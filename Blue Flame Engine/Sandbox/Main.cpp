@@ -7,8 +7,7 @@ using namespace BFE::Graphics;
 using namespace BFE::Input;
 
 int main()
-{
-	BFE::Graphics::Window window("", 0, 0, 800, 600, Window::Style::Windowed, Renderer::RenderingAPI::DirectX11);
+{BFE::Graphics::Window window("", 0, 0, 1280, 720, Window::Style::Windowed, Renderer::RenderingAPI::DirectX11);
 
 	if (Renderer::renderingAPI == Renderer::RenderingAPI::DirectX11)
 		window.SetWindowTitle("Blue Flame Engine - DirectX 11");

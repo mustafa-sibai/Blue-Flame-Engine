@@ -34,14 +34,16 @@ namespace BFE
 				Window &window;
 				DX11Renderer dx11Renderer;
 				GLRenderer glRenderer;
+				GLuint GL_PRIMITIVE_TYPE;
 
 			public:
 				Renderer(Window &window);
 				~Renderer();
 
 				void Initialize();
+				void SetPrimitiveType(PrimitiveType primitiveType);
 				void Clear(Math::Vector4 Color);
-				void Draw(PrimitiveType primitiveType, const unsigned int vertexCount);
+				void Draw(const unsigned int vertexCount);
 				void SwapBuffers();
 				void CleanUp();
 

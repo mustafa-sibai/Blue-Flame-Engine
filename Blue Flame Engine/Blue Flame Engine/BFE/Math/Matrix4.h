@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector3.h"
+#include "Math.h"
 #include "../Graphics/Renderer/Renderer.h"
 
 #ifdef COMPILE_BLUE_FLAME_ENGINE   
@@ -26,7 +26,7 @@ namespace BFE
 				static Matrix4 Identity();
 				static Matrix4 Translate(const Vector3 &translation);
 				static Matrix4 Scale(const Vector3 &scale);
-
+				static Matrix4 Rotate(const float &angle, const Vector3 &axis);
 				friend const Matrix4 operator*(const Matrix4 &LeftMatrix, const Matrix4 &RightMatrix) { return Matrix4::Multiplay(LeftMatrix, RightMatrix); }
 
 			private:

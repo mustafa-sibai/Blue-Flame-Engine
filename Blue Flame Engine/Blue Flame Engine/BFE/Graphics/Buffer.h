@@ -18,14 +18,15 @@ namespace BFE
 				Renderer &renderer;
 				ID3D11Buffer *dx11Buffer;
 				GLuint glBuffer;
+				HRESULT hr;
 
 			public:
 				Buffer(Renderer &renderer);
 				~Buffer();
 
 				void CreateVertexBuffer(void* data, const unsigned int size);
-				void CreateConstentBuffer(Shader &shader, void *data, const unsigned int size, const char* bufferNameInShader, const unsigned int bindingIndex);
-				void UpdateConstentBuffer(void* data);
+				void CreateConstentBuffer(Shader &shader, void *data, unsigned int size, const unsigned int bindingIndex);
+				void UpdateConstentBuffer(void *data, unsigned int size);
 
 				inline ID3D11Buffer* GetDX11Buffer() const { return dx11Buffer; }
 				inline ID3D11Buffer* const* GetConstDX11Buffer() const { return &dx11Buffer; }

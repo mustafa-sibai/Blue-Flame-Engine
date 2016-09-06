@@ -68,6 +68,33 @@ namespace BFE
 
 			context->OMSetRenderTargets(1, &renderTarget, NULL);
 
+
+
+
+			ID3D11RasterizerState* m_rasterState;
+
+			D3D11_RASTERIZER_DESC rasterDesc;
+			rasterDesc.AntialiasedLineEnable = false;
+			rasterDesc.CullMode = D3D11_CULL_NONE;
+			rasterDesc.DepthBias = 0;
+			rasterDesc.DepthBiasClamp = 0.0f;
+			rasterDesc.DepthClipEnable = false;
+			rasterDesc.FillMode = D3D11_FILL_SOLID;
+			rasterDesc.FrontCounterClockwise = false;
+			rasterDesc.MultisampleEnable = false;
+			rasterDesc.ScissorEnable = false;
+			rasterDesc.SlopeScaledDepthBias = 0.0f;
+
+			// Create the rasterizer state from the description we just filled out.
+			device->CreateRasterizerState(&rasterDesc, &m_rasterState);
+
+
+			// Now set the rasterizer state.
+			context->RSSetState(m_rasterState);
+
+
+
+
 			//Set view port
 			D3D11_VIEWPORT viewPort;
 			ZeroMemory(&viewPort, sizeof(D3D11_VIEWPORT));

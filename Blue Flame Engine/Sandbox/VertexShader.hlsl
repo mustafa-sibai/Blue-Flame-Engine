@@ -14,7 +14,7 @@ VOut main(float4 position : POSITION, float4 color : COLOR)
 {
 	VOut output;
 
-	output.position = mul(position, buffer_modelMatrix);
+	output.position = mul(buffer_modelMatrix, position);
 	output.color = color + buffer_color;
 
 	return output;

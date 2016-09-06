@@ -36,7 +36,7 @@ namespace BFE
 					shader.GetDX11Shader().GetVSData(),
 					shader.GetDX11Shader().GetVSsize(),
 					&inputLayout);
-				
+
 				renderer.GetDx11Renderer().GetContext().IASetInputLayout(inputLayout);
 				renderer.GetDx11Renderer().GetContext().IASetVertexBuffers(0,
 					1,
