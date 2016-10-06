@@ -1,20 +1,14 @@
-#if 0
 #pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../Common.h"
 
-#ifdef COMPILE_BLUE_FLAME_ENGINE   
-	#define DLLEXPORT __declspec(dllexport) 
-#else   
-	#define DLLEXPORT __declspec(dllimport) 
-#endif
-
-namespace BFE
+namespace BF
 {
 	namespace IO
 	{
-		struct DLLEXPORT FileReader
+		struct BF_API FileReader
 		{
 			static std::string ReadTextFile(const char *FileName)
 			{
@@ -57,4 +51,3 @@ namespace BFE
 		};
 	}
 }
-#endif // 0

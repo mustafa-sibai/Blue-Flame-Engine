@@ -27,32 +27,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BF\Application\Window.cpp" />
-    <ClCompile Include="BF\Graphics\Buffers\BufferMapper.cpp" />
-    <ClCompile Include="BF\Graphics\Buffers\ConstentBuffer.cpp" />
-    <ClCompile Include="BF\Graphics\Buffers\VertexBuffer.cpp" />
-    <ClCompile Include="BF\Graphics\Renderer\Renderer.cpp" />
-    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\DX11Shader.cpp" />
-    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\GLShader.cpp" />
-    <ClCompile Include="BF\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="BF\Input\Mouse.cpp" />
-    <ClCompile Include="BF\Math\Matrix4.cpp" />
-    <ClCompile Include="BF\Platform\DirectX\DXContext.cpp" />
-    <ClCompile Include="BF\Platform\Linux\LXWindow.cpp" />
-    <ClCompile Include="BF\Platform\OpenGL\LXGLContext.cpp" />
-    <ClCompile Include="BF\Platform\OpenGL\WINGLContext.cpp" />
-    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
-    <ClCompile Include="BF\Util\Log.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="BF\Application\Window.h" />
     <ClInclude Include="BF\Application\WindowStyle.h" />
     <ClInclude Include="BF\Common.h" />
+    <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\Buffers\BufferMapper.h" />
     <ClInclude Include="BF\Graphics\Buffers\ConstentBuffer.h" />
     <ClInclude Include="BF\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="BF\Graphics\RenderAPI.h" />
-    <ClInclude Include="BF\Graphics\Renderer\Renderer.h" />
     <ClInclude Include="BF\Graphics\Shader\PlatformSpecific\DX11Shader.h" />
     <ClInclude Include="BF\Graphics\Shader\PlatformSpecific\GLShader.h" />
     <ClInclude Include="BF\Graphics\Shader\Shader.h" />
@@ -64,13 +46,31 @@
     <ClInclude Include="BF\Math\Vector2.h" />
     <ClInclude Include="BF\Math\Vector3.h" />
     <ClInclude Include="BF\Math\Vector4.h" />
-    <ClInclude Include="BF\Platform\DirectX\DXContext.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\LXGLContext.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h" />
     <ClInclude Include="BF\Platform\Linux\LXWindow.h" />
-    <ClInclude Include="BF\Platform\OpenGL\LXGLContext.h" />
-    <ClInclude Include="BF\Platform\OpenGL\WINGLContext.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\Util\Log.h" />
     <ClInclude Include="empty.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BF\Application\Window.cpp" />
+    <ClCompile Include="BF\Graphics\API\Context.cpp" />
+    <ClCompile Include="BF\Graphics\Buffers\BufferMapper.cpp" />
+    <ClCompile Include="BF\Graphics\Buffers\ConstentBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\DX11Shader.cpp" />
+    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\GLShader.cpp" />
+    <ClCompile Include="BF\Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="BF\Input\Mouse.cpp" />
+    <ClCompile Include="BF\Math\Matrix4.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\LXGLContext.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp" />
+    <ClCompile Include="BF\Platform\Linux\LXWindow.cpp" />
+    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
+    <ClCompile Include="BF\Util\Log.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5a670711-fa5d-4f9b-9dd2-2e931c7e1d64}</ProjectGuid>
@@ -215,7 +215,8 @@
       <AdditionalDependencies>$(RemoteRootDir)/Dependency/GLEW/lib/Linux/libGLEW.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Core\BF\*.*" "$(SolutionDir)Core-Linux\BF\*.*"</Command>
+      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Core\BF\*.*" "$(SolutionDir)Core-Linux\BF\*.*"
+</Command>
     </PreBuildEvent>
     <RemotePreBuildEvent>
       <Command>
@@ -237,7 +238,8 @@
       <AdditionalDependencies>$(RemoteRootDir)/Dependency/GLEW/lib/Linux/libGLEW.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Core\BF\*.*" "$(SolutionDir)Core-Linux\BF\*.*"</Command>
+      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Core\BF\*.*" "$(SolutionDir)Core-Linux\BF\*.*"
+</Command>
     </PreBuildEvent>
     <RemotePreBuildEvent>
       <Command>

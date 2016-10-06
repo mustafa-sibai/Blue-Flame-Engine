@@ -24,9 +24,6 @@
     <ClInclude Include="BF\Application\WindowStyle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Platform\OpenGL\WINGLContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Platform\Windows\WINWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,54 +45,69 @@
     <ClInclude Include="BF\Math\Vector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\RenderAPI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Buffers\BufferMapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Buffers\ConstentBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Buffers\VertexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderer\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Shader\PlatformSpecific\DX11Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Shader\PlatformSpecific\GLShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Shader\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Input\Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\IO\FileReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Platform\DirectX\DXContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Platform\Linux\LXWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Platform\OpenGL\LXGLContext.h">
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Util\Log.h">
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\LXGLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\Context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\BufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\ConstentBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\WEBGLContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\WebGL\WEBWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BF\Application\Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Platform\OpenGL\WINGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp">
@@ -104,40 +116,61 @@
     <ClCompile Include="BF\Math\Matrix4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\Buffers\BufferMapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Buffers\ConstentBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Buffers\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderer\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\DX11Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Shader\PlatformSpecific\GLShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Shader\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Input\Mouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Platform\DirectX\DXContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\Linux\LXWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Platform\OpenGL\LXGLContext.cpp">
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Util\Log.cpp">
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\LXGLContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\Context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXVertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\BufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\WEBGLContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\WebGL\WEBWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

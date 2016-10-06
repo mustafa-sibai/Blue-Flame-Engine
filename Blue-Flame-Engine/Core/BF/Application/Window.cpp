@@ -4,15 +4,14 @@ namespace BF
 {
 	namespace Application
 	{
-		Window::Window(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style, Graphics::RenderAPI renderAPI)
+		Window::Window(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style)
 		{
-
 #ifdef BF_PLATFORM_WINDOWS
-			winWindow = new Platform::Windows::WINWindow(title, x, y, width, height, style, renderAPI);
-			winGLContext = new Platform::Windows::WINGLContext(winWindow);
+			winWindow = new Platform::Windows::WINWindow(title, x, y, width, height, style);
 #elif BF_PLATFORM_LINUX
-			lxWindow = new Platform::Linux::LXWindow(title, x, y, width, height, style, renderAPI);
-			lxGLContext = new Platform::Linux::LXGLContext(lxWindow);
+			lxWindow = new Platform::Linux::LXWindow(title, x, y, width, height, style);
+#elif BF_PLATFORM_WEBGL
+			webWindow = new Platform::WebGL::WEBWindow();
 #endif
 		}
 
@@ -26,6 +25,8 @@ namespace BF
 			winWindow->Update();
 #elif BF_PLATFORM_LINUX
 			lxWindow->Update();
+#elif BF_PLATFORM_WEBGL
+			webWindow->Update();
 #endif
 		}
 
@@ -35,24 +36,8 @@ namespace BF
 			return winWindow->IsOpen();
 #elif BF_PLATFORM_LINUX
 			return lxWindow->IsOpen();
-#endif
-		}
-
-		void Window::Clear(Math::Vector4 Color)
-		{
-#ifdef BF_PLATFORM_WINDOWS
-			winGLContext->Clear(Color);
-#elif BF_PLATFORM_LINUX
-			lxGLContext->Clear(Color);
-#endif
-		}
-
-		void Window::SwapBuffers()
-		{
-#ifdef BF_PLATFORM_WINDOWS
-			winGLContext->SwapBuffers();
-#elif BF_PLATFORM_LINUX
-			lxGLContext->SwapBuffers();
+#elif BF_PLATFORM_WEBGL
+			return webWindow->IsOpen();
 #endif
 		}
 	}

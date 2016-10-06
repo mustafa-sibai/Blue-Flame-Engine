@@ -7,9 +7,9 @@ namespace BF
 	{
 		struct Vector3
 		{
-			float x = 0.0f, y = 0.0f, z = 0.0f;
+			float x, y, z;
 
-			Vector3() { }
+			Vector3() : x(0.0f), y(0.0f), z(0.0f) { }
 			Vector3(const float &value) : x(value), y(value), z(value) { }
 			Vector3(const float &x, const float &y, const float &z) : x(x), y(y), z(z) { }
 

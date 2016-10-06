@@ -4,9 +4,7 @@
 #include <Windows.h>
 #include <Dwmapi.h>
 #include "../../Common.h"
-#include "../../Graphics/RenderAPI.h"
 #include "../../Application/WindowStyle.h"
-
 
 //#inlcude"../Math/Vector4.h"
 //#include "../Input/Mouse.h"
@@ -29,7 +27,7 @@ namespace BF
 					unsigned short width, height, clientWidth, clientHeight;
 
 				public:
-					WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style, Graphics::RenderAPI renderAPI);
+					WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style);
 					~WINWindow();
 
 					void Update();

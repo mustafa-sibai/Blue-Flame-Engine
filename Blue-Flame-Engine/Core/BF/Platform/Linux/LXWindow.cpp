@@ -7,7 +7,7 @@ namespace BF
 	{
 		namespace Linux
 		{
-			LXWindow::LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style, Graphics::RenderAPI renderAPI)
+			LXWindow::LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style)
 			{
 				display = XOpenDisplay(NULL);
 
@@ -64,7 +64,7 @@ namespace BF
 
 				int bestFBC = -1, worstFBC = -1, bestSamples = -1, worstSamples = 999;
 
-				int i;
+				size_t i;
 				for (i = 0; i < fbcount; ++i)
 				{
 					XVisualInfo *visualInfo = glXGetVisualFromFBConfig(display, fbc[i]);

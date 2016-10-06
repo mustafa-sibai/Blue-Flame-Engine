@@ -9,11 +9,9 @@ namespace BF
 		{
 			LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-			WINWindow::WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style, Graphics::RenderAPI renderAPI) :
+			WINWindow::WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style) :
 				hWnd(nullptr), msg(), mousePoint(), currentWindowStyle(), width(width), height(height), clientWidth(0), clientHeight(0)
 			{
-				Graphics::renderAPI = renderAPI;
-
 				HINSTANCE hInstance = GetModuleHandle(NULL);
 
 				WNDCLASSEX wc;
@@ -37,7 +35,7 @@ namespace BF
 					currentWindowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
 
 					AdjustWindowRect(&wr, currentWindowStyle, FALSE);
-					clientWidth = (unsigned short)(wr.right - wr.left);
+					clientWidth = (unsigned short)(wr.right + wr.left);
 					clientHeight = (unsigned short)(height + wr.top);
 				}
 				else if (style == Application::WindowStyle::Borderless)

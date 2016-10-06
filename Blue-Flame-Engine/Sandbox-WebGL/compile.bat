@@ -1,0 +1,2 @@
+CALL mkdir ..\Output\Sandbox\WebGL\
+CALL emcc "Sandbox/main.cpp" "../Output/Core/WebGL/Core.bc" -D BF_PLATFORM_WEBGL -std=c++11 -O1 -o ../Output/Sandbox/WebGL/Sandbox.html --embed-file ./Sandbox/FragmentShader.glsl --embed-file ./Sandbox/VertexShader.glsl

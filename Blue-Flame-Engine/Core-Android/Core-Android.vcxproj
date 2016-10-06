@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="NsightTegraProject">
+    <NsightTegraProjectRevisionNumber>11</NsightTegraProjectRevisionNumber>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Tegra-Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Tegra-Android">
+      <Configuration>Release</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Shipping|Tegra-Android">
+      <Configuration>Shipping</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CA77759E-E1CC-453A-B45E-2E49F242416F}</ProjectGuid>
+    <RootNamespace>Core_Android</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <AndroidTargetAPI>android-24</AndroidTargetAPI>
+    <AndroidMinAPI>android-15</AndroidMinAPI>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <AndroidTargetAPI>android-24</AndroidTargetAPI>
+    <AndroidMinAPI>android-15</AndroidMinAPI>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Shipping|Tegra-Android'">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <AndroidTargetAPI>android-24</AndroidTargetAPI>
+    <AndroidMinAPI>android-15</AndroidMinAPI>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
+    <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <TargetName>libCore</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <TargetName>libCore</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Tegra-Android'">
+    <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <TargetName>libCore</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <ClCompile>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
+    <ClCompile>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Tegra-Android'">
+    <ClCompile>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Core_Android.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

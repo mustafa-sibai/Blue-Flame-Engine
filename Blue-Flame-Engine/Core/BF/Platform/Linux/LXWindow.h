@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 #include <GL/glxew.h>
 #include "../../Application/WindowStyle.h"
-#include "../../Graphics/RenderAPI.h"
 
 namespace BF
 {
@@ -26,7 +25,7 @@ namespace BF
 					void CreateWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, GLXFBConfig frameBuffer);
 
 				public:
-					LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style, Graphics::RenderAPI renderAPI);
+					LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style);
 					~LXWindow();
 
 					void Update();

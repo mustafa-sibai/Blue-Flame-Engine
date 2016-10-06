@@ -1,20 +1,22 @@
 #pragma once
-/*#include <BFE/Graphics/Window.h>
-#include <BFE/Graphics/Buffers/VertexBuffer.h>
-#include <BFE/Graphics/Buffers/BufferMapper.h>
-#include <BFE/Graphics/Buffers/ConstentBuffer.h>
-#include <BFE/Graphics/Shader/Shader.h>
-#include <BFE/Math/Math.h>
+#include <BF/Application/Window.h>
+#include <BF/Graphics/API/Context.h>
+#include <BF/Graphics/API/VertexBuffer.h>
+#include <BF/Graphics/API/ConstentBuffer.h>
+#include <BF/Graphics/API/Shader.h>
+#include <BF/Math/Math.h>
 #include <iostream>
 
-using namespace BFE::Graphics;
-using namespace BFE::Graphics::Buffers;
-using namespace BFE::Math;
+using namespace BF::Application;
+using namespace BF::Graphics;
+using namespace BF::Graphics::API;
+using namespace BF::Math;
 
 struct Vertex 
 {
 	Vector3 position;
 	Vector4 color;
+	Vector2 UV;
 };
 
 struct InitBuffer
@@ -30,19 +32,18 @@ class RenderTriangle
 		Vertex tri2Vertices[3];
 
 		InitBuffer initBuffer;
-		VertexBuffer buffer1, buffer2;
-		ConstentBuffer constentBuffer;
-		BufferMapper::ShaderLayout shaderLayout[2];
-		BufferMapper bufferMapper;
-		Window &window;
-		Renderer renderer;
-		Shader shader;
+		VertexBuffer *buffer1, *buffer2;
+		ConstentBuffer *constentBuffer;
+		BufferLayout *bufferLayout;
+		Window *window;
+		Context *context;
+		Shader *shader;
 		float angle = 0;
 
 	public:
-		RenderTriangle(Window &window);
+		RenderTriangle(Window *window);
 		~RenderTriangle();
 
 		void Draw();
 		void CleanUp();
-};*/
+};

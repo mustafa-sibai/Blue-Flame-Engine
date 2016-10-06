@@ -1,59 +1,66 @@
 #include "RenderTriangle.h"
-/*
-RenderTriangle::RenderTriangle(Window &window) :
-	window(window), renderer(window), shader(renderer), buffer1(renderer), buffer2(renderer), bufferMapper(renderer), constentBuffer(renderer), initBuffer()
+
+RenderTriangle::RenderTriangle(Window *window) :
+	window(window), context(nullptr), shader(nullptr), buffer1(nullptr), buffer2(nullptr), bufferLayout(nullptr), constentBuffer(nullptr), initBuffer()
 {
-	renderer.Initialize();
+	context = new Context(window, BF::Graphics::API::RenderAPI::OpenGL);
+	shader = new Shader(context);
+
+	buffer1 = new VertexBuffer(context, shader);
+	buffer2 = new VertexBuffer(context, shader);
+
+	constentBuffer = new ConstentBuffer(context, shader);
 
 	//create vertices clockwise
 	tri1Vertices[0].position = Vector3(-1.0f, 0.0, 0.0f);
 	tri1Vertices[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+	tri1Vertices[0].UV = Vector2(0.0f, 0.0f);
 
 	tri1Vertices[1].position = Vector3(0.0f, 1.0f, 0.0f);
 	tri1Vertices[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
+	tri1Vertices[1].UV = Vector2(1.0f, 0.0f);
 
 	tri1Vertices[2].position = Vector3(1.0f, 0.0f, 0.0f);
 	tri1Vertices[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
-	
+	tri1Vertices[2].UV = Vector2(1.0f, 1.0f);
 
 	tri2Vertices[0].position = Vector3(0.75f, 0.0, 0.0f);
 	tri2Vertices[0].color = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
 
-	tri2Vertices[1].position = Vector3(0.50f, 0.5f, 0.0f);
+	tri2Vertices[1].position = Vector3(0.5f, 1.0f, 0.0f);
 	tri2Vertices[1].color = Vector4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	tri2Vertices[2].position = Vector3(0.25f, 0.0f, 0.0f);
 	tri2Vertices[2].color = Vector4(0.0f, 0.0f, 1.0f, 1.0f);
 
-	if (Renderer::renderingAPI == Renderer::RenderingAPI::DirectX11)
-		shader.Load("D:\\Projects\\Personal Projects\\Blue Flame Enginee\\Blue Flame Engine\\Output\\Sandbox\\x64\\Binary\\Debug\\VertexShader.cso",
-			"D:\\Projects\\Personal Projects\\Blue Flame Enginee\\Blue Flame Engine\\Output\\Sandbox\\x64\\Binary\\Debug\\PixelShader.cso");
-	else if (Renderer::renderingAPI == Renderer::RenderingAPI::OpenGL4_5)
-		shader.Load("VertexShader.glsl", "FragmentShader.glsl");
+	if (BF::Graphics::API::Context::GetRenderAPI() == BF::Graphics::API::RenderAPI::DirectX)
+	{
+		shader->Load("D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Output/Sandbox/Windows/x64/Binary/Debug/VertexShader.cso",
+			"D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Output/Sandbox/Windows/x64/Binary/Debug/PixelShader.cso");
+	}
+	else if (BF::Graphics::API::Context::GetRenderAPI() == BF::Graphics::API::RenderAPI::OpenGL)
+	{
+		shader->Load("Sandbox/VertexShader.glsl", "Sandbox/FragmentShader.glsl");
+	}
 	
-	shader.Bind();
-	buffer1.Create(tri1Vertices, sizeof(tri1Vertices));
-	buffer2.Create(tri2Vertices, sizeof(tri2Vertices));
+	shader->Bind();
+	buffer1->Create(tri1Vertices, sizeof(tri1Vertices));
+	buffer2->Create(tri2Vertices, sizeof(tri2Vertices));
 
-	shaderLayout[0].index = 0;
-	shaderLayout[0].name = "POSITION";
-	shaderLayout[0].componentCount = 3;
-	shaderLayout[0].dataType = BufferMapper::DataType::FLOAT;
-	shaderLayout[0].stride = sizeof(Vertex);
-	shaderLayout[0].offset = 0;
+	initBuffer.modelMatrix = Matrix4::Scale(Vector3(2.0f, 2.0f, 2.0f)) * Matrix4::Translate(Vector3(0.0f, -0.2f, 0.0f));
+	initBuffer.color = Vector4(1.0f, 0.0f, 0.5f, 1.0f);
+	constentBuffer->Create(&initBuffer, sizeof(initBuffer), 0);
 
-	shaderLayout[1].index = 1;
-	shaderLayout[1].name = "COLOR";
-	shaderLayout[1].componentCount = 4;
-	shaderLayout[1].dataType = BufferMapper::DataType::FLOAT;
-	shaderLayout[1].stride = sizeof(Vertex);
-	shaderLayout[1].offset = 12;
+	bufferLayout = new BufferLayout();
 
-	bufferMapper.Create(&shader, shaderLayout, 2);
+	bufferLayout->Push(0, "POSITION", DataType::Float3, sizeof(Vertex), 0);
+	bufferLayout->Push(1, "COLOR", DataType::Float4, sizeof(Vertex), 3 * sizeof(float));
+	bufferLayout->Push(2, "TEXCOORD", DataType::Float2, sizeof(Vertex), (3 * sizeof(float)) + (4 * sizeof(float)));
 
-	constentBuffer.Create(shader, &initBuffer, sizeof(initBuffer), 0);
+	context->SetPrimitiveType(PrimitiveType::TriangleList);
 
-	renderer.SetPrimitiveType(Renderer::PrimitiveType::TriangleList);
+	buffer1->SetLayout(bufferLayout);
+	buffer2->SetLayout(bufferLayout);
 }
 
 RenderTriangle::~RenderTriangle()
@@ -62,34 +69,31 @@ RenderTriangle::~RenderTriangle()
 
 void RenderTriangle::Draw()
 {
-	initBuffer.color = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+	context->Clear(Vector4(0.5, 0.0f, 0.5f, 1.0f));
+
+	initBuffer.color = Vector4(0.2f, 0.5f, 0.3f, 1.0f);
+	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0, 0, 5.0f)) * Matrix4::Perspective(90.0f, window->GetAspectRatio(), 0.1f, 1000.0f);
+	constentBuffer->Update(&initBuffer, sizeof(initBuffer));
 	
+	buffer1->Bind();
+	context->Draw(3);
+	buffer1->Unbind();
+
 	angle += 0.050f;
-	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0, 0, 0)) * Matrix4::Perspective(90.0f, window.GetAspectRatio(), 0.1f, 1000.0f);
-	constentBuffer.Update(&initBuffer, sizeof(initBuffer));
-
-	renderer.Clear(Vector4(0.5, 0.0f, 0.5f, 1.0f));
-
-	buffer1.Bind();
-	bufferMapper.Map(&buffer1);
-	buffer1.Unbind();
+	initBuffer.color = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+	//initBuffer.modelMatrix = Matrix4::Rotate(angle, Vector3(0, 0, 1)) * Matrix4::Perspective(90.0f, window->GetAspectRatio(), 0.1f, 1000.0f);
+	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0, 0.5f, 6.0f)) * Matrix4::Perspective(90.0f, window->GetAspectRatio(), 0.1f, 1000.0f);
+	constentBuffer->Update(&initBuffer, sizeof(initBuffer));
 	
-	renderer.Draw(3);
+	buffer2->Bind();
+	context->Draw(3);
+	buffer2->Unbind();
 
-	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0.35f, 1, 1)) * Matrix4::Perspective(90.0f, window.GetAspectRatio(), 0.1f, 1000.0f);
-	constentBuffer.Update(&initBuffer, sizeof(initBuffer));
-
-	buffer2.Bind();
-	bufferMapper.Map(&buffer2);
-	buffer2.Unbind();
-
-	renderer.Draw(3);
-	
-	renderer.SwapBuffers();
+	context->SwapBuffers();
 }
 
 void RenderTriangle::CleanUp()
 {
-	shader.CleanUp();
-	renderer.CleanUp();
-}*/
+	shader->CleanUp();
+	//context->CleanUp();
+}

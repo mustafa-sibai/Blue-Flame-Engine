@@ -18,7 +18,7 @@ namespace BF
 
 		Matrix4::Matrix4()
 		{
-			for (int i = 0; i < SIZE; i++)
+			for (size_t i = 0; i < SIZE; i++)
 				elements[i] = 0.0f;
 		}
 
@@ -103,11 +103,11 @@ namespace BF
 		{
 			Matrix4 newMatrix;
 
-			for (int y = 0; y < ROW_COLUMN_SIZE; y++)
+			for (size_t y = 0; y < ROW_COLUMN_SIZE; y++)
 			{
-				for (int e = 0; e < ROW_COLUMN_SIZE; e++)
+				for (size_t e = 0; e < ROW_COLUMN_SIZE; e++)
 				{
-					for (int x = 0; x < ROW_COLUMN_SIZE; x++)
+					for (size_t x = 0; x < ROW_COLUMN_SIZE; x++)
 						newMatrix.elements[x + y * ROW_COLUMN_SIZE] += leftMatrix.elements[e + y * ROW_COLUMN_SIZE] * rightMatrix.elements[x + e * ROW_COLUMN_SIZE];
 				}
 			}
