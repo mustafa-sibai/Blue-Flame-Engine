@@ -1,9 +1,10 @@
 #pragma once
 #include <BF/Application/Window.h>
 #include <BF/Graphics/API/Context.h>
+#include <BF/Graphics/API/Shader.h>
 #include <BF/Graphics/API/VertexBuffer.h>
 #include <BF/Graphics/API/ConstentBuffer.h>
-#include <BF/Graphics/API/Shader.h>
+#include <BF/Graphics/API/Texture2D.h>
 #include <BF/Math/Math.h>
 #include <iostream>
 
@@ -28,16 +29,17 @@ struct InitBuffer
 class RenderTriangle
 {
 	private:
-		Vertex tri1Vertices[3];
+		Vertex tri1Vertices[6];
 		Vertex tri2Vertices[3];
 
+		Window *window;
+		Context *context;
+		Shader *shader;
 		InitBuffer initBuffer;
 		VertexBuffer *buffer1, *buffer2;
 		ConstentBuffer *constentBuffer;
 		BufferLayout *bufferLayout;
-		Window *window;
-		Context *context;
-		Shader *shader;
+		Texture2D *texture2D;
 		float angle = 0;
 
 	public:

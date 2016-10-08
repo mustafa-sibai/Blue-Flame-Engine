@@ -15,6 +15,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core-Android", "Core-Androi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox-Android", "Sandbox-Android\Sandbox-Android.vcxproj", "{54342271-7ACF-4E57-A06E-CF0980E8EF2F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core-WebGL", "Core-WebGL\Core-WebGL.vcxproj", "{2B2D61D4-F8EA-471E-8882-36B5905BC063}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox-WebGL", "Sandbox-WebGL\Sandbox-WebGL.vcxproj", "{F007E29A-45E1-4B9C-8837-639E46DD6E40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -145,6 +149,46 @@ Global
 		{54342271-7ACF-4E57-A06E-CF0980E8EF2F}.Shipping|Tegra-Android.Build.0 = Shipping|Tegra-Android
 		{54342271-7ACF-4E57-A06E-CF0980E8EF2F}.Shipping|x64.ActiveCfg = Shipping|Tegra-Android
 		{54342271-7ACF-4E57-A06E-CF0980E8EF2F}.Shipping|x86.ActiveCfg = Shipping|Tegra-Android
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|ARM.ActiveCfg = Debug|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|Tegra-Android.ActiveCfg = Debug|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|x64.ActiveCfg = Debug|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|x64.Build.0 = Debug|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|x86.ActiveCfg = Debug|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Debug|x86.Build.0 = Debug|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|ARM.ActiveCfg = Release|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|Tegra-Android.ActiveCfg = Release|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|x64.ActiveCfg = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|x64.Build.0 = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|x86.ActiveCfg = Release|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Release|x86.Build.0 = Release|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|ARM.ActiveCfg = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|ARM.Build.0 = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|Tegra-Android.ActiveCfg = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|Tegra-Android.Build.0 = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|x64.ActiveCfg = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|x64.Build.0 = Release|x64
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|x86.ActiveCfg = Release|Win32
+		{2B2D61D4-F8EA-471E-8882-36B5905BC063}.Shipping|x86.Build.0 = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|ARM.ActiveCfg = Debug|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|Tegra-Android.ActiveCfg = Debug|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|x64.ActiveCfg = Debug|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|x64.Build.0 = Debug|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|x86.ActiveCfg = Debug|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Debug|x86.Build.0 = Debug|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|ARM.ActiveCfg = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|Tegra-Android.ActiveCfg = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|x64.ActiveCfg = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|x64.Build.0 = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|x86.ActiveCfg = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Release|x86.Build.0 = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|ARM.ActiveCfg = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|ARM.Build.0 = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|Tegra-Android.ActiveCfg = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|Tegra-Android.Build.0 = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|x64.ActiveCfg = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|x64.Build.0 = Release|x64
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|x86.ActiveCfg = Release|Win32
+		{F007E29A-45E1-4B9C-8837-639E46DD6E40}.Shipping|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

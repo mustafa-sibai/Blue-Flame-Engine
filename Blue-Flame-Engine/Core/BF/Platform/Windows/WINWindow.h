@@ -37,15 +37,15 @@ namespace BF
 
 					PIXELFORMATDESCRIPTOR const GetPixelFormat() const;
 
-					inline unsigned short const GetWidth() const { return width; }
-					inline unsigned short const GetHeight() const { return height; }
+					inline const unsigned short GetWidth() const { return width; }
+					inline const unsigned short GetHeight() const { return height; }
+						    			    
+					inline const unsigned short GetClientWidth() const { return clientWidth; }
+					inline const unsigned short GetClientHeight() const { return clientHeight; }
 
-					inline unsigned short const GetClientWidth() const { return clientWidth; }
-					inline unsigned short const GetClientHeight() const { return clientHeight; }
+					inline const float GetAspectRatio() const { return (float)(width / height); }
 
-					inline float const GetAspectRatio() const { return (float)(width / height); }
-
-					inline HWND const &GetHWND() const { return hWnd; }
+					inline const HWND &GetHWND() const { return hWnd; }
 			};
 		}
 	}

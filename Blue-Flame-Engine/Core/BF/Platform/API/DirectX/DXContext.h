@@ -32,9 +32,9 @@ namespace BF
 						void SwapBuffers();
 						void CleanUp();
 
-						inline ID3D11Device *GetDevice() { return device; }
-						inline ID3D11DeviceContext *GetContext() { return context; }
-						inline IDXGISwapChain *GetSwapChain() { return swapChain; }
+						inline ID3D11Device *GetDevice() const { return device; }
+						inline ID3D11DeviceContext *GetContext() const { return context; }
+						inline const IDXGISwapChain *GetSwapChain() const { return swapChain; }
 
 					private:
 						void CreateDeviceAndSwapChain();

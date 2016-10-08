@@ -20,8 +20,8 @@ namespace BF
 
 				void DXShader::Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath)
 				{
-					VSData = IO::FileReader::ReadBinaryFile(vertexShaderFilePath, VSsize);
-					PSData = IO::FileReader::ReadBinaryFile(pixelShaderFilePath, PSsize);
+					VSData = IO::FileReader::ReadBinaryFile(vertexShaderFilePath, &VSsize);
+					PSData = IO::FileReader::ReadBinaryFile(pixelShaderFilePath, &PSsize);
 					
 					if (FAILED(hr = context->GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS)))
 					{

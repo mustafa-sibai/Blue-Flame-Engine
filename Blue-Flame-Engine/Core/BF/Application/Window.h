@@ -25,19 +25,19 @@ namespace BF
 			bool IsOpen();
 
 #ifdef BF_PLATFORM_WINDOWS
-			inline Platform::Windows::WINWindow *GetWINWindow() { return winWindow; }
+			inline Platform::Windows::WINWindow *GetWINWindow() const { return winWindow; }
 
-			inline unsigned short const GetWidth() const { return winWindow->GetWidth(); }
-			inline unsigned short const GetHeight() const { return winWindow->GetHeight(); }
-
-			inline unsigned short const GetClientWidth() const { return winWindow->GetClientWidth(); }
-			inline unsigned short const GetClientHeight() const { return winWindow->GetClientHeight(); }
+			inline const unsigned short GetWidth() const { return winWindow->GetWidth(); }
+			inline const unsigned short GetHeight() const { return winWindow->GetHeight(); }
+						 
+			inline const unsigned short GetClientWidth() const { return winWindow->GetClientWidth(); }
+			inline const unsigned short GetClientHeight() const { return winWindow->GetClientHeight(); }
 
 			inline float const GetAspectRatio() const { return winWindow->GetAspectRatio(); }
 #elif BF_PLATFORM_LINUX
-			inline Platform::Linux::LXWindow *GetLXWindow() { return lxWindow; }
+			inline Platform::Linux::LXWindow *GetLXWindow() const { return lxWindow; }
 #elif BF_PLATFORM_WEBGL
-			inline Platform::WebGL::WEBWindow *GetWEBWindow() { return webWindow; }
+			inline Platform::WebGL::WEBWindow *GetWEBWindow() const { return webWindow; }
 #endif
 
 		};

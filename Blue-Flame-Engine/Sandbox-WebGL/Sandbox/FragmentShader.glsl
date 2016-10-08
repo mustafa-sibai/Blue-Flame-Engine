@@ -1,8 +1,14 @@
+#version 300 es
 precision mediump float;
 
-varying vec4 fragmentColor;
+in vec4 fragmentColor;
+in vec2 UV;
+out vec4 color;
+
+uniform sampler2D myTextureSampler;
 
 void main() 
 {
-	gl_FragColor = fragmentColor;
+	//color = fragmentColor;
+	color = texture(myTextureSampler, UV);
 }

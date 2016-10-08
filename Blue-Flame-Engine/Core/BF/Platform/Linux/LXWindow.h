@@ -31,7 +31,7 @@ namespace BF
 					void Update();
 					bool IsOpen();
 
-					inline Display *GetDisplay() { return display; }
+					inline const Display *GetDisplay() const { return display; }
 					inline const Window GetWindow() const { return window; }
 					inline const GLXFBConfig GetFrameBufferConfig() const { return frameBufferConfig; }
 			};

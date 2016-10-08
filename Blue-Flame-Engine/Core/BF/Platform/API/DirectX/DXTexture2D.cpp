@@ -1,5 +1,5 @@
 #ifdef BF_PLATFORM_WINDOWS
-#include "DXTexture.h"
+#include "DXTexture2D.h"
 
 namespace BF
 {
@@ -9,16 +9,16 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXTexture::DXTexture(DXContext *dxContext) :
+				DXTexture2D::DXTexture2D(DXContext *dxContext) :
 					dxContext(dxContext)
 				{
 				}
 
-				DXTexture::~DXTexture()
+				DXTexture2D::~DXTexture2D()
 				{
 				}
 
-				void DXTexture::Load()
+				void DXTexture2D::Load(const char *fileName)
 				{
 				}
 			}

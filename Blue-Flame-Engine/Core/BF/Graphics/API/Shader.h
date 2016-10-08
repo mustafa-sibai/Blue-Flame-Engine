@@ -29,10 +29,10 @@ namespace BF
 					void CleanUp();
 
 #ifdef BF_PLATFORM_WINDOWS
-					inline Platform::API::DirectX::DXShader *GetDXShader() { return dxShader; }
+					inline Platform::API::DirectX::DXShader *GetDXShader() const { return dxShader; }
 #endif
 #if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					inline Platform::API::OpenGL::GLShader *GetGLShader() { return glShader; }
+					inline const Platform::API::OpenGL::GLShader *GetGLShader() const { return glShader; }
 #endif
 			};
 		}

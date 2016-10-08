@@ -16,7 +16,7 @@ namespace BF
 					private:
 						HRESULT hr;
 
-						char* VSData, *PSData;
+						char *VSData, *PSData;
 						size_t VSsize, PSsize;
 
 						ID3D11VertexShader *VS;
@@ -32,8 +32,8 @@ namespace BF
 						void Bind();
 						void CleanUp();
 
-						inline char* &GetVSData() { return VSData; }
-						inline size_t &GetVSsize() { return VSsize; }
+						inline const char *GetVSData() const { return VSData; }
+						inline const size_t &GetVSsize() const { return VSsize; }
 				};
 			}
 		}

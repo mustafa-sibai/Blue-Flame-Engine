@@ -7,7 +7,6 @@
 
 #include <vector>
 #include "../../../IO/FileReader.h"
-#include "../../../Math/Math.h"
 
 namespace BF
 {
@@ -36,7 +35,7 @@ namespace BF
 						void Bind();
 						void Unbind();
 
-						inline GLuint &GetProgramID() { return programID; }
+						inline const GLuint &GetProgramID() const { return programID; }
 				};
 			}
 		}

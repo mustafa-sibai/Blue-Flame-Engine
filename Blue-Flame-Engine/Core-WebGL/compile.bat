@@ -1,2 +1,0 @@
-CALL mkdir ..\Output\Core\WebGL\
-CALL emcc "../Core/BF/Application/Window.cpp" "../Core/BF/Math/Matrix4.cpp" "../Core/BF/Graphics/API/Context.cpp" "../Core/BF/Graphics/API/Shader.cpp" "../Core/BF/Graphics/API/VertexBuffer.cpp" "../Core/BF/Graphics/API/BufferLayout.cpp" "../Core/BF/Platform/API/OpenGL/GLShader.cpp" "../Core/BF/Platform/API/OpenGL/GLVertexBuffer.cpp" "../Core/BF/Platform/WebGL/WEBWindow.cpp" "../Core/BF/Platform/API/OpenGL/Context/WEBGLContext.cpp" -D BF_PLATFORM_WEBGL -std=c++11 -O1 -o ../Output/Core/WebGL/Core.bc

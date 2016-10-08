@@ -22,7 +22,7 @@ namespace BF
 					void Update();
 					bool IsOpen();
 
-					inline EGLDisplay GetDisplay() { return display; }
+					inline EGLDisplay GetDisplay() const { return display; }
 					inline EGLint *GetNumConfigs() { return &numConfigs; }
 			};
 		}

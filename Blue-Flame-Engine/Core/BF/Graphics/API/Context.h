@@ -45,14 +45,14 @@ namespace BF
 					void SwapBuffers();
 
 #ifdef BF_PLATFORM_WINDOWS
-					inline Platform::API::DirectX::DXContext *GetDXContext() { return dxContext; }
-					inline Platform::API::OpenGL::WINGLContext *GetWINGLContext() { return winGLContext; }
+					inline Platform::API::DirectX::DXContext *GetDXContext() const { return dxContext; }
+					inline const Platform::API::OpenGL::WINGLContext *GetWINGLContext() const { return winGLContext; }
 #elif BF_PLATFORM_LINUX
-					inline Platform::API::OpenGL::LXGLContext  *GetLXGLContext() { return lxGLContext; }
+					inline const Platform::API::OpenGL::LXGLContext  *GetLXGLContext() const { return lxGLContext; }
 #elif BF_PLATFORM_WEBGL
-					inline Platform::API::OpenGL::WEBGLContext  *GetWEBGLContext() { return webGLContext; }
+					inline const Platform::API::OpenGL::WEBGLContext  *GetWEBGLContext() const { return webGLContext; }
 #endif
-					static inline RenderAPI GetRenderAPI() { return renderAPI; }
+					static const inline RenderAPI GetRenderAPI() { return renderAPI; }
 			};
 		}
 	}

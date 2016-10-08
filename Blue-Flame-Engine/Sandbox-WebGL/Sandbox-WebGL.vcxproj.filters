@@ -18,22 +18,10 @@
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\RenderTriangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sandbox\VertexShader.glsl" />
     <None Include="Sandbox\FragmentShader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Sandbox\VertexShader.hlsl" />
-    <FxCompile Include="Sandbox\PixelShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Sandbox\RenderTriangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <None Include="Sandbox\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sandbox\test.png">
