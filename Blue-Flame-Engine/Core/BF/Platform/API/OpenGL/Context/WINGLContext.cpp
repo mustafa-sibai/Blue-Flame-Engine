@@ -51,6 +51,8 @@ namespace BF
 
 					fprintf(stdout, "OPENGL VERSION %s\n", (char*)glGetString(GL_VERSION));
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+
+					wglSwapIntervalEXT(1);
 				}
 
 				WINGLContext::~WINGLContext()
@@ -62,6 +64,11 @@ namespace BF
 					glClearColor(color.x, color.y, color.z, color.w);
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 					glEnable(GL_DEPTH_TEST);
+				}
+
+				void WINGLContext::Draw(GLenum mode, GLsizei count, GLenum type)
+				{
+					glDrawElements(mode, count, type, nullptr);
 				}
 
 				void WINGLContext::SwapBuffers()

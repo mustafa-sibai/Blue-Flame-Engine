@@ -10,27 +10,27 @@ namespace BF
 		{
 			enum class DataType { Byte, Short, Int, Float, Float2, Float3, Float4, Double };
 
-			struct BF_API BufferElement
+			struct BF_API VertexBufferElement
 			{
 				int index = 0;
-				char* name = NULL;
+				char* name = 0;
 				DataType dataType;
 				unsigned int stride = 0;
 				unsigned int offset = 0;
 			};
 
-			class BF_API BufferLayout
+			class BF_API VertexBufferLayout
 			{
 				private:
-					std::vector<BufferElement> bufferElements;
+					std::vector<VertexBufferElement> vertexBufferElements;
 
 				public:
-					BufferLayout();
-					~BufferLayout();
+					VertexBufferLayout();
+					~VertexBufferLayout();
 
 					void Push(int index, char* name, DataType dataType, unsigned int stride, unsigned int offset);
 
-					inline const std::vector<BufferElement> GetBufferElement() const { return bufferElements; }
+					inline const std::vector<VertexBufferElement> GetBufferElement() const { return vertexBufferElements; }
 			};
 		}
 	}

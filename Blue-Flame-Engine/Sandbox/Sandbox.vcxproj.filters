@@ -25,6 +25,7 @@
   <ItemGroup>
     <None Include="Sandbox\VertexShader.glsl" />
     <None Include="Sandbox\FragmentShader.glsl" />
+    <None Include="Sandbox\Cube.obj_" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Sandbox\VertexShader.hlsl" />

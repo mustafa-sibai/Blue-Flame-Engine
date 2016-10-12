@@ -84,9 +84,6 @@
     <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\API\BufferLayout.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\API\ConstentBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,6 +109,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Platform\API\DirectX\DXTexture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLIndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\IndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXIndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\IO\OBJReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,9 +179,6 @@
     <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\API\BufferLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -192,6 +207,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\API\DirectX\DXTexture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLIndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXIndexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\IO\OBJReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

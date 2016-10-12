@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
+#include "../Common.h"
 
 namespace BF
 {
 	namespace Math
 	{
-		struct Rectangle
+		struct BF_API Rectangle
 		{
 			int x, y, width, height;
 

@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
+#include "../Common.h"
 
 namespace BF
 {
 	namespace Math
 	{
-		struct Vector4
+		struct BF_API Vector4
 		{
 			float x, y, z, w;
 

@@ -181,6 +181,7 @@ xcopy /Y "$(SolutionDir)Dependency\FreeImage\Dist\x64\*.dll" "$(SolutionDir)Outp
     <ClCompile Include="Sandbox\RenderTriangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Sandbox\Cube.obj_" />
     <None Include="Sandbox\FragmentShader.glsl" />
     <None Include="Sandbox\VertexShader.glsl" />
   </ItemGroup>
