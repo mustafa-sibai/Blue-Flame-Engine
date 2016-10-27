@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WEBGL
 #include "WEBGLContext.h"
 
 namespace BF
@@ -9,7 +8,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				WEBGLContext::WEBGLContext(WebGL::WEBWindow *webWindow) :
+				WEBGLContext::WEBGLContext(WebGL::WEBWindow* webWindow) :
 					webWindow(webWindow)
 				{
 					EGLint attribs[] = {
@@ -68,4 +67,3 @@ namespace BF
 		}
 	}
 }
-#endif

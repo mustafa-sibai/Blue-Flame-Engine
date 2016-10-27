@@ -18,6 +18,94 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BF\Application\Window.cpp" />
+    <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\Context.cpp" />
+    <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\Shader.cpp" />
+    <ClCompile Include="BF\Graphics\API\Texture2D.cpp" />
+    <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
+    <ClCompile Include="BF\Graphics\Mesh.cpp" />
+    <ClCompile Include="BF\Graphics\Model.cpp" />
+    <ClCompile Include="BF\Input\Keyboard.cpp" />
+    <ClCompile Include="BF\Input\Mouse.cpp" />
+    <ClCompile Include="BF\IO\FileReader.cpp" />
+    <ClCompile Include="BF\IO\ImageReader.cpp" />
+    <ClCompile Include="BF\IO\OBJReader.cpp" />
+    <ClCompile Include="BF\Math\Math.cpp" />
+    <ClCompile Include="BF\Math\Matrix4.cpp" />
+    <ClCompile Include="BF\Math\Vector2.cpp" />
+    <ClCompile Include="BF\Math\Vector3.cpp" />
+    <ClCompile Include="BF\Math\Vector4.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXIndexBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXShader.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXTexture2D.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXVertexBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLShader.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLTexture2D.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
+    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
+    <ClCompile Include="BF\Graphics\Camera.cpp" />
+    <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLVertexArray.cpp" />
+    <ClCompile Include="BF\Graphics\API\VertexArray.cpp" />
+    <ClCompile Include="BF\System\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BF\Application\Window.h" />
+    <ClInclude Include="BF\Application\WindowStyle.h" />
+    <ClInclude Include="BF\BlueFlame.h" />
+    <ClInclude Include="BF\Common.h" />
+    <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
+    <ClInclude Include="BF\Graphics\API\Context.h" />
+    <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
+    <ClInclude Include="BF\Graphics\API\Shader.h" />
+    <ClInclude Include="BF\Graphics\API\Texture2D.h" />
+    <ClInclude Include="BF\Graphics\API\VertexBuffer.h" />
+    <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h" />
+    <ClInclude Include="BF\Graphics\Mesh.h" />
+    <ClInclude Include="BF\Graphics\Model.h" />
+    <ClInclude Include="BF\Input\Keyboard.h" />
+    <ClInclude Include="BF\Input\Mouse.h" />
+    <ClInclude Include="BF\IO\FileReader.h" />
+    <ClInclude Include="BF\IO\ImageReader.h" />
+    <ClInclude Include="BF\IO\OBJReader.h" />
+    <ClInclude Include="BF\Math\Math.h" />
+    <ClInclude Include="BF\Math\Matrix4.h" />
+    <ClInclude Include="BF\Math\Rectangle.h" />
+    <ClInclude Include="BF\Math\Vector2.h" />
+    <ClInclude Include="BF\Math\Vector3.h" />
+    <ClInclude Include="BF\Math\Vector4.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXIndexBuffer.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXShader.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXTexture2D.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXVertexBuffer.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLIndexBuffer.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLShader.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLTexture2D.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
+    <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
+    <ClInclude Include="BF\Graphics\Camera.h" />
+    <ClInclude Include="BF\Graphics\FPSCamera.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLVertexArray.h" />
+    <ClInclude Include="BF\Graphics\API\VertexArray.h" />
+    <ClInclude Include="BF\System\Timer.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>
     <RootNamespace>Core</RootNamespace>
@@ -28,7 +116,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -36,14 +124,14 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -51,7 +139,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -101,7 +189,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -115,7 +206,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;FreeImageLibd.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -131,8 +225,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -150,8 +247,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -164,81 +264,6 @@
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="BF\Application\Window.h" />
-    <ClInclude Include="BF\Application\WindowStyle.h" />
-    <ClInclude Include="BF\Common.h" />
-    <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h" />
-    <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
-    <ClInclude Include="BF\Graphics\API\VertexBuffer.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXShader.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLShader.h" />
-    <ClInclude Include="BF\Graphics\API\Shader.h" />
-    <ClInclude Include="BF\Input\Mouse.h" />
-    <ClInclude Include="BF\IO\FileReader.h" />
-    <ClInclude Include="BF\Math\Math.h" />
-    <ClInclude Include="BF\Math\Matrix4.h" />
-    <ClInclude Include="BF\Math\Rectangle.h" />
-    <ClInclude Include="BF\Math\Vector2.h" />
-    <ClInclude Include="BF\Math\Vector3.h" />
-    <ClInclude Include="BF\Math\Vector4.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
-    <ClInclude Include="BF\Platform\Linux\LXWindow.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\Context\LXGLContext.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h" />
-    <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
-    <ClInclude Include="BF\Graphics\API\Context.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXVertexBuffer.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\Context\WEBGLContext.h" />
-    <ClInclude Include="BF\Platform\WebGL\WEBWindow.h" />
-    <ClInclude Include="BF\IO\ImageReader.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLTexture2D.h" />
-    <ClInclude Include="BF\Graphics\API\Texture2D.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXTexture2D.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLIndexBuffer.h" />
-    <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXIndexBuffer.h" />
-    <ClInclude Include="BF\IO\OBJReader.h" />
-    <ClInclude Include="BF\Graphics\Mesh.h" />
-    <ClInclude Include="BF\Graphics\Model.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="BF\Application\Window.cpp" />
-    <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
-    <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
-    <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp" />
-    <ClCompile Include="BF\IO\FileReader.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXShader.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLShader.cpp" />
-    <ClCompile Include="BF\Graphics\API\Shader.cpp" />
-    <ClCompile Include="BF\Input\Mouse.cpp" />
-    <ClCompile Include="BF\Math\Matrix4.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
-    <ClCompile Include="BF\Platform\Linux\LXWindow.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\Context\LXGLContext.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp" />
-    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
-    <ClCompile Include="BF\Graphics\API\Context.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXVertexBuffer.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\Context\WEBGLContext.cpp" />
-    <ClCompile Include="BF\Platform\WebGL\WEBWindow.cpp" />
-    <ClCompile Include="BF\IO\ImageReader.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLTexture2D.cpp" />
-    <ClCompile Include="BF\Graphics\API\Texture2D.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXTexture2D.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
-    <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXIndexBuffer.cpp" />
-    <ClCompile Include="BF\IO\OBJReader.cpp" />
-    <ClCompile Include="BF\Graphics\Mesh.cpp" />
-    <ClCompile Include="BF\Graphics\Model.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

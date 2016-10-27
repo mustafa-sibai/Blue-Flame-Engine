@@ -1,8 +1,13 @@
 #pragma once
-#include "../API/Context.h"
-#include "../API/Shader.h"
-#include "../../Platform/API/DirectX/DXVertexBuffer.h"
-#include "../../Platform/API/OpenGL/GLVertexBuffer.h"
+#ifdef BF_PLATFORM_WINDOWS
+	#include "BF/Platform/API/DirectX/DXVertexBuffer.h"
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+	#include "BF/Platform/API/OpenGL/GLVertexBuffer.h"
+#endif
+
+#include "BF/Graphics/API/Context.h"
+#include "BF/Graphics/API/Shader.h"
 
 namespace BF
 {
@@ -13,23 +18,31 @@ namespace BF
 			class BF_API VertexBuffer
 			{
 				private:
-					Context *context;
+					Context* context;
 
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXVertexBuffer *dxVertexBuffer;
+					Platform::API::DirectX::DXVertexBuffer* dxVertexBuffer;
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					Platform::API::OpenGL::GLVertexBuffer *glVertexBuffer;
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+					Platform::API::OpenGL::GLVertexBuffer* glVertexBuffer;
 #endif	
 				public:
-					VertexBuffer(Context *context, Shader *shader);
+					VertexBuffer(Context* context, Shader* shader);
 					~VertexBuffer();
 
-					void Create(void* data, const unsigned int size);
-					void SetLayout(VertexBufferLayout *vertexBufferLayout);
+					void Create(void* data, unsigned int size);
+					void* Map() const;
+					void Unmap() const;
+					void Bind() const;
+					void Unbind() const;
 
-					const void Bind() const;
-					const void Unbind() const;
+#ifdef BF_PLATFORM_WINDOWS
+					inline Platform::API::DirectX::DXVertexBuffer* GetDXVertexBuffer() const { return dxVertexBuffer; }
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+					inline Platform::API::OpenGL::GLVertexBuffer* GetGLVertexBuffer() const { return glVertexBuffer; }
+#endif
+
 			};
 		}
 	}

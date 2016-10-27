@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -10,8 +10,8 @@ namespace BF
 	{
 		struct BF_API FileReader
 		{
-			static std::string ReadTextFile(const char *fileName);
-			static char* ReadBinaryFile(const char *fileName, size_t *size);
+			static std::string ReadTextFile(const char* fileName);
+			static char* ReadBinaryFile(const char* fileName, size_t* size);
 		};
 	}
 }

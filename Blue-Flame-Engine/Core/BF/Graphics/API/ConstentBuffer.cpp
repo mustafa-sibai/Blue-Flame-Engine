@@ -6,14 +6,14 @@ namespace BF
 	{
 		namespace API
 		{
-			ConstentBuffer::ConstentBuffer(Context *context, Shader *shader) :
+			ConstentBuffer::ConstentBuffer(Context* context, Shader* shader) :
 				context(context), shader(shader)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxConstentBuffer = new BF::Platform::API::DirectX::DXConstentBuffer(context->GetDXContext(), shader->GetDXShader());
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glConstentBuffer = new BF::Platform::API::OpenGL::GLConstentBuffer();
 #endif
@@ -23,25 +23,25 @@ namespace BF
 			{
 			}
 
-			void ConstentBuffer::Create(void *data, unsigned int size, const unsigned int bindingIndex)
+			void ConstentBuffer::Create(void* data, unsigned int size, unsigned int bindingIndex)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxConstentBuffer->Create(data, size);
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glConstentBuffer->Create(data, size, bindingIndex);
 #endif
 			}
 
-			void ConstentBuffer::Update(void *data, const unsigned int size)
+			void ConstentBuffer::Update(void* data, unsigned int size)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxConstentBuffer->Update(data);
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glConstentBuffer->Update(data, size);
 #endif

@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "DXContext.h"
 
 namespace BF
@@ -9,8 +8,8 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXContext::DXContext(Windows::WINWindow *winWindow) :
-					winWindow(winWindow), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr)
+				DXContext::DXContext(Application::Window* window) :
+					window(window), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr)
 				{
 					CreateDeviceAndSwapChain();
 					CreateBackBuffer();
@@ -31,7 +30,7 @@ namespace BF
 					swapChainDesc.BufferCount = 1;
 					swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 					swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-					swapChainDesc.OutputWindow = winWindow->GetHWND();
+					swapChainDesc.OutputWindow = window->GetWINWindow()->GetHWND();
 					swapChainDesc.SampleDesc.Count = 4;
 					swapChainDesc.Windowed = TRUE;
 
@@ -68,7 +67,7 @@ namespace BF
 
 				void DXContext::CreateBackBuffer()
 				{
-					ID3D11Texture2D *backBuffer;
+					ID3D11Texture2D* backBuffer;
 					ZeroMemory(&backBuffer, sizeof(backBuffer));
 
 					swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer);
@@ -105,13 +104,13 @@ namespace BF
 
 				void DXContext::CreateDepthBuffer()
 				{
-					ID3D11Texture2D *depthBuffer;
+					ID3D11Texture2D* depthBuffer;
 					D3D11_TEXTURE2D_DESC texd;
 					ZeroMemory(&texd, sizeof(texd));
 					ZeroMemory(&depthBuffer, sizeof(depthBuffer));
 
-					texd.Width = winWindow->GetClientWidth();
-					texd.Height = winWindow->GetClientHeight();
+					texd.Width = window->GetClientWidth();
+					texd.Height = window->GetClientHeight();
 					texd.ArraySize = 1;
 					texd.MipLevels = 1;
 					texd.SampleDesc.Count = 4;
@@ -141,8 +140,8 @@ namespace BF
 
 					viewPort.TopLeftX = 0;
 					viewPort.TopLeftY = 0;
-					viewPort.Width = winWindow->GetClientWidth();
-					viewPort.Height = winWindow->GetClientHeight();
+					viewPort.Width = window->GetClientWidth();
+					viewPort.Height = window->GetClientHeight();
 					viewPort.MinDepth = 0;
 					viewPort.MaxDepth = 1;
 					context->RSSetViewports(1, &viewPort);
@@ -160,7 +159,7 @@ namespace BF
 					swapChain->Present(0, 0);
 				}
 
-				void DXContext::Draw(const unsigned int vertexCount)
+				void DXContext::Draw(unsigned int vertexCount)
 				{
 					context->DrawIndexed(vertexCount, 0, 0);
 				}
@@ -176,4 +175,3 @@ namespace BF
 		}
 	}
 }
-#endif

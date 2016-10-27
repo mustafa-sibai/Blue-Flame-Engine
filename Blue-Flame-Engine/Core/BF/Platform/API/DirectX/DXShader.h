@@ -1,7 +1,6 @@
-#ifdef BF_PLATFORM_WINDOWS
 #pragma once
 #include "DXContext.h"
-#include "../../../IO/FileReader.h"
+#include "BF/IO/FileReader.h"
 
 namespace BF
 {
@@ -14,28 +13,28 @@ namespace BF
 				class BF_API DXShader
 				{
 					private:
-						DXContext *context;
+						DXContext* context;
 
-						ID3D11VertexShader *VS;
-						ID3D11PixelShader *PS;
+						ID3D11VertexShader* VS;
+						ID3D11PixelShader* PS;
 						HRESULT hr;
 
-						char *VSData, *PSData;
+						char* VSData;
+						char* PSData;
 						size_t VSsize, PSsize;
 
 					public:
-						DXShader(DXContext *context);
+						DXShader(DXContext* context);
 						~DXShader();
 					
 						void Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath);
 						void Bind();
 						void CleanUp();
 
-						inline const char *GetVSData() const { return VSData; }
-						inline const size_t &GetVSsize() const { return VSsize; }
+						inline const char* GetVSData() const { return VSData; }
+						inline const size_t& GetVSsize() const { return VSsize; }
 				};
 			}
 		}
 	}
 }
-#endif

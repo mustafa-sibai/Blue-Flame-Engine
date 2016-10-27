@@ -1,18 +1,20 @@
 #include "ImageReader.h"
+#include <FreeImage.h>
+#include <Utilities.h>
 
 namespace BF
 {
 	namespace IO
 	{
-		BYTE* ImageReader::ReadImage(const char *filename, unsigned int *width, unsigned int *height)
+		uint8_t* ImageReader::ReadImage(const char* filename, unsigned int* width, unsigned int* height)
 		{
 			FreeImage_Initialise();
 
 			FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
-			FIBITMAP *dib = nullptr;
-			BYTE* bits = nullptr;
-
+			FIBITMAP* dib = nullptr;
+			uint8_t* bits = nullptr;
+			
 			fif = FreeImage_GetFileType(filename, 0);
 
 			if (fif == FIF_UNKNOWN)
@@ -43,7 +45,7 @@ namespace BF
 				SwapRedBlue32(bitmap);
 
 			FreeImage_DeInitialise();
-
+			
 			return bits;
 		}
 	}

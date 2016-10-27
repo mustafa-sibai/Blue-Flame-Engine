@@ -17,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void GLConstentBuffer::Create(const void *data, const unsigned int size, const unsigned int bindingIndex)
+				void GLConstentBuffer::Create(const void* data, unsigned int size, unsigned int bindingIndex)
 				{
 					glCreateBuffers(1, &buffer);
 					glBindBuffer(GL_UNIFORM_BUFFER, buffer);
@@ -31,7 +31,7 @@ namespace BF
 					glBindBuffer(GL_UNIFORM_BUFFER, 0);
 				}
 
-				void GLConstentBuffer::Update(const void *data, const unsigned int size)
+				void GLConstentBuffer::Update(const void* data, const unsigned int size)
 				{
 					glBindBuffer(GL_UNIFORM_BUFFER, buffer);
 					glBufferSubData(GL_UNIFORM_BUFFER, 0, size, data);

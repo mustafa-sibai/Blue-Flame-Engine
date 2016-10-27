@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "WINGLContext.h"
 
 namespace BF
@@ -9,14 +8,14 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				WINGLContext::WINGLContext(Windows::WINWindow *window) :
+				WINGLContext::WINGLContext(Application::Window* window) :
 					window(window), hDC(nullptr)
 				{
-					hDC = GetDC(window->GetHWND());
+					hDC = GetDC(window->GetWINWindow()->GetHWND());
 
 					int  letWindowsChooseThisPixelFormat;
-					letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &window->GetPixelFormat());
-					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &window->GetPixelFormat());
+					letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &window->GetWINWindow()->GetPixelFormat());
+					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &window->GetWINWindow()->GetPixelFormat());
 
 					HGLRC tempContext = wglCreateContext(hDC);
 					wglMakeCurrent(hDC, tempContext);
@@ -50,9 +49,10 @@ namespace BF
 					glViewport(0, 0, window->GetClientWidth(), window->GetClientHeight());
 
 					fprintf(stdout, "OPENGL VERSION %s\n", (char*)glGetString(GL_VERSION));
+					fprintf(stdout, "Graphics Card: %s - %s\n", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-					wglSwapIntervalEXT(1);
+					//wglSwapIntervalEXT(1);
 				}
 
 				WINGLContext::~WINGLContext()
@@ -63,7 +63,7 @@ namespace BF
 				{
 					glClearColor(color.x, color.y, color.z, color.w);
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					glEnable(GL_DEPTH_TEST);
+					//glEnable(GL_DEPTH_TEST);
 				}
 
 				void WINGLContext::Draw(GLenum mode, GLsizei count, GLenum type)
@@ -78,9 +78,9 @@ namespace BF
 
 				void WINGLContext::CleanUp()
 				{
+					DeleteDC(hDC);
 				}
 			}
 		}
 	}
 }
-#endif

@@ -1,12 +1,12 @@
 #pragma once
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX
-#include <GL/glew.h>
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include <GL/glew.h>
 #elif BF_PLATFORM_WEBGL
-#include <GLES3/gl3.h>
+	#include <GLES3/gl3.h>
 #endif
 
 #include <vector>
-#include "../../../IO/FileReader.h"
+#include "BF/IO/FileReader.h"
 
 namespace BF
 {
@@ -32,10 +32,10 @@ namespace BF
 
 						void Load(const char* vertexShaderFilePath, const char* fragmentShaderFilePath);
 
-						void Bind();
-						void Unbind();
+						void Bind() const;
+						void Unbind() const;
 
-						inline const GLuint &GetProgramID() const { return programID; }
+						inline const GLuint& GetProgramID() const { return programID; }
 				};
 			}
 		}

@@ -11,9 +11,6 @@ namespace BF
 {
 	namespace Math
 	{
-		static float ToRadians(float Degrees)
-		{
-			return (float)((Degrees * M_PI) / 180.f);
-		}
+		float ToRadians(float Degrees);
 	}
 }

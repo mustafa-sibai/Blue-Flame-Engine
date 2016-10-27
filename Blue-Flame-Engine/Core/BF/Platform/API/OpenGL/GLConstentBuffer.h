@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
+#include <string.h>
 #include <GL/glew.h>
-#include "../../../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -20,8 +21,8 @@ namespace BF
 						GLConstentBuffer();
 						~GLConstentBuffer();
 
-						void Create(const void *data, const unsigned int size, const unsigned int bindingIndex);
-						void Update(const void *data, const unsigned int size);
+						void Create(const void* data, unsigned int size, unsigned int bindingIndex);
+						void Update(const void* data, unsigned int size);
 				};
 			}
 		}

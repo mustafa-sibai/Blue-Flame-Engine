@@ -27,7 +27,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sandbox\Main.cpp" />
+    <None Include="..\Sandbox\Sandbox\FragmentShader.glsl">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x86'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
+    </None>
+    <None Include="..\Sandbox\Sandbox\VertexShader.glsl">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x86'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Sandbox\Sandbox\Main.cpp" />
+    <ClCompile Include="..\Sandbox\Sandbox\RenderTriangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sandbox\empty.h" />
+    <ClInclude Include="..\Sandbox\Sandbox\RenderTriangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{a26683cf-b572-4811-be43-53831ebee71a}</ProjectGuid>
@@ -66,32 +89,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core-Linux;$(SolutionDir)Dependency\GLEW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
@@ -99,7 +122,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
@@ -111,7 +135,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
@@ -123,7 +148,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
@@ -135,7 +161,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,7 +174,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
@@ -159,7 +187,8 @@
       <AdditionalIncludeDirectories>/home/fantasy/projects/Core-Linux/;/home/fantasy/projects/Dependency/GLEW/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PreBuildEvent>
-      <Command>%systemroot%\System32\xcopy /Y/E "$(SolutionDir)Sandbox\Sandbox\*.*" "$(SolutionDir)Sandbox-Linux\Sandbox\*.*"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
     <Link>
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/$(Platform)/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>

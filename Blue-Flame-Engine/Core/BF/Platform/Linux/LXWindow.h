@@ -1,12 +1,12 @@
-#ifdef BF_PLATFORM_LINUX
 #pragma once
 #include <stdio.h>
 #include <GL/glew.h>
 #include <GL/glxew.h>
-#include "../../Application/WindowStyle.h"
+#include "BF/Application/WindowStyle.h"
 
 namespace BF
 {
+	namespace Application { class Window; }
 	namespace Platform
 	{
 		namespace Linux
@@ -14,28 +14,29 @@ namespace BF
 			class BF_API LXWindow
 			{
 				private:
-					Display *display;
-					Window window;
-					XEvent events;
+					Application::Window* window;
+
+					Display* display;
+					Window xwindow;
+					XEvent xEvent;
 					GLXFBConfig frameBufferConfig;
 
 				private:
 					void CheckGLXVersion();
 					GLXFBConfig GetBestFrameBufferConfig(int framebuffer_attribs[]);
-					void CreateWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, GLXFBConfig frameBuffer);
+					void CreateWindow(Application::Window* window, GLXFBConfig frameBuffer);
 
 				public:
-					LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style);
+					LXWindow(Application::Window* window);
 					~LXWindow();
 
 					void Update();
 					bool IsOpen();
 
-					inline const Display *GetDisplay() const { return display; }
-					inline const Window GetWindow() const { return window; }
-					inline const GLXFBConfig GetFrameBufferConfig() const { return frameBufferConfig; }
+					inline Display* GetDisplay() const { return display; }
+					inline Window GetWindow() const { return xwindow; }
+					inline GLXFBConfig GetFrameBufferConfig() const { return frameBufferConfig; }
 			};
 		}
 	}
 }
-#endif

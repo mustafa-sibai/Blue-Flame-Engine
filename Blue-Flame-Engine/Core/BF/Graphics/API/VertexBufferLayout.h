@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "../../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -13,7 +13,7 @@ namespace BF
 			struct BF_API VertexBufferElement
 			{
 				int index = 0;
-				char* name = 0;
+				const char* name = 0;
 				DataType dataType;
 				unsigned int stride = 0;
 				unsigned int offset = 0;
@@ -28,9 +28,9 @@ namespace BF
 					VertexBufferLayout();
 					~VertexBufferLayout();
 
-					void Push(int index, char* name, DataType dataType, unsigned int stride, unsigned int offset);
+					void Push(int index, const char* name, DataType dataType, unsigned int stride, unsigned int offset);
 
-					inline const std::vector<VertexBufferElement> GetBufferElement() const { return vertexBufferElements; }
+					inline std::vector<VertexBufferElement> GetBufferElement() const { return vertexBufferElements; }
 			};
 		}
 	}

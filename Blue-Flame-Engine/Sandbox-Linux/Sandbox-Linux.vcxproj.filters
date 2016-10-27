@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{2cd24e4b-a64d-44c2-8938-5dfd3b9d005b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sandbox">
+      <UniqueIdentifier>{02fc80c2-4a89-4875-b6ae-19119e9bb2d9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Sandbox\Sandbox\FragmentShader.glsl">
+      <Filter>Source Files\Sandbox</Filter>
+    </None>
+    <None Include="..\Sandbox\Sandbox\VertexShader.glsl">
+      <Filter>Source Files\Sandbox</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Sandbox\Sandbox\Main.cpp">
+      <Filter>Source Files\Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandbox\Sandbox\RenderTriangle.cpp">
+      <Filter>Source Files\Sandbox</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sandbox\Sandbox\RenderTriangle.h">
+      <Filter>Source Files\Sandbox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Sandbox\empty.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

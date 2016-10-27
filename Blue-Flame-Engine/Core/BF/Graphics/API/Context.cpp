@@ -6,18 +6,18 @@ namespace BF
 	{
 		namespace API
 		{
-			RenderAPI Context::renderAPI = RenderAPI::None;
+			RenderAPI Context::renderAPI = RenderAPI::none;
 
-			Context::Context(Application::Window *window, RenderAPI renderAPI) :
+			Context::Context(Application::Window* window, RenderAPI renderAPI) :
 				window(window), GL_PRIMITIVE_TYPE(0)
 			{
 				this->renderAPI = renderAPI;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
-					dxContext = new Platform::API::DirectX::DXContext(window->GetWINWindow());
+					dxContext = new Platform::API::DirectX::DXContext(window);
 				else if (renderAPI == RenderAPI::OpenGL)
-					winGLContext = new Platform::API::OpenGL::WINGLContext(window->GetWINWindow());
+					winGLContext = new Platform::API::OpenGL::WINGLContext(window);
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext = new Platform::API::OpenGL::LXGLContext(window->GetLXWindow());
@@ -114,7 +114,7 @@ namespace BF
 #endif
 			}
 
-			void Context::Draw(const unsigned int vertexCount)
+			void Context::Draw(unsigned int vertexCount)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)

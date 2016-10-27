@@ -8,6 +8,8 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::IO;
+
 				GLTexture2D::GLTexture2D() :
 					textureID(0), width(0), height(0), data(nullptr)
 				{
@@ -17,9 +19,9 @@ namespace BF
 				{
 				}
 
-				void GLTexture2D::Load(const char *fileName)
+				void GLTexture2D::Load(const char* fileName)
 				{
-					data = BF::IO::ImageReader::ReadImage(fileName, &width, &height);
+					data = ImageReader::ReadImage(fileName, &width, &height);
 					
 					if (data != nullptr)
 					{
@@ -33,12 +35,12 @@ namespace BF
 					}
 				}
 
-				const void GLTexture2D::Bind() const
+				void GLTexture2D::Bind() const
 				{
 					glBindTexture(GL_TEXTURE_2D, textureID);
 				}
 
-				const void GLTexture2D::Unbind() const
+				void GLTexture2D::Unbind() const
 				{
 					glBindTexture(GL_TEXTURE_2D, 0);
 				}

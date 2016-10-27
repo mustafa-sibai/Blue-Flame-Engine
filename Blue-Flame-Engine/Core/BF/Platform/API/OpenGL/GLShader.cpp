@@ -8,6 +8,9 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace std;
+				using namespace BF::IO;
+
 				GLShader::GLShader() :
 					programID(0), result(GL_FALSE), errorLength(0)
 				{
@@ -30,7 +33,7 @@ namespace BF
 					glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &errorLength);
 					if (errorLength > 0)
 					{
-						std::vector<char> shaderErrorMessage(errorLength + 1);
+						vector<char> shaderErrorMessage(errorLength + 1);
 						glGetShaderInfoLog(shaderID, errorLength, NULL, &shaderErrorMessage[0]);
 						printf("Compile Error: %s\n", &shaderErrorMessage[0]);
 					}
@@ -40,8 +43,8 @@ namespace BF
 
 				void GLShader::Load(const char* vertexShaderFilePath, const char* fragmentShaderFilePath)
 				{
-					GLuint vertexShader = CompileShader(IO::FileReader::ReadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
-					GLuint fragmentShader = CompileShader(IO::FileReader::ReadTextFile(fragmentShaderFilePath), GL_FRAGMENT_SHADER);
+					GLuint vertexShader = CompileShader(FileReader::ReadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
+					GLuint fragmentShader = CompileShader(FileReader::ReadTextFile(fragmentShaderFilePath), GL_FRAGMENT_SHADER);
 
 					programID = glCreateProgram();
 
@@ -53,7 +56,7 @@ namespace BF
 					glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &errorLength);
 					if (errorLength > 0)
 					{
-						std::vector<char> ProgramErrorMessage(errorLength + 1);
+						vector<char> ProgramErrorMessage(errorLength + 1);
 						glGetProgramInfoLog(programID, errorLength, NULL, &ProgramErrorMessage[0]);
 						printf("Link Error: %s\n", &ProgramErrorMessage[0]);
 					}
@@ -64,12 +67,12 @@ namespace BF
 					glDeleteShader(fragmentShader);
 				}
 
-				void GLShader::Bind()
+				void GLShader::Bind() const
 				{
 					glUseProgram(programID);
 				}
 
-				void GLShader::Unbind()
+				void GLShader::Unbind() const
 				{
 					glUseProgram(0);
 				}

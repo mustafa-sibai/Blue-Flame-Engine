@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "DXConstentBuffer.h"
 
 namespace BF
@@ -9,7 +8,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXConstentBuffer::DXConstentBuffer(DXContext *dxContext, DXShader *dxShader) :
+				DXConstentBuffer::DXConstentBuffer(DXContext* dxContext, DXShader* dxShader) :
 					dxContext(dxContext), dxShader(dxShader), buffer(nullptr), hr(0)
 				{
 				}
@@ -18,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void DXConstentBuffer::Create(void *data, unsigned int size)
+				void DXConstentBuffer::Create(void* data, unsigned int size)
 				{
 					//Align the buffer to be a multiple of 16
 					int remainder = size % 16;
@@ -40,12 +39,12 @@ namespace BF
 					dxContext->GetContext()->VSSetConstantBuffers(0, 1, &buffer);
 				}
 
-				void DXConstentBuffer::Update(void *data)
+				void DXConstentBuffer::Update(void* data)
 				{
+					//TODO: slow should use map instead
 					dxContext->GetContext()->UpdateSubresource(buffer, 0, 0, data, 0, 0);
 				}
 			}
 		}
 	}
 }
-#endif

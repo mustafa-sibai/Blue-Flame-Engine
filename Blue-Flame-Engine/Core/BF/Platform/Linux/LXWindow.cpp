@@ -1,5 +1,6 @@
-#ifdef BF_PLATFORM_LINUX
 #include "LXWindow.h"
+#include "BF/Input/Keyboard.h"
+#include "BF/Application/Window.h"
 
 namespace BF
 {
@@ -7,7 +8,10 @@ namespace BF
 	{
 		namespace Linux
 		{
-			LXWindow::LXWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style)
+			using namespace BF::Input;
+
+			LXWindow::LXWindow(Application::Window* window) :
+				window(window), display(nullptr), xwindow(0), xEvent(), frameBufferConfig(nullptr)
 			{
 				display = XOpenDisplay(NULL);
 
@@ -38,7 +42,7 @@ namespace BF
 
 				CheckGLXVersion();
 				frameBufferConfig = GetBestFrameBufferConfig(framebuffer_attribs);
-				CreateWindow(title, x, y, width, height, frameBufferConfig);
+				CreateWindow(window, frameBufferConfig);
 			}
 
 			void LXWindow::CheckGLXVersion()
@@ -48,7 +52,6 @@ namespace BF
 				if (!glXQueryVersion(display, &GLXMajor, &GLXMinor) || ((GLXMajor == 1) && (GLXMinor < 3)) || (GLXMajor < 1))
 				{
 					printf("Invalid GLX version. GLX needs to be version 1.3 or higher");
-					//exit(1);
 				}
 			}
 
@@ -59,12 +62,11 @@ namespace BF
 				if (!fbc)
 				{
 					printf("Failed to retrieve a framebuffer config\n");
-					//exit(1);
 				}
 
 				int bestFBC = -1, worstFBC = -1, bestSamples = -1, worstSamples = 999;
 
-				size_t i;
+				int i;
 				for (i = 0; i < fbcount; ++i)
 				{
 					XVisualInfo *visualInfo = glXGetVisualFromFBConfig(display, fbc[i]);
@@ -74,7 +76,7 @@ namespace BF
 						glXGetFBConfigAttrib(display, fbc[i], GLX_SAMPLE_BUFFERS, &sampleBuffer);
 						glXGetFBConfigAttrib(display, fbc[i], GLX_SAMPLES, &samples);
 
-						if (bestFBC < 0 || sampleBuffer && samples > bestSamples)
+						if ((bestFBC < 0 || sampleBuffer) && (samples > bestSamples))
 							bestFBC = i, bestSamples = samples;
 						if (worstFBC < 0 || !sampleBuffer || samples < worstSamples)
 							worstFBC = i, worstSamples = samples;
@@ -86,7 +88,7 @@ namespace BF
 				return fbc[bestFBC];
 			}
 
-			void LXWindow::CreateWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, GLXFBConfig frameBuffer)
+			void LXWindow::CreateWindow(Application::Window* window, GLXFBConfig frameBuffer)
 			{
 				XVisualInfo *visualInfo = glXGetVisualFromFBConfig(display, frameBuffer);
 
@@ -97,18 +99,19 @@ namespace BF
 				windowAttributes.border_pixel = 0;
 				windowAttributes.event_mask = StructureNotifyMask;
 
-				window = XCreateWindow(display, RootWindow(display, visualInfo->screen), x, y, width, height, 0,
+				xwindow = XCreateWindow(display, RootWindow(display, visualInfo->screen), window->positionX, window->positionY, window->width, window->height, 0,
 					visualInfo->depth, InputOutput, visualInfo->visual, CWBorderPixel | CWColormap | CWEventMask, &windowAttributes);
 				if (!window)
 				{
 					printf("Failed to create window.\n");
-					//exit(1);
 				}
 
 				XFree(visualInfo);
 
-				XStoreName(display, window, title);
-				XMapWindow(display, window);
+				XSelectInput(display, xwindow, KeyPressMask | KeyReleaseMask);
+
+				XStoreName(display, xwindow, window->title);
+				XMapWindow(display, xwindow);
 			}
 
 			LXWindow::~LXWindow()
@@ -117,6 +120,29 @@ namespace BF
 
 			void LXWindow::Update()
 			{
+				while (XPending(display))
+				{
+					XNextEvent(display, &xEvent);
+					switch (xEvent.type)
+					{
+						case KeyPress:
+						{
+							Keyboard::keys[(unsigned char)xEvent.xkey.keycode] = true;
+							break;
+						}
+						case KeyRelease:
+						{
+							Keyboard::keys[(unsigned char)xEvent.xkey.keycode] = false;
+							break;
+						}
+
+						default:
+							break;
+					}
+				}
+
+				/* close connection to server */
+				//XCloseDisplay(display);
 			}
 
 			bool LXWindow::IsOpen()
@@ -126,4 +152,3 @@ namespace BF
 		}
 	}
 }
-#endif

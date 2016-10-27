@@ -1,19 +1,17 @@
-#if 0
 #include "Mouse.h"
 
-namespace BFE
+namespace BF
 {
 	namespace Input
 	{
-		Vector2 *Mouse::Position{ 0 };
+		Math::Vector2 Mouse::Position(0);
 
-		inline const Vector2 Mouse::GetPosition()
+		Mouse::Mouse()
 		{
-			if (Mouse::Position == nullptr)
-				return Vector2(0);
-			else
-				return *Position;
+		}
+
+		Mouse::~Mouse()
+		{
 		}
 	}
 }
-#endif

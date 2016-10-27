@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WEBGL
 #include "WEBWindow.h"
 
 namespace BF
@@ -45,4 +44,3 @@ namespace BF
 		}
 	}
 }
-#endif

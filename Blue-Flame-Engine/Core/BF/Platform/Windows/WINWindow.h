@@ -1,18 +1,13 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
 #include <iostream>
 #include <Windows.h>
 #include <Dwmapi.h>
-#include "../../Common.h"
-#include "../../Application/WindowStyle.h"
-
-//#inlcude"../Math/Vector4.h"
-//#include "../Input/Mouse.h"
-//#include "Renderer/Renderer.h"
-//#include "../RenderAPI.h"
+#include "BF/Common.h"
+#include "BF/Application/WindowStyle.h"
 
 namespace BF
 {
+	namespace Application { class Window; }
 	namespace Platform
 	{
 		namespace Windows
@@ -22,32 +17,28 @@ namespace BF
 				private:
 					HWND hWnd;
 					MSG msg;
-					POINT mousePoint;
 					DWORD currentWindowStyle;
-					unsigned short width, height, clientWidth, clientHeight;
+					Application::Window* window;
 
 				public:
-					WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style);
+					WINWindow(Application::Window* window);
 					~WINWindow();
 
 					void Update();
 					bool IsOpen();
 					void Move();
 					void SetWindowTitle(const char* title);
+					PIXELFORMATDESCRIPTOR GetPixelFormat() const;
 
-					PIXELFORMATDESCRIPTOR const GetPixelFormat() const;
+				private:
+					void SetClientSize();
 
-					inline const unsigned short GetWidth() const { return width; }
-					inline const unsigned short GetHeight() const { return height; }
-						    			    
-					inline const unsigned short GetClientWidth() const { return clientWidth; }
-					inline const unsigned short GetClientHeight() const { return clientHeight; }
+				public:
+					inline const HWND& GetHWND() const { return hWnd; }
 
-					inline const float GetAspectRatio() const { return (float)(width / height); }
-
-					inline const HWND &GetHWND() const { return hWnd; }
+				private:
+					static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 			};
 		}
 	}
 }
-#endif

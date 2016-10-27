@@ -1,8 +1,6 @@
 #pragma once
-#include <FreeImage.h>
-#include <Utilities.h>
 #include <iostream>
-#include "../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -10,7 +8,7 @@ namespace BF
 	{
 		struct BF_API ImageReader
 		{
-			static BYTE* ReadImage(const char *filename, unsigned int *width, unsigned int *height);
+			static uint8_t* ReadImage(const char* filename, unsigned int* width, unsigned int* height);
 		};
 	}
 }

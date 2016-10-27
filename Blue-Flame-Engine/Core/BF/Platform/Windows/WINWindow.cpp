@@ -1,5 +1,7 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "WinWindow.h"
+#include "BF/Input/Keyboard.h"
+#include "BF/Input/Mouse.h"
+#include "BF/Application/Window.h"
 
 namespace BF
 {
@@ -7,12 +9,14 @@ namespace BF
 	{
 		namespace Windows
 		{
-			LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+			using namespace Input;
+			using namespace Application;
+			using namespace Math;
 
-			WINWindow::WINWindow(const char* title, unsigned short x, unsigned short y, unsigned short width, unsigned short height, Application::WindowStyle style) :
-				hWnd(nullptr), msg(), mousePoint(), currentWindowStyle(), width(width), height(height), clientWidth(0), clientHeight(0)
+			WINWindow::WINWindow(Application::Window* window) :
+				window(window), hWnd(nullptr), msg(), currentWindowStyle()
 			{
-				HINSTANCE hInstance = GetModuleHandle(NULL);
+				HINSTANCE hInstance = GetModuleHandle(0);
 
 				WNDCLASSEX wc;
 				ZeroMemory(&wc, sizeof(wc));
@@ -21,49 +25,40 @@ namespace BF
 				wc.style = CS_HREDRAW | CS_VREDRAW;
 				wc.lpfnWndProc = WndProc;
 				wc.hInstance = hInstance;
-				wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+				wc.hCursor = LoadCursor(0, IDC_ARROW);
 				wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
-				wc.lpszClassName = "Blue Flame Engine Window Class";
+				wc.lpszClassName = L"Blue Flame Engine Window Class";
 
-				RegisterClassEx(&wc);
+				if (!RegisterClassEx(&wc))
+					std::cout << "failed to register window class" << std::endl;
 
-				//Adjust the client size correctly
-				RECT wr = { 0, 0, width, height };
-
-				if (style == Application::WindowStyle::Windowed)
-				{
+				if (window->style == WindowStyle::Windowed)
 					currentWindowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
-
-					AdjustWindowRect(&wr, currentWindowStyle, FALSE);
-					clientWidth = (unsigned short)(wr.right + wr.left);
-					clientHeight = (unsigned short)(height + wr.top);
-				}
-				else if (style == Application::WindowStyle::Borderless)
-				{
+				else if (window->style == WindowStyle::ResizableWindow)
+					currentWindowStyle = WS_OVERLAPPEDWINDOW;
+				else if (window->style == WindowStyle::Borderless)
 					currentWindowStyle = WS_POPUP;
 
-					AdjustWindowRect(&wr, currentWindowStyle, FALSE);
-					clientWidth = width;
-					clientHeight = height;
-				}
+				wchar_t wchTitle[256];
+				MultiByteToWideChar(CP_ACP, 0, window->title, -1, wchTitle, 256);
 
-				hWnd = CreateWindowEx(NULL,
-					wc.lpszClassName,
-					title,
+				hWnd = CreateWindowEx(0,
+					L"Blue Flame Engine Window Class",
+					wchTitle,
 					currentWindowStyle,
-					x,
-					y,
-					wr.right - wr.left,
-					wr.bottom,
-					NULL,
-					NULL,
+					window->positionX,
+					window->positionY,
+					window->width,
+					window->height,
+					0,
+					0,
 					hInstance,
-					NULL);
+					window);
 
-				/*
-				if(style == Window::Style::Borderless)
-				SetWindowLongPtr(hwnd, GWL_STYLE, WS_POPUP);*/
+				if (!hWnd)
+					std::cout << "failed to create window" << std::endl;
 
+				SetClientSize();
 				ShowWindow(hWnd, SW_SHOW);
 			}
 
@@ -73,20 +68,11 @@ namespace BF
 
 			void WINWindow::Update()
 			{
-				if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 				{
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
 				}
-				/*
-				if (GetCursorPos(&mousePoint))
-				{
-					if (ScreenToClient(hWnd, &mousePoint))
-					{
-						delete Input::Mouse::Position;
-						Input::Mouse::Position = new Vector2((float)mousePoint.x, (float)mousePoint.y);
-					}
-				}*/
 			}
 
 			bool WINWindow::IsOpen()
@@ -99,7 +85,10 @@ namespace BF
 
 			void WINWindow::SetWindowTitle(const char* title)
 			{
-				SetWindowText(hWnd, title);
+				wchar_t wchTitle[256];
+				MultiByteToWideChar(CP_ACP, 0, title, -1, wchTitle, 256);
+
+				SetWindowText(hWnd, wchTitle);
 			}
 
 			void WINWindow::Move()
@@ -108,7 +97,7 @@ namespace BF
 				//MoveWindow(hWnd, 500, 500, 100, 100, TRUE);
 			}
 
-			PIXELFORMATDESCRIPTOR const WINWindow::GetPixelFormat() const
+			PIXELFORMATDESCRIPTOR WINWindow::GetPixelFormat() const
 			{
 				PIXELFORMATDESCRIPTOR result = {};
 				result.nSize = sizeof(PIXELFORMATDESCRIPTOR);
@@ -123,21 +112,71 @@ namespace BF
 				return result;
 			}
 
-			LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+			void WINWindow::SetClientSize()
 			{
+				RECT clientRect;
+				GetClientRect(hWnd, &clientRect);
+
+				window->clientWidth = (unsigned short)clientRect.right;
+				window->clientHeight = (unsigned short)clientRect.bottom;
+
+				window->borderWidth = window->width - window->clientWidth;
+				window->borderHeight = window->height - window->clientHeight;
+			}
+
+			LRESULT CALLBACK WINWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+			{
+				Window *window = nullptr;
+
+				if (message == WM_NCCREATE)
+				{
+					window = static_cast<Window*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
+
+					SetLastError(0);
+					if (!SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(window)))
+					{
+						if (GetLastError() != 0)
+							return FALSE;
+					}
+				}
+				else
+					window = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+
 				switch (message)
 				{
-				case WM_DESTROY:
-				{
-					PostQuitMessage(0);
-					return 0;
-				} break;
-				}
+					case WM_DESTROY:
+					{
+						PostQuitMessage(0);
+						break;
+					}
+					case WM_SIZE:
+					{
+						window->width = LOWORD(lParam) + window->borderWidth;
+						window->height = HIWORD(lParam) + window->borderHeight;
 
-				// Handle any messages the switch statement didn't
+						window->clientWidth = LOWORD(lParam);
+						window->clientHeight = HIWORD(lParam);
+					}
+					case WM_KEYDOWN:
+					{
+						Keyboard::keys[(unsigned char)wParam] = true;
+						break;
+					}
+					case WM_KEYUP:
+					{
+						Keyboard::keys[(unsigned char)wParam] = false;
+						break;
+					}
+					case WM_MOUSEMOVE:
+					{
+						POINT mousePoint = { LOWORD(lParam), HIWORD(lParam) };
+						Mouse::Position = Vector2((float)mousePoint.x, (float)mousePoint.y);
+					}
+					default:
+						break;
+				}
 				return DefWindowProc(hWnd, message, wParam, lParam);
 			}
 		}
 	}
 }
-#endif

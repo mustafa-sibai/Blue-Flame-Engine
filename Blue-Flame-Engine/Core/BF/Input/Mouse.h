@@ -1,35 +1,25 @@
-#if 0
 #pragma once
-#include "../Graphics/Window.h"
-#include "../Math/Vector2.h"
+#include "BF/Math/Vector2.h"
+#include "BF/Platform/Windows/WINWindow.h"
 
-#ifdef COMPILE_BLUE_FLAME_ENGINE   
-	#define DLLEXPORT __declspec(dllexport) 
-#else   
-	#define DLLEXPORT __declspec(dllimport) 
-#endif
-
-using namespace BFE::Math;
-
-namespace BFE
+namespace BF
 {
-	namespace Graphics
-	{
-		class Window;
-	}
-
 	namespace Input
 	{
-		class DLLEXPORT Mouse
+		class BF_API Mouse
 		{
-			friend class BFE::Graphics::Window;
+			private:
+				friend class BF::Platform::Windows::WINWindow;
 
 			private:
-				static Vector2 *Position;
+				static Math::Vector2 Position;
 
 			public:
-				const static Vector2 GetPosition();
+				Mouse();
+				~Mouse();
+
+			public:
+				inline static Math::Vector2 GetPosition() { return Position; }
 		};
 	}
 }
-#endif

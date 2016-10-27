@@ -1,8 +1,7 @@
-#ifdef BF_PLATFORM_WEBGL
 #pragma once
 #include <GLES3/gl3.h>
-#include "../../../../Math/Vector4.h"
-#include "../../../WebGL/WEBWindow.h"
+#include "BF/Math/Vector4.h"
+#include "BF/Platform/WebGL/WEBWindow.h"
 
 namespace BF
 {
@@ -14,20 +13,19 @@ namespace BF
 			{
 				class WEBGLContext
 				{
-				private:
-					WebGL::WEBWindow *webWindow;
-					EGLConfig config;
-					EGLNativeWindowType window;
+					private:
+						WebGL::WEBWindow* webWindow;
+						EGLConfig config;
+						EGLNativeWindowType window;
 
-				public:
-					WEBGLContext(WebGL::WEBWindow *webWindow);
-					~WEBGLContext();
+					public:
+						WEBGLContext(WebGL::WEBWindow* webWindow);
+						~WEBGLContext();
 
-					void Clear(Math::Vector4 Color);
-					void SwapBuffers();
+						void Clear(Math::Vector4 Color);
+						void SwapBuffers();
 				};
 			}
 		}
 	}
 }
-#endif

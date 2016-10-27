@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "DXVertexBuffer.h"
 
 namespace BF
@@ -9,7 +8,9 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXVertexBuffer::DXVertexBuffer(DXContext *dxContext, DXShader *dxShader) :
+				using namespace BF::Graphics::API;
+
+				DXVertexBuffer::DXVertexBuffer(DXContext* dxContext, DXShader* dxShader) :
 					dxContext(dxContext), dxShader(dxShader), vertexBufferLayout(nullptr), buffer(nullptr), inputLayout(nullptr), hr(0)
 				{
 				}
@@ -18,7 +19,7 @@ namespace BF
 				{
 				}
 
-				void DXVertexBuffer::Create(void* data, const unsigned int size)
+				void DXVertexBuffer::Create(const void* data, unsigned int size)
 				{
 					D3D11_BUFFER_DESC bufferDesc;
 					ZeroMemory(&bufferDesc, sizeof(bufferDesc));
@@ -46,7 +47,7 @@ namespace BF
 					dxContext->GetContext()->Unmap(buffer, 0);
 				}
 
-				void DXVertexBuffer::SetLayout(Graphics::API::VertexBufferLayout *vertexBufferLayout)
+				void DXVertexBuffer::SetLayout(VertexBufferLayout* vertexBufferLayout)
 				{
 					this->vertexBufferLayout = vertexBufferLayout;
 
@@ -67,54 +68,54 @@ namespace BF
 					delete[] inputElementDesc;
 				}
 
-				void DXVertexBuffer::Bind()
+				void DXVertexBuffer::Bind() const
 				{
 					unsigned int offset = 0;
 					dxContext->GetContext()->IASetInputLayout(inputLayout);
 					dxContext->GetContext()->IASetVertexBuffers(0, 1, &buffer, &vertexBufferLayout->GetBufferElement()[0].stride, &offset);
 				}
 
-				void DXVertexBuffer::Unbind()
+				void DXVertexBuffer::Unbind() const
 				{
 				}
 
-				DXGI_FORMAT DXVertexBuffer::GetDXDataType(Graphics::API::DataType dataType)
+				DXGI_FORMAT DXVertexBuffer::GetDXDataType(DataType dataType)
 				{
 					switch (dataType)
 					{
-						case Graphics::API::DataType::Byte:
+						case DataType::Byte:
 						{
 							break;
 						}
-						case Graphics::API::DataType::Short:
+						case DataType::Short:
 						{
 							break;
 						}
-						case Graphics::API::DataType::Int:
+						case DataType::Int:
 						{
 							break;
 						}
-						case Graphics::API::DataType::Float:
+						case DataType::Float:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
 							break;
 						}
-						case Graphics::API::DataType::Float2:
+						case DataType::Float2:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
 							break;
 						}
-						case Graphics::API::DataType::Float3:
+						case DataType::Float3:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
 							break;
 						}
-						case Graphics::API::DataType::Float4:
+						case DataType::Float4:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
 							break;
 						}
-						case Graphics::API::DataType::Double:
+						case DataType::Double:
 						{
 							break;
 						}
@@ -128,4 +129,3 @@ namespace BF
 		}
 	}
 }
-#endif

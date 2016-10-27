@@ -23,22 +23,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sandbox\VertexShader.glsl" />
-    <None Include="Sandbox\FragmentShader.glsl" />
-    <None Include="Sandbox\Cube.obj_" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Sandbox\VertexShader.hlsl" />
-    <FxCompile Include="Sandbox\PixelShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Sandbox\RenderTriangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Sandbox\test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>

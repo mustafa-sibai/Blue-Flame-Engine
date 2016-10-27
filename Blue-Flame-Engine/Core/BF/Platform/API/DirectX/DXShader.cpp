@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "DXShader.h"
 
 namespace BF
@@ -9,7 +8,9 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXShader::DXShader(DXContext *context) :
+				using namespace BF::IO;
+
+				DXShader::DXShader(DXContext* context) :
 					context(context), VS(nullptr), PS(nullptr), hr(0), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
 				{
 				}
@@ -20,8 +21,8 @@ namespace BF
 
 				void DXShader::Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath)
 				{
-					VSData = IO::FileReader::ReadBinaryFile(vertexShaderFilePath, &VSsize);
-					PSData = IO::FileReader::ReadBinaryFile(pixelShaderFilePath, &PSsize);
+					VSData = FileReader::ReadBinaryFile(vertexShaderFilePath, &VSsize);
+					PSData = FileReader::ReadBinaryFile(pixelShaderFilePath, &PSsize);
 					
 					if (FAILED(hr = context->GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS)))
 					{
@@ -49,4 +50,3 @@ namespace BF
 		}
 	}
 }
-#endif

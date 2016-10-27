@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-#include "../Common.h"
+#include <math.h>
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -10,16 +11,26 @@ namespace BF
 		{
 			float x, y;
 
-			Vector2() : x(0.0f), y(0.0f) { }
-			Vector2(const float &value) : x(value), y(value) { }
-			Vector2(const float &x, const float &y) : x(x), y(y) { }
+			Vector2();
+			Vector2(const float& value);
+			Vector2(const float& x, const float& y);
+			~Vector2();
 
-			friend const Vector2 operator+(const Vector2 &leftVector, const Vector2 &rightVector) { return Vector2(leftVector.x + rightVector.x, leftVector.y + rightVector.y); }
-			friend const Vector2 operator-(const Vector2 &leftVector, const Vector2 &rightVector) { return Vector2(leftVector.x - rightVector.x, leftVector.y - rightVector.y); }
-			friend const Vector2 operator*(const Vector2 &leftVector, const Vector2 &rightVector) { return Vector2(leftVector.x * rightVector.x, leftVector.y * rightVector.y); }
-			friend const Vector2 operator/(const Vector2 &leftVector, const Vector2 &rightVector) { return Vector2(leftVector.x / rightVector.x, leftVector.y / rightVector.y); }
+			float Dot(const Vector2& vector) const;
+			float Magnitude() const;
+			Vector2 Normalize() const;
 
-			friend std::ostream& operator<<(std::ostream& os, const Vector2& vector) { return os << "{" << vector.x << ", " << vector.y << "}"; }
+			friend BF_API Vector2 operator+(const Vector2& left, const Vector2& right);
+			friend BF_API Vector2 operator-(const Vector2& left, const Vector2& right);
+			friend BF_API Vector2 operator*(const Vector2& left, const Vector2& right);
+			friend BF_API Vector2 operator/(const Vector2& left, const Vector2& right);
+
+			Vector2& operator+=(const Vector2& right);
+			Vector2& operator-=(const Vector2& right);
+			Vector2& operator*=(const Vector2& right);
+			Vector2& operator/=(const Vector2& right);
+
+			friend BF_API std::ostream& operator<<(std::ostream& os, const Vector2& vector);
 		};
 	}
 }

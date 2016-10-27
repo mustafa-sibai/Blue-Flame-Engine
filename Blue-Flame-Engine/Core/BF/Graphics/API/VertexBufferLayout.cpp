@@ -15,7 +15,7 @@ namespace BF
 			{
 			}
 
-			void VertexBufferLayout::Push(int index, char *name, DataType dataType, unsigned int stride, unsigned int offset)
+			void VertexBufferLayout::Push(int index, const char* name, DataType dataType, unsigned int stride, unsigned int offset)
 			{
 				VertexBufferElement vertexBufferElement;
 				vertexBufferElement.index = index;

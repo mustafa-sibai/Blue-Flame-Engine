@@ -22,7 +22,7 @@ namespace BF
 			totalVertices(0), totalTexCoord(0), totalNormals(0)
 		{
 			meshes = new std::vector<Graphics::Mesh>();
-			vertices = new std::vector<Graphics::Vertex>();
+			vertices = new std::vector<Graphics::MeshVertexData>();
 			indices = new std::vector<unsigned int>();
 		}
 
@@ -30,7 +30,7 @@ namespace BF
 		{
 		}
 
-		std::vector<Graphics::Mesh> *OBJReader::Load(const char* fileName)
+		std::vector<Graphics::Mesh>* OBJReader::Load(const char* fileName)
 		{
 			FILE * file = fopen(fileName, "r");
 
@@ -56,7 +56,7 @@ namespace BF
 
 				if (res == EOF || strcmp(lineHeader, "o") == 0)
 				{
-					if (res == EOF || strcmp(lineHeader, "o") == 0 && addPreviousMesh)
+					if ((res == EOF || strcmp(lineHeader, "o") == 0) && addPreviousMesh)
 					{
 						AddMesh(tempVertices, tempTexcoord, tempNormals, tempIndecies);
 
@@ -161,7 +161,7 @@ namespace BF
 			return meshes;
 		}
 
-		void OBJReader::AddMesh(std::vector<Math::Vector3> &tempVertices, std::vector<Math::Vector2> &tempTexcoord, std::vector<Math::Vector3> &tempNormals, std::vector<Index> &tempIndecies)
+		void OBJReader::AddMesh(std::vector<Math::Vector3>& tempVertices, std::vector<Math::Vector2>& tempTexcoord, std::vector<Math::Vector3>& tempNormals, std::vector<Index>& tempIndecies)
 		{
 			int index = 0;
 
@@ -185,9 +185,9 @@ namespace BF
 					tempIndecies[i].index = index;
 
 					if (tempTexcoord.size() <= 0)
-						vertices->push_back(Graphics::Vertex(tempVertices[tempIndecies[i].positionIndex - totalVertices], Math::Vector2(0), tempNormals[tempIndecies[i].normalIndex - totalNormals]));
+						vertices->push_back(Graphics::MeshVertexData(tempVertices[tempIndecies[i].positionIndex - totalVertices], Math::Vector2(0), tempNormals[tempIndecies[i].normalIndex - totalNormals]));
 					else
-						vertices->push_back(Graphics::Vertex(tempVertices[tempIndecies[i].positionIndex - totalVertices], tempTexcoord[tempIndecies[i].texcoordIndex - totalTexCoord], tempNormals[tempIndecies[i].normalIndex - totalNormals]));
+						vertices->push_back(Graphics::MeshVertexData(tempVertices[tempIndecies[i].positionIndex - totalVertices], tempTexcoord[tempIndecies[i].texcoordIndex - totalTexCoord], tempNormals[tempIndecies[i].normalIndex - totalNormals]));
 
 					index++;
 				}
@@ -201,7 +201,7 @@ namespace BF
 			totalVertices += (unsigned int)tempVertices.size();
 			totalTexCoord += (unsigned int)tempTexcoord.size();
 			totalNormals += (unsigned int)tempNormals.size();
-			vertices = new std::vector<Graphics::Vertex>();
+			vertices = new std::vector<Graphics::MeshVertexData>();
 			indices = new std::vector<unsigned int>();
 
 			tempVertices.clear();

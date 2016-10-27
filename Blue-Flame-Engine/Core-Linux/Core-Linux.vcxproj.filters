@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{e13f2cc4-6d82-4096-8a39-b41758b10922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF">
+      <UniqueIdentifier>{b6c9e3da-ab67-4496-b4e9-0e6b9c15f19e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Math">
+      <UniqueIdentifier>{ca8f1d8c-a2d9-4ea1-964e-cc2ff3a4d0a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics">
+      <UniqueIdentifier>{0afbc1cc-319a-4fc3-9c70-e373517cacb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API">
+      <UniqueIdentifier>{e36a8496-5187-4e7a-94bc-389e3d00dde8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\IO">
+      <UniqueIdentifier>{dfa33c60-7e67-41a9-ad40-c44adf1a6fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Input">
+      <UniqueIdentifier>{ffd2159b-f024-484d-8c27-5e2c9eff1a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform">
+      <UniqueIdentifier>{dde31dde-4877-45f6-8207-d75353c97bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API">
+      <UniqueIdentifier>{7d96cd7e-6377-437a-bf48-784d155e75cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API\OpenGL">
+      <UniqueIdentifier>{ff0215ca-d77c-46a8-b0be-e44aebf12c47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API\OpenGL\Context">
+      <UniqueIdentifier>{292f4782-4d8a-4202-9951-5b19fef86a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\Linux">
+      <UniqueIdentifier>{7eda1f05-0bd1-4089-b589-fd410537047c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Application">
+      <UniqueIdentifier>{6b8e3a7c-e673-433b-ace8-1298c3ebbbed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Renderers">
+      <UniqueIdentifier>{a800e3fa-f9f3-487d-9eac-7a041502d455}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\BlueFlame.h">
+      <Filter>Source Files\BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Common.h">
+      <Filter>Source Files\BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Math.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Matrix4.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Rectangle.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector2.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector3.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector4.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\ConstentBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Context.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\IndexBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Shader.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Texture2D.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBufferLayout.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Mesh.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Model.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\FileReader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\ImageReader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\OBJReader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Keyboard.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Mouse.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Linux\LXWindow.h">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\LXGLContext.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\Window.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\WindowStyle.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\empty.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Camera.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\FPSCamera.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\Sprite.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\SpriteRenderer.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Core\BF\Math\Math.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Matrix4.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\ConstentBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Context.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\IndexBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Shader.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Texture2D.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBufferLayout.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Mesh.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Model.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\FileReader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\ImageReader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\OBJReader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Keyboard.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Mouse.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Linux\LXWindow.cpp">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\LXGLContext.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\Window.cpp">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Camera.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\FPSCamera.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\Sprite.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\SpriteRenderer.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector2.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector3.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector4.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

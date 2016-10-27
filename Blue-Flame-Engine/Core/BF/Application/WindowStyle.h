@@ -1,5 +1,5 @@
 #pragma once
-#include "../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -9,6 +9,7 @@ namespace BF
 		{
 			Fullscreen,
 			Windowed,
+			ResizableWindow,
 			Borderless
 		};
 	}

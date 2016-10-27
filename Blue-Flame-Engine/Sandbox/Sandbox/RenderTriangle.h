@@ -1,46 +1,47 @@
 #pragma once
-#include <BF/Application/Window.h>
-#include <BF/Graphics/API/Context.h>
-#include <BF/Graphics/API/Shader.h>
-#include <BF/Graphics/API/ConstentBuffer.h>
-#include <BF/Graphics/API/Texture2D.h>
-#include <BF/Graphics/Model.h>
-#include <BF/Math/Math.h>
+#include <BF/BlueFlame.h>
 #include <vector>
 #include <iostream>
-
-using namespace BF::Application;
-using namespace BF::Graphics;
-using namespace BF::Graphics::API;
-using namespace BF::Math;
+#include <chrono>
+#include <vector>
 
 struct Vertex 
 {
-	Vector3 position;
-	Vector4 color;
-	Vector2 UV;
+	BF::Math::Vector3 position;
+	BF::Math::Vector4 color;
+	BF::Math::Vector2 UV;
 };
 
 struct InitBuffer
 {
-	Matrix4 modelMatrix;
-	Vector4 color;
+	BF::Math::Matrix4 modelMatrix;
+	BF::Math::Matrix4 viewMatrix;
+	BF::Math::Matrix4 projectionMatrix;
+	BF::Math::Vector4 color;
 };
 
 class RenderTriangle
 {
 	private:
-		Window *window;
-		Context *context;
-		Shader *shader;
+		BF::Application::Window* window;
+		BF::Graphics::API::Context* context;
+		BF::Graphics::API::Shader* shader;
 		InitBuffer initBuffer;
-		ConstentBuffer *constentBuffer;
-		Model *model;
-		Texture2D *texture2D;
+		BF::Graphics::API::ConstentBuffer* constentBuffer;
+
+		BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
+		//BF::Graphics::Model* model;
+		//BF::Graphics::API::Texture2D* texture2D;
+		//BF::Graphics::FPSCamera* fpsCamera;
+		BF::System::Timer* timer;
+
+		std::vector<BF::Graphics::Renderers::Sprite*>* sprites;
+
 		float angle = 0;
+		int frames = 0;
 
 	public:
-		RenderTriangle(Window *window);
+		RenderTriangle(BF::Application::Window* window);
 		~RenderTriangle();
 
 		void Draw();

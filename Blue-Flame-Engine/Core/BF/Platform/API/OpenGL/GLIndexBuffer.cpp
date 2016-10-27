@@ -17,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void GLIndexBuffer::Create(const unsigned int* const indices, const unsigned int count)
+				void GLIndexBuffer::Create(const unsigned int* const indices, unsigned int count)
 				{
 					this->count = count;
 
@@ -27,12 +27,12 @@ namespace BF
 					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				}
 
-				const void GLIndexBuffer::Bind() const
+				void GLIndexBuffer::Bind() const
 				{
 					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
 				}
 
-				const void GLIndexBuffer::Unbind() const
+				void GLIndexBuffer::Unbind() const
 				{
 					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 				}

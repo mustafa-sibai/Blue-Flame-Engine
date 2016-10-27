@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_LINUX
 #include "LXGLContext.h"
 
 namespace BF
@@ -10,13 +9,13 @@ namespace BF
 			namespace OpenGL
 			{
 				static bool ctxErrorOccurred = false;
-				static int ctxErrorHandler(Display *display, XErrorEvent *errorEvent)
+				static int ctxErrorHandler(Display* display, XErrorEvent* errorEvent)
 				{
 					ctxErrorOccurred = true;
 					return 0;
 				}
 
-				LXGLContext::LXGLContext(Linux::LXWindow *lxWindow) :
+				LXGLContext::LXGLContext(Linux::LXWindow* lxWindow) :
 					lxWindow(lxWindow), context(NULL)
 				{
 					// Install an X error handler so the application won't exit if GL 3.0
@@ -84,7 +83,6 @@ namespace BF
 					if (ctxErrorOccurred || !context)
 					{
 						printf("Failed to create an OpenGL context\n");
-						//exit(1);
 					}
 
 					if (!glXIsDirect(lxWindow->GetDisplay(), context))
@@ -101,7 +99,6 @@ namespace BF
 					else
 					{
 						printf("Failed to create GL %hu.%hu context\n", OPENGL_CONTEXT_MAJOR_VERSION, OPENGL_CONTEXT_MINOR_VERSION);
-						//exit(1);
 					}
 
 					GLenum err = glewInit();
@@ -112,7 +109,13 @@ namespace BF
 				void LXGLContext::Clear(Math::Vector4 color)
 				{
 					glClearColor(color.x, color.y, color.z, color.w);
-					glClear(GL_COLOR_BUFFER_BIT);
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					glEnable(GL_DEPTH_TEST);
+				}
+
+				void LXGLContext::Draw(GLenum mode, GLsizei count, GLenum type)
+				{
+					glDrawElements(mode, count, type, nullptr);
 				}
 
 				void LXGLContext::SwapBuffers()
@@ -123,4 +126,3 @@ namespace BF
 		}
 	}
 }
-#endif

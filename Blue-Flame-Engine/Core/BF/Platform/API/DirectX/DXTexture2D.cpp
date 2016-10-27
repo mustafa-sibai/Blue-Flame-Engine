@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #include "DXTexture2D.h"
 
 namespace BF
@@ -9,7 +8,9 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXTexture2D::DXTexture2D(DXContext *dxContext) :
+				using namespace BF::IO;
+
+				DXTexture2D::DXTexture2D(DXContext* dxContext) :
 					dxContext(dxContext), texture2D(nullptr), resourceView(nullptr), samplerState(nullptr), hr(0), data(nullptr), width(0), height(0)
 				{
 				}
@@ -18,9 +19,9 @@ namespace BF
 				{
 				}
 
-				void DXTexture2D::Load(const char *fileName)
+				void DXTexture2D::Load(const char* fileName)
 				{
-					data = BF::IO::ImageReader::ReadImage(fileName, &width, &height);
+					data = ImageReader::ReadImage(fileName, &width, &height);
 
 					D3D11_TEXTURE2D_DESC texDesc;
 					ZeroMemory(&texDesc, sizeof(texDesc));
@@ -80,17 +81,16 @@ namespace BF
 					}
 				}
 
-				const void DXTexture2D::Bind() const
+				void DXTexture2D::Bind() const
 				{
 					dxContext->GetContext()->PSSetShaderResources(0, 1, &resourceView);
 					dxContext->GetContext()->PSSetSamplers(0, 1, &samplerState);
 				}
 
-				const void DXTexture2D::Unbind() const
+				void DXTexture2D::Unbind() const
 				{
 				}
 			}
 		}
 	}
 }
-#endif

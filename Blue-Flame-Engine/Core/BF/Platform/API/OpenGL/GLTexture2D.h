@@ -1,13 +1,12 @@
 #pragma once
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX
-#include <GL/glew.h>
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include <GL/glew.h>
 #elif BF_PLATFORM_WEBGL
-#include <GLES3/gl3.h>
+	#include <GLES3/gl3.h>
 #endif
 
-#include "../../../Common.h"
-#include "../../../IO/ImageReader.h"
-#include "../../../Math/Vector2.h"
+#include "BF/IO/ImageReader.h"
+#include "BF/Math/Vector2.h"
 
 namespace BF
 {
@@ -22,20 +21,20 @@ namespace BF
 					private:
 						GLuint textureID;
 
-						BYTE* data;
+						uint8_t* data;
 						unsigned int width, height;
 
 					public:
 						GLTexture2D();
 						~GLTexture2D();
 
-						void Load(const char *fileName);
+						void Load(const char* fileName);
 
-						const void Bind() const;
-						const void Unbind() const;
+						void Bind() const;
+						void Unbind() const;
 
-						inline const unsigned int GetWidth() const { return width; }
-						inline const unsigned int GetHeight() const { return height; }
+						inline unsigned int GetWidth() const { return width; }
+						inline unsigned int GetHeight() const { return height; }
 				};
 			}
 		}

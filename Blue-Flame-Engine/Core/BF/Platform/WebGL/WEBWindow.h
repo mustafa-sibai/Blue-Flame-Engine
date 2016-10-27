@@ -1,7 +1,6 @@
-#ifdef BF_PLATFORM_WEBGL
 #pragma once
 #include <EGL/egl.h>
-#include "../../Common.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -23,9 +22,8 @@ namespace BF
 					bool IsOpen();
 
 					inline EGLDisplay GetDisplay() const { return display; }
-					inline EGLint *GetNumConfigs() { return &numConfigs; }
+					inline EGLint& GetNumConfigs() { return numConfigs; }
 			};
 		}
 	}
 }
-#endif

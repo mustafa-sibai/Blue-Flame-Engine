@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXIndexBuffer::DXIndexBuffer(DXContext *dxContext) : 
+				DXIndexBuffer::DXIndexBuffer(DXContext* dxContext) : 
 					dxContext(dxContext), buffer(nullptr), hr(0), count(0)
 				{
 				}
@@ -17,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void DXIndexBuffer::Create(const unsigned int* const indices, const unsigned int count)
+				void DXIndexBuffer::Create(const unsigned int* const indices, unsigned int count)
 				{
 					this->count = count;
 
@@ -45,12 +45,12 @@ namespace BF
 					}
 				}
 
-				const void DXIndexBuffer::Bind() const
+				void DXIndexBuffer::Bind() const
 				{
 					dxContext->GetContext()->IASetIndexBuffer(buffer, DXGI_FORMAT_R32_UINT, 0);
 				}
 
-				const void DXIndexBuffer::Unbind() const
+				void DXIndexBuffer::Unbind() const
 				{
 				}
 			}
