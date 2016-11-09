@@ -1,6 +1,6 @@
 #pragma once
 #include "DXContext.h"
-#include "BF/IO/FileReader.h"
+#include "BF/IO/FileLoader.h"
 
 namespace BF
 {

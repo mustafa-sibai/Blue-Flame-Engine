@@ -31,6 +31,7 @@ namespace BF
 					~VertexBuffer();
 
 					void Create(void* data, unsigned int size);
+					void SetLayout(VertexBufferLayout* vertexBufferLayout);
 					void* Map() const;
 					void Unmap() const;
 					void Bind() const;
@@ -42,7 +43,6 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 					inline Platform::API::OpenGL::GLVertexBuffer* GetGLVertexBuffer() const { return glVertexBuffer; }
 #endif
-
 			};
 		}
 	}

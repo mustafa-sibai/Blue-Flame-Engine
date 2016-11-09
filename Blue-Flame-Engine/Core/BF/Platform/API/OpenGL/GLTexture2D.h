@@ -5,7 +5,7 @@
 	#include <GLES3/gl3.h>
 #endif
 
-#include "BF/IO/ImageReader.h"
+#include "BF/IO/ImageLoader.h"
 #include "BF/Math/Vector2.h"
 
 namespace BF

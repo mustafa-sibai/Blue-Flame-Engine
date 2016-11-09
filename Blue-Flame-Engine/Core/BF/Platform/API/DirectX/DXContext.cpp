@@ -1,4 +1,5 @@
 #include "DXContext.h"
+#include "BF/Graphics/API/Context.h"
 
 namespace BF
 {
@@ -9,7 +10,7 @@ namespace BF
 			namespace DirectX
 			{
 				DXContext::DXContext(Application::Window* window) :
-					window(window), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr)
+					window(window), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
 				{
 					CreateDeviceAndSwapChain();
 					CreateBackBuffer();
@@ -18,7 +19,7 @@ namespace BF
 					SetViewPort();
 				}
 
-				DXContext::~DXContext() 
+				DXContext::~DXContext()
 				{
 				}
 
@@ -145,6 +146,41 @@ namespace BF
 					viewPort.MinDepth = 0;
 					viewPort.MaxDepth = 1;
 					context->RSSetViewports(1, &viewPort);
+				}
+
+				void DXContext::SetPrimitiveType(Graphics::API::PrimitiveType primitiveType)
+				{
+					switch (primitiveType)
+					{
+						case Graphics::API::PrimitiveType::PointList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
+							break;
+						}
+						case Graphics::API::PrimitiveType::LineList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+							break;
+						}
+						case Graphics::API::PrimitiveType::LineStrip:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
+							break;
+						}
+						case Graphics::API::PrimitiveType::TriangleList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+							break;
+						}
+						case Graphics::API::PrimitiveType::TriangeStrip:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+							break;
+						}
+						default:
+							break;
+					}
+					context->IASetPrimitiveTopology(D3DPrimitiveType);
 				}
 
 				void DXContext::Clear(Math::Vector4 Color)

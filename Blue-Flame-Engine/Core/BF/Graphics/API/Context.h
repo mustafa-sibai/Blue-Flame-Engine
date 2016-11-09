@@ -9,7 +9,7 @@
 #endif
 
 #include "BF/Application/Window.h"
-#include "Context.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -33,7 +33,6 @@ namespace BF
 				private:
 					Application::Window* window;
 					static RenderAPI renderAPI;
-					GLuint GL_PRIMITIVE_TYPE;
 
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXContext* dxContext;

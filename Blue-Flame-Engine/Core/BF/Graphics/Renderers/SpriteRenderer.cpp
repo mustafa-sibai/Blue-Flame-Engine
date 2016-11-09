@@ -16,20 +16,14 @@ namespace BF
 				vertexBuffer = new VertexBuffer(context, shader);
 				indexBuffer = new IndexBuffer(context);
 				vertexBufferLayout = new VertexBufferLayout();
-				vertexArray = new VertexArray(context, shader);
 
 				vertexBufferLayout->Push(0, "POSITION", BF::Graphics::API::DataType::Float3, 0, 0);
 
 				const int numberOfObjects = 50000;
 				
-				vertexArray->Create();
 				vertexBuffer->Create(0, (4 * numberOfObjects) * sizeof(Vector3));
+				vertexBuffer->SetLayout(vertexBufferLayout);
 
-				vertexArray->Push(vertexBuffer);
-				vertexArray->Push(vertexBuffer);
-				vertexArray->SetVertexBufferLayout(vertexBufferLayout);
-
-				
 				unsigned int* indecies = new unsigned int[(6 * numberOfObjects)];
 				
 				for (size_t i = 0; i < (6 * numberOfObjects); i++)
@@ -103,11 +97,11 @@ namespace BF
 
 			void SpriteRenderer::Draw()
 			{
-				vertexArray->Bind();
+				vertexBuffer->Bind();
 				indexBuffer->Bind();
 				context->Draw(indexCount);
 				indexBuffer->Unbind();
-				vertexArray->Unbind();
+				vertexBuffer->Unbind();
 			}
 		}
 	}

@@ -21,7 +21,7 @@ namespace BF
 
 				void GLTexture2D::Load(const char* fileName)
 				{
-					data = ImageReader::ReadImage(fileName, &width, &height);
+					data = ImageLoader::Load(fileName, &width, &height);
 					
 					if (data != nullptr)
 					{

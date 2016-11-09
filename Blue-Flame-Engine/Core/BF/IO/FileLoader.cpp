@@ -1,10 +1,10 @@
-#include "FileReader.h"
+#include "FileLoader.h"
 
 namespace BF
 {
 	namespace IO
 	{
-		std::string FileReader::ReadTextFile(const char* fileName)
+		std::string FileLoader::LoadTextFile(const char* fileName)
 		{
 			std::ifstream file(fileName, std::ios::in);
 			std::string data = "", line = "";
@@ -20,7 +20,7 @@ namespace BF
 			return data;
 		}
 
-		char* FileReader::ReadBinaryFile(const char* fileName, size_t* size)
+		char* FileLoader::LoadBinaryFile(const char* fileName, size_t* size)
 		{
 			std::ifstream stream;
 			char* data;

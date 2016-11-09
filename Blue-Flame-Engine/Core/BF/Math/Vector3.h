@@ -17,6 +17,7 @@ namespace BF
 			~Vector3();
 
 			float Dot(const Vector3& vector) const;
+			Vector3 Vector3::Cross(const Vector3& vector) const;
 			float Magnitude() const;
 			Vector3 Normalize() const;
 

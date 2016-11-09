@@ -2,9 +2,18 @@
 #include <d3d11.h>
 #include "BF/Application/Window.h"
 #include "BF/Math/Vector4.h"
+#include "BF/Common.h"
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace API
+		{
+			enum class PrimitiveType;
+		}
+	}
+
 	namespace Platform
 	{
 		namespace API
@@ -22,12 +31,14 @@ namespace BF
 						ID3D11RenderTargetView* renderTarget;
 						ID3D11RasterizerState* rasterizerState;
 						ID3D11DepthStencilView* zBuffer;
+						D3D_PRIMITIVE_TOPOLOGY D3DPrimitiveType;
 						HRESULT hr;
 
 					public:
 						DXContext(Application::Window* window);
 						~DXContext();
 
+						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
 						void Clear(Math::Vector4 Color);
 						void SwapBuffers();
 						void Draw(unsigned int vertexCount);

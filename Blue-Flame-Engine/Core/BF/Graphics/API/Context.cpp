@@ -9,7 +9,7 @@ namespace BF
 			RenderAPI Context::renderAPI = RenderAPI::none;
 
 			Context::Context(Application::Window* window, RenderAPI renderAPI) :
-				window(window), GL_PRIMITIVE_TYPE(0)
+				window(window)
 			{
 				this->renderAPI = renderAPI;
 
@@ -34,67 +34,12 @@ namespace BF
 			void Context::SetPrimitiveType(PrimitiveType primitiveType)
 			{
 #ifdef BF_PLATFORM_WINDOWS
-				D3D_PRIMITIVE_TOPOLOGY D3DPrimitiveType = D3D_PRIMITIVE_TOPOLOGY_UNDEFINED;
-#endif
-				switch (primitiveType)
-				{
-				case PrimitiveType::PointList:
-				{
-#ifdef BF_PLATFORM_WINDOWS
-					if (renderAPI == RenderAPI::DirectX)		D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
-#endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					if (renderAPI == RenderAPI::OpenGL)			GL_PRIMITIVE_TYPE = GL_POINTS;
-#endif
-					break;
-				}
-				case PrimitiveType::LineList:
-				{
-#ifdef BF_PLATFORM_WINDOWS
-					if (renderAPI == RenderAPI::DirectX)		D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
-#endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					if (renderAPI == RenderAPI::OpenGL)			GL_PRIMITIVE_TYPE = GL_LINES;
-#endif
-					break;
-				}
-				case PrimitiveType::LineStrip:
-				{
-#ifdef BF_PLATFORM_WINDOWS
-					if (renderAPI == RenderAPI::DirectX)		D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
-#endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					if (renderAPI == RenderAPI::OpenGL)			GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
-#endif
-					break;
-				}
-				case PrimitiveType::TriangleList:
-				{
-#ifdef BF_PLATFORM_WINDOWS
-					if (renderAPI == RenderAPI::DirectX)		D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-#endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					if (renderAPI == RenderAPI::OpenGL)			GL_PRIMITIVE_TYPE = GL_TRIANGLES;
-#endif
-					break;
-				}
-				case PrimitiveType::TriangeStrip:
-				{
-#ifdef BF_PLATFORM_WINDOWS
-					if (renderAPI == RenderAPI::DirectX)		D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
-#endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
-					if (renderAPI == RenderAPI::OpenGL)			GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
-#endif
-					break;
-				}
-				default:
-					break;
-				}
-
-#ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
-					dxContext->GetContext()->IASetPrimitiveTopology(D3DPrimitiveType);
+					dxContext->SetPrimitiveType(primitiveType);
+#endif
+#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext->SetPrimitiveType(primitiveType);
 #endif
 			}
 
@@ -120,7 +65,7 @@ namespace BF
 				if (renderAPI == RenderAPI::DirectX)
 					dxContext->Draw(vertexCount);
 				else if (renderAPI == RenderAPI::OpenGL)
-					winGLContext->Draw(GL_PRIMITIVE_TYPE, vertexCount, GL_UNSIGNED_INT);
+					winGLContext->Draw(vertexCount);
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext->Draw(GL_PRIMITIVE_TYPE, vertexCount, GL_UNSIGNED_INT);

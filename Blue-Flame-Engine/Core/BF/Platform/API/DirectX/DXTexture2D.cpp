@@ -21,7 +21,7 @@ namespace BF
 
 				void DXTexture2D::Load(const char* fileName)
 				{
-					data = ImageReader::ReadImage(fileName, &width, &height);
+					data = ImageLoader::Load(fileName, &width, &height);
 
 					D3D11_TEXTURE2D_DESC texDesc;
 					ZeroMemory(&texDesc, sizeof(texDesc));

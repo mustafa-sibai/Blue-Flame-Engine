@@ -1,12 +1,10 @@
-#include "ImageReader.h"
-#include <FreeImage.h>
-#include <Utilities.h>
+#include "ImageLoader.h"
 
 namespace BF
 {
 	namespace IO
 	{
-		uint8_t* ImageReader::ReadImage(const char* filename, unsigned int* width, unsigned int* height)
+		uint8_t* ImageLoader::Load(const char* filename, unsigned int* width, unsigned int* height)
 		{
 			FreeImage_Initialise();
 
@@ -35,8 +33,6 @@ namespace BF
 			bits = FreeImage_GetBits(bitmap);
 			*width = FreeImage_GetWidth(bitmap);
 			*height = FreeImage_GetHeight(bitmap);
-
-			std::cout << *width << " " << *height << std::endl;
 
 			if ((bits == 0) || (*width == 0) || (*height == 0))
 				std::cout << "file courrpted" << std::endl;

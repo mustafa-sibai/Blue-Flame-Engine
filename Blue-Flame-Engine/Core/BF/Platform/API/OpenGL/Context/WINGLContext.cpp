@@ -1,4 +1,5 @@
 #include "WINGLContext.h"
+#include "BF/Graphics/API/Context.h"
 
 namespace BF
 {
@@ -8,6 +9,8 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::Graphics::API;
+
 				WINGLContext::WINGLContext(Application::Window* window) :
 					window(window), hDC(nullptr)
 				{
@@ -53,22 +56,57 @@ namespace BF
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
 					//wglSwapIntervalEXT(1);
+					
 				}
 
 				WINGLContext::~WINGLContext()
 				{
 				}
 
-				void WINGLContext::Clear(Math::Vector4 color)
+				void WINGLContext::SetPrimitiveType(PrimitiveType primitiveType)
 				{
-					glClearColor(color.x, color.y, color.z, color.w);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					//glEnable(GL_DEPTH_TEST);
+					switch (primitiveType)
+					{
+						case PrimitiveType::PointList:
+						{
+							GL_PRIMITIVE_TYPE = GL_POINTS;
+							break;
+						}
+						case PrimitiveType::LineList:
+						{
+							GL_PRIMITIVE_TYPE = GL_LINES;
+							break;
+						}
+						case PrimitiveType::LineStrip:
+						{
+							GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
+							break;
+						}
+						case PrimitiveType::TriangleList:
+						{
+							GL_PRIMITIVE_TYPE = GL_TRIANGLES;
+							break;
+						}
+						case PrimitiveType::TriangeStrip:
+						{
+							GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
+							break;
+						}
+						default:
+							break;
+					}
 				}
 
-				void WINGLContext::Draw(GLenum mode, GLsizei count, GLenum type)
+				void WINGLContext::Clear(Math::Vector4 color)
 				{
-					glDrawElements(mode, count, type, nullptr);
+					glEnable(GL_DEPTH_TEST);
+					glClearColor(color.x, color.y, color.z, color.w);
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				}
+
+				void WINGLContext::Draw(GLsizei count)
+				{
+					glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr);
 				}
 
 				void WINGLContext::SwapBuffers()

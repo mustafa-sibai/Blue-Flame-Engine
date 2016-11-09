@@ -8,8 +8,10 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::Graphics::API;
+
 				GLVertexBuffer::GLVertexBuffer() :
-					buffer(0)
+					buffer(0), VAO(0)
 				{
 				}
 
@@ -19,6 +21,9 @@ namespace BF
 
 				void GLVertexBuffer::Create(const void* data, unsigned int size)
 				{
+					glGenVertexArrays(1, &VAO);
+					glBindVertexArray(0);
+
 					glGenBuffers(1, &buffer);
 					glBindBuffer(GL_ARRAY_BUFFER, buffer);
 					glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW);
@@ -27,24 +32,140 @@ namespace BF
 
 				void* GLVertexBuffer::Map() const
 				{
-					Bind();
+					glBindBuffer(GL_ARRAY_BUFFER, buffer);
 					return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 				}
 
 				void GLVertexBuffer::Unmap() const
 				{
 					glUnmapBuffer(GL_ARRAY_BUFFER);
-					Unbind();
+					glBindBuffer(GL_ARRAY_BUFFER, 0);
 				}
 
 				void GLVertexBuffer::Bind() const
 				{
-					glBindBuffer(GL_ARRAY_BUFFER, buffer);
+					glBindVertexArray(VAO);
 				}
 
 				void GLVertexBuffer::Unbind() const
 				{
+					glBindVertexArray(0);
+				}
+
+				void GLVertexBuffer::SetLayout(BF::Graphics::API::VertexBufferLayout* vertexBufferLayout)
+				{
+					glBindVertexArray(VAO);
+					glBindBuffer(GL_ARRAY_BUFFER, buffer);
+
+					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
+					{
+						glEnableVertexAttribArray(vertexBufferLayout->GetBufferElement()[i].index);
+						glVertexAttribPointer(vertexBufferLayout->GetBufferElement()[i].index, GetComponentCount(vertexBufferLayout->GetBufferElement()[i].dataType),
+							GetGLDataType(vertexBufferLayout->GetBufferElement()[i].dataType), GL_FALSE, vertexBufferLayout->GetBufferElement()[i].stride, (GLvoid*)vertexBufferLayout->GetBufferElement()[i].offset);
+					}
+
 					glBindBuffer(GL_ARRAY_BUFFER, 0);
+					glBindVertexArray(0);
+				}
+
+				GLenum GLVertexBuffer::GetGLDataType(DataType dataType)
+				{
+					switch (dataType)
+					{
+						case DataType::Byte:
+						{
+							return GL_BYTE;
+							break;
+						}
+						case DataType::Short:
+						{
+							return GL_SHORT;
+							break;
+						}
+						case DataType::Int:
+						{
+							return GL_INT;
+							break;
+						}
+						case DataType::Float:
+						{
+							return GL_FLOAT;
+							break;
+						}
+						case DataType::Float2:
+						{
+							return GL_FLOAT;
+							break;
+						}
+						case DataType::Float3:
+						{
+							return GL_FLOAT;
+							break;
+						}
+						case DataType::Float4:
+						{
+							return GL_FLOAT;
+							break;
+						}
+						case DataType::Double:
+						{
+							return GL_FLOAT;
+							break;
+						}
+						default:
+							return -1;
+							break;
+					}
+				}
+
+				unsigned int GLVertexBuffer::GetComponentCount(DataType dataType)
+				{
+					switch (dataType)
+					{
+						case DataType::Byte:
+						{
+							return 1;
+							break;
+						}
+						case DataType::Short:
+						{
+							return 1;
+							break;
+						}
+						case DataType::Int:
+						{
+							return 1;
+							break;
+						}
+						case DataType::Float:
+						{
+							return 1;
+							break;
+						}
+						case DataType::Float2:
+						{
+							return 2;
+							break;
+						}
+						case DataType::Float3:
+						{
+							return 3;
+							break;
+						}
+						case DataType::Float4:
+						{
+							return 4;
+							break;
+						}
+						case DataType::Double:
+						{
+							return 1;
+							break;
+						}
+						default:
+							return -1;
+							break;
+					}
 				}
 			}
 		}

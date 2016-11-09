@@ -3,6 +3,7 @@
 #include "API/VertexBuffer.h"
 #include "API/IndexBuffer.h"
 #include "API/VertexBufferLayout.h"
+#include "API/Texture2D.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
@@ -32,13 +33,15 @@ namespace BF
 		{
 			//private:
 		public:
-				API::VertexBuffer* buffer;
+				API::VertexBuffer* vertexBuffer;
 				API::IndexBuffer* indexBuffer;
+				API::Texture2D* texture2D;
 				std::vector<MeshVertexData>* vertices;
 				std::vector<unsigned int>* indices;
+				std::string textureFileName;
 
 			public:
-				Mesh(std::vector<MeshVertexData>* vertices, std::vector<unsigned int>* indices);
+				Mesh(std::vector<MeshVertexData>* vertices, std::vector<unsigned int>* indices, std::string textureFileName);
 				~Mesh();
 
 				void SetBuffers(API::Context* context, API::Shader* shader);

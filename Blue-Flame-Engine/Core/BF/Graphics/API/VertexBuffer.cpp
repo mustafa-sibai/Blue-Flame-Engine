@@ -35,6 +35,18 @@ namespace BF
 #endif
 			}
 
+			void VertexBuffer::SetLayout(VertexBufferLayout* vertexBufferLayout)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					dxVertexBuffer->SetLayout(vertexBufferLayout);
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glVertexBuffer->SetLayout(vertexBufferLayout);
+#endif
+			}
+
 			void* VertexBuffer::Map() const
 			{
 #ifdef BF_PLATFORM_WINDOWS

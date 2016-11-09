@@ -43,8 +43,8 @@ namespace BF
 
 				void GLShader::Load(const char* vertexShaderFilePath, const char* fragmentShaderFilePath)
 				{
-					GLuint vertexShader = CompileShader(FileReader::ReadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
-					GLuint fragmentShader = CompileShader(FileReader::ReadTextFile(fragmentShaderFilePath), GL_FRAGMENT_SHADER);
+					GLuint vertexShader = CompileShader(FileLoader::LoadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
+					GLuint fragmentShader = CompileShader(FileLoader::LoadTextFile(fragmentShaderFilePath), GL_FRAGMENT_SHADER);
 
 					programID = glCreateProgram();
 

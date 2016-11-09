@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
-#include "BF/Graphics/API/VertexArray.h"
 #include "Mesh.h"
-#include "BF/IO/OBJReader.h"
+#include "BF/IO/OBJLoader.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -14,7 +13,6 @@ namespace BF
 			private:
 				API::Context* context;
 				API::Shader* shader;
-				API::VertexArray* vertexArray;
 				API::VertexBufferLayout* vertexBufferLayout;
 				std::vector<Mesh>* meshes;
 				IO::OBJReader* objReader;

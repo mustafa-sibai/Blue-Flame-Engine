@@ -7,6 +7,14 @@
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace API
+		{
+			enum class PrimitiveType;
+		}
+	}
+
 	namespace Platform
 	{
 		namespace API
@@ -19,6 +27,7 @@ namespace BF
 						Application::Window* window;
 						HDC hDC;
 						HGLRC context;
+						GLuint GL_PRIMITIVE_TYPE;
 						const unsigned short OPENGL_CONTEXT_MAJOR_VERSION = 4;
 						const unsigned short OPENGL_CONTEXT_MINOR_VERSION = 5;
 
@@ -26,8 +35,9 @@ namespace BF
 						WINGLContext(Application::Window* window);
 						~WINGLContext();
 
+						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
 						void Clear(Math::Vector4 color);
-						void Draw(GLenum mode, GLsizei count, GLenum type);
+						void Draw(GLsizei count);
 						void SwapBuffers();
 						void CleanUp();
 				};

@@ -11,6 +11,8 @@ namespace BF
 			Where M is the new matrix. I is the identity matrix. v is the vector matrix.
 			This will match both DirectX and OpenGL column major memory layout and will use column major vector in the shader.
 
+			This matrix class also uses a left handed coordinates system.
+
 			index         value                 layout
 			0  4  8  12   M11  M12  M13  M14    Xx Yx Zz Tx
 			1  5  9  13   M21  M22  M23  M24    Xy Yy Zy Ty
@@ -68,23 +70,22 @@ namespace BF
 		{
 			Matrix4 rotationMatrix = Matrix4::Identity();
 
-			/*float r = ToRadians(angle);
+			float r = ToRadians(angle);
 			float c = (float)cos(r);
 			float s = (float)sin(r);
 			float oc = 1.0f - c;
 
-			rotationMatrix.elements[0 + 0 * ROW_COLUMN_SIZE] = axis.x * axis.x * oc + c;
-			rotationMatrix.elements[1 + 0 * ROW_COLUMN_SIZE] = axis.x * axis.y * oc + axis.z * s;
-			rotationMatrix.elements[2 + 0 * ROW_COLUMN_SIZE] = axis.x * axis.z * oc - axis.y * s;
+			rotationMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.x * oc + c;
+			rotationMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc + axis.z * s;
+			rotationMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc - axis.y * s;
 
-			rotationMatrix.elements[0 + 1 * ROW_COLUMN_SIZE] = axis.x * axis.y * oc - axis.z * s;
-			rotationMatrix.elements[1 + 1 * ROW_COLUMN_SIZE] = axis.y * axis.y * oc + c;
-			rotationMatrix.elements[2 + 1 * ROW_COLUMN_SIZE] = axis.y * axis.z * oc + axis.x * s;
+			rotationMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc - axis.z * s;
+			rotationMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = axis.y * axis.y * oc + c;
+			rotationMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc + axis.x * s;
 
-			rotationMatrix.elements[0 + 2 * ROW_COLUMN_SIZE] = axis.x * axis.z * oc + axis.y * s;
-			rotationMatrix.elements[1 + 2 * ROW_COLUMN_SIZE] = axis.y * axis.z * oc - axis.x * s;
-			rotationMatrix.elements[2 + 2 * ROW_COLUMN_SIZE] = axis.z * axis.z * oc + c;*/
-
+			rotationMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc + axis.y * s;
+			rotationMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc - axis.x * s;
+			rotationMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = axis.z * axis.z * oc + c;
 			return rotationMatrix;
 		}
 
@@ -115,6 +116,33 @@ namespace BF
 			orthographicMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = (farZ + nearZ) / (farZ - nearZ);
 
 			return orthographicMatrix;
+		}
+
+		Matrix4 Matrix4::LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &up)
+		{
+			Matrix4 viewMatrix = Matrix4::Identity();
+
+			Vector3 zAxis = (target - eye).Normalize();
+			Vector3 xAxis = zAxis.Cross(up).Normalize();
+			Vector3 yAxis = xAxis.Cross(zAxis);
+			
+			viewMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = xAxis.x;
+			viewMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = xAxis.y;
+			viewMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = xAxis.z;
+
+			viewMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = yAxis.x;
+			viewMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = yAxis.y;
+			viewMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = yAxis.z;
+
+			viewMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = zAxis.x;
+			viewMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = zAxis.y;
+			viewMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = zAxis.z;
+
+			viewMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = xAxis.Dot(eye);
+			viewMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = yAxis.Dot(eye);
+			viewMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = zAxis.Dot(eye);
+
+			return viewMatrix;
 		}
 
 		Matrix4 Matrix4::Multiplay(const Matrix4& matrixA, const Matrix4& matrixB)

@@ -6,7 +6,7 @@
 #endif
 
 #include <vector>
-#include "BF/IO/FileReader.h"
+#include "BF/IO/FileLoader.h"
 
 namespace BF
 {

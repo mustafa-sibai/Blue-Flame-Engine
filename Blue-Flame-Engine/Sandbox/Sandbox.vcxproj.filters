@@ -27,4 +27,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Assets\Shaders\HLSL\PixelShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\HLSL\VertexShader.hlsl" />
+  </ItemGroup>
 </Project>

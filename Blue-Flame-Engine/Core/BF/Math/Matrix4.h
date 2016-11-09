@@ -26,7 +26,7 @@ namespace BF
 				static Matrix4 Rotate(float angle, const Vector3& axis);
 				static Matrix4 Perspective(float fieldOfView, float aspectRatio, float nearZ, float farZ);
 				static Matrix4 Orthographic(float left, float right, float top, float bottom, float nearZ, float farZ);
-
+				static Matrix4 LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &up);
 				friend const Matrix4 operator*(const Matrix4& matrixA, const Matrix4& matrixB) { return Matrix4::Multiplay(matrixB, matrixA); }
 
 			private:
