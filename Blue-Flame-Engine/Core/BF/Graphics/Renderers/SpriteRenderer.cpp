@@ -17,11 +17,13 @@ namespace BF
 				indexBuffer = new IndexBuffer(context);
 				vertexBufferLayout = new VertexBufferLayout();
 
-				vertexBufferLayout->Push(0, "POSITION", BF::Graphics::API::DataType::Float3, 0, 0);
+				vertexBufferLayout->Push(0, "POSITION", BF::Graphics::API::DataType::Float3, sizeof(SpriteData), 0);
+				vertexBufferLayout->Push(1, "COLOR",	BF::Graphics::API::DataType::Float4, sizeof(SpriteData), sizeof(Vector3));
+				vertexBufferLayout->Push(2, "TEXCOORD", BF::Graphics::API::DataType::Float2, sizeof(SpriteData), sizeof(Vector3) + sizeof(Vector4));
 
 				const int numberOfObjects = 50000;
 				
-				vertexBuffer->Create(0, (4 * numberOfObjects) * sizeof(Vector3));
+				vertexBuffer->Create(nullptr, (4 * numberOfObjects) * sizeof(SpriteData));
 				vertexBuffer->SetLayout(vertexBufferLayout);
 
 				unsigned int* indecies = new unsigned int[(6 * numberOfObjects)];
@@ -64,22 +66,31 @@ namespace BF
 
 			void SpriteRenderer::Submit(Sprite* sprite)
 			{
+				sprite->texture2D->Bind();
 				if (firstSubmission)
 				{
 					//Bottom Left
-					spriteData->position = Vector3(sprite->position.x, sprite->position.y + sprite->size.y, 0.0f);
+					spriteData->position	= Vector3(sprite->position.x, sprite->position.y + sprite->size.y, 0.0f);
+					spriteData->color		= sprite->color;
+					spriteData->UV			= Vector2(0.0f, 0.0f);
 					spriteData++;
 
 					//Top Left
-					spriteData->position = Vector3(sprite->position.x, sprite->position.y, 0.0f);
+					spriteData->position	= Vector3(sprite->position.x, sprite->position.y, 0.0f);
+					spriteData->color		= sprite->color;
+					spriteData->UV			= Vector2(0.0f, 1.0f);
 					spriteData++;
 
 					//Top Right
-					spriteData->position = Vector3(sprite->position.x + sprite->size.x, sprite->position.y, 0.0f);
+					spriteData->position	= Vector3(sprite->position.x + sprite->size.x, sprite->position.y, 0.0f);
+					spriteData->color		= sprite->color;
+					spriteData->UV			= Vector2(1.0f, 1.0f);
 					spriteData++;
 
 					//Bottom Right
-					spriteData->position = Vector3(sprite->position.x + sprite->size.x, sprite->position.y + sprite->size.y, 0.0f);
+					spriteData->position	= Vector3(sprite->position.x + sprite->size.x, sprite->position.y + sprite->size.y, 0.0f);
+					spriteData->color		= sprite->color;
+					spriteData->UV			= Vector2(1.0f, 0.0f);
 					spriteData++;
 
 					indexCount += 6;

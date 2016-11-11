@@ -40,9 +40,7 @@ namespace BF
 					hr = dxContext->GetDevice()->CreateBuffer(&bufferDesc, &subData, &buffer);
 
 					if (FAILED(hr))
-					{
-						//print error
-					}
+						std::cout << "failed to create index buffer" << std::endl;
 				}
 
 				void DXIndexBuffer::Bind() const

@@ -34,17 +34,11 @@ namespace BF
 					if (FAILED(hr))
 						std::cout << "Could not create a vertex buffer." << std::endl;
 
-					//Map buffer
-					D3D11_MAPPED_SUBRESOURCE mappedSubResource;
-					ZeroMemory(&mappedSubResource, sizeof(mappedSubResource));
-
-					hr = dxContext->GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource);
-
-					if (FAILED(hr))
-						std::cout << "Could not map vertex buffer." << std::endl;
-
-					memcpy(mappedSubResource.pData, data, size);
-					dxContext->GetContext()->Unmap(buffer, 0);
+					if (data != nullptr)
+					{
+						memcpy(Map(), data, size);
+						Unmap();
+					}
 				}
 
 				void DXVertexBuffer::SetLayout(VertexBufferLayout* vertexBufferLayout)
@@ -64,8 +58,27 @@ namespace BF
 						inputElementDesc[i].InstanceDataStepRate = 0;
 					}
 					
-					dxContext->GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout->GetBufferElement().size(), dxShader->GetVSData(), dxShader->GetVSsize(), &inputLayout);
+					hr = dxContext->GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout->GetBufferElement().size(), dxShader->GetVSData(), dxShader->GetVSsize(), &inputLayout);
+					if (FAILED(hr))
+						std::cout << "Could not create vertex buffer input layout." << std::endl;
+					
 					delete[] inputElementDesc;
+				}
+
+				void* DXVertexBuffer::Map() const
+				{
+					D3D11_MAPPED_SUBRESOURCE mappedSubResource;
+					ZeroMemory(&mappedSubResource, sizeof(mappedSubResource));
+
+					if (FAILED(dxContext->GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource)))
+						std::cout << "Could not map vertex buffer." << std::endl;
+
+					return mappedSubResource.pData;
+				}
+
+				void DXVertexBuffer::Unmap() const
+				{
+					dxContext->GetContext()->Unmap(buffer, 0);
 				}
 
 				void DXVertexBuffer::Bind() const

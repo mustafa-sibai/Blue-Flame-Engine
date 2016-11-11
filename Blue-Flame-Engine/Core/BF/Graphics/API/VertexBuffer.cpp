@@ -50,8 +50,8 @@ namespace BF
 			void* VertexBuffer::Map() const
 			{
 #ifdef BF_PLATFORM_WINDOWS
-				//if (Context::GetRenderAPI() == RenderAPI::DirectX)
-				//	dxVertexBuffer->Bind();
+				if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					return dxVertexBuffer->Map();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
@@ -63,8 +63,8 @@ namespace BF
 			void VertexBuffer::Unmap() const
 			{
 #ifdef BF_PLATFORM_WINDOWS
-				//if (Context::GetRenderAPI() == RenderAPI::DirectX)
-				//	dxVertexBuffer->Bind();
+				if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					dxVertexBuffer->Unmap();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)

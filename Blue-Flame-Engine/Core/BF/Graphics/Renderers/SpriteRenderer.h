@@ -1,8 +1,8 @@
 #pragma once
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
-#include "BF/Math/Math.h"
 #include "BF/Graphics/Renderers/Sprite.h"
+#include "BF/Math/Math.h"
 
 namespace BF
 {

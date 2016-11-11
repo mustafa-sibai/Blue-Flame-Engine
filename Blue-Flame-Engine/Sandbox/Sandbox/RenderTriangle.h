@@ -30,7 +30,7 @@ class RenderTriangle
 		BF::Graphics::API::ConstentBuffer* constentBuffer;
 
 		BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
-		BF::Graphics::Model* model;
+		//BF::Graphics::Model* model;
 		//BF::Graphics::FPSCamera* fpsCamera;
 		BF::System::Timer* timer;
 

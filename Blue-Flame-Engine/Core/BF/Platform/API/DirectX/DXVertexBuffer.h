@@ -29,7 +29,8 @@ namespace BF
 
 						void Create(const void* data, unsigned int size);
 						void SetLayout(Graphics::API::VertexBufferLayout* vertexBufferLayout);
-
+						void* Map() const;
+						void Unmap() const;
 						void Bind() const;
 						void Unbind() const;
 

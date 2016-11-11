@@ -8,17 +8,17 @@ using namespace BF::Math;
 using namespace BF::System;
 
 RenderTriangle::RenderTriangle(BF::Application::Window* window) :
-	window(window), context(nullptr), shader(nullptr), spriteRenderer(nullptr), model(nullptr), constentBuffer(nullptr), /*fpsCamera(nullptr),*/ initBuffer()
+	window(window), context(nullptr), shader(nullptr), spriteRenderer(nullptr),/* model(nullptr),*/ constentBuffer(nullptr), /*fpsCamera(nullptr),*/ initBuffer()
 {
 	timer = new Timer();
 	context = new Context(window, RenderAPI::OpenGL);
 	shader = new Shader(context);
 
 	constentBuffer = new ConstentBuffer(context, shader);
-	model = new Model(context, shader);
+	//model = new Model(context, shader);
 	//fpsCamera = new FPSCamera(Matrix4::Perspective(90.0f, window->GetAspectRatio(), 1.0f, 12.0f));
 
-	spriteRenderer = new SpriteRenderer(context, shader);
+	
 	
 #if BF_PLATFORM_WINDOWS
 	if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -28,7 +28,7 @@ RenderTriangle::RenderTriangle(BF::Application::Window* window) :
 
 	//model->Load("Assets/A380.obj");
 	//model->Load("Assets/Cube.obj_");
-	model->Load("Assets/Models/MultiMeshAndTexturedCubes/MultiMeshAndTexturedCubes.obj");
+	//model->Load("Assets/Models/MultiMeshAndTexturedCubes/MultiMeshAndTexturedCubes.obj");
 #endif
 
 #if BF_PLATFORM_LINUX
@@ -41,17 +41,22 @@ RenderTriangle::RenderTriangle(BF::Application::Window* window) :
 
 	shader->Bind();
 
+	spriteRenderer = new SpriteRenderer(context, shader);
+
 	initBuffer.modelMatrix = Matrix4::Identity();
 	initBuffer.color = Vector4(1.0f, 0.0f, 0.5f, 1.0f);
 	constentBuffer->Create(&initBuffer, sizeof(initBuffer), 0);
 
 	context->SetPrimitiveType(PrimitiveType::TriangleList);
 
+
+	Texture2D* t = new Texture2D(context);
+	t->Load("Assets/Textures/silver.png");
 	sprites = new std::vector<BF::Graphics::Renderers::Sprite*>();
 
-	for (size_t y = 0; y < 160; y++)
-		for (size_t x = 0; x < 300; x++)
-			sprites->push_back(new Sprite(Vector3(x * 6.0f, y * 6.0f, 0.0f), Vector2(5.0f, 5.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
+	//for (size_t y = 0; y < 160; y++)
+		//for (size_t x = 0; x < 300; x++)
+			sprites->push_back(new Sprite(t, Vector3(910.0f, 490.0f, 0.0f), Vector2(100.0f, 100.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
 
 	initBuffer.viewMatrix = Matrix4::LookAt(Vector3(15.0f, 0, 0), Vector3(35.0f, 0.0f, 10), Vector3(0, 1, 0));
 }
@@ -71,24 +76,24 @@ void RenderTriangle::Draw()
 	initBuffer.color = Vector4(0.2f, 0.5f, 0.3f, 1.0f);
 	//coulmn major in c++ 
 	//initBuffer.modelMatrix = fpsCamera->GetProjectionMatrix() * Matrix4::Translate(Vector3(0.0, 0.0f, 1.0f))  * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f));
-	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0.0, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 0, 1)); //* Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f));*///Matrix4::Translate(Vector3(0.0, 0.0f, 1.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f));
+	initBuffer.modelMatrix = Matrix4::Translate(Vector3(0.0f, 0.0f, 0.0f));//* * Matrix4::Rotate(angle, Vector3(0, 0, 1));  Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f));*///Matrix4::Translate(Vector3(0.0, 0.0f, 1.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(0.5f, 0.5f, 0.5f));
 	//initBuffer.viewMatrix = fpsCamera->GetViewMatrix();
 	//initBuffer.modelMatrix = Matrix4::Translate(Vector3(0.0f, 0.0f, 5.0f));
-	initBuffer.projectionMatrix = Matrix4::Perspective(90.0f, window->GetAspectRatio(), 0.1f, 1500.0f);
+	//initBuffer.projectionMatrix = Matrix4::Perspective(90.0f, window->GetAspectRatio(), 0.1f, 1500.0f);
 	//initBuffer.modelMatrix = Matrix4::Translate(Vector3(100.0f, 100.0f, 0.0f));
-	//initBuffer.projectionMatrix = Matrix4::Orthographic(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f);
+	initBuffer.projectionMatrix = Matrix4::Orthographic(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f);
 	constentBuffer->Update(&initBuffer, sizeof(initBuffer));
-	model->Draw();
+	//model->Draw();
 
-	/*
-	spriteRenderer->Begin(SpriteRenderer::SubmitType::StaticSubmit);
+	
+	spriteRenderer->Begin(SpriteRenderer::SubmitType::DynamicSubmit);
 	for (size_t i = 0; i < sprites->size(); i++)
 		spriteRenderer->Submit(sprites[0][i]);
 	spriteRenderer->End();
 	
 
 	spriteRenderer->Draw();
-	*/
+	
 	context->SwapBuffers();
 
 	if (timer->GetElapsedTimeInSeconds() >= 1.0f)
