@@ -50,6 +50,7 @@ namespace BF
 					void Clear(Math::Vector4 Color);
 					void Draw(unsigned int vertexCount);
 					void SwapBuffers();
+					void EnableDepthBuffer(bool state);
 
 #ifdef BF_PLATFORM_WINDOWS
 					inline Platform::API::DirectX::DXContext* GetDXContext() const { return dxContext; }

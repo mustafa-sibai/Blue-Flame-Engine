@@ -18,17 +18,31 @@
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\RenderTriangle.cpp">
+    <ClCompile Include="Sandbox\_3DScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\_2DScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sandbox\RenderTriangle.h">
+    <ClInclude Include="Sandbox\_3DScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\_2DScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Assets\Shaders\HLSL\PixelShader.hlsl" />
-    <FxCompile Include="Assets\Shaders\HLSL\VertexShader.hlsl" />
+    <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\SpriteRenderer\PixelShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\3D\VertexShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\3D\PixelShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Assets\Shaders\HLSL\3D\PixelShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\HLSL\3D\VertexShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\HLSL\SpriteRenderer\PixelShader.hlsl" />
+    <FxCompile Include="Assets\Shaders\HLSL\SpriteRenderer\VertexShader.hlsl" />
   </ItemGroup>
 </Project>

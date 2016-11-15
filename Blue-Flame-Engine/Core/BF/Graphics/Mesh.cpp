@@ -21,7 +21,7 @@ namespace BF
 		{
 			vertexBuffer = new VertexBuffer(context, shader);
 			indexBuffer = new IndexBuffer(context);
-			texture2D = new Texture2D(context);
+			texture2D = new Texture2D(context, shader);
 
 			vertexBuffer->Create(&vertices[0][0], (unsigned int)vertices->size() * sizeof(MeshVertexData));
 			indexBuffer->Create(&indices[0][0], (unsigned int)indices->size());

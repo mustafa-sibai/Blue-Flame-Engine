@@ -14,6 +14,7 @@ namespace BF
 		struct BF_API MeshVertexData
 		{
 			Math::Vector3 position;
+			Math::Vector4 color;
 			Math::Vector2 texcoord;
 			Math::Vector3 normal;
 
@@ -21,7 +22,7 @@ namespace BF
 				position(0), texcoord(0), normal(0) { }
 
 			MeshVertexData(Math::Vector3 position, Math::Vector2 texcoord, Math::Vector3 normal) :
-				position(0), texcoord(0), normal(0)
+				position(0), color(0), texcoord(0), normal(0)
 			{
 				this->position = position;
 				this->texcoord = texcoord;

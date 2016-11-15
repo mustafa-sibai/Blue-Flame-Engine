@@ -22,7 +22,7 @@ namespace BF
 						DXConstentBuffer(DXContext* dxContext, DXShader* dxShader);
 						~DXConstentBuffer();
 
-						void Create(void* data, unsigned int size);
+						void Create(unsigned int size);
 						void Update(void* data);
 				};
 			}

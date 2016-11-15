@@ -38,7 +38,7 @@ namespace BF
 					inline Platform::API::DirectX::DXShader* GetDXShader() const { return dxShader; }
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-					inline const Platform::API::OpenGL::GLShader* GetGLShader() const { return glShader; }
+					inline Platform::API::OpenGL::GLShader* GetGLShader() const { return glShader; }
 #endif
 			};
 		}

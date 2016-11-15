@@ -17,17 +17,20 @@ namespace BF
 				indexBuffer = new IndexBuffer(context);
 				vertexBufferLayout = new VertexBufferLayout();
 
-				vertexBufferLayout->Push(0, "POSITION", BF::Graphics::API::DataType::Float3, sizeof(SpriteData), 0);
-				vertexBufferLayout->Push(1, "COLOR",	BF::Graphics::API::DataType::Float4, sizeof(SpriteData), sizeof(Vector3));
-				vertexBufferLayout->Push(2, "TEXCOORD", BF::Graphics::API::DataType::Float2, sizeof(SpriteData), sizeof(Vector3) + sizeof(Vector4));
+				vertexBufferLayout->Push(0, "POSITION",		BF::Graphics::API::DataType::Float3, sizeof(SpriteBuffer), 0);
+				vertexBufferLayout->Push(1, "COLOR",		BF::Graphics::API::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector3));
+				vertexBufferLayout->Push(2, "TEXCOORD",		BF::Graphics::API::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4));
+				vertexBufferLayout->Push(3, "TEXTUREID",	BF::Graphics::API::DataType::Float,	 sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2));
+
+				shader->Bind();
 
 				const int numberOfObjects = 50000;
-				
-				vertexBuffer->Create(nullptr, (4 * numberOfObjects) * sizeof(SpriteData));
+
+				vertexBuffer->Create(nullptr, (4 * numberOfObjects) * sizeof(SpriteBuffer));
 				vertexBuffer->SetLayout(vertexBufferLayout);
 
 				unsigned int* indecies = new unsigned int[(6 * numberOfObjects)];
-				
+
 				for (size_t i = 0; i < (6 * numberOfObjects); i++)
 					indecies[i] = 0;
 
@@ -56,42 +59,53 @@ namespace BF
 			void SpriteRenderer::Begin(SubmitType submitType)
 			{
 				this->submitType = submitType;
+				context->EnableDepthBuffer(false);
 
 				if (firstSubmission)
-				{
-					indexCount = 0;
-					spriteData = (SpriteData*)vertexBuffer->Map();
-				}
+					spriteBuffer = (SpriteBuffer*)vertexBuffer->Map();
 			}
 
 			void SpriteRenderer::Submit(Sprite* sprite)
 			{
-				sprite->texture2D->Bind();
 				if (firstSubmission)
 				{
-					//Bottom Left
-					spriteData->position	= Vector3(sprite->position.x, sprite->position.y + sprite->size.y, 0.0f);
-					spriteData->color		= sprite->color;
-					spriteData->UV			= Vector2(0.0f, 0.0f);
-					spriteData++;
+					float textureID = FindTexture(sprite->texture2D);
+
+					if(textureID == 0.0f)
+						sprite->texture2D->Bind("textures[0]", textureID);
+					else if (textureID == 1.0f)
+						sprite->texture2D->Bind("textures[1]", textureID);
+
+					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+					CalculateUV(sprite, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
 					//Top Left
-					spriteData->position	= Vector3(sprite->position.x, sprite->position.y, 0.0f);
-					spriteData->color		= sprite->color;
-					spriteData->UV			= Vector2(0.0f, 1.0f);
-					spriteData++;
+					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x, sprite->position.y + sprite->rectangle.y, 0.0f);
+					spriteBuffer->color		= sprite->color;
+					spriteBuffer->UV		= topLeftUV;
+					spriteBuffer->textureID = textureID;
+					spriteBuffer++;
 
 					//Top Right
-					spriteData->position	= Vector3(sprite->position.x + sprite->size.x, sprite->position.y, 0.0f);
-					spriteData->color		= sprite->color;
-					spriteData->UV			= Vector2(1.0f, 1.0f);
-					spriteData++;
+					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x + sprite->rectangle.width, sprite->position.y + sprite->rectangle.y, 0.0f);
+					spriteBuffer->color		= sprite->color;
+					spriteBuffer->UV		= topRightUV;
+					spriteBuffer->textureID = textureID;
+					spriteBuffer++;
 
 					//Bottom Right
-					spriteData->position	= Vector3(sprite->position.x + sprite->size.x, sprite->position.y + sprite->size.y, 0.0f);
-					spriteData->color		= sprite->color;
-					spriteData->UV			= Vector2(1.0f, 0.0f);
-					spriteData++;
+					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x + sprite->rectangle.width, sprite->position.y + sprite->rectangle.y + sprite->rectangle.height, 0.0f);
+					spriteBuffer->color		= sprite->color;
+					spriteBuffer->UV		= bottomRightUV;
+					spriteBuffer->textureID = textureID;
+					spriteBuffer++;
+
+					//Bottom Left
+					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x, sprite->position.y + sprite->rectangle.y + sprite->rectangle.height, 0.0f);
+					spriteBuffer->color		= sprite->color;
+					spriteBuffer->UV		= bottomLeftUV;
+					spriteBuffer->textureID = textureID;
+					spriteBuffer++;
 
 					indexCount += 6;
 				}
@@ -113,6 +127,42 @@ namespace BF
 				context->Draw(indexCount);
 				indexBuffer->Unbind();
 				vertexBuffer->Unbind();
+
+				if (firstSubmission)
+				{
+					for (unsigned int i = 0; i < textures.size(); i++)
+						textures[i]->Unbind();
+
+					textures.clear();
+					indexCount = 0;
+				}
+			}
+
+			void SpriteRenderer::CalculateUV(Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft)
+			{
+				*topLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
+									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));
+
+				*topRight = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / ((float)sprite->sourceRectangle.x + (float)sprite->sourceRectangle.width)),
+									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));
+
+				*bottomRight = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / ((float)sprite->sourceRectangle.x + (float)sprite->sourceRectangle.width)),
+										1.0f / ((float)sprite->texture2D->GetHeight() / ((float)sprite->sourceRectangle.y + (float)sprite->sourceRectangle.height)));
+
+				*bottomLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
+										1.0f / ((float)sprite->texture2D->GetHeight() / ((float)sprite->sourceRectangle.y + (float)sprite->sourceRectangle.height)));
+			}
+
+			float SpriteRenderer::FindTexture(API::Texture2D* texture)
+			{
+				for (unsigned int i = 0; i < textures.size(); i++)
+				{
+					if (textures[i] == texture)
+						return (float)i;
+				}
+
+				textures.push_back(texture);
+				return (float)(textures.size() - 1);
 			}
 		}
 	}

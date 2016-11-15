@@ -4,12 +4,13 @@
 #elif BF_PLATFORM_WEBGL
 	#include <GLES3/gl3.h>
 #endif
-
-#include "BF/IO/ImageLoader.h"
-#include "BF/Math/Vector2.h"
+#include "GLShader.h"
+#include "BF/Common.h"
 
 namespace BF
 {
+	namespace Graphics { namespace API { class Texture2D; } }
+
 	namespace Platform
 	{
 		namespace API
@@ -19,22 +20,18 @@ namespace BF
 				class BF_API GLTexture2D
 				{
 					private:
+						GLShader* glshader;
+						Graphics::API::Texture2D* texture2D;
 						GLuint textureID;
 
-						uint8_t* data;
-						unsigned int width, height;
-
 					public:
-						GLTexture2D();
+						GLTexture2D(GLShader* glshader, Graphics::API::Texture2D* texture2D);
 						~GLTexture2D();
 
-						void Load(const char* fileName);
-
+						void Create();
 						void Bind() const;
+						void Bind(const char* samplerName, unsigned int index) const;
 						void Unbind() const;
-
-						inline unsigned int GetWidth() const { return width; }
-						inline unsigned int GetHeight() const { return height; }
 				};
 			}
 		}

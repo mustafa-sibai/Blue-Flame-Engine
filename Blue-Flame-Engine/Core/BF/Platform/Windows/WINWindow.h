@@ -8,6 +8,7 @@
 namespace BF
 {
 	namespace Application { class Window; }
+
 	namespace Platform
 	{
 		namespace Windows

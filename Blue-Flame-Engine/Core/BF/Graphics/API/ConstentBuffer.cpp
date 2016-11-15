@@ -15,7 +15,7 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstentBuffer = new BF::Platform::API::OpenGL::GLConstentBuffer();
+					glConstentBuffer = new BF::Platform::API::OpenGL::GLConstentBuffer(shader->GetGLShader());
 #endif
 			}
 
@@ -23,15 +23,15 @@ namespace BF
 			{
 			}
 
-			void ConstentBuffer::Create(void* data, unsigned int size, unsigned int bindingIndex)
+			void ConstentBuffer::Create(unsigned int size, unsigned int bindingIndex)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxConstentBuffer->Create(data, size);
+					dxConstentBuffer->Create(size);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstentBuffer->Create(data, size, bindingIndex);
+					glConstentBuffer->Create(size, bindingIndex);
 #endif
 			}
 

@@ -1,4 +1,5 @@
 #include "DXTexture2D.h"
+#include "BF/Graphics/API/Texture2D.h"
 
 namespace BF
 {
@@ -8,10 +9,8 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				using namespace BF::IO;
-
-				DXTexture2D::DXTexture2D(DXContext* dxContext) :
-					dxContext(dxContext), texture2D(nullptr), resourceView(nullptr), samplerState(nullptr), hr(0), data(nullptr), width(0), height(0)
+				DXTexture2D::DXTexture2D(DXContext* dxContext, Graphics::API::Texture2D* texture2D) :
+					dxContext(dxContext), texture2D(texture2D), textureID(nullptr), resourceView(nullptr), samplerState(nullptr), hr(0)
 				{
 				}
 
@@ -19,15 +18,13 @@ namespace BF
 				{
 				}
 
-				void DXTexture2D::Load(const char* fileName)
+				void DXTexture2D::Create()
 				{
-					data = ImageLoader::Load(fileName, &width, &height);
-
 					D3D11_TEXTURE2D_DESC texDesc;
 					ZeroMemory(&texDesc, sizeof(texDesc));
 
-					texDesc.Width = width;
-					texDesc.Height = height;
+					texDesc.Width = texture2D->GetWidth();
+					texDesc.Height = texture2D->GetHeight();
 					texDesc.MipLevels = texDesc.ArraySize = 1;
 					texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 					texDesc.SampleDesc.Count = 1;
@@ -39,15 +36,13 @@ namespace BF
 					D3D11_SUBRESOURCE_DATA subData;
 					ZeroMemory(&subData, sizeof(subData));
 
-					subData.pSysMem = data;
-					subData.SysMemPitch = width * 4;
+					subData.pSysMem = texture2D->GetData();
+					subData.SysMemPitch = texture2D->GetWidth() * 4;
 					subData.SysMemSlicePitch = 0;
 
-					hr = dxContext->GetDevice()->CreateTexture2D(&texDesc, &subData, &texture2D);
+					hr = dxContext->GetDevice()->CreateTexture2D(&texDesc, &subData, &textureID);
 					if (FAILED(hr))
-					{
-						//print error
-					}
+						std::cout << "Failed to create D3D11 Texture2D for D3D11 texture" << std::endl;
 
 					D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
 					ZeroMemory(&srvDesc, sizeof(D3D11_SHADER_RESOURCE_VIEW_DESC));
@@ -56,11 +51,9 @@ namespace BF
 					srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 					srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
 
-					hr = dxContext->GetDevice()->CreateShaderResourceView(texture2D, &srvDesc, &resourceView);
+					hr = dxContext->GetDevice()->CreateShaderResourceView(textureID, &srvDesc, &resourceView);
 					if (FAILED(hr))
-					{
-						//print error
-					}
+						std::cout << "Failed to create ShaderResourceView for D3D11 texture" << std::endl;
 
 					D3D11_SAMPLER_DESC samplerDesc;
 					ZeroMemory(&samplerDesc, sizeof(D3D11_SAMPLER_DESC));
@@ -76,9 +69,7 @@ namespace BF
 
 					hr = dxContext->GetDevice()->CreateSamplerState(&samplerDesc, &samplerState);
 					if (FAILED(hr))
-					{
-						//print error
-					}
+						std::cout << "Failed to create D3D11 SamplerState texture" << std::endl;
 				}
 
 				void DXTexture2D::Bind() const

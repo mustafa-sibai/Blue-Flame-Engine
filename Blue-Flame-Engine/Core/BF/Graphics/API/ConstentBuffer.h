@@ -29,7 +29,7 @@ namespace BF
 					ConstentBuffer(Context* context, Shader* shader);
 					~ConstentBuffer();
 
-					void Create(void* data, unsigned int size, unsigned int bindingIndex);
+					void Create(unsigned int size, unsigned int bindingIndex);
 					void Update(void* data, unsigned int size);
 			};
 		}

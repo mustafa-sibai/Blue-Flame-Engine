@@ -40,6 +40,7 @@ namespace BF
 						void Draw(GLsizei count);
 						void SwapBuffers();
 						void CleanUp();
+						void EnableDepthBuffer(bool state);
 				};
 			}
 		}

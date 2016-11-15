@@ -24,8 +24,8 @@ namespace BF
 			meshes = objReader->Load(fileName);
 
 			vertexBufferLayout->Push(0, "POSITION", DataType::Float3, sizeof(MeshVertexData), 0);
-			//vertexBufferLayout->Push(1, "COLOR", DataType::Float4, sizeof(Vertex), 0);
-			vertexBufferLayout->Push(2, "TEXCOORD", DataType::Float2, sizeof(MeshVertexData), sizeof(Vector3));
+			vertexBufferLayout->Push(1, "COLOR",	DataType::Float4, sizeof(MeshVertexData), sizeof(Vector3));
+			vertexBufferLayout->Push(2, "TEXCOORD", DataType::Float2, sizeof(MeshVertexData), sizeof(Vector3) + sizeof(Vector4));
 
 			for (size_t i = 0; i < meshes->size(); i++)
 			{

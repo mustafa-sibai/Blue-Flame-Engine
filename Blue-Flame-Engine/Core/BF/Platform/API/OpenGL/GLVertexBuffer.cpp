@@ -72,21 +72,6 @@ namespace BF
 				{
 					switch (dataType)
 					{
-						case DataType::Byte:
-						{
-							return GL_BYTE;
-							break;
-						}
-						case DataType::Short:
-						{
-							return GL_SHORT;
-							break;
-						}
-						case DataType::Int:
-						{
-							return GL_INT;
-							break;
-						}
 						case DataType::Float:
 						{
 							return GL_FLOAT;
@@ -107,11 +92,6 @@ namespace BF
 							return GL_FLOAT;
 							break;
 						}
-						case DataType::Double:
-						{
-							return GL_FLOAT;
-							break;
-						}
 						default:
 							return -1;
 							break;
@@ -122,21 +102,6 @@ namespace BF
 				{
 					switch (dataType)
 					{
-						case DataType::Byte:
-						{
-							return 1;
-							break;
-						}
-						case DataType::Short:
-						{
-							return 1;
-							break;
-						}
-						case DataType::Int:
-						{
-							return 1;
-							break;
-						}
 						case DataType::Float:
 						{
 							return 1;
@@ -155,11 +120,6 @@ namespace BF
 						case DataType::Float4:
 						{
 							return 4;
-							break;
-						}
-						case DataType::Double:
-						{
-							return 1;
 							break;
 						}
 						default:

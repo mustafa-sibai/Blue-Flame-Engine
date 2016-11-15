@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
-#include <string.h>
 #include <GL/glew.h>
+
+#include "GLShader.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -15,13 +15,14 @@ namespace BF
 				class BF_API GLConstentBuffer
 				{
 					private:
+						GLShader* glShader;
 						GLuint buffer;
 
 					public:
-						GLConstentBuffer();
+						GLConstentBuffer(GLShader* glShader);
 						~GLConstentBuffer();
 
-						void Create(const void* data, unsigned int size, unsigned int bindingIndex);
+						void Create(unsigned int size, unsigned int bindingIndex);
 						void Update(const void* data, unsigned int size);
 				};
 			}

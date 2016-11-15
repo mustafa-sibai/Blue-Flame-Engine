@@ -17,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void DXConstentBuffer::Create(void* data, unsigned int size)
+				void DXConstentBuffer::Create(unsigned int size)
 				{
 					//Align the buffer to be a multiple of 16
 					int remainder = size % 16;

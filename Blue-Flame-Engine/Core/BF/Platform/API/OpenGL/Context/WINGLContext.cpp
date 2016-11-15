@@ -56,7 +56,8 @@ namespace BF
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
 					//wglSwapIntervalEXT(1);
-					
+					glEnable(GL_BLEND);
+					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				}
 
 				WINGLContext::~WINGLContext()
@@ -99,7 +100,10 @@ namespace BF
 
 				void WINGLContext::Clear(Math::Vector4 color)
 				{
-					glEnable(GL_DEPTH_TEST);
+					GLenum err = glGetError();
+					if(err != GL_NO_ERROR)
+						printf(" %d\n ", err);
+
 					glClearColor(color.x, color.y, color.z, color.w);
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				}
@@ -117,6 +121,14 @@ namespace BF
 				void WINGLContext::CleanUp()
 				{
 					DeleteDC(hDC);
+				}
+
+				void WINGLContext::EnableDepthBuffer(bool state)
+				{
+					if(state)
+						glEnable(GL_DEPTH_TEST);
+					else
+						glDisable(GL_DEPTH_TEST);
 				}
 			}
 		}

@@ -90,6 +90,21 @@ namespace BF
 					webGLContext->SwapBuffers();
 #endif
 			}
+			void Context::EnableDepthBuffer(bool state)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+					//dxContext->SwapBuffers();
+				}
+				else if (renderAPI == RenderAPI::OpenGL)
+				{
+					winGLContext->EnableDepthBuffer(state);
+				}
+#elif BF_PLATFORM_LINUX
+#elif BF_PLATFORM_WEBGL
+#endif
+			}
 		}
 	}
 }

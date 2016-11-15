@@ -27,6 +27,9 @@ namespace BF
 			if (!dib)
 				std::cout << "file not found" << std::endl;
 
+			if(!FreeImage_FlipVertical(dib))
+				std::cout << "failed to flip image" << std::endl;
+
 			FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(dib);
 			FreeImage_Unload(dib);
 
