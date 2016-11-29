@@ -10,7 +10,7 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				DXVertexBuffer::DXVertexBuffer(DXContext* dxContext, DXShader* dxShader) :
+				DXVertexBuffer::DXVertexBuffer(const DXContext* dxContext, const DXShader* dxShader) :
 					dxContext(dxContext), dxShader(dxShader), vertexBufferLayout(nullptr), buffer(nullptr), inputLayout(nullptr), hr(0)
 				{
 				}
@@ -41,15 +41,15 @@ namespace BF
 					}
 				}
 
-				void DXVertexBuffer::SetLayout(VertexBufferLayout* vertexBufferLayout)
+				void DXVertexBuffer::SetLayout(const VertexBufferLayout* vertexBufferLayout)
 				{
 					this->vertexBufferLayout = vertexBufferLayout;
 
 					D3D11_INPUT_ELEMENT_DESC* inputElementDesc = new D3D11_INPUT_ELEMENT_DESC[vertexBufferLayout->GetBufferElement().size()];
-					
+
 					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
 					{
-						inputElementDesc[i].SemanticName = vertexBufferLayout->GetBufferElement()[i].name;
+						inputElementDesc[i].SemanticName = vertexBufferLayout->GetBufferElement()[i].name.c_str();
 						inputElementDesc[i].SemanticIndex = 0;
 						inputElementDesc[i].Format = GetDXDataType(vertexBufferLayout->GetBufferElement()[i].dataType);
 						inputElementDesc[i].InputSlot = 0;
@@ -57,7 +57,7 @@ namespace BF
 						inputElementDesc[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 						inputElementDesc[i].InstanceDataStepRate = 0;
 					}
-					
+
 					hr = dxContext->GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout->GetBufferElement().size(), dxShader->GetVSData(), dxShader->GetVSsize(), &inputLayout);
 					if (FAILED(hr))
 						std::cout << "Could not create vertex buffer input layout." << std::endl;
@@ -88,26 +88,10 @@ namespace BF
 					dxContext->GetContext()->IASetVertexBuffers(0, 1, &buffer, &vertexBufferLayout->GetBufferElement()[0].stride, &offset);
 				}
 
-				void DXVertexBuffer::Unbind() const
-				{
-				}
-
 				DXGI_FORMAT DXVertexBuffer::GetDXDataType(DataType dataType)
 				{
 					switch (dataType)
 					{
-						case DataType::Byte:
-						{
-							break;
-						}
-						case DataType::Short:
-						{
-							break;
-						}
-						case DataType::Int:
-						{
-							break;
-						}
 						case DataType::Float:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
@@ -126,10 +110,6 @@ namespace BF
 						case DataType::Float4:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
-							break;
-						}
-						case DataType::Double:
-						{
 							break;
 						}
 						default:

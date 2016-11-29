@@ -31,7 +31,7 @@ namespace BF
 			class BF_API Context
 			{
 				private:
-					Application::Window* window;
+					const Application::Window* window;
 					static RenderAPI renderAPI;
 
 #ifdef BF_PLATFORM_WINDOWS
@@ -43,7 +43,7 @@ namespace BF
 					Platform::API::OpenGL::WEBGLContext* webGLContext;
 #endif
 				public:
-					Context(Application::Window* window, RenderAPI renderAPI);
+					Context(const Application::Window* window, RenderAPI renderAPI);
 					~Context();
 
 					void SetPrimitiveType(PrimitiveType primitiveType);

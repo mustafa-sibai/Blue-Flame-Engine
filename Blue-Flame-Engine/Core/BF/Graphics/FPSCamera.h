@@ -8,7 +8,7 @@ namespace BF
 		class BF_API FPSCamera : public Camera
 		{
 			private:
-				float speed;
+				float movmentSpeed, yaw;
 
 			public:
 				FPSCamera(const Math::Matrix4& projectionMatrix);

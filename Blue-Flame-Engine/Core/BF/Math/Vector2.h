@@ -12,8 +12,8 @@ namespace BF
 			float x, y;
 
 			Vector2();
-			Vector2(const float& value);
-			Vector2(const float& x, const float& y);
+			Vector2(float value);
+			Vector2(float x, float y);
 			~Vector2();
 
 			float Dot(const Vector2& vector) const;

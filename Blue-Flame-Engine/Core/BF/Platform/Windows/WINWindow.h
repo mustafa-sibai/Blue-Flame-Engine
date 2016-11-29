@@ -2,8 +2,8 @@
 #include <iostream>
 #include <Windows.h>
 #include <Dwmapi.h>
-#include "BF/Common.h"
 #include "BF/Application/WindowStyle.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -28,7 +28,7 @@ namespace BF
 					void Update();
 					bool IsOpen();
 					void Move();
-					void SetWindowTitle(const char* title);
+					void SetWindowTitle(const std::string& title);
 					PIXELFORMATDESCRIPTOR GetPixelFormat() const;
 
 				private:

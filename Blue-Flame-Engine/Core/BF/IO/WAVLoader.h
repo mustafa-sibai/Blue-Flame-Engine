@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include "BF/Common.h"
 
 namespace BF
@@ -15,7 +15,7 @@ namespace BF
 				static WAVHeader wavHeader;
 
 			public:
-				static uint8_t* Load(const char* filename, uint32_t* size, uint32_t* sampleRate, uint16_t* bitsPerSample, uint16_t* numChannels);
+				static uint8_t* Load(const std::string& filename, uint32_t* size, uint32_t* sampleRate, uint16_t* bitsPerSample, uint16_t* numChannels);
 		};
 	}
 }

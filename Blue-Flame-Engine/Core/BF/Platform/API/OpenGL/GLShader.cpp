@@ -20,7 +20,7 @@ namespace BF
 				{
 				}
 
-				GLuint GLShader::CompileShader(std::string shaderCode, GLenum shaderType)
+				GLuint GLShader::CompileShader(const std::string& shaderCode, GLenum shaderType)
 				{
 					GLuint shaderID = glCreateShader(shaderType);
 
@@ -41,7 +41,7 @@ namespace BF
 					return shaderID;
 				}
 
-				void GLShader::Load(const char* vertexShaderFilePath, const char* fragmentShaderFilePath)
+				void GLShader::Load(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath)
 				{
 					GLuint vertexShader = CompileShader(FileLoader::LoadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
 					GLuint fragmentShader = CompileShader(FileLoader::LoadTextFile(fragmentShaderFilePath), GL_FRAGMENT_SHADER);

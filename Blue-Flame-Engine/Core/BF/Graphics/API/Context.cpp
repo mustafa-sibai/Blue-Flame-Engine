@@ -8,7 +8,7 @@ namespace BF
 		{
 			RenderAPI Context::renderAPI = RenderAPI::none;
 
-			Context::Context(Application::Window* window, RenderAPI renderAPI) :
+			Context::Context(const Application::Window* window, RenderAPI renderAPI) :
 				window(window)
 			{
 				this->renderAPI = renderAPI;
@@ -90,19 +90,17 @@ namespace BF
 					webGLContext->SwapBuffers();
 #endif
 			}
+
 			void Context::EnableDepthBuffer(bool state)
 			{
+
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
-				{
-					//dxContext->SwapBuffers();
-				}
-				else if (renderAPI == RenderAPI::OpenGL)
-				{
+					dxContext->EnableDepthBuffer(state);
+#endif
+#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
+				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext->EnableDepthBuffer(state);
-				}
-#elif BF_PLATFORM_LINUX
-#elif BF_PLATFORM_WEBGL
 #endif
 			}
 		}

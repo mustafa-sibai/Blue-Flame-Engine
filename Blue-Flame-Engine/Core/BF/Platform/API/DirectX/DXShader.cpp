@@ -10,7 +10,7 @@ namespace BF
 			{
 				using namespace BF::IO;
 
-				DXShader::DXShader(DXContext* context) :
+				DXShader::DXShader(const DXContext* context) :
 					context(context), VS(nullptr), PS(nullptr), hr(0), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
 				{
 				}
@@ -19,7 +19,7 @@ namespace BF
 				{
 				}
 
-				void DXShader::Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath)
+				void DXShader::Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath)
 				{
 					VSData = FileLoader::LoadBinaryFile(vertexShaderFilePath, &VSsize);
 					PSData = FileLoader::LoadBinaryFile(pixelShaderFilePath, &PSsize);
@@ -35,13 +35,13 @@ namespace BF
 					}
 				}
 
-				void DXShader::Bind()
+				void DXShader::Bind() const
 				{
 					context->GetContext()->VSSetShader(VS, 0, 0);
 					context->GetContext()->PSSetShader(PS, 0, 0);
 				}
 
-				void DXShader::CleanUp()
+				void DXShader::CleanUp() const
 				{
 					VS->Release();
 					PS->Release();

@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace IO
 	{
-		uint8_t* ImageLoader::Load(const char* filename, unsigned int* width, unsigned int* height)
+		uint8_t* ImageLoader::Load(const std::string& filename, unsigned int* width, unsigned int* height)
 		{
 			FreeImage_Initialise();
 
@@ -13,16 +13,16 @@ namespace BF
 			FIBITMAP* dib = nullptr;
 			uint8_t* bits = nullptr;
 			
-			fif = FreeImage_GetFileType(filename, 0);
+			fif = FreeImage_GetFileType(filename.c_str(), 0);
 
 			if (fif == FIF_UNKNOWN)
-				fif = FreeImage_GetFIFFromFilename(filename);
+				fif = FreeImage_GetFIFFromFilename(filename.c_str());
 
 			if (fif == FIF_UNKNOWN)
 				std::cout << "FIF_UNKNOWN" << std::endl;
 
 			if (FreeImage_FIFSupportsReading(fif))
-				dib = FreeImage_Load(fif, filename);
+				dib = FreeImage_Load(fif, filename.c_str());
 
 			if (!dib)
 				std::cout << "file not found" << std::endl;

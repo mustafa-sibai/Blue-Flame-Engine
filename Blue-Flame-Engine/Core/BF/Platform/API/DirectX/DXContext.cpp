@@ -9,7 +9,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXContext::DXContext(Application::Window* window) :
+				DXContext::DXContext(const Application::Window* window) :
 					window(window), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
 				{
 					CreateDeviceAndSwapChain();
@@ -17,6 +17,8 @@ namespace BF
 					CreateRasterizerState();
 					CreateDepthBuffer();
 					SetViewPort();
+
+					context->OMSetRenderTargets(1, &renderTarget, zBuffer);
 				}
 
 				DXContext::~DXContext()
@@ -130,8 +132,6 @@ namespace BF
 					dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
 					device->CreateDepthStencilView(depthBuffer, &dsvd, &zBuffer);
 					depthBuffer->Release();
-
-					context->OMSetRenderTargets(1, &renderTarget, zBuffer);
 				}
 
 				void DXContext::SetViewPort()
@@ -143,8 +143,8 @@ namespace BF
 					viewPort.TopLeftY = 0;
 					viewPort.Width = window->GetClientWidth();
 					viewPort.Height = window->GetClientHeight();
-					viewPort.MinDepth = 0;
-					viewPort.MaxDepth = 1;
+					viewPort.MinDepth = 0.0f;
+					viewPort.MaxDepth = 1.0f;
 					context->RSSetViewports(1, &viewPort);
 				}
 
@@ -183,11 +183,21 @@ namespace BF
 					context->IASetPrimitiveTopology(D3DPrimitiveType);
 				}
 
-				void DXContext::Clear(Math::Vector4 Color)
+				void DXContext::EnableDepthBuffer(bool state)
 				{
-					float color[4] = { Color.x, Color.y, Color.z, Color.w };
+					if (state)
+						context->OMSetRenderTargets(1, &renderTarget, zBuffer);
+					else
+						context->OMSetRenderTargets(1, &renderTarget, 0);
+				}
+
+				void DXContext::Clear(const Math::Vector4& Color)
+				{
+					float color[] = { Color.x, Color.y, Color.z, Color.w };
 					context->ClearRenderTargetView(renderTarget, color);
-					context->ClearDepthStencilView(zBuffer, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+					if(zBuffer)
+						context->ClearDepthStencilView(zBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 				}
 
 				void DXContext::SwapBuffers()

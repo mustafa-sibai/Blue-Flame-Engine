@@ -4,3 +4,7 @@
 *.tlog
 *.ilk
 *.db
+*.obj
+*.lib
+*.dll
+*.fbx

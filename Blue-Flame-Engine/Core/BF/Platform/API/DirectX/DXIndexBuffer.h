@@ -12,7 +12,7 @@ namespace BF
 				class BF_API DXIndexBuffer
 				{
 					private:
-						DXContext* dxContext;
+						const DXContext* dxContext;
 
 						ID3D11Buffer* buffer;
 						HRESULT hr;
@@ -20,13 +20,11 @@ namespace BF
 						unsigned int count;
 
 					public:
-						DXIndexBuffer(DXContext* dxContext);
+						DXIndexBuffer(const DXContext* dxContext);
 						~DXIndexBuffer();
 
 						void Create(const unsigned int* indices, unsigned int count);
-
 						void Bind() const;
-						void Unbind() const;
 
 						inline unsigned int GetIndicesCount() const { return count; }
 				};

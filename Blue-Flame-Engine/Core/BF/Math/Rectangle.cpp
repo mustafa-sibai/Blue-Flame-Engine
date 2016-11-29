@@ -11,7 +11,7 @@ namespace BF
 		{
 		}
 
-		Rectangle::Rectangle(const int& x, const int& y, const int& width, const int& height) :
+		Rectangle::Rectangle(int x, int y, int width, int height) :
 			x(x), y(y), width(width), height(height)
 		{
 		}

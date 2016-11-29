@@ -13,7 +13,7 @@ namespace _2DScene
 		window(window), context(nullptr), shader(nullptr), spriteRenderer(nullptr), constentBuffer(nullptr)
 	{
 		timer = new Timer();
-		context = new Context(window, RenderAPI::OpenGL);
+		context = new Context(window, RenderAPI::DirectX);
 		shader = new Shader(context);
 
 		constentBuffer = new ConstentBuffer(context, shader);
@@ -38,10 +38,12 @@ namespace _2DScene
 
 		context->SetPrimitiveType(PrimitiveType::TriangleList);
 
-		t = new Texture2D(context, shader);
-		t2 = new Texture2D(context, shader);
-		t->Load("Assets/Textures/tilea5.png");
-		t2->Load("Assets/Textures/test2.png");
+		//t = new Texture2D(context, shader);
+		//t2 = new Texture2D(context, shader);
+		//t->Load("Assets/Textures/tilea5.png");
+		//t2->Load("Assets/Textures/test2.png");
+
+		font = new Font(context, shader);
 
 		//sprites = new std::vector<BF::Graphics::Renderers::Sprite*>();
 
@@ -53,7 +55,7 @@ namespace _2DScene
 
 		initBuffer.modelMatrix = Matrix4::Identity();
 		initBuffer.viewMatrix = Matrix4::Identity();
-		initBuffer.projectionMatrix = Matrix4::Orthographic(0.0f, 1920.0f, 0.0f, 1080.0f, -1.0f, 1.0f);
+		initBuffer.projectionMatrix = Matrix4::Orthographic(0.0f, window->GetClientWidth(), 0.0f, window->GetClientHeight(), -1.0f, 1.0f);
 	}
 
 	_2DScene::~_2DScene()
@@ -72,8 +74,9 @@ namespace _2DScene
 		//for (size_t i = 0; i < sprites->size(); i++)
 		//	spriteRenderer->Submit(sprites[0][i]);
 
-		spriteRenderer->Submit(new Sprite(t, BF::Math::Vector3(500.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
-		spriteRenderer->Submit(new Sprite(t2, BF::Math::Vector3(350.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
+		//spriteRenderer->Submit(new Sprite(t, BF::Math::Vector3(500.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
+		//spriteRenderer->Submit(new Sprite(t2, BF::Math::Vector3(350.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
+		spriteRenderer->Submit(new Sprite(font->texture, BF::Math::Vector3(350.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
 		spriteRenderer->End();
 
 		spriteRenderer->Draw();

@@ -11,7 +11,7 @@ namespace BF
 			int x, y, width, height;
 
 			Rectangle();
-			Rectangle(const int& x, const int& y, const int& width, const int& height);
+			Rectangle(int x, int y, int width, int height);
 
 			friend Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle);
 			friend Rectangle operator-(const Rectangle& leftRectangle, const Rectangle& rightRectangle);

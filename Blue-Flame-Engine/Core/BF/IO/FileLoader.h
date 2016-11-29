@@ -10,8 +10,8 @@ namespace BF
 	{
 		struct BF_API FileLoader
 		{
-			static std::string LoadTextFile(const char* fileName);
-			static char* LoadBinaryFile(const char* fileName, size_t* size);
+			static std::string LoadTextFile(const std::string& fileName);
+			static char* LoadBinaryFile(const std::string& fileName, size_t* size);
 		};
 	}
 }

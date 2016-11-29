@@ -1,5 +1,6 @@
 #pragma once
 #include <BF/BlueFlame.h>
+#include <BF/Graphics/Font.h>
 #include <vector>
 #include <iostream>
 #include <chrono>
@@ -30,6 +31,8 @@ namespace _2DScene
 			BF::Graphics::API::Texture2D* t;
 			BF::Graphics::API::Texture2D* t2;
 			int frames = 0;
+
+			BF::Graphics::Font* font;
 
 		public:
 			_2DScene(BF::Application::Window* window);

@@ -10,7 +10,7 @@ namespace BF
 			using namespace BF::Graphics::Renderers;
 			using namespace BF::Math;
 
-			SpriteRenderer::SpriteRenderer(Context* context, Shader* shader) :
+			SpriteRenderer::SpriteRenderer(Context* context, const Shader* shader) :
 				context(context), shader(shader), indexCount(0), firstSubmission(true)
 			{
 				vertexBuffer = new VertexBuffer(context, shader);
@@ -50,6 +50,8 @@ namespace BF
 				}
 
 				indexBuffer->Create(indecies, (6 * numberOfObjects));
+
+				context->EnableDepthBuffer(false);
 			}
 
 			SpriteRenderer::~SpriteRenderer()
@@ -59,7 +61,6 @@ namespace BF
 			void SpriteRenderer::Begin(SubmitType submitType)
 			{
 				this->submitType = submitType;
-				context->EnableDepthBuffer(false);
 
 				if (firstSubmission)
 					spriteBuffer = (SpriteBuffer*)vertexBuffer->Map();
@@ -138,7 +139,7 @@ namespace BF
 				}
 			}
 
-			void SpriteRenderer::CalculateUV(Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft)
+			void SpriteRenderer::CalculateUV(const Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft)
 			{
 				*topLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
 									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));

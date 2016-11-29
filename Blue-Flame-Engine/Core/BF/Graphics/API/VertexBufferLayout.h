@@ -8,12 +8,12 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class DataType { Byte, Short, Int, Float, Float2, Float3, Float4, Double };
+			enum class DataType { Float, Float2, Float3, Float4 };
 
 			struct BF_API VertexBufferElement
 			{
 				int index = 0;
-				const char* name = 0;
+				std::string name = "";
 				DataType dataType;
 				unsigned int stride = 0;
 				unsigned int offset = 0;
@@ -28,9 +28,9 @@ namespace BF
 					VertexBufferLayout();
 					~VertexBufferLayout();
 
-					void Push(int index, const char* name, DataType dataType, unsigned int stride, unsigned int offset);
+					void Push(int index, const std::string& name, DataType dataType, unsigned int stride, unsigned int offset);
 
-					inline std::vector<VertexBufferElement> GetBufferElement() const { return vertexBufferElements; }
+					inline const std::vector<VertexBufferElement>& GetBufferElement() const { return vertexBufferElements; }
 			};
 		}
 	}

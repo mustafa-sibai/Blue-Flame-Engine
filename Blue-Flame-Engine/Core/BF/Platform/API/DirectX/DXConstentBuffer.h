@@ -12,14 +12,14 @@ namespace BF
 				class BF_API DXConstentBuffer
 				{
 					private:
-						DXContext* dxContext;
-						DXShader* dxShader;
+						const DXContext* dxContext;
+						const DXShader* dxShader;
 
 						ID3D11Buffer* buffer;
 						HRESULT hr;
 
 					public:
-						DXConstentBuffer(DXContext* dxContext, DXShader* dxShader);
+						DXConstentBuffer(const DXContext* dxContext, const DXShader* dxShader);
 						~DXConstentBuffer();
 
 						void Create(unsigned int size);

@@ -6,7 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			IndexBuffer::IndexBuffer(Context* context) :
+			IndexBuffer::IndexBuffer(const Context* context) :
 				context(context)
 			{
 #ifdef BF_PLATFORM_WINDOWS
@@ -49,10 +49,6 @@ namespace BF
 
 			void IndexBuffer::Unbind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxIndexBuffer->Unbind();
-#endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glIndexBuffer->Unbind();

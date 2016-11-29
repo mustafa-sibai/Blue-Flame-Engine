@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace Application
 	{
-		Window::Window(const char* title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
+		Window::Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
 			title(title), positionX(positionX), positionY(positionY), width(width), height(height), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0)
 		{
 #ifdef BF_PLATFORM_WINDOWS

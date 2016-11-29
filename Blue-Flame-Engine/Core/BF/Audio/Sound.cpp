@@ -14,7 +14,7 @@ namespace BF
 		{
 		}
 
-		void Sound::Load(const char* filename)
+		void Sound::Load(const std::string& filename)
 		{
 			data = WAVLoader::Load(filename, &dataSize, &sampleRate, &bitsPerSample, &numChannels);
 

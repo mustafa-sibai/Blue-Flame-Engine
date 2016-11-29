@@ -11,7 +11,7 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				WINGLContext::WINGLContext(Application::Window* window) :
+				WINGLContext::WINGLContext(const Application::Window* window) :
 					window(window), hDC(nullptr)
 				{
 					hDC = GetDC(window->GetWINWindow()->GetHWND());
@@ -55,9 +55,11 @@ namespace BF
 					fprintf(stdout, "Graphics Card: %s - %s\n", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
+					glEnable(GL_DEPTH_TEST);
+
 					//wglSwapIntervalEXT(1);
-					glEnable(GL_BLEND);
-					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+					//glEnable(GL_BLEND);
+					//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				}
 
 				WINGLContext::~WINGLContext()
@@ -98,10 +100,10 @@ namespace BF
 					}
 				}
 
-				void WINGLContext::Clear(Math::Vector4 color)
+				void WINGLContext::Clear(const Math::Vector4& color)
 				{
 					GLenum err = glGetError();
-					if(err != GL_NO_ERROR)
+					if (err != GL_NO_ERROR)
 						printf(" %d\n ", err);
 
 					glClearColor(color.x, color.y, color.z, color.w);
@@ -125,7 +127,7 @@ namespace BF
 
 				void WINGLContext::EnableDepthBuffer(bool state)
 				{
-					if(state)
+					if (state)
 						glEnable(GL_DEPTH_TEST);
 					else
 						glDisable(GL_DEPTH_TEST);

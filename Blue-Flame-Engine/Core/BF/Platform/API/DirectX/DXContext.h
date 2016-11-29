@@ -23,7 +23,7 @@ namespace BF
 				class BF_API DXContext
 				{
 					private:
-						Application::Window* window;
+						const Application::Window* window;
 
 						ID3D11Device* device;
 						ID3D11DeviceContext* context;
@@ -35,14 +35,17 @@ namespace BF
 						HRESULT hr;
 
 					public:
-						DXContext(Application::Window* window);
+						DXContext(const Application::Window* window);
 						~DXContext();
 
-						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
-						void Clear(Math::Vector4 Color);
+						
+						void Clear(const Math::Vector4& Color);
 						void SwapBuffers();
 						void Draw(unsigned int vertexCount);
 						void CleanUp();
+
+						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
+						void EnableDepthBuffer(bool state);
 
 						inline ID3D11Device* GetDevice() const { return device; }
 						inline ID3D11DeviceContext* GetContext() const { return context; }

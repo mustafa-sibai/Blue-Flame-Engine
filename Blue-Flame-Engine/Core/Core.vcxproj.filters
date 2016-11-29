@@ -135,10 +135,19 @@
     <ClCompile Include="BF\IO\ImageLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\IO\OBJLoader.cpp">
+    <ClCompile Include="BF\IO\WAVLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\IO\WAVLoader.cpp">
+    <ClCompile Include="BF\Graphics\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\TextureAtlas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,13 +278,22 @@
     <ClInclude Include="BF\IO\WAVLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\IO\OBJLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\IO\FileLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\IO\ImageLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\TextureAtlas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

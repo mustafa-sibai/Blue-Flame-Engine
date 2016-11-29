@@ -17,8 +17,8 @@ namespace BF
 			class BF_API ConstentBuffer
 			{
 				private:
-					Context* context;
-					Shader* shader;
+					const Context* context;
+					const Shader* shader;
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXConstentBuffer* dxConstentBuffer;
 #endif
@@ -26,7 +26,7 @@ namespace BF
 					Platform::API::OpenGL::GLConstentBuffer* glConstentBuffer;
 #endif
 				public:
-					ConstentBuffer(Context* context, Shader* shader);
+					ConstentBuffer(const Context* context, const Shader* shader);
 					~ConstentBuffer();
 
 					void Create(unsigned int size, unsigned int bindingIndex);

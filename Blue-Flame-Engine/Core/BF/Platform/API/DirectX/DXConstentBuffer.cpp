@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXConstentBuffer::DXConstentBuffer(DXContext* dxContext, DXShader* dxShader) :
+				DXConstentBuffer::DXConstentBuffer(const DXContext* dxContext, const DXShader* dxShader) :
 					dxContext(dxContext), dxShader(dxShader), buffer(nullptr), hr(0)
 				{
 				}

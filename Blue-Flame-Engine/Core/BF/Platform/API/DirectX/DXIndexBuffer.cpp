@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXIndexBuffer::DXIndexBuffer(DXContext* dxContext) : 
+				DXIndexBuffer::DXIndexBuffer(const DXContext* dxContext) :
 					dxContext(dxContext), buffer(nullptr), hr(0), count(0)
 				{
 				}
@@ -46,10 +46,6 @@ namespace BF
 				void DXIndexBuffer::Bind() const
 				{
 					dxContext->GetContext()->IASetIndexBuffer(buffer, DXGI_FORMAT_R32_UINT, 0);
-				}
-
-				void DXIndexBuffer::Unbind() const
-				{
 				}
 			}
 		}

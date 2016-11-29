@@ -6,7 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			VertexBuffer::VertexBuffer(Context* context, Shader* shader) :
+			VertexBuffer::VertexBuffer(const Context* context, const Shader* shader) :
 				context(context)
 			{
 #ifdef BF_PLATFORM_WINDOWS
@@ -86,10 +86,6 @@ namespace BF
 
 			void VertexBuffer::Unbind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer->Unbind();
-#endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer->Unbind();

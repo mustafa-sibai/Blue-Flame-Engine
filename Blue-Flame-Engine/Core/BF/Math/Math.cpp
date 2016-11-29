@@ -6,7 +6,7 @@ namespace BF
 	{
 		float ToRadians(float Degrees)
 		{
-			return (float)((Degrees * M_PI) / 180.f);
+			return Degrees * (float)(M_PI / 180.0f);
 		}
 	}
 }

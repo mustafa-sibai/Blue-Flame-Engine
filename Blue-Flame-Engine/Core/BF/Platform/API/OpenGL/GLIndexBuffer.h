@@ -26,7 +26,7 @@ namespace BF
 						GLIndexBuffer();
 						~GLIndexBuffer();
 
-						void Create(const unsigned int* const indices, unsigned int count);
+						void Create(const unsigned int* indices, unsigned int count);
 
 						void Bind() const;
 						void Unbind() const;

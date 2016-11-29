@@ -27,9 +27,9 @@ namespace BF
 			unsigned char* data;
 		} WAVLoader::wavHeader;
 
-		uint8_t* WAVLoader::Load(const char* filename, uint32_t* size, uint32_t* sampleRate, uint16_t* bitsPerSample, uint16_t* numChannels)
+		uint8_t* WAVLoader::Load(const std::string& filename, uint32_t* size, uint32_t* sampleRate, uint16_t* bitsPerSample, uint16_t* numChannels)
 		{
-			FILE* file = fopen(filename, "rb");
+			FILE* file = fopen(filename.c_str(), "rb");
 
 			if (!file)
 			{

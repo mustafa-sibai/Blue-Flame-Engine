@@ -12,8 +12,8 @@ namespace BF
 			float x, y, z, w;
 
 			Vector4();
-			Vector4(const float& value);
-			Vector4(const float& x, const float& y, const float& z, const float& w);
+			Vector4(float value);
+			Vector4(float x, float y, float z, float w);
 			~Vector4();
 
 			float Dot(const Vector4& vector) const;

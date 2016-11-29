@@ -17,7 +17,7 @@ namespace BF
 
 				private:
 					API::Context* context;
-					API::Shader* shader;
+					const API::Shader* shader;
 					API::VertexBuffer* vertexBuffer;
 					API::IndexBuffer* indexBuffer;
 					API::VertexBufferLayout* vertexBufferLayout;
@@ -31,7 +31,7 @@ namespace BF
 					std::vector<API::Texture2D*> textures;
 
 				public:
-					SpriteRenderer(API::Context* context, API::Shader* shader);
+					SpriteRenderer(API::Context* context, const API::Shader* shader);
 					~SpriteRenderer();
 
 					void Begin(SubmitType submitType);
@@ -40,7 +40,7 @@ namespace BF
 					void Draw();
 
 				private:
-					void CalculateUV(Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
+					void CalculateUV(const Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
 					float FindTexture(API::Texture2D* texture);
 			};
 		}

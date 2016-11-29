@@ -31,12 +31,12 @@ namespace BF
 #elif BF_PLATFORM_WEBGL
 				Platform::WebGL::WEBWindow* webWindow;
 #endif
-				const char* title;
+				std::string title;
 				unsigned short positionX, positionY, width, height, clientWidth, clientHeight, borderWidth, borderHeight;
 				Application::WindowStyle style;
 
 			public:
-				Window(const char* title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
+				Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
 				~Window();
 				void Update();
 				bool IsOpen();

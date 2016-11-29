@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -26,20 +26,23 @@
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Shader.cpp" />
+    <ClCompile Include="BF\Graphics\API\Texture.cpp" />
     <ClCompile Include="BF\Graphics\API\Texture2D.cpp" />
     <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
+    <ClCompile Include="BF\Graphics\Font.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
+    <ClCompile Include="BF\Graphics\Material.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
     <ClCompile Include="BF\IO\FileLoader.cpp" />
     <ClCompile Include="BF\IO\ImageLoader.cpp" />
-    <ClCompile Include="BF\IO\OBJLoader.cpp" />
     <ClCompile Include="BF\IO\WAVLoader.cpp" />
     <ClCompile Include="BF\Math\Math.cpp" />
     <ClCompile Include="BF\Math\Matrix4.cpp" />
@@ -73,20 +76,23 @@
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Shader.h" />
+    <ClInclude Include="BF\Graphics\API\Texture.h" />
     <ClInclude Include="BF\Graphics\API\Texture2D.h" />
     <ClInclude Include="BF\Graphics\API\VertexBuffer.h" />
     <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h" />
     <ClInclude Include="BF\Graphics\Camera.h" />
+    <ClInclude Include="BF\Graphics\Font.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
+    <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
     <ClInclude Include="BF\IO\FileLoader.h" />
     <ClInclude Include="BF\IO\ImageLoader.h" />
-    <ClInclude Include="BF\IO\OBJLoader.h" />
     <ClInclude Include="BF\IO\WAVLoader.h" />
     <ClInclude Include="BF\Math\Math.h" />
     <ClInclude Include="BF\Math\Matrix4.h" />
@@ -118,14 +124,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -133,14 +139,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
@@ -166,26 +172,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Debug;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Debug;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeType\lib\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Release;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Release;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeType\lib\x64\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Debug;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Release;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -205,7 +211,9 @@
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLibd.lib;%(AdditionalDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -226,8 +234,10 @@
       </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLibd.lib;%(AdditionalDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -252,11 +262,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -281,11 +293,15 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>
+      </FloatingPointExceptions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Link>

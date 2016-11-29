@@ -17,7 +17,7 @@ namespace BF
 				{
 				}
 
-				void GLIndexBuffer::Create(const unsigned int* const indices, unsigned int count)
+				void GLIndexBuffer::Create(const unsigned int* indices, unsigned int count)
 				{
 					this->count = count;
 

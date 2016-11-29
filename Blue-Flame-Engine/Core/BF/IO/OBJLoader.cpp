@@ -10,15 +10,16 @@ namespace BF
 
 		struct OBJReader::Index
 		{
-			unsigned int positionIndex, texcoordIndex, normalIndex;
-			int index;
+			int positionIndex, texcoordIndex, normalIndex;
+			unsigned int index;
 
-			Index(unsigned int positionIndex, unsigned int texcoordIndex, unsigned int normalIndex) :
-				positionIndex(0), texcoordIndex(0), normalIndex(0), index(-1)
+			Index(int positionIndex, int texcoordIndex, int normalIndex, unsigned int index) :
+				positionIndex(0), texcoordIndex(0), normalIndex(0), index(0)
 			{
 				this->positionIndex = positionIndex;
 				this->texcoordIndex = texcoordIndex;
 				this->normalIndex = normalIndex;
+				this->index = index;
 			}
 		};
 
@@ -66,16 +67,14 @@ namespace BF
 			vector<Vector3> tempNormals;
 			vector<Index> tempIndecies;
 
-			char materialName[255];
-
 			while (true)
 			{
-				char lineHeader[255];
+				char lineHeader[512];
 				int res = fscanf(file, "%s", lineHeader);
 
 				if (strcmp(lineHeader, "mtllib") == 0)
 				{
-					char materialFileNameC[255];
+					char materialFileNameC[512];
 					fscanf(file, "%s", materialFileNameC);
 					materialFileName = materialFileNameC;
 				}
@@ -83,7 +82,7 @@ namespace BF
 				{
 					if ((res == EOF || strcmp(lineHeader, "o") == 0) && addPreviousMesh)
 					{
-						AddMesh(tempVertices, tempTexcoord, tempNormals, tempIndecies, materialName);
+						AddMesh(tempVertices, tempTexcoord, tempNormals, tempIndecies);
 
 						if (res == EOF)
 							break;
@@ -96,7 +95,7 @@ namespace BF
 				{
 					if (strcmp(lineHeader, "v") == 0 && readFace && !containsGroups)
 					{
-						AddMesh(tempVertices, tempTexcoord, tempNormals, tempIndecies, materialName);
+						AddMesh(tempVertices, tempTexcoord, tempNormals, tempIndecies);
 						readFace = false;
 					}
 
@@ -118,7 +117,9 @@ namespace BF
 				}
 				else if (strcmp(lineHeader, "usemtl") == 0)
 				{
+					char materialName[512];
 					fscanf(file, "%s", materialName);
+					meshMaterialNames.push_back(materialName);
 				}
 				else if (strcmp(lineHeader, "f") == 0)
 				{
@@ -177,10 +178,44 @@ namespace BF
 
 					for (int i = 0; i < 3; i++)
 					{
+						bool found = false;
+
 						if (hasTextureCoords)
-							tempIndecies.push_back(Index(vertexIndex[i] - 1, texcoordIndex[i] - 1, normalIndex[i] - 1));
+						{
+							for (size_t j = 0; j < tempIndecies.size(); j++)
+							{
+								if (tempIndecies[j].positionIndex == vertexIndex[i] - totalVertices - 1 &&
+									tempIndecies[j].texcoordIndex == texcoordIndex[i] - totalTexCoord - 1 &&
+									tempIndecies[j].normalIndex == normalIndex[i] - totalNormals - 1)
+								{
+									tempIndecies.push_back(Index(-10, -10, -10, tempIndecies[j].index));
+									found = true;
+									break;
+								}
+							}
+
+							if (!found)
+								tempIndecies.push_back(Index(vertexIndex[i] - totalVertices - 1, texcoordIndex[i] - totalTexCoord - 1, normalIndex[i] - totalNormals - 1, index));
+						}
 						else
-							tempIndecies.push_back(Index(vertexIndex[i] - 1, 0, normalIndex[i] - 1));
+						{
+							for (size_t j = 0; j < tempIndecies.size(); j++)
+							{
+								if (tempIndecies[j].positionIndex == vertexIndex[i] - totalVertices - 1 &&
+									tempIndecies[j].normalIndex == normalIndex[i] - totalNormals - 1)
+								{
+									tempIndecies.push_back(Index(-10, -10, -10, tempIndecies[j].index));
+									found = true;
+									break;
+								}
+							}
+
+							if (!found)
+								tempIndecies.push_back(Index(vertexIndex[i] - totalVertices - 1, 0, normalIndex[i] - totalNormals - 1, index));
+						}
+
+						if (!found)
+							index++;
 					}
 
 					readFace = true;
@@ -200,64 +235,75 @@ namespace BF
 				return;
 			}
 
-			char textureFileName[255];
-			int meshIndex = 0;
+			bool temp = false;
 
 			while (true)
 			{
-				char lineHeader[255];
+				char lineHeader[512];
+				string textureFileName;
 				int res = fscanf(file, "%s", lineHeader);
 
 				if (res == EOF)
 					break;
 
-				if (strcmp(lineHeader, "map_Kd") == 0)
+				if (strcmp(lineHeader, "newmtl") == 0)
 				{
-					fscanf(file, "%s", textureFileName);
-					meshes[0][meshIndex].textureFileName = filePath + textureFileName;
-					meshIndex++;
+					res = fscanf(file, "%s", lineHeader);
+
+					if (res == EOF)
+						break;
+
+					for (size_t i = 0; i < meshMaterialNames.size(); i++)
+					{
+						if (strcmp(lineHeader, meshMaterialNames[i].c_str()) == 0)
+						{
+							while (true)
+							{
+								res = fscanf(file, "%s", lineHeader);
+								if (res == EOF || strcmp(lineHeader, "newmtl") == 0)
+									break;
+
+								if (strcmp(lineHeader, "map_Kd") == 0)
+								{
+									char c;
+									c = fgetc(file);
+									while ((c = fgetc(file)) != EOF && c != '\n')
+										textureFileName += c;
+
+									meshes[0][i].SetTextureFileName(filePath + textureFileName);
+									temp = true;
+									break;
+								}
+							}
+							break;
+						}
+					}
 				}
+
+				if (temp)
+					break;
 			}
 
 			fclose(file);
 		}
 
-		void OBJReader::AddMesh(vector<Vector3>& tempVertices, vector<Vector2>& tempTexcoord, vector<Vector3>& tempNormals, vector<Index>& tempIndecies, std::string textureFileName)
+		void OBJReader::AddMesh(vector<Vector3>& tempVertices, vector<Vector2>& tempTexcoord, vector<Vector3>& tempNormals, vector<Index>& tempIndecies)
 		{
-			int index = 0;
-
 			for (size_t i = 0; i < tempIndecies.size(); i++)
 			{
-				/*for (int j = i; j < tempIndecies.size(); j++)
+				if (tempIndecies[i].positionIndex != -10 && tempIndecies[i].texcoordIndex != -10 && tempIndecies[i].normalIndex != -10)
 				{
-					if (i != j)
-					{
-						if (tempIndecies[i].positionIndex == tempIndecies[j].positionIndex &&
-							tempIndecies[i].texcoordIndex == tempIndecies[j].texcoordIndex &&
-							tempIndecies[i].normalIndex == tempIndecies[j].normalIndex)
-						{
-							tempIndecies[j].index = i;
-						}
-					}
-				}*/
-
-				if (tempIndecies[i].index == -1)
-				{
-					tempIndecies[i].index = index;
-
 					if (tempTexcoord.size() <= 0)
-						vertices->push_back(MeshVertexData(tempVertices[tempIndecies[i].positionIndex - totalVertices], Vector2(0), tempNormals[tempIndecies[i].normalIndex - totalNormals]));
+						vertices->push_back(MeshVertexData(tempVertices[tempIndecies[i].positionIndex], Vector2(0), tempNormals[tempIndecies[i].normalIndex]));
 					else
-						vertices->push_back(MeshVertexData(tempVertices[tempIndecies[i].positionIndex - totalVertices], tempTexcoord[tempIndecies[i].texcoordIndex - totalTexCoord], tempNormals[tempIndecies[i].normalIndex - totalNormals]));
-
-					index++;
+						vertices->push_back(MeshVertexData(tempVertices[tempIndecies[i].positionIndex], tempTexcoord[tempIndecies[i].texcoordIndex], tempNormals[tempIndecies[i].normalIndex]));
 				}
 			}
 
 			for (size_t i = 0; i < tempIndecies.size(); i++)
 				indices->push_back(tempIndecies[i].index);
 
-			meshes->push_back(Mesh(vertices, indices, textureFileName));
+			meshes->push_back(Mesh(vertices, indices));
 
 			totalVertices += (unsigned int)tempVertices.size();
 			totalTexCoord += (unsigned int)tempTexcoord.size();
@@ -269,6 +315,7 @@ namespace BF
 			tempTexcoord.clear();
 			tempNormals.clear();
 			tempIndecies.clear();
+			index = 0;
 		}
 	}
 }

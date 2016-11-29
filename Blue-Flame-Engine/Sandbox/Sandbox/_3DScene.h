@@ -24,7 +24,7 @@ namespace _3DScene
 			BF::Graphics::API::ConstentBuffer* constentBuffer;
 
 			BF::Graphics::Model* model;
-			//BF::Graphics::FPSCamera* fpsCamera;
+			BF::Graphics::FPSCamera* fpsCamera;
 			BF::System::Timer* timer;
 
 			float angle = 0;

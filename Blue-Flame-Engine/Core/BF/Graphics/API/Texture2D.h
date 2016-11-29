@@ -8,8 +8,8 @@
 
 #include "Context.h"
 #include "Shader.h"
+#include "Texture.h"
 #include "BF/IO/ImageLoader.h"
-
 
 namespace BF
 {
@@ -17,11 +17,11 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API Texture2D
+			class BF_API Texture2D : public Texture
 			{
 				private:
-					Shader* shader;
-					Context* context;
+					const Shader* shader;
+					const Context* context;
 
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXTexture2D* dxTexture2D;
@@ -29,21 +29,19 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 					Platform::API::OpenGL::GLTexture2D* glTexture2D;
 #endif
-					uint8_t* data;
-					unsigned int width, height;
-
 				public:
-					Texture2D(Context* context, Shader* shader);
+					Texture2D(const Context* context, const Shader* shader);
 					~Texture2D();
 
-					void Load(const char* fileName);
-					void Bind() const;
-					void Bind(const char* samplerName, unsigned int index) const;
-					void Unbind() const;
+					void Load(const std::string& fileName);
+					void Load(const std::string& fileName, TextureWrap textureWrap, TextureFilter textureFilter);
+					void Create(unsigned int width, unsigned int height, Format format, const uint8_t* data);
+					void Create(unsigned int width, unsigned int height, Format format, const uint8_t* data, TextureWrap textureWrap, TextureFilter textureFilter);
 
-					inline const uint8_t* GetData() const { return data; }
-					inline const unsigned int& GetWidth() const { return width; }
-					inline const unsigned int& GetHeight() const { return height; }
+					void Bind() const;
+					void Bind(const std::string& samplerName, unsigned int index) const;
+					void Unbind() const;
+					void Unbind(const std::string& samplerName, unsigned int index) const;
 			};
 		}
 	}

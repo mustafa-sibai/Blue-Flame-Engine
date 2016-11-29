@@ -17,7 +17,7 @@ namespace BF
 			class BF_API IndexBuffer
 			{
 				private:
-					Context* context;
+					const Context* context;
 
 #ifdef BF_PLATFORM_WINDOWS
 				Platform::API::DirectX::DXIndexBuffer* dxIndexBuffer;
@@ -26,7 +26,7 @@ namespace BF
 				Platform::API::OpenGL::GLIndexBuffer* glIndexBuffer;
 #endif	
 				public:
-					IndexBuffer(Context* context);
+					IndexBuffer(const Context* context);
 					~IndexBuffer();
 
 					void Create(const unsigned int* const indices, unsigned int count);

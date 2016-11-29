@@ -13,7 +13,7 @@ namespace BF
 				class BF_API DXShader
 				{
 					private:
-						DXContext* context;
+						const DXContext* context;
 
 						ID3D11VertexShader* VS;
 						ID3D11PixelShader* PS;
@@ -24,15 +24,15 @@ namespace BF
 						size_t VSsize, PSsize;
 
 					public:
-						DXShader(DXContext* context);
+						DXShader(const DXContext* context);
 						~DXShader();
 					
-						void Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath);
-						void Bind();
-						void CleanUp();
+						void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
+						void Bind() const;
+						void CleanUp() const;
 
 						inline const char* GetVSData() const { return VSData; }
-						inline const size_t& GetVSsize() const { return VSsize; }
+						inline const size_t GetVSsize() const { return VSsize; }
 				};
 			}
 		}

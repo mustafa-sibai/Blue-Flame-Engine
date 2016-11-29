@@ -4,13 +4,13 @@
 #elif BF_PLATFORM_WEBGL
 	#include <GLES3/gl3.h>
 #endif
+
 #include "GLShader.h"
+#include "BF/Graphics/API/Texture.h"
 #include "BF/Common.h"
 
 namespace BF
 {
-	namespace Graphics { namespace API { class Texture2D; } }
-
 	namespace Platform
 	{
 		namespace API
@@ -21,17 +21,22 @@ namespace BF
 				{
 					private:
 						GLShader* glshader;
-						Graphics::API::Texture2D* texture2D;
 						GLuint textureID;
 
 					public:
-						GLTexture2D(GLShader* glshader, Graphics::API::Texture2D* texture2D);
+						GLTexture2D(GLShader* glshader);
 						~GLTexture2D();
 
-						void Create();
+						void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, const uint8_t* data, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
 						void Bind() const;
-						void Bind(const char* samplerName, unsigned int index) const;
+						void Bind(const std::string& samplerName, unsigned int index) const;
 						void Unbind() const;
+						void Unbind(const std::string& samplerName, unsigned int index) const;
+
+					private:
+						int GetGLTextureFormat(Graphics::API::Texture::Format format) const;
+						int GetGLTextureWrap(Graphics::API::Texture::TextureWrap textureWrap) const;
+						int GetGLTextureFilter(Graphics::API::Texture::TextureFilter textureFilter) const;
 				};
 			}
 		}

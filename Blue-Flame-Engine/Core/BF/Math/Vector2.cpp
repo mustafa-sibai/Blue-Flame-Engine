@@ -9,12 +9,12 @@ namespace BF
 		{
 		}
 
-		Vector2::Vector2(const float& value) :
+		Vector2::Vector2(float value) :
 			x(value), y(value)
 		{
 		}
 
-		Vector2::Vector2(const float& x, const float& y) :
+		Vector2::Vector2(float x, float y) :
 			x(x), y(y)
 		{
 		}

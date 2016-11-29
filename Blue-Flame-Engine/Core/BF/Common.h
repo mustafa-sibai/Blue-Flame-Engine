@@ -4,7 +4,7 @@
 #endif
 
 #if !defined (BF_PLATFORM_WINDOWS) && !defined (BF_PLATFORM_LINUX) && !defined (BF_PLATFORM_WEBGL)
-	#error define BF_PLATFORM_WINDOWS or BF_PLATFORM_LINUX or BF_PLATFORM_WEBGL
+	#error Platform is not defined. Please define one of the following platforms. BF_PLATFORM_WINDOWS or BF_PLATFORM_LINUX or BF_PLATFORM_WEBGL
 #endif
 
 #ifdef BF_PLATFORM_WINDOWS

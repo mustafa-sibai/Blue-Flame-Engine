@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace IO
 	{
-		std::string FileLoader::LoadTextFile(const char* fileName)
+		std::string FileLoader::LoadTextFile(const std::string& fileName)
 		{
 			std::ifstream file(fileName, std::ios::in);
 			std::string data = "", line = "";
@@ -20,7 +20,7 @@ namespace BF
 			return data;
 		}
 
-		char* FileLoader::LoadBinaryFile(const char* fileName, size_t* size)
+		char* FileLoader::LoadBinaryFile(const std::string& fileName, size_t* size)
 		{
 			std::ifstream stream;
 			char* data;

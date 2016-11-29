@@ -23,13 +23,13 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 					Platform::API::OpenGL::GLShader* glShader;
 #endif
-					Context* context;
+					const Context* context;
 
 				public:
-					Shader(Context* context);
+					Shader(const Context* context);
 					~Shader();
 
-					void Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath);
+					void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
 					void CleanUp();
 
 					void Bind() const;

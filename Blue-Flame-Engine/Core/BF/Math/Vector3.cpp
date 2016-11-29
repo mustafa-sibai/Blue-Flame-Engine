@@ -9,12 +9,12 @@ namespace BF
 		{
 		}
 
-		Vector3::Vector3(const float& value) :
+		Vector3::Vector3(float value) :
 			x(value), y(value), z(value)
 		{
 		}
 
-		Vector3::Vector3(const float& x, const float& y, const float& z) :
+		Vector3::Vector3(float x, float y, float z) :
 			x(x), y(y), z(z)
 		{
 		}

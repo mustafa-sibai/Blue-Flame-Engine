@@ -18,7 +18,7 @@ namespace BF
 			class BF_API VertexBuffer
 			{
 				private:
-					Context* context;
+					const Context* context;
 
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXVertexBuffer* dxVertexBuffer;
@@ -27,7 +27,7 @@ namespace BF
 					Platform::API::OpenGL::GLVertexBuffer* glVertexBuffer;
 #endif	
 				public:
-					VertexBuffer(Context* context, Shader* shader);
+					VertexBuffer(const Context* context, const Shader* shader);
 					~VertexBuffer();
 
 					void Create(void* data, unsigned int size);

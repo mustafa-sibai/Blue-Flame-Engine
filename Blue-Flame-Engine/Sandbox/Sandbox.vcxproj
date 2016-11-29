@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,26 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -71,25 +71,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -140,6 +140,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -164,6 +166,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -10,7 +10,7 @@ namespace BF
 		{
 			protected:
 				Math::Matrix4 projectionMatrix, viewMatrix;
-				Math::Vector3 position, rotation;
+				Math::Vector3 position, direction;
 
 			public:
 				Camera(const Math::Matrix4& projectionMatrix);

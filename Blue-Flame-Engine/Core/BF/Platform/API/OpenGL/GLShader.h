@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "BF/IO/FileLoader.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -24,13 +25,13 @@ namespace BF
 						int errorLength;
 
 					private:
-						GLuint CompileShader(std::string shaderCode, GLenum shaderType);
+						GLuint CompileShader(const std::string& shaderCode, GLenum shaderType);
 
 					public:
 						GLShader();
 						~GLShader();
 
-						void Load(const char* vertexShaderFilePath, const char* fragmentShaderFilePath);
+						void Load(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
 
 						void Bind() const;
 						void Unbind() const;

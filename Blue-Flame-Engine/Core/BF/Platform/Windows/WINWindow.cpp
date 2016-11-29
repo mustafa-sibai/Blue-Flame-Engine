@@ -40,7 +40,7 @@ namespace BF
 					currentWindowStyle = WS_POPUP;
 
 				wchar_t wchTitle[256];
-				MultiByteToWideChar(CP_ACP, 0, window->title, -1, wchTitle, 256);
+				MultiByteToWideChar(CP_ACP, 0, window->title.c_str(), -1, wchTitle, 256);
 
 				hWnd = CreateWindowEx(0,
 					L"Blue Flame Engine Window Class",
@@ -83,10 +83,10 @@ namespace BF
 					return true;
 			}
 
-			void WINWindow::SetWindowTitle(const char* title)
+			void WINWindow::SetWindowTitle(const std::string& title)
 			{
 				wchar_t wchTitle[256];
-				MultiByteToWideChar(CP_ACP, 0, title, -1, wchTitle, 256);
+				MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wchTitle, 256);
 
 				SetWindowText(hWnd, wchTitle);
 			}

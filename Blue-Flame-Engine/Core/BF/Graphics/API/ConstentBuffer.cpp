@@ -6,7 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			ConstentBuffer::ConstentBuffer(Context* context, Shader* shader) :
+			ConstentBuffer::ConstentBuffer(const Context* context, const Shader* shader) :
 				context(context), shader(shader)
 			{
 #ifdef BF_PLATFORM_WINDOWS

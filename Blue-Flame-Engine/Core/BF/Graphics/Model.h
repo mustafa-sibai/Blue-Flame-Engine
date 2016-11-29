@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Mesh.h"
-#include "BF/IO/OBJLoader.h"
+//#include "BF/IO/FBXLoader.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -15,13 +15,13 @@ namespace BF
 				API::Shader* shader;
 				API::VertexBufferLayout* vertexBufferLayout;
 				std::vector<Mesh>* meshes;
-				IO::OBJReader* objReader;
+				//IO::FBXLoader fbxLoader;
 
 			public:
 				Model(API::Context* context, API::Shader* shader);
 				~Model();
 
-				void Load(const char* fileName);
+				void Load(const std::string& filename);
 				void Draw();
 		};
 	}

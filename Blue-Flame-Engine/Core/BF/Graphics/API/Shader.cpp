@@ -6,7 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			Shader::Shader(Context* context) :
+			Shader::Shader(const Context* context) :
 				context(context)
 			{
 #ifdef BF_PLATFORM_WINDOWS
@@ -23,7 +23,7 @@ namespace BF
 			{
 			}
 
-			void Shader::Load(const char* vertexShaderFilePath, const char* pixelShaderFilePath)
+			void Shader::Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)

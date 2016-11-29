@@ -25,7 +25,7 @@ namespace BF
 				Sound();
 				~Sound();
 
-				void Load(const char* filename);
+				void Load(const std::string& filename);
 				void Play(bool loop);
 
 			private:

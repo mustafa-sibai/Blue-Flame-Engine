@@ -118,29 +118,29 @@ namespace BF
 			return orthographicMatrix;
 		}
 
-		Matrix4 Matrix4::LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &up)
+		Matrix4 Matrix4::LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &upVector)
 		{
 			Matrix4 viewMatrix = Matrix4::Identity();
 
-			Vector3 zAxis = (target - eye).Normalize();
-			Vector3 xAxis = zAxis.Cross(up).Normalize();
-			Vector3 yAxis = xAxis.Cross(zAxis);
-			
-			viewMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = xAxis.x;
-			viewMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = xAxis.y;
-			viewMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = xAxis.z;
+			Vector3 forward = (target - eye).Normalize();
+			Vector3 right = forward.Cross(upVector.Normalize());
+			Vector3 up = right.Cross(forward);
 
-			viewMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = yAxis.x;
-			viewMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = yAxis.y;
-			viewMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = yAxis.z;
+			viewMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = right.x;
+			viewMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = right.y;
+			viewMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = right.z;
 
-			viewMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = zAxis.x;
-			viewMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = zAxis.y;
-			viewMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = zAxis.z;
+			viewMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = up.x;
+			viewMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = up.y;
+			viewMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = up.z;
 
-			viewMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = xAxis.Dot(eye);
-			viewMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = yAxis.Dot(eye);
-			viewMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = zAxis.Dot(eye);
+			viewMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = forward.x;
+			viewMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = forward.y;
+			viewMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = forward.z;
+
+			viewMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = -right.Dot(eye);
+			viewMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = -up.Dot(eye);
+			viewMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = -forward.Dot(eye);
 
 			return viewMatrix;
 		}
