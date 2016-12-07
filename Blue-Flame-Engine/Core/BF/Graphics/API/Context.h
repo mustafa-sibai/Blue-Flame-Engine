@@ -22,9 +22,9 @@ namespace BF
 			enum class BF_API RenderAPI
 			{
 #ifdef BF_PLATFORM_WINDOWS
-				none, OpenGL, DirectX
+				DirectX, OpenGL
 #elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-				none, OpenGL
+				OpenGL
 #endif	
 			};
 
@@ -46,11 +46,11 @@ namespace BF
 					Context(const Application::Window* window, RenderAPI renderAPI);
 					~Context();
 
-					void SetPrimitiveType(PrimitiveType primitiveType);
-					void Clear(Math::Vector4 Color);
-					void Draw(unsigned int vertexCount);
-					void SwapBuffers();
-					void EnableDepthBuffer(bool state);
+					void SetPrimitiveType(PrimitiveType primitiveType) const;
+					void Clear(Math::Vector4 Color) const;
+					void Draw(unsigned int vertexCount) const;
+					void SwapBuffers() const;
+					void EnableDepthBuffer(bool state) const;
 
 #ifdef BF_PLATFORM_WINDOWS
 					inline Platform::API::DirectX::DXContext* GetDXContext() const { return dxContext; }

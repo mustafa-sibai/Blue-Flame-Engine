@@ -41,6 +41,7 @@
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
+    <ClCompile Include="BF\IO\BFXLoader.cpp" />
     <ClCompile Include="BF\IO\FileLoader.cpp" />
     <ClCompile Include="BF\IO\ImageLoader.cpp" />
     <ClCompile Include="BF\IO\WAVLoader.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
+    <ClInclude Include="BF\IO\BFXLoader.h" />
     <ClInclude Include="BF\IO\FileLoader.h" />
     <ClInclude Include="BF\IO\ImageLoader.h" />
     <ClInclude Include="BF\IO\WAVLoader.h" />
@@ -113,6 +115,7 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLTexture2D.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
+    <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\System\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

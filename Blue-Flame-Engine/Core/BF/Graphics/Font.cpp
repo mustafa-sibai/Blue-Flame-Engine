@@ -9,7 +9,7 @@ namespace BF
 		{
 			texture = new API::Texture2D(context, shader);
 			textureAtlas = new TextureAtlas();
-			textureAtlas->Create(512, 512, API::Texture::Format::R8);
+			
 
 			error = FT_Init_FreeType(&library);
 			if (error != FT_Err_Ok)
@@ -33,11 +33,29 @@ namespace BF
 			else
 				std::cout << "OK !!" << std::endl;
 
-			PrepareGlyph(0x00000041);
-			textureAtlas->AddTexture(Math::Rectangle(0, 0, face->glyph->bitmap.width, face->glyph->bitmap.rows), face->glyph->bitmap.buffer);
 
-			PrepareGlyph(0x00000042);
-			textureAtlas->AddTexture(Math::Rectangle(100, 100, face->glyph->bitmap.width, face->glyph->bitmap.rows), face->glyph->bitmap.buffer);
+			int smallestUnicode = 0x00000020;
+			int biggestUnicode = 0x0000007E;
+
+			int rowsAndColumnsSize = ceil(sqrt(biggestUnicode - smallestUnicode));
+			int altalSize = 48 * rowsAndColumnsSize;
+
+			textureAtlas->Create(altalSize, altalSize, API::Texture::Format::R8);
+
+
+			for (unsigned int y = 0; y < rowsAndColumnsSize; y++)
+			{
+				for (unsigned int x = 0; x < rowsAndColumnsSize; x++)
+				{
+					int unicode = smallestUnicode + (x + y * rowsAndColumnsSize);
+
+					if (unicode <= biggestUnicode)
+					{
+						PrepareGlyph(unicode);
+						textureAtlas->AddTexture(Math::Rectangle(x * 48, y * 48, face->glyph->bitmap.width, face->glyph->bitmap.rows), face->glyph->bitmap.buffer);
+					}
+				}
+			}
 
 			texture->Create(textureAtlas->GetWidth(), textureAtlas->GetHeight(), BF::Graphics::API::Texture2D::Format::R8, textureAtlas->GetBuffer());
 		}

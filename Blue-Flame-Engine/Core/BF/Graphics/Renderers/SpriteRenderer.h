@@ -13,10 +13,10 @@ namespace BF
 			class BF_API SpriteRenderer
 			{
 				public:
-					enum class SubmitType { None = 0, StaticSubmit, DynamicSubmit };
+					enum class SubmitType { StaticSubmit, DynamicSubmit };
 
 				private:
-					API::Context* context;
+					const API::Context* context;
 					const API::Shader* shader;
 					API::VertexBuffer* vertexBuffer;
 					API::IndexBuffer* indexBuffer;
@@ -26,22 +26,21 @@ namespace BF
 					unsigned int indexCount;
 
 					SubmitType submitType;
-					bool firstSubmission;
+					bool submitSprite;
 
-					std::vector<API::Texture2D*> textures;
+					std::vector<const API::Texture2D*> textures;
 
 				public:
-					SpriteRenderer(API::Context* context, const API::Shader* shader);
+					SpriteRenderer(const API::Context* context, const API::Shader* shader);
 					~SpriteRenderer();
 
 					void Begin(SubmitType submitType);
-					void Submit(Sprite* sprite);
+					void Submit(const Sprite* sprite);
 					void End();
-					void Draw();
 
 				private:
 					void CalculateUV(const Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
-					float FindTexture(API::Texture2D* texture);
+					float FindTexture(const API::Texture2D* texture);
 			};
 		}
 	}

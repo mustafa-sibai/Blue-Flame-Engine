@@ -33,8 +33,8 @@ namespace BF
 
 			if (!file)
 			{
+				printf("Error: Could not find/open WAV file in filename: %s\n", filename.c_str());
 				fclose(file);
-				printf("Error: Could not find/open WAV file.\n");
 				return nullptr;
 			}
 
@@ -43,8 +43,8 @@ namespace BF
 			fread(wavHeader.RIFFChunkID, sizeof(char), 4, file);
 			if (strcmp(wavHeader.RIFFChunkID, "RIFF"))
 			{
+				printf("Error: Could not read RIFF chunk in filename: %s\n", filename.c_str());
 				fclose(file);
-				printf("Error: Could not read RIFF chunk.\n");
 				return nullptr;
 			}
 
@@ -53,16 +53,16 @@ namespace BF
 			fread(wavHeader.format, sizeof(char), 4, file);
 			if (strcmp(wavHeader.format, "WAVE"))
 			{
+				printf("Error: Could not read WAVE format in RIFF chunk in filename: %s\n", filename.c_str());
 				fclose(file);
-				printf("Error: Could not read WAVE format in RIFF chunk.\n");
 				return nullptr;
 			}
 
 			fread(wavHeader.FMTSubChunkID, sizeof(char), 4, file);
 			if (strcmp(wavHeader.FMTSubChunkID, "fmt "))
 			{
+				printf("Error: Could not read fmt chunk in filename: %s\n", filename.c_str());
 				fclose(file);
-				printf("Error: Could not read fmt chunk.\n");
 				return nullptr;
 			}
 
@@ -71,8 +71,8 @@ namespace BF
 
 			if (wavHeader.audioFormat != 1 && wavHeader.audioFormat != 3)
 			{
+				printf("Error: Audio is not PCM or IEEE float. Cannot read compressed audio format in filename: %s\n", filename.c_str());
 				fclose(file);
-				printf("Error: Audio is not PCM or IEEE float. Cannot read compressed audio format.\n");
 				return nullptr;
 			}
 
@@ -97,8 +97,8 @@ namespace BF
 
 					if (result == 0)
 					{
+						printf("Error: Could not find data chunk in filename: %s\n", filename.c_str());
 						fclose(file);
-						printf("Error: Could not find data chunk.\n");
 						return nullptr;
 					}
 				}

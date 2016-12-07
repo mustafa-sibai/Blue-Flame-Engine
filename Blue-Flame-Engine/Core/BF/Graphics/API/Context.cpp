@@ -6,8 +6,11 @@ namespace BF
 	{
 		namespace API
 		{
-			RenderAPI Context::renderAPI = RenderAPI::none;
-
+#ifdef BF_PLATFORM_WINDOWS
+			RenderAPI Context::renderAPI = RenderAPI::DirectX;
+#elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+			RenderAPI Context::renderAPI = RenderAPI::OpenGL;
+#endif
 			Context::Context(const Application::Window* window, RenderAPI renderAPI) :
 				window(window)
 			{
@@ -31,19 +34,19 @@ namespace BF
 			{
 			}
 
-			void Context::SetPrimitiveType(PrimitiveType primitiveType)
+			void Context::SetPrimitiveType(PrimitiveType primitiveType) const
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
 					dxContext->SetPrimitiveType(primitiveType);
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext->SetPrimitiveType(primitiveType);
 #endif
 			}
 
-			void Context::Clear(Math::Vector4 color)
+			void Context::Clear(Math::Vector4 color) const
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
@@ -59,7 +62,7 @@ namespace BF
 #endif
 			}
 
-			void Context::Draw(unsigned int vertexCount)
+			void Context::Draw(unsigned int vertexCount) const
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
@@ -75,7 +78,7 @@ namespace BF
 #endif
 			}
 
-			void Context::SwapBuffers()
+			void Context::SwapBuffers() const
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
@@ -91,14 +94,14 @@ namespace BF
 #endif
 			}
 
-			void Context::EnableDepthBuffer(bool state)
+			void Context::EnableDepthBuffer(bool state) const
 			{
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
 					dxContext->EnableDepthBuffer(state);
 #endif
-#if defined BF_PLATFORM_WINDOWS || defined BF_PLATFORM_LINUX || defined BF_PLATFORM_WEBGL
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext->EnableDepthBuffer(state);
 #endif

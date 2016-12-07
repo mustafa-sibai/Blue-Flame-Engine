@@ -23,6 +23,4 @@
 #include <BF/Math/Math.h>
 
 #include <BF/System/Timer.h>
-
-
-//#include <BF/IO/FBXLoader.h>
+#include <BF/System/Log.h>

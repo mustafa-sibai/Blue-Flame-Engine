@@ -12,6 +12,7 @@ namespace BF
 
 			Rectangle();
 			Rectangle(int x, int y, int width, int height);
+			bool Intersect(const Rectangle& rectangle);
 
 			friend Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle);
 			friend Rectangle operator-(const Rectangle& leftRectangle, const Rectangle& rightRectangle);

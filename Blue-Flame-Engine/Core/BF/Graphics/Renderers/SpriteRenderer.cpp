@@ -6,12 +6,20 @@ namespace BF
 	{
 		namespace Renderers
 		{
+
+#define MAX_SPRITES		60000
+#define SPRITE_VERTICES 4
+#define	SPRITE_INDICES	6
+#define VERTICES_SIZE	MAX_SPRITES * SPRITE_VERTICES
+#define INDICES_SIZE	MAX_SPRITES * SPRITE_INDICES
+#define MAX_TEXTURES	32 - 1
+			
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers;
 			using namespace BF::Math;
 
-			SpriteRenderer::SpriteRenderer(Context* context, const Shader* shader) :
-				context(context), shader(shader), indexCount(0), firstSubmission(true)
+			SpriteRenderer::SpriteRenderer(const Context* context, const Shader* shader) :
+				context(context), shader(shader), indexCount(0), submitSprite(true)
 			{
 				vertexBuffer = new VertexBuffer(context, shader);
 				indexBuffer = new IndexBuffer(context);
@@ -24,19 +32,13 @@ namespace BF
 
 				shader->Bind();
 
-				const int numberOfObjects = 50000;
-
-				vertexBuffer->Create(nullptr, (4 * numberOfObjects) * sizeof(SpriteBuffer));
+				vertexBuffer->Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
 				vertexBuffer->SetLayout(vertexBufferLayout);
 
-				unsigned int* indecies = new unsigned int[(6 * numberOfObjects)];
-
-				for (size_t i = 0; i < (6 * numberOfObjects); i++)
-					indecies[i] = 0;
-
+				unsigned int* indecies = new unsigned int[INDICES_SIZE];
 				int index = 0;
 
-				for (size_t i = 0; i < (6 * numberOfObjects); i += 6)
+				for (unsigned int i = 0; i < INDICES_SIZE; i += SPRITE_INDICES)
 				{
 					indecies[i + 0] = index + 0;
 					indecies[i + 1] = index + 1;
@@ -46,10 +48,10 @@ namespace BF
 					indecies[i + 4] = index + 3;
 					indecies[i + 5] = index + 0;
 
-					index += 4;
+					index += SPRITE_VERTICES;
 				}
 
-				indexBuffer->Create(indecies, (6 * numberOfObjects));
+				indexBuffer->Create(indecies, INDICES_SIZE);
 
 				context->EnableDepthBuffer(false);
 			}
@@ -62,20 +64,27 @@ namespace BF
 			{
 				this->submitType = submitType;
 
-				if (firstSubmission)
+				if (submitSprite)
 					spriteBuffer = (SpriteBuffer*)vertexBuffer->Map();
 			}
 
-			void SpriteRenderer::Submit(Sprite* sprite)
+			void SpriteRenderer::Submit(const Sprite* sprite)
 			{
-				if (firstSubmission)
+				if (submitSprite)
 				{
 					float textureID = FindTexture(sprite->texture2D);
 
-					if(textureID == 0.0f)
-						sprite->texture2D->Bind("textures[0]", textureID);
-					else if (textureID == 1.0f)
-						sprite->texture2D->Bind("textures[1]", textureID);
+					if ((int)textureID > MAX_TEXTURES)
+					{
+						if (submitType == SubmitType::StaticSubmit)
+							return;
+
+						End();
+						Begin(submitType);
+						textureID = FindTexture(sprite->texture2D);
+					}
+
+					sprite->texture2D->Bind("textures[" + std::to_string((int)textureID) + std::string("]"), textureID);
 
 					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 					CalculateUV(sprite, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
@@ -108,28 +117,27 @@ namespace BF
 					spriteBuffer->textureID = textureID;
 					spriteBuffer++;
 
-					indexCount += 6;
+					indexCount += SPRITE_INDICES;
 				}
 			}
 
 			void SpriteRenderer::End()
 			{
-				if (firstSubmission)
+				if (submitSprite)
 					vertexBuffer->Unmap();
 
-				if (submitType == SubmitType::StaticSubmit)
-					firstSubmission = false;
-			}
-
-			void SpriteRenderer::Draw()
-			{
 				vertexBuffer->Bind();
 				indexBuffer->Bind();
 				context->Draw(indexCount);
 				indexBuffer->Unbind();
 				vertexBuffer->Unbind();
 
-				if (firstSubmission)
+				if (submitType == SubmitType::StaticSubmit)
+				{
+					submitSprite = false;
+					textures.clear();
+				}
+				else if (submitType == SubmitType::DynamicSubmit)
 				{
 					for (unsigned int i = 0; i < textures.size(); i++)
 						textures[i]->Unbind();
@@ -139,7 +147,7 @@ namespace BF
 				}
 			}
 
-			void SpriteRenderer::CalculateUV(const Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft)
+			void SpriteRenderer::CalculateUV(const Sprite* sprite, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
 				*topLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
 									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));
@@ -154,7 +162,7 @@ namespace BF
 										1.0f / ((float)sprite->texture2D->GetHeight() / ((float)sprite->sourceRectangle.y + (float)sprite->sourceRectangle.height)));
 			}
 
-			float SpriteRenderer::FindTexture(API::Texture2D* texture)
+			float SpriteRenderer::FindTexture(const Texture2D* texture)
 			{
 				for (unsigned int i = 0; i < textures.size(); i++)
 				{

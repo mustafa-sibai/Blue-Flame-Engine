@@ -13,14 +13,14 @@ using namespace std;
 int main()
 {
 	BF::Application::Window window("Blue Flame Engine", 0, 0, 1920, 1080, BF::Application::WindowStyle::ResizableWindow);
-	//_3DScene::_3DScene _3dScene(&window);
-	_2DScene::_2DScene _2dScene(&window);
+	_3DScene::_3DScene _3dScene(&window);
+	//_2DScene::_2DScene _2dScene(&window);
 
 	while (window.IsOpen())
 	{
 		window.Update();
-		//_3dScene.Draw();
-		_2dScene.Draw();
+		_3dScene.Draw();
+		//_2dScene.Draw();
 	}
 
 	/*

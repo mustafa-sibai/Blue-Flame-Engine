@@ -16,6 +16,14 @@ namespace BF
 		{
 		}
 
+		bool Rectangle::Intersect(const Rectangle& rectangle)
+		{
+			if (y < rectangle.y + rectangle.height && y + height > rectangle.y && x + width > rectangle.x && x < rectangle.x + rectangle.width)
+				return true;
+
+			return false;
+		}
+
 		Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle)
 		{
 			return Rectangle(leftRectangle.x + rightRectangle.x, leftRectangle.y + rightRectangle.y, leftRectangle.width + rightRectangle.width, leftRectangle.height + rightRectangle.height);

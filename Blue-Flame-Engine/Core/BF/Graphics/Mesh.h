@@ -15,16 +15,16 @@ namespace BF
 		struct BF_API MeshVertexData
 		{
 			Math::Vector3 position;
-			Math::Vector4 color;
+			//Math::Vector4 color;
 			Math::Vector2 texcoord;
 			Math::Vector3 normal;
-			float textureID;
+			//float textureID;
 
 			MeshVertexData() :
 				position(0), texcoord(0), normal(0) { }
 
-			MeshVertexData(Math::Vector3 position, Math::Vector2 texcoord, Math::Vector3 normal, float textureID) :
-				position(position), color(Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f)), texcoord(texcoord), normal(normal), textureID(textureID)
+			MeshVertexData(Math::Vector3 position, Math::Vector2 texcoord, Math::Vector3 normal/*, float textureID*/) :
+				position(position), /*color(Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f)),*/ texcoord(texcoord), normal(normal)//, textureID(textureID)
 			{
 			}
 		};
@@ -34,9 +34,9 @@ namespace BF
 			private:
 				API::VertexBuffer* vertexBuffer;
 				API::IndexBuffer* indexBuffer;
-				std::vector<API::Texture2D*>* textures;
+				//std::vector<API::Texture2D*>* textures;
 				std::vector<MeshVertexData>* vertices;
-				std::vector<Material>* materials;
+				//std::vector<Material>* materials;
 				std::vector<unsigned int>* indices;
 				std::string textureFileName;
 
