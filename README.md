@@ -18,3 +18,7 @@ A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 <li>Math library that has Vector2, 3 and 4, 4x4 Matrix and Rectangle.</li>
 <li>Support for both Perspective and Orthographic projection</li>
 </ul>
+
+<br>
+This is the sponza scene running ony my game engine with basic diffuse lighting.
+![alt tag](http://i.imgur.com/7Tsvk0S.jpg)
