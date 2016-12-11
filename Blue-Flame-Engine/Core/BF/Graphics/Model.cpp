@@ -8,7 +8,7 @@ namespace BF
 		using namespace BF::Graphics::API;
 		using namespace BF::Math;
 
-		Model::Model(API::Context* context, API::Shader* shader) :
+		Model::Model(const Context* context, const Shader* shader) :
 			context(context), shader(shader), vertexBufferLayout(nullptr)
 		{
 			vertexBufferLayout = new VertexBufferLayout();

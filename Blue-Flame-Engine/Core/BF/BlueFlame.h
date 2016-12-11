@@ -15,6 +15,8 @@
 #include <BF/Graphics/API/IndexBuffer.h>
 #include <BF/Graphics/API/ConstentBuffer.h>
 
+#include <BF/Graphics/Font.h>
+
 #include <BF/Graphics/Renderers/SpriteRenderer.h>
 
 #include <BF/Input/Keyboard.h>
@@ -22,5 +24,6 @@
 
 #include <BF/Math/Math.h>
 
+#include <BF/System/Scene.h>
 #include <BF/System/Timer.h>
 #include <BF/System/Log.h>

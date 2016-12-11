@@ -1,7 +1,5 @@
 #pragma once
 #include <BF/BlueFlame.h>
-#include <BF/Graphics/Font.h>
-#include <vector>
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -15,30 +13,28 @@ namespace _2DScene
 		BF::Math::Matrix4 projectionMatrix;
 	};
 
-	class _2DScene
+	class _2DScene : public Scene
 	{
 		private:
-			BF::Application::Window* window;
-			BF::Graphics::API::Context* context;
 			BF::Graphics::API::Shader* shader;
-			InitBuffer initBuffer;
+
 			BF::Graphics::API::ConstentBuffer* constentBuffer;
-
 			BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
-			//std::vector<BF::Graphics::Renderers::Sprite*>* sprites;
-			BF::System::Timer* timer;
-
 			BF::Graphics::API::Texture2D* t;
 			BF::Graphics::API::Texture2D* t2;
-			int frames = 0;
-
 			BF::Graphics::Font* font;
+			InitBuffer initBuffer;
+			//std::vector<BF::Graphics::Renderers::Sprite*>* sprites;
 
 		public:
-			_2DScene(BF::Application::Window* window);
+			_2DScene();
 			~_2DScene();
 
-			void Draw();
-			void CleanUp();
+		private:
+			void Initialize() override;
+			void Load() override;
+			void Update() override;
+			void FixedUpdate() override;
+			void Render() override;
 	};
 }

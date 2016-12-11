@@ -9,13 +9,18 @@ namespace _2DScene
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	_2DScene::_2DScene(BF::Application::Window* window) :
-		window(window), context(nullptr), shader(nullptr), spriteRenderer(nullptr), constentBuffer(nullptr)
+	_2DScene::_2DScene() :
+		shader(nullptr), spriteRenderer(nullptr), constentBuffer(nullptr)
 	{
-		timer = new Timer();
-		context = new Context(window, RenderAPI::OpenGL);
-		shader = new Shader(context);
+	}
 
+	_2DScene::~_2DScene()
+	{
+	}
+
+	void _2DScene::Initialize()
+	{
+		shader = new Shader(context);
 		constentBuffer = new ConstentBuffer(context, shader);
 
 #if BF_PLATFORM_WINDOWS
@@ -29,8 +34,6 @@ namespace _2DScene
 		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader->Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
 #endif
-
-		//shader->Bind();
 
 		spriteRenderer = new SpriteRenderer(context, shader);
 
@@ -48,7 +51,7 @@ namespace _2DScene
 		//sprites = new std::vector<BF::Graphics::Renderers::Sprite*>();
 
 		//for (size_t y = 0; y < 160; y++)
-			//for (size_t x = 0; x < 300; x++)
+		//for (size_t x = 0; x < 300; x++)
 
 		//sprites->push_back(new Sprite(t, BF::Math::Vector3(500.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
 		//sprites->push_back(new Sprite(t2, BF::Math::Vector3(350.0f, 200.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f)));
@@ -64,14 +67,22 @@ namespace _2DScene
 		BF_FATAL("BF_FATAL %f", r);
 	}
 
-	_2DScene::~_2DScene()
+	void _2DScene::Load()
+	{
+		//BF_WARNING("Loaded");
+	}
+
+	void _2DScene::FixedUpdate()
+	{
+		//BF_WARNING("TICKS");
+	}
+
+	void _2DScene::Update()
 	{
 	}
 
-	void _2DScene::Draw()
+	void _2DScene::Render()
 	{
-		++frames;
-
 		context->Clear(Vector4(0.5, 0.0f, 0.0f, 1.0f));
 
 		constentBuffer->Update(&initBuffer, sizeof(initBuffer));
@@ -86,18 +97,5 @@ namespace _2DScene
 		spriteRenderer->End();
 
 		context->SwapBuffers();
-
-		if (timer->GetElapsedTimeInSeconds() >= 1.0f)
-		{
-			std::cout << frames << std::endl;
-			timer->Reset();
-			frames = 0;
-		}
-	}
-
-	void _2DScene::CleanUp()
-	{
-		shader->CleanUp();
-		//context->CleanUp();
 	}
 }

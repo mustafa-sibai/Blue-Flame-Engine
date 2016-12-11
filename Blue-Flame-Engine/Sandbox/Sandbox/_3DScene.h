@@ -1,6 +1,5 @@
 #pragma once
 #include <BF/BlueFlame.h>
-#include <vector>
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -14,27 +13,26 @@ namespace _3DScene
 		BF::Math::Matrix4 projectionMatrix;
 	};
 
-	class _3DScene
+	class _3DScene : public Scene
 	{
 		private:
-			BF::Application::Window* window;
-			BF::Graphics::API::Context* context;
 			BF::Graphics::API::Shader* shader;
-			InitBuffer initBuffer;
 			BF::Graphics::API::ConstentBuffer* constentBuffer;
-
 			BF::Graphics::Model* model;
 			BF::Graphics::FPSCamera* fpsCamera;
-			BF::System::Timer* timer;
 
+			InitBuffer initBuffer;
 			float angle = 0;
-			int frames = 0;
 
 		public:
-			_3DScene(BF::Application::Window* window);
+			_3DScene();
 			~_3DScene();
 
-			void Draw();
-			void CleanUp();
+		private:
+			void Initialize() override;
+			void Load() override;
+			void Update() override;
+			void FixedUpdate() override;
+			void Render() override;
 	};
 }

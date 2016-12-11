@@ -22,6 +22,7 @@
     <ClCompile Include="BF\Application\Window.cpp" />
     <ClCompile Include="BF\Audio\Sound.cpp" />
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
+    <ClCompile Include="BF\Engine.cpp" />
     <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
@@ -64,6 +65,7 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLTexture2D.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
+    <ClCompile Include="BF\System\SceneManager.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +75,7 @@
     <ClInclude Include="BF\Audio\SoundManager.h" />
     <ClInclude Include="BF\BlueFlame.h" />
     <ClInclude Include="BF\Common.h" />
+    <ClInclude Include="BF\Engine.h" />
     <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
@@ -116,6 +119,8 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Log.h" />
+    <ClInclude Include="BF\System\Scene.h" />
+    <ClInclude Include="BF\System\SceneManager.h" />
     <ClInclude Include="BF\System\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

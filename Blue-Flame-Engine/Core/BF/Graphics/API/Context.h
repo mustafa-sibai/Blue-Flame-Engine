@@ -22,7 +22,7 @@ namespace BF
 			enum class BF_API RenderAPI
 			{
 #ifdef BF_PLATFORM_WINDOWS
-				DirectX, OpenGL
+				Default, DirectX, OpenGL
 #elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				OpenGL
 #endif	

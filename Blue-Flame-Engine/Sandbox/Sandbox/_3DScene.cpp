@@ -9,11 +9,17 @@ namespace _3DScene
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	_3DScene::_3DScene(BF::Application::Window* window) :
-		window(window), context(nullptr), shader(nullptr), model(nullptr), constentBuffer(nullptr), fpsCamera(nullptr), initBuffer()
+	_3DScene::_3DScene() :
+		shader(nullptr), model(nullptr), constentBuffer(nullptr), fpsCamera(nullptr), initBuffer()
 	{
-		timer = new Timer();
-		context = new Context(window, RenderAPI::OpenGL);
+	}
+
+	_3DScene::~_3DScene()
+	{
+	}
+
+	void _3DScene::Initialize()
+	{
 		shader = new Shader(context);
 
 		constentBuffer = new ConstentBuffer(context, shader);
@@ -36,11 +42,11 @@ namespace _3DScene
 		//model->Load("Assets/Models/TexturedCube/TexturedCube.fbx");
 		//model->Load("Assets/Models/MultiTextureCube/MultiTextureCube.fbx");
 		//model->Load("Assets/Models/MultiTextureCube/untitled.fbx");
-		
+
 		//model->Load("Assets/Models/untitled.obj");
 		//model->Load("Assets/Models/MultiMeshAndTexturedCubes/MultiMeshAndTexturedCubes.obj");
 		model->Load("Assets/Models/untitled.bfx");
-		
+
 #endif
 
 #if BF_PLATFORM_LINUX
@@ -53,42 +59,39 @@ namespace _3DScene
 
 		shader->Bind();
 		constentBuffer->Create(sizeof(initBuffer), 0);
+
+		context->EnableDepthBuffer(true);
 		context->SetPrimitiveType(PrimitiveType::TriangleList);
 
 		initBuffer.projectionMatrix = fpsCamera->GetProjectionMatrix();
-	}
-
-	_3DScene::~_3DScene()
-	{
-	}
-
-	void _3DScene::Draw()
-	{
-		++frames;
-		context->EnableDepthBuffer(true);
-		fpsCamera->Update();
-
-		context->Clear(Vector4(0.5, 0.0f, 0.0f, 1.0f));
 
 		angle = -90.0f;
-		initBuffer.viewMatrix = fpsCamera->GetViewMatrix();
 		initBuffer.modelMatrix = Matrix4::Translate(Vector3(0.0f, 0.0f, 0.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f));
+	}
+
+	void _3DScene::Load()
+	{
+		//BF_WARNING("Loaded");
+	}
+
+	void _3DScene::FixedUpdate()
+	{
+		fpsCamera->Update();
+		//BF_WARNING("TICKS");
+	}
+
+	void _3DScene::Update()
+	{
+	}
+
+	void _3DScene::Render()
+	{
+		context->Clear(Vector4(0.5, 0.0f, 0.0f, 1.0f));
+
+		initBuffer.viewMatrix = fpsCamera->GetViewMatrix();
 		constentBuffer->Update(&initBuffer, sizeof(initBuffer));
 
 		model->Draw();
 		context->SwapBuffers();
-
-		if (timer->GetElapsedTimeInSeconds() >= 1.0f)
-		{
-			std::cout << frames << std::endl;
-			timer->Reset();
-			frames = 0;
-		}
-	}
-
-	void _3DScene::CleanUp()
-	{
-		shader->CleanUp();
-		//context->CleanUp();
 	}
 }

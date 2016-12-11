@@ -10,7 +10,7 @@ namespace BF
 		using namespace BF::Math;
 
 		FPSCamera::FPSCamera(const Math::Matrix4& projectionMatrix) :
-			Camera(projectionMatrix), movmentSpeed(0.01f), yaw(0.0f)
+			Camera(projectionMatrix), movmentSpeed(0.1f), yaw(0.0f)
 		{
 		}
 

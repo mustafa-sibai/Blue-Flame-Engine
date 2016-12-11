@@ -145,7 +145,7 @@ namespace BF
 			return viewMatrix;
 		}
 
-		Matrix4 Matrix4::Multiplay(const Matrix4& matrixA, const Matrix4& matrixB)
+		Matrix4 Matrix4::Multiply(const Matrix4& matrixA, const Matrix4& matrixB)
 		{
 			Matrix4 newMatrix;
 

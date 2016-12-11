@@ -8,7 +8,7 @@ namespace BF
 		using namespace BF::Graphics::API;
 		using namespace BF::Math;
 
-		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices, std::vector<Material>* materials) :
+		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices, vector<Material>* materials) :
 			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices)/*, materials(materials), textureFileName("")*/
 		{
 		}
@@ -17,7 +17,7 @@ namespace BF
 		{
 		}
 
-		void Mesh::SetBuffers(API::Context* context, API::Shader* shader)
+		void Mesh::SetBuffers(const Context* context, const Shader* shader)
 		{
 			vertexBuffer = new VertexBuffer(context, shader);
 			indexBuffer = new IndexBuffer(context);
@@ -36,7 +36,7 @@ namespace BF
 			}*/
 		}
 
-		void Mesh::SetTextureFileName(std::string textureFileName)
+		void Mesh::SetTextureFileName(string textureFileName)
 		{
 			this->textureFileName = textureFileName;
 		}

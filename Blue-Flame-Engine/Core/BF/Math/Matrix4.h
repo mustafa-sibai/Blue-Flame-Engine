@@ -27,10 +27,10 @@ namespace BF
 				static Matrix4 Perspective(float fieldOfView, float aspectRatio, float nearZ, float farZ);
 				static Matrix4 Orthographic(float left, float right, float top, float bottom, float nearZ, float farZ);
 				static Matrix4 LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &up);
-				friend const Matrix4 operator*(const Matrix4& matrixA, const Matrix4& matrixB) { return Matrix4::Multiplay(matrixB, matrixA); }
+				friend const Matrix4 operator*(const Matrix4& matrixA, const Matrix4& matrixB) { return Matrix4::Multiply(matrixB, matrixA); }
 
 			private:
-				static Matrix4 Multiplay(const Matrix4& matrixA, const Matrix4& matrixB);
+				static Matrix4 Multiply(const Matrix4& matrixA, const Matrix4& matrixB);
 		};
 	}
 }

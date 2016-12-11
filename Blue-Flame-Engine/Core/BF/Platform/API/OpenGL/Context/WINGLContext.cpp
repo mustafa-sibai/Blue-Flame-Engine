@@ -15,9 +15,7 @@ namespace BF
 					window(window), hDC(nullptr)
 				{
 					hDC = GetDC(window->GetWINWindow()->GetHWND());
-
-					int  letWindowsChooseThisPixelFormat;
-					letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &window->GetWINWindow()->GetPixelFormat());
+					int letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &window->GetWINWindow()->GetPixelFormat());
 					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &window->GetWINWindow()->GetPixelFormat());
 
 					HGLRC tempContext = wglCreateContext(hDC);
@@ -29,6 +27,7 @@ namespace BF
 						WGL_CONTEXT_MINOR_VERSION_ARB, OPENGL_CONTEXT_MINOR_VERSION,
 						WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
 						WGL_CONTEXT_FLAGS_ARB, WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
+						0
 					};
 
 					GLenum err = glewInit();
