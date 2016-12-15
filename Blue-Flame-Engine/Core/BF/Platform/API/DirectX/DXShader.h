@@ -1,6 +1,7 @@
 #pragma once
-#include "DXContext.h"
-#include "BF/IO/FileLoader.h"
+#include <d3d11.h>
+#include <string>
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -13,8 +14,6 @@ namespace BF
 				class BF_API DXShader
 				{
 					private:
-						const DXContext* context;
-
 						ID3D11VertexShader* VS;
 						ID3D11PixelShader* PS;
 						HRESULT hr;
@@ -24,7 +23,7 @@ namespace BF
 						size_t VSsize, PSsize;
 
 					public:
-						DXShader(const DXContext* context);
+						DXShader();
 						~DXShader();
 					
 						void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);

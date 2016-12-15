@@ -13,16 +13,15 @@ using namespace std;
 
 int main()
 {
-	BF::Application::Window window("Blue Flame Engine", 0, 0, 1920, 1080, BF::Application::WindowStyle::Windowed);
-	Engine* engine = new Engine(window, BF::Graphics::API::Context(&window, BF::Graphics::API::RenderAPI::OpenGL));
+	Engine engine(BF::Application::Window("Blue Flame Engine", 0, 0, 1920, 1080, BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
 
-	SceneManager::AddNewScene(new _2DScene::_2DScene());
-	SceneManager::AddNewScene(new _3DScene::_3DScene());
+	BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
+	BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
 
-	SceneManager::GetScene(0).Run();
-	//SceneManager::GetScene(1).Run();
+	BF::Application::SceneManager::GetScene(0).Run();
+	//BF::Application::SceneManager::GetScene(1).Run();
 
-	engine->Run();
+	engine.Run();
 
 	/*
 		TCHAR  buffer[MAX_PATH];
@@ -39,8 +38,8 @@ int main()
 
 			sound.Load("Assets/Audio/16test.wav");
 			sound.Play(true);
-			
-	
+
+
 	system("PAUSE");
 	*/
 	return 0;

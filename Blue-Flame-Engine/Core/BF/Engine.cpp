@@ -1,17 +1,19 @@
 #include "Engine.h"
+#include "BF/Application/SceneManager.h"
+#include "BF/System/Log.h"
 
 using namespace BF::Graphics::API;
 using namespace BF::Application;
 
-Engine::Engine() :
-	window("Blue Flame Engine", 0, 0, 400, 400, WindowStyle::Windowed),
-	context(&window, RenderAPI::Default), totalTime(0), extra(0), FPS(0), FUPS(0), extraTimesToRunFixedUpdate(0), runFixedUpdate(false)
-{
-}
+Window Engine::window;
+Context Engine::context = Context(RenderAPI::Default);
 
-Engine::Engine(const Window& window, const Context& context) :
-	window(window), context(context), totalTime(0), extra(0), FPS(0), FUPS(0), extraTimesToRunFixedUpdate(0), runFixedUpdate(false)
+Engine::Engine(Window window, RenderAPI renderAPI) :
+	totalTime(0), extra(0), FPS(0), FUPS(0), extraTimesToRunFixedUpdate(0), runFixedUpdate(false)
 {
+	Engine::window = window;
+	Engine::context = Context(renderAPI);
+	Engine::context.Initialize();
 }
 
 Engine::~Engine()
@@ -30,8 +32,6 @@ void Engine::Run()
 			{
 				if (!SceneManager::GetScene(i).initialized)
 				{
-					SceneManager::GetScene(i).SetWindow(window);
-					SceneManager::GetScene(i).SetContext(context);
 					SceneManager::GetScene(i).Initialize();
 					SceneManager::GetScene(i).initialized = true;
 				}
@@ -52,7 +52,7 @@ void Engine::Run()
 
 				SceneManager::GetScene(i).Update();
 				SceneManager::GetScene(i).Render();
-				float elapsedFrameTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
+				double elapsedFrameTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
 
 				FPS++;
 				totalTime += elapsedFrameTime;

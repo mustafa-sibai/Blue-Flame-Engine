@@ -1,4 +1,5 @@
 #include "VertexBuffer.h"
+#include "Context.h"
 
 namespace BF
 {
@@ -6,17 +7,11 @@ namespace BF
 	{
 		namespace API
 		{
-			VertexBuffer::VertexBuffer(const Context* context, const Shader* shader) :
-				context(context)
-			{
+			VertexBuffer::VertexBuffer(const Shader& shader)
 #ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer = new Platform::API::DirectX::DXVertexBuffer(context->GetDXContext(), shader->GetDXShader());
+				: dxVertexBuffer(shader.GetDXShader())
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer = new Platform::API::OpenGL::GLVertexBuffer();
-#endif
+			{
 			}
 
 			VertexBuffer::~VertexBuffer()
@@ -27,23 +22,23 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer->Create(data, size);
+					dxVertexBuffer.Create(data, size);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer->Create(data, size);
+					glVertexBuffer.Create(data, size);
 #endif
 			}
 
-			void VertexBuffer::SetLayout(VertexBufferLayout* vertexBufferLayout)
+			void VertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer->SetLayout(vertexBufferLayout);
+					dxVertexBuffer.SetLayout(vertexBufferLayout);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer->SetLayout(vertexBufferLayout);
+					glVertexBuffer.SetLayout(vertexBufferLayout);
 #endif
 			}
 
@@ -51,11 +46,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					return dxVertexBuffer->Map();
+					return dxVertexBuffer.Map();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					return glVertexBuffer->Map();
+					return glVertexBuffer.Map();
 #endif
 				return nullptr;
 			}
@@ -64,11 +59,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer->Unmap();
+					dxVertexBuffer.Unmap();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer->Unmap();
+					glVertexBuffer.Unmap();
 #endif
 			}
 
@@ -76,11 +71,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer->Bind();
+					dxVertexBuffer.Bind();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer->Bind();
+					glVertexBuffer.Bind();
 #endif
 			}
 
@@ -88,7 +83,7 @@ namespace BF
 			{
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer->Unbind();
+					glVertexBuffer.Unbind();
 #endif
 			}
 		}

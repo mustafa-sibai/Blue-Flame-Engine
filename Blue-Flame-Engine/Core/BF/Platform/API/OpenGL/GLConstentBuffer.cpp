@@ -8,20 +8,18 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				GLConstentBuffer::GLConstentBuffer(GLShader* glShader) :
-					glShader(glShader), buffer(0)
+				GLConstentBuffer::GLConstentBuffer() :
+					buffer(0)
 				{
 				}
 
 				GLConstentBuffer::~GLConstentBuffer()
 				{
+					glDeleteBuffers(1, &buffer);
 				}
 
 				void GLConstentBuffer::Create(unsigned int size, unsigned int bindingIndex)
 				{
-					//GLuint shader_data = glGetUniformBlockIndex(glShader->GetProgramID(), "shader_data");
-					//glUniformBlockBinding(glShader->GetProgramID(), shader_data, 0);
-
 					glCreateBuffers(1, &buffer);
 					glBindBuffer(GL_UNIFORM_BUFFER, buffer);
 					glBufferData(GL_UNIFORM_BUFFER, size, 0, GL_DYNAMIC_DRAW);

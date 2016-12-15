@@ -5,7 +5,6 @@
 	#include <GLES3/gl3.h>
 #endif
 
-#include <iostream>
 #include "BF/Common.h"
 
 namespace BF

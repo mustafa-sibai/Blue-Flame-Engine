@@ -1,8 +1,9 @@
 #pragma once
+#include <d3d11.h>
 #include <iostream>
-#include "DXContext.h"
 #include "DXShader.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -15,26 +16,26 @@ namespace BF
 				class BF_API DXVertexBuffer
 				{
 					private:
-						const DXContext* dxContext;
-						const DXShader* dxShader;
-						const Graphics::API::VertexBufferLayout* vertexBufferLayout;
-						
+						const DXShader& dxShader;
+
 						ID3D11Buffer* buffer;
 						ID3D11InputLayout* inputLayout;
 						HRESULT hr;
 
+						unsigned int offset, stride;
+
 					public:
-						DXVertexBuffer(const DXContext* dxContext, const DXShader* dxShader);
+						DXVertexBuffer(const DXShader& dxShader);
 						~DXVertexBuffer();
 
 						void Create(const void* data, unsigned int size);
-						void SetLayout(const Graphics::API::VertexBufferLayout* vertexBufferLayout);
+						void SetLayout(const Graphics::API::VertexBufferLayout& vertexBufferLayout);
 						void* Map() const;
 						void Unmap() const;
 						void Bind() const;
 
 					private:
-						DXGI_FORMAT DXVertexBuffer::GetDXDataType(Graphics::API::DataType dataType);
+						DXGI_FORMAT DXVertexBuffer::GetDXDataType(Graphics::API::VertexBufferLayout::DataType dataType);
 				};
 			}
 		}

@@ -1,4 +1,5 @@
 #include "DXConstentBuffer.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -8,8 +9,8 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXConstentBuffer::DXConstentBuffer(const DXContext* dxContext, const DXShader* dxShader) :
-					dxContext(dxContext), dxShader(dxShader), buffer(nullptr), hr(0)
+				DXConstentBuffer::DXConstentBuffer() :
+					buffer(nullptr), hr(0)
 				{
 				}
 
@@ -31,18 +32,18 @@ namespace BF
 					bufferDesc.ByteWidth = size;
 					bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 
-					hr = dxContext->GetDevice()->CreateBuffer(&bufferDesc, NULL, &buffer);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, NULL, &buffer);
 
 					if (FAILED(hr))
 						std::cout << "Could not create a constent buffer." << std::endl;
 
-					dxContext->GetContext()->VSSetConstantBuffers(0, 1, &buffer);
+					Engine::GetContext().GetDXContext().GetContext()->VSSetConstantBuffers(0, 1, &buffer);
 				}
 
 				void DXConstentBuffer::Update(void* data)
 				{
-					//TODO: slow should use map instead
-					dxContext->GetContext()->UpdateSubresource(buffer, 0, 0, data, 0, 0);
+					//TODO: Slow should use map instead.
+					Engine::GetContext().GetDXContext().GetContext()->UpdateSubresource(buffer, 0, 0, data, 0, 0);
 				}
 			}
 		}

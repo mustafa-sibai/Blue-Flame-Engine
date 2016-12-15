@@ -10,27 +10,52 @@ namespace BF
 			using namespace Math;
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), sourceRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
+				texture2D(texture2D), position(position), rectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), scissorRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
 			{
 			}
 
-			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Rectangle& sourceRectangle, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle(0, 0, sourceRectangle.width, sourceRectangle.height), sourceRectangle(sourceRectangle), color(color)
+			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Rectangle& scissorRectangle, const Vector4& color) :
+				texture2D(texture2D), position(position), rectangle(0, 0, scissorRectangle.width, scissorRectangle.height), scissorRectangle(scissorRectangle), color(color)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Vector4& color) :
-				texture2D(texture2D), position(), rectangle(rectangle), sourceRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
+				texture2D(texture2D), position(), rectangle(rectangle), scissorRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
 			{
 			}
 
-			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Rectangle& sourceRectangle, const Vector4& color) :
-				texture2D(texture2D), position(), rectangle(rectangle), sourceRectangle(sourceRectangle), color(color)
+			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Rectangle& scissorRectangle, const Vector4& color) :
+				texture2D(texture2D), position(), rectangle(rectangle), scissorRectangle(scissorRectangle), color(color)
 			{
 			}
 
 			Sprite::~Sprite()
 			{
+			}
+
+			void Sprite::SetTexture(const Graphics::API::Texture2D* texture2D)
+			{
+				this->texture2D = texture2D;
+			}
+
+			void Sprite::SetPosition(const Math::Vector3& position)
+			{
+				this->position = position;
+			}
+
+			void Sprite::SetColor(const Math::Vector4& color)
+			{
+				this->color = color;
+			}
+
+			void Sprite::SetRectangle(const Math::Rectangle& rectangle)
+			{
+				this->rectangle = rectangle;
+			}
+
+			void Sprite::SetScissorRectangle(const Math::Rectangle& scissorRectangle)
+			{
+				this->scissorRectangle = scissorRectangle;
 			}
 		}
 	}

@@ -7,6 +7,7 @@
 #endif
 
 #include "Shader.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -17,16 +18,15 @@ namespace BF
 			class BF_API ConstentBuffer
 			{
 				private:
-					const Context* context;
-					const Shader* shader;
+					const Shader& shader;
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXConstentBuffer* dxConstentBuffer;
+					Platform::API::DirectX::DXConstentBuffer dxConstentBuffer;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-					Platform::API::OpenGL::GLConstentBuffer* glConstentBuffer;
+					Platform::API::OpenGL::GLConstentBuffer glConstentBuffer;
 #endif
 				public:
-					ConstentBuffer(const Context* context, const Shader* shader);
+					ConstentBuffer(const Shader& shader);
 					~ConstentBuffer();
 
 					void Create(unsigned int size, unsigned int bindingIndex);

@@ -156,7 +156,13 @@
     <ClCompile Include="BF\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\System\SceneManager.cpp">
+    <ClCompile Include="BF\Graphics\GUI\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -314,10 +320,16 @@
     <ClInclude Include="BF\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\System\Scene.h">
+    <ClInclude Include="BF\Graphics\GUI\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\System\SceneManager.h">
+    <ClInclude Include="BF\Graphics\GUI\StyleSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

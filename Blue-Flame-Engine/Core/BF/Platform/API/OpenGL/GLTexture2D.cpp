@@ -9,9 +9,10 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace std;
 				using namespace BF::Graphics::API;
 
-				GLTexture2D::GLTexture2D(GLShader* glshader) :
+				GLTexture2D::GLTexture2D(const GLShader& glshader) :
 					glshader(glshader), textureID(0)
 				{
 				}
@@ -49,11 +50,11 @@ namespace BF
 					glBindTexture(GL_TEXTURE_2D, textureID);
 				}
 
-				void GLTexture2D::Bind(const std::string& samplerName, unsigned int index) const
+				void GLTexture2D::Bind(const string& samplerName, unsigned int index) const
 				{
 					glActiveTexture(GL_TEXTURE0 + index);
 					glBindTexture(GL_TEXTURE_2D, textureID);
-					glUniform1i(glGetUniformLocation(glshader->GetProgramID(), samplerName.c_str()), index);
+					glUniform1i(glGetUniformLocation(glshader.GetProgramID(), samplerName.c_str()), index);
 				}
 
 				void GLTexture2D::Unbind() const
@@ -61,7 +62,7 @@ namespace BF
 					glBindTexture(GL_TEXTURE_2D, 0);
 				}
 
-				void GLTexture2D::Unbind(const std::string& samplerName, unsigned int index) const
+				void GLTexture2D::Unbind(const string& samplerName, unsigned int index) const
 				{
 					glActiveTexture(GL_TEXTURE0 + index);
 					glBindTexture(GL_TEXTURE_2D, 0);
@@ -87,7 +88,7 @@ namespace BF
 						case Texture2D::TextureWrap::MirroredReapeat: return GL_MIRRORED_REPEAT;
 						case Texture2D::TextureWrap::ClampToEdge: return GL_CLAMP_TO_EDGE;
 						case Texture2D::TextureWrap::ClampToBorder: return GL_CLAMP_TO_BORDER;
-						default: GL_REPEAT;
+						default: return GL_REPEAT;
 					}
 				}
 

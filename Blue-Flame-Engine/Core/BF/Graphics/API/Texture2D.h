@@ -6,10 +6,9 @@
 	#include "BF/Platform/API/OpenGL/GLTexture2D.h"
 #endif
 
-#include "Context.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "BF/IO/ImageLoader.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -20,17 +19,16 @@ namespace BF
 			class BF_API Texture2D : public Texture
 			{
 				private:
-					const Shader* shader;
-					const Context* context;
+					const Shader& shader;
 
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXTexture2D* dxTexture2D;
+					Platform::API::DirectX::DXTexture2D dxTexture2D;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-					Platform::API::OpenGL::GLTexture2D* glTexture2D;
+					Platform::API::OpenGL::GLTexture2D glTexture2D;
 #endif
 				public:
-					Texture2D(const Context* context, const Shader* shader);
+					Texture2D(const Shader& shader);
 					~Texture2D();
 
 					void Load(const std::string& fileName);

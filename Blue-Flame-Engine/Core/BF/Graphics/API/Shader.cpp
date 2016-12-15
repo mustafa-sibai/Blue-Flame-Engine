@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include "Context.h"
 
 namespace BF
 {
@@ -6,32 +7,25 @@ namespace BF
 	{
 		namespace API
 		{
-			Shader::Shader(const Context* context) :
-				context(context)
+			using namespace std;
+
+			Shader::Shader()
 			{
-#ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxShader = new BF::Platform::API::DirectX::DXShader(context->GetDXContext());
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glShader = new BF::Platform::API::OpenGL::GLShader();
-#endif
 			}
 
 			Shader::~Shader()
 			{
 			}
 
-			void Shader::Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath)
+			void Shader::Load(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxShader->Load(vertexShaderFilePath, pixelShaderFilePath);
+					dxShader.Load(vertexShaderFilePath, pixelShaderFilePath);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glShader->Load(vertexShaderFilePath, pixelShaderFilePath);
+					glShader.Load(vertexShaderFilePath, pixelShaderFilePath);
 #endif
 			}
 
@@ -39,11 +33,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxShader->Bind();
+					dxShader.Bind();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glShader->Bind();
+					glShader.Bind();
 #endif	
 			}
 
@@ -51,7 +45,7 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxShader->CleanUp();
+					dxShader.CleanUp();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)

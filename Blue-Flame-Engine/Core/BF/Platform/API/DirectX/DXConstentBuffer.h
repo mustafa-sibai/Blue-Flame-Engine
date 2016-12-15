@@ -1,5 +1,6 @@
 #pragma once
-#include "DXShader.h"
+#include <d3d11.h>
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -12,14 +13,11 @@ namespace BF
 				class BF_API DXConstentBuffer
 				{
 					private:
-						const DXContext* dxContext;
-						const DXShader* dxShader;
-
 						ID3D11Buffer* buffer;
 						HRESULT hr;
 
 					public:
-						DXConstentBuffer(const DXContext* dxContext, const DXShader* dxShader);
+						DXConstentBuffer();
 						~DXConstentBuffer();
 
 						void Create(unsigned int size);

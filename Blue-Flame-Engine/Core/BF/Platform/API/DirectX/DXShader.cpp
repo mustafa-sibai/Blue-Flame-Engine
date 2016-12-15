@@ -1,4 +1,6 @@
 #include "DXShader.h"
+#include "BF/IO/FileLoader.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -8,10 +10,11 @@ namespace BF
 		{
 			namespace DirectX
 			{
+				using namespace std;
 				using namespace BF::IO;
 
-				DXShader::DXShader(const DXContext* context) :
-					context(context), VS(nullptr), PS(nullptr), hr(0), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
+				DXShader::DXShader() :
+					VS(nullptr), PS(nullptr), hr(0), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
 				{
 				}
 
@@ -19,26 +22,22 @@ namespace BF
 				{
 				}
 
-				void DXShader::Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath)
+				void DXShader::Load(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
 				{
 					VSData = FileLoader::LoadBinaryFile(vertexShaderFilePath, &VSsize);
 					PSData = FileLoader::LoadBinaryFile(pixelShaderFilePath, &PSsize);
 					
-					if (FAILED(hr = context->GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS)))
-					{
+					if (FAILED(hr = Engine::GetContext().GetDXContext().GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS)))
 						std::cout << hr << std::endl;
-					}
 
-					if (FAILED(hr = context->GetDevice()->CreatePixelShader(PSData, PSsize, 0, &PS)))
-					{
+					if (FAILED(hr = Engine::GetContext().GetDXContext().GetDevice()->CreatePixelShader(PSData, PSsize, 0, &PS)))
 						std::cout << hr << std::endl;
-					}
 				}
 
 				void DXShader::Bind() const
 				{
-					context->GetContext()->VSSetShader(VS, 0, 0);
-					context->GetContext()->PSSetShader(PS, 0, 0);
+					Engine::GetContext().GetDXContext().GetContext()->VSSetShader(VS, 0, 0);
+					Engine::GetContext().GetDXContext().GetContext()->PSSetShader(PS, 0, 0);
 				}
 
 				void DXShader::CleanUp() const

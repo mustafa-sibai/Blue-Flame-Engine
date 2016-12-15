@@ -22,6 +22,7 @@ namespace BF
 					Application::Window* window;
 
 				public:
+					WINWindow() = default;
 					WINWindow(Application::Window* window);
 					~WINWindow();
 

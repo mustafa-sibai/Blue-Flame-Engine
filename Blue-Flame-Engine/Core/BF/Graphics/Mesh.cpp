@@ -17,10 +17,10 @@ namespace BF
 		{
 		}
 
-		void Mesh::SetBuffers(const Context* context, const Shader* shader)
+		void Mesh::SetBuffers(const Shader& shader)
 		{
-			vertexBuffer = new VertexBuffer(context, shader);
-			indexBuffer = new IndexBuffer(context);
+			vertexBuffer = new VertexBuffer(shader);
+			indexBuffer = new IndexBuffer();
 			//textures = new std::vector<Texture2D*>();
 
 			vertexBuffer->Create(&vertices[0][0], (unsigned int)vertices->size() * sizeof(MeshVertexData));

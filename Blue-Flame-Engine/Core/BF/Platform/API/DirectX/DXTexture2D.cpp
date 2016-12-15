@@ -1,5 +1,6 @@
 #include "DXTexture2D.h"
 #include "BF/Graphics/API/Texture2D.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -11,8 +12,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				DXTexture2D::DXTexture2D(const DXContext* dxContext) :
-					dxContext(dxContext), textureID(nullptr), resourceView(nullptr), samplerState(nullptr), hr(0)
+				DXTexture2D::DXTexture2D() :
+					textureID(nullptr), resourceView(nullptr), samplerState(nullptr), hr(0)
 				{
 				}
 
@@ -42,7 +43,7 @@ namespace BF
 					subData.SysMemPitch = width * 1;//4;
 					subData.SysMemSlicePitch = 0;//texture2D->GetWidth() * texture2D->GetHeight() * 1;
 
-					hr = dxContext->GetDevice()->CreateTexture2D(&texDesc, &subData, &textureID);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateTexture2D(&texDesc, &subData, &textureID);
 					if (FAILED(hr))
 						std::cout << "Failed to create D3D11 Texture2D for D3D11 texture" << std::endl;
 
@@ -54,7 +55,7 @@ namespace BF
 					srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 					srvDesc.Texture2D.MipLevels = texDesc.MipLevels;
 
-					hr = dxContext->GetDevice()->CreateShaderResourceView(textureID, &srvDesc, &resourceView);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateShaderResourceView(textureID, &srvDesc, &resourceView);
 					//hr = dxContext->GetDevice()->CreateShaderResourceView(textureID, 0, &resourceView);
 					if (FAILED(hr))
 						std::cout << "Failed to create ShaderResourceView for D3D11 texture" << std::endl;
@@ -71,15 +72,15 @@ namespace BF
 					samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 					samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-					hr = dxContext->GetDevice()->CreateSamplerState(&samplerDesc, &samplerState);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateSamplerState(&samplerDesc, &samplerState);
 					if (FAILED(hr))
 						std::cout << "Failed to create D3D11 SamplerState texture" << std::endl;
 				}
 
 				void DXTexture2D::Bind(unsigned int index) const
 				{
-					dxContext->GetContext()->PSSetShaderResources(index, 1, &resourceView);
-					dxContext->GetContext()->PSSetSamplers(index, 1, &samplerState);
+					Engine::GetContext().GetDXContext().GetContext()->PSSetShaderResources(index, 1, &resourceView);
+					Engine::GetContext().GetDXContext().GetContext()->PSSetSamplers(index, 1, &samplerState);
 				}
 
 
@@ -103,7 +104,7 @@ namespace BF
 						case Texture2D::TextureWrap::MirroredReapeat: return D3D11_TEXTURE_ADDRESS_MIRROR;
 						case Texture2D::TextureWrap::ClampToEdge: return D3D11_TEXTURE_ADDRESS_CLAMP;
 						case Texture2D::TextureWrap::ClampToBorder: return D3D11_TEXTURE_ADDRESS_BORDER;
-						default: D3D11_TEXTURE_ADDRESS_WRAP;
+						default: return D3D11_TEXTURE_ADDRESS_WRAP;
 					}
 				}
 

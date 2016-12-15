@@ -1,6 +1,5 @@
 #pragma once
 #include <d3d11.h>
-#include "BF/Application/Window.h"
 #include "BF/Math/Vector4.h"
 #include "BF/Common.h"
 
@@ -23,8 +22,6 @@ namespace BF
 				class BF_API DXContext
 				{
 					private:
-						const Application::Window* window;
-
 						ID3D11Device* device;
 						ID3D11DeviceContext* context;
 						IDXGISwapChain* swapChain;
@@ -35,10 +32,10 @@ namespace BF
 						HRESULT hr;
 
 					public:
-						DXContext(const Application::Window* window);
+						DXContext();
 						~DXContext();
 
-						
+						void Initialize();
 						void Clear(const Math::Vector4& Color);
 						void SwapBuffers();
 						void Draw(unsigned int vertexCount);

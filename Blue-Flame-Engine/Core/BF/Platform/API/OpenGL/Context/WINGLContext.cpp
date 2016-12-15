@@ -1,5 +1,6 @@
 #include "WINGLContext.h"
 #include "BF/Graphics/API/Context.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -9,14 +10,25 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				using namespace BF::Graphics::API;
+#define OPENGL_CONTEXT_MAJOR_VERSION 4
+#define OPENGL_CONTEXT_MINOR_VERSION 5
 
-				WINGLContext::WINGLContext(const Application::Window* window) :
-					window(window), hDC(nullptr)
+				using namespace BF::Graphics::API;
+				using namespace BF::Math;
+
+				WINGLContext::WINGLContext()
 				{
-					hDC = GetDC(window->GetWINWindow()->GetHWND());
-					int letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &window->GetWINWindow()->GetPixelFormat());
-					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &window->GetWINWindow()->GetPixelFormat());
+				}
+
+				WINGLContext::~WINGLContext()
+				{
+				}
+
+				void WINGLContext::Initialize()
+				{
+					hDC = GetDC(Engine::GetWindow().GetWINWindow().GetHWND());
+					int letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &Engine::GetWindow().GetWINWindow().GetPixelFormat());
+					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &Engine::GetWindow().GetWINWindow().GetPixelFormat());
 
 					HGLRC tempContext = wglCreateContext(hDC);
 					wglMakeCurrent(hDC, tempContext);
@@ -48,7 +60,7 @@ namespace BF
 						fprintf(stdout, "Failed to create an OpenGL 3.x and above context.");
 					}
 
-					glViewport(0, 0, window->GetClientWidth(), window->GetClientHeight());
+					glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
 
 					fprintf(stdout, "OPENGL VERSION %s\n", (char*)glGetString(GL_VERSION));
 					fprintf(stdout, "Graphics Card: %s - %s\n", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
@@ -59,10 +71,6 @@ namespace BF
 					//wglSwapIntervalEXT(1);
 					//glEnable(GL_BLEND);
 					//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				}
-
-				WINGLContext::~WINGLContext()
-				{
 				}
 
 				void WINGLContext::SetPrimitiveType(PrimitiveType primitiveType)
@@ -99,7 +107,7 @@ namespace BF
 					}
 				}
 
-				void WINGLContext::Clear(const Math::Vector4& color)
+				void WINGLContext::Clear(const Vector4& color)
 				{
 					GLenum err = glGetError();
 					if (err != GL_NO_ERROR)

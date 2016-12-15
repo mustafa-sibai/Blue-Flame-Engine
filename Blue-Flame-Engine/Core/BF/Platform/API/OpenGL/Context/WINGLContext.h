@@ -1,7 +1,6 @@
 #pragma once
 #include <GL/glew.h>
 #include <GL/wglew.h>
-#include "BF/Application/Window.h"
 #include "BF/Math/Vector4.h"
 #include "BF/Common.h"
 
@@ -24,17 +23,15 @@ namespace BF
 				class BF_API WINGLContext
 				{
 					private:
-						const Application::Window* window;
 						HDC hDC;
 						HGLRC context;
 						GLuint GL_PRIMITIVE_TYPE;
-						const unsigned short OPENGL_CONTEXT_MAJOR_VERSION = 4;
-						const unsigned short OPENGL_CONTEXT_MINOR_VERSION = 5;
 
 					public:
-						WINGLContext(const Application::Window* window);
+						WINGLContext();
 						~WINGLContext();
 
+						void Initialize();
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
 						void Clear(const Math::Vector4& color);
 						void Draw(GLsizei count);

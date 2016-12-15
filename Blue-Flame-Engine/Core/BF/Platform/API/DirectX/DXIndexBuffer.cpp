@@ -1,4 +1,5 @@
 #include "DXIndexBuffer.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -8,8 +9,8 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXIndexBuffer::DXIndexBuffer(const DXContext* dxContext) :
-					dxContext(dxContext), buffer(nullptr), hr(0), count(0)
+				DXIndexBuffer::DXIndexBuffer() :
+					buffer(nullptr), hr(0), count(0)
 				{
 				}
 
@@ -37,7 +38,7 @@ namespace BF
 					subData.SysMemPitch = 0;
 					subData.SysMemSlicePitch = 0;
 
-					hr = dxContext->GetDevice()->CreateBuffer(&bufferDesc, &subData, &buffer);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, &subData, &buffer);
 
 					if (FAILED(hr))
 						std::cout << "failed to create index buffer" << std::endl;
@@ -45,7 +46,7 @@ namespace BF
 
 				void DXIndexBuffer::Bind() const
 				{
-					dxContext->GetContext()->IASetIndexBuffer(buffer, DXGI_FORMAT_R32_UINT, 0);
+					Engine::GetContext().GetDXContext().GetContext()->IASetIndexBuffer(buffer, DXGI_FORMAT_R32_UINT, 0);
 				}
 			}
 		}

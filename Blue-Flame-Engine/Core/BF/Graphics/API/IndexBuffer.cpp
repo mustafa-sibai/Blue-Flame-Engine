@@ -1,4 +1,5 @@
 #include "IndexBuffer.h"
+#include "Context.h"
 
 namespace BF
 {
@@ -6,32 +7,23 @@ namespace BF
 	{
 		namespace API
 		{
-			IndexBuffer::IndexBuffer(const Context* context) :
-				context(context)
+			IndexBuffer::IndexBuffer()
 			{
-#ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxIndexBuffer = new Platform::API::DirectX::DXIndexBuffer(context->GetDXContext());
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glIndexBuffer = new Platform::API::OpenGL::GLIndexBuffer();
-#endif	
 			}
 
 			IndexBuffer::~IndexBuffer()
 			{
 			}
 
-			void IndexBuffer::Create(const unsigned int* const indices, unsigned int count)
+			void IndexBuffer::Create(const unsigned int* indices, unsigned int count)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxIndexBuffer->Create(indices, count);
+					dxIndexBuffer.Create(indices, count);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glIndexBuffer->Create(indices, count);
+					glIndexBuffer.Create(indices, count);
 #endif	
 			}
 
@@ -39,11 +31,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxIndexBuffer->Bind();
+					dxIndexBuffer.Bind();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glIndexBuffer->Bind();
+					glIndexBuffer.Bind();
 #endif	
 			}
 
@@ -51,7 +43,7 @@ namespace BF
 			{
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glIndexBuffer->Unbind();
+					glIndexBuffer.Unbind();
 #endif	
 			}
 
@@ -59,11 +51,11 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					return dxIndexBuffer->GetIndicesCount();
+					return dxIndexBuffer.GetIndicesCount();
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					return glIndexBuffer->GetIndicesCount();
+					return glIndexBuffer.GetIndicesCount();
 #endif
 				return 0;
 			}

@@ -1,4 +1,5 @@
 #include "SpriteRenderer.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -18,22 +19,22 @@ namespace BF
 			using namespace BF::Graphics::Renderers;
 			using namespace BF::Math;
 
-			SpriteRenderer::SpriteRenderer(const Context* context, const Shader* shader) :
-				context(context), shader(shader), indexCount(0), submitSprite(true)
+			SpriteRenderer::SpriteRenderer(const Shader& shader) :
+				shader(shader), vertexBuffer(shader), indexCount(0), submitSprite(true)
 			{
-				vertexBuffer = new VertexBuffer(context, shader);
-				indexBuffer = new IndexBuffer(context);
-				vertexBufferLayout = new VertexBufferLayout();
+				indexBuffer = new IndexBuffer();
+			}
 
-				vertexBufferLayout->Push(0, "POSITION",		BF::Graphics::API::DataType::Float3, sizeof(SpriteBuffer), 0);
-				vertexBufferLayout->Push(1, "COLOR",		BF::Graphics::API::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector3));
-				vertexBufferLayout->Push(2, "TEXCOORD",		BF::Graphics::API::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4));
-				vertexBufferLayout->Push(3, "TEXTUREID",	BF::Graphics::API::DataType::Float,	 sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2));
+			SpriteRenderer::~SpriteRenderer()
+			{
+			}
 
-				shader->Bind();
-
-				vertexBuffer->Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
-				vertexBuffer->SetLayout(vertexBufferLayout);
+			void SpriteRenderer::Initialize()
+			{
+				vertexBufferLayout.Push(0, "POSITION",	VertexBufferLayout::DataType::Float3, sizeof(SpriteBuffer), 0);
+				vertexBufferLayout.Push(1, "COLOR",		VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector3));
+				vertexBufferLayout.Push(2, "TEXCOORD",	VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4));
+				vertexBufferLayout.Push(3, "TEXTUREID", VertexBufferLayout::DataType::Float,  sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2));
 
 				unsigned int* indecies = new unsigned int[INDICES_SIZE];
 				int index = 0;
@@ -51,13 +52,15 @@ namespace BF
 					index += SPRITE_VERTICES;
 				}
 
+				shader.Bind();
+
+				vertexBuffer.Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
+				vertexBuffer.SetLayout(vertexBufferLayout);
 				indexBuffer->Create(indecies, INDICES_SIZE);
 
-				context->EnableDepthBuffer(false);
-			}
+				Engine::GetContext().EnableDepthBuffer(false);
 
-			SpriteRenderer::~SpriteRenderer()
-			{
+				delete indecies;
 			}
 
 			void SpriteRenderer::Begin(SubmitType submitType)
@@ -65,14 +68,14 @@ namespace BF
 				this->submitType = submitType;
 
 				if (submitSprite)
-					spriteBuffer = (SpriteBuffer*)vertexBuffer->Map();
+					spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 			}
 
-			void SpriteRenderer::Submit(const Sprite* sprite)
+			void SpriteRenderer::Submit(const Sprite& sprite)
 			{
 				if (submitSprite)
 				{
-					float textureID = FindTexture(sprite->texture2D);
+					float textureID = FindTexture(sprite.GetTexture());
 
 					if ((int)textureID > MAX_TEXTURES)
 					{
@@ -81,38 +84,38 @@ namespace BF
 
 						End();
 						Begin(submitType);
-						textureID = FindTexture(sprite->texture2D);
+						textureID = FindTexture(sprite.GetTexture());
 					}
 
-					sprite->texture2D->Bind("textures[" + std::to_string((int)textureID) + std::string("]"), textureID);
+					sprite.GetTexture()->Bind("textures[" + std::to_string((unsigned int)textureID) + std::string("]"), (unsigned int)textureID);
 
 					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 					CalculateUV(sprite, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
 					//Top Left
-					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x, sprite->position.y + sprite->rectangle.y, 0.0f);
-					spriteBuffer->color		= sprite->color;
+					spriteBuffer->position	= Vector3(sprite.GetPosition().x + sprite.GetRectangle().x, sprite.GetPosition().y + sprite.GetRectangle().y, 0.0f);
+					spriteBuffer->color		= sprite.GetColor();
 					spriteBuffer->UV		= topLeftUV;
 					spriteBuffer->textureID = textureID;
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x + sprite->rectangle.width, sprite->position.y + sprite->rectangle.y, 0.0f);
-					spriteBuffer->color		= sprite->color;
+					spriteBuffer->position	= Vector3(sprite.GetPosition().x + sprite.GetRectangle().x + sprite.GetRectangle().width, sprite.GetPosition().y + sprite.GetRectangle().y, 0.0f);
+					spriteBuffer->color		= sprite.GetColor();
 					spriteBuffer->UV		= topRightUV;
 					spriteBuffer->textureID = textureID;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x + sprite->rectangle.width, sprite->position.y + sprite->rectangle.y + sprite->rectangle.height, 0.0f);
-					spriteBuffer->color		= sprite->color;
+					spriteBuffer->position	= Vector3(sprite.GetPosition().x + sprite.GetRectangle().x + sprite.GetRectangle().width, sprite.GetPosition().y + sprite.GetRectangle().y + sprite.GetRectangle().height, 0.0f);
+					spriteBuffer->color		= sprite.GetColor();
 					spriteBuffer->UV		= bottomRightUV;
 					spriteBuffer->textureID = textureID;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position	= Vector3(sprite->position.x + sprite->rectangle.x, sprite->position.y + sprite->rectangle.y + sprite->rectangle.height, 0.0f);
-					spriteBuffer->color		= sprite->color;
+					spriteBuffer->position	= Vector3(sprite.GetPosition().x + sprite.GetRectangle().x, sprite.GetPosition().y + sprite.GetRectangle().y + sprite.GetRectangle().height, 0.0f);
+					spriteBuffer->color		= sprite.GetColor();
 					spriteBuffer->UV		= bottomLeftUV;
 					spriteBuffer->textureID = textureID;
 					spriteBuffer++;
@@ -124,13 +127,13 @@ namespace BF
 			void SpriteRenderer::End()
 			{
 				if (submitSprite)
-					vertexBuffer->Unmap();
+					vertexBuffer.Unmap();
 
-				vertexBuffer->Bind();
+				vertexBuffer.Bind();
 				indexBuffer->Bind();
-				context->Draw(indexCount);
+				Engine::GetContext().Draw(indexCount);
 				indexBuffer->Unbind();
-				vertexBuffer->Unbind();
+				vertexBuffer.Unbind();
 
 				if (submitType == SubmitType::StaticSubmit)
 				{
@@ -147,19 +150,19 @@ namespace BF
 				}
 			}
 
-			void SpriteRenderer::CalculateUV(const Sprite* sprite, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
+			void SpriteRenderer::CalculateUV(const Sprite& sprite, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
-				*topLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
-									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));
+				*topLeft = Vector2(1.0f / ((float)sprite.GetTexture()->GetWidth() / (float)sprite.GetScissorRectangle().x),
+									1.0f / ((float)sprite.GetTexture()->GetHeight() / (float)sprite.GetScissorRectangle().y));
 
-				*topRight = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / ((float)sprite->sourceRectangle.x + (float)sprite->sourceRectangle.width)),
-									1.0f / ((float)sprite->texture2D->GetHeight() / (float)sprite->sourceRectangle.y));
+				*topRight = Vector2(1.0f / ((float)sprite.GetTexture()->GetWidth() / ((float)sprite.GetScissorRectangle().x + (float)sprite.GetScissorRectangle().width)),
+									1.0f / ((float)sprite.GetTexture()->GetHeight() / (float)sprite.GetScissorRectangle().y));
 
-				*bottomRight = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / ((float)sprite->sourceRectangle.x + (float)sprite->sourceRectangle.width)),
-										1.0f / ((float)sprite->texture2D->GetHeight() / ((float)sprite->sourceRectangle.y + (float)sprite->sourceRectangle.height)));
+				*bottomRight = Vector2(1.0f / ((float)sprite.GetTexture()->GetWidth() / ((float)sprite.GetScissorRectangle().x + (float)sprite.GetScissorRectangle().width)),
+										1.0f / ((float)sprite.GetTexture()->GetHeight() / ((float)sprite.GetScissorRectangle().y + (float)sprite.GetScissorRectangle().height)));
 
-				*bottomLeft = Vector2(1.0f / ((float)sprite->texture2D->GetWidth() / (float)sprite->sourceRectangle.x),
-										1.0f / ((float)sprite->texture2D->GetHeight() / ((float)sprite->sourceRectangle.y + (float)sprite->sourceRectangle.height)));
+				*bottomLeft = Vector2(1.0f / ((float)sprite.GetTexture()->GetWidth() / (float)sprite.GetScissorRectangle().x),
+										1.0f / ((float)sprite.GetTexture()->GetHeight() / ((float)sprite.GetScissorRectangle().y + (float)sprite.GetScissorRectangle().height)));
 			}
 
 			float SpriteRenderer::FindTexture(const Texture2D* texture)

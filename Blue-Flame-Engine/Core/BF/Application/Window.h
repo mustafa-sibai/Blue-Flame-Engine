@@ -22,27 +22,29 @@ namespace BF
 #elif BF_PLATFORM_WEBGL
 			friend Platform::WebGL::WEBWindow;
 #endif
-
 			private:
-#ifdef BF_PLATFORM_WINDOWS
-				Platform::Windows::WINWindow* winWindow;
-#elif BF_PLATFORM_LINUX
-				Platform::Linux::LXWindow* lxWindow;
-#elif BF_PLATFORM_WEBGL
-				Platform::WebGL::WEBWindow* webWindow;
-#endif
 				std::string title;
 				unsigned short positionX, positionY, width, height, clientWidth, clientHeight, borderWidth, borderHeight;
 				Application::WindowStyle style;
 
+#ifdef BF_PLATFORM_WINDOWS
+				Platform::Windows::WINWindow winWindow;
+#elif BF_PLATFORM_LINUX
+				Platform::Linux::LXWindow lxWindow;
+#elif BF_PLATFORM_WEBGL
+				Platform::WebGL::WEBWindow webWindow;
+#endif
+
 			public:
+				Window() = default;
 				Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
 				~Window();
+
 				void Update();
 				bool IsOpen();
 
 #ifdef BF_PLATFORM_WINDOWS
-				inline Platform::Windows::WINWindow* GetWINWindow() const { return winWindow; }
+				inline const Platform::Windows::WINWindow& GetWINWindow() const { return winWindow; }
 
 				inline unsigned short GetWidth() const { return width; }
 				inline unsigned short GetHeight() const { return height; }
@@ -52,9 +54,9 @@ namespace BF
 
 				inline float GetAspectRatio() const { return (float)width / (float)height; }
 #elif BF_PLATFORM_LINUX
-				inline Platform::Linux::LXWindow *GetLXWindow() const { return lxWindow; }
+				inline const Platform::Linux::LXWindow& GetLXWindow() const { return lxWindow; }
 #elif BF_PLATFORM_WEBGL
-				inline Platform::WebGL::WEBWindow *GetWEBWindow() const { return webWindow; }
+				inline const Platform::WebGL::WEBWindow& GetWEBWindow() const { return webWindow; }
 #endif
 		};
 	}

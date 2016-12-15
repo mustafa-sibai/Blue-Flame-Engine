@@ -11,14 +11,13 @@ namespace BF
 		class BF_API Model
 		{
 			private:
-				const API::Context* context;
-				const API::Shader* shader;
-				API::VertexBufferLayout* vertexBufferLayout;
+				const API::Shader& shader;
+				API::VertexBufferLayout vertexBufferLayout;
 				std::vector<Mesh>* meshes;
 				IO::BFXLoader bfxLoader;
 
 			public:
-				Model(const API::Context* context, const API::Shader* shader);
+				Model(const API::Shader& shader);
 				~Model();
 
 				void Load(const std::string& filename);

@@ -13,17 +13,31 @@ namespace _2DScene
 		BF::Math::Matrix4 projectionMatrix;
 	};
 
-	class _2DScene : public Scene
+	class _2DScene : public BF::Application::Scene
 	{
 		private:
-			BF::Graphics::API::Shader* shader;
+			BF::Graphics::API::Shader shader;
 
 			BF::Graphics::API::ConstentBuffer* constentBuffer;
-			BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
+			BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+
 			BF::Graphics::API::Texture2D* t;
 			BF::Graphics::API::Texture2D* t2;
+
+			BF::Graphics::Renderers::Sprite sprite1;
+			BF::Graphics::Renderers::Sprite sprite2;
+			BF::Graphics::Renderers::Sprite sprite3;
+			BF::Graphics::Renderers::Sprite sprite4;
+			BF::Graphics::Renderers::Sprite sprite5;
+
+			BF::Graphics::Renderers::Sprite fontSprite;
 			BF::Graphics::Font* font;
+
+			BF::Graphics::GUI::StyleSheet styleSheet;
+			BF::Graphics::GUI::Button button;
+
 			InitBuffer initBuffer;
+
 			//std::vector<BF::Graphics::Renderers::Sprite*>* sprites;
 
 		public:

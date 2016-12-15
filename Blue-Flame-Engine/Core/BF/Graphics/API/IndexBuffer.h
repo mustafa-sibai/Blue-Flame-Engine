@@ -6,7 +6,7 @@
 	#include "BF/Platform/API/OpenGL/GLIndexBuffer.h"
 #endif
 
-#include "Context.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -17,19 +17,17 @@ namespace BF
 			class BF_API IndexBuffer
 			{
 				private:
-					const Context* context;
-
 #ifdef BF_PLATFORM_WINDOWS
-				Platform::API::DirectX::DXIndexBuffer* dxIndexBuffer;
+					Platform::API::DirectX::DXIndexBuffer dxIndexBuffer;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-				Platform::API::OpenGL::GLIndexBuffer* glIndexBuffer;
+					Platform::API::OpenGL::GLIndexBuffer glIndexBuffer;
 #endif	
 				public:
-					IndexBuffer(const Context* context);
+					IndexBuffer();
 					~IndexBuffer();
 
-					void Create(const unsigned int* const indices, unsigned int count);
+					void Create(const unsigned int* indices, unsigned int count);
 
 					void Bind() const;
 					void Unbind() const;

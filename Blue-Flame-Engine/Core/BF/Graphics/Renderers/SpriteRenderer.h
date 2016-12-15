@@ -16,11 +16,10 @@ namespace BF
 					enum class SubmitType { StaticSubmit, DynamicSubmit };
 
 				private:
-					const API::Context* context;
-					const API::Shader* shader;
-					API::VertexBuffer* vertexBuffer;
+					const API::Shader& shader;
+					API::VertexBuffer vertexBuffer;
 					API::IndexBuffer* indexBuffer;
-					API::VertexBufferLayout* vertexBufferLayout;
+					API::VertexBufferLayout vertexBufferLayout;
 
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
@@ -31,15 +30,16 @@ namespace BF
 					std::vector<const API::Texture2D*> textures;
 
 				public:
-					SpriteRenderer(const API::Context* context, const API::Shader* shader);
+					SpriteRenderer(const API::Shader& shader);
 					~SpriteRenderer();
 
+					void Initialize();
 					void Begin(SubmitType submitType);
-					void Submit(const Sprite* sprite);
+					void Submit(const Sprite& sprite);
 					void End();
 
 				private:
-					void CalculateUV(const Sprite* sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
+					void CalculateUV(const Sprite& sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
 					float FindTexture(const API::Texture2D* texture);
 			};
 		}

@@ -1,5 +1,9 @@
 #pragma once
+#include <BF/Engine.h>
+
 #include <BF/Application/Window.h>
+#include <BF/Application/Scene.h>
+#include <BF/Application/SceneManager.h>
 
 #include <BF/Audio/Sound.h>
 #include <BF/Audio/SoundManager.h>
@@ -19,11 +23,13 @@
 
 #include <BF/Graphics/Renderers/SpriteRenderer.h>
 
+#include <BF/Graphics/GUI/StyleSheet.h>
+#include <BF/Graphics/GUI/Button.h>
+
 #include <BF/Input/Keyboard.h>
 #include <BF/Input/Mouse.h>
 
 #include <BF/Math/Math.h>
 
-#include <BF/System/Scene.h>
 #include <BF/System/Timer.h>
 #include <BF/System/Log.h>

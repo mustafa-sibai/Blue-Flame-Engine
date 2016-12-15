@@ -27,7 +27,7 @@ namespace BF
 						~GLVertexBuffer();
 
 						void Create(const void* data, unsigned int size);
-						void SetLayout(Graphics::API::VertexBufferLayout* vertexBufferLayout);
+						void SetLayout(const Graphics::API::VertexBufferLayout& vertexBufferLayout);
 						void* Map() const;
 						void Unmap() const;
 						void Bind() const;
@@ -36,8 +36,8 @@ namespace BF
 						inline const GLuint& GetBuffer() const { return buffer; }
 
 					private:
-						GLenum GetGLDataType(Graphics::API::DataType dataType);
-						unsigned int GetComponentCount(Graphics::API::DataType dataType);
+						GLenum GetGLDataType(Graphics::API::VertexBufferLayout::DataType dataType);
+						unsigned int GetComponentCount(Graphics::API::VertexBufferLayout::DataType dataType);
 				};
 			}
 		}

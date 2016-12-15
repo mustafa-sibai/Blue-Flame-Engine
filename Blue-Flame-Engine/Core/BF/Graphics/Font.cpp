@@ -4,10 +4,10 @@ namespace BF
 {
 	namespace Graphics
 	{
-		Font::Font(const API::Context* context, const API::Shader* shader) :
+		Font::Font(const API::Shader& shader) :
 			textureAtlas(nullptr), texture(nullptr)
 		{
-			texture = new API::Texture2D(context, shader);
+			texture = new API::Texture2D(shader);
 			textureAtlas = new TextureAtlas();
 			
 
@@ -34,11 +34,11 @@ namespace BF
 				std::cout << "OK !!" << std::endl;
 
 
-			int smallestUnicode = 0x00000020;
-			int biggestUnicode = 0x0000007E;
+			unsigned int smallestUnicode = 0x00000020;
+			unsigned int biggestUnicode = 0x0000007E;
 
-			int rowsAndColumnsSize = ceil(sqrt(biggestUnicode - smallestUnicode));
-			int altalSize = 48 * rowsAndColumnsSize;
+			unsigned int rowsAndColumnsSize = (unsigned int)ceil(sqrt((float)biggestUnicode - (float)smallestUnicode));
+			unsigned int altalSize = 48 * rowsAndColumnsSize;
 
 			textureAtlas->Create(altalSize, altalSize, API::Texture::Format::R8);
 
@@ -47,7 +47,7 @@ namespace BF
 			{
 				for (unsigned int x = 0; x < rowsAndColumnsSize; x++)
 				{
-					int unicode = smallestUnicode + (x + y * rowsAndColumnsSize);
+					unsigned int unicode = smallestUnicode + (x + y * rowsAndColumnsSize);
 
 					if (unicode <= biggestUnicode)
 					{

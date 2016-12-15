@@ -1,7 +1,10 @@
 #pragma once
-#include <GL/glew.h>
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include <GL/glew.h>
+#elif BF_PLATFORM_WEBGL
+	#include <GLES3/gl3.h>
+#endif
 
-#include "GLShader.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -15,11 +18,10 @@ namespace BF
 				class BF_API GLConstentBuffer
 				{
 					private:
-						GLShader* glShader;
 						GLuint buffer;
 
 					public:
-						GLConstentBuffer(GLShader* glShader);
+						GLConstentBuffer();
 						~GLConstentBuffer();
 
 						void Create(unsigned int size, unsigned int bindingIndex);

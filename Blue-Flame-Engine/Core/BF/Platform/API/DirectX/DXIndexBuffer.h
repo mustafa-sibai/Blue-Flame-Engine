@@ -1,5 +1,6 @@
 #pragma once
-#include "DXContext.h"
+#include <d3d11.h>
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -12,15 +13,13 @@ namespace BF
 				class BF_API DXIndexBuffer
 				{
 					private:
-						const DXContext* dxContext;
-
 						ID3D11Buffer* buffer;
 						HRESULT hr;
 
 						unsigned int count;
 
 					public:
-						DXIndexBuffer(const DXContext* dxContext);
+						DXIndexBuffer();
 						~DXIndexBuffer();
 
 						void Create(const unsigned int* indices, unsigned int count);

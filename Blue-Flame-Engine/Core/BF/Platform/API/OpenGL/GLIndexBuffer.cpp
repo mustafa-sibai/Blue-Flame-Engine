@@ -15,6 +15,7 @@ namespace BF
 
 				GLIndexBuffer::~GLIndexBuffer()
 				{
+					glDeleteBuffers(1, &buffer);
 				}
 
 				void GLIndexBuffer::Create(const unsigned int* indices, unsigned int count)

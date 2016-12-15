@@ -23,7 +23,7 @@ namespace BF
 				API::Texture2D* texture;
 
 			public:
-				Font(const API::Context* context, const API::Shader* shader);
+				Font(const API::Shader& shader);
 				~Font();
 
 				void PrepareGlyph(unsigned int unicode);

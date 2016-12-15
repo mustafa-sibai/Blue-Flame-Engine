@@ -44,7 +44,7 @@ namespace BF
 				Mesh(std::vector<MeshVertexData>* vertices, std::vector<unsigned int>* indices, std::vector<Material>* materials);
 				~Mesh();
 
-				void SetBuffers(const API::Context* context, const API::Shader* shader);
+				void SetBuffers(const API::Shader& shader);
 				void SetTextureFileName(std::string textureFileName);
 
 				void Bind() const;

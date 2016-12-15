@@ -6,7 +6,7 @@
 	#include "BF/Platform/API/OpenGL/GLShader.h"
 #endif
 
-#include "Context.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -18,15 +18,13 @@ namespace BF
 			{
 				private:
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXShader* dxShader;
+					Platform::API::DirectX::DXShader dxShader;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-					Platform::API::OpenGL::GLShader* glShader;
+					Platform::API::OpenGL::GLShader glShader;
 #endif
-					const Context* context;
-
 				public:
-					Shader(const Context* context);
+					Shader();
 					~Shader();
 
 					void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
@@ -35,10 +33,10 @@ namespace BF
 					void Bind() const;
 
 #ifdef BF_PLATFORM_WINDOWS
-					inline Platform::API::DirectX::DXShader* GetDXShader() const { return dxShader; }
+					inline const Platform::API::DirectX::DXShader& GetDXShader() const { return dxShader; }
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
-					inline Platform::API::OpenGL::GLShader* GetGLShader() const { return glShader; }
+					inline const Platform::API::OpenGL::GLShader& GetGLShader() const { return glShader; }
 #endif
 			};
 		}

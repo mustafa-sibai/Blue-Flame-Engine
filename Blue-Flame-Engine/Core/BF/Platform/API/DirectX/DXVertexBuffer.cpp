@@ -1,4 +1,5 @@
 #include "DXVertexBuffer.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -10,8 +11,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				DXVertexBuffer::DXVertexBuffer(const DXContext* dxContext, const DXShader* dxShader) :
-					dxContext(dxContext), dxShader(dxShader), vertexBufferLayout(nullptr), buffer(nullptr), inputLayout(nullptr), hr(0)
+				DXVertexBuffer::DXVertexBuffer(const DXShader& dxShader) :
+					dxShader(dxShader), buffer(nullptr), inputLayout(nullptr), hr(0), offset(0), stride(0)
 				{
 				}
 
@@ -29,7 +30,7 @@ namespace BF
 					bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 					bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-					hr = dxContext->GetDevice()->CreateBuffer(&bufferDesc, 0, &buffer);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, 0, &buffer);
 
 					if (FAILED(hr))
 						std::cout << "Could not create a vertex buffer." << std::endl;
@@ -41,27 +42,28 @@ namespace BF
 					}
 				}
 
-				void DXVertexBuffer::SetLayout(const VertexBufferLayout* vertexBufferLayout)
+				void DXVertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
 				{
-					this->vertexBufferLayout = vertexBufferLayout;
+					D3D11_INPUT_ELEMENT_DESC* inputElementDesc = new D3D11_INPUT_ELEMENT_DESC[vertexBufferLayout.GetBufferElement().size()];
 
-					D3D11_INPUT_ELEMENT_DESC* inputElementDesc = new D3D11_INPUT_ELEMENT_DESC[vertexBufferLayout->GetBufferElement().size()];
-
-					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
+					for (size_t i = 0; i < vertexBufferLayout.GetBufferElement().size(); i++)
 					{
-						inputElementDesc[i].SemanticName = vertexBufferLayout->GetBufferElement()[i].name.c_str();
+						inputElementDesc[i].SemanticName = vertexBufferLayout.GetBufferElement()[i].name.c_str();
 						inputElementDesc[i].SemanticIndex = 0;
-						inputElementDesc[i].Format = GetDXDataType(vertexBufferLayout->GetBufferElement()[i].dataType);
+						inputElementDesc[i].Format = GetDXDataType(vertexBufferLayout.GetBufferElement()[i].dataType);
 						inputElementDesc[i].InputSlot = 0;
-						inputElementDesc[i].AlignedByteOffset = vertexBufferLayout->GetBufferElement()[i].offset;
+						inputElementDesc[i].AlignedByteOffset = vertexBufferLayout.GetBufferElement()[i].offset;
 						inputElementDesc[i].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 						inputElementDesc[i].InstanceDataStepRate = 0;
 					}
 
-					hr = dxContext->GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout->GetBufferElement().size(), dxShader->GetVSData(), dxShader->GetVSsize(), &inputLayout);
+					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout.GetBufferElement().size(), dxShader.GetVSData(), dxShader.GetVSsize(), &inputLayout);
 					if (FAILED(hr))
 						std::cout << "Could not create vertex buffer input layout." << std::endl;
 					
+					offset = vertexBufferLayout.GetBufferElement()[0].offset;
+					stride = vertexBufferLayout.GetBufferElement()[0].stride;
+
 					delete[] inputElementDesc;
 				}
 
@@ -70,7 +72,7 @@ namespace BF
 					D3D11_MAPPED_SUBRESOURCE mappedSubResource;
 					ZeroMemory(&mappedSubResource, sizeof(mappedSubResource));
 
-					if (FAILED(dxContext->GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource)))
+					if (FAILED(Engine::GetContext().GetDXContext().GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource)))
 						std::cout << "Could not map vertex buffer." << std::endl;
 
 					return mappedSubResource.pData;
@@ -78,36 +80,35 @@ namespace BF
 
 				void DXVertexBuffer::Unmap() const
 				{
-					dxContext->GetContext()->Unmap(buffer, 0);
+					Engine::GetContext().GetDXContext().GetContext()->Unmap(buffer, 0);
 				}
 
 				void DXVertexBuffer::Bind() const
 				{
-					unsigned int offset = 0;
-					dxContext->GetContext()->IASetInputLayout(inputLayout);
-					dxContext->GetContext()->IASetVertexBuffers(0, 1, &buffer, &vertexBufferLayout->GetBufferElement()[0].stride, &offset);
+					Engine::GetContext().GetDXContext().GetContext()->IASetInputLayout(inputLayout);
+					Engine::GetContext().GetDXContext().GetContext()->IASetVertexBuffers(0, 1, &buffer, &stride, &offset);
 				}
 
-				DXGI_FORMAT DXVertexBuffer::GetDXDataType(DataType dataType)
+				DXGI_FORMAT DXVertexBuffer::GetDXDataType(VertexBufferLayout::DataType dataType)
 				{
 					switch (dataType)
 					{
-						case DataType::Float:
+						case VertexBufferLayout::DataType::Float:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
 							break;
 						}
-						case DataType::Float2:
+						case VertexBufferLayout::DataType::Float2:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
 							break;
 						}
-						case DataType::Float3:
+						case VertexBufferLayout::DataType::Float3:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
 							break;
 						}
-						case DataType::Float4:
+						case VertexBufferLayout::DataType::Float4:
 						{
 							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
 							break;

@@ -1,5 +1,6 @@
 #include "DXContext.h"
 #include "BF/Graphics/API/Context.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -9,8 +10,19 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXContext::DXContext(const Application::Window* window) :
-					window(window), device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
+				using namespace BF::Graphics::API;
+				using namespace BF::Math;
+
+				DXContext::DXContext() :
+					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
+				{
+				}
+
+				DXContext::~DXContext()
+				{
+				}
+
+				void DXContext::Initialize()
 				{
 					CreateDeviceAndSwapChain();
 					CreateBackBuffer();
@@ -21,8 +33,74 @@ namespace BF
 					context->OMSetRenderTargets(1, &renderTarget, zBuffer);
 				}
 
-				DXContext::~DXContext()
+				void DXContext::Clear(const Vector4& Color)
 				{
+					float color[] = { Color.x, Color.y, Color.z, Color.w };
+					context->ClearRenderTargetView(renderTarget, color);
+
+					if (zBuffer)
+						context->ClearDepthStencilView(zBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+				}
+
+				void DXContext::SwapBuffers()
+				{
+					swapChain->Present(0, 0);
+				}
+
+				void DXContext::Draw(unsigned int vertexCount)
+				{
+					context->DrawIndexed(vertexCount, 0, 0);
+				}
+
+				void DXContext::CleanUp()
+				{
+					swapChain->Release();
+					renderTarget->Release();
+					device->Release();
+					context->Release();
+				}
+
+				void DXContext::SetPrimitiveType(PrimitiveType primitiveType)
+				{
+					switch (primitiveType)
+					{
+					case PrimitiveType::PointList:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
+						break;
+					}
+					case PrimitiveType::LineList:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+						break;
+					}
+					case PrimitiveType::LineStrip:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
+						break;
+					}
+					case PrimitiveType::TriangleList:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+						break;
+					}
+					case PrimitiveType::TriangeStrip:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+						break;
+					}
+					default:
+						break;
+					}
+					context->IASetPrimitiveTopology(D3DPrimitiveType);
+				}
+
+				void DXContext::EnableDepthBuffer(bool state)
+				{
+					if (state)
+						context->OMSetRenderTargets(1, &renderTarget, zBuffer);
+					else
+						context->OMSetRenderTargets(1, &renderTarget, 0);
 				}
 
 				void DXContext::CreateDeviceAndSwapChain()
@@ -33,7 +111,7 @@ namespace BF
 					swapChainDesc.BufferCount = 1;
 					swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 					swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-					swapChainDesc.OutputWindow = window->GetWINWindow()->GetHWND();
+					swapChainDesc.OutputWindow = Engine::GetWindow().GetWINWindow().GetHWND();
 					swapChainDesc.SampleDesc.Count = 4;
 					swapChainDesc.Windowed = TRUE;
 
@@ -112,8 +190,8 @@ namespace BF
 					ZeroMemory(&texd, sizeof(texd));
 					ZeroMemory(&depthBuffer, sizeof(depthBuffer));
 
-					texd.Width = window->GetClientWidth();
-					texd.Height = window->GetClientHeight();
+					texd.Width = Engine::GetWindow().GetClientWidth();
+					texd.Height = Engine::GetWindow().GetClientHeight();
 					texd.ArraySize = 1;
 					texd.MipLevels = 1;
 					texd.SampleDesc.Count = 4;
@@ -141,81 +219,11 @@ namespace BF
 
 					viewPort.TopLeftX = 0;
 					viewPort.TopLeftY = 0;
-					viewPort.Width = window->GetClientWidth();
-					viewPort.Height = window->GetClientHeight();
+					viewPort.Width = Engine::GetWindow().GetClientWidth();
+					viewPort.Height = Engine::GetWindow().GetClientHeight();
 					viewPort.MinDepth = 0.0f;
 					viewPort.MaxDepth = 1.0f;
 					context->RSSetViewports(1, &viewPort);
-				}
-
-				void DXContext::SetPrimitiveType(Graphics::API::PrimitiveType primitiveType)
-				{
-					switch (primitiveType)
-					{
-						case Graphics::API::PrimitiveType::PointList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
-							break;
-						}
-						case Graphics::API::PrimitiveType::LineList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
-							break;
-						}
-						case Graphics::API::PrimitiveType::LineStrip:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
-							break;
-						}
-						case Graphics::API::PrimitiveType::TriangleList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-							break;
-						}
-						case Graphics::API::PrimitiveType::TriangeStrip:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
-							break;
-						}
-						default:
-							break;
-					}
-					context->IASetPrimitiveTopology(D3DPrimitiveType);
-				}
-
-				void DXContext::EnableDepthBuffer(bool state)
-				{
-					if (state)
-						context->OMSetRenderTargets(1, &renderTarget, zBuffer);
-					else
-						context->OMSetRenderTargets(1, &renderTarget, 0);
-				}
-
-				void DXContext::Clear(const Math::Vector4& Color)
-				{
-					float color[] = { Color.x, Color.y, Color.z, Color.w };
-					context->ClearRenderTargetView(renderTarget, color);
-
-					if(zBuffer)
-						context->ClearDepthStencilView(zBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-				}
-
-				void DXContext::SwapBuffers()
-				{
-					swapChain->Present(0, 0);
-				}
-
-				void DXContext::Draw(unsigned int vertexCount)
-				{
-					context->DrawIndexed(vertexCount, 0, 0);
-				}
-
-				void DXContext::CleanUp()
-				{
-					swapChain->Release();
-					renderTarget->Release();
-					device->Release();
-					context->Release();
 				}
 			}
 		}

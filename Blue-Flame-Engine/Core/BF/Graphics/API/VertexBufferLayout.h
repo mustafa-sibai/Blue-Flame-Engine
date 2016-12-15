@@ -8,19 +8,20 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class DataType { Float, Float2, Float3, Float4 };
-
-			struct BF_API VertexBufferElement
-			{
-				int index = 0;
-				std::string name = "";
-				DataType dataType;
-				unsigned int stride = 0;
-				unsigned int offset = 0;
-			};
-
 			class BF_API VertexBufferLayout
 			{
+				public:
+					enum class DataType { Float, Float2, Float3, Float4 };
+
+					struct BF_API VertexBufferElement
+					{
+						int index = 0;
+						std::string name = "";
+						DataType dataType;
+						unsigned int stride = 0;
+						unsigned int offset = 0;
+					};
+
 				private:
 					std::vector<VertexBufferElement> vertexBufferElements;
 

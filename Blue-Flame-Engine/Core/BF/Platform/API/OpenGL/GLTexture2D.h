@@ -20,11 +20,11 @@ namespace BF
 				class BF_API GLTexture2D
 				{
 					private:
-						GLShader* glshader;
+						const GLShader& glshader;
 						GLuint textureID;
 
 					public:
-						GLTexture2D(GLShader* glshader);
+						GLTexture2D(const GLShader& glshader);
 						~GLTexture2D();
 
 						void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, const uint8_t* data, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);

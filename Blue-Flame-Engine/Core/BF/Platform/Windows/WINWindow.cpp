@@ -13,8 +13,8 @@ namespace BF
 			using namespace Application;
 			using namespace Math;
 
-			WINWindow::WINWindow(Application::Window* window) :
-				window(window), hWnd(nullptr), msg(), currentWindowStyle()
+			WINWindow::WINWindow(Window* window) :
+				window(window)
 			{
 				HINSTANCE hInstance = GetModuleHandle(0);
 
@@ -53,7 +53,7 @@ namespace BF
 					0,
 					0,
 					hInstance,
-					window);
+					&window);
 
 				if (!hWnd)
 					std::cout << "failed to create window" << std::endl;

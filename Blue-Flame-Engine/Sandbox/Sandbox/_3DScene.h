@@ -13,10 +13,10 @@ namespace _3DScene
 		BF::Math::Matrix4 projectionMatrix;
 	};
 
-	class _3DScene : public Scene
+	class _3DScene : public BF::Application::Scene
 	{
 		private:
-			BF::Graphics::API::Shader* shader;
+			BF::Graphics::API::Shader shader;
 			BF::Graphics::API::ConstentBuffer* constentBuffer;
 			BF::Graphics::Model* model;
 			BF::Graphics::FPSCamera* fpsCamera;

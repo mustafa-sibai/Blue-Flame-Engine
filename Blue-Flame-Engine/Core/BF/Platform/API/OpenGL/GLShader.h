@@ -31,7 +31,7 @@ namespace BF
 						GLShader();
 						~GLShader();
 
-						void Load(const std::string& vertexShaderFilePath, const std::string& fragmentShaderFilePath);
+						void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
 
 						void Bind() const;
 						void Unbind() const;
