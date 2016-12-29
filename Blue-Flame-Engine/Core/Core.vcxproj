@@ -23,6 +23,7 @@
     <ClCompile Include="BF\Audio\Sound.cpp" />
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
     <ClCompile Include="BF\Engine.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
@@ -32,18 +33,23 @@
     <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
-    <ClCompile Include="BF\Graphics\Font.cpp" />
+    <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Widget.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\WidgetManager.cpp" />
     <ClCompile Include="BF\Graphics\Material.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
+    <ClCompile Include="BF\Graphics\TileMap.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
+    <ClCompile Include="BF\IO\BFALoader.cpp" />
+    <ClCompile Include="BF\IO\BFMLoader.cpp" />
     <ClCompile Include="BF\IO\BFXLoader.cpp" />
     <ClCompile Include="BF\IO\FileLoader.cpp" />
     <ClCompile Include="BF\IO\ImageLoader.cpp" />
@@ -66,6 +72,7 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLShader.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLTexture2D.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\Vulkan\VKContext.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\Application\SceneManager.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
@@ -78,6 +85,7 @@
     <ClInclude Include="BF\BlueFlame.h" />
     <ClInclude Include="BF\Common.h" />
     <ClInclude Include="BF\Engine.h" />
+    <ClInclude Include="BF\Graphics\Animation\SpriteAnimation.h" />
     <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
@@ -87,19 +95,31 @@
     <ClInclude Include="BF\Graphics\API\VertexBuffer.h" />
     <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h" />
     <ClInclude Include="BF\Graphics\Camera.h" />
-    <ClInclude Include="BF\Graphics\Font.h" />
+    <ClInclude Include="BF\Graphics\Fonts\Character.h" />
+    <ClInclude Include="BF\Graphics\Fonts\Font.h" />
+    <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
     <ClInclude Include="BF\Graphics\GUI\Button.h" />
     <ClInclude Include="BF\Graphics\GUI\StyleSheet.h" />
+    <ClInclude Include="BF\Graphics\GUI\Widget.h" />
+    <ClInclude Include="BF\Graphics\GUI\WidgetManager.h" />
     <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
+    <ClInclude Include="BF\Graphics\Tile.h" />
+    <ClInclude Include="BF\Graphics\TileData.h" />
+    <ClInclude Include="BF\Graphics\TileMap.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
+    <ClInclude Include="BF\IO\BFALoader.h" />
+    <ClInclude Include="BF\IO\BFMLoader.h" />
     <ClInclude Include="BF\IO\BFXLoader.h" />
+    <ClInclude Include="BF\IO\FileFormats\BFAFormat.h" />
+    <ClInclude Include="BF\IO\FileFormats\BFMFormat.h" />
+    <ClInclude Include="BF\IO\FileFormats\BFXFormat.h" />
     <ClInclude Include="BF\IO\FileLoader.h" />
     <ClInclude Include="BF\IO\ImageLoader.h" />
     <ClInclude Include="BF\IO\WAVLoader.h" />
@@ -121,6 +141,7 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLShader.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLTexture2D.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
+    <ClInclude Include="BF\Platform\API\Vulkan\VKContext.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\Application\Scene.h" />
@@ -184,25 +205,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Debug;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeType\lib\x64\Debug;$(SolutionDir)Dependency\TinyXML-2\tinyxml2\bin\tinyxml2\x64-Debug-Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\Vulkan\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\Vulkan\lib\Windows;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Dist\x64\Debug;$(SolutionDir)Dependency\FreeType\lib\x64\Debug;$(SolutionDir)Dependency\TinyXML-2\tinyxml2\bin\tinyxml2\x64-Debug-Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\FreeImage\Dist\x64\Release;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeType\lib\x64\Release;$(SolutionDir)Dependency\TinyXML-2\tinyxml2\bin\tinyxml2\x64-Release-Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\Vulkan\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib\Windows;$(SolutionDir)Dependency\Vulkan\lib\Windows;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Dist\x64\Release;$(SolutionDir)Dependency\FreeType\lib\x64\Release;$(SolutionDir)Dependency\TinyXML-2\tinyxml2\bin\tinyxml2\x64-Release-Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\Vulkan\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\Vulkan\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -220,7 +241,8 @@
       </PrecompiledHeaderFile>
     </ClCompile>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -246,13 +268,14 @@
       </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;vulkan-1.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -283,7 +306,8 @@
       <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -313,12 +337,13 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;vulkan-1.lib;OpenAL32.lib;FreeImageLib.lib;freetype27.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>

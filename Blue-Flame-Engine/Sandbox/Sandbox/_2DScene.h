@@ -4,6 +4,8 @@
 #include <chrono>
 #include <vector>
 
+
+
 namespace _2DScene
 {
 	struct InitBuffer
@@ -31,11 +33,13 @@ namespace _2DScene
 			BF::Graphics::Renderers::Sprite sprite5;
 
 			BF::Graphics::Renderers::Sprite fontSprite;
-			BF::Graphics::Font* font;
+			BF::Graphics::Fonts::Font font;
+			BF::Graphics::Fonts::FontAtlas* fontAtlas;
 
-			BF::Graphics::GUI::StyleSheet styleSheet;
 			BF::Graphics::GUI::Button button;
+			BF::Graphics::TileMap tileMap;
 
+			BF::Graphics::Animation::SpriteAnimation spriteAnimation;
 			InitBuffer initBuffer;
 
 			//std::vector<BF::Graphics::Renderers::Sprite*>* sprites;

@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <Windows.h>
+#include <Windowsx.h>
 #include <Dwmapi.h>
 #include "BF/Application/WindowStyle.h"
 #include "BF/Common.h"
@@ -19,6 +19,7 @@ namespace BF
 					HWND hWnd;
 					MSG msg;
 					DWORD currentWindowStyle;
+					POINT mousePosition;
 					Application::Window* window;
 
 				public:

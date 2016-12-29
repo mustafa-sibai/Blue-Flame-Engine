@@ -13,8 +13,7 @@ namespace BF
 			private:
 				const API::Shader& shader;
 				API::VertexBufferLayout vertexBufferLayout;
-				std::vector<Mesh>* meshes;
-				IO::BFXLoader bfxLoader;
+				std::vector<Mesh>* model;
 
 			public:
 				Model(const API::Shader& shader);

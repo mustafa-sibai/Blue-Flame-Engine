@@ -30,10 +30,10 @@ namespace BF
 				string textureFilename = string(title);
 				texture->Load(textureFilename);
 
-				AddButtonComponent(xmlDocument);
+				AddButtonWidget(xmlDocument);
 			}
 
-			Math::Rectangle StyleSheet::ReadComponent(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type)
+			Math::Rectangle StyleSheet::ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type)
 			{
 				const char* x = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("X");
 				const char* y = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("Y");
@@ -43,23 +43,23 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
-			void StyleSheet::AddButtonComponent(const tinyxml2::XMLDocument& xmlDocument)
+			void StyleSheet::AddButtonWidget(const tinyxml2::XMLDocument& xmlDocument)
 			{
-				Component component;
+				WidgetData widgetData;
 				Rectangle scissorRectangle;
 
-				component.name = "Button";
+				widgetData.name = "Button";
 
-				scissorRectangle = ReadComponent(xmlDocument, "Button", "Hovered");
-				component.hoveredSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Hovered");
+				widgetData.hoveredSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
 
-				scissorRectangle = ReadComponent(xmlDocument, "Button", "Pressed");
-				component.pressedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Pressed");
+				widgetData.pressedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
 
-				scissorRectangle = ReadComponent(xmlDocument, "Button", "Released");
-				component.releasedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Released");
+				widgetData.releasedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
 
-				GUIComponents.push_back(component);
+			widgetsData.push_back(widgetData);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ namespace BF
 			bufferSize = width * height * ((unsigned int)format / 8);
 
 			buffer = new uint8_t[bufferSize];
-			memset(buffer, 0, bufferSize);
+			memset(buffer, 0, sizeof(uint8_t) * bufferSize);
 		}
 
 		void TextureAtlas::AddTexture(const Math::Rectangle& rectangle, uint8_t* data)

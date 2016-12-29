@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <tinyxml2.h>
+#include "Widget.h"
 #include "BF/Graphics/Renderers/Sprite.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
@@ -12,40 +13,31 @@ namespace BF
 	{
 		namespace GUI
 		{
-			struct Component
-			{
-				std::string name;
-				Renderers::Sprite hoveredSprite;
-				Renderers::Sprite pressedSprite;
-				Renderers::Sprite releasedSprite;
-			};
-
 			class BF_API StyleSheet
 			{
 				private:
 					std::string styleSheetNode;
-					std::vector<Component> GUIComponents;
+					std::vector<WidgetData> widgetsData;
 					API::Texture2D* texture;
 
 				public:
-					StyleSheet() = default;
 					StyleSheet(const API::Shader& shader);
 					~StyleSheet();
 
 					void Load(const std::string& filename);
 
-					inline Component GetComponent(const std::string& name) const
+					inline WidgetData GetWidgetData(const std::string& name) const
 					{
-						for (size_t i = 0; i < GUIComponents.size(); i++)
-							if (GUIComponents[i].name == name)
-								return GUIComponents[i];
+						for (size_t i = 0; i < widgetsData.size(); i++)
+							if (widgetsData[i].name == name)
+								return widgetsData[i];
 
-						return Component();
+						return WidgetData();
 					}
 
 				private:
-					Math::Rectangle ReadComponent(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
-					void AddButtonComponent(const tinyxml2::XMLDocument& xmlDocument);
+					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
+					void AddButtonWidget(const tinyxml2::XMLDocument& xmlDocument);
 			};
 		}
 	}

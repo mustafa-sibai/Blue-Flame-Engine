@@ -1,5 +1,8 @@
 #include "FBXLoader.h"
 
+using namespace BF::Math;
+using namespace BF::Graphics;
+
 FBXLoader::FBXLoader()
 {
 }

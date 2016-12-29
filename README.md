@@ -15,6 +15,9 @@ A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 <li>Rendering 3D models with basic Phong shading.</li>
 <li>Rendering 2D sprites with sprite batching.</li>
 <li>Rendering 2D textures.</li>
+<li>Rendering Tile maps</li>
+<li>Support for playing sprite animation</li>
+<li>Support GUI system</li>
 <li>Math library that has Vector2, 3 and 4, 4x4 Matrix and Rectangle.</li>
 <li>Support for both Perspective and Orthographic projection</li>
 </ul>

@@ -7,19 +7,18 @@
 
 #include "BF/Common.h"
 
+#define MAX_KEYS 256
+
 namespace BF
 {
 	namespace Input
 	{
-		#define MAX_KEYS 256
-
 		class BF_API Keyboard
 		{
-			private:
 #ifdef BF_PLATFORM_WINDOWS
-				friend class BF::Platform::Windows::WINWindow;
+			friend class BF::Platform::Windows::WINWindow;
 #elif BF_PLATFORM_LINUX
-				friend class BF::Platform::Linux::LXWindow;
+			friend class BF::Platform::Linux::LXWindow;
 #endif
 			public:
 				enum class BF_API Key

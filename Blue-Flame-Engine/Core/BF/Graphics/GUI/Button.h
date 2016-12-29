@@ -1,6 +1,6 @@
 #pragma once
-#include "BF/Graphics/Renderers/SpriteRenderer.h"
-#include "StyleSheet.h"
+#include "Widget.h"
+#include "BF/Application/Scene.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -9,23 +9,16 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API Button
+			class BF_API Button : public Widget
 			{
-				private:
-					Renderers::SpriteRenderer& spriteRenderer;
-					Component component;
+			public:
+				Button(Application::Scene& scene);
+				~Button();
 
-				public:
-					Button(Renderers::SpriteRenderer& spriteRenderer);
-					~Button();
-
-					void Load(const StyleSheet& StyleSheet);
-					void Update();
-					void Render();
-
-					inline bool IsHovered() { return true; }
-					inline bool IsPressed() { return true; }
-					inline bool IsReleased() { return true; }
+				void Initialize(Renderers::SpriteRenderer& spriteRenderer) override;
+				void Load(const StyleSheet& StyleSheet, const std::string& widgetName) override;
+				void Update() override;
+				void Render() override;
 			};
 		}
 	}

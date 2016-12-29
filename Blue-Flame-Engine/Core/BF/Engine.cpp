@@ -75,7 +75,7 @@ void Engine::Run()
 
 				if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
 				{
-					BF_INFO("frames: %d FUPS: %d", FPS, FUPS);
+					BF_LOG_INFO("frames: %d FUPS: %d", FPS, FUPS);
 					SceneManager::GetScene(i).frameRateTimer.Reset();
 					FPS = 0;
 					FUPS = 0;

@@ -2,6 +2,7 @@
 #include "BF/Input/Keyboard.h"
 #include "BF/Input/Mouse.h"
 #include "BF/Application/Window.h"
+#include "BF/System/Log.h"
 
 namespace BF
 {
@@ -72,6 +73,21 @@ namespace BF
 				{
 					TranslateMessage(&msg);
 					DispatchMessage(&msg);
+				}
+
+				if (GetCursorPos(&mousePosition))
+				{
+					Mouse::positionRelativeToScreen = Vector2((float)mousePosition.x, (float)mousePosition.y);
+
+					if (ScreenToClient(hWnd, &mousePosition))
+					{
+						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= window->clientWidth && mousePosition.y <= window->clientHeight)
+							Mouse::insideWindowClient = true;
+						else
+							Mouse::insideWindowClient = false;
+
+						Mouse::positionRelativeToWindow = Vector2((float)min(max(0, mousePosition.x), window->clientWidth), (float)min(max(0, mousePosition.y), window->clientHeight));
+					}
 				}
 			}
 
@@ -149,6 +165,7 @@ namespace BF
 						PostQuitMessage(0);
 						break;
 					}
+
 					case WM_SIZE:
 					{
 						window->width = LOWORD(lParam) + window->borderWidth;
@@ -156,22 +173,79 @@ namespace BF
 
 						window->clientWidth = LOWORD(lParam);
 						window->clientHeight = HIWORD(lParam);
+						break;
 					}
+
 					case WM_KEYDOWN:
 					{
 						Keyboard::keys[(unsigned char)wParam] = true;
 						break;
 					}
+
 					case WM_KEYUP:
 					{
 						Keyboard::keys[(unsigned char)wParam] = false;
 						break;
 					}
-					case WM_MOUSEMOVE:
+
+					case WM_LBUTTONDOWN:
 					{
-						POINT mousePoint = { LOWORD(lParam), HIWORD(lParam) };
-						Mouse::Position = Vector2((float)mousePoint.x, (float)mousePoint.y);
+						Mouse::buttons[(unsigned char)Mouse::Button::Left] = true;
+						break;
 					}
+
+					case WM_LBUTTONUP:
+					{
+						Mouse::buttons[(unsigned char)Mouse::Button::Left] = false;
+						break;
+					}
+
+					case WM_MBUTTONDOWN:
+					{
+						Mouse::buttons[(unsigned char)Mouse::Button::Middle] = true;
+						break;
+					}
+
+					case WM_MBUTTONUP:
+					{
+						Mouse::buttons[(unsigned char)Mouse::Button::Middle] = false;
+						break;
+					}
+
+					case WM_RBUTTONDOWN:
+					{
+						Mouse::buttons[(unsigned char)Mouse::Button::Right] = true;
+						break;
+					}
+
+					case WM_RBUTTONUP:
+					{
+						Mouse::buttons[(unsigned char)Mouse::Button::Right] = false;
+						break;
+					}
+
+					case WM_XBUTTONDOWN:
+					{
+						int buttonID = GET_XBUTTON_WPARAM(wParam);
+
+						if (buttonID == 1)
+							Mouse::buttons[(unsigned char)Mouse::Button::X1] = true;
+						else if (buttonID == 2)
+							Mouse::buttons[(unsigned char)Mouse::Button::X2] = true;
+						break;
+					}
+
+					case WM_XBUTTONUP:
+					{
+						int buttonID = GET_XBUTTON_WPARAM(wParam);
+
+						if (buttonID == 1)
+							Mouse::buttons[(unsigned char)Mouse::Button::X1] = false;
+						else if (buttonID == 2)
+							Mouse::buttons[(unsigned char)Mouse::Button::X2] = false;
+						break;
+					}
+
 					default:
 						break;
 				}

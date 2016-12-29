@@ -1,5 +1,7 @@
 #include "BFXWriter.h"
 
+using namespace BF::Graphics;
+
 BFXWriter::BFXWriter(const std::vector<Mesh>* mesh)
 {
 	this->mesh = mesh;

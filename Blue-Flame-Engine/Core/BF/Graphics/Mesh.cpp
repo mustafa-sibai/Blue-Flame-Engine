@@ -8,7 +8,7 @@ namespace BF
 		using namespace BF::Graphics::API;
 		using namespace BF::Math;
 
-		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices, vector<Material>* materials) :
+		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices/*, vector<Material>* materials*/) :
 			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices)/*, materials(materials), textureFileName("")*/
 		{
 		}

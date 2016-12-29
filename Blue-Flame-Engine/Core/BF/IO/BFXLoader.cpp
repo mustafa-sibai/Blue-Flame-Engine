@@ -1,24 +1,21 @@
 #include "BFXLoader.h"
+#include "FileFormats/BFXFormat.h"
 
 namespace BF
 {
 	namespace IO
 	{
-		using namespace Graphics;
+		using namespace std;
+		using namespace BF::Graphics;
+		using namespace BF::IO::FileFormats;
 
-		BFXLoader::BFXLoader()
-		{
-		}
+		static std::vector<Graphics::Mesh>* model;
 
-		BFXLoader::~BFXLoader()
+		vector<Mesh>* BFXLoader::Load(const string& filename)
 		{
-		}
-
-		std::vector<Mesh>* BFXLoader::Load(const std::string& filename)
-		{
-			char fileHeader[8];
+			char fileHeader[9];
+			model = new vector<Mesh>();
 			BFXFormat bfxFormat;
-			std::vector<Mesh>* model = new std::vector<Mesh>();
 
 			FILE* file;
 			file = fopen(filename.c_str(), "rb");
@@ -31,6 +28,14 @@ namespace BF
 			}
 
 			fread(fileHeader, sizeof(char), 8, file);
+			fileHeader[8] = '\0';
+			if (strcmp(fileHeader, "BFX FILE") != 0)
+			{
+				printf("Error: Wrong file format: %s\n", filename.c_str());
+				fclose(file);
+				return nullptr;
+			}
+
 			fread(&bfxFormat.majorFileVersion, sizeof(uint8_t), 1, file);
 			fread(&bfxFormat.minorFileVersion, sizeof(uint8_t), 1, file);
 			fread(&bfxFormat.meshCount, sizeof(unsigned int), 1, file);
@@ -38,18 +43,17 @@ namespace BF
 			for (size_t i = 0; i < bfxFormat.meshCount; i++)
 			{
 				fread(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
-				std::vector<MeshVertexData>* verticess = new std::vector<MeshVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshVertexData));
+				vector<MeshVertexData>* verticess = new vector<MeshVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshVertexData));
 				fread(&verticess[0][0], bfxFormat.vertexBufferSize, 1, file);
 
 				fread(&bfxFormat.indexBufferSize, sizeof(unsigned int), 1, file);
-				std::vector<unsigned int>* indicess = new std::vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
+				vector<unsigned int>* indicess = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
 				fread(&indicess[0][0], bfxFormat.indexBufferSize, 1, file);
 
-				model->push_back(Mesh(verticess, indicess, nullptr));
+				model->push_back(Mesh(verticess, indicess));
 			}
 
 			fclose(file);
-
 			return model;
 		}
 	}

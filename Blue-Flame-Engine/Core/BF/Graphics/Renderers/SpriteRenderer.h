@@ -2,6 +2,7 @@
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
 #include "BF/Graphics/Renderers/Sprite.h"
+#include "BF/Graphics/Fonts/FontAtlas.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -35,11 +36,13 @@ namespace BF
 
 					void Initialize();
 					void Begin(SubmitType submitType);
-					void Submit(const Sprite& sprite);
+					void Render(const Sprite& sprite);
+					void RenderRectangle(const Math::Rectangle& rectangle, const Math::Vector4& Color);
+					void RenderText(const Fonts::FontAtlas& fontAtlas, const std::string& text, Math::Vector3 position, const Math::Vector4& color);
 					void End();
 
 				private:
-					void CalculateUV(const Sprite& sprite, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
+					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
 					float FindTexture(const API::Texture2D* texture);
 			};
 		}

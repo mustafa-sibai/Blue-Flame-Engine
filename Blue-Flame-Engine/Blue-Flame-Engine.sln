@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.25920.0
+VisualStudioVersion = 15.0.26014.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\Core.vcxproj", "{CDB20F4C-0F5C-43C1-8165-569F68720BDF}"
 EndProject
@@ -22,7 +22,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox-WebGL", "Sandbox-We
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core-Linux", "Core-Linux\Core-Linux.vcxproj", "{6693C31C-1E8A-439C-8602-E51B584DFA14}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BFX Tool", "BFX Tool\BFX Tool.vcxproj", "{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CDB20F4C-0F5C-43C1-8165-569F68720BDF} = {CDB20F4C-0F5C-43C1-8165-569F68720BDF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,26 +197,26 @@ Global
 		{6693C31C-1E8A-439C-8602-E51B584DFA14}.Shipping|x64.Build.0 = Release|x64
 		{6693C31C-1E8A-439C-8602-E51B584DFA14}.Shipping|x86.ActiveCfg = Release|x86
 		{6693C31C-1E8A-439C-8602-E51B584DFA14}.Shipping|x86.Build.0 = Release|x86
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|ARM.ActiveCfg = Debug|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|Tegra-Android.ActiveCfg = Debug|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|x64.ActiveCfg = Debug|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|x64.Build.0 = Debug|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|x86.ActiveCfg = Debug|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Debug|x86.Build.0 = Debug|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|ARM.ActiveCfg = Release|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|Tegra-Android.ActiveCfg = Release|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|x64.ActiveCfg = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|x64.Build.0 = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|x86.ActiveCfg = Release|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Release|x86.Build.0 = Release|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|ARM.ActiveCfg = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|ARM.Build.0 = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|Tegra-Android.ActiveCfg = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|Tegra-Android.Build.0 = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|x64.ActiveCfg = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|x64.Build.0 = Release|x64
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|x86.ActiveCfg = Release|Win32
-		{A88F9F5C-8FE7-4BC9-9B86-6F2125092942}.Shipping|x86.Build.0 = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|ARM.ActiveCfg = Debug|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|Tegra-Android.ActiveCfg = Debug|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|x64.ActiveCfg = Debug|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|x64.Build.0 = Debug|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|x86.ActiveCfg = Debug|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Debug|x86.Build.0 = Debug|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|ARM.ActiveCfg = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|Tegra-Android.ActiveCfg = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|x64.ActiveCfg = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|x64.Build.0 = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|x86.ActiveCfg = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Release|x86.Build.0 = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|ARM.ActiveCfg = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|ARM.Build.0 = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|Tegra-Android.ActiveCfg = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|Tegra-Android.Build.0 = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|x64.ActiveCfg = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|x64.Build.0 = Release|x64
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|x86.ActiveCfg = Release|Win32
+		{1FAE27B0-B3EF-41DE-92B9-84F02522C81D}.Shipping|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

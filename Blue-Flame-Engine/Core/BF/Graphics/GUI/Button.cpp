@@ -1,4 +1,5 @@
 #include "Button.h"
+#include "WidgetManager.h"
 
 namespace BF
 {
@@ -6,29 +7,33 @@ namespace BF
 	{
 		namespace GUI
 		{
-			using namespace BF::Graphics::Renderers;
-
-			Button::Button(Renderers::SpriteRenderer& spriteRenderer) :
-				spriteRenderer(spriteRenderer)
+			Button::Button(Application::Scene& scene)
 			{
+				scene.GetWidgetManager().AddWidget(this);
 			}
 
 			Button::~Button()
 			{
 			}
 
-			void Button::Load(const StyleSheet& StyleSheet)
+			void Button::Initialize(Renderers::SpriteRenderer& spriteRenderer)
 			{
-				component = StyleSheet.GetComponent("Button");
+				Widget::Initialize(spriteRenderer);
+			}
+
+			void Button::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
+			{
+				Widget::Load(StyleSheet, "Button");
 			}
 
 			void Button::Update()
 			{
+				Widget::Update();
 			}
 
 			void Button::Render()
 			{
-				spriteRenderer.Submit(component.releasedSprite);
+				Widget::Render();
 			}
 		}
 	}
