@@ -1,6 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Core_Android.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\Android\JNI.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\AContext.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Rectangle.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Vector2.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Vector4.cpp" />
+    <ClCompile Include="..\Core\BF\System\Timer.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Vector3.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Math.cpp" />
+    <ClCompile Include="..\Core\BF\Math\Matrix4.cpp" />
+    <ClCompile Include="..\Core\BF\Application\Window.cpp" />
+    <ClCompile Include="..\Core\BF\Application\SceneManager.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\Context.cpp" />
+    <ClCompile Include="..\Core\BF\Engine.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\Android\AWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\System\Log.h" />
+    <ClInclude Include="..\Core\BF\Platform\Android\JNI.h" />
+    <ClInclude Include="..\Core\BF\BlueFlame.h" />
+    <ClInclude Include="..\Core\BF\Common.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\AContext.h" />
+    <ClInclude Include="..\Core\BF\Math\Rectangle.h" />
+    <ClInclude Include="..\Core\BF\Math\Vector2.h" />
+    <ClInclude Include="..\Core\BF\Math\Vector4.h" />
+    <ClInclude Include="..\Core\BF\System\Timer.h" />
+    <ClInclude Include="..\Core\BF\Math\Vector3.h" />
+    <ClInclude Include="..\Core\BF\Math\Math.h" />
+    <ClInclude Include="..\Core\BF\Math\Matrix4.h" />
+    <ClInclude Include="..\Core\BF\Application\WindowStyle.h" />
+    <ClInclude Include="..\Core\BF\Application\Window.h" />
+    <ClInclude Include="..\Core\BF\Application\Scene.h" />
+    <ClInclude Include="..\Core\BF\Application\SceneManager.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\Context.h" />
+    <ClInclude Include="..\Core\BF\Engine.h" />
+    <ClInclude Include="..\Core\BF\Platform\Android\AWindow.h" />
   </ItemGroup>
 </Project>

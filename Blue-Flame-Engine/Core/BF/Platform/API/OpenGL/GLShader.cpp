@@ -1,4 +1,5 @@
 #include "GLShader.h"
+#include "GLError.h"
 
 namespace BF
 {
@@ -22,20 +23,21 @@ namespace BF
 
 				GLuint GLShader::CompileShader(const string& shaderCode, GLenum shaderType)
 				{
-					GLuint shaderID = glCreateShader(shaderType);
+					GLuint shaderID = 0;
+					GLCall(shaderID = glCreateShader(shaderType));
 
 					const char* cShaderCode = shaderCode.c_str();
 
-					glShaderSource(shaderID, 1, &cShaderCode, 0);
-					glCompileShader(shaderID);
+					GLCall(glShaderSource(shaderID, 1, &cShaderCode, 0));
+					GLCall(glCompileShader(shaderID));
 
-					glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
-					glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &errorLength);
+					GLCall(glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result));
+					GLCall(glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &errorLength));
 					if (errorLength > 0)
 					{
 						vector<char> shaderErrorMessage(errorLength + 1);
-						glGetShaderInfoLog(shaderID, errorLength, NULL, &shaderErrorMessage[0]);
-						printf("Compile Error: %s\n", &shaderErrorMessage[0]);
+						GLCall(glGetShaderInfoLog(shaderID, errorLength, NULL, &shaderErrorMessage[0]));
+						BF_LOG_ERROR("Compile Error: %s", &shaderErrorMessage[0]);
 					}
 
 					return shaderID;
@@ -46,35 +48,35 @@ namespace BF
 					GLuint vertexShader = CompileShader(FileLoader::LoadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
 					GLuint pixelShader = CompileShader(FileLoader::LoadTextFile(pixelShaderFilePath), GL_FRAGMENT_SHADER);
 
-					programID = glCreateProgram();
+					GLCall(programID = glCreateProgram());
 
-					glAttachShader(programID, vertexShader);
-					glAttachShader(programID, pixelShader);
-					glLinkProgram(programID);
+					GLCall(glAttachShader(programID, vertexShader));
+					GLCall(glAttachShader(programID, pixelShader));
+					GLCall(glLinkProgram(programID));
 
-					glGetProgramiv(programID, GL_LINK_STATUS, &result);
-					glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &errorLength);
+					GLCall(glGetProgramiv(programID, GL_LINK_STATUS, &result));
+					GLCall(glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &errorLength));
 					if (errorLength > 0)
 					{
 						vector<char> ProgramErrorMessage(errorLength + 1);
-						glGetProgramInfoLog(programID, errorLength, NULL, &ProgramErrorMessage[0]);
-						printf("Link Error: %s\n", &ProgramErrorMessage[0]);
+						GLCall(glGetProgramInfoLog(programID, errorLength, NULL, &ProgramErrorMessage[0]));
+						BF_LOG_ERROR("Link Error: %s", &ProgramErrorMessage[0]);
 					}
 
-					glDetachShader(programID, vertexShader);
-					glDetachShader(programID, pixelShader);
-					glDeleteShader(vertexShader);
-					glDeleteShader(pixelShader);
+					GLCall(glDetachShader(programID, vertexShader));
+					GLCall(glDetachShader(programID, pixelShader));
+					GLCall(glDeleteShader(vertexShader));
+					GLCall(glDeleteShader(pixelShader));
 				}
 
 				void GLShader::Bind() const
 				{
-					glUseProgram(programID);
+					GLCall(glUseProgram(programID));
 				}
 
 				void GLShader::Unbind() const
 				{
-					glUseProgram(0);
+					GLCall(glUseProgram(0));
 				}
 			}
 		}

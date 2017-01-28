@@ -1,6 +1,5 @@
 #pragma once
 #include <d3d11.h>
-#include <iostream>
 #include "DXShader.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
 #include "BF/Common.h"
@@ -20,7 +19,6 @@ namespace BF
 
 						ID3D11Buffer* buffer;
 						ID3D11InputLayout* inputLayout;
-						HRESULT hr;
 
 						unsigned int offset, stride;
 

@@ -8,7 +8,7 @@
 #include "BF/Math/Vector2.h"
 #include "BF/Common.h"
 
-#define MAX_BUTTONS 10
+#define BF_MAX_MOUSE_BUTTONS 10
 
 namespace BF
 {
@@ -19,23 +19,22 @@ namespace BF
 			friend class BF::Platform::Windows::WINWindow;
 
 			private:
-				static Math::Vector2 positionRelativeToWindow;
-				static Math::Vector2 positionRelativeToScreen;
+				static Math::Vector2 position;
 				static bool insideWindowClient;
-				static bool buttons[MAX_BUTTONS];
+				static bool buttons[BF_MAX_MOUSE_BUTTONS];
 
 			public:
-				enum class BF_API Button { Left, Right, Middle, X1, X2 };
+				enum class Button { Left, Right, Middle, X1, X2 };
 
 			public:
 				Mouse();
 				~Mouse();
 
 				static bool IsButtonPressed(Button button);
+				static void SetPosition(Math::Vector2 position);
 
-				inline static Math::Vector2 GetPositionRelativeToWindow() { return positionRelativeToWindow; }
-				inline static Math::Vector2 GetPositionRelativeToScreen () { return positionRelativeToScreen; }
-
+				static void ShowMouseCursor(bool value);
+				inline static Math::Vector2 GetPosition() { return position; }
 				inline static bool IsInsideWindowClient()
 				{
 					if (!insideWindowClient)

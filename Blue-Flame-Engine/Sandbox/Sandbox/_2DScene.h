@@ -4,25 +4,13 @@
 #include <chrono>
 #include <vector>
 
-
-
 namespace _2DScene
 {
-	struct InitBuffer
-	{
-		BF::Math::Matrix4 modelMatrix;
-		BF::Math::Matrix4 viewMatrix;
-		BF::Math::Matrix4 projectionMatrix;
-	};
-
 	class _2DScene : public BF::Application::Scene
 	{
 		private:
-			BF::Graphics::API::Shader shader;
-
-			BF::Graphics::API::ConstentBuffer* constentBuffer;
 			BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
-
+			
 			BF::Graphics::API::Texture2D* t;
 			BF::Graphics::API::Texture2D* t2;
 
@@ -35,12 +23,13 @@ namespace _2DScene
 			BF::Graphics::Renderers::Sprite fontSprite;
 			BF::Graphics::Fonts::Font font;
 			BF::Graphics::Fonts::FontAtlas* fontAtlas;
-
-			BF::Graphics::GUI::Button button;
+			
 			BF::Graphics::TileMap tileMap;
+			
+			BF::Graphics::GUI::Button button;
 
-			BF::Graphics::Animation::SpriteAnimation spriteAnimation;
-			InitBuffer initBuffer;
+			//BF::Graphics::Animation::SpriteAnimation spriteAnimation;
+			//InitBuffer initBuffer;
 
 			//std::vector<BF::Graphics::Renderers::Sprite*>* sprites;
 

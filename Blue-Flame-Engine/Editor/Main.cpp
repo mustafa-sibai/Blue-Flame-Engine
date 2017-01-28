@@ -29,22 +29,113 @@ int main()
 
 	tileMapData.tilesData.push_back(tiledata1);
 	tileMapData.tilesData.push_back(tiledata2);
+	*/
+	//-----------------------------------------------------------------------
+
+
+	BF::Graphics::TileMapData tileMapData;
+	tileMapData.textures.push_back("Assets/Textures/grass.png");
+	tileMapData.textures.push_back("Assets/Textures/road.png");
+	//-----------------------------------------------------------------------
+
+	BF::Math::Vector2 pos(500, 500);
+	BF::Math::Vector2 size(100, 65);
+
+	//center
+	BF::Graphics::TileData tiledata0;
+	tiledata0.textureID = 0;
+	tiledata0.rectangle = BF::Math::Rectangle(pos.x, pos.y, size.x, size.y);
+	tiledata0.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//down
+	BF::Graphics::TileData tiledata1;
+	tiledata1.textureID = 1;
+	tiledata1.rectangle = BF::Math::Rectangle(pos.x, pos.y + (size.x / 2), size.x, size.y);
+	tiledata1.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//up
+	BF::Graphics::TileData tiledata2;
+	tiledata2.textureID = 1;
+	tiledata2.rectangle = BF::Math::Rectangle(pos.x, pos.y - (size.x / 2), size.x, size.y);
+	tiledata2.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//left
+	BF::Graphics::TileData tiledata3;
+	tiledata3.textureID = 1;
+	tiledata3.rectangle = BF::Math::Rectangle(pos.x - size.x, pos.y, size.x, size.y);
+	tiledata3.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//right
+	BF::Graphics::TileData tiledata4;
+	tiledata4.textureID = 1;
+	tiledata4.rectangle = BF::Math::Rectangle(pos.x + size.x, pos.y, size.x, size.y);
+	tiledata4.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//right bottom
+	BF::Graphics::TileData tiledata5;
+	tiledata5.textureID = 1;
+	tiledata5.rectangle = BF::Math::Rectangle(pos.x + (size.x / 2), pos.y + (size.x / 4), size.x, size.y);
+	tiledata5.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//left bottom
+	BF::Graphics::TileData tiledata6;
+	tiledata6.textureID = 1;
+	tiledata6.rectangle = BF::Math::Rectangle(pos.x - (size.x / 2), pos.y + (size.x / 4), size.x, size.y);
+	tiledata6.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//right top
+	BF::Graphics::TileData tiledata7;
+	tiledata7.textureID = 1;
+	tiledata7.rectangle = BF::Math::Rectangle(pos.x + (size.x / 2), pos.y - (size.x / 4), size.x, size.y);
+	tiledata7.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
+
+	//left top
+	BF::Graphics::TileData tiledata8;
+	tiledata8.textureID = 1;
+	tiledata8.rectangle = BF::Math::Rectangle(pos.x - (size.x / 2), pos.y - (size.x / 4), size.x, size.y);
+	tiledata8.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
 
 	//-----------------------------------------------------------------------
-	BFMWriter writer;
-	writer.WriteToFile("TileMap", tileMapData);
-	//-------------------------------------------------------------------------------------------------
 
+	//Rendering
+	/*tileMapData.tilesData.push_back(tiledata2);
+
+	tileMapData.tilesData.push_back(tiledata8);
+	tileMapData.tilesData.push_back(tiledata7);
+
+	tileMapData.tilesData.push_back(tiledata3);
+	tileMapData.tilesData.push_back(tiledata0);
+	tileMapData.tilesData.push_back(tiledata4);
+
+	tileMapData.tilesData.push_back(tiledata6);
+	tileMapData.tilesData.push_back(tiledata5);
+
+	tileMapData.tilesData.push_back(tiledata1);*/
+
+	tileMapData.tilesData.push_back(tiledata0);
+	tileMapData.tilesData.push_back(tiledata1);
+	tileMapData.tilesData.push_back(tiledata2);
+	tileMapData.tilesData.push_back(tiledata3);
+	tileMapData.tilesData.push_back(tiledata4);
+	tileMapData.tilesData.push_back(tiledata5);
+	tileMapData.tilesData.push_back(tiledata6);
+	tileMapData.tilesData.push_back(tiledata7);
+	tileMapData.tilesData.push_back(tiledata8);
+	
+	BFMWriter writer;
+	writer.WriteToFile("../Sandbox/Assets/Maps/TileMap", tileMapData);
 	//-------------------------------------------------------------------------------------------------
-	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/crytek-sponza/sponza.fbx");
+	
+	//-------------------------------------------------------------------------------------------------
+	/*FBXLoader fbxloader;
+	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("untitled");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");*/
 	//-------------------------------------------------------------------------------------------------
-	*/
+	
 
-	BF::Graphics::Animation::SpriteAnimationData spriteAnimationData;
+	/*BF::Graphics::Animation::SpriteAnimationData spriteAnimationData;
 	BF::Graphics::Animation::Sequence sequence;
 	sequence.keyFrames.push_back(BF::Graphics::Animation::KeyFrame(100, BF::Math::Rectangle(0, 0, 32, 48)));
 	sequence.keyFrames.push_back(BF::Graphics::Animation::KeyFrame(100, BF::Math::Rectangle(32, 0, 32, 48)));
@@ -59,7 +150,7 @@ int main()
 	spriteAnimationData.textureName = "../Sandbox/Assets/Textures/player.png";
 
 	BFAWriter bfaWriter;
-	bfaWriter.WriteToFile("../Sandbox/Assets/Animation/spriteAnimation", spriteAnimationData);
+	bfaWriter.WriteToFile("../Sandbox/Assets/Animation/spriteAnimation", spriteAnimationData);*/
 
 	system("PAUSE");
 	return 0;

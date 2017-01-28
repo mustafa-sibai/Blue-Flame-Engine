@@ -1,5 +1,4 @@
 #pragma once
-#include <string.h>
 #include "Math.h"
 #include "BF/Common.h"
 

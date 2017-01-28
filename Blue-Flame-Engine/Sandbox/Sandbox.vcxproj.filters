@@ -24,6 +24,9 @@
     <ClCompile Include="Sandbox\_2DScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\AndroidTestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\_3DScene.h">
@@ -32,12 +35,19 @@
     <ClInclude Include="Sandbox\_2DScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sandbox\AndroidTestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\PixelShader.glsl" />
     <None Include="Assets\Shaders\GLSL\3D\VertexShader.glsl" />
     <None Include="Assets\Shaders\GLSL\3D\PixelShader.glsl" />
+    <None Include="Assets\Shaders\HLSL\Compiled\SpriteRenderer\PixelShader.cso" />
+    <None Include="Assets\Shaders\HLSL\Compiled\SpriteRenderer\VertexShader.cso" />
+    <None Include="Assets\Shaders\GLSL\TextureCube\PixelShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\TextureCube\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\HLSL\3D\PixelShader.hlsl" />

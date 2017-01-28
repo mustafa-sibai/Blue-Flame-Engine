@@ -1,4 +1,5 @@
 #include "GLIndexBuffer.h"
+#include "GLError.h"
 
 namespace BF
 {
@@ -15,27 +16,27 @@ namespace BF
 
 				GLIndexBuffer::~GLIndexBuffer()
 				{
-					glDeleteBuffers(1, &buffer);
+					GLCall(glDeleteBuffers(1, &buffer));
 				}
 
 				void GLIndexBuffer::Create(const unsigned int* indices, unsigned int count)
 				{
 					this->count = count;
 
-					glGenBuffers(1, &buffer);
-					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
-					glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+					GLCall(glGenBuffers(1, &buffer));
+					GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer));
+					GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW));
+					GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 				}
 
 				void GLIndexBuffer::Bind() const
 				{
-					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer);
+					GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer));
 				}
 
 				void GLIndexBuffer::Unbind() const
 				{
-					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+					GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 				}
 			}
 		}

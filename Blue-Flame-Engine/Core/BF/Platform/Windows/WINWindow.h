@@ -7,8 +7,6 @@
 
 namespace BF
 {
-	namespace Application { class Window; }
-
 	namespace Platform
 	{
 		namespace Windows
@@ -20,13 +18,17 @@ namespace BF
 					MSG msg;
 					DWORD currentWindowStyle;
 					POINT mousePosition;
-					Application::Window* window;
+
+					Application::WindowStyle style;
+					std::string title;
+					unsigned short positionX, positionY, width, height, clientWidth, clientHeight, borderWidth, borderHeight;
+					int borderThickness;
 
 				public:
-					WINWindow() = default;
-					WINWindow(Application::Window* window);
+					WINWindow(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
 					~WINWindow();
 
+					void Initialize();
 					void Update();
 					bool IsOpen();
 					void Move();
@@ -37,6 +39,14 @@ namespace BF
 					void SetClientSize();
 
 				public:
+					inline unsigned short GetWidth() const { return width; }
+					inline unsigned short GetHeight() const { return height; }
+
+					inline unsigned short GetClientWidth() const { return clientWidth; }
+					inline unsigned short GetClientHeight() const { return clientHeight; }
+
+					inline float GetAspectRatio() const { return (float)width / (float)height; }
+
 					inline const HWND& GetHWND() const { return hWnd; }
 
 				private:

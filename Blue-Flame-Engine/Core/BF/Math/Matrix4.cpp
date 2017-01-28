@@ -86,6 +86,7 @@ namespace BF
 			rotationMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc + axis.y * s;
 			rotationMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc - axis.x * s;
 			rotationMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = axis.z * axis.z * oc + c;
+
 			return rotationMatrix;
 		}
 
@@ -123,7 +124,7 @@ namespace BF
 			Matrix4 viewMatrix = Matrix4::Identity();
 
 			Vector3 forward = (target - eye).Normalize();
-			Vector3 right = forward.Cross(upVector.Normalize());
+			Vector3 right = forward.Cross(upVector).Normalize();
 			Vector3 up = right.Cross(forward);
 
 			viewMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = right.x;
@@ -149,11 +150,11 @@ namespace BF
 		{
 			Matrix4 newMatrix;
 
-			for (size_t row = 0; row < MATRIX_ROW_SIZE; row++)
+			for (unsigned int row = 0; row < MATRIX_ROW_SIZE; row++)
 			{
-				for (size_t col = 0; col < MATRIX_COLUMN_SIZE; col++)
+				for (unsigned int col = 0; col < MATRIX_COLUMN_SIZE; col++)
 				{
-					for (size_t e = 0; e < MATRIX_ROW_SIZE; e++)
+					for (unsigned int e = 0; e < MATRIX_ROW_SIZE; e++)
 						newMatrix.elements[e + row * MATRIX_ROW_SIZE] += matrixA.elements[col + row * MATRIX_COLUMN_SIZE] * matrixB.elements[e + col * MATRIX_COLUMN_SIZE];
 				}
 			}

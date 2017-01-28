@@ -14,43 +14,46 @@ namespace BF
 			struct WidgetData
 			{
 				std::string name;
+				Renderers::Sprite normalSprite;
 				Renderers::Sprite hoveredSprite;
 				Renderers::Sprite pressedSprite;
-				Renderers::Sprite releasedSprite;
 			};
 
 			class BF_API Widget
 			{
 				friend class WidgetManager;
 
-			private:
-				Renderers::SpriteRenderer* spriteRenderer;
-				WidgetData widgetData;
-				Math::Rectangle rectangle;
+				private:
+					Renderers::SpriteRenderer* spriteRenderer;
+					WidgetData widgetData;
+					Math::Rectangle rectangle;
+					Renderers::Sprite* currentSprite;
 
-				bool checkOnce = true;
-				bool mouseNotPressedOnWidget = false;
+					bool checkOnce = true;
+					bool mouseNotPressedOnWidget = false;
 
-				bool hovered;
-				bool pressed;
-				bool released;
+					bool hovered;
+					bool pressed;
 
-			public:
-				Widget();
-				~Widget();
+					void(*OnClickCallBack)();
 
-				inline bool IsHovered() const { return hovered; }
-				inline bool IsPressed() const { return pressed; }
-				inline bool IsReleased() const { return released; }
+				public:
+					Widget();
+					~Widget();
 
-			protected:
-				virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer);
-				virtual void Load(const StyleSheet& StyleSheet, const std::string& widgetName);
-				virtual void Update();
-				virtual void Render();
+					void AddOnClickListener(void(*OnClickCallBack)());
 
-			private:
-				bool IsMouseOnWidget();
+					inline bool IsHovered() const { return hovered; }
+					inline bool IsPressed() const { return pressed; }
+
+				protected:
+					virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer);
+					virtual void Load(const StyleSheet& StyleSheet, const std::string& widgetName);
+					virtual void Update();
+					virtual void Render();
+
+				private:
+					bool IsMouseOnWidget();
 			};
 		}
 	}

@@ -1,5 +1,6 @@
 #include "DXVertexBuffer.h"
 #include "BF/Engine.h"
+#include "DXError.h"
 
 namespace BF
 {
@@ -12,7 +13,7 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				DXVertexBuffer::DXVertexBuffer(const DXShader& dxShader) :
-					dxShader(dxShader), buffer(nullptr), inputLayout(nullptr), hr(0), offset(0), stride(0)
+					dxShader(dxShader), buffer(nullptr), inputLayout(nullptr), offset(0), stride(0)
 				{
 				}
 
@@ -30,10 +31,7 @@ namespace BF
 					bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 					bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, 0, &buffer);
-
-					if (FAILED(hr))
-						std::cout << "Could not create a vertex buffer." << std::endl;
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, 0, &buffer));
 
 					if (data != nullptr)
 					{
@@ -57,10 +55,8 @@ namespace BF
 						inputElementDesc[i].InstanceDataStepRate = 0;
 					}
 
-					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout.GetBufferElement().size(), dxShader.GetVSData(), dxShader.GetVSsize(), &inputLayout);
-					if (FAILED(hr))
-						std::cout << "Could not create vertex buffer input layout." << std::endl;
-					
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateInputLayout(inputElementDesc, (unsigned int)vertexBufferLayout.GetBufferElement().size(), dxShader.GetVSData(), dxShader.GetVSsize(), &inputLayout));
+
 					offset = vertexBufferLayout.GetBufferElement()[0].offset;
 					stride = vertexBufferLayout.GetBufferElement()[0].stride;
 
@@ -72,9 +68,7 @@ namespace BF
 					D3D11_MAPPED_SUBRESOURCE mappedSubResource;
 					ZeroMemory(&mappedSubResource, sizeof(mappedSubResource));
 
-					if (FAILED(Engine::GetContext().GetDXContext().GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource)))
-						std::cout << "Could not map vertex buffer." << std::endl;
-
+					DXCall(Engine::GetContext().GetDXContext().GetContext()->Map(buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedSubResource));
 					return mappedSubResource.pData;
 				}
 

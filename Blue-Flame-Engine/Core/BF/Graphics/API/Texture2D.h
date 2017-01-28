@@ -33,8 +33,8 @@ namespace BF
 
 					void Load(const std::string& fileName);
 					void Load(const std::string& fileName, TextureWrap textureWrap, TextureFilter textureFilter);
-					void Create(unsigned int width, unsigned int height, Format format, const uint8_t* data);
-					void Create(unsigned int width, unsigned int height, Format format, const uint8_t* data, TextureWrap textureWrap, TextureFilter textureFilter);
+					void Create(const TextureData& textureData, Format format);
+					void Create(const TextureData& textureData, Format format, TextureWrap textureWrap, TextureFilter textureFilter);
 
 					void Bind() const;
 					void Bind(const std::string& samplerName, unsigned int index) const;

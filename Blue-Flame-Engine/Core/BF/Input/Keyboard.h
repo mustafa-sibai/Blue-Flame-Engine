@@ -7,7 +7,7 @@
 
 #include "BF/Common.h"
 
-#define MAX_KEYS 256
+#define BF_MAX_KEYS 256
 
 namespace BF
 {
@@ -21,7 +21,7 @@ namespace BF
 			friend class BF::Platform::Linux::LXWindow;
 #endif
 			public:
-				enum class BF_API Key
+				enum class Key
 				{
 #ifdef BF_PLATFORM_WINDOWS
 					F1 = 0x70, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
@@ -44,7 +44,7 @@ namespace BF
 				};
 
 			private:
-				static bool keys[MAX_KEYS];
+				static bool keys[BF_MAX_KEYS];
 
 			public:
 				Keyboard();

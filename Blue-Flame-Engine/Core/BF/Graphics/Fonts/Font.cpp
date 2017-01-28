@@ -6,6 +6,8 @@ namespace BF
 	{
 		namespace Fonts
 		{
+			using namespace std;
+			using namespace BF::Graphics::API;
 			using namespace BF::Math;
 
 			struct Glyph
@@ -28,37 +30,37 @@ namespace BF
 				}
 			};
 
-			Font::Font(const API::Shader& shader) :
+			Font::Font(const Shader& shader) :
 				startUnicode(0), endUnicode(0)
 			{
-				texture = new API::Texture2D(shader);
+				texture = new Texture2D(shader);
 			}
 
 			Font::~Font()
 			{
 			}
 
-			FontAtlas* Font::Load(const std::string& filename, Language language)
+			FontAtlas* Font::Load(const string& filename, Language language)
 			{
-				std::vector<Character>* characters = new std::vector<Character>();
+				vector<Character>* characters = new vector<Character>();
 
 				error = FT_Init_FreeType(&library);
 				if (error != FT_Err_Ok)
-					std::cout << "ERROR !!" << std::endl;
+					cout << "ERROR !!" << endl;
 
 				error = FT_New_Face(library, "Assets/Fonts/arial.ttf", 0, &face);
 
 				if (error == FT_Err_Unknown_File_Format)
-					std::cout << "ERROR: Unknown File Format !!" << std::endl;
+					cout << "ERROR: Unknown File Format !!" << endl;
 				else if (error)
-					std::cout << "ERROR: file not found !!" << std::endl;
+					cout << "ERROR: file not found !!" << endl;
 
-				std::cout << "family_name: " << face->family_name << " style_name: " << face->style_name << std::endl;
-				std::cout << "face_index: " << face->face_index << " num_faces: " << face->num_faces << " num_glyphs: " << face->num_glyphs << std::endl;
+				cout << "family_name: " << face->family_name << " style_name: " << face->style_name << endl;
+				cout << "face_index: " << face->face_index << " num_faces: " << face->num_faces << " num_glyphs: " << face->num_glyphs << endl;
 
 				error = FT_Set_Pixel_Sizes(face, 0, charPixelSize);
 				if (error != FT_Err_Ok)
-					std::cout << "ERROR !!" << std::endl;
+					cout << "ERROR !!" << endl;
 
 
 				if (language == Language::English)
@@ -69,7 +71,7 @@ namespace BF
 
 				const unsigned int totalGlyphs = endUnicode - startUnicode;
 
-				std::vector<Glyph> glyph(totalGlyphs);
+				vector<Glyph> glyph(totalGlyphs);
 				unsigned int totalGlyphsWidth = 0;
 
 				for (unsigned int i = 0; i < totalGlyphs; i++)
@@ -89,7 +91,7 @@ namespace BF
 
 				unsigned int altalWidth, atlasHeight;
 				CalculateTextureAtelsSize(totalGlyphs, totalGlyphsWidth, charPixelSize, altalWidth, atlasHeight);
-				textureAtlas.Create(altalWidth, atlasHeight, API::Texture::Format::R8);
+				textureAtlas.Create(altalWidth, atlasHeight, Texture::Format::R8);
 
 				for (unsigned int x = 0, y = 0, index = 0; index < totalGlyphs; )
 				{
@@ -100,7 +102,7 @@ namespace BF
 					}
 					else
 					{
-						Math::Rectangle scissorRectangle = Math::Rectangle(x, charPixelSize * y, glyph[index].width, glyph[index].height);
+						Rectangle scissorRectangle = Rectangle(x, charPixelSize * y, glyph[index].width, glyph[index].height);
 						textureAtlas.AddTexture(scissorRectangle, glyph[index].buffer);
 						characters->push_back(Character(Vector3(), charPixelSize, scissorRectangle, glyph[index].bearing, glyph[index].advance));
 						x += (unsigned int)glyph[index].width;
@@ -108,7 +110,7 @@ namespace BF
 					}
 				}
 
-				texture->Create(textureAtlas.GetWidth(), textureAtlas.GetHeight(), BF::Graphics::API::Texture2D::Format::R8, textureAtlas.GetBuffer());
+				texture->Create(textureAtlas.GetTextureData(), Texture2D::Format::R8);
 
 				FT_Done_Face(face);
 				FT_Done_FreeType(library);
@@ -126,12 +128,12 @@ namespace BF
 
 				error = FT_Load_Glyph(face, glyph_index, FT_LOAD_DEFAULT);
 				if (error != FT_Err_Ok)
-					std::cout << "ERROR !!" << std::endl;
+					cout << "ERROR !!" << endl;
 
 				error = FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
 
 				if (error != FT_Err_Ok)
-					std::cout << "ERROR !!" << std::endl;
+					cout << "ERROR !!" << endl;
 			}
 
 			void Font::CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int totalGlyphsWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height)

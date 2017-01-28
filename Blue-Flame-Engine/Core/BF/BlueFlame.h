@@ -26,10 +26,12 @@
 
 #include <BF/Graphics/Animation/SpriteAnimation.h>
 
-#include <BF/Graphics/TileMap.h>
-#include <BF/Graphics/Model.h>
 #include <BF/Graphics/FPSCamera.h>
+#include <BF/Graphics/TileMap.h>
+#include <BF/Graphics/Skybox.h>
+#include <BF/Graphics/Model.h>
 
+#include <BF/Input/Controller.h>
 #include <BF/Input/Keyboard.h>
 #include <BF/Input/Mouse.h>
 

@@ -27,7 +27,7 @@ namespace BF
 						GLTexture2D(const GLShader& glshader);
 						~GLTexture2D();
 
-						void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, const uint8_t* data, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
+						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
 						void Bind() const;
 						void Bind(const std::string& samplerName, unsigned int index) const;
 						void Unbind() const;

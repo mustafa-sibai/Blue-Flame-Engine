@@ -31,6 +31,7 @@ namespace BF
 					void CleanUp();
 
 					void Bind() const;
+					void Unbind() const;
 
 #ifdef BF_PLATFORM_WINDOWS
 					inline const Platform::API::DirectX::DXShader& GetDXShader() const { return dxShader; }

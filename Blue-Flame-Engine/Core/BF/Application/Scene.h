@@ -1,7 +1,8 @@
 #pragma once
+#include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/Graphics/API/Context.h"
-#include "BF/Graphics/GUI/WidgetManager.h"
+//#include "BF/Graphics/GUI/WidgetManager.h"
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
@@ -11,12 +12,12 @@ namespace BF
 	{
 		class BF_API Scene
 		{
-			friend class Engine;
+			friend class BF::Engine;
 
 			private:
 				System::Timer frameTimer;
 				System::Timer frameRateTimer;
-				Graphics::GUI::WidgetManager widgetManager;
+				//Graphics::GUI::WidgetManager widgetManager;
 				bool run = false;
 				bool initialized = false;
 				bool loaded = false;
@@ -27,7 +28,7 @@ namespace BF
 				inline void Stop() { run = false; }
 
 				inline bool IsRunning() const { return run; }
-				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
+				//inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 
 			protected:
 				virtual void Initialize() = 0;

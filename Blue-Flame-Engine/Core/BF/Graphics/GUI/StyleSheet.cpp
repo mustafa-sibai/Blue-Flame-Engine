@@ -50,16 +50,16 @@ namespace BF
 
 				widgetData.name = "Button";
 
+				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Normal");
+				widgetData.normalSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+
 				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Hovered");
 				widgetData.hoveredSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
 
 				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Pressed");
 				widgetData.pressedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
 
-				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Released");
-				widgetData.releasedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
-
-			widgetsData.push_back(widgetData);
+				widgetsData.push_back(widgetData);
 			}
 		}
 	}

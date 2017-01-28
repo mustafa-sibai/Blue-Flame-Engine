@@ -1,5 +1,6 @@
 #include "DXConstentBuffer.h"
 #include "BF/Engine.h"
+#include "DXError.h"
 
 namespace BF
 {
@@ -10,7 +11,7 @@ namespace BF
 			namespace DirectX
 			{
 				DXConstentBuffer::DXConstentBuffer() :
-					buffer(nullptr), hr(0)
+					buffer(nullptr)
 				{
 				}
 
@@ -32,10 +33,7 @@ namespace BF
 					bufferDesc.ByteWidth = size;
 					bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 
-					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, NULL, &buffer);
-
-					if (FAILED(hr))
-						std::cout << "Could not create a constent buffer." << std::endl;
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, NULL, &buffer));
 
 					Engine::GetContext().GetDXContext().GetContext()->VSSetConstantBuffers(0, 1, &buffer);
 				}

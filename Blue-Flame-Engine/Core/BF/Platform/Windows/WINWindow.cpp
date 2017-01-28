@@ -1,7 +1,7 @@
 #include "WinWindow.h"
+#include "BF/Input/Controller.h"
 #include "BF/Input/Keyboard.h"
 #include "BF/Input/Mouse.h"
-#include "BF/Application/Window.h"
 #include "BF/System/Log.h"
 
 namespace BF
@@ -14,8 +14,16 @@ namespace BF
 			using namespace Application;
 			using namespace Math;
 
-			WINWindow::WINWindow(Window* window) :
-				window(window)
+			WINWindow::WINWindow(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
+				title(title), positionX(positionX), positionY(positionY), width(width), height(height), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0), borderThickness(0)
+			{
+			}
+
+			WINWindow::~WINWindow()
+			{
+			}
+
+			void WINWindow::Initialize()
 			{
 				HINSTANCE hInstance = GetModuleHandle(0);
 
@@ -33,38 +41,36 @@ namespace BF
 				if (!RegisterClassEx(&wc))
 					std::cout << "failed to register window class" << std::endl;
 
-				if (window->style == WindowStyle::Windowed)
+				if (style == WindowStyle::Windowed)
 					currentWindowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
-				else if (window->style == WindowStyle::ResizableWindow)
+				else if (style == WindowStyle::ResizableWindow)
 					currentWindowStyle = WS_OVERLAPPEDWINDOW;
-				else if (window->style == WindowStyle::Borderless)
+				else if (style == WindowStyle::Borderless)
 					currentWindowStyle = WS_POPUP;
 
 				wchar_t wchTitle[256];
-				MultiByteToWideChar(CP_ACP, 0, window->title.c_str(), -1, wchTitle, 256);
+				MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wchTitle, 256);
+
+				borderThickness = GetSystemMetrics(SM_CXSIZEFRAME);
 
 				hWnd = CreateWindowEx(0,
 					L"Blue Flame Engine Window Class",
 					wchTitle,
 					currentWindowStyle,
-					window->positionX,
-					window->positionY,
-					window->width,
-					window->height,
+					positionX,
+					positionY,
+					width,
+					height,
 					0,
 					0,
 					hInstance,
-					&window);
+					this);
 
 				if (!hWnd)
 					std::cout << "failed to create window" << std::endl;
 
 				SetClientSize();
 				ShowWindow(hWnd, SW_SHOW);
-			}
-
-			WINWindow::~WINWindow()
-			{
 			}
 
 			void WINWindow::Update()
@@ -77,18 +83,18 @@ namespace BF
 
 				if (GetCursorPos(&mousePosition))
 				{
-					Mouse::positionRelativeToScreen = Vector2((float)mousePosition.x, (float)mousePosition.y);
-
 					if (ScreenToClient(hWnd, &mousePosition))
 					{
-						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= window->clientWidth && mousePosition.y <= window->clientHeight)
+						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= clientWidth && mousePosition.y <= clientHeight)
 							Mouse::insideWindowClient = true;
 						else
 							Mouse::insideWindowClient = false;
 
-						Mouse::positionRelativeToWindow = Vector2((float)min(max(0, mousePosition.x), window->clientWidth), (float)min(max(0, mousePosition.y), window->clientHeight));
+						Mouse::position = Vector2((float)min(max(0, mousePosition.x), clientWidth), (float)min(max(0, mousePosition.y), clientHeight));
 					}
 				}
+
+				Controllers::Update();
 			}
 
 			bool WINWindow::IsOpen()
@@ -133,20 +139,20 @@ namespace BF
 				RECT clientRect;
 				GetClientRect(hWnd, &clientRect);
 
-				window->clientWidth = (unsigned short)clientRect.right;
-				window->clientHeight = (unsigned short)clientRect.bottom;
+				clientWidth = (unsigned short)clientRect.right;
+				clientHeight = (unsigned short)clientRect.bottom;
 
-				window->borderWidth = window->width - window->clientWidth;
-				window->borderHeight = window->height - window->clientHeight;
+				borderWidth = width - clientWidth;
+				borderHeight = height - clientHeight;
 			}
 
 			LRESULT CALLBACK WINWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
-				Window *window = nullptr;
+				WINWindow *window = nullptr;
 
 				if (message == WM_NCCREATE)
 				{
-					window = static_cast<Window*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
+					window = static_cast<WINWindow*>(reinterpret_cast<CREATESTRUCT*>(lParam)->lpCreateParams);
 
 					SetLastError(0);
 					if (!SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(window)))
@@ -156,7 +162,7 @@ namespace BF
 					}
 				}
 				else
-					window = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+					window = reinterpret_cast<WINWindow*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 
 				switch (message)
 				{

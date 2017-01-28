@@ -21,6 +21,8 @@ namespace BF
 
 				inline void SetViewMatrix(const Math::Matrix4& viewMatrix) { this->viewMatrix = viewMatrix; }
 				inline const Math::Matrix4& GetViewMatrix() const { return viewMatrix; }
+
+				inline const Math::Vector3& GetPosition() const { return position; }
 		};
 	}
 }

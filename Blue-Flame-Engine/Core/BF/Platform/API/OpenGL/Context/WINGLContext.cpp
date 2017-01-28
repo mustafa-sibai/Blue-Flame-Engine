@@ -1,6 +1,7 @@
 #include "WINGLContext.h"
-#include "BF/Graphics/API/Context.h"
 #include "BF/Engine.h"
+#include "BF/Graphics/API/Context.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
 {
@@ -26,9 +27,9 @@ namespace BF
 
 				void WINGLContext::Initialize()
 				{
-					hDC = GetDC(Engine::GetWindow().GetWINWindow().GetHWND());
-					int letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &Engine::GetWindow().GetWINWindow().GetPixelFormat());
-					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &Engine::GetWindow().GetWINWindow().GetPixelFormat());
+					hDC = GetDC(Engine::GetWindow().GetHWND());
+					int letWindowsChooseThisPixelFormat = ChoosePixelFormat(hDC, &Engine::GetWindow().GetPixelFormat());
+					SetPixelFormat(hDC, letWindowsChooseThisPixelFormat, &Engine::GetWindow().GetPixelFormat());
 
 					HGLRC tempContext = wglCreateContext(hDC);
 					wglMakeCurrent(hDC, tempContext);
@@ -44,7 +45,7 @@ namespace BF
 
 					GLenum err = glewInit();
 					if (GLEW_OK != err)
-						fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+						BF_LOG_ERROR("Error: %s", glewGetErrorString(err));
 
 					if (wglewIsSupported("WGL_ARB_create_context") == 1)
 					{
@@ -57,20 +58,18 @@ namespace BF
 					{
 						wglMakeCurrent(NULL, NULL);
 						wglDeleteContext(tempContext);
-						fprintf(stdout, "Failed to create an OpenGL 3.x and above context.");
+						BF_LOG_ERROR("Failed to create an OpenGL 3.x and above context.");
 					}
 
-					glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
+					GLCall(glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));
 
-					fprintf(stdout, "OPENGL VERSION %s\n", (char*)glGetString(GL_VERSION));
-					fprintf(stdout, "Graphics Card: %s - %s\n", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
-					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+					BF_LOG_INFO("OPENGL VERSION %s", (char*)glGetString(GL_VERSION));
+					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
+					BF_LOG_INFO("Status: Using GLEW %s", glewGetString(GLEW_VERSION));
 
-					glEnable(GL_DEPTH_TEST);
-
-					//wglSwapIntervalEXT(1);
-					//glEnable(GL_BLEND);
-					//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+					GLint r;
+					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
+					BF_LOG_INFO("%d", r);
 				}
 
 				void WINGLContext::SetPrimitiveType(PrimitiveType primitiveType)
@@ -109,17 +108,13 @@ namespace BF
 
 				void WINGLContext::Clear(const Vector4& color)
 				{
-					GLenum err = glGetError();
-					if (err != GL_NO_ERROR)
-						printf(" %d\n ", err);
-
-					glClearColor(color.x, color.y, color.z, color.w);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+					GLCall(glClearColor(color.x, color.y, color.z, color.w));
+					GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 				}
 
 				void WINGLContext::Draw(GLsizei count)
 				{
-					glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr);
+					GLCall(glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr));
 				}
 
 				void WINGLContext::SwapBuffers()
@@ -135,9 +130,33 @@ namespace BF
 				void WINGLContext::EnableDepthBuffer(bool state)
 				{
 					if (state)
-						glEnable(GL_DEPTH_TEST);
+						GLCall(glEnable(GL_DEPTH_TEST));
 					else
-						glDisable(GL_DEPTH_TEST);
+						GLCall(glDisable(GL_DEPTH_TEST));
+				}
+
+				void WINGLContext::EnableDepthMask(bool state)
+				{
+					if (state)
+						GLCall(glDepthMask(GL_TRUE));
+					else
+						GLCall(glDepthMask(GL_FALSE));
+				}
+
+				void WINGLContext::EnableBlending(bool state)
+				{
+					if (state)
+					{
+						GLCall(glEnable(GL_BLEND));
+						GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+					}
+					else
+						GLCall(glDisable(GL_BLEND));
+				}
+
+				void WINGLContext::EnableVsync(bool state)
+				{
+					wglSwapIntervalEXT(state);
 				}
 			}
 		}

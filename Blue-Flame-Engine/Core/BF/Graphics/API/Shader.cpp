@@ -41,6 +41,14 @@ namespace BF
 #endif	
 			}
 
+			void Shader::Unbind() const
+			{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glShader.Unbind();
+#endif
+			}
+
 			void Shader::CleanUp()
 			{
 #ifdef BF_PLATFORM_WINDOWS

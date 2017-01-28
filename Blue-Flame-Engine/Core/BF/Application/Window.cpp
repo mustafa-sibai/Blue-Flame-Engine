@@ -5,12 +5,7 @@ namespace BF
 	namespace Application
 	{
 		Window::Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
-			title(title), positionX(positionX), positionY(positionY), width(width), height(height), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0),
-#ifdef BF_PLATFORM_WINDOWS
-			winWindow(this)
-#elif BF_PLATFORM_LINUX
-			lxWindow(this)
-#endif
+			WINWindow(title, positionX, positionY, width, height, style)
 		{
 		}
 
@@ -18,25 +13,42 @@ namespace BF
 		{
 		}
 
+		void Window::Initialize()
+		{
+#ifdef BF_PLATFORM_WINDOWS
+			WINWindow::Initialize();
+#elif BF_PLATFORM_LINUX
+			LXWindow::Initialize();
+#elif BF_PLATFORM_WEBGL
+			WEBWindow::Initialize();
+#elif BF_PLATFORM_ANDROID
+			AWindow::Initialize();
+#endif
+		}
+
 		void Window::Update()
 		{
 #ifdef BF_PLATFORM_WINDOWS
-			winWindow.Update();
+			WINWindow::Update();
 #elif BF_PLATFORM_LINUX
-			lxWindow.Update();
+			LXWindow::Update();
 #elif BF_PLATFORM_WEBGL
-			webWindow.Update();
+			WEBWindow::Update();
+#elif BF_PLATFORM_ANDROID
+			AWindow::Update();
 #endif
 		}
 
 		bool Window::IsOpen()
 		{
 #ifdef BF_PLATFORM_WINDOWS
-			return winWindow.IsOpen();
+			return WINWindow::IsOpen();
 #elif BF_PLATFORM_LINUX
-			return lxWindow.IsOpen();
+			return LXWindow::IsOpen();
 #elif BF_PLATFORM_WEBGL
-			return webWindow.IsOpen();
+			return WEBWindow::IsOpen();
+#elif BF_PLATFORM_ANDROID
+			return AWindow::IsOpen();
 #endif
 		}
 	}

@@ -37,7 +37,11 @@ namespace BF
 						void Draw(GLsizei count);
 						void SwapBuffers();
 						void CleanUp();
+
 						void EnableDepthBuffer(bool state);
+						void EnableDepthMask(bool state);
+						void EnableBlending(bool state);
+						void EnableVsync(bool state);
 				};
 			}
 		}

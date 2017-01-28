@@ -15,6 +15,7 @@ namespace BF
 				Button(Application::Scene& scene);
 				~Button();
 
+			private:
 				void Initialize(Renderers::SpriteRenderer& spriteRenderer) override;
 				void Load(const StyleSheet& StyleSheet, const std::string& widgetName) override;
 				void Update() override;

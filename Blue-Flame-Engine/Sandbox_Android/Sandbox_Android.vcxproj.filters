@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="res">
+      <UniqueIdentifier>44da75dd-9500-4717-b7c9-581df1e137f9</UniqueIdentifier>
+    </Filter>
+    <Filter Include="res\values">
+      <UniqueIdentifier>281ff3db-4905-4b60-be56-c74860a1078d</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{949872fa-339e-4cf6-b472-f01255cd21f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\com">
+      <UniqueIdentifier>{b5b936be-75a7-4ce9-a401-4457292e0b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\com\vault16software">
+      <UniqueIdentifier>{1e86bc07-5fb4-4577-9ec1-73341988df5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\com\vault16software\sandbox">
+      <UniqueIdentifier>{5067de3f-069f-4fa9-a2f8-3776f36a67ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jni">
+      <UniqueIdentifier>{ce986a98-c591-4b14-99e4-7dc138385fe5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidBuild Include="AndroidManifest.xml" />
+    <AndroidBuild Include="res\values\strings.xml">
+      <Filter>res\values</Filter>
+    </AndroidBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <JCompile Include="src\com\vault16software\sandbox\Sandbox_Android.java">
+      <Filter>src\com\vault16software\sandbox</Filter>
+    </JCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="jni\Sandbox_Android.cpp" />
+    <ClCompile Include="..\Sandbox\Sandbox\AndroidTestScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sandbox\Sandbox\AndroidTestScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Sandbox\Sandbox\Main.cpp" />
+    <None Include="res\layout\main.xml" />
+  </ItemGroup>
+</Project>

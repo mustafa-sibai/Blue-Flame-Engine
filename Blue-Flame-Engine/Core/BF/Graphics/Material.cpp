@@ -4,9 +4,10 @@ namespace BF
 {
 	namespace Graphics
 	{
-		Material::Material(std::string diffuseMapName, Math::Vector4 diffuseColor) :
-			diffuseMapName(diffuseMapName), diffuseColor(diffuseColor)
+		Material::Material(const API::Shader& shader) :
+			shader(shader), constentBuffer(shader)
 		{
+			constentBuffer.Create(sizeof(MaterialBuffer), 1);
 		}
 
 		Material::~Material()

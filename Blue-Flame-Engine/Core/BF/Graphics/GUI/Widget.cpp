@@ -12,7 +12,8 @@ namespace BF
 			using namespace BF::Graphics::Renderers;
 			using namespace BF::Input;
 
-			Widget::Widget()
+			Widget::Widget() :
+				currentSprite(nullptr)
 			{
 			}
 
@@ -29,22 +30,47 @@ namespace BF
 			{
 				widgetData = StyleSheet.GetWidgetData(widgetName);
 				rectangle = widgetData.pressedSprite.GetRectangle();
+				currentSprite = &widgetData.normalSprite;
+			}
+
+			void Widget::AddOnClickListener(void(*OnClickCallBack)())
+			{
+				this->OnClickCallBack = OnClickCallBack;
+			}
+
+			bool Widget::IsMouseOnWidget()
+			{
+				if (Mouse::IsInsideWindowClient())
+					if (Mouse::GetPosition().x >= rectangle.x && Mouse::GetPosition().x <= rectangle.x + rectangle.width &&
+						Mouse::GetPosition().y >= rectangle.y && Mouse::GetPosition().y <= rectangle.y + rectangle.height)
+						return true;
+
+				return false;
 			}
 
 			void Widget::Update()
 			{
 				hovered = IsMouseOnWidget();
 
+				if (hovered)
+					currentSprite = &widgetData.hoveredSprite;
+				else
+					currentSprite = &widgetData.normalSprite;
+
 				if (!hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
 					mouseNotPressedOnWidget = true;
 
 				if (!mouseNotPressedOnWidget && hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
+				{
+					currentSprite = &widgetData.pressedSprite;
 					pressed = true;
+				}
 
 				if (hovered && pressed && !Mouse::IsButtonPressed(Mouse::Button::Left))
 				{
 					pressed = false;
-					released = true;
+					currentSprite = &widgetData.normalSprite;
+					OnClickCallBack();
 				}
 
 				if (!Mouse::IsButtonPressed(Mouse::Button::Left))
@@ -56,17 +82,7 @@ namespace BF
 
 			void Widget::Render()
 			{
-				spriteRenderer->Render(widgetData.releasedSprite);
-			}
-
-			bool Widget::IsMouseOnWidget()
-			{
-				if (Mouse::IsInsideWindowClient())
-					if (Mouse::GetPositionRelativeToWindow().x >= rectangle.x && Mouse::GetPositionRelativeToWindow().x <= rectangle.x + rectangle.width &&
-						Mouse::GetPositionRelativeToWindow().y >= rectangle.y && Mouse::GetPositionRelativeToWindow().y <= rectangle.y + rectangle.height)
-						return true;
-
-				return false;
+				spriteRenderer->Render(*currentSprite);
 			}
 		}
 	}

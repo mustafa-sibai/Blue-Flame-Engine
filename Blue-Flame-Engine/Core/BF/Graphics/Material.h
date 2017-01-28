@@ -1,19 +1,27 @@
 #pragma once
-#include "BF/Math/Vector4.h"
+#include "BF/Graphics/API/ConstentBuffer.h"
+#include "BF/Math/Math.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
+		struct MaterialBuffer
+		{
+			Math::Vector3 ambientColor;
+			Math::Vector3 diffuseColor;
+			Math::Vector3 specularColor;
+		};
+
 		class BF_API Material
 		{
-			public:
-				std::string diffuseMapName;
-				Math::Vector4 diffuseColor;
+		private:
+			const API::Shader& shader;
+			API::ConstentBuffer constentBuffer;
 
 			public:
-				Material(std::string diffuseMapName, Math::Vector4 diffuseColor);
+				Material(const API::Shader& shader);
 				~Material();
 		};
 	}

@@ -9,7 +9,7 @@ namespace BF
 		{
 			Button::Button(Application::Scene& scene)
 			{
-				scene.GetWidgetManager().AddWidget(this);
+				//scene.GetWidgetManager().AddWidget(this);
 			}
 
 			Button::~Button()

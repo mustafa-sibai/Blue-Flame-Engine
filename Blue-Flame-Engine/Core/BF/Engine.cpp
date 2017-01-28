@@ -2,84 +2,106 @@
 #include "BF/Application/SceneManager.h"
 #include "BF/System/Log.h"
 
-using namespace BF::Graphics::API;
-using namespace BF::Application;
-
-Window Engine::window;
-Context Engine::context = Context(RenderAPI::Default);
-
-Engine::Engine(Window window, RenderAPI renderAPI) :
-	totalTime(0), extra(0), FPS(0), FUPS(0), extraTimesToRunFixedUpdate(0), runFixedUpdate(false)
+namespace BF
 {
-	Engine::window = window;
-	Engine::context = Context(renderAPI);
-	Engine::context.Initialize();
-}
+	using namespace BF::Graphics::API;
+	using namespace BF::Application;
 
-Engine::~Engine()
-{
-}
+	Window Engine::window = Window("", 0, 0, 0, 0, Application::WindowStyle::Windowed);
+	Context Engine::context = Context(RenderAPI::OpenGL);
+	Engine::State Engine::state;
 
-void Engine::Run()
-{
-	while (window.IsOpen())
+	Engine::Engine(Window window, RenderAPI renderAPI) :
+		totalTime(0), extra(0), FPS(0), FUPS(0), timesToRunFixedUpdate(0), elapsedFrameTime(0)
 	{
-		window.Update();
+		BF_LOG_INFO("Engine Constructor");
 
-		for (int i = 0; i < SceneManager::GetScenes().size(); i++)
+		Engine::window = window;
+		Engine::context = Context(renderAPI);
+	}
+
+	Engine::~Engine()
+	{
+		BF_LOG_INFO("Engine DEstructor");
+	}
+
+	void Engine::Run()
+	{
+		BF_LOG_INFO("Engine Run");
+		while (true)
 		{
-			if (SceneManager::GetScene(i).IsRunning())
+			switch (state)
 			{
-				if (!SceneManager::GetScene(i).initialized)
+				case State::Initialize:
 				{
-					SceneManager::GetScene(i).Initialize();
-					SceneManager::GetScene(i).initialized = true;
+					window.Initialize();
+					context.Initialize();
+					state = State::Render;
+					break;
 				}
 
-				if (!SceneManager::GetScene(i).loaded)
+				case State::Render:
 				{
-					SceneManager::GetScene(i).Load();
-					SceneManager::GetScene(i).loaded = true;
-				}
-
-				SceneManager::GetScene(i).frameTimer.Reset();
-				if (runFixedUpdate || extraTimesToRunFixedUpdate > 0)
-				{
-					SceneManager::GetScene(i).FixedUpdate();
-					extraTimesToRunFixedUpdate--;
-					runFixedUpdate = false;
-				}
-
-				SceneManager::GetScene(i).Update();
-				SceneManager::GetScene(i).Render();
-				double elapsedFrameTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
-
-				FPS++;
-				totalTime += elapsedFrameTime;
-
-				if (totalTime >= frameTimeTarget)
-				{
-					extra += totalTime - frameTimeTarget;
-					FUPS++;
-					runFixedUpdate = true;
-
-					if (extra >= frameTimeTarget)
+					for (int i = 0; i < SceneManager::GetScenes().size(); i++)
 					{
-						extraTimesToRunFixedUpdate++;
-						FUPS++;
-						extra -= frameTimeTarget;
+						if (SceneManager::GetScene(i).IsRunning())
+						{
+							if (!SceneManager::GetScene(i).initialized)
+							{
+								SceneManager::GetScene(i).Initialize();
+								SceneManager::GetScene(i).initialized = true;
+							}
+
+							if (!SceneManager::GetScene(i).loaded)
+							{
+								SceneManager::GetScene(i).Load();
+								SceneManager::GetScene(i).loaded = true;
+							}
+
+							SceneManager::GetScene(i).frameTimer.Reset();
+							if (timesToRunFixedUpdate > 0)
+							{
+								SceneManager::GetScene(i).FixedUpdate();
+								timesToRunFixedUpdate--;
+								FUPS++;
+							}
+
+							window.Update();
+							SceneManager::GetScene(i).Update();
+							SceneManager::GetScene(i).Render();
+							elapsedFrameTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
+
+							FPS++;
+							totalTime += elapsedFrameTime;
+
+							if (totalTime >= frameTimeTarget)
+							{
+								extra += totalTime - frameTimeTarget;
+								timesToRunFixedUpdate++;
+
+								if (extra >= frameTimeTarget)
+								{
+									timesToRunFixedUpdate++;
+									extra -= frameTimeTarget;
+								}
+
+								totalTime = 0;
+							}
+
+							if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
+							{
+								BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
+								SceneManager::GetScene(i).frameRateTimer.Reset();
+								FPS = 0;
+								FUPS = 0;
+							}
+						}
 					}
-
-					totalTime = 0;
+					break;
 				}
 
-				if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
-				{
-					BF_LOG_INFO("frames: %d FUPS: %d", FPS, FUPS);
-					SceneManager::GetScene(i).frameRateTimer.Reset();
-					FPS = 0;
-					FUPS = 0;
-				}
+				default:
+					break;
 			}
 		}
 	}

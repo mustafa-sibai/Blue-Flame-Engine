@@ -22,61 +22,57 @@ namespace BF
 
 			void Texture2D::Load(const string& fileName)
 			{
-				buffer = ImageLoader::Load(fileName, &width, &height);
+				textureData.buffer = ImageLoader::Load(fileName, &textureData.width, &textureData.height);
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(width, height, Format::R8G8B8A8, buffer, TextureWrap::Repeat, TextureFilter::Neatest);
+					dxTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(width, height, Format::R8G8B8A8, buffer, TextureWrap::Repeat, TextureFilter::Neatest);
+					glTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);
 #endif
 			}
 
 			void Texture2D::Load(const string& fileName, TextureWrap textureWrap, TextureFilter textureFilter)
 			{
-				buffer = ImageLoader::Load(fileName, &width, &height);
+				textureData.buffer = ImageLoader::Load(fileName, &textureData.width, &textureData.height);
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(width, height, Format::R8G8B8A8, buffer, textureWrap, textureFilter);
+					dxTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(width, height, Format::R8G8B8A8, buffer, textureWrap, textureFilter);
+					glTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);
 #endif
 			}
 
-			void Texture2D::Create(unsigned int width, unsigned int height, Format format, const uint8_t* data)
+			void Texture2D::Create(const TextureData& textureData, Format format)
 			{
-				this->width = width;
-				this->height = height;
-				this->buffer = data;
+				this->textureData = textureData;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(width, height, format, buffer, TextureWrap::Repeat, TextureFilter::Neatest);
+					dxTexture2D.Create(textureData, format, TextureWrap::Repeat, TextureFilter::Neatest);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(width, height, format, buffer, TextureWrap::Repeat, TextureFilter::Neatest);
+					glTexture2D.Create(textureData, format, TextureWrap::Repeat, TextureFilter::Neatest);
 #endif
 			}
 
-			void Texture2D::Create(unsigned int width, unsigned int height, Format format, const uint8_t* data, TextureWrap textureWrap, TextureFilter textureFilter)
+			void Texture2D::Create(const TextureData& textureData, Format format, TextureWrap textureWrap, TextureFilter textureFilter)
 			{
-				this->width = width;
-				this->height = height;
-				this->buffer = data;
+				this->textureData = textureData;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(width, height, format, buffer, textureWrap, textureFilter);
+					dxTexture2D.Create(textureData, format, textureWrap, textureFilter);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(width, height, format, buffer, textureWrap, textureFilter);
+					glTexture2D.Create(textureData, format, textureWrap, textureFilter);
 #endif
 			}
 

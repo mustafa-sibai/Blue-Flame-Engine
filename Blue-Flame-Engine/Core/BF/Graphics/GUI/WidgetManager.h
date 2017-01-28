@@ -15,7 +15,6 @@ namespace BF
 			class BF_API WidgetManager
 			{
 			private:
-				API::Shader shader;
 				Renderers::SpriteRenderer spriteRenderer;
 				StyleSheet styleSheet;
 

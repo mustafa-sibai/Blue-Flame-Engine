@@ -1,5 +1,6 @@
 #include "DXIndexBuffer.h"
 #include "BF/Engine.h"
+#include "DXError.h"
 
 namespace BF
 {
@@ -10,7 +11,7 @@ namespace BF
 			namespace DirectX
 			{
 				DXIndexBuffer::DXIndexBuffer() :
-					buffer(nullptr), hr(0), count(0)
+					buffer(nullptr), count(0)
 				{
 				}
 
@@ -38,10 +39,7 @@ namespace BF
 					subData.SysMemPitch = 0;
 					subData.SysMemSlicePitch = 0;
 
-					hr = Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, &subData, &buffer);
-
-					if (FAILED(hr))
-						std::cout << "failed to create index buffer" << std::endl;
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateBuffer(&bufferDesc, &subData, &buffer));
 				}
 
 				void DXIndexBuffer::Bind() const

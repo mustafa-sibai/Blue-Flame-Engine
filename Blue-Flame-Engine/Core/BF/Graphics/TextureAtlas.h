@@ -10,7 +10,6 @@ namespace BF
 		class BF_API TextureAtlas : public API::Texture
 		{
 			private:
-				uint8_t* buffer;
 				unsigned int bufferSize;
 
 			public:
@@ -19,10 +18,6 @@ namespace BF
 
 				void Create(unsigned int width, unsigned int height, Format format);
 				void AddTexture(const Math::Rectangle& rectangle, uint8_t* data);
-
-				inline unsigned int GetWidth() const { return width; }
-				inline unsigned int GetHeight() const { return height; }
-				inline const uint8_t* GetBuffer() const { return buffer; }
 		};
 	}
 }

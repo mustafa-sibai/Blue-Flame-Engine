@@ -14,7 +14,6 @@ namespace BF
 				{
 					private:
 						ID3D11Buffer* buffer;
-						HRESULT hr;
 
 					public:
 						DXConstentBuffer();

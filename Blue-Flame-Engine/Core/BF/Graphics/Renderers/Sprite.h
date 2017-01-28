@@ -14,16 +14,37 @@ namespace BF
 				Math::Vector4 color;
 				Math::Vector2 UV;
 				float textureID;
+				float renderingType;
 			};
 
 			class BF_API Sprite
 			{
+				friend class SpriteRenderer;
+
 				private:
+					struct FrontToBack
+					{
+						bool operator() (const Sprite* spriteA, const Sprite* spriteB) const
+						{
+							return spriteB->rectangle.y < spriteA->rectangle.y;
+						}
+					};
+
+					struct BackToFront
+					{
+						bool operator() (const Sprite* spriteA, const Sprite* spriteB) const
+						{
+							return spriteA->rectangle.y < spriteB->rectangle.y;
+						}
+					};
+
 					const Graphics::API::Texture2D* texture2D;
 					Math::Vector3 position;
 					Math::Rectangle rectangle;
 					Math::Rectangle scissorRectangle;
 					Math::Vector4 color;
+					bool submitted, recentlySubmitted;
+					unsigned int indexInVector;
 
 				public:
 					Sprite() = default;

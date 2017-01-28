@@ -1,6 +1,7 @@
 #include "DXShader.h"
 #include "BF/IO/FileLoader.h"
 #include "BF/Engine.h"
+#include "DXError.h"
 
 namespace BF
 {
@@ -14,7 +15,7 @@ namespace BF
 				using namespace BF::IO;
 
 				DXShader::DXShader() :
-					VS(nullptr), PS(nullptr), hr(0), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
+					VS(nullptr), PS(nullptr), VSData(nullptr), PSData(nullptr), VSsize(0), PSsize(0)
 				{
 				}
 
@@ -27,11 +28,8 @@ namespace BF
 					VSData = FileLoader::LoadBinaryFile(vertexShaderFilePath, &VSsize);
 					PSData = FileLoader::LoadBinaryFile(pixelShaderFilePath, &PSsize);
 					
-					if (FAILED(hr = Engine::GetContext().GetDXContext().GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS)))
-						std::cout << hr << std::endl;
-
-					if (FAILED(hr = Engine::GetContext().GetDXContext().GetDevice()->CreatePixelShader(PSData, PSsize, 0, &PS)))
-						std::cout << hr << std::endl;
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS));
+					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreatePixelShader(PSData, PSsize, 0, &PS));
 				}
 
 				void DXShader::Bind() const

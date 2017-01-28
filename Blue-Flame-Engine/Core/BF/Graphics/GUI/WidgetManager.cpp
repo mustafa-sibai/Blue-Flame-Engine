@@ -6,8 +6,10 @@ namespace BF
 	{
 		namespace GUI
 		{
+			using namespace BF::Graphics::Renderers;
+
 			WidgetManager::WidgetManager() :
-				spriteRenderer(shader), styleSheet(shader)
+				styleSheet(spriteRenderer.GetShader())
 			{
 			}
 
@@ -30,9 +32,6 @@ namespace BF
 
 			void WidgetManager::Load()
 			{
-				shader.Load("D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Sandbox/Assets/Shaders/GLSL/SpriteRenderer/VertexShader.glsl", 
-							"D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Sandbox/Assets/Shaders/GLSL/SpriteRenderer/PixelShader.glsl");
-				shader.Bind();
 				styleSheet.Load("D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Sandbox/Assets/GUI/StyleSheet.xml");
 
 				for (size_t i = 0; i < widgets.size(); i++)
@@ -47,7 +46,7 @@ namespace BF
 
 			void WidgetManager::Render()
 			{
-				spriteRenderer.Begin(BF::Graphics::Renderers::SpriteRenderer::SubmitType::DynamicSubmit);
+				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
 				for (size_t i = 0; i < widgets.size(); i++)
 					widgets[i]->Render();
 				spriteRenderer.End();

@@ -28,8 +28,9 @@ namespace BF
 						ID3D11RenderTargetView* renderTarget;
 						ID3D11RasterizerState* rasterizerState;
 						ID3D11DepthStencilView* zBuffer;
+						ID3D11BlendState *blendState;
 						D3D_PRIMITIVE_TOPOLOGY D3DPrimitiveType;
-						HRESULT hr;
+						bool vsync;
 
 					public:
 						DXContext();
@@ -43,6 +44,8 @@ namespace BF
 
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
 						void EnableDepthBuffer(bool state);
+						void EnableBlending(bool state);
+						void EnableVsync(bool state);
 
 						inline ID3D11Device* GetDevice() const { return device; }
 						inline ID3D11DeviceContext* GetContext() const { return context; }

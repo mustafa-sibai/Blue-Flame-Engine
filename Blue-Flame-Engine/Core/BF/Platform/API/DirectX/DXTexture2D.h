@@ -17,13 +17,12 @@ namespace BF
 						ID3D11Texture2D* textureID;
 						ID3D11ShaderResourceView* resourceView;
 						ID3D11SamplerState* samplerState;
-						HRESULT hr;
 
 					public:
 						DXTexture2D();
 						~DXTexture2D();
 
-						void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, const uint8_t* data, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
+						void Create(const TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
 						void Bind(unsigned int index) const;
 
 					private:

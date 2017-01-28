@@ -31,7 +31,6 @@ namespace BF
 				std::cout << "failed to flip image" << std::endl;
 
 			FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(dib);
-			FreeImage_Unload(dib);
 
 			bits = FreeImage_GetBits(bitmap);
 			*width = FreeImage_GetWidth(bitmap);
@@ -43,8 +42,9 @@ namespace BF
 			if (FreeImage_GetRedMask(bitmap) == 0xff0000)
 				SwapRedBlue32(bitmap);
 
+			FreeImage_Unload(dib);
+			//FreeImage_Unload(bitmap);
 			FreeImage_DeInitialise();
-			
 			return bits;
 		}
 	}

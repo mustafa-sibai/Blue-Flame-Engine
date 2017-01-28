@@ -11,6 +11,19 @@ namespace BF
 			class BF_API Texture
 			{
 				public:
+					struct TextureData
+					{
+						unsigned int width;
+						unsigned int height;
+						uint8_t* buffer;
+
+						TextureData() : width(0), height(0), buffer(nullptr) {};
+						TextureData(unsigned int width, unsigned int height, uint8_t* buffer) :
+							width(width), height(height), buffer(buffer)
+						{
+						}
+					};
+
 					enum class Format { R8 = 8, R8G8 = 16, R8G8B8 = 24, R8G8B8A8 = 32 };
 					enum class TextureWrap { Repeat, MirroredReapeat, ClampToEdge, ClampToBorder };
 
@@ -18,9 +31,7 @@ namespace BF
 					enum class TextureFilter { Neatest, Linear };
 
 				protected:
-					const uint8_t* buffer;
-					unsigned int width, height;
-
+					TextureData textureData;
 					Format format;
 					TextureWrap textureWrap;
 					TextureFilter textureFilter;
@@ -29,9 +40,7 @@ namespace BF
 					~Texture();
 
 				public:
-					inline unsigned int GetWidth() const { return width; }
-					inline unsigned int GetHeight() const { return height; }
-					inline const uint8_t* GetBuffer() const { return buffer; }
+					inline const TextureData& GetTextureData() const { return textureData; }
 			};
 		}
 	}

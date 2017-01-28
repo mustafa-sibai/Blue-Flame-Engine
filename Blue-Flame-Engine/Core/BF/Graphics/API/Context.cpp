@@ -14,7 +14,7 @@ namespace BF
 				{
 #ifdef BF_PLATFORM_WINDOWS
 					renderAPI = RenderAPI::DirectX;
-#elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 					renderAPI = RenderAPI::OpenGL;
 #endif
 				}
@@ -35,6 +35,9 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.Initialize();
+#elif BF_PLATFORM_ANDROID
+				if (renderAPI == RenderAPI::OpenGL)
+					aContext.Initialize();
 #endif
 			}
 
@@ -47,6 +50,9 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.SetPrimitiveType(primitiveType);
+#elif BF_PLATFORM_ANDROID
+				//if (renderAPI == RenderAPI::OpenGL)
+					//aContext.SetPrimitiveType();
 #endif
 			}
 
@@ -59,10 +65,13 @@ namespace BF
 					winGLContext.Clear(color);
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
-					lxGLContext->Clear(color);
+					lxGLContext.Clear(color);
 #elif BF_PLATFORM_WEBGL
 				if (renderAPI == RenderAPI::OpenGL)
-					webGLContext->Clear(color);
+					webGLContext.Clear(color);
+#elif BF_PLATFORM_ANDROID
+				if (renderAPI == RenderAPI::OpenGL)
+					aContext.Clear();
 #endif
 			}
 
@@ -79,6 +88,9 @@ namespace BF
 #elif BF_PLATFORM_WEBGL
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Draw(GL_PRIMITIVE_TYPE, vertexCount, GL_UNSIGNED_INT);
+#elif BF_PLATFORM_ANDROID
+				if (renderAPI == RenderAPI::OpenGL)
+					aContext.Draw();
 #endif
 			}
 
@@ -95,12 +107,14 @@ namespace BF
 #elif BF_PLATFORM_WEBGL
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.SwapBuffers();
+#elif BF_PLATFORM_ANDROID
+				if (renderAPI == RenderAPI::OpenGL)
+					aContext.SwapBuffers();
 #endif
 			}
 
 			void Context::EnableDepthBuffer(bool state)
 			{
-
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
 					dxContext.EnableDepthBuffer(state);
@@ -108,6 +122,42 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableDepthBuffer(state);
+#endif
+			}
+
+			void Context::EnableDepthMask(bool state)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				//if (renderAPI == RenderAPI::DirectX)
+					//dxContext.EnableDepthBuffer(state);
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.EnableDepthMask(state);
+#endif
+			}
+
+			void Context::EnableBlending(bool state)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+					dxContext.EnableBlending(state);
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.EnableBlending(state);
+#endif
+			}
+
+			void Context::EnableVsync(bool state)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+					dxContext.EnableVsync(state);
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.EnableVsync(state);
 #endif
 			}
 		}

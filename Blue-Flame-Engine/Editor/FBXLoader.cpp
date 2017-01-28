@@ -243,7 +243,8 @@ Vector2 FBXLoader::ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUV
 {
 	if (inUVLayer >= 2 || inMesh->GetElementUVCount() <= inUVLayer)
 	{
-		throw std::exception("Invalid UV Layer Number");
+		return Vector2();
+		//throw std::exception("Invalid UV Layer Number");
 	}
 	FbxGeometryElementUV* vertexUV = inMesh->GetElementUV(inUVLayer);
 

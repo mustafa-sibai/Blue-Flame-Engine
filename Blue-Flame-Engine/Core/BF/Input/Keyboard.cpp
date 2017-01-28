@@ -4,11 +4,11 @@ namespace BF
 {
 	namespace Input
 	{
-		bool Keyboard::keys[MAX_KEYS];
+		bool Keyboard::keys[BF_MAX_KEYS];
 
 		Keyboard::Keyboard()
 		{
-			for (size_t i = 0; i < MAX_KEYS; i++)
+			for (unsigned int i = 0; i < BF_MAX_KEYS; i++)
 				keys[i] = false;
 		}
 

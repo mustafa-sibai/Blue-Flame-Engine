@@ -11,7 +11,7 @@ namespace BF
 		using namespace BF::IO;
 
 		TileMap::TileMap() :
-			spriteRenderer(shader)
+			spriteRenderer()
 		{
 		}
 
@@ -22,15 +22,11 @@ namespace BF
 		void TileMap::Load(const std::string& filename)
 		{
 			spriteRenderer.Initialize();
-
-			shader.Load("Assets/Shaders/GLSL/SpriteRenderer/VertexShader.glsl", "Assets/Shaders/GLSL/SpriteRenderer/PixelShader.glsl");
-			shader.Bind();
-
 			tileMapData = BFMLoader::Load(filename);
 
 			for (size_t i = 0; i < tileMapData->textures.size(); i++)
 			{
-				Texture2D* texture = new Texture2D(shader);
+				Texture2D* texture = new Texture2D(spriteRenderer.GetShader());
 				texture->Load(tileMapData->textures[i]);
 				textures.push_back(texture);
 			}
@@ -45,7 +41,7 @@ namespace BF
 
 		void TileMap::Draw()
 		{
-			spriteRenderer.Begin(Renderers::SpriteRenderer::SubmitType::DynamicSubmit);
+			spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 
 			for (size_t i = 0; i < sprites.size(); i++)
 				spriteRenderer.Render(sprites[i]);

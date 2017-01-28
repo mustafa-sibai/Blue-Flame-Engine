@@ -1,6 +1,7 @@
 #include "DXContext.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/Engine.h"
+#include "DXError.h"
 
 namespace BF
 {
@@ -14,7 +15,7 @@ namespace BF
 				using namespace BF::Math;
 
 				DXContext::DXContext() :
-					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
+					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), vsync(false), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
 				{
 				}
 
@@ -44,7 +45,10 @@ namespace BF
 
 				void DXContext::SwapBuffers()
 				{
-					swapChain->Present(0, 0);
+					if(vsync)
+						DXCall(swapChain->Present(1, 0));
+					else
+						DXCall(swapChain->Present(0, 0));
 				}
 
 				void DXContext::Draw(unsigned int vertexCount)
@@ -64,33 +68,33 @@ namespace BF
 				{
 					switch (primitiveType)
 					{
-					case PrimitiveType::PointList:
-					{
-						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
-						break;
-					}
-					case PrimitiveType::LineList:
-					{
-						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
-						break;
-					}
-					case PrimitiveType::LineStrip:
-					{
-						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
-						break;
-					}
-					case PrimitiveType::TriangleList:
-					{
-						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-						break;
-					}
-					case PrimitiveType::TriangeStrip:
-					{
-						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
-						break;
-					}
-					default:
-						break;
+						case PrimitiveType::PointList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
+							break;
+						}
+						case PrimitiveType::LineList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+							break;
+						}
+						case PrimitiveType::LineStrip:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
+							break;
+						}
+						case PrimitiveType::TriangleList:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+							break;
+						}
+						case PrimitiveType::TriangeStrip:
+						{
+							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+							break;
+						}
+						default:
+							break;
 					}
 					context->IASetPrimitiveTopology(D3DPrimitiveType);
 				}
@@ -103,6 +107,36 @@ namespace BF
 						context->OMSetRenderTargets(1, &renderTarget, 0);
 				}
 
+				void DXContext::EnableBlending(bool state)
+				{
+					if (state)
+					{
+						D3D11_BLEND_DESC blendDesc;
+						ZeroMemory(&blendDesc, sizeof(blendDesc));
+
+						blendDesc.RenderTarget[0].BlendEnable = TRUE;
+						blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+						blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+						blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+						blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+						blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+						blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+						blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+						blendDesc.IndependentBlendEnable = FALSE;
+						blendDesc.AlphaToCoverageEnable = FALSE;
+
+						DXCall(device->CreateBlendState(&blendDesc, &blendState));
+						context->OMSetBlendState(blendState, 0, 0xffffffff);
+					}
+					else
+						context->OMSetBlendState(0, 0, 0xffffffff);
+				}
+
+				void DXContext::EnableVsync(bool state)
+				{
+					vsync = state;
+				}
+
 				void DXContext::CreateDeviceAndSwapChain()
 				{
 					DXGI_SWAP_CHAIN_DESC swapChainDesc;
@@ -111,7 +145,7 @@ namespace BF
 					swapChainDesc.BufferCount = 1;
 					swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 					swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-					swapChainDesc.OutputWindow = Engine::GetWindow().GetWINWindow().GetHWND();
+					swapChainDesc.OutputWindow = Engine::GetWindow().GetHWND();
 					swapChainDesc.SampleDesc.Count = 4;
 					swapChainDesc.Windowed = TRUE;
 
@@ -129,7 +163,7 @@ namespace BF
 					UINT               numLevelsRequested = 1;
 					D3D_FEATURE_LEVEL  FeatureLevelsSupported;
 
-					hr = D3D11CreateDeviceAndSwapChain(NULL,
+					DXCall(D3D11CreateDeviceAndSwapChain(NULL,
 						D3D_DRIVER_TYPE_HARDWARE,
 						NULL,
 						creationFlags,
@@ -140,10 +174,7 @@ namespace BF
 						&swapChain,
 						&device,
 						&FeatureLevelsSupported,
-						&context);
-
-					if (FAILED(hr))
-						std::cout << hr << std::endl;
+						&context));
 				}
 
 				void DXContext::CreateBackBuffer()
@@ -151,12 +182,8 @@ namespace BF
 					ID3D11Texture2D* backBuffer;
 					ZeroMemory(&backBuffer, sizeof(backBuffer));
 
-					swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer);
-
-					hr = device->CreateRenderTargetView(backBuffer, NULL, &renderTarget);
-					if (FAILED(hr))
-						std::cout << hr << std::endl;
-
+					DXCall(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer));
+					DXCall(device->CreateRenderTargetView(backBuffer, NULL, &renderTarget));
 					backBuffer->Release();
 				}
 
@@ -176,10 +203,7 @@ namespace BF
 					rasterDesc.ScissorEnable = false;
 					rasterDesc.SlopeScaledDepthBias = 0.0f;
 
-					hr = device->CreateRasterizerState(&rasterDesc, &rasterizerState);
-					if (FAILED(hr))
-						std::cout << hr << std::endl;
-
+					DXCall(device->CreateRasterizerState(&rasterDesc, &rasterizerState));
 					context->RSSetState(rasterizerState);
 				}
 
@@ -197,10 +221,7 @@ namespace BF
 					texd.SampleDesc.Count = 4;
 					texd.Format = DXGI_FORMAT_D32_FLOAT;
 					texd.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-
-					hr = device->CreateTexture2D(&texd, NULL, &depthBuffer);
-					if (FAILED(hr))
-						std::cout << hr << std::endl;
+					DXCall(device->CreateTexture2D(&texd, NULL, &depthBuffer));
 
 					//Create Z-Buffer
 					D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
@@ -208,7 +229,7 @@ namespace BF
 
 					dsvd.Format = DXGI_FORMAT_D32_FLOAT;
 					dsvd.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
-					device->CreateDepthStencilView(depthBuffer, &dsvd, &zBuffer);
+					DXCall(device->CreateDepthStencilView(depthBuffer, &dsvd, &zBuffer));
 					depthBuffer->Release();
 				}
 

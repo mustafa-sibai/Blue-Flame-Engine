@@ -10,22 +10,26 @@ namespace BF
 			using namespace Math;
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, texture2D->GetWidth(), texture2D->GetHeight()), scissorRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
+				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, texture2D->GetTextureData().width, texture2D->GetTextureData().height),
+				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Rectangle& scissorRectangle, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height), scissorRectangle(scissorRectangle), color(color)
+				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height),
+				scissorRectangle(scissorRectangle), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Vector4& color) :
-				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle), scissorRectangle(0, 0, texture2D->GetWidth(), texture2D->GetHeight()), color(color)
+				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle),
+				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Rectangle& scissorRectangle, const Vector4& color) :
-				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle), scissorRectangle(scissorRectangle), color(color)
+				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle),
+				scissorRectangle(scissorRectangle), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
 			{
 			}
 

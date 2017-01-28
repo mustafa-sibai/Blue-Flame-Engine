@@ -20,7 +20,6 @@ namespace BF
 		class BF_API TileMap
 		{
 		private:
-			API::Shader shader;
 			Renderers::SpriteRenderer spriteRenderer;
 			std::vector<API::Texture2D*> textures;
 			std::vector<Renderers::Sprite> sprites;

@@ -16,7 +16,6 @@ namespace BF
 					private:
 						ID3D11VertexShader* VS;
 						ID3D11PixelShader* PS;
-						HRESULT hr;
 
 						char* VSData;
 						char* PSData;
