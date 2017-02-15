@@ -36,7 +36,12 @@ namespace BF
 				void* GLVertexBuffer::Map() const
 				{
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 					GLCall(return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+#elif BF_PLATFORM_WEBGL || defined (BF_PLATFORM_ANDROID)
+					return nullptr;
+#endif
 				}
 
 				void GLVertexBuffer::Unmap() const

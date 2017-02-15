@@ -12,5 +12,6 @@ namespace BF
 	namespace Math
 	{
 		float ToRadians(float Degrees);
+		float Normalize(float value, float min, float max);
 	}
 }

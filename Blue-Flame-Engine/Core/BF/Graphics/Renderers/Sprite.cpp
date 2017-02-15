@@ -9,27 +9,27 @@ namespace BF
 			using namespace Graphics::API;
 			using namespace Math;
 
-			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, texture2D->GetTextureData().width, texture2D->GetTextureData().height),
-				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
+			Sprite::Sprite(const Texture2D* texture2D, const Vector2& position, unsigned int zLayer, const Color& color) :
+				texture2D(texture2D), position(position), zLayer(zLayer), rectangle((int)position.x, (int)position.y, texture2D->GetTextureData().width, texture2D->GetTextureData().height),
+				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color)
 			{
 			}
 
-			Sprite::Sprite(const Texture2D* texture2D, const Vector3& position, const Rectangle& scissorRectangle, const Vector4& color) :
-				texture2D(texture2D), position(position), rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height),
-				scissorRectangle(scissorRectangle), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
+			Sprite::Sprite(const Texture2D* texture2D, const Vector2& position, unsigned int zLayer, const Rectangle& scissorRectangle, const Color& color) :
+				texture2D(texture2D), position(position), zLayer(zLayer), rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height),
+				scissorRectangle(scissorRectangle), color(color)
 			{
 			}
 
-			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Vector4& color) :
-				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle),
-				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
+			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Color& color) :
+				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y), zLayer(zLayer), rectangle(rectangle),
+				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color)
 			{
 			}
 
-			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, const Rectangle& scissorRectangle, const Vector4& color) :
-				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y, 0.0f), rectangle(rectangle),
-				scissorRectangle(scissorRectangle), color(color), submitted(false), recentlySubmitted(false), indexInVector(0)
+			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Rectangle& scissorRectangle, const Color& color) :
+				texture2D(texture2D), position((float)rectangle.x, (float)rectangle.y), zLayer(zLayer), rectangle(rectangle),
+				scissorRectangle(scissorRectangle), color(color)
 			{
 			}
 
@@ -42,12 +42,14 @@ namespace BF
 				this->texture2D = texture2D;
 			}
 
-			void Sprite::SetPosition(const Math::Vector3& position)
+			void Sprite::SetPosition(const Math::Vector2& position)
 			{
 				this->position = position;
+				this->rectangle.x = (int)position.x;
+				this->rectangle.y = (int)position.y;
 			}
 
-			void Sprite::SetColor(const Math::Vector4& color)
+			void Sprite::SetColor(const Color& color)
 			{
 				this->color = color;
 			}
@@ -55,11 +57,18 @@ namespace BF
 			void Sprite::SetRectangle(const Math::Rectangle& rectangle)
 			{
 				this->rectangle = rectangle;
+				this->position.x = (float)rectangle.x;
+				this->position.y = (float)rectangle.y;
 			}
 
 			void Sprite::SetScissorRectangle(const Math::Rectangle& scissorRectangle)
 			{
 				this->scissorRectangle = scissorRectangle;
+			}
+
+			void Sprite::SetZLayer(unsigned int zLayer)
+			{
+				this->zLayer = zLayer;
 			}
 		}
 	}

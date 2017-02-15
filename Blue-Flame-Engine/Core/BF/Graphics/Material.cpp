@@ -5,7 +5,7 @@ namespace BF
 	namespace Graphics
 	{
 		Material::Material(const API::Shader& shader) :
-			shader(shader), constentBuffer(shader)
+			shader(shader), constentBuffer()
 		{
 			constentBuffer.Create(sizeof(MaterialBuffer), 1);
 		}

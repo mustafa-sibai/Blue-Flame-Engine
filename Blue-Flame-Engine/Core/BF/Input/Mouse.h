@@ -16,8 +16,9 @@ namespace BF
 	{
 		class BF_API Mouse
 		{
+#ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINWindow;
-
+#endif
 			private:
 				static Math::Vector2 position;
 				static bool insideWindowClient;

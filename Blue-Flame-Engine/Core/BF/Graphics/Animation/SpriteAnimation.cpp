@@ -27,7 +27,7 @@ namespace BF
 				data = IO::BFALoader::Load(filename);
 				texture.Load(data->textureName);
 
-				sprite = Renderers::Sprite(&texture, Math::Rectangle(0, 350, 32 * 10, 48 * 10), data->sequences[0].keyFrames[0].scissorRectangle, Math::Vector4(1.0f));
+				sprite = Renderers::Sprite(&texture, Math::Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
 				timer.Reset();
 			}
 

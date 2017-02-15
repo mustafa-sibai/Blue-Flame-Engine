@@ -25,7 +25,7 @@ namespace BF
 
 		Matrix4::Matrix4()
 		{
-			memset(elements, 0, sizeof(float) * MATRIX_SIZE);
+			memset(elements, 0, sizeof(float) * BF_MATRIX_SIZE);
 		}
 
 		Matrix4::~Matrix4()
@@ -36,10 +36,10 @@ namespace BF
 		{
 			Matrix4 identityMatrix;
 
-			identityMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = 1.0;
-			identityMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = 1.0;
-			identityMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = 1.0;
-			identityMatrix.elements[3 + 3 * MATRIX_COLUMN_SIZE] = 1.0;
+			identityMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = 1.0;
+			identityMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = 1.0;
+			identityMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = 1.0;
+			identityMatrix.elements[3 + 3 * BF_MATRIX_COLUMN_SIZE] = 1.0;
 
 			return identityMatrix;
 		}
@@ -48,9 +48,9 @@ namespace BF
 		{
 			Matrix4 translateMatrix = Matrix4::Identity();
 
-			translateMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = translation.x;
-			translateMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = translation.y;
-			translateMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = translation.z;
+			translateMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = translation.x;
+			translateMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = translation.y;
+			translateMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = translation.z;
 
 			return translateMatrix;
 		}
@@ -59,9 +59,9 @@ namespace BF
 		{
 			Matrix4 scaleMatrix = Matrix4::Identity();
 
-			scaleMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = scale.x;
-			scaleMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = scale.y;
-			scaleMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = scale.z;
+			scaleMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = scale.x;
+			scaleMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = scale.y;
+			scaleMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = scale.z;
 
 			return scaleMatrix;
 		}
@@ -75,17 +75,17 @@ namespace BF
 			float s = (float)sin(r);
 			float oc = 1.0f - c;
 
-			rotationMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.x * oc + c;
-			rotationMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc + axis.z * s;
-			rotationMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc - axis.y * s;
+			rotationMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = axis.x * axis.x * oc + c;
+			rotationMatrix.elements[1 + 0 * BF_MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc + axis.z * s;
+			rotationMatrix.elements[2 + 0 * BF_MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc - axis.y * s;
 
-			rotationMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc - axis.z * s;
-			rotationMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = axis.y * axis.y * oc + c;
-			rotationMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc + axis.x * s;
+			rotationMatrix.elements[0 + 1 * BF_MATRIX_COLUMN_SIZE] = axis.x * axis.y * oc - axis.z * s;
+			rotationMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = axis.y * axis.y * oc + c;
+			rotationMatrix.elements[2 + 1 * BF_MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc + axis.x * s;
 
-			rotationMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc + axis.y * s;
-			rotationMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc - axis.x * s;
-			rotationMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = axis.z * axis.z * oc + c;
+			rotationMatrix.elements[0 + 2 * BF_MATRIX_COLUMN_SIZE] = axis.x * axis.z * oc + axis.y * s;
+			rotationMatrix.elements[1 + 2 * BF_MATRIX_COLUMN_SIZE] = axis.y * axis.z * oc - axis.x * s;
+			rotationMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = axis.z * axis.z * oc + c;
 
 			return rotationMatrix;
 		}
@@ -96,11 +96,11 @@ namespace BF
 
 			float t = (float)tan(ToRadians(fieldOfView * 0.5f));
 
-			perspectiveMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = 1.0f / (t * aspectRatio);
-			perspectiveMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = 1.0f / t;
-			perspectiveMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = (-nearZ - farZ) / (nearZ - farZ);
-			perspectiveMatrix.elements[3 + 2 * MATRIX_COLUMN_SIZE] = 1.0f;
-			perspectiveMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = (2.0f * farZ * nearZ) / (nearZ - farZ);
+			perspectiveMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = 1.0f / (t * aspectRatio);
+			perspectiveMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = 1.0f / t;
+			perspectiveMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = (-nearZ - farZ) / (nearZ - farZ);
+			perspectiveMatrix.elements[3 + 2 * BF_MATRIX_COLUMN_SIZE] = 1.0f;
+			perspectiveMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = (2.0f * farZ * nearZ) / (nearZ - farZ);
 
 			return perspectiveMatrix;
 		}
@@ -109,12 +109,12 @@ namespace BF
 		{
 			Matrix4 orthographicMatrix = Identity();
 
-			orthographicMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = 2.0f / (right - left);
-			orthographicMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = 2.0f / (top - bottom);
-			orthographicMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = 2.0f / (nearZ - farZ);
-			orthographicMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = (left + right) / (left - right);
-			orthographicMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = (bottom + top) / (bottom - top);
-			orthographicMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = (farZ + nearZ) / (farZ - nearZ);
+			orthographicMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (right - left);
+			orthographicMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (top - bottom);
+			orthographicMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (nearZ - farZ);
+			orthographicMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = (left + right) / (left - right);
+			orthographicMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = (bottom + top) / (bottom - top);
+			orthographicMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = (farZ + nearZ) / (farZ - nearZ);
 
 			return orthographicMatrix;
 		}
@@ -127,21 +127,21 @@ namespace BF
 			Vector3 right = forward.Cross(upVector).Normalize();
 			Vector3 up = right.Cross(forward);
 
-			viewMatrix.elements[0 + 0 * MATRIX_COLUMN_SIZE] = right.x;
-			viewMatrix.elements[0 + 1 * MATRIX_COLUMN_SIZE] = right.y;
-			viewMatrix.elements[0 + 2 * MATRIX_COLUMN_SIZE] = right.z;
+			viewMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = right.x;
+			viewMatrix.elements[0 + 1 * BF_MATRIX_COLUMN_SIZE] = right.y;
+			viewMatrix.elements[0 + 2 * BF_MATRIX_COLUMN_SIZE] = right.z;
 
-			viewMatrix.elements[1 + 0 * MATRIX_COLUMN_SIZE] = up.x;
-			viewMatrix.elements[1 + 1 * MATRIX_COLUMN_SIZE] = up.y;
-			viewMatrix.elements[1 + 2 * MATRIX_COLUMN_SIZE] = up.z;
+			viewMatrix.elements[1 + 0 * BF_MATRIX_COLUMN_SIZE] = up.x;
+			viewMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = up.y;
+			viewMatrix.elements[1 + 2 * BF_MATRIX_COLUMN_SIZE] = up.z;
 
-			viewMatrix.elements[2 + 0 * MATRIX_COLUMN_SIZE] = forward.x;
-			viewMatrix.elements[2 + 1 * MATRIX_COLUMN_SIZE] = forward.y;
-			viewMatrix.elements[2 + 2 * MATRIX_COLUMN_SIZE] = forward.z;
+			viewMatrix.elements[2 + 0 * BF_MATRIX_COLUMN_SIZE] = forward.x;
+			viewMatrix.elements[2 + 1 * BF_MATRIX_COLUMN_SIZE] = forward.y;
+			viewMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = forward.z;
 
-			viewMatrix.elements[0 + 3 * MATRIX_COLUMN_SIZE] = -right.Dot(eye);
-			viewMatrix.elements[1 + 3 * MATRIX_COLUMN_SIZE] = -up.Dot(eye);
-			viewMatrix.elements[2 + 3 * MATRIX_COLUMN_SIZE] = -forward.Dot(eye);
+			viewMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = -right.Dot(eye);
+			viewMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = -up.Dot(eye);
+			viewMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = -forward.Dot(eye);
 
 			return viewMatrix;
 		}
@@ -150,12 +150,12 @@ namespace BF
 		{
 			Matrix4 newMatrix;
 
-			for (unsigned int row = 0; row < MATRIX_ROW_SIZE; row++)
+			for (unsigned int row = 0; row < BF_MATRIX_ROW_SIZE; row++)
 			{
-				for (unsigned int col = 0; col < MATRIX_COLUMN_SIZE; col++)
+				for (unsigned int col = 0; col < BF_MATRIX_COLUMN_SIZE; col++)
 				{
-					for (unsigned int e = 0; e < MATRIX_ROW_SIZE; e++)
-						newMatrix.elements[e + row * MATRIX_ROW_SIZE] += matrixA.elements[col + row * MATRIX_COLUMN_SIZE] * matrixB.elements[e + col * MATRIX_COLUMN_SIZE];
+					for (unsigned int e = 0; e < BF_MATRIX_ROW_SIZE; e++)
+						newMatrix.elements[e + row * BF_MATRIX_ROW_SIZE] += matrixA.elements[col + row * BF_MATRIX_COLUMN_SIZE] * matrixB.elements[e + col * BF_MATRIX_COLUMN_SIZE];
 				}
 			}
 

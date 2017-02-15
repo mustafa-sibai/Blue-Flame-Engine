@@ -2,11 +2,10 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXConstentBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLConstentBuffer.h"
 #endif
 
-#include "Shader.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -18,7 +17,6 @@ namespace BF
 			class BF_API ConstentBuffer
 			{
 				private:
-					const Shader& shader;
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXConstentBuffer dxConstentBuffer;
 #endif
@@ -26,7 +24,7 @@ namespace BF
 					Platform::API::OpenGL::GLConstentBuffer glConstentBuffer;
 #endif
 				public:
-					ConstentBuffer(const Shader& shader);
+					ConstentBuffer();
 					~ConstentBuffer();
 
 					void Create(unsigned int size, unsigned int bindingIndex);

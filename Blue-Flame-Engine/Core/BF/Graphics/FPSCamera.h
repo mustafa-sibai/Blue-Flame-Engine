@@ -15,11 +15,11 @@ namespace BF
 				Math::Vector2 windowCenter;
 
 			public:
-				FPSCamera(const Math::Matrix4& projectionMatrix);
+				FPSCamera();
 				~FPSCamera();
 
-				void Initialize();
-				void Update();
+				void Initialize(const Math::Matrix4& projectionMatrix) override;
+				void Update() override;
 		};
 	}
 }

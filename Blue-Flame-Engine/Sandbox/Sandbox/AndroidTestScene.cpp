@@ -32,7 +32,7 @@ void AndroidTestScene::Update()
 
 void AndroidTestScene::Render()
 {
-	BF::Engine::GetContext().Clear(BF::Math::Vector4(0.5, 0.0f, 0.0f, 1.0f));
+	BF::Engine::GetContext().Clear(BF::Graphics::Color(0.5, 0.0f, 0.0f, 1.0f));
 	BF::Engine::GetContext().SwapBuffers();
 	//BF_LOG_INFO("Render");
 }

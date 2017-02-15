@@ -10,6 +10,7 @@
 	#include "BF/Platform/API/OpenGL/Context/AContext.h"
 #endif
 
+#include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -51,7 +52,7 @@ namespace BF
 
 					void Initialize();
 					void SetPrimitiveType(PrimitiveType primitiveType);
-					void Clear(Math::Vector4 Color);
+					void Clear(const Color& color);
 					void Draw(unsigned int vertexCount);
 					void SwapBuffers();
 					

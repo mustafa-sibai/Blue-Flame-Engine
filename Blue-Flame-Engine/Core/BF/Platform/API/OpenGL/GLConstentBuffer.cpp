@@ -21,7 +21,7 @@ namespace BF
 
 				void GLConstentBuffer::Create(unsigned int size, unsigned int bindingIndex)
 				{
-					GLCall(glCreateBuffers(1, &buffer));
+					GLCall(glGenBuffers(1, &buffer));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
 					GLCall(glBufferData(GL_UNIFORM_BUFFER, size, 0, GL_DYNAMIC_DRAW));
 

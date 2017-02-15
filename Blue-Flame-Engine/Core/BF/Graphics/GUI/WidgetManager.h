@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "BF/Graphics/API/Shader.h"
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "StyleSheet.h"
 #include "Widget.h"
@@ -8,28 +7,37 @@
 
 namespace BF
 {
+	namespace Application
+	{
+		class Scene;
+	}
+
 	namespace Graphics
 	{
 		namespace GUI
 		{
 			class BF_API WidgetManager
 			{
-			private:
-				Renderers::SpriteRenderer spriteRenderer;
-				StyleSheet styleSheet;
+				friend class BF::Application::Scene;
 
-			public:
-				std::vector<Widget*> widgets;
+				private:
+					Renderers::SpriteRenderer spriteRenderer;
+					StyleSheet styleSheet;
 
-			public:
-				WidgetManager();
-				~WidgetManager();
+				public:
+					std::vector<Widget*> widgets;
 
-				void AddWidget(Widget* widget);
-				void Initialize();
-				void Load();
-				void Update();
-				void Render();
+				public:
+					WidgetManager();
+					~WidgetManager();
+
+					void AddWidget(Widget* widget);
+
+				private:
+					void Initialize();
+					void Load();
+					void Update();
+					void Render();
 			};
 		}
 	}

@@ -4,9 +4,9 @@
 //#include <BF/Application/SceneManager.h>
 //#include <BF/Platform/API/Vulkan/VKContext.h>
 
-//#include "_2DScene.h"
+#include "_2DScene.h"
 #include "_3DScene.h"
-//#include "AndroidTestScene.h"
+#include "AndroidTestScene.h"
 
 //#include <windows.h>
 //#include <string>
@@ -14,17 +14,35 @@
 
 //using namespace std;
 
+//#include <BF/Network/Server.h>
+//#include <BF/Network/Client.h>
+
 int main()
 {
+	/*BF::Network::Server server;
+
+	server.Initialize();
+	server.Listen();
+	server.Accept();*/
+
+	
+	/*BF::Network::Client client;
+
+	client.Initialize();
+	client.Connect();
+
+	system("PAUSE");*/
+
 	//BF::Platform::API::Vulkan::VKContext vKContext;
 
 	//BF_LOG_INFO("MAIN FUNCTION");
 
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", 0, 0, 1920, 1080, BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", 800, 250, 1920, 1080, BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
-	//BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
-	BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
+	//BF::Application::SceneManager::AddNewScene(new test());
+	BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
+	//BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
 
 	BF::Application::SceneManager::GetScene(0).Run();
 	//BF::Application::SceneManager::GetScene(1).Run();

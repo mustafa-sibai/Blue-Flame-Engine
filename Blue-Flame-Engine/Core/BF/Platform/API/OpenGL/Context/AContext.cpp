@@ -11,6 +11,8 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::Graphics;
+
 				AContext::AContext()// :
 					//renderThread(&AContext::RenderLoop, this)
 				{
@@ -75,9 +77,9 @@ namespace BF
 						//return false;
 					}
 
-					ANativeWindow_setBuffersGeometry(Engine::GetWindow().GetAWindow().window, 0, 0, format);
+					ANativeWindow_setBuffersGeometry(Engine::GetWindow().window, 0, 0, format);
 
-					if (!(surface = eglCreateWindowSurface(display, config, Engine::GetWindow().GetAWindow().window, 0))) {
+					if (!(surface = eglCreateWindowSurface(display, config, Engine::GetWindow().window, 0))) {
 						BF_LOG_ERROR("eglCreateWindowSurface() returned error %d", eglGetError());
 						//destroy();
 						//return false;
@@ -111,10 +113,10 @@ namespace BF
 					BF_LOG_INFO("%s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 				}
 
-				void AContext::Clear()
+				void AContext::Clear(const Color& color)
 				{
 					glViewport(0, 0, width, height);
-					glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+					glClearColor(color.r, color.g, color.b, color.a);
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				}
 

@@ -2,7 +2,7 @@
 //#include <thread>
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
-#include "BF/Math/Vector4.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -33,7 +33,7 @@ namespace BF
 					~AContext();
 
 					void Initialize();
-					void Clear();
+					void Clear(const Graphics::Color& color);
 					void Draw();
 					void SwapBuffers();
 					void CleanUp();

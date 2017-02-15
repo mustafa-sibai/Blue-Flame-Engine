@@ -7,8 +7,7 @@ namespace BF
 	{
 		namespace API
 		{
-			ConstentBuffer::ConstentBuffer(const Shader& shader) :
-				shader(shader)
+			ConstentBuffer::ConstentBuffer()
 			{
 			}
 

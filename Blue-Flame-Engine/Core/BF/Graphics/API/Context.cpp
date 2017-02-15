@@ -56,7 +56,7 @@ namespace BF
 #endif
 			}
 
-			void Context::Clear(Math::Vector4 color)
+			void Context::Clear(const Color& color)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
@@ -71,7 +71,7 @@ namespace BF
 					webGLContext.Clear(color);
 #elif BF_PLATFORM_ANDROID
 				if (renderAPI == RenderAPI::OpenGL)
-					aContext.Clear();
+					aContext.Clear(color);
 #endif
 			}
 

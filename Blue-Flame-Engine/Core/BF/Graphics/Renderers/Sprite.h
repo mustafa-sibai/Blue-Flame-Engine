@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/Math/Math.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Graphics/API/Texture2D.h"
 
 namespace BF
@@ -10,10 +11,9 @@ namespace BF
 		{
 			struct BF_API SpriteBuffer
 			{
-				Math::Vector3 position;
-				Math::Vector4 color;
+				Math::Vector2 position;
+				Color color;
 				Math::Vector2 UV;
-				float textureID;
 				float renderingType;
 			};
 
@@ -26,7 +26,14 @@ namespace BF
 					{
 						bool operator() (const Sprite* spriteA, const Sprite* spriteB) const
 						{
-							return spriteB->rectangle.y < spriteA->rectangle.y;
+							if (spriteA->rectangle.y > spriteB->rectangle.y)
+								return true;
+							else if (spriteA->rectangle.y == spriteB->rectangle.y && spriteA->zLayer < spriteB->zLayer)
+								return true;
+							else if (spriteA->rectangle.y == spriteB->rectangle.y && spriteA->zLayer == spriteB->zLayer)
+								return false;
+							else
+								return false;
 						}
 					};
 
@@ -34,37 +41,45 @@ namespace BF
 					{
 						bool operator() (const Sprite* spriteA, const Sprite* spriteB) const
 						{
-							return spriteA->rectangle.y < spriteB->rectangle.y;
+							if (spriteA->rectangle.y < spriteB->rectangle.y)
+								return true;
+							else if (spriteA->rectangle.y == spriteB->rectangle.y && spriteA->zLayer < spriteB->zLayer)
+								return true;
+							else if (spriteA->rectangle.y == spriteB->rectangle.y && spriteA->zLayer == spriteB->zLayer)
+								return false;
+							else
+								return false;
 						}
 					};
 
 					const Graphics::API::Texture2D* texture2D;
-					Math::Vector3 position;
+					Math::Vector2 position;
 					Math::Rectangle rectangle;
 					Math::Rectangle scissorRectangle;
-					Math::Vector4 color;
-					bool submitted, recentlySubmitted;
-					unsigned int indexInVector;
+					Color color;
+					unsigned int zLayer;
 
 				public:
 					Sprite() = default;
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector3& position, const Math::Vector4& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector3& position, const Math::Rectangle& scissorRectangle, const Math::Vector4& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, const Math::Vector4& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, const Math::Rectangle& scissorRectangle, const Math::Vector4& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2& position, unsigned int zLayer, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2& position, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
 					~Sprite();
 
 					void SetTexture(const Graphics::API::Texture2D* texture2D);
-					void SetPosition(const Math::Vector3& position);
-					void SetColor(const Math::Vector4& color);
+					void SetPosition(const Math::Vector2& position);
+					void SetColor(const Color& color);
 					void SetRectangle(const Math::Rectangle& rectangle);
 					void SetScissorRectangle(const Math::Rectangle& scissorRectangle);
+					void SetZLayer(unsigned int zLayer);
 
 					inline const Graphics::API::Texture2D* GetTexture() const { return texture2D; }
-					inline const Math::Vector3& GetPosition() const { return position; }
-					inline const Math::Vector4& GetColor() const { return color; }
+					inline const Math::Vector2& GetPosition() const { return position; }
+					inline const Color& GetColor() const { return color; }
 					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
 					inline const Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
+					inline unsigned int GetZLayer() const { return zLayer; }
 			};
 		}
 	}

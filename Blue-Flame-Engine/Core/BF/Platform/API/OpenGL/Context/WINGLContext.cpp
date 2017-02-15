@@ -3,6 +3,9 @@
 #include "BF/Graphics/API/Context.h"
 #include "BF/Platform/API/OpenGL/GLError.h"
 
+#define OPENGL_CONTEXT_MAJOR_VERSION 4
+#define OPENGL_CONTEXT_MINOR_VERSION 5
+
 namespace BF
 {
 	namespace Platform
@@ -11,11 +14,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-#define OPENGL_CONTEXT_MAJOR_VERSION 4
-#define OPENGL_CONTEXT_MINOR_VERSION 5
-
 				using namespace BF::Graphics::API;
-				using namespace BF::Math;
 
 				WINGLContext::WINGLContext()
 				{
@@ -70,6 +69,8 @@ namespace BF
 					GLint r;
 					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
 					BF_LOG_INFO("%d", r);
+
+					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				}
 
 				void WINGLContext::SetPrimitiveType(PrimitiveType primitiveType)
@@ -106,9 +107,9 @@ namespace BF
 					}
 				}
 
-				void WINGLContext::Clear(const Vector4& color)
+				void WINGLContext::Clear(const Graphics::Color& color)
 				{
-					GLCall(glClearColor(color.x, color.y, color.z, color.w));
+					GLCall(glClearColor(color.r, color.g, color.b, color.a));
 					GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 				}
 

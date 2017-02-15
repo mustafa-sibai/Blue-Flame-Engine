@@ -20,6 +20,8 @@ namespace _2DScene
 			BF::Graphics::Renderers::Sprite sprite4;
 			BF::Graphics::Renderers::Sprite sprite5;
 
+			BF::Graphics::Renderers::Sprite sprite6;
+
 			BF::Graphics::Renderers::Sprite fontSprite;
 			BF::Graphics::Fonts::Font font;
 			BF::Graphics::Fonts::FontAtlas* fontAtlas;
@@ -27,7 +29,15 @@ namespace _2DScene
 			BF::Graphics::TileMap tileMap;
 			
 			BF::Graphics::GUI::Button button;
+			BF::Graphics::GUI::Panel panel;
+			BF::Graphics::Camera camera;
 
+			BF::AI::Waypoint waypoint;
+			std::vector<BF::AI::Waypoint::Node> waypoints;
+
+			BF::System::Timer timer;
+			BF::AI::Waypoint::Node node;
+			BF::AI::Waypoint::Node node2;
 			//BF::Graphics::Animation::SpriteAnimation spriteAnimation;
 			//InitBuffer initBuffer;
 
@@ -43,5 +53,7 @@ namespace _2DScene
 			void Update() override;
 			void FixedUpdate() override;
 			void Render() override;
+
+			static bool TimeFunction(void* this_pointer);
 	};
 }

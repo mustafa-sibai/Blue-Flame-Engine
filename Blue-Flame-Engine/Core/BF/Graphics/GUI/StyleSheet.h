@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <unordered_map>
 #include <tinyxml2.h>
 #include "Widget.h"
 #include "BF/Graphics/Renderers/Sprite.h"
@@ -17,7 +17,7 @@ namespace BF
 			{
 				private:
 					std::string styleSheetNode;
-					std::vector<WidgetData> widgetsData;
+					std::unordered_map<std::string, WidgetData> widgetsData;
 					API::Texture2D* texture;
 
 				public:
@@ -26,18 +26,11 @@ namespace BF
 
 					void Load(const std::string& filename);
 
-					inline WidgetData GetWidgetData(const std::string& name) const
-					{
-						for (size_t i = 0; i < widgetsData.size(); i++)
-							if (widgetsData[i].name == name)
-								return widgetsData[i];
-
-						return WidgetData();
-					}
+					inline const WidgetData& GetWidget(const std::string& name) const { return widgetsData.at(name); }
 
 				private:
 					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
-					void AddButtonWidget(const tinyxml2::XMLDocument& xmlDocument);
+					void LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName);
 			};
 		}
 	}

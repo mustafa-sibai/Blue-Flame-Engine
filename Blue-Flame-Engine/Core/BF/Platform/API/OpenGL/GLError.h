@@ -1,5 +1,10 @@
 #pragma once
-#include <GL/glew.h>
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include <GL/glew.h>
+#elif BF_PLATFORM_WEBGL || defined (BF_PLATFORM_ANDROID)
+	#include <GLES3/gl3.h>
+#endif
+
 #include "BF/System/Log.h"
 
 namespace BF

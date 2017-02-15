@@ -11,12 +11,13 @@ namespace BF
 			class BF_API AWindow
 			{
 			public:
-				static ANativeWindow* window;
+				ANativeWindow* window;
 
 			public:
 				AWindow();
 				~AWindow();
 
+				void Initialize();
 				void Update();
 				bool IsOpen();
 			};

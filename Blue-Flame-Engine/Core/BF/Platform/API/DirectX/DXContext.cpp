@@ -12,7 +12,6 @@ namespace BF
 			namespace DirectX
 			{
 				using namespace BF::Graphics::API;
-				using namespace BF::Math;
 
 				DXContext::DXContext() :
 					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), vsync(false), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
@@ -34,10 +33,10 @@ namespace BF
 					context->OMSetRenderTargets(1, &renderTarget, zBuffer);
 				}
 
-				void DXContext::Clear(const Vector4& Color)
+				void DXContext::Clear(const Graphics::Color& color)
 				{
-					float color[] = { Color.x, Color.y, Color.z, Color.w };
-					context->ClearRenderTargetView(renderTarget, color);
+					float colorArray[] = { color.r, color.g, color.b, color.a };
+					context->ClearRenderTargetView(renderTarget, colorArray);
 
 					if (zBuffer)
 						context->ClearDepthStencilView(zBuffer, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);

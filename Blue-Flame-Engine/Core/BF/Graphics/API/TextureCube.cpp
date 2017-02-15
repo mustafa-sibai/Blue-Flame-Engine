@@ -70,8 +70,14 @@ namespace BF
 
 			void TextureCube::Unbind() const
 			{
+#ifdef BF_PLATFORM_WINDOWS
+				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
+				dxTexture2D.Bind(0);*/
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTextureCube.Unbind();
+#endif				
 			}
 		}
 	}

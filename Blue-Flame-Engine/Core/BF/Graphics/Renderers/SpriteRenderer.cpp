@@ -2,30 +2,29 @@
 #include <algorithm>
 #include "BF/Engine.h"
 
+#define MAX_SPRITES		60000
+#define SPRITE_VERTICES 4
+#define	SPRITE_INDICES	6
+#define VERTICES_SIZE	MAX_SPRITES * SPRITE_VERTICES
+#define INDICES_SIZE	MAX_SPRITES * SPRITE_INDICES
+
 namespace BF
 {
 	namespace Graphics
 	{
 		namespace Renderers
 		{
-
-#define MAX_SPRITES		60000
-#define SPRITE_VERTICES 4
-#define	SPRITE_INDICES	6
-#define VERTICES_SIZE	MAX_SPRITES * SPRITE_VERTICES
-#define INDICES_SIZE	MAX_SPRITES * SPRITE_INDICES
-#define MAX_TEXTURES	32 - 1
-
 			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers;
 			using namespace BF::Graphics::Fonts;
 			using namespace BF::Math;
 
+			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
+
 			SpriteRenderer::SpriteRenderer() :
-				vertexBuffer(shader), constentBuffer(shader), indexCount(0), submitSprite(true)
+				vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false)
 			{
-				indexBuffer = new IndexBuffer();
 			}
 
 			SpriteRenderer::~SpriteRenderer()
@@ -34,6 +33,8 @@ namespace BF
 
 			void SpriteRenderer::Initialize()
 			{
+				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
+
 #if BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 				{
@@ -50,15 +51,11 @@ namespace BF
 				}
 #endif
 				shader.Bind();
-				systemBuffer.modelMatrix = Matrix4::Identity();
-				systemBuffer.viewMatrix = Matrix4::Identity();
-				systemBuffer.projectionMatrix = Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f);
 
-				vertexBufferLayout.Push(0, "POSITION",		VertexBufferLayout::DataType::Float3, sizeof(SpriteBuffer), 0);
-				vertexBufferLayout.Push(1, "COLOR",			VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector3));
-				vertexBufferLayout.Push(2, "TEXCOORD",		VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4));
-				vertexBufferLayout.Push(3, "TEXTUREID",		VertexBufferLayout::DataType::Float,  sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2));
-				vertexBufferLayout.Push(4, "RENDERINGTYPE", VertexBufferLayout::DataType::Float,  sizeof(SpriteBuffer), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2) + sizeof(float));
+				vertexBufferLayout.Push(0, "POSITION",		VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);
+				vertexBufferLayout.Push(1, "COLOR",			VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2));
+				vertexBufferLayout.Push(2, "TEXCOORD",		VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color));
+				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float,  sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color) + sizeof(Vector2));
 				
 				unsigned int* indecies = new unsigned int[INDICES_SIZE];
 				int index = 0;
@@ -78,12 +75,11 @@ namespace BF
 
 				vertexBuffer.Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
 				vertexBuffer.SetLayout(vertexBufferLayout);
-				indexBuffer->Create(indecies, INDICES_SIZE);
-				constentBuffer.Create(sizeof(SystemBuffer), 0);
+				indexBuffer.Create(indecies, INDICES_SIZE);
 
 				Engine::GetContext().EnableDepthBuffer(false);
 				Engine::GetContext().EnableBlending(true);
-				delete indecies;
+				delete[] indecies;
 			}
 
 			void SpriteRenderer::Begin(SubmitType submitType, SortingOrder sortingOrder)
@@ -92,59 +88,84 @@ namespace BF
 				this->sortingOrder = sortingOrder;
 
 				shader.Bind();
-				constentBuffer.Update(&systemBuffer, sizeof(systemBuffer));
 
 				if (submitSprite)
 					spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 			}
 
-			void SpriteRenderer::Render(Sprite& sprite)
+			void SpriteRenderer::Render(const Sprite& sprite)
 			{
 				if (submitSprite)
-				{
-					if (!sprite.submitted)
-					{
-						sprites.push_back(&sprite);
-						sprites[sprites.size() - 1][0].indexInVector = (unsigned int)sprites.size() - 1;
-						sprite.submitted = true;
-					}
-					sprite.recentlySubmitted = true;
-				}
+					sprites.push_back(&sprite);
 			}
 
-			void SpriteRenderer::RenderRectangle(const Rectangle& rectangle, const Vector4& Color)
+			void SpriteRenderer::RenderRectangle(const Rectangle& rectangle, const Color& color)
 			{
 				if (submitSprite)
 				{
 					//Top Left
-					spriteBuffer->position		= Vector3((float)rectangle.x, (float)rectangle.y, 0.0f);
-					spriteBuffer->color			= Color;
+					spriteBuffer->position		= Vector2((float)rectangle.x, (float)rectangle.y);
+					spriteBuffer->color			= color;
 					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->textureID		= -1.0f;
 					spriteBuffer->renderingType = 0;
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position		= Vector3((float)(rectangle.x + rectangle.width), (float)rectangle.y, 0.0f);
-					spriteBuffer->color			= Color;
+					spriteBuffer->position		= Vector2((float)(rectangle.x + rectangle.width), (float)rectangle.y);
+					spriteBuffer->color			= color;
 					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->textureID		= -1.0f;
 					spriteBuffer->renderingType = 0;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position		= Vector3((float)(rectangle.x + rectangle.width), (float)(rectangle.y + rectangle.height), 0.0f);
-					spriteBuffer->color			= Color;
+					spriteBuffer->position		= Vector2((float)(rectangle.x + rectangle.width), (float)(rectangle.y + rectangle.height));
+					spriteBuffer->color			= color;
 					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->textureID		= -1.0f;
 					spriteBuffer->renderingType = 0;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position		= Vector3((float)rectangle.x, (float)(rectangle.y + rectangle.height), 0.0f);
-					spriteBuffer->color			= Color;
+					spriteBuffer->position		= Vector2((float)rectangle.x, (float)(rectangle.y + rectangle.height));
+					spriteBuffer->color			= color;
 					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->textureID		= -1.0f;
+					spriteBuffer->renderingType = 0;
+					spriteBuffer++;
+
+					indexCount += SPRITE_INDICES;
+				}
+			}
+
+			void SpriteRenderer::RenderLine(const Vector2& startPoint, const Vector2& endPoint, float thickness, const Color& color)
+			{
+				if (submitSprite)
+				{
+					Vector2 normal = Vector2(endPoint.y - startPoint.y, -(endPoint.x - startPoint.x)).Normalize() * thickness;
+
+					//Top Left
+					spriteBuffer->position		= startPoint + normal;
+					spriteBuffer->color			= color;
+					spriteBuffer->UV			= Vector2(0.0f);
+					spriteBuffer->renderingType = 0;
+					spriteBuffer++;
+
+					//Top Right
+					spriteBuffer->position		= Vector2(endPoint.x + normal.x, endPoint.y + normal.y);
+					spriteBuffer->color			= color;
+					spriteBuffer->UV			= Vector2(0.0f);
+					spriteBuffer->renderingType = 0;
+					spriteBuffer++;
+
+					//Bottom Right
+					spriteBuffer->position		= Vector2(endPoint.x - normal.x, endPoint.y - normal.y);
+					spriteBuffer->color			= color;
+					spriteBuffer->UV			= Vector2(0.0f);
+					spriteBuffer->renderingType = 0;
+					spriteBuffer++;
+
+					//Bottom Left
+					spriteBuffer->position		= startPoint - normal;
+					spriteBuffer->color			= color;
+					spriteBuffer->UV			= Vector2(0.0f);
 					spriteBuffer->renderingType = 0;
 					spriteBuffer++;
 
@@ -154,35 +175,27 @@ namespace BF
 
 			void SpriteRenderer::MapBuffer()
 			{
-				int totalSpritesRemoved = 0;
-
 				for (size_t i = 0; i < sprites.size(); i++)
 				{
-					if (!sprites[i][0].recentlySubmitted)
+					if (currentBoundTexture != nullptr)
 					{
-						totalSpritesRemoved++;
-						sprites[i][0].submitted = false;
-						sprites[i][0].recentlySubmitted = false;
+						if (sprites[i][0].texture2D != currentBoundTexture)
+						{
+							if (submitType == SubmitType::StaticSubmit)
+								return;
 
-						sprites.erase(sprites.begin() + sprites[i][0].indexInVector);
+							newDrawCall = true;
+
+							End();
+							Begin(submitType, sortingOrder);
+						}
 					}
 
-					if(totalSpritesRemoved > 0)
-						sprites[i][0].indexInVector -= totalSpritesRemoved;
-
-					float textureID = FindTexture(sprites[i][0].texture2D);
-
-					if ((int)textureID > MAX_TEXTURES)
+					if (currentBoundTexture != sprites[i][0].texture2D)
 					{
-						if (submitType == SubmitType::StaticSubmit)
-							return;
-
-						End();
-						Begin(submitType, sortingOrder);
-						textureID = FindTexture(sprites[i][0].texture2D);
+						sprites[i][0].texture2D->Bind();
+						currentBoundTexture = sprites[i][0].texture2D;
 					}
-
-					sprites[i][0].texture2D->Bind("textures[" + to_string((unsigned int)textureID) + string("]"), (unsigned int)textureID);
 
 					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 					CalculateUV(sprites[i][0].texture2D, sprites[i][0].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
@@ -191,59 +204,58 @@ namespace BF
 					spriteBuffer->position		= sprites[i][0].position;
 					spriteBuffer->color			= sprites[i][0].color;
 					spriteBuffer->UV			= topLeftUV;
-					spriteBuffer->textureID		= textureID;
-					spriteBuffer->renderingType = 0;
+					spriteBuffer->renderingType = 1;
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position		= Vector3(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y, sprites[i][0].position.z);
+					spriteBuffer->position		= Vector2(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y);
 					spriteBuffer->color			= sprites[i][0].color;
 					spriteBuffer->UV			= topRightUV;
-					spriteBuffer->textureID		= textureID;
-					spriteBuffer->renderingType = 0;
+					spriteBuffer->renderingType = 1;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position	= Vector3(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y + sprites[i][0].rectangle.height, sprites[i][0].position.z);
+					spriteBuffer->position		= Vector2(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y + sprites[i][0].rectangle.height);
 					spriteBuffer->color			= sprites[i][0].color;
 					spriteBuffer->UV			= bottomRightUV;
-					spriteBuffer->textureID		= textureID;
-					spriteBuffer->renderingType = 0;
+					spriteBuffer->renderingType = 1;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position		= Vector3(sprites[i][0].position.x, sprites[i][0].position.y + sprites[i][0].rectangle.height, sprites[i][0].position.z);
+					spriteBuffer->position		= Vector2(sprites[i][0].position.x, sprites[i][0].position.y + sprites[i][0].rectangle.height);
 					spriteBuffer->color			= sprites[i][0].color;
 					spriteBuffer->UV			= bottomLeftUV;
-					spriteBuffer->textureID		= textureID;
-					spriteBuffer->renderingType = 0;
+					spriteBuffer->renderingType = 1;
 					spriteBuffer++;
 
-					sprites[i][0].recentlySubmitted = false;
 					indexCount += SPRITE_INDICES;
 				}
 			}
 
-			void SpriteRenderer::RenderText(const FontAtlas& fontAtlas, const string& text, const Vector3& position, const Vector4& color)
+			void SpriteRenderer::RenderText(const FontAtlas& fontAtlas, const string& text, const Vector2& position, const Color& color)
 			{
 				Rectangle prevPos;
-				Vector3 pos = position;
-				
+				Vector2 pos = position;
+				const Texture2D* previousTexture = nullptr;
+
 				if (submitSprite)
 				{
-					float textureID = FindTexture(fontAtlas.texture);
-
-					if ((int)textureID > MAX_TEXTURES)
+					if (previousTexture != nullptr)
 					{
-						if (submitType == SubmitType::StaticSubmit)
-							return;
+						if (fontAtlas.texture != previousTexture)
+						{
+							if (submitType == SubmitType::StaticSubmit)
+								return;
 
-						End();
-						Begin(submitType, sortingOrder);
-						textureID = FindTexture(fontAtlas.texture);
+							newDrawCall = true;
+
+							End();
+							Begin(submitType, sortingOrder);
+						}
 					}
 
-					fontAtlas.texture->Bind("textures[" + to_string((unsigned int)textureID) + string("]"), (unsigned int)textureID);
+					fontAtlas.texture->Bind();
+					previousTexture = fontAtlas.texture;
 
 					for (size_t i = 0; i < text.length(); i++)
 					{
@@ -253,7 +265,7 @@ namespace BF
 						Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 						CalculateUV(fontAtlas.texture, scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
-						pos += Vector3(prevPos.x + fontAtlas.characters[0][unicode].bearing.x, 0, 0);
+						pos += Vector2(prevPos.x + fontAtlas.characters[0][unicode].bearing.x, 0.0f);
 						prevPos.x = fontAtlas.characters[0][unicode].scissorRectangle.width;
 						pos.y = position.y + (fontAtlas.characters[0][unicode].charPixelSize - fontAtlas.characters[0][unicode].bearing.y);
 
@@ -261,32 +273,28 @@ namespace BF
 						spriteBuffer->position		= pos;
 						spriteBuffer->color			= color;
 						spriteBuffer->UV			= topLeftUV;
-						spriteBuffer->textureID		= textureID;
-						spriteBuffer->renderingType = 1;
+						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Top Right
-						spriteBuffer->position		= Vector3(pos.x + (float)scissorRectangle.width, pos.y, pos.z);
+						spriteBuffer->position		= Vector2(pos.x + (float)scissorRectangle.width, pos.y);
 						spriteBuffer->color			= color;
 						spriteBuffer->UV			= topRightUV;
-						spriteBuffer->textureID		= textureID;
-						spriteBuffer->renderingType = 1;
+						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Bottom Right
-						spriteBuffer->position		= Vector3(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height, pos.z);
+						spriteBuffer->position		= Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
 						spriteBuffer->color			= color;
 						spriteBuffer->UV			= bottomRightUV;
-						spriteBuffer->textureID		= textureID;
-						spriteBuffer->renderingType = 1;
+						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Bottom Left
-						spriteBuffer->position		= Vector3((float)pos.x, pos.y + (float)scissorRectangle.height, pos.z);
+						spriteBuffer->position		= Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
 						spriteBuffer->color			= color;
 						spriteBuffer->UV			= bottomLeftUV;
-						spriteBuffer->textureID		= textureID;
-						spriteBuffer->renderingType = 1;
+						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						indexCount += SPRITE_INDICES;
@@ -298,33 +306,38 @@ namespace BF
 			{
 				if (submitSprite)
 				{
-					if (sortingOrder == SortingOrder::BackToFront)
-						sort(sprites.begin(), sprites.end(), Sprite::BackToFront());
-					else if (sortingOrder == SortingOrder::FrontToBack)
-						sort(sprites.begin(), sprites.end(), Sprite::FrontToBack());
+					if (!newDrawCall)
+					{
+						if (sortingOrder == SortingOrder::BackToFront)
+							sort(sprites.begin(), sprites.end(), Sprite::BackToFront());
+						else if (sortingOrder == SortingOrder::FrontToBack)
+							sort(sprites.begin(), sprites.end(), Sprite::FrontToBack());
 
-					MapBuffer();
-					vertexBuffer.Unmap();
+						MapBuffer();
+						vertexBuffer.Unmap();
+					}
+					else
+						vertexBuffer.Unmap();
 				}
 
 				vertexBuffer.Bind();
-				indexBuffer->Bind();
+				indexBuffer.Bind();
 				Engine::GetContext().Draw(indexCount);
-				indexBuffer->Unbind();
+				indexBuffer.Unbind();
 				vertexBuffer.Unbind();
 
 				if (submitType == SubmitType::StaticSubmit)
 				{
 					submitSprite = false;
-					textures.clear();
 				}
 				else if (submitType == SubmitType::DynamicSubmit)
 				{
-					for (unsigned int i = 0; i < textures.size(); i++)
-						textures[i]->Unbind();
-
-					textures.clear();
 					indexCount = 0;
+
+					if (!newDrawCall)
+						sprites.clear();
+
+					newDrawCall = false;
 				}
 			}
 
@@ -341,18 +354,6 @@ namespace BF
 
 				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
 									1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
-			}
-
-			float SpriteRenderer::FindTexture(const Texture2D* texture)
-			{
-				for (unsigned int i = 0; i < textures.size(); i++)
-				{
-					if (textures[i] == texture)
-						return (float)i;
-				}
-
-				textures.push_back(texture);
-				return (float)(textures.size() - 1);
 			}
 		}
 	}

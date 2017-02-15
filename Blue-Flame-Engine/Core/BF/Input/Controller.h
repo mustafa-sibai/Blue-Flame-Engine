@@ -2,6 +2,7 @@
 #pragma once
 #include "BF/Platform/Windows/WINWindow.h"
 #include <Xinput.h>
+#include "BF/System/Timer.h"
 #include "BF/Common.h"
 
 #define BF_MAX_CONTROLLER_BUTTONS 25
@@ -41,6 +42,7 @@ namespace BF
 
 			private:
 				static Controller controller[XUSER_MAX_COUNT];
+				static System::Timer timer;
 
 			private:
 				static void Update();
@@ -53,6 +55,7 @@ namespace BF
 
 			private:
 				static void FindNewDevices();
+				static int* GetOtherControllersIndecies(int controllerIndex);
 		};
 	}
 }

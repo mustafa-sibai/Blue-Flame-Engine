@@ -7,9 +7,8 @@ namespace BF
 	{
 		namespace Android
 		{
-			ANativeWindow* AWindow::window = nullptr;
-
-			AWindow::AWindow()
+			AWindow::AWindow() :
+				window(nullptr)
 			{
 				BF_LOG_INFO("~AWindow");
 			}
@@ -17,6 +16,11 @@ namespace BF
 			AWindow::~AWindow()
 			{
 				BF_LOG_INFO("~AWindow");
+			}
+
+			void AWindow::Initialize()
+			{
+				BF_LOG_INFO("AWindow Initialize");
 			}
 
 			void AWindow::Update()

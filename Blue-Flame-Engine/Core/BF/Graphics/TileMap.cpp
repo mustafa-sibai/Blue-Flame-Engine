@@ -5,13 +5,12 @@ namespace BF
 {
 	namespace Graphics
 	{
+		using namespace std;
 		using namespace BF::Graphics::API;
 		using namespace BF::Graphics::Renderers;
-		using namespace BF::Math;
 		using namespace BF::IO;
 
-		TileMap::TileMap() :
-			spriteRenderer()
+		TileMap::TileMap()
 		{
 		}
 
@@ -19,9 +18,13 @@ namespace BF
 		{
 		}
 
-		void TileMap::Load(const std::string& filename)
+		void TileMap::Initialize()
 		{
 			spriteRenderer.Initialize();
+		}
+
+		void TileMap::Load(const string& filename)
+		{
 			tileMapData = BFMLoader::Load(filename);
 
 			for (size_t i = 0; i < tileMapData->textures.size(); i++)
@@ -32,14 +35,14 @@ namespace BF
 			}
 
 			for (size_t i = 0; i < tileMapData->tilesData.size(); i++)
-				sprites.push_back(Sprite(textures[tileMapData->tilesData[i].textureID], tileMapData->tilesData[i].rectangle, tileMapData->tilesData[i].scissorRectangle, Vector4(1.0f)));
+				sprites.push_back(Sprite(textures[tileMapData->tilesData[i].textureID], tileMapData->tilesData[i].rectangle, 0, tileMapData->tilesData[i].scissorRectangle, Color(1.0f)));
 		}
 
 		void TileMap::Update()
 		{
 		}
 
-		void TileMap::Draw()
+		void TileMap::Render()
 		{
 			spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 

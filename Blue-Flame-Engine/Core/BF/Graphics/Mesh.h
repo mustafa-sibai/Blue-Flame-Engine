@@ -5,6 +5,7 @@
 #include "API/VertexBufferLayout.h"
 #include "API/Texture2D.h"
 #include "BF/Math/Math.h"
+#include "Color.h"
 #include "Material.h"
 #include "BF/Common.h"
 
@@ -15,16 +16,15 @@ namespace BF
 		struct BF_API MeshVertexData
 		{
 			Math::Vector3 position;
-			//Math::Vector4 color;
+			//Color color;
 			Math::Vector2 texcoord;
 			Math::Vector3 normal;
-			//float textureID;
 
 			MeshVertexData() :
 				position(0), texcoord(0), normal(0) { }
 
-			MeshVertexData(Math::Vector3 position, Math::Vector2 texcoord, Math::Vector3 normal/*, float textureID*/) :
-				position(position), /*color(Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f)),*/ texcoord(texcoord), normal(normal)//, textureID(textureID)
+			MeshVertexData(Math::Vector3 position, /*Color color,*/ Math::Vector2 texcoord, Math::Vector3 normal) :
+				position(position), /*color(color), */texcoord(texcoord), normal(normal)
 			{
 			}
 		};

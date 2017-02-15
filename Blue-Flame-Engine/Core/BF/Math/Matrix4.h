@@ -2,9 +2,9 @@
 #include "Math.h"
 #include "BF/Common.h"
 
-#define MATRIX_COLUMN_SIZE 4
-#define MATRIX_ROW_SIZE 4
-#define MATRIX_SIZE MATRIX_COLUMN_SIZE * MATRIX_ROW_SIZE
+#define BF_MATRIX_COLUMN_SIZE 4
+#define BF_MATRIX_ROW_SIZE 4
+#define BF_MATRIX_SIZE BF_MATRIX_COLUMN_SIZE * BF_MATRIX_ROW_SIZE
 
 namespace BF
 {
@@ -13,7 +13,7 @@ namespace BF
 		class BF_API Matrix4
 		{
 			private:
-				float elements[MATRIX_SIZE];
+				float elements[BF_MATRIX_SIZE];
 
 			public:
 				Matrix4();

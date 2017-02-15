@@ -11,8 +11,8 @@ namespace BF
 		using namespace BF::Input;
 		using namespace BF::Math;
 
-		FPSCamera::FPSCamera(const Math::Matrix4& projectionMatrix) :
-			Camera(projectionMatrix), movmentSpeed(0.1f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f)
+		FPSCamera::FPSCamera() : 
+			movmentSpeed(1.0f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f)
 		{
 		}
 
@@ -20,8 +20,10 @@ namespace BF
 		{
 		}
 
-		void FPSCamera::Initialize()
+		void FPSCamera::Initialize(const Math::Matrix4& projectionMatrix)
 		{
+			Camera::Initialize(projectionMatrix);
+
 			cameraFront = Vector3(0.0f, 0.0f, 1.0f);
 			cameraUp = Vector3(0.0f, 1.0f, 0.0f);
 			windowCenter = Vector2(floor((float)Engine::GetWindow().GetClientWidth() / 2.0f), floor((float)Engine::GetWindow().GetClientHeight() / 2.0f));
@@ -54,7 +56,9 @@ namespace BF
 			cameraFront.z = sin(ToRadians(yaw)) * cos(ToRadians(pitch));
 			cameraFront = cameraFront.Normalize();
 
-			viewMatrix = Matrix4::LookAt(position, position + cameraFront, cameraUp);
+			systemBuffer.viewMatrix = Matrix4::LookAt(position, position + cameraFront, cameraUp);
+			systemBuffer.cameraPosition = Vector4(position.x, position.y, position.z, 1.0f);
+			Camera::Update();
 		}
 	}
 }

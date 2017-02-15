@@ -2,7 +2,7 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXIndexBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLIndexBuffer.h"
 #endif
 

@@ -8,6 +8,7 @@ namespace BF
 	namespace Input
 	{
 		Controller Controllers::controller[XUSER_MAX_COUNT];
+		System::Timer Controllers::timer;
 
 		Controller::Controller() :
 			ID(-1)
@@ -64,7 +65,11 @@ namespace BF
 
 		void Controllers::Update()
 		{
-			FindNewDevices();
+			if (timer.GetElapsedTimeInMilliseconds() > 1000)
+			{
+				FindNewDevices();
+				timer.Reset();
+			}
 
 			for (unsigned int i = 0; i < 4; i++)
 				controller[i].Update();
@@ -74,30 +79,33 @@ namespace BF
 		{
 			for (unsigned int i = 0; i < XUSER_MAX_COUNT; i++)
 			{
-				if (controller[0].IsDeviceConnected(i) && controller[0].ID == -1 && controller[1].ID != i && controller[2].ID != i && controller[3].ID != i)
+				if (controller[i].ID == -1)
 				{
-					controller[0].ID = i;
-					i = 0;
-				}
+					int* j = GetOtherControllersIndecies(i);
 
-				if (controller[1].IsDeviceConnected(i) && controller[1].ID == -1 && controller[0].ID != i && controller[2].ID != i && controller[3].ID != i)
-				{
-					controller[1].ID = i;
-					i = 0;
-				}
+					if (controller[i].IsDeviceConnected(i) && controller[j[0]].ID != i && controller[j[1]].ID != i && controller[j[2]].ID != i)
+						controller[i].ID = i;
 
-				if (controller[2].IsDeviceConnected(i) && controller[2].ID == -1 && controller[0].ID != i && controller[1].ID != i && controller[3].ID != i)
-				{
-					controller[2].ID = i;
-					i = 0;
-				}
-
-				if (controller[3].IsDeviceConnected(i) && controller[3].ID == -1 && controller[0].ID != i && controller[1].ID != i && controller[2].ID != i)
-				{
-					controller[3].ID = i;
-					break;
+					delete[] j;
 				}
 			}
+		}
+
+		int* Controllers::GetOtherControllersIndecies(int controllerIndex)
+		{
+			int index = 0;
+			int controllerNumbers[3];
+
+			for (unsigned int i = 0; i < XUSER_MAX_COUNT; i++)
+			{
+				if (controllerIndex != i)
+				{
+					controllerNumbers[index] = i;
+					index++;
+				}
+			}
+
+			return new int[3]{ controllerNumbers[0], controllerNumbers[1], controllerNumbers[2] };
 		}
 	}
 }

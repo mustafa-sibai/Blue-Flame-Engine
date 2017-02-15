@@ -23,7 +23,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxShader.Load(vertexShaderFilePath, pixelShaderFilePath);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glShader.Load(vertexShaderFilePath, pixelShaderFilePath);
 #endif
@@ -35,7 +35,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxShader.Bind();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glShader.Bind();
 #endif	
@@ -43,7 +43,7 @@ namespace BF
 
 			void Shader::Unbind() const
 			{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glShader.Unbind();
 #endif
@@ -55,7 +55,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxShader.CleanUp();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 				{
 				}

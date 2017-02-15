@@ -14,7 +14,7 @@ namespace BF
 	Engine::Engine(Window window, RenderAPI renderAPI) :
 		totalTime(0), extra(0), FPS(0), FUPS(0), timesToRunFixedUpdate(0), elapsedFrameTime(0)
 	{
-		BF_LOG_INFO("Engine Constructor");
+		BF_LOG_INFO("Blue Flame Engine v%d.%d.%d", BF_ENGINE_MAJOR_VERSION, BF_ENGINE_MINOR_VERSION, BF_ENGINE_PATCH_VERSION);
 
 		Engine::window = window;
 		Engine::context = Context(renderAPI);
@@ -28,7 +28,7 @@ namespace BF
 	void Engine::Run()
 	{
 		BF_LOG_INFO("Engine Run");
-		while (true)
+		while (state != State::Exit)
 		{
 			switch (state)
 			{

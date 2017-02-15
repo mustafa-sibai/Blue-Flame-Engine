@@ -13,7 +13,6 @@ namespace BF
 
 			struct WidgetData
 			{
-				std::string name;
 				Renderers::Sprite normalSprite;
 				Renderers::Sprite hoveredSprite;
 				Renderers::Sprite pressedSprite;
@@ -26,10 +25,8 @@ namespace BF
 				private:
 					Renderers::SpriteRenderer* spriteRenderer;
 					WidgetData widgetData;
-					Math::Rectangle rectangle;
 					Renderers::Sprite* currentSprite;
 
-					bool checkOnce = true;
 					bool mouseNotPressedOnWidget = false;
 
 					bool hovered;
@@ -42,6 +39,9 @@ namespace BF
 					~Widget();
 
 					void AddOnClickListener(void(*OnClickCallBack)());
+
+					void SetPosition(const Math::Vector2& position);
+					void SetRectangle(const Math::Rectangle& rectangle);
 
 					inline bool IsHovered() const { return hovered; }
 					inline bool IsPressed() const { return pressed; }

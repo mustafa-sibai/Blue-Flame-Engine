@@ -11,6 +11,8 @@
 	#include "BF/Platform/Android/AWindow.h"
 #endif
 
+#include "WindowStyle.h"
+
 namespace BF
 {
 	namespace Application
@@ -19,15 +21,15 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 			Platform::Windows::WINWindow
 #elif BF_PLATFORM_LINUX
-			Platform::Linux::LXWindow;
+			Platform::Linux::LXWindow
 #elif BF_PLATFORM_WEBGL
-			Platform::WebGL::WEBWindow;
+			Platform::WebGL::WEBWindow
 #elif BF_PLATFORM_ANDROID
-			Platform::Android::AWindow;
+			Platform::Android::AWindow
 #endif
 		{
 			public:
-				Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
+				Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, BF::Application::WindowStyle style);
 				~Window();
 
 				void Initialize();

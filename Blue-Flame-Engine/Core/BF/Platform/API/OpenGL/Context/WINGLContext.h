@@ -1,7 +1,7 @@
 #pragma once
 #include <GL/glew.h>
 #include <GL/wglew.h>
-#include "BF/Math/Vector4.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -33,7 +33,7 @@ namespace BF
 
 						void Initialize();
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
-						void Clear(const Math::Vector4& color);
+						void Clear(const Graphics::Color& color);
 						void Draw(GLsizei count);
 						void SwapBuffers();
 						void CleanUp();

@@ -2,7 +2,7 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXVertexBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLVertexBuffer.h"
 #endif
 
@@ -21,7 +21,7 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXVertexBuffer dxVertexBuffer;
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 					Platform::API::OpenGL::GLVertexBuffer glVertexBuffer;
 #endif	
 				public:
@@ -38,7 +38,7 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 					inline const Platform::API::DirectX::DXVertexBuffer& GetDXVertexBuffer() const { return dxVertexBuffer; }
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 					inline const Platform::API::OpenGL::GLVertexBuffer& GetGLVertexBuffer() const { return glVertexBuffer; }
 #endif
 			};

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "BF/Common.h"
 
 namespace BF

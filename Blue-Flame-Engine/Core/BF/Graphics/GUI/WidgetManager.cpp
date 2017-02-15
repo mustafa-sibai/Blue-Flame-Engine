@@ -32,7 +32,7 @@ namespace BF
 
 			void WidgetManager::Load()
 			{
-				styleSheet.Load("D:/Projects/Personal-Projects/Blue-Flame-Engine/Blue-Flame-Engine/Sandbox/Assets/GUI/StyleSheet.xml");
+				styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 
 				for (size_t i = 0; i < widgets.size(); i++)
 					widgets[i]->Load(styleSheet, "");

@@ -21,7 +21,15 @@
     <ClCompile Include="..\Core\BF\Application\SceneManager.cpp" />
     <ClCompile Include="..\Core\BF\Application\Window.cpp" />
     <ClCompile Include="..\Core\BF\Engine.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\ConstentBuffer.cpp" />
     <ClCompile Include="..\Core\BF\Graphics\API\Context.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\IndexBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\Shader.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBufferLayout.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\Camera.cpp" />
+    <ClCompile Include="..\Core\BF\Graphics\Color.cpp" />
+    <ClCompile Include="..\Core\BF\IO\FileLoader.cpp" />
     <ClCompile Include="..\Core\BF\Math\Math.cpp" />
     <ClCompile Include="..\Core\BF\Math\Matrix4.cpp" />
     <ClCompile Include="..\Core\BF\Math\Rectangle.cpp" />
@@ -31,6 +39,11 @@
     <ClCompile Include="..\Core\BF\Platform\Android\AWindow.cpp" />
     <ClCompile Include="..\Core\BF\Platform\Android\JNI.cpp" />
     <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\AContext.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLError.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="..\Core\BF\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +54,15 @@
     <ClInclude Include="..\Core\BF\BlueFlame.h" />
     <ClInclude Include="..\Core\BF\Common.h" />
     <ClInclude Include="..\Core\BF\Engine.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\ConstentBuffer.h" />
     <ClInclude Include="..\Core\BF\Graphics\API\Context.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\IndexBuffer.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\Shader.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBuffer.h" />
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBufferLayout.h" />
+    <ClInclude Include="..\Core\BF\Graphics\Camera.h" />
+    <ClInclude Include="..\Core\BF\Graphics\Color.h" />
+    <ClInclude Include="..\Core\BF\IO\FileLoader.h" />
     <ClInclude Include="..\Core\BF\Math\Math.h" />
     <ClInclude Include="..\Core\BF\Math\Matrix4.h" />
     <ClInclude Include="..\Core\BF\Math\Rectangle.h" />
@@ -51,6 +72,11 @@
     <ClInclude Include="..\Core\BF\Platform\Android\AWindow.h" />
     <ClInclude Include="..\Core\BF\Platform\Android\JNI.h" />
     <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\AContext.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLError.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="..\Core\BF\System\Log.h" />
     <ClInclude Include="..\Core\BF\System\Timer.h" />
   </ItemGroup>
@@ -107,7 +133,7 @@
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependency\FreeImage\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalOptions>-landroid -lEGL -lGLESv3 %(AdditionalOptions)</AdditionalOptions>
@@ -117,14 +143,14 @@
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependency\FreeImage\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Shipping|Tegra-Android'">
     <ClCompile>
       <CppLanguageStandard>c++11</CppLanguageStandard>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Dependency\FreeImage\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

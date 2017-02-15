@@ -42,8 +42,8 @@ namespace BF
 			void JNI::NativeSetSurface(ANativeWindow* window)
 			{
 				BF_LOG_INFO("NativeSetSurface");
-				BF::Engine::GetWindow().GetAWindow().window = window;
-				BF::Engine::GetContext().GetAContext().Initialize();
+				BF::Engine::GetWindow().window = window;
+				BF::Engine::GetContext().Initialize();
 
 				//if(BF::Engine::GetWindow().GetAWindow().window != nullptr)
 					//BF_LOG_INFO("ok");

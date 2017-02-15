@@ -30,7 +30,8 @@ namespace BF
 				string textureFilename = string(title);
 				texture->Load(textureFilename);
 
-				AddButtonWidget(xmlDocument);
+				LoadWidget(xmlDocument, "Button");
+				LoadWidget(xmlDocument, "Panel");
 			}
 
 			Math::Rectangle StyleSheet::ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type)
@@ -43,23 +44,21 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
-			void StyleSheet::AddButtonWidget(const tinyxml2::XMLDocument& xmlDocument)
+			void StyleSheet::LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName)
 			{
 				WidgetData widgetData;
 				Rectangle scissorRectangle;
 
-				widgetData.name = "Button";
+				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Normal");
+				widgetData.normalSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
 
-				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Normal");
-				widgetData.normalSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Hovered");
+				widgetData.hoveredSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
 
-				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Hovered");
-				widgetData.hoveredSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
+				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Pressed");
+				widgetData.pressedSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
 
-				scissorRectangle = ReadWidgetData(xmlDocument, "Button", "Pressed");
-				widgetData.pressedSprite = Sprite(texture, Vector3(0.0f), scissorRectangle, Vector4(1.0f));
-
-				widgetsData.push_back(widgetData);
+				widgetsData.insert({ widgetName, widgetData });
 			}
 		}
 	}

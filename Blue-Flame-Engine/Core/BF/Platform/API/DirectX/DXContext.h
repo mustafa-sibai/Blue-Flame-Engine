@@ -1,6 +1,6 @@
 #pragma once
 #include <d3d11.h>
-#include "BF/Math/Vector4.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -37,7 +37,7 @@ namespace BF
 						~DXContext();
 
 						void Initialize();
-						void Clear(const Math::Vector4& Color);
+						void Clear(const Graphics::Color& color);
 						void SwapBuffers();
 						void Draw(unsigned int vertexCount);
 						void CleanUp();
