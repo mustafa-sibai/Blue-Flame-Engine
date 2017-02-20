@@ -41,8 +41,8 @@ int main()
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
-	BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
-	//BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
+	//BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
+	BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
 
 	BF::Application::SceneManager::GetScene(0).Run();
 	//BF::Application::SceneManager::GetScene(1).Run();

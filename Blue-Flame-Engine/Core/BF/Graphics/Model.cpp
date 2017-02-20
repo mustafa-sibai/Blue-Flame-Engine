@@ -26,7 +26,6 @@ namespace BF
 			//vertexBufferLayout->Push(1, "COLOR",	DataType::Float4, sizeof(MeshVertexData), sizeof(Vector3));
 			vertexBufferLayout.Push(1, "TEXCOORD",	VertexBufferLayout::DataType::Float2, sizeof(MeshVertexData), sizeof(Vector3)/* + sizeof(Vector4)*/);
 			vertexBufferLayout.Push(2, "NORMAL",	VertexBufferLayout::DataType::Float3, sizeof(MeshVertexData), sizeof(Vector3) /*+ sizeof(Vector4) */+ sizeof(Vector2));
-			//vertexBufferLayout->Push(4, "TEXTUREID", DataType::Float, sizeof(MeshVertexData), sizeof(Vector3) + sizeof(Vector4) + sizeof(Vector2) + sizeof(Vector3));
 
 			for (size_t i = 0; i < model->size(); i++)
 			{
@@ -35,7 +34,7 @@ namespace BF
 			}
 		}
 
-		void Model::Draw()
+		void Model::Render()
 		{
 			for (size_t i = 0; i < model->size(); i++)
 			{

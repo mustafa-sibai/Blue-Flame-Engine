@@ -160,6 +160,32 @@ namespace BF
 					winGLContext.EnableVsync(state);
 #endif
 			}
+
+			void Context::EnableScissor(bool state)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+				}
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.EnableScissor(state);
+#endif
+			}
+
+			void Context::SetScissor(const Math::Rectangle& rectangle)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+				}
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+				if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.SetScissor(rectangle);
+#endif
+			}
 		}
 	}
 }

@@ -34,6 +34,7 @@ namespace BF
 			void Panel::Render()
 			{
 				Widget::Render();
+				spriteRenderer->SetScissor(Math::Rectangle(GetRectangle().x, GetRectangle().y, 50, 50));
 			}
 		}
 	}

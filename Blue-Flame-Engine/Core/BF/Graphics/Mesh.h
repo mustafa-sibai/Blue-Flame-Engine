@@ -6,7 +6,6 @@
 #include "API/Texture2D.h"
 #include "BF/Math/Math.h"
 #include "Color.h"
-#include "Material.h"
 #include "BF/Common.h"
 
 namespace BF

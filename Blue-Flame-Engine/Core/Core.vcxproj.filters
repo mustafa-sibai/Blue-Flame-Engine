@@ -228,6 +228,12 @@
     <ClCompile Include="BF\Graphics\GUI\Panel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\API\RenderTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\Window.h">
@@ -474,6 +480,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\GUI\Panel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\RenderTarget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

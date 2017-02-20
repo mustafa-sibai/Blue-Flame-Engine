@@ -9,11 +9,17 @@ namespace _3DScene
 	class _3DScene : public BF::Application::Scene
 	{
 		private:
-			BF::Graphics::API::Shader shader;
+			BF::Graphics::API::Shader shader, lightShader;
+			BF::Graphics::API::ConstentBuffer constentBuffer;
+			BF::Graphics::API::ConstentBuffer materialConstentBuffer;
+			BF::Graphics::Model lightModel;
 			BF::Graphics::Model cubeModel;
 			BF::Graphics::Model planeModel;
 			BF::Graphics::FPSCamera fpsCamera;
-			BF::Graphics::Terrain terrain;
+			//BF::Graphics::Terrain terrain;
+
+			BF::Graphics::LightBuffer light;
+			BF::Graphics::Material material;
 
 			BF::Graphics::Skybox skybox;
 			float angle = 0;

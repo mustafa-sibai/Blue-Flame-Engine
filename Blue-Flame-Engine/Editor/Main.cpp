@@ -2,20 +2,22 @@
 #include <BF/BlueFlame.h>
 #include "EditorScene.h"
 
-/*#include <BF/IO/BFALoader.h>
-#include "FBXLoader.h"
-#include "BFXWriter.h"
-#include "BFMWriter.h"
-#include "BFAWriter.h"*/
+#include <BF/IO/BFALoader.h>
+#include "IO/FBXLoader.h"
+#include "IO/BFXWriter.h"
+#include "IO/BFMWriter.h"
+#include "IO/BFAWriter.h"
+
+using namespace Editor::IO;
 
 int main()
 {
-	BF::Engine engine(BF::Application::Window("Blue Flame Editor", 0, 0, 1920, 1080, BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
+	//BF::Engine engine(BF::Application::Window("Blue Flame Editor", 0, 0, 1920, 1080, BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
 
-	BF::Application::SceneManager::AddNewScene(new Editor::EditorScene());
-	BF::Application::SceneManager::GetScene(0).Run();
+	//BF::Application::SceneManager::AddNewScene(new Editor::EditorScene());
+	//BF::Application::SceneManager::GetScene(0).Run();
 
-	engine.Run();
+	//engine.Run();
 
 	/*
 	//-------------------------------------------------------------------------------------------------
@@ -136,11 +138,11 @@ int main()
 	//-------------------------------------------------------------------------------------------------
 	*/
 	//-------------------------------------------------------------------------------------------------
-	/*FBXLoader fbxloader;
+	FBXLoader fbxloader;
 	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");*/
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
 	//-------------------------------------------------------------------------------------------------
 	
 

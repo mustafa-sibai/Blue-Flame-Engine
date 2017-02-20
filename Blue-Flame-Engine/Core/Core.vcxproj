@@ -90,6 +90,8 @@
     <ClCompile Include="BF\Network\Client.cpp" />
     <ClCompile Include="BF\Graphics\Terrain.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Panel.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\RenderTarget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="BF\Network\Client.h" />
     <ClInclude Include="BF\Graphics\Terrain.h" />
     <ClInclude Include="BF\Graphics\GUI\Panel.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h" />
+    <ClInclude Include="BF\Graphics\API\RenderTarget.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>

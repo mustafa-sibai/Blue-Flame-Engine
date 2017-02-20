@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
 #include "BF/Graphics/Color.h"
+#include "BF/Math/Math.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -42,6 +43,9 @@ namespace BF
 						void EnableDepthMask(bool state);
 						void EnableBlending(bool state);
 						void EnableVsync(bool state);
+
+						void EnableScissor(bool state);
+						void SetScissor(const Math::Rectangle& rectangle);
 				};
 			}
 		}

@@ -1,4 +1,5 @@
 #pragma once
+#include "Color.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
@@ -6,20 +7,13 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Light
+		struct LightBuffer
 		{
-		private:
-			Math::Vector3 position;
-			Math::Vector4 color;
+			Math::Vector4 position;
 
-		public:
-			Light();
-			~Light();
-
-			void SetLight(Math::Vector3 position, Math::Vector4 color);
-
-			inline const Math::Vector3& GetPosition() const { return position; }
-			inline const Math::Vector4& GetColor() const { return color; }
+			Color ambientColor;
+			Color diffuseColor;
+			Color specularColor;
 		};
 	}
 }

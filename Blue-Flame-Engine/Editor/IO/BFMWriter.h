@@ -5,14 +5,20 @@
 #include <BF/Graphics/TileMap.h>
 #include <BF/IO/FileFormats/BFMFormat.h>
 
-class BFMWriter
+namespace Editor
 {
-private:
-	BF::IO::FileFormats::BFMFormat bfmFormat;
+	namespace IO
+	{
+		class BFMWriter
+		{
+			private:
+				BF::IO::FileFormats::BFMFormat bfmFormat;
 
-public:
-	BFMWriter();
-	~BFMWriter();
+			public:
+				BFMWriter();
+				~BFMWriter();
 
-	void WriteToFile(const std::string& filename, const BF::Graphics::TileMapData& tileMapData);
-};
+				void WriteToFile(const std::string& filename, const BF::Graphics::TileMapData& tileMapData);
+		};
+	}
+}

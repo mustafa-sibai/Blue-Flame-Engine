@@ -12,7 +12,7 @@ namespace BF
 			using namespace BF::IO;
 
 			Texture2D::Texture2D(const Shader& shader) :
-				shader(shader), glTexture2D(shader.GetGLShader())
+				shader(shader), glTexture2D(shader.glShader)
 			{
 			}
 

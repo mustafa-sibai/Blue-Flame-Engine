@@ -43,23 +43,6 @@ namespace BF
 
 		void Mesh::Bind() const
 		{
-			/*for (size_t i = 0; i < materials->size(); i++)
-			{
-				if (i == 0)
-					if (textures->size() > 0)
-						textures[0][i]->Bind("textures[0]", i);
-				if (i == 1)
-					if (textures->size() > 1)
-						textures[0][i]->Bind("textures[1]", i);
-				if (i == 2)
-					if (textures->size() > 2)
-						textures[0][i]->Bind("textures[2]", i);
-				if (i == 3)
-					if (textures->size() > 3)
-						textures[0][i]->Bind("textures[3]", i);
-			}*/
-
-
 			vertexBuffer->Bind();
 			indexBuffer->Bind();
 		}

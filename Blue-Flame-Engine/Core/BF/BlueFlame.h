@@ -16,6 +16,7 @@
 #include <BF/Graphics/API/Shader.h>
 #include <BF/Graphics/API/Texture2D.h>
 #include <BF/Graphics/API/VertexBuffer.h>
+#include <BF/Graphics/API/RenderTarget.h>
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 #include <BF/Graphics/API/VertexBufferLayout.h>
@@ -43,6 +44,9 @@
 #include <BF/Graphics/Skybox.h>
 #include <BF/Graphics/Model.h>
 #include <BF/Graphics/Terrain.h>
+
+#include <BF/Graphics/Material.h>
+#include <BF/Graphics/Light.h>
 
 #include <BF/Input/Controller.h>
 #include <BF/Input/Keyboard.h>

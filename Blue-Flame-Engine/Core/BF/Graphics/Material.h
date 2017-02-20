@@ -1,29 +1,34 @@
 #pragma once
-#include "BF/Graphics/API/Shader.h"
-#include "BF/Graphics/API/ConstentBuffer.h"
-#include "BF/Math/Math.h"
+#include "Color.h"
+#include "API/Texture2D.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
-		struct MaterialBuffer
-		{
-			Math::Vector3 ambientColor;
-			Math::Vector3 diffuseColor;
-			Math::Vector3 specularColor;
-		};
-
 		class BF_API Material
 		{
-		private:
-			const API::Shader& shader;
-			API::ConstentBuffer constentBuffer;
+			private:
+				struct ColorBuffer
+				{
+					Color ambientColor;
+					Color diffuseColor;
+					Color specularColor;
+
+					float shininess;
+				};
 
 			public:
+				ColorBuffer colorBuffer;
+				API::Texture2D* diffuseMap;
+				API::Texture2D* specularMap;
+
 				Material(const API::Shader& shader);
 				~Material();
+
+				void Bind();
+				void Unbind();
 		};
 	}
 }

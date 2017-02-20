@@ -34,13 +34,6 @@ namespace BF
 					void Unmap() const;
 					void Bind() const;
 					void Unbind() const;
-
-#ifdef BF_PLATFORM_WINDOWS
-					inline const Platform::API::DirectX::DXVertexBuffer& GetDXVertexBuffer() const { return dxVertexBuffer; }
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
-					inline const Platform::API::OpenGL::GLVertexBuffer& GetGLVertexBuffer() const { return glVertexBuffer; }
-#endif
 			};
 		}
 	}

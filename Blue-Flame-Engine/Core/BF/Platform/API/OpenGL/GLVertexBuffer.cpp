@@ -12,13 +12,13 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				GLVertexBuffer::GLVertexBuffer() :
-					buffer(0), VAO(0)
+					VBO(0), VAO(0)
 				{
 				}
 
 				GLVertexBuffer::~GLVertexBuffer()
 				{
-					GLCall(glDeleteBuffers(1, &buffer));
+					GLCall(glDeleteBuffers(1, &VBO));
 					GLCall(glDeleteVertexArrays(1, &VAO));
 				}
 
@@ -27,15 +27,15 @@ namespace BF
 					GLCall(glGenVertexArrays(1, &VAO));
 					GLCall(glBindVertexArray(0));
 
-					GLCall(glGenBuffers(1, &buffer));
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+					GLCall(glGenBuffers(1, &VBO));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
 					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
 
 				void* GLVertexBuffer::Map() const
 				{
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 					GLCall(return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
@@ -63,7 +63,7 @@ namespace BF
 				void GLVertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
 				{
 					GLCall(glBindVertexArray(VAO));
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
 
 					for (size_t i = 0; i < vertexBufferLayout.GetBufferElement().size(); i++)
 					{

@@ -122,25 +122,25 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfStl>libstdc++_shared</UseOfStl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfStl>libstdc++_shared</UseOfStl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfStl>libstdc++_shared</UseOfStl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseOfStl>libstdc++_shared</UseOfStl>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>Remote_GCC_1_0</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />

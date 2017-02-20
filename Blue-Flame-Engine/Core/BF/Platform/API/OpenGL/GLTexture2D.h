@@ -19,12 +19,14 @@ namespace BF
 			{
 				class BF_API GLTexture2D
 				{
+					friend class GLFramebuffer;
+
 					private:
-						const GLShader& glshader;
+						const GLShader& glShader;
 						GLuint textureID;
 
 					public:
-						GLTexture2D(const GLShader& glshader);
+						GLTexture2D(const GLShader& glShader);
 						~GLTexture2D();
 
 						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);

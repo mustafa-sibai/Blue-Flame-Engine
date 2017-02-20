@@ -15,7 +15,7 @@ namespace BF
 				Panel(Application::Scene& scene);
 				~Panel();
 
-			private:
+			protected:
 				void Initialize(Renderers::SpriteRenderer& spriteRenderer) override;
 				void Load(const StyleSheet& StyleSheet, const std::string& widgetName) override;
 				void Update() override;

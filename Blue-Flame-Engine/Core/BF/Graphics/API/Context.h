@@ -61,6 +61,9 @@ namespace BF
 					void EnableBlending(bool state);
 					void EnableVsync(bool state);
 
+					void EnableScissor(bool state);
+					void SetScissor(const Math::Rectangle& rectangle);
+
 #ifdef BF_PLATFORM_WINDOWS
 					inline const Platform::API::DirectX::DXContext& GetDXContext() const { return dxContext; }
 					inline const Platform::API::OpenGL::WINGLContext& GetWINGLContext() const { return winGLContext; }

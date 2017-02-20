@@ -5,15 +5,21 @@
 #include <BF/Graphics/Mesh.h>
 #include <BF/IO/FileFormats/BFXFormat.h>
 
-class BFXWriter
+namespace Editor
 {
-private:
-	BF::IO::FileFormats::BFXFormat bfxFormat;
-	const std::vector<BF::Graphics::Mesh>* mesh;
+	namespace IO
+	{
+		class BFXWriter
+		{
+			private:
+				BF::IO::FileFormats::BFXFormat bfxFormat;
+				const std::vector<BF::Graphics::Mesh>* mesh;
 
-public:
-	BFXWriter(const std::vector<BF::Graphics::Mesh>* mesh);
-	~BFXWriter();
+			public:
+				BFXWriter(const std::vector<BF::Graphics::Mesh>* mesh);
+				~BFXWriter();
 
-	void WriteToFile(const std::string& filename);
-};
+				void WriteToFile(const std::string& filename);
+		};
+	}
+}

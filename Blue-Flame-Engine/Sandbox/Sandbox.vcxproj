@@ -189,15 +189,19 @@
     <ClCompile Include="Sandbox\Main.cpp" />
     <ClCompile Include="Sandbox\_2DScene.cpp" />
     <ClCompile Include="Sandbox\_3DScene.cpp" />
+    <ClCompile Include="Sandbox\TestPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\AndroidTestScene.h" />
     <ClInclude Include="Sandbox\_2DScene.h" />
     <ClInclude Include="Sandbox\_3DScene.h" />
+    <ClInclude Include="Sandbox\TestPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\3D\PixelShader.glsl" />
     <None Include="Assets\Shaders\GLSL\3D\VertexShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\Light\PixelShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\Light\VertexShader.glsl" />
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\PixelShader.glsl" />
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
     <None Include="Assets\Shaders\GLSL\TextureCube\PixelShader.glsl" />

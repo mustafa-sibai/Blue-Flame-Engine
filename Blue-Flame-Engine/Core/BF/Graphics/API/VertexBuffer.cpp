@@ -9,7 +9,7 @@ namespace BF
 		{
 			VertexBuffer::VertexBuffer(const Shader& shader)
 #ifdef BF_PLATFORM_WINDOWS
-				: dxVertexBuffer(shader.GetDXShader())
+				: dxVertexBuffer(shader.dxShader)
 #endif
 			{
 			}

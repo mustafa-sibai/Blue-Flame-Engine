@@ -27,6 +27,9 @@
     <ClCompile Include="Sandbox\AndroidTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\TestPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\_3DScene.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sandbox\AndroidTestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\TestPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,6 +54,8 @@
     <None Include="Assets\Shaders\HLSL\Compiled\SpriteRenderer\VertexShader.cso" />
     <None Include="Assets\Shaders\GLSL\TextureCube\PixelShader.glsl" />
     <None Include="Assets\Shaders\GLSL\TextureCube\VertexShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\Light\PixelShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\Light\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\HLSL\3D\PixelShader.hlsl" />

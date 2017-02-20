@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
+#include "TestPanel.h"
 
 namespace _2DScene
 {
@@ -11,8 +12,12 @@ namespace _2DScene
 		private:
 			BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 			
+			//BF::Graphics::API::RenderTarget renderTarget;
+
 			BF::Graphics::API::Texture2D* t;
 			BF::Graphics::API::Texture2D* t2;
+			BF::Graphics::API::Texture2D* t3;
+			BF::Graphics::API::Texture2D* t4;
 
 			BF::Graphics::Renderers::Sprite sprite1;
 			BF::Graphics::Renderers::Sprite sprite2;
@@ -21,6 +26,8 @@ namespace _2DScene
 			BF::Graphics::Renderers::Sprite sprite5;
 
 			BF::Graphics::Renderers::Sprite sprite6;
+			BF::Graphics::Renderers::Sprite sprite7;
+			BF::Graphics::Renderers::Sprite sprite8;
 
 			BF::Graphics::Renderers::Sprite fontSprite;
 			BF::Graphics::Fonts::Font font;
@@ -29,7 +36,7 @@ namespace _2DScene
 			BF::Graphics::TileMap tileMap;
 			
 			BF::Graphics::GUI::Button button;
-			BF::Graphics::GUI::Panel panel;
+			TestPanel panel;
 			BF::Graphics::Camera camera;
 
 			BF::AI::Waypoint waypoint;

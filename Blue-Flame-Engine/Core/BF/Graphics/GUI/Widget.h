@@ -16,14 +16,18 @@ namespace BF
 				Renderers::Sprite normalSprite;
 				Renderers::Sprite hoveredSprite;
 				Renderers::Sprite pressedSprite;
+
+				int minWidth = 0, minHeight = 0;
 			};
 
 			class BF_API Widget
 			{
 				friend class WidgetManager;
 
-				private:
+				protected:
 					Renderers::SpriteRenderer* spriteRenderer;
+
+				private:
 					WidgetData widgetData;
 					Renderers::Sprite* currentSprite;
 
@@ -41,7 +45,10 @@ namespace BF
 					void AddOnClickListener(void(*OnClickCallBack)());
 
 					void SetPosition(const Math::Vector2& position);
-					void SetRectangle(const Math::Rectangle& rectangle);
+					void SetRectangle(Math::Rectangle rectangle);
+
+					inline const Math::Vector2& GetPosition() const { return currentSprite->GetPosition(); }
+					inline const Math::Rectangle& GetRectangle() const { return currentSprite->GetRectangle(); }
 
 					inline bool IsHovered() const { return hovered; }
 					inline bool IsPressed() const { return pressed; }

@@ -44,19 +44,34 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
+			Math::Rectangle StyleSheet::ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type)
+			{
+				const char* x = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("MinWidth");
+				const char* y = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("MinHeight");
+				const char* width = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("Width");
+				const char* height = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(name.c_str())->FirstChildElement(type.c_str())->Attribute("Height");
+
+				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
+			}
+
 			void StyleSheet::LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName)
 			{
 				WidgetData widgetData;
-				Rectangle scissorRectangle;
+				Rectangle rectangle, scissorRectangle;
+
+				rectangle = ReadWidgetDimensions(xmlDocument, widgetName, "Dimensions");
+
+				widgetData.minWidth = rectangle.x;
+				widgetData.minHeight = rectangle.y;
 
 				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Normal");
-				widgetData.normalSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
+				widgetData.normalSprite = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
 
 				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Hovered");
-				widgetData.hoveredSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
+				widgetData.hoveredSprite = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
 
 				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "Pressed");
-				widgetData.pressedSprite = Sprite(texture, Vector2(0.0f), 0, scissorRectangle, Color(1.0f));
+				widgetData.pressedSprite = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
 
 				widgetsData.insert({ widgetName, widgetData });
 			}

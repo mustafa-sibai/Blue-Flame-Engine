@@ -13,8 +13,8 @@ namespace BF
 				using namespace std;
 				using namespace BF::Graphics::API;
 
-				GLTexture2D::GLTexture2D(const GLShader& glshader) :
-					glshader(glshader), textureID(0)
+				GLTexture2D::GLTexture2D(const GLShader& glShader) :
+					glShader(glShader), textureID(0)
 				{
 				}
 
@@ -54,7 +54,7 @@ namespace BF
 				{
 					GLCall(glActiveTexture(GL_TEXTURE0 + index));
 					GLCall(glBindTexture(GL_TEXTURE_2D, textureID));
-					GLCall(glUniform1i(glGetUniformLocation(glshader.GetProgramID(), samplerName.c_str()), index));
+					GLCall(glUniform1i(glGetUniformLocation(glShader.GetProgramID(), samplerName.c_str()), index));
 				}
 
 				void GLTexture2D::Unbind() const

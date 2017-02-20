@@ -18,6 +18,8 @@ namespace BF
 		{
 			class BF_API Texture2D : public Texture
 			{
+				friend class BF::Platform::API::OpenGL::GLFramebuffer;
+
 				private:
 					const Shader& shader;
 

@@ -30,6 +30,7 @@ namespace BF
 
 				private:
 					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
+					Math::Rectangle ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
 					void LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName);
 			};
 		}

@@ -44,8 +44,11 @@ namespace BF
 				widgetData.pressedSprite.SetPosition(position);
 			}
 
-			void Widget::SetRectangle(const Math::Rectangle& rectangle)
+			void Widget::SetRectangle(Math::Rectangle rectangle)
 			{
+				rectangle.width = max(widgetData.minWidth, rectangle.width);
+				rectangle.height = max(widgetData.minHeight, rectangle.height);
+
 				widgetData.normalSprite.SetRectangle(rectangle);
 				widgetData.hoveredSprite.SetRectangle(rectangle);
 				widgetData.pressedSprite.SetRectangle(rectangle);

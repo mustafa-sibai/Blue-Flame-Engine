@@ -20,7 +20,7 @@ namespace BF
 				{
 					private:
 						GLuint VAO;
-						GLuint buffer;
+						GLuint VBO;
 
 					public:
 						GLVertexBuffer();
@@ -33,7 +33,7 @@ namespace BF
 						void Bind() const;
 						void Unbind() const;
 
-						inline const GLuint& GetBuffer() const { return buffer; }
+						inline const GLuint& GetBuffer() const { return VBO; }
 
 					private:
 						GLenum GetGLDataType(Graphics::API::VertexBufferLayout::DataType dataType);

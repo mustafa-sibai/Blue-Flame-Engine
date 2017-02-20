@@ -41,11 +41,13 @@ namespace BF
 					void Initialize();
 					void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					void Render(const Sprite& sprite);
-					void Render(Sprite&&) = delete;
+					//void Render(Sprite&&) = delete;
 					void RenderRectangle(const Math::Rectangle& rectangle, const Color& color);
 					void RenderLine(const Math::Vector2& startPoint, const Math::Vector2& endPoint, float thickness, const Color& color);
 					void RenderText(const Fonts::FontAtlas& fontAtlas, const std::string& text, const Math::Vector2& position, const Color& color);
 					void End();
+
+					void SetScissor(const Math::Rectangle& rectangle);
 
 					inline const API::Shader& GetShader() const { return shader; }
 

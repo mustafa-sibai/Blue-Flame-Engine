@@ -159,6 +159,20 @@ namespace BF
 				{
 					wglSwapIntervalEXT(state);
 				}
+
+				void WINGLContext::EnableScissor(bool state)
+				{
+					if (state)
+						glEnable(GL_SCISSOR_TEST);
+					else
+						glDisable(GL_SCISSOR_TEST);
+				}
+
+				void WINGLContext::SetScissor(const Math::Rectangle& rectangle)
+				{
+					int height = Engine::GetWindow().GetClientHeight() - rectangle.height - rectangle.y;
+					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientHeight() - height - rectangle.y);
+				}
 			}
 		}
 	}

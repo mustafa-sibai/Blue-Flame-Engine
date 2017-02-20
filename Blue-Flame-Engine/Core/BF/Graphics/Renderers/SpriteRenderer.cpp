@@ -79,6 +79,8 @@ namespace BF
 
 				Engine::GetContext().EnableDepthBuffer(false);
 				Engine::GetContext().EnableBlending(true);
+				Engine::GetContext().EnableScissor(true);
+
 				delete[] indecies;
 			}
 
@@ -339,6 +341,13 @@ namespace BF
 
 					newDrawCall = false;
 				}
+			}
+
+			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
+			{		
+				End();
+				Begin(submitType, sortingOrder);
+				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)

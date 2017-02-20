@@ -20,7 +20,7 @@ namespace BF
 				~Model();
 
 				void Load(const std::string& filename);
-				void Draw();
+				void Render();
 		};
 	}
 }

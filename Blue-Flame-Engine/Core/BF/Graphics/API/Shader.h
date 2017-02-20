@@ -17,6 +17,9 @@ namespace BF
 		{
 			class BF_API Shader
 			{
+				friend class VertexBuffer;
+				friend class Texture2D;
+
 				private:
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXShader dxShader;
@@ -33,13 +36,6 @@ namespace BF
 
 					void Bind() const;
 					void Unbind() const;
-
-#ifdef BF_PLATFORM_WINDOWS
-					inline const Platform::API::DirectX::DXShader& GetDXShader() const { return dxShader; }
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
-					inline const Platform::API::OpenGL::GLShader& GetGLShader() const { return glShader; }
-#endif
 			};
 		}
 	}

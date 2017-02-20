@@ -1,8 +1,6 @@
 # Blue-Flame-Engine
 A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 
-<br></br>
-
 <b>Features:-</b>
 <ul>
 <li>Support for Windows, Linux, WebGL and Android</li>
@@ -17,16 +15,30 @@ A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 <li>Rendering 2D sprites with sprite batching.</li>
 <li>Rendering 2D textures.</li>
 <li>Rendering Texture Cubes and Skybox.</li>
-<li>Rendering Tile maps</li>
-<li>Support for playing sprite animation</li>
-<li>Support for terrain generation using height maps</li>
-<li>Support GUI system</li>
-<li>Math library that has Vector2, 3 and 4, 4x4 Matrix and Rectangle.</li>
+<li>Rendering Tile maps.</li>
+<li>Rendering to a 2D texture using Framebuffer.</li>
+<li>Support for Ambient, diffuse and specular lighting.</li>
+<li>Support for Material system that can specify Ambient, diffuse and specular colors and support for diffuse and specular maps.</li>
+<li>Support for playing sprite animation.</li>
+<li>Support for terrain generation using height maps.</li>
+<li>Support for GUI system.</li>
+<li>Support for math library that has Vector2, 3 and 4, 4x4 Matrix and Rectangle.</li>
+<li>Support for basic AABB collision detection.</li>
 <li>Support for both Perspective and Orthographic projection.</li>
 <li>Support for Camera system.</li>
 <li>Support for basic TCP networking.</li>
 <li>Support for map editor.</li>
 <li>Controller support on Windows using Xinput v1.4.</li>
+</ul>
+
+<br>
+
+<b>Platform state as of 20/02/2017:-</b>
+<ul>
+<li>Windows - OpenGL:- working</li>
+<li>Windows - DirectX:- broken</li>
+<li>Linux - OpenGL:- broken</li>
+<li>Android - OpenGL ES:- broken</li>
 </ul>
 
 <br>

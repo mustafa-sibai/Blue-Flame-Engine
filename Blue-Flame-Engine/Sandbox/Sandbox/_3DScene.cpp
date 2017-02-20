@@ -10,7 +10,7 @@ namespace _3DScene
 	using namespace BF::System;
 
 	_3DScene::_3DScene() :
-		cubeModel(shader), planeModel(shader)
+		cubeModel(shader), planeModel(shader), lightModel(lightShader), material(shader)
 	{
 	}
 
@@ -25,45 +25,62 @@ namespace _3DScene
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
-		//skybox.Initialize();
-		terrain.Initialize();
+		skybox.Initialize();
+
+		constentBuffer.Create(sizeof(LightBuffer), 1);
+		materialConstentBuffer.Create(sizeof(material.colorBuffer), 2);
+
+		//terrain.Initialize();
 	}
 
 	void _3DScene::Load()
 	{
-		terrain.Load("Assets/HeightMaps/heightmap2.bmp");
-/*#if BF_PLATFORM_WINDOWS
+		//terrain.Load("Assets/HeightMaps/heightmap2.bmp");
+
+#if BF_PLATFORM_WINDOWS
+		if (Context::GetRenderAPI() == RenderAPI::DirectX)
+			lightShader.Load("Assets/Shaders/HLSL/Compiled/Light/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/Light/PixelShader.cso");
+		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+			lightShader.Load("Assets/Shaders/GLSL/Light/VertexShader.glsl", "Assets/Shaders/GLSL/Light/PixelShader.glsl");
+#elif BF_PLATFORM_LINUX
+		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+			lightShader.Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
+#endif
+
+#if BF_PLATFORM_WINDOWS
 		if (Context::GetRenderAPI() == RenderAPI::DirectX)
 			shader.Load("Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
 		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader.Load("Assets/Shaders/GLSL/3D/VertexShader.glsl", "Assets/Shaders/GLSL/3D/PixelShader.glsl");
 #elif BF_PLATFORM_LINUX
 		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-			shader->Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
+			shader.Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
 #endif
-		shader.Bind();*/
 
-		/*std::vector<std::string> filenames{ "Assets/TextureCubes/LancellottiChapel/posx.jpg", "Assets/TextureCubes/LancellottiChapel/negx.jpg",
+		shader.Bind();
+
+		std::vector<std::string> filenames{ "Assets/TextureCubes/LancellottiChapel/posx.jpg", "Assets/TextureCubes/LancellottiChapel/negx.jpg",
 											"Assets/TextureCubes/LancellottiChapel/posy.jpg", "Assets/TextureCubes/LancellottiChapel/negy.jpg",
-											"Assets/TextureCubes/LancellottiChapel/posz.jpg", "Assets/TextureCubes/LancellottiChapel/negz.jpg" };*/
+											"Assets/TextureCubes/LancellottiChapel/posz.jpg", "Assets/TextureCubes/LancellottiChapel/negz.jpg" };
 
-		//skybox.Load(filenames, "Assets/Shaders/GLSL/TextureCube/VertexShader.glsl", "Assets/Shaders/GLSL/TextureCube/PixelShader.glsl");
-		
-		//model->Load("Assets/Models/untitled.bfx");
-		//planeModel.Load("Assets/Models/Plane.bfx");
-		//cubeModel.Load("Assets/Models/Cube.bfx");
+		skybox.Load(filenames, "Assets/Shaders/GLSL/TextureCube/VertexShader.glsl", "Assets/Shaders/GLSL/TextureCube/PixelShader.glsl");
+
+		planeModel.Load("Assets/Models/Plane.bfx");
+		cubeModel.Load("Assets/Models/Cube.bfx");
+		lightModel.Load("Assets/Models/Cube.bfx");
+
+		material.diffuseMap->Load("Assets/Textures/diffuseMap.png");
+		material.specularMap->Load("Assets/Textures/specularMap.png");
 	}
 
 	void _3DScene::FixedUpdate()
 	{
-
+		angle += 0.5f;
+		fpsCamera.Update();
 	}
 
 	void _3DScene::Update()
 	{
-		angle += 0.5f;
-		fpsCamera.Update();
-
 		if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::A))
 			BF_LOG_INFO("A Pressed !");
 
@@ -103,19 +120,47 @@ namespace _3DScene
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		/*skybox.Render();
+		skybox.Render();
 
 		shader.Bind();
 
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
-		planeModel.Draw();
-		
+		planeModel.Render();
+
+
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
-		cubeModel.Draw();
 
-		shader.Unbind();*/
+		//material.colorBuffer.ambientColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
+		//material.colorBuffer.diffuseColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
+		//material.colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 
-		terrain.Render();
+		material.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		material.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		material.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		material.colorBuffer.shininess = 32.0f;
+		materialConstentBuffer.Update(&material, sizeof(material.colorBuffer));
+		material.Bind();
+
+		cubeModel.Render();
+
+		shader.Unbind();
+
+
+		lightShader.Bind();
+
+		light.position = Vector4(9.0f, 0.0f, 0.0f, 1.0f);
+
+		light.ambientColor	= Color(0.2f, 0.2f, 0.2f, 1.0f);
+		light.diffuseColor	= Color(0.5f, 0.5f, 0.5f, 1.0f);
+		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		constentBuffer.Update(&light, sizeof(LightBuffer));
+
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(light.position.x, light.position.y, light.position.z)) * Matrix4::Scale(Vector3(0.1f)));
+		lightModel.Render();
+
+		lightShader.Unbind();
+
+		//terrain.Render();
 
 		BF::Engine::GetContext().SwapBuffers();
 	}
