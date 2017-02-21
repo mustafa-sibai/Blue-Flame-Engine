@@ -1,9 +1,9 @@
-# Blue-Flame-Engine
+# Blue Flame Engine
 A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 
 <b>Features:-</b>
 <ul>
-<li>Support for Windows, Linux, WebGL and Android</li>
+<li>Support for Windows, Linux, WebGL and Android.</li>
 <li>Support for DirectX 11 and OpenGL 4+.</li>
 <li>Support for PNG, JPEG, BMP, DDS, TIFF, WBMP, WebP and more using the FreeImage library.</li>
 <li>Support for FBX model format that then gets converted to a custom model loading format called BFX.</li>
