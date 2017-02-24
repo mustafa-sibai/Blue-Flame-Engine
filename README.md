@@ -46,3 +46,7 @@ This is the sponza scene running ony my game engine with basic diffuse lighting.
 ![alt tag](http://i.imgur.com/7Tsvk0S.jpg)
 
 [![Blue Flame Engine: Texture Cubes and Skybox](http://img.youtube.com/vi/YhPcsCIEzDY/0.jpg)](https://www.youtube.com/watch?v=YhPcsCIEzDY "Blue Flame Engine: Texture Cubes and Skybox")
+
+<br>
+
+[![](https://codescene.io/projects/700/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/700/jobs/latest-successful/results)
