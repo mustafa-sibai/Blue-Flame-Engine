@@ -1,9 +1,9 @@
-# Blue-Flame-Engine
+# Blue Flame Engine
 A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 
 <b>Features:-</b>
 <ul>
-<li>Support for Windows, Linux, WebGL and Android</li>
+<li>Support for Windows, Linux, WebGL and Android.</li>
 <li>Support for DirectX 11 and OpenGL 4+.</li>
 <li>Support for PNG, JPEG, BMP, DDS, TIFF, WBMP, WebP and more using the FreeImage library.</li>
 <li>Support for FBX model format that then gets converted to a custom model loading format called BFX.</li>
@@ -41,8 +41,14 @@ A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 <li>Android - OpenGL ES:- broken</li>
 </ul>
 
+<a href="https://trello.com/b/vznbwo4t" target="_blank"><img src="https://www.cluedin.net/images/providers/trello.png" width="75"></a> 
+
 <br>
 This is the sponza scene running ony my game engine with basic diffuse lighting.
 ![alt tag](http://i.imgur.com/7Tsvk0S.jpg)
 
 [![Blue Flame Engine: Texture Cubes and Skybox](http://img.youtube.com/vi/YhPcsCIEzDY/0.jpg)](https://www.youtube.com/watch?v=YhPcsCIEzDY "Blue Flame Engine: Texture Cubes and Skybox")
+
+<br>
+
+[![](https://codescene.io/projects/700/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/700/jobs/latest-successful/results)
