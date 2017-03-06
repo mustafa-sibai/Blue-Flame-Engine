@@ -7,7 +7,7 @@ namespace BF
 		namespace API
 		{
 			Texture::Texture() :
-				format(Format::R8G8B8A8), textureWrap(TextureWrap::Repeat), textureFilter(TextureFilter::Neatest)
+				format(Format::R8G8B8A8), wrap(Wrap::Repeat), filter(Filter::Point)
 			{
 			}
 

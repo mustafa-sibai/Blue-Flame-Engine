@@ -92,6 +92,9 @@
     <ClCompile Include="BF\Graphics\GUI\Panel.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\RenderTarget.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Scrollbar.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\ScrollbarSlider.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -178,6 +181,9 @@
     <ClInclude Include="BF\Graphics\GUI\Panel.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h" />
     <ClInclude Include="BF\Graphics\API\RenderTarget.h" />
+    <ClInclude Include="BF\Graphics\GUI\Scrollbar.h" />
+    <ClInclude Include="BF\Graphics\GUI\ScrollbarSlider.h" />
+    <ClInclude Include="BF\Graphics\GUI\Checkbox.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>

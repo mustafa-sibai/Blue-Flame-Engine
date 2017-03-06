@@ -30,6 +30,9 @@
     <ClCompile Include="Sandbox\TestPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\_3DScene2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\_3DScene.h">
@@ -44,6 +47,9 @@
     <ClInclude Include="Sandbox\TestPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Sandbox\_3DScene2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
@@ -56,6 +62,8 @@
     <None Include="Assets\Shaders\GLSL\TextureCube\VertexShader.glsl" />
     <None Include="Assets\Shaders\GLSL\Light\PixelShader.glsl" />
     <None Include="Assets\Shaders\GLSL\Light\VertexShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\3DMipAF\PixelShader.glsl" />
+    <None Include="Assets\Shaders\GLSL\3DMipAF\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\HLSL\3D\PixelShader.hlsl" />

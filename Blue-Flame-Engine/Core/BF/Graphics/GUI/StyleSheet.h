@@ -29,8 +29,11 @@ namespace BF
 					inline const WidgetData& GetWidget(const std::string& name) const { return widgetsData.at(name); }
 
 				private:
-					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
+					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& state, const std::string& type);
 					Math::Rectangle ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& type);
+					bool DoesStateExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& state);
+					bool DoesTypeExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& name, const std::string& state, const std::string& type);
+
 					void LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName);
 			};
 		}

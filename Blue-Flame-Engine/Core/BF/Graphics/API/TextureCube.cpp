@@ -34,11 +34,11 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTextureCube.Create(textureCubes, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);
+					glTextureCube.Create(textureCubes, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
-			void TextureCube::Load(const vector<string>& fileNames, TextureWrap textureWrap, TextureFilter textureFilter)
+			void TextureCube::Load(const vector<string>& fileNames, Wrap textureWrap, Filter textureFilter)
 			{
 				for (size_t i = 0; i < fileNames.size(); i++)
 				{

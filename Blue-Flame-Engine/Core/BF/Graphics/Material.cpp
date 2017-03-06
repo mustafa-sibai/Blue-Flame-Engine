@@ -6,10 +6,9 @@ namespace BF
 	{
 		using namespace BF::Graphics::API;
 
-		Material::Material(const Shader& shader)
+		Material::Material(const Shader& shader) :
+			diffuseMap(shader), specularMap(shader)
 		{
-			diffuseMap = new Texture2D(shader);
-			specularMap = new Texture2D(shader);
 		}
 
 		Material::~Material()
@@ -18,14 +17,14 @@ namespace BF
 
 		void Material::Bind()
 		{
-			diffuseMap->Bind("diffuseMap", 0);
-			specularMap->Bind("specularMap", 1);
+			diffuseMap.Bind("diffuseMap", 1);
+			specularMap.Bind("specularMap", 2);
 		}
 
 		void Material::Unbind()
 		{
-			diffuseMap->Unbind();
-			specularMap->Unbind();
+			diffuseMap.Unbind();
+			specularMap.Unbind();
 		}
 	}
 }

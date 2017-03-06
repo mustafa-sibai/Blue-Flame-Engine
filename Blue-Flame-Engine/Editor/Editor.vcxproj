@@ -156,7 +156,9 @@
     <ClInclude Include="IO\BFXWriter.h" />
     <ClInclude Include="IO\FBXLoader.h" />
     <ClInclude Include="PaintTile.h" />
+    <ClInclude Include="ScenePanel.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileSheetPanel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorScene.cpp" />
@@ -167,7 +169,9 @@
     <ClCompile Include="IO\FBXLoader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PaintTile.cpp" />
+    <ClCompile Include="ScenePanel.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileSheetPanel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

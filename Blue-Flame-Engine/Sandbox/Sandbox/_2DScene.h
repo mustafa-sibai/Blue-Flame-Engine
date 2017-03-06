@@ -36,6 +36,8 @@ namespace _2DScene
 			BF::Graphics::TileMap tileMap;
 			
 			BF::Graphics::GUI::Button button;
+			BF::Graphics::GUI::Checkbox checkbox;
+
 			TestPanel panel;
 			BF::Graphics::Camera camera;
 
@@ -45,6 +47,7 @@ namespace _2DScene
 			BF::System::Timer timer;
 			BF::AI::Waypoint::Node node;
 			BF::AI::Waypoint::Node node2;
+
 			//BF::Graphics::Animation::SpriteAnimation spriteAnimation;
 			//InitBuffer initBuffer;
 

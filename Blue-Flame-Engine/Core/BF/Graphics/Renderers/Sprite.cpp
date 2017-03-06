@@ -9,6 +9,11 @@ namespace BF
 			using namespace Graphics::API;
 			using namespace Math;
 
+			Sprite::Sprite() :
+				texture2D(nullptr), position(), zLayer(0), rectangle(), scissorRectangle(), color()
+			{
+			}
+
 			Sprite::Sprite(const Texture2D* texture2D, const Vector2& position, unsigned int zLayer, const Color& color) :
 				texture2D(texture2D), position(position), zLayer(zLayer), rectangle((int)position.x, (int)position.y, texture2D->GetTextureData().width, texture2D->GetTextureData().height),
 				scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height), color(color)

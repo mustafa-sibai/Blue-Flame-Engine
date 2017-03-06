@@ -13,5 +13,35 @@ namespace BF
 		{
 			return (value - max) / (max - min);
 		}
+
+		int Min(int a, int b)
+		{
+			return a < b ? a : b;
+		}
+
+		float Min(float a, float b)
+		{
+			return a < b ? a : b;
+		}
+
+		int Max(int a, int b)
+		{
+			return a > b ? a : b;
+		}
+
+		float Max(float a, float b)
+		{
+			return a > b ? a : b;
+		}
+
+		int Clamp(int value, int lower, int upper)
+		{
+			return Max(lower, Min(value, upper));
+		}
+
+		float Clamp(float value, float lower, float upper)
+		{
+			return Max(lower, Min(value, upper));
+		}
 	}
 }

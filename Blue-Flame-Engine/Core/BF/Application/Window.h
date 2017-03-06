@@ -29,7 +29,7 @@ namespace BF
 #endif
 		{
 			public:
-				Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, BF::Application::WindowStyle style);
+				Window(const std::string& title, const Math::Rectangle& rectangle, BF::Application::WindowStyle style);
 				~Window();
 
 				void Initialize();

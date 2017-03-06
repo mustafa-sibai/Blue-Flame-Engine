@@ -28,14 +28,16 @@ void TestPanel::Load(const StyleSheet& StyleSheet, const string& widgetName)
 {
 	Panel::Load(StyleSheet, widgetName);
 
+	SetPosition(Vector2(900, 200));
+	SetContentRectangle(Math::Rectangle(900, 200, 1000, 1000));
 	t->Load("Assets/Textures/tilea5.png");
-	SetPosition(Vector2(200, 200));
-	s = Sprite(t, Math::Rectangle(Panel::GetPosition().x, Panel::GetPosition().y, 800, 600), 0, Color(1.0f));
+	s = Sprite(t, GetContentRectangle(), 0, Color(1.0f));
 }
 
 void TestPanel::Update()
 {
 	Panel::Update();
+	s.SetPosition(GetContentPosition());
 }
 
 void TestPanel::Render()

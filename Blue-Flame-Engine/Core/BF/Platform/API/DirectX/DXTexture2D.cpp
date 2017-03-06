@@ -22,7 +22,7 @@ namespace BF
 				{
 				}
 
-				void DXTexture2D::Create(const TextureData& textureData, Texture::Format format, Texture::TextureWrap textureWrap, Texture::TextureFilter textureFilter)
+				void DXTexture2D::Create(const TextureData& textureData, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
 				{
 					D3D11_TEXTURE2D_DESC texDesc;
 					ZeroMemory(&texDesc, sizeof(texDesc));
@@ -62,12 +62,12 @@ namespace BF
 					D3D11_SAMPLER_DESC samplerDesc;
 					ZeroMemory(&samplerDesc, sizeof(D3D11_SAMPLER_DESC));
 
-					samplerDesc.AddressU = GetDXTextureWrap(textureWrap);
-					samplerDesc.AddressV = GetDXTextureWrap(textureWrap);
-					samplerDesc.AddressW = GetDXTextureWrap(textureWrap);
+					samplerDesc.AddressU = GetDXTextureWrap(wrap);
+					samplerDesc.AddressV = GetDXTextureWrap(wrap);
+					samplerDesc.AddressW = GetDXTextureWrap(wrap);
 					samplerDesc.MinLOD = 0;
 					samplerDesc.MaxLOD = 11;
-					samplerDesc.Filter = GetDXTextureFilter(textureFilter);
+					samplerDesc.Filter = GetDXTextureFilter(filter);
 					samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
 					samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
@@ -92,27 +92,29 @@ namespace BF
 					}
 				}
 
-				D3D11_TEXTURE_ADDRESS_MODE DXTexture2D::GetDXTextureWrap(Texture::TextureWrap textureWrap) const
+				D3D11_TEXTURE_ADDRESS_MODE DXTexture2D::GetDXTextureWrap(Texture::Wrap wrap) const
 				{
-					switch (textureWrap)
+					switch (wrap)
 					{
-						case Texture2D::TextureWrap::Repeat: return D3D11_TEXTURE_ADDRESS_WRAP;
-						case Texture2D::TextureWrap::MirroredReapeat: return D3D11_TEXTURE_ADDRESS_MIRROR;
-						case Texture2D::TextureWrap::ClampToEdge: return D3D11_TEXTURE_ADDRESS_CLAMP;
-						case Texture2D::TextureWrap::ClampToBorder: return D3D11_TEXTURE_ADDRESS_BORDER;
+						case Texture2D::Wrap::Repeat: return D3D11_TEXTURE_ADDRESS_WRAP;
+						case Texture2D::Wrap::MirroredReapeat: return D3D11_TEXTURE_ADDRESS_MIRROR;
+						case Texture2D::Wrap::ClampToEdge: return D3D11_TEXTURE_ADDRESS_CLAMP;
+						case Texture2D::Wrap::ClampToBorder: return D3D11_TEXTURE_ADDRESS_BORDER;
 						default: return D3D11_TEXTURE_ADDRESS_WRAP;
 					}
 				}
 
-				D3D11_FILTER DXTexture2D::GetDXTextureFilter(Texture::TextureFilter textureFilter) const
+				D3D11_FILTER DXTexture2D::GetDXTextureFilter(Texture::Filter filter) const
 				{
-					//TODO: Add more texture filter types to control both min and mag
-					switch (textureFilter)
+					/*//TODO: Add more texture filter types to control both min and mag
+					switch (filter)
 					{
-						case Texture2D::TextureFilter::Neatest: return D3D11_FILTER_MIN_MAG_MIP_POINT;
-						case Texture2D::TextureFilter::Linear: return D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+						case Texture2D::Filter::Point: return D3D11_FILTER_MIN_MAG_MIP_POINT;
+						case Texture2D::Filter::Linear: return D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 						default: return D3D11_FILTER_MIN_MAG_MIP_POINT;
-					}
+					}*/
+
+					return D3D11_FILTER_MIN_MAG_MIP_POINT;
 				}
 			}
 		}

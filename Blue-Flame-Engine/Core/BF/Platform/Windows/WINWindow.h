@@ -3,6 +3,7 @@
 #include <Windowsx.h>
 #include <Dwmapi.h>
 #include "BF/Application/WindowStyle.h"
+#include "BF/Math/Rectangle.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -21,11 +22,12 @@ namespace BF
 
 					Application::WindowStyle style;
 					std::string title;
-					unsigned short positionX, positionY, width, height, clientWidth, clientHeight, borderWidth, borderHeight;
+					Math::Rectangle rectangle;
+					unsigned int clientWidth, clientHeight, borderWidth, borderHeight;
 					int borderThickness;
 
 				public:
-					WINWindow(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style);
+					WINWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style);
 					~WINWindow();
 
 					void Initialize();
@@ -39,13 +41,12 @@ namespace BF
 					void SetClientSize();
 
 				public:
-					inline unsigned short GetWidth() const { return width; }
-					inline unsigned short GetHeight() const { return height; }
+					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
 
 					inline unsigned short GetClientWidth() const { return clientWidth; }
 					inline unsigned short GetClientHeight() const { return clientHeight; }
 
-					inline float GetAspectRatio() const { return (float)width / (float)height; }
+					inline float GetAspectRatio() const { return (float)rectangle.width / (float)rectangle.height; }
 
 					inline const HWND& GetHWND() const { return hWnd; }
 

@@ -28,6 +28,9 @@ namespace BF
 			void Initialize();
 			void Load(const std::vector<std::string>& filenames, const std::string& vertexShaderFilename, const std::string& pixelShaderFilename);
 			void Render();
+
+			void Bind();
+			void Unbind();
 		};
 	}
 }

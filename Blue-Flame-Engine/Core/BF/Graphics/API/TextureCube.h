@@ -35,7 +35,7 @@ namespace BF
 				~TextureCube();
 
 				void Load(const std::vector<std::string>& fileNames);
-				void Load(const std::vector<std::string>& fileNames, TextureWrap textureWrap, TextureFilter textureFilter);
+				void Load(const std::vector<std::string>& fileNames, Wrap wrap, Filter filter);
 
 				void Bind() const;
 				void Unbind() const;

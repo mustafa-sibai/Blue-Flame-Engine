@@ -1,4 +1,5 @@
 #include "Vector2.h"
+#include "BF/System/Log.h"
 
 namespace BF
 {

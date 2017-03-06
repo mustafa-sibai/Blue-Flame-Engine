@@ -43,7 +43,7 @@ namespace BF
 			vertexBuffer.SetLayout(vertexBufferLayout);
 
 			shader.Load(vertexShaderFilename, pixelShaderFilename);
-			textureCube.Load(filenames);
+			textureCube.Load(filenames, Texture::Wrap::ClampToEdge, Texture::Filter::Bilinear);
 		}
 
 		void Skybox::Render()
@@ -59,6 +59,16 @@ namespace BF
 			textureCube.Unbind();
 			shader.Unbind();
 			Engine::GetContext().EnableDepthMask(true);
+		}
+
+		void Skybox::Bind()
+		{
+			textureCube.Bind();
+		}
+
+		void Skybox::Unbind()
+		{
+			textureCube.Unbind();
 		}
 	}
 }

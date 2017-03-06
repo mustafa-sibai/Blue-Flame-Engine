@@ -1,22 +1,16 @@
 #pragma once
 #include <BF/BlueFlame.h>
-#include "PaintTile.h"
-#include "Grid.h"
-#include "TileMap.h"
+#include "ScenePanel.h"
 
 namespace Editor
 {
 	class EditorScene : public BF::Application::Scene
 	{
 	private:
-		BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 		BF::Graphics::Camera camera;
 
-		BF::Graphics::API::Texture2D texture;
-
-		Grid grid;
-		PaintTile paintTile;
-		Editor::TileMap tilemap;
+		TileSheetPanel tilesheet;
+		ScenePanel scenePanel;
 
 	public:
 		EditorScene();

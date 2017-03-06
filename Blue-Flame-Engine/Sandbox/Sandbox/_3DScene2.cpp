@@ -1,6 +1,6 @@
-#include "_3DScene.h"
+#include "_3DScene2.h"
 
-namespace _3DScene
+namespace _3DScene2
 {
 	using namespace BF::Application;
 	using namespace BF::Graphics;
@@ -9,19 +9,19 @@ namespace _3DScene
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	_3DScene::_3DScene() :
+	_3DScene2::_3DScene2() :
 		cubeModel(shader), planeModel(shader), lightModel(lightShader), material(shader)
 	{
 	}
 
-	_3DScene::~_3DScene()
+	_3DScene2::~_3DScene2()
 	{
 	}
 
-	void _3DScene::Initialize()
+	void _3DScene2::Initialize()
 	{
 		BF::Engine::GetContext().EnableDepthBuffer(true);
-		BF::Engine::GetContext().EnableVsync(true);
+		//BF::Engine::GetContext().EnableVsync(true);
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
@@ -33,7 +33,7 @@ namespace _3DScene
 		//terrain.Initialize();
 	}
 
-	void _3DScene::Load()
+	void _3DScene2::Load()
 	{
 		//terrain.Load("Assets/HeightMaps/heightmap2.bmp");
 
@@ -49,9 +49,9 @@ namespace _3DScene
 
 #if BF_PLATFORM_WINDOWS
 		if (Context::GetRenderAPI() == RenderAPI::DirectX)
-			shader.Load("Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
+			shader.Load("Assets/Shaders/HLSL/Compiled/3DMipAF/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/3DMipAF/PixelShader.cso");
 		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-			shader.Load("Assets/Shaders/GLSL/3D/VertexShader.glsl", "Assets/Shaders/GLSL/3D/PixelShader.glsl");
+			shader.Load("Assets/Shaders/GLSL/3DMipAF/VertexShader.glsl", "Assets/Shaders/GLSL/3DMipAF/PixelShader.glsl");
 #elif BF_PLATFORM_LINUX
 		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader.Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
@@ -69,21 +69,18 @@ namespace _3DScene
 		cubeModel.Load("Assets/Models/Cube.bfx");
 		lightModel.Load("Assets/Models/Cube.bfx");
 
-		material.diffuseMap.Load("Assets/Textures/diffuseMap.png");
-		material.specularMap.Load("Assets/Textures/specularMap.png");
+		material.diffuseMap.Load("Assets/Textures/diffuseMap.png", Texture::Wrap::ClampToBorder, Texture::Filter::AnisotropicX16);
+		material.specularMap.Load("Assets/Textures/specularMap.png", Texture::Wrap::ClampToBorder, Texture::Filter::AnisotropicX16);
 	}
 
-	void _3DScene::FixedUpdate()
+	void _3DScene2::FixedUpdate()
 	{
-
-	}
-
-	void _3DScene::Update()
-	{
-
 		angle += 0.5f;
 		fpsCamera.Update();
+	}
 
+	void _3DScene2::Update()
+	{
 		if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::A))
 			BF_LOG_INFO("A Pressed !");
 
@@ -119,18 +116,22 @@ namespace _3DScene
 			BF_LOG_INFO("Back Pressed !");
 	}
 
-	void _3DScene::Render()
+	void _3DScene2::Render()
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
 		skybox.Render();
 
-		skybox.Bind();
 		shader.Bind();
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
-		planeModel.Render();
-
+		for (int z = 0; z < 10; z++)
+		{
+			for (int x = 0; x < 10; x++)
+			{
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(20.0f * x, -2.5f, 20.0f * z)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
+				planeModel.Render();
+			}
+		}
 
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
 
@@ -148,13 +149,12 @@ namespace _3DScene
 		cubeModel.Render();
 
 		shader.Unbind();
-		skybox.Unbind();
 
 		lightShader.Bind();
 
-		light.position = Vector4(9.0f, 0.0f, 0.0f, 1.0f);
+		light.position = Vector4(9.0f, 20.0f, 0.0f, 1.0f);
 
-		light.ambientColor	= Color(0.2f, 0.2f, 0.2f, 1.0f);
+		light.ambientColor	= Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.diffuseColor	= Color(0.5f, 0.5f, 0.5f, 1.0f);
 		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		constentBuffer.Update(&light, sizeof(LightBuffer));

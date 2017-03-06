@@ -145,8 +145,8 @@ namespace BF
 				float rows = ceil(totalGlyphs / columns);
 				height = (unsigned int)pow(2, ceil(log(rows * glyphHeight) / log(2)));
 
-				unsigned int temp = max(height, width);
-				height = min(height, width);
+				unsigned int temp = Max((int)height, (int)width);
+				height = Min((int)height, (int)width);
 				width = temp;
 			}
 		}

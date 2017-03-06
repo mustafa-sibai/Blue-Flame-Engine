@@ -15,9 +15,9 @@ namespace BF
 			{
 			}
 
-			void RenderTarget::Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter)
+			void RenderTarget::Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter)
 			{
-				texture2D.Create(Texture::TextureData(width, height, nullptr), format, textureWrap, textureFilter);
+				texture2D.Create(Texture::TextureData(width, height, nullptr), format, wrap, filter);
 
 				glFramebuffer.Create(texture2D);
 			}

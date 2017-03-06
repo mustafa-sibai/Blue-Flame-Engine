@@ -27,7 +27,7 @@ namespace _2DScene
 	}
 
 	_2DScene::_2DScene() :
-		button(*this), panel(*this), font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
+		button(*this), checkbox(*this), panel(*this), font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
 	{
 		t = new Texture2D(spriteRenderer.GetShader());
 		t2 = new Texture2D(spriteRenderer.GetShader());
@@ -80,7 +80,7 @@ namespace _2DScene
 		//tileMap.Load("Assets/Maps/TileMap.bfm");
 		//spriteAnimation.Load("Assets/Animation/spriteAnimation.bfa");
 
-		button.AddOnClickListener(DoButtonWork);
+		//button.AddOnClickListener(DoButtonWork);
 
 		button.SetPosition(Vector2(100, 100));
 
@@ -110,6 +110,11 @@ namespace _2DScene
 
 		if(node.HasArrived())
 			waypoint.GoTo(node2);
+
+		/*if (checkbox.IsChecked())
+			BF_LOG_ERROR("CHECKED !!");
+		else
+			BF_LOG_WARNING("NOT CHECKED !! ");*/
 
 		//BF_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToWindow().x, BF::Input::Mouse::GetPositionRelativeToWindow().y );
 		//BF_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToScreen().x, BF::Input::Mouse::GetPositionRelativeToScreen().y);

@@ -26,25 +26,25 @@ namespace BF
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);
+					dxTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);
+					glTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
-			void Texture2D::Load(const string& fileName, TextureWrap textureWrap, TextureFilter textureFilter)
+			void Texture2D::Load(const string& fileName, Wrap wrap, Filter filter)
 			{
 				textureData.buffer = ImageLoader::Load(fileName, &textureData.width, &textureData.height);
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);
+					dxTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);
+					glTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
 #endif
 			}
 
@@ -54,25 +54,25 @@ namespace BF
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, format, TextureWrap::Repeat, TextureFilter::Neatest);
+					dxTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, format, TextureWrap::Repeat, TextureFilter::Neatest);
+					glTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
-			void Texture2D::Create(const TextureData& textureData, Format format, TextureWrap textureWrap, TextureFilter textureFilter)
+			void Texture2D::Create(const TextureData& textureData, Format format, Wrap wrap, Filter filter)
 			{
 				this->textureData = textureData;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, format, textureWrap, textureFilter);
+					dxTexture2D.Create(textureData, format, wrap, filter);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, format, textureWrap, textureFilter);
+					glTexture2D.Create(textureData, format, wrap, filter);
 #endif
 			}
 

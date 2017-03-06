@@ -34,9 +34,9 @@ namespace BF
 					~Texture2D();
 
 					void Load(const std::string& fileName);
-					void Load(const std::string& fileName, TextureWrap textureWrap, TextureFilter textureFilter);
+					void Load(const std::string& fileName, Wrap wrap, Filter filter);
 					void Create(const TextureData& textureData, Format format);
-					void Create(const TextureData& textureData, Format format, TextureWrap textureWrap, TextureFilter textureFilter);
+					void Create(const TextureData& textureData, Format format, Wrap wrap, Filter filter);
 
 					void Bind() const;
 					void Bind(const std::string& samplerName, unsigned int index) const;

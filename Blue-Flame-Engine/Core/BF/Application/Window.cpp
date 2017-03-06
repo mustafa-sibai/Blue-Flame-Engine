@@ -4,9 +4,9 @@ namespace BF
 {
 	namespace Application
 	{
-		Window::Window(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
+		Window::Window(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
 #ifdef BF_PLATFORM_WINDOWS
-			WINWindow(title, positionX, positionY, width, height, style)
+			WINWindow(title, rectangle, style)
 #elif BF_PLATFORM_ANDROID
 			AWindow()
 #endif

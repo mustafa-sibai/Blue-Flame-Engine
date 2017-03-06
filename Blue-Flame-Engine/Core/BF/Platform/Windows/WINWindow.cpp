@@ -2,7 +2,7 @@
 #include "BF/Input/Controller.h"
 #include "BF/Input/Keyboard.h"
 #include "BF/Input/Mouse.h"
-#include "BF/System/Log.h"
+#include "BF/Math/Math.h"
 
 namespace BF
 {
@@ -10,12 +10,12 @@ namespace BF
 	{
 		namespace Windows
 		{
-			using namespace Input;
-			using namespace Application;
-			using namespace Math;
+			using namespace BF::Input;
+			using namespace BF::Application;
+			using namespace BF::Math;
 
-			WINWindow::WINWindow(const std::string& title, unsigned short positionX, unsigned short positionY, unsigned short width, unsigned short height, Application::WindowStyle style) :
-				title(title), positionX(positionX), positionY(positionY), width(width), height(height), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0), borderThickness(0)
+			WINWindow::WINWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
+				title(title), rectangle(rectangle), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0), borderThickness(0)
 			{
 			}
 
@@ -57,10 +57,10 @@ namespace BF
 					L"Blue Flame Engine Window Class",
 					wchTitle,
 					currentWindowStyle,
-					positionX,
-					positionY,
-					width,
-					height,
+					rectangle.x,
+					rectangle.y,
+					rectangle.width,
+					rectangle.height,
 					0,
 					0,
 					hInstance,
@@ -90,7 +90,7 @@ namespace BF
 						else
 							Mouse::insideWindowClient = false;
 
-						Mouse::position = Vector2((float)min(max(0, mousePosition.x), clientWidth), (float)min(max(0, mousePosition.y), clientHeight));
+						Mouse::position = Vector2(Clamp((float)mousePosition.x, 0.0f, (float)clientWidth), Clamp((float)mousePosition.y, 0.0f, (float)clientHeight));
 					}
 				}
 
@@ -142,8 +142,8 @@ namespace BF
 				clientWidth = (unsigned short)clientRect.right;
 				clientHeight = (unsigned short)clientRect.bottom;
 
-				borderWidth = width - clientWidth;
-				borderHeight = height - clientHeight;
+				borderWidth = rectangle.width - clientWidth;
+				borderHeight = rectangle.height - clientHeight;
 			}
 
 			LRESULT CALLBACK WINWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -174,8 +174,8 @@ namespace BF
 
 					case WM_SIZE:
 					{
-						window->width = LOWORD(lParam) + window->borderWidth;
-						window->height = HIWORD(lParam) + window->borderHeight;
+						window->rectangle.width = LOWORD(lParam) + window->borderWidth;
+						window->rectangle.height = HIWORD(lParam) + window->borderHeight;
 
 						window->clientWidth = LOWORD(lParam);
 						window->clientHeight = HIWORD(lParam);

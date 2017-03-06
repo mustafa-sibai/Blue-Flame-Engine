@@ -24,12 +24,13 @@ namespace BF
 					private:
 						const GLShader& glShader;
 						GLuint textureID;
+						float AFLevel;
 
 					public:
 						GLTexture2D(const GLShader& glShader);
 						~GLTexture2D();
 
-						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
+						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
 						void Bind() const;
 						void Bind(const std::string& samplerName, unsigned int index) const;
 						void Unbind() const;
@@ -37,8 +38,7 @@ namespace BF
 
 					private:
 						int GetGLTextureFormat(Graphics::API::Texture::Format format) const;
-						int GetGLTextureWrap(Graphics::API::Texture::TextureWrap textureWrap) const;
-						int GetGLTextureFilter(Graphics::API::Texture::TextureFilter textureFilter) const;
+						int GetGLTextureWrap(Graphics::API::Texture::Wrap wrap) const;
 				};
 			}
 		}

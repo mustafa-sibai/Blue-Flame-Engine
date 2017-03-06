@@ -22,13 +22,13 @@ namespace BF
 						DXTexture2D();
 						~DXTexture2D();
 
-						void Create(const TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
+						void Create(const TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
 						void Bind(unsigned int index) const;
 
 					private:
 						DXGI_FORMAT GetDXTextureFormat(Graphics::API::Texture::Format format) const;
-						D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(Graphics::API::Texture::TextureWrap textureWrap) const;
-						D3D11_FILTER GetDXTextureFilter(Graphics::API::Texture::TextureFilter textureFilter) const;
+						D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(Graphics::API::Texture::Wrap wrap) const;
+						D3D11_FILTER GetDXTextureFilter(Graphics::API::Texture::Filter filter) const;
 				};
 			}
 		}

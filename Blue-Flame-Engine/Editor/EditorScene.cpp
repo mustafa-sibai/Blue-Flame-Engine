@@ -9,7 +9,7 @@ namespace Editor
 	using namespace BF::Graphics::Renderers;
 
 	EditorScene::EditorScene() :
-		grid(spriteRenderer), paintTile(spriteRenderer, grid, tilemap), texture(spriteRenderer.GetShader())
+		tilesheet(*this), scenePanel(*this, tilesheet)
 	{
 	}
 
@@ -19,15 +19,13 @@ namespace Editor
 
 	void EditorScene::Initialize()
 	{
-		spriteRenderer.Initialize();
-		tilemap.Initialize();
+		Scene::Initialize();
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 	}
 
 	void EditorScene::Load()
 	{
-		texture.Load("../Sandbox/Assets/Textures/tilea5.png");
-		paintTile.SetCurrentTile(Sprite(&texture, Vector2(0.0f, 0.0f), 0, Color(1.0f)));
+		Scene::Load();
 	}
 
 	void EditorScene::FixedUpdate()
@@ -36,21 +34,15 @@ namespace Editor
 
 	void EditorScene::Update()
 	{
+		Scene::Update();
 		camera.Update();
-		paintTile.Update();
 	}
 
 	void EditorScene::Render()
 	{
 		Engine::GetContext().Clear(Color(0.5f, 0.0f, 0.1f, 1.0f));
-
-		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
-		grid.Render();
-		paintTile.Render();
-		spriteRenderer.End();
-
-		tilemap.Render();
-
+		Scene::Render();
+		scenePanel.RenderTileMap();
 		Engine::GetContext().SwapBuffers();
 	}
 }

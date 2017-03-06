@@ -7,7 +7,7 @@ namespace BF
 	using namespace BF::Graphics::API;
 	using namespace BF::Application;
 
-	Window Engine::window = Window("", 0, 0, 0, 0, Application::WindowStyle::Windowed);
+	Window Engine::window = Window("", Math::Rectangle(), Application::WindowStyle::Windowed);
 	Context Engine::context = Context(RenderAPI::OpenGL);
 	Engine::State Engine::state;
 

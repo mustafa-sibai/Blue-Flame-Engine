@@ -30,7 +30,7 @@ namespace BF
 				RenderTarget(const Shader& shader);
 				~RenderTarget();
 
-				void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::TextureWrap textureWrap, Graphics::API::Texture::TextureFilter textureFilter);
+				void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
 
 				void Bind();
 				void Unbind();
