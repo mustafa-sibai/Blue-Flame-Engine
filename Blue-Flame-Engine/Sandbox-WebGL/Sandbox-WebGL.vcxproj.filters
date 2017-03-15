@@ -18,14 +18,13 @@
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\_2DScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Sandbox\FragmentShader.glsl" />
-    <None Include="Sandbox\VertexShader.glsl" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Sandbox\test.png">
-      <Filter>Resource Files</Filter>
-    </Image>
+    <ClInclude Include="Sandbox\_2DScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

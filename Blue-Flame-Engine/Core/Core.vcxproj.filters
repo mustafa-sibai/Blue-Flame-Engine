@@ -159,9 +159,6 @@
     <ClCompile Include="BF\IO\BFMLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Platform\API\Vulkan\VKContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\GUI\Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -241,6 +238,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -407,9 +416,6 @@
     <ClInclude Include="BF\IO\BFMLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Platform\API\Vulkan\VKContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\GUI\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -504,6 +510,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\GUI\Checkbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\LineShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

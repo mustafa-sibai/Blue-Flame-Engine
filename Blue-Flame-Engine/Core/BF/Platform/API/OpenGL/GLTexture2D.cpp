@@ -37,6 +37,7 @@ namespace BF
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetGLTextureWrap(wrap)));
 
 					//TODO: We should not check for max AF vaule everytime we create a new texture. This should be set in some kind of static settings class that should be run once after context creation.
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 					if (filter == Texture::Filter::AnisotropicX2 || filter == Texture::Filter::AnisotropicX4 ||
 						filter == Texture::Filter::AnisotropicX8 || filter == Texture::Filter::AnisotropicX16)
 					{
@@ -48,6 +49,7 @@ namespace BF
 							BF_LOG_WARNING("Anisotropic filtering is not supported on this hardware. The engine will fall back to Trilinear filtering.");
 						}
 					}
+#endif
 
 					switch (filter)
 					{

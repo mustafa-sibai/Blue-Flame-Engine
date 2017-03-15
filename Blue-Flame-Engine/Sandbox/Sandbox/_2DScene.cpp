@@ -41,7 +41,7 @@ namespace _2DScene
 
 	void _2DScene::Initialize()
 	{
-		Scene::Initialize();
+		//Scene::Initialize();
 
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		spriteRenderer.Initialize();
@@ -49,14 +49,14 @@ namespace _2DScene
 
 	void _2DScene::Load()
 	{
-		Scene::Load();
+		//Scene::Load();
 
 		t->Load("Assets/Textures/tilea5.png");
 		t2->Load("Assets/Textures/test2.png");
 		t3->Load("Assets/Textures/Untitled.png");
 		t4->Load("Assets/Textures/silver.png");
 
-		sprite1 = Sprite(t, Vector2(0.0f, 0.0f), 0, BF::Math::Rectangle(0, 0, 24, 24), Color(1.0f));
+		sprite1 = Sprite(t, Vector2(0.0f, 0.0f), 0, Color(1.0f, 1.0f, 1.0f, 1.0f));
 		sprite2 = Sprite(t, Vector2(100.0f, 100.0f), 0, BF::Math::Rectangle(32, 0, 32, 32), Color(1.0f));
 		sprite3 = Sprite(t, Vector2(300.0f, 100.0f), 0, BF::Math::Rectangle(64, 0, 32, 32), Color(1.0f));
 		sprite4 = Sprite(t, Vector2(300.0f, 300.0f), 0, BF::Math::Rectangle(96, 0, 32, 32), Color(1.0f));
@@ -68,6 +68,12 @@ namespace _2DScene
 
 		node = Waypoint::Node(Vector2(100.0f, 100.0f));
 		node2 = Waypoint::Node(Vector2(300.0f, 100.0f));
+
+		line = LineShape(Vector2(0.0f, 100.0f), Vector2(800.0f, 100.0f), 5, 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
+		line2 = LineShape(Vector2(0.0f, 300.0f), Vector2(800.0f, 300.0f), 5, 0, Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+		rp = RegularPolygon(Math::Rectangle(225, 200, 64, 64), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
+		rp2 = RegularPolygon(Math::Rectangle(225, 400, 64, 64), 0, Color(1.0f, 0.0f, 0.0f, 1.0f));
 
 		//waypoints.push_back(Waypoint::Node(Vector2(100.0f, 100.0f), TimeFunction));
 		//waypoints.push_back(Waypoint::Node(Vector2(300.0f, 100.0f), TimeFunction));
@@ -89,7 +95,7 @@ namespace _2DScene
 
 	void _2DScene::FixedUpdate()
 	{
-		Scene::FixedUpdate();
+		//Scene::FixedUpdate();
 
 		//BF_WARNING("TICKS");
 		//spriteAnimation.Update();
@@ -102,14 +108,14 @@ namespace _2DScene
 
 	void _2DScene::Update()
 	{
-		Scene::Update();
+		//Scene::Update();
 		camera.Update();
 		//waypoint.Update();
 
-		waypoint.GoTo(node);
+		/*waypoint.GoTo(node);
 
 		if(node.HasArrived())
-			waypoint.GoTo(node2);
+			waypoint.GoTo(node2);*/
 
 		/*if (checkbox.IsChecked())
 			BF_LOG_ERROR("CHECKED !!");
@@ -124,10 +130,17 @@ namespace _2DScene
 	{
 		//renderTarget.Bind();
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
-		Scene::Render();
+		//Scene::Render();
 
-		//spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
-		//spriteRenderer.Render(sprite7);
+		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
+		spriteRenderer.Render(line);
+		spriteRenderer.Render(rp);
+		spriteRenderer.Render(sprite1);
+		spriteRenderer.Render(line2);
+		spriteRenderer.Render(rp2);
+		//spriteRenderer.RenderLine(Vector2(0.0f, 300.0f), Vector2(800.0f, 300.0f), 5, Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+
 
 		//spriteRenderer.SetScissor(Math::Rectangle(25, 50, 125, 200));
 		//spriteRenderer.SetScissor(Math::Rectangle(0, 100, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight() - 200));
@@ -165,7 +178,7 @@ namespace _2DScene
 		//spriteRenderer.DrawRectangle(BF::Math::Rectangle(1200, 800, 100, 100), BF::Math::Vector4(1.0, 0.0, 1.0, 1.0));
 
 		//spriteAnimation.Render();
-		//spriteRenderer.End();
+		spriteRenderer.End();
 
 		//tileMap.Draw();
 		//renderTarget.Unbind();

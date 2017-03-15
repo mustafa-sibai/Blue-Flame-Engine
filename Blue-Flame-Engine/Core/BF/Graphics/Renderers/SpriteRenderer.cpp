@@ -52,11 +52,11 @@ namespace BF
 #endif
 				shader.Bind();
 
-				vertexBufferLayout.Push(0, "POSITION",		VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);
-				vertexBufferLayout.Push(1, "COLOR",			VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2));
-				vertexBufferLayout.Push(2, "TEXCOORD",		VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color));
-				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float,  sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color) + sizeof(Vector2));
-				
+				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);
+				vertexBufferLayout.Push(1, "COLOR", VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2));
+				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color));
+				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color) + sizeof(Vector2));
+
 				unsigned int* indecies = new unsigned int[INDICES_SIZE];
 				int index = 0;
 
@@ -95,142 +95,166 @@ namespace BF
 					spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 			}
 
-			void SpriteRenderer::Render(const Sprite& sprite)
+			void SpriteRenderer::Render(const Renderable& renderable)
 			{
 				if (submitSprite)
-					sprites.push_back(&sprite);
+					renderables.push_back(&renderable);
 			}
 
-			void SpriteRenderer::RenderRectangle(const Rectangle& rectangle, const Color& color)
+			void SpriteRenderer::MapLineBuffer(const LineShape& lineShape)
 			{
-				if (submitSprite)
-				{
-					//Top Left
-					spriteBuffer->position		= Vector2((float)rectangle.x, (float)rectangle.y);
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
+				Vector2 normal = Vector2(lineShape.endPoint.y - lineShape.startPoint.y, -(lineShape.endPoint.x - lineShape.startPoint.x)).Normalize() * lineShape.thickness;
 
-					//Top Right
-					spriteBuffer->position		= Vector2((float)(rectangle.x + rectangle.width), (float)rectangle.y);
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
+				//Top Left
+				spriteBuffer->position = lineShape.startPoint + normal;
+				spriteBuffer->color = lineShape.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
 
-					//Bottom Right
-					spriteBuffer->position		= Vector2((float)(rectangle.x + rectangle.width), (float)(rectangle.y + rectangle.height));
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
+				//Top Right
+				spriteBuffer->position = Vector2(lineShape.endPoint.x + normal.x, lineShape.endPoint.y + normal.y);
+				spriteBuffer->color = lineShape.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
 
-					//Bottom Left
-					spriteBuffer->position		= Vector2((float)rectangle.x, (float)(rectangle.y + rectangle.height));
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
+				//Bottom Right
+				spriteBuffer->position = Vector2(lineShape.endPoint.x - normal.x, lineShape.endPoint.y - normal.y);
+				spriteBuffer->color = lineShape.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
 
-					indexCount += SPRITE_INDICES;
-				}
+				//Bottom Left
+				spriteBuffer->position = lineShape.startPoint - normal;
+				spriteBuffer->color = lineShape.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
+
+				indexCount += SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::RenderLine(const Vector2& startPoint, const Vector2& endPoint, float thickness, const Color& color)
+			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon& regularPolygon)
 			{
-				if (submitSprite)
+				//Top Left
+				spriteBuffer->position = Vector2((float)regularPolygon.rectangle.x, (float)regularPolygon.rectangle.y);
+				spriteBuffer->color = regularPolygon.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
+
+				//Top Right
+				spriteBuffer->position = Vector2((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)regularPolygon.rectangle.y);
+				spriteBuffer->color = regularPolygon.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
+
+				//Bottom Right
+				spriteBuffer->position = Vector2((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->color = regularPolygon.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
+
+				//Bottom Left
+				spriteBuffer->position = Vector2((float)regularPolygon.rectangle.x, (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->color = regularPolygon.color;
+				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->renderingType = 0;
+				spriteBuffer++;
+
+				indexCount += SPRITE_INDICES;
+			}
+
+			void SpriteRenderer::MapSpriteBuffer(const Sprite& sprite)
+			{
+				if (currentBoundTexture != nullptr)
 				{
-					Vector2 normal = Vector2(endPoint.y - startPoint.y, -(endPoint.x - startPoint.x)).Normalize() * thickness;
+					if (sprite.texture2D != currentBoundTexture)
+					{
+						if (submitType == SubmitType::StaticSubmit)
+							return;
 
-					//Top Left
-					spriteBuffer->position		= startPoint + normal;
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
+						newDrawCall = true;
 
-					//Top Right
-					spriteBuffer->position		= Vector2(endPoint.x + normal.x, endPoint.y + normal.y);
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
-
-					//Bottom Right
-					spriteBuffer->position		= Vector2(endPoint.x - normal.x, endPoint.y - normal.y);
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
-
-					//Bottom Left
-					spriteBuffer->position		= startPoint - normal;
-					spriteBuffer->color			= color;
-					spriteBuffer->UV			= Vector2(0.0f);
-					spriteBuffer->renderingType = 0;
-					spriteBuffer++;
-
-					indexCount += SPRITE_INDICES;
+						End();
+						Begin(submitType, sortingOrder);
+					}
 				}
+
+				if (currentBoundTexture != sprite.texture2D)
+				{
+					sprite.texture2D->Bind();
+					currentBoundTexture = sprite.texture2D;
+				}
+
+				Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+				CalculateUV(sprite.texture2D, sprite.scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+
+				//Top Left
+				spriteBuffer->position = sprite.position;
+				spriteBuffer->color = sprite.color;
+				spriteBuffer->UV = topLeftUV;
+				spriteBuffer->renderingType = 1;
+				spriteBuffer++;
+
+				//Top Right
+				spriteBuffer->position = Vector2(sprite.position.x + sprite.rectangle.width, sprite.position.y);
+				spriteBuffer->color = sprite.color;
+				spriteBuffer->UV = topRightUV;
+				spriteBuffer->renderingType = 1;
+				spriteBuffer++;
+
+				//Bottom Right
+				spriteBuffer->position = Vector2(sprite.position.x + sprite.rectangle.width, sprite.position.y + sprite.rectangle.height);
+				spriteBuffer->color = sprite.color;
+				spriteBuffer->UV = bottomRightUV;
+				spriteBuffer->renderingType = 1;
+				spriteBuffer++;
+
+				//Bottom Left
+				spriteBuffer->position = Vector2(sprite.position.x, sprite.position.y + sprite.rectangle.height);
+				spriteBuffer->color = sprite.color;
+				spriteBuffer->UV = bottomLeftUV;
+				spriteBuffer->renderingType = 1;
+				spriteBuffer++;
+
+				indexCount += SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapBuffer()
 			{
-				for (size_t i = 0; i < sprites.size(); i++)
+				if (submitSprite)
 				{
-					if (currentBoundTexture != nullptr)
+					for (size_t i = 0; i < renderables.size(); i++)
 					{
-						if (sprites[i][0].texture2D != currentBoundTexture)
+						switch (renderables[i][0].type)
 						{
-							if (submitType == SubmitType::StaticSubmit)
-								return;
-
-							newDrawCall = true;
-
-							End();
-							Begin(submitType, sortingOrder);
+						case Renderable::Type::Line:
+						{
+							LineShape& line = (LineShape&)renderables[i][0];
+							MapLineBuffer(line);
+							break;
+						}
+						case Renderable::Type::RegularPolygon:
+						{
+							RegularPolygon& regularPolygon = (RegularPolygon&)renderables[i][0];
+							MapPolygonBuffer(regularPolygon);
+							break;
+						}
+						case Renderable::Type::Sprite:
+						{
+							Sprite& sprite = (Sprite&)renderables[i][0];
+							MapSpriteBuffer(sprite);
+							break;
+						}
+						default:
+							break;
 						}
 					}
-
-					if (currentBoundTexture != sprites[i][0].texture2D)
-					{
-						sprites[i][0].texture2D->Bind();
-						currentBoundTexture = sprites[i][0].texture2D;
-					}
-
-					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
-					CalculateUV(sprites[i][0].texture2D, sprites[i][0].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
-
-					//Top Left
-					spriteBuffer->position		= sprites[i][0].position;
-					spriteBuffer->color			= sprites[i][0].color;
-					spriteBuffer->UV			= topLeftUV;
-					spriteBuffer->renderingType = 1;
-					spriteBuffer++;
-
-					//Top Right
-					spriteBuffer->position		= Vector2(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y);
-					spriteBuffer->color			= sprites[i][0].color;
-					spriteBuffer->UV			= topRightUV;
-					spriteBuffer->renderingType = 1;
-					spriteBuffer++;
-
-					//Bottom Right
-					spriteBuffer->position		= Vector2(sprites[i][0].position.x + sprites[i][0].rectangle.width, sprites[i][0].position.y + sprites[i][0].rectangle.height);
-					spriteBuffer->color			= sprites[i][0].color;
-					spriteBuffer->UV			= bottomRightUV;
-					spriteBuffer->renderingType = 1;
-					spriteBuffer++;
-
-					//Bottom Left
-					spriteBuffer->position		= Vector2(sprites[i][0].position.x, sprites[i][0].position.y + sprites[i][0].rectangle.height);
-					spriteBuffer->color			= sprites[i][0].color;
-					spriteBuffer->UV			= bottomLeftUV;
-					spriteBuffer->renderingType = 1;
-					spriteBuffer++;
-
-					indexCount += SPRITE_INDICES;
 				}
 			}
 
@@ -272,30 +296,30 @@ namespace BF
 						pos.y = position.y + (fontAtlas.characters[0][unicode].charPixelSize - fontAtlas.characters[0][unicode].bearing.y);
 
 						//Top Left
-						spriteBuffer->position		= pos;
-						spriteBuffer->color			= color;
-						spriteBuffer->UV			= topLeftUV;
+						spriteBuffer->position = pos;
+						spriteBuffer->color = color;
+						spriteBuffer->UV = topLeftUV;
 						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Top Right
-						spriteBuffer->position		= Vector2(pos.x + (float)scissorRectangle.width, pos.y);
-						spriteBuffer->color			= color;
-						spriteBuffer->UV			= topRightUV;
+						spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y);
+						spriteBuffer->color = color;
+						spriteBuffer->UV = topRightUV;
 						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Bottom Right
-						spriteBuffer->position		= Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
-						spriteBuffer->color			= color;
-						spriteBuffer->UV			= bottomRightUV;
+						spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
+						spriteBuffer->color = color;
+						spriteBuffer->UV = bottomRightUV;
 						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
 						//Bottom Left
-						spriteBuffer->position		= Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
-						spriteBuffer->color			= color;
-						spriteBuffer->UV			= bottomLeftUV;
+						spriteBuffer->position = Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
+						spriteBuffer->color = color;
+						spriteBuffer->UV = bottomLeftUV;
 						spriteBuffer->renderingType = 2;
 						spriteBuffer++;
 
@@ -311,9 +335,9 @@ namespace BF
 					if (!newDrawCall)
 					{
 						if (sortingOrder == SortingOrder::BackToFront)
-							sort(sprites.begin(), sprites.end(), Sprite::BackToFront());
+							sort(renderables.begin(), renderables.end(), Sprite::BackToFront());
 						else if (sortingOrder == SortingOrder::FrontToBack)
-							sort(sprites.begin(), sprites.end(), Sprite::FrontToBack());
+							sort(renderables.begin(), renderables.end(), Sprite::FrontToBack());
 
 						MapBuffer();
 						vertexBuffer.Unmap();
@@ -337,14 +361,14 @@ namespace BF
 					indexCount = 0;
 
 					if (!newDrawCall)
-						sprites.clear();
+						renderables.clear();
 
 					newDrawCall = false;
 				}
 			}
 
 			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
-			{		
+			{
 				End();
 				Begin(submitType, sortingOrder);
 				BF::Engine::GetContext().SetScissor(rectangle);
@@ -353,16 +377,16 @@ namespace BF
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
 				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+					1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
 
 				*topRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+					1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
 
 				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-									1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+					1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
 				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-									1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+					1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

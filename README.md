@@ -10,7 +10,7 @@ A 3D/2D game engine that supports both DirectX11 and OpenGL 4.5
 <li>Support for custom file formats like BFA for Animation and BFM for tile maps.</li>
 <li>Support for 16bit, 32bit and IEEE float WAV file format loading.</li>
 <li>Support for OpenAL-Soft 1.17.2 for 3D audio.</li>
-<li>Support for ttf font rendering using FreeType library.</li>
+<li>Support for ttf font rendering using FreeType v2.7.1 library.</li>
 <li>Rendering 3D models with basic Phong shading.</li>
 <li>Rendering 2D sprites with sprite batching.</li>
 <li>Rendering 2D textures.</li>

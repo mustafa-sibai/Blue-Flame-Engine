@@ -1,10 +1,18 @@
 #pragma once
+#include <EGL/egl.h>
 #include <GLES3/gl3.h>
-#include "BF/Math/Vector4.h"
-#include "BF/Platform/WebGL/WEBWindow.h"
+#include "BF/Graphics/Color.h"
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace API
+		{
+			enum class PrimitiveType;
+		}
+	}
+
 	namespace Platform
 	{
 		namespace API
@@ -13,17 +21,22 @@ namespace BF
 			{
 				class WEBGLContext
 				{
-					private:
-						WebGL::WEBWindow* webWindow;
-						EGLConfig config;
-						EGLNativeWindowType window;
+				private:
+					EGLContext context;
+					EGLint width;
+					EGLint height;
 
-					public:
-						WEBGLContext(WebGL::WEBWindow* webWindow);
-						~WEBGLContext();
+					GLuint GL_PRIMITIVE_TYPE;
 
-						void Clear(Math::Vector4 Color);
-						void SwapBuffers();
+				public:
+					WEBGLContext();
+					~WEBGLContext();
+
+					void Initialize();
+					void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
+					void Clear(Graphics::Color color);
+					void Render(GLsizei count);
+					void SwapBuffers();
 				};
 			}
 		}

@@ -23,6 +23,7 @@ namespace BF
 				ColorBuffer colorBuffer;
 				API::Texture2D diffuseMap;
 				API::Texture2D specularMap;
+				API::Texture2D normalMap;
 
 				Material(const API::Shader& shader);
 				~Material();

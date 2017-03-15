@@ -35,7 +35,7 @@ namespace BF
 						void Initialize();
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
 						void Clear(const Graphics::Color& color);
-						void Draw(GLsizei count);
+						void Render(GLsizei count);
 						void SwapBuffers();
 						void CleanUp();
 

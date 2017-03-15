@@ -113,7 +113,7 @@ namespace BF
 					GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 				}
 
-				void WINGLContext::Draw(GLsizei count)
+				void WINGLContext::Render(GLsizei count)
 				{
 					GLCall(glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr));
 				}

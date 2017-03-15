@@ -19,6 +19,12 @@ namespace _2DScene
 			BF::Graphics::API::Texture2D* t3;
 			BF::Graphics::API::Texture2D* t4;
 
+			BF::Graphics::Renderers::LineShape line;
+			BF::Graphics::Renderers::LineShape line2;
+			
+			BF::Graphics::Renderers::RegularPolygon rp;
+			BF::Graphics::Renderers::RegularPolygon rp2;
+
 			BF::Graphics::Renderers::Sprite sprite1;
 			BF::Graphics::Renderers::Sprite sprite2;
 			BF::Graphics::Renderers::Sprite sprite3;

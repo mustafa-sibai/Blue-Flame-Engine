@@ -3,6 +3,8 @@
 	#include "BF/Platform/Windows/WINWindow.h"
 #elif BF_PLATFORM_LINUX
 	#include "BF/Platform/Linux/LXWindow.h"
+#elif BF_PLATFORM_WEBGL
+	#include "BF/Platform/WebGL/WEBWindow.h"
 #endif
 
 #include "BF/Math/Vector2.h"
@@ -18,6 +20,8 @@ namespace BF
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINWindow;
+#elif BF_PLATFORM_WEBGL
+			friend class BF::Platform::WebGL::WEBWindow;
 #endif
 			private:
 				static Math::Vector2 position;

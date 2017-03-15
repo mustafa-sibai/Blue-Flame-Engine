@@ -39,7 +39,7 @@ namespace BF
 						void Initialize();
 						void Clear(const Graphics::Color& color);
 						void SwapBuffers();
-						void Draw(unsigned int vertexCount);
+						void Render(unsigned int vertexCount);
 						void CleanUp();
 
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);

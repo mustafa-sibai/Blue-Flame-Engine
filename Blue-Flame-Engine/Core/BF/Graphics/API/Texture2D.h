@@ -12,6 +12,17 @@
 
 namespace BF
 {
+	namespace Platform
+	{
+		namespace API
+		{
+			namespace OpenGL
+			{
+				class GLFramebuffer;
+			}
+		}
+	}
+
 	namespace Graphics
 	{
 		namespace API

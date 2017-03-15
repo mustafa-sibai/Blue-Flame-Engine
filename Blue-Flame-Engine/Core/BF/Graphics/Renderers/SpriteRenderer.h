@@ -4,6 +4,8 @@
 #include "BF/Graphics/Renderers/Sprite.h"
 #include "BF/Graphics/Fonts/FontAtlas.h"
 #include "BF/Graphics/Color.h"
+#include "LineShape.h"
+#include "RegularPolygon.h"
 
 namespace BF
 {
@@ -26,7 +28,7 @@ namespace BF
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					std::vector<const Sprite*> sprites;
+					std::vector<const Renderable*> renderables;
 
 					SubmitType submitType;
 					SortingOrder sortingOrder;
@@ -40,10 +42,11 @@ namespace BF
 
 					void Initialize();
 					void Begin(SubmitType submitType, SortingOrder sortingOrder);
-					void Render(const Sprite& sprite);
+					void Render(const Renderable& renderable);
 					//void Render(Sprite&&) = delete;
-					void RenderRectangle(const Math::Rectangle& rectangle, const Color& color);
-					void RenderLine(const Math::Vector2& startPoint, const Math::Vector2& endPoint, float thickness, const Color& color);
+					//void RenderLine(const Math::Vector2& startPoint, const Math::Vector2& endPoint, float thickness, const Color& color);
+					//void RenderRectangle(const Math::Rectangle& rectangle, const Color& color);
+
 					void RenderText(const Fonts::FontAtlas& fontAtlas, const std::string& text, const Math::Vector2& position, const Color& color);
 					void End();
 
@@ -52,6 +55,9 @@ namespace BF
 					inline const API::Shader& GetShader() const { return shader; }
 
 				private:
+					void MapLineBuffer(const LineShape& lineShape);
+					void MapPolygonBuffer(const RegularPolygon& regularPolygon);
+					void MapSpriteBuffer(const Sprite& sprite);
 					void MapBuffer();
 					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
 			};

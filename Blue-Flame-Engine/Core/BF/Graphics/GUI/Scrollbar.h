@@ -10,6 +10,8 @@ namespace BF
 	{
 		namespace GUI
 		{
+			class Panel;
+
 			class BF_API Scrollbar : public Widget
 			{
 				friend class Panel;

@@ -1,40 +1,31 @@
 #pragma once
-#include <string>
-
-#ifdef BF_PLATFORM_WINDOWS
-	#include "BF/Platform/Windows/WINWindow.h"
-#elif BF_PLATFORM_LINUX
-	#include "BF/Platform/Linux/LXWindow.h"
-#elif BF_PLATFORM_WEBGL
-	#include "BF/Platform/WebGL/WEBWindow.h"
-#elif BF_PLATFORM_ANDROID
-	#include "BF/Platform/Android/AWindow.h"
-#endif
-
-#include "WindowStyle.h"
+#include "BF/Application/WindowStyle.h"
+#include "BF/Math/Rectangle.h"
+#include "BF/Common.h"
 
 namespace BF
 {
 	namespace Application
 	{
-		class BF_API Window : public
-#ifdef BF_PLATFORM_WINDOWS
-			Platform::Windows::WINWindow
-#elif BF_PLATFORM_LINUX
-			Platform::Linux::LXWindow
-#elif BF_PLATFORM_WEBGL
-			Platform::WebGL::WEBWindow
-#elif BF_PLATFORM_ANDROID
-			Platform::Android::AWindow
-#endif
+		class BF_API Window
 		{
 			public:
-				Window(const std::string& title, const Math::Rectangle& rectangle, BF::Application::WindowStyle style);
+				Application::WindowStyle style;
+				std::string title;
+				Math::Rectangle rectangle;
+				unsigned int clientWidth, clientHeight, borderWidth, borderHeight;
+				int borderThickness;
+
+			public:
+				Window(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style);
 				~Window();
 
-				void Initialize();
-				void Update();
-				bool IsOpen();
+				inline const Math::Rectangle& GetRectangle() const { return rectangle; }
+
+				inline unsigned int GetClientWidth() const { return clientWidth; }
+				inline unsigned int GetClientHeight() const { return clientHeight; }
+
+				inline float GetAspectRatio() const { return (float)rectangle.width / (float)rectangle.height; }
 		};
 	}
 }

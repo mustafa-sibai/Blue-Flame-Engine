@@ -10,6 +10,7 @@
 	#include "BF/Platform/API/OpenGL/Context/AContext.h"
 #endif
 
+#include "BF/Math/Rectangle.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 

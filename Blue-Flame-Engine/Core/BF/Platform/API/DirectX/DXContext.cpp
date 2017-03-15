@@ -50,7 +50,7 @@ namespace BF
 						DXCall(swapChain->Present(0, 0));
 				}
 
-				void DXContext::Draw(unsigned int vertexCount)
+				void DXContext::Render(unsigned int vertexCount)
 				{
 					context->DrawIndexed(vertexCount, 0, 0);
 				}

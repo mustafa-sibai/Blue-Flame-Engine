@@ -1,4 +1,10 @@
 #pragma once
+#ifdef BF_PLATFORM_WINDOWS
+	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
+#elif BF_PLATFORM_WEBGL
+	#include "BF/Platform/WebGL/WEBEngineEntryPoint.h"
+#endif
+
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/Graphics/API/Context.h"
@@ -13,6 +19,12 @@ namespace BF
 		class BF_API Scene
 		{
 			friend class BF::Engine;
+
+#ifdef BF_PLATFORM_WINDOWS
+			friend class BF::Platform::Windows::WINEngineEntryPoint;
+#elif BF_PLATFORM_WEBGL
+			friend class BF::Platform::WebGL::WEBEngineEntryPoint;
+#endif
 
 			private:
 				System::Timer frameTimer;

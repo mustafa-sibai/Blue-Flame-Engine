@@ -15,7 +15,7 @@ namespace BF
 			using namespace BF::Math;
 
 			WINWindow::WINWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
-				title(title), rectangle(rectangle), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0), borderThickness(0)
+				Window(title, rectangle, style)
 			{
 			}
 

@@ -31,7 +31,7 @@ namespace BF
 					Left = 0x25, Up, Right, Down,
 					CapsLock = 0x14, NumLock = 0x90, ScrollLock = 0x91,
 					Escape = 0x1B, Tab = 0x09, Enter = 0x0D, Space = 0x20
-#elif BF_PLATFORM_LINUX
+#elif defined (BF_PLATFORM_LINUX) || (BF_PLATFORM_WEBGL)
 					F1 = 0x43, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11 = 0x5f, F12,
 					Num0 = 0x13, Num1 = 0xa, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9,
 					NumPad0 = 0x5a, NumPad1 = 0x57, NumPad2, NumPad3, NumPad4 = 0x53, NumPad5, NumPad6, NumPad7 = 0x4f, NumPad8, NumPad9,

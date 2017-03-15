@@ -15,11 +15,13 @@ namespace _3DScene
 			BF::Graphics::Model lightModel;
 			BF::Graphics::Model cubeModel;
 			BF::Graphics::Model planeModel;
+			BF::Graphics::Model wallModel;
 			BF::Graphics::FPSCamera fpsCamera;
 			//BF::Graphics::Terrain terrain;
 
 			BF::Graphics::LightBuffer light;
-			BF::Graphics::Material material;
+			BF::Graphics::Material floorMaterial;
+			BF::Graphics::Material wallMaterial;
 
 			BF::Graphics::Skybox skybox;
 			float angle = 0;

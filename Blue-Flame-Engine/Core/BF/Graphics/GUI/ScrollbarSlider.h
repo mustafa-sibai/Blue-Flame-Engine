@@ -8,6 +8,8 @@ namespace BF
 	{
 		namespace GUI
 		{
+			class Scrollbar;
+
 			class BF_API ScrollbarSlider : public Widget
 			{
 				friend class Panel;
