@@ -1,7 +1,7 @@
 #pragma once
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 	#include <GL/glew.h>
-#elif BF_PLATFORM_WEBGL || defined (BF_PLATFORM_ANDROID)
+#elif BF_PLATFORM_WEB || defined (BF_PLATFORM_ANDROID)
 	#include <GLES3/gl3.h>
 #endif
 

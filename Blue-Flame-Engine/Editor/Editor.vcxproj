@@ -84,13 +84,13 @@
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\x64\debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\x64\release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

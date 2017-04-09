@@ -24,7 +24,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Create(data, size);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Create(data, size);
 #endif
@@ -36,7 +36,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.SetLayout(vertexBufferLayout);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.SetLayout(vertexBufferLayout);
 #endif
@@ -48,7 +48,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					return dxVertexBuffer.Map();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					return glVertexBuffer.Map();
 #endif
@@ -61,7 +61,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Unmap();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unmap();
 #endif
@@ -73,7 +73,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Bind();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Bind();
 #endif
@@ -81,7 +81,7 @@ namespace BF
 
 			void VertexBuffer::Unbind() const
 			{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unbind();
 #endif

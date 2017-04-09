@@ -28,6 +28,8 @@ namespace BF
 						HGLRC context;
 						GLuint GL_PRIMITIVE_TYPE;
 
+						bool initialized;
+
 					public:
 						WINGLContext();
 						~WINGLContext();
@@ -43,9 +45,10 @@ namespace BF
 						void EnableDepthMask(bool state);
 						void EnableBlending(bool state);
 						void EnableVsync(bool state);
-
 						void EnableScissor(bool state);
+
 						void SetScissor(const Math::Rectangle& rectangle);
+						void SetViewport(const Math::Rectangle& rectangle);
 				};
 			}
 		}

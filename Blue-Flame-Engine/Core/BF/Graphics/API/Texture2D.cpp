@@ -28,7 +28,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
@@ -42,7 +42,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
 #endif
@@ -56,7 +56,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
 #endif
@@ -70,7 +70,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, format, wrap, filter);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Create(textureData, format, wrap, filter);
 #endif
@@ -82,7 +82,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Bind(0);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Bind();
 #endif
@@ -94,7 +94,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Bind(index);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Bind(samplerName, index);
 #endif
@@ -105,7 +105,7 @@ namespace BF
 
 #ifdef BF_PLATFORM_WINDOWS
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Unbind();
 #endif
@@ -115,7 +115,7 @@ namespace BF
 			{
 #ifdef BF_PLATFORM_WINDOWS
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Unbind(samplerName, index);
 #endif

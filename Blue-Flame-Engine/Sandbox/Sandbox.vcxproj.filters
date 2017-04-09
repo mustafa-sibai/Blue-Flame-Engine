@@ -24,13 +24,13 @@
     <ClCompile Include="Sandbox\_2DScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\AndroidTestScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sandbox\TestPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sandbox\_3DScene2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\InputTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,13 +41,13 @@
     <ClInclude Include="Sandbox\_2DScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sandbox\AndroidTestScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sandbox\TestPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sandbox\_3DScene2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\InputTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

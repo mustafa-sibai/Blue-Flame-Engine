@@ -1,8 +1,10 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 	#include "BF/Platform/WebGL/WEBEngineEntryPoint.h"
+#elif BF_PLATFORM_ANDROID
+	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
 #include "BF/Engine.h"
@@ -21,26 +23,35 @@ namespace BF
 			friend class BF::Engine;
 
 #ifdef BF_PLATFORM_WINDOWS
-			friend class BF::Platform::Windows::WINEngineEntryPoint;
-#elif BF_PLATFORM_WEBGL
-			friend class BF::Platform::WebGL::WEBEngineEntryPoint;
+				friend class BF::Platform::Windows::WINEngineEntryPoint;
+#elif BF_PLATFORM_WEB
+				friend class BF::Platform::WebGL::WEBEngineEntryPoint;
+#elif BF_PLATFORM_ANDROID
+			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 
 			private:
 				System::Timer frameTimer;
 				System::Timer frameRateTimer;
+#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
 				Graphics::GUI::WidgetManager widgetManager;
-				bool run = false;
-				bool initialized = false;
-				bool loaded = false;
-				int fixedUpdateTicks = 0;
+#endif
+				bool run;
+				bool initialized;
+				bool loaded;
+				int fixedUpdateTicks;
 
 			public:
+				Scene();
+				~Scene();
+
 				inline void Run() { run = true; }
 				inline void Stop() { run = false; }
 
 				inline bool IsRunning() const { return run; }
+#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
 				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
+#endif
 
 			protected:
 				virtual void Initialize();

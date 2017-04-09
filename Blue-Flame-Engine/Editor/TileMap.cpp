@@ -17,7 +17,7 @@ namespace Editor
 
 	void TileMap::AddSprite(Sprite sprite, int index)
 	{
-		map.insert({ index, sprite });
+		map[index] = sprite;
 	}
 
 	void TileMap::Initialize()

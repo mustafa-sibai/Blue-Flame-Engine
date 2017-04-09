@@ -16,7 +16,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				WINGLContext::WINGLContext()
+				WINGLContext::WINGLContext() : 
+					initialized(false)
 				{
 				}
 
@@ -52,6 +53,7 @@ namespace BF
 						wglMakeCurrent(NULL, NULL);
 						wglDeleteContext(tempContext);
 						wglMakeCurrent(hDC, context);
+						initialized = true;
 					}
 					else
 					{
@@ -60,7 +62,7 @@ namespace BF
 						BF_LOG_ERROR("Failed to create an OpenGL 3.x and above context.");
 					}
 
-					GLCall(glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));
+					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
 
 					BF_LOG_INFO("OPENGL VERSION %s", (char*)glGetString(GL_VERSION));
 					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
@@ -172,6 +174,12 @@ namespace BF
 				{
 					int height = Engine::GetWindow().GetClientHeight() - rectangle.height - rectangle.y;
 					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientHeight() - height - rectangle.y);
+				}
+
+				void WINGLContext::SetViewport(const Math::Rectangle& rectangle)
+				{
+					if(initialized)
+						GLCall(glViewport(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
 				}
 			}
 		}

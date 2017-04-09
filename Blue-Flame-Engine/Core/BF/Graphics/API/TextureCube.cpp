@@ -32,7 +32,7 @@ namespace BF
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);*/
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTextureCube.Create(textureCubes, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
@@ -50,7 +50,7 @@ namespace BF
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);*/
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTextureCube.Create(textureCubes, Format::R8G8B8A8, textureWrap, textureFilter);
 #endif
@@ -62,7 +62,7 @@ namespace BF
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Bind(0);*/
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTextureCube.Bind();
 #endif
@@ -74,7 +74,7 @@ namespace BF
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
 				dxTexture2D.Bind(0);*/
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTextureCube.Unbind();
 #endif				

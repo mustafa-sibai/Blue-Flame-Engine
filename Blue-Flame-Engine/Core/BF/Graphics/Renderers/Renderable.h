@@ -13,60 +13,60 @@ namespace BF
 			{
 				friend class SpriteRenderer;
 
-			private:
-				struct FrontToBack
-				{
-					bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+				private:
+					struct FrontToBack
 					{
-						if (renderableA->rectangle.y > renderableB->rectangle.y)
-							return true;
-						else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
-							return true;
-						else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
-							return false;
-						else
-							return false;
-					}
-				};
+						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						{
+							if (renderableA->rectangle.y > renderableB->rectangle.y)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
+								return false;
+							else
+								return false;
+						}
+					};
 
-				struct BackToFront
-				{
-					bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+					struct BackToFront
 					{
-						if (renderableA->rectangle.y < renderableB->rectangle.y)
-							return true;
-						else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
-							return true;
-						else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
-							return false;
-						else
-							return false;
-					}
-				};
+						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						{
+							if (renderableA->rectangle.y < renderableB->rectangle.y)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
+								return false;
+							else
+								return false;
+						}
+					};
 
-			protected:
-				Math::Vector2 position;
-				Math::Rectangle rectangle;
-				Color color;
-				unsigned int zLayer;
+				protected:
+					Math::Vector2 position;
+					Math::Rectangle rectangle;
+					Color color;
+					unsigned int zLayer;
 
-			public:
-				enum class Type { None, Line, RegularPolygon, Sprite };
-				Type type;
+				public:
+					enum class Type { None, Line, RegularPolygon, Sprite };
+					Type type;
 
-				Renderable();
-				Renderable(const Math::Vector2& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type);
-				~Renderable();
+					Renderable();
+					Renderable(const Math::Vector2& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type);
+					~Renderable();
 
-				void SetPosition(const Math::Vector2& position);
-				void SetColor(const Color& color);
-				void SetRectangle(const Math::Rectangle& rectangle);
-				void SetZLayer(unsigned int zLayer);
+					void SetPosition(const Math::Vector2& position);
+					void SetColor(const Color& color);
+					void SetRectangle(const Math::Rectangle& rectangle);
+					void SetZLayer(unsigned int zLayer);
 
-				inline const Math::Vector2& GetPosition() const { return position; }
-				inline const Color& GetColor() const { return color; }
-				inline const Math::Rectangle& GetRectangle() const { return rectangle; }
-				inline unsigned int GetZLayer() const { return zLayer; }
+					inline const Math::Vector2& GetPosition() const { return position; }
+					inline const Color& GetColor() const { return color; }
+					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
+					inline unsigned int GetZLayer() const { return zLayer; }
 			};
 		}
 	}

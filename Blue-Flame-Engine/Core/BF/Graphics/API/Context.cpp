@@ -14,7 +14,7 @@ namespace BF
 				{
 #ifdef BF_PLATFORM_WINDOWS
 					renderAPI = RenderAPI::DirectX;
-#elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#elif defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 					renderAPI = RenderAPI::OpenGL;
 #endif
 				}
@@ -37,12 +37,12 @@ namespace BF
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Initialize();
 #elif BF_PLATFORM_ANDROID
 				if (renderAPI == RenderAPI::OpenGL)
-					aContext.Initialize();
+					andContext.Initialize();
 #endif
 			}
 
@@ -57,7 +57,7 @@ namespace BF
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.SetPrimitiveType(primitiveType);
 #elif BF_PLATFORM_ANDROID
@@ -76,12 +76,12 @@ namespace BF
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.Clear(color);
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Clear(color);
 #elif BF_PLATFORM_ANDROID
 				if (renderAPI == RenderAPI::OpenGL)
-					aContext.Clear(color);
+					andContext.Clear(color);
 #endif
 			}
 
@@ -95,12 +95,12 @@ namespace BF
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.Render(GL_PRIMITIVE_TYPE, vertexCount, GL_UNSIGNED_INT);
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Render(vertexCount);
 #elif BF_PLATFORM_ANDROID
 				if (renderAPI == RenderAPI::OpenGL)
-					aContext.Render();
+					andContext.Render();
 #endif
 			}
 
@@ -114,12 +114,12 @@ namespace BF
 #elif BF_PLATFORM_LINUX
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.SwapBuffers();
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.SwapBuffers();
 #elif BF_PLATFORM_ANDROID
 				if (renderAPI == RenderAPI::OpenGL)
-					aContext.SwapBuffers();
+					andContext.SwapBuffers();
 #endif
 			}
 
@@ -136,7 +136,7 @@ namespace BF
 				{
 
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -159,7 +159,7 @@ namespace BF
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -182,7 +182,7 @@ namespace BF
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -206,7 +206,7 @@ namespace BF
 				{
 
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -230,7 +230,7 @@ namespace BF
 				{
 
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -253,7 +253,30 @@ namespace BF
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif BF_PLATFORM_ANDROID
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#endif
+			}
+
+			void Context::SetViewport(const Math::Rectangle & rectangle)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+				}
+				else if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.SetViewport(rectangle);
+#elif BF_PLATFORM_LINUX
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif BF_PLATFORM_WEB
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}

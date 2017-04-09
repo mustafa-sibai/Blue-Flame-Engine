@@ -108,6 +108,8 @@ namespace _2DScene
 
 	void _2DScene::Update()
 	{
+		//This is temporary.
+		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		//Scene::Update();
 		camera.Update();
 		//waypoint.Update();

@@ -3,8 +3,8 @@
 	#pragma warning (disable:4251)
 #endif
 
-#if !defined (BF_PLATFORM_WINDOWS) && !defined (BF_PLATFORM_LINUX) && !defined (BF_PLATFORM_WEBGL) && !defined (BF_PLATFORM_ANDROID)
-	#error Platform is not defined. Please define one of the following platforms. BF_PLATFORM_WINDOWS or BF_PLATFORM_LINUX or BF_PLATFORM_ANDROID or BF_PLATFORM_WEBGL
+#if !defined (BF_PLATFORM_WINDOWS) && !defined (BF_PLATFORM_LINUX) && !defined (BF_PLATFORM_WEB) && !defined (BF_PLATFORM_ANDROID)
+	#error Platform is not defined. Please define one of the following platforms. BF_PLATFORM_WINDOWS or BF_PLATFORM_LINUX or BF_PLATFORM_ANDROID or BF_PLATFORM_WEB
 #endif
 
 #ifdef BF_PLATFORM_WINDOWS

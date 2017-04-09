@@ -5,22 +5,25 @@ namespace Editor
 {
 	class Grid
 	{
-	private:
-		BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
-		BF::Math::Vector2 linePosition;
-		BF::Math::Rectangle rectangle;
+		private:
+			BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
+			BF::Math::Vector2 linePosition;
+			BF::Math::Rectangle rectangle;
 
-	public:
-		int tileWidth, tileHeight;
+			std::vector<BF::Graphics::Renderers::LineShape> horizontalLines;
+			std::vector<BF::Graphics::Renderers::LineShape> verticalLines;
 
-	public:
-		Grid(BF::Math::Rectangle& rectangle);
-		~Grid();
+		public:
+			int tileWidth, tileHeight;
 
-		bool IsMouseInGrid();
-		void Initialize(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer);
-		void Render();
+		public:
+			Grid(BF::Math::Rectangle& rectangle);
+			~Grid();
 
-		inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
+			bool IsMouseInGrid();
+			void Initialize(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer);
+			void Render();
+
+			inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
 	};
 }

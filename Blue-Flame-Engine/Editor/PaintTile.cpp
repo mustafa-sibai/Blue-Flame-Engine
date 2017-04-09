@@ -43,7 +43,7 @@ namespace Editor
 			if (Mouse::IsButtonPressed(Mouse::Button::Left))
 			{
 				int index = indexedPosition.x + (indexedPosition.y * grid.GetRectangle().width);
-				tileMap.AddSprite((Sprite(currentTile.GetTexture(), currentTile.GetPosition(), 0, BF::Math::Rectangle(0, 0, 64, 64), currentTile.GetColor())), index);
+				tileMap.AddSprite(currentTile, index);
 			}
 		}
 	}

@@ -9,7 +9,7 @@ namespace Editor
 	using namespace BF::Graphics::Renderers;
 
 	EditorScene::EditorScene() :
-		tilesheet(*this), scenePanel(*this, tilesheet)
+		tilesheet(*this, scenePanel.GetPaintTile()), scenePanel(*this, tilesheet)
 	{
 	}
 

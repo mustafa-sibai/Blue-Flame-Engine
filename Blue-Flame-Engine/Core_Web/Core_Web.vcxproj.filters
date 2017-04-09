@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\BF">
+      <UniqueIdentifier>{5e7892c7-a886-4cce-b476-4246498ab417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\AI">
+      <UniqueIdentifier>{f3af8fa7-a66c-43be-9030-290dcacb97b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Application">
+      <UniqueIdentifier>{f62a3464-965d-4933-824a-aee27d501a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics">
+      <UniqueIdentifier>{c0ca68bd-336f-4c68-aa7a-c37a50e09d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Animation">
+      <UniqueIdentifier>{55f50dfd-20ff-44f7-bd13-8613acc9f5ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API">
+      <UniqueIdentifier>{d5d68181-e5ed-4983-9dc3-2a1e80acda63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Fonts">
+      <UniqueIdentifier>{3da699ad-f27e-402f-b037-a1382eb5e445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\GUI">
+      <UniqueIdentifier>{0af1d6a4-0687-4c72-9652-26ebc23fc1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Renderers">
+      <UniqueIdentifier>{9b14531c-cd87-4140-a7bc-b5563b51bdd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Input">
+      <UniqueIdentifier>{eed6bbb1-ec9b-48ea-a568-d2dda910029c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\IO">
+      <UniqueIdentifier>{13d38d18-c13d-40e8-9269-aacbee93b99f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\IO\FileFormats">
+      <UniqueIdentifier>{65124139-f96b-4101-9d32-53ef61032743}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Math">
+      <UniqueIdentifier>{12ea829b-59ac-40e9-9b10-748c0e7508ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Network">
+      <UniqueIdentifier>{4c2f5f05-e68a-444d-ab05-0c70fec45425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform">
+      <UniqueIdentifier>{27e05ca8-efba-4144-a119-3fa0e659d881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API">
+      <UniqueIdentifier>{33f6cfdb-06e8-44f3-bcc1-2296287efb4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API\OpenGL">
+      <UniqueIdentifier>{20b49849-78f6-4688-8f35-a448e3526caa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\Web">
+      <UniqueIdentifier>{ed58b6b5-3eba-4f9d-b7d5-ec01fa331505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\System">
+      <UniqueIdentifier>{b6d7f3e6-68ca-41f4-9161-f441bb7ca3a7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

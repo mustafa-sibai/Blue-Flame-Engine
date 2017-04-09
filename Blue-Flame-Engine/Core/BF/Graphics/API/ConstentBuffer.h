@@ -2,7 +2,7 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXConstentBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL) || defined (BF_PLATFORM_ANDROID)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLConstentBuffer.h"
 #endif
 
@@ -20,7 +20,7 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXConstentBuffer dxConstentBuffer;
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 					Platform::API::OpenGL::GLConstentBuffer glConstentBuffer;
 #endif
 				public:

@@ -21,7 +21,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxConstentBuffer.Create(size);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glConstentBuffer.Create(size, bindingIndex);
 #endif
@@ -33,7 +33,7 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxConstentBuffer.Update(data);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEBGL)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glConstentBuffer.Update(data, size);
 #endif

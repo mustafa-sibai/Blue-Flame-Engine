@@ -3,7 +3,7 @@
 	#include "BF/Platform/Windows/WINWindow.h"
 #elif BF_PLATFORM_LINUX
 	#include "BF/Platform/Linux/LXWindow.h"
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 	#include "BF/Platform/WebGL/WEBWindow.h"
 #endif
 
@@ -20,7 +20,7 @@ namespace BF
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINWindow;
-#elif BF_PLATFORM_WEBGL
+#elif BF_PLATFORM_WEB
 			friend class BF::Platform::WebGL::WEBWindow;
 #endif
 			private:
