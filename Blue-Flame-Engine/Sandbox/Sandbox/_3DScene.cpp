@@ -42,7 +42,7 @@ namespace _3DScene
 			lightShader.Load("Assets/Shaders/HLSL/Compiled/Light/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/Light/PixelShader.cso");
 		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			lightShader.Load("Assets/Shaders/GLSL/Light/VertexShader.glsl", "Assets/Shaders/GLSL/Light/PixelShader.glsl");
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			lightShader.Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
 #endif
@@ -52,7 +52,7 @@ namespace _3DScene
 			shader.Load("Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
 		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader.Load("Assets/Shaders/GLSL/3D/VertexShader.glsl", "Assets/Shaders/GLSL/3D/PixelShader.glsl");
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 		if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader.Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
 #endif

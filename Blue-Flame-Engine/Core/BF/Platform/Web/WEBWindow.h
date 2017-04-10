@@ -1,6 +1,6 @@
 #pragma once
 #include <emscripten.h>
-#include <html5.h>
+#include <emscripten/html5.h>
 #include <EGL/egl.h>
 #include "BF/Application/Window.h"
 #include "BF/Platform/API/OpenGL/Context/WEBGLContext.h"
@@ -10,7 +10,7 @@ namespace BF
 {
 	namespace Platform
 	{
-		namespace WebGL
+		namespace Web
 		{
 			class BF_API WEBWindow : public Application::Window
 			{

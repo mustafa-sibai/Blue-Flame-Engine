@@ -2,12 +2,12 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXContext.h"
 	#include "BF/Platform/API/OpenGL/Context/WINGLContext.h"
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 	#include "BF/Platform/API/OpenGL/Context/LXGLContext.h"
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 	#include "BF/Platform/API/OpenGL/Context/WEBGLContext.h"
-#elif BF_PLATFORM_ANDROID
-	#include "BF/Platform/API/OpenGL/Context/ANDContext.h"
+#elif defined(BF_PLATFORM_ANDROID)
+	#include "BF/Platform/API/OpenGL/Context/ANDGLContext.h"
 #endif
 
 #include "BF/Math/Rectangle.h"
@@ -40,12 +40,12 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXContext dxContext;
 					Platform::API::OpenGL::WINGLContext winGLContext;
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 					Platform::API::OpenGL::LXGLContext lxGLContext;
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 					Platform::API::OpenGL::WEBGLContext webGLContext;
-#elif BF_PLATFORM_ANDROID
-					Platform::API::OpenGL::ANDContext andContext;
+#elif defined(BF_PLATFORM_ANDROID)
+					Platform::API::OpenGL::ANDGLContext ANDGLContext;
 #endif
 				public:
 					Context(RenderAPI renderAPI);
@@ -69,12 +69,12 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 					inline const Platform::API::DirectX::DXContext& GetDXContext() const { return dxContext; }
 					inline const Platform::API::OpenGL::WINGLContext& GetWINGLContext() const { return winGLContext; }
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 					inline const Platform::API::OpenGL::LXGLContext& GetLXGLContext() const { return lxGLContext; }
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 					inline const Platform::API::OpenGL::WEBGLContext& GetWEBGLContext() const { return webGLContext; }
-#elif BF_PLATFORM_ANDROID
-					inline Platform::API::OpenGL::ANDContext& GetAContext() { return andContext; }
+#elif defined(BF_PLATFORM_ANDROID)
+					inline Platform::API::OpenGL::ANDGLContext& GetAContext() { return ANDGLContext; }
 #endif
 					static const inline RenderAPI GetRenderAPI() { return renderAPI; }
 			};

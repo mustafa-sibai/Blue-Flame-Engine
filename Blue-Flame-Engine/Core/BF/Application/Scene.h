@@ -1,9 +1,9 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
-#elif BF_PLATFORM_WEB
-	#include "BF/Platform/WebGL/WEBEngineEntryPoint.h"
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_WEB)
+	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
+#elif defined(BF_PLATFORM_ANDROID)
 	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
@@ -24,9 +24,9 @@ namespace BF
 
 #ifdef BF_PLATFORM_WINDOWS
 				friend class BF::Platform::Windows::WINEngineEntryPoint;
-#elif BF_PLATFORM_WEB
-				friend class BF::Platform::WebGL::WEBEngineEntryPoint;
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_WEB)
+				friend class BF::Platform::Web::WEBEngineEntryPoint;
+#elif defined(BF_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 

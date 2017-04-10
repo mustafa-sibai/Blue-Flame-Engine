@@ -44,7 +44,7 @@ namespace BF
 			{
 				shader.Load("../Sandbox/Assets/Shaders/GLSL/3D/VertexShader.glsl", "../Sandbox/Assets/Shaders/GLSL/3D/PixelShader.glsl");
 			}
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 			if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			{
 				shader->Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");

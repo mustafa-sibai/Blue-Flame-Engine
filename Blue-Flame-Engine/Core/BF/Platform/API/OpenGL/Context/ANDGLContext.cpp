@@ -1,4 +1,4 @@
-#include "ANDContext.h"
+#include "ANDGLContext.h"
 #include "BF/System/Log.h"
 #include "BF/Engine.h"
 //#include "BF/Platform/Android/JNI.h"
@@ -13,19 +13,19 @@ namespace BF
 			{
 				using namespace BF::Graphics;
 
-				ANDContext::ANDContext()// :
+				ANDGLContext::ANDGLContext()// :
 					//renderThread(&AContext::RenderLoop, this)
 				{
 					BF_LOG_INFO("AContext");
 				}
 
-				ANDContext::~ANDContext()
+				ANDGLContext::~ANDGLContext()
 				{
 					BF_LOG_INFO("~AContext");
 					//renderThread.join();
 				}
 
-				void ANDContext::Initialize()
+				void ANDGLContext::Initialize()
 				{
 					BF_LOG_INFO("AContext Initialize");
 
@@ -55,7 +55,7 @@ namespace BF
 					BF_LOG_INFO("%s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 				}
 
-				void ANDContext::Clear(const Color& color)
+				void ANDGLContext::Clear(const Color& color)
 				{
 					//BF_LOG_INFO("Clear");
 					//glViewport(0, 0, width, height);
@@ -63,23 +63,23 @@ namespace BF
 					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 				}
 
-				void ANDContext::Render()
+				void ANDGLContext::Render()
 				{
 					//BF_LOG_INFO("Draw");
 				}
 
-				void ANDContext::SwapBuffers()
+				void ANDGLContext::SwapBuffers()
 				{
 					//BF_LOG_INFO("SwapBuffers");
 					eglSwapBuffers(Engine::GetWindow().display, Engine::GetWindow().surface);
 				}
 
-				void ANDContext::CleanUp()
+				void ANDGLContext::CleanUp()
 				{
 					BF_LOG_INFO("CleanUp");
 				}
 
-				void ANDContext::RenderLoop()
+				void ANDGLContext::RenderLoop()
 				{
 					BF_LOG_INFO("RenderLoop");
 				}

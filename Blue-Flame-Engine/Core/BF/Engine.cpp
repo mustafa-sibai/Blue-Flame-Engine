@@ -1,5 +1,4 @@
  #include "Engine.h"
-#include "BF/Application/SceneManager.h"
 #include "BF/System/Log.h"
 
 namespace BF
@@ -10,7 +9,7 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 	using namespace BF::Platform::Windows;
 #elif defined (BF_PLATFORM_WEB)
-	using namespace BF::Platform::WebGL;
+	using namespace BF::Platform::Web;
 #elif defined (BF_PLATFORM_ANDROID)
 	using namespace BF::Platform::Android;
 #endif

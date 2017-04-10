@@ -33,16 +33,16 @@ namespace BF
 					dxContext.Initialize();
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.Initialize();
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Initialize();
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
-					andContext.Initialize();
+					ANDGLContext.Initialize();
 #endif
 			}
 
@@ -53,14 +53,14 @@ namespace BF
 					dxContext.SetPrimitiveType(primitiveType);
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.SetPrimitiveType(primitiveType);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.SetPrimitiveType(primitiveType);
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				//if (renderAPI == RenderAPI::OpenGL)
 					//aContext.SetPrimitiveType();
 #endif
@@ -73,15 +73,15 @@ namespace BF
 					dxContext.Clear(color);
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.Clear(color);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.Clear(color);
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Clear(color);
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
-					andContext.Clear(color);
+					ANDGLContext.Clear(color);
 #endif
 			}
 
@@ -92,15 +92,15 @@ namespace BF
 					dxContext.Render(vertexCount);
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.Render(vertexCount);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.Render(GL_PRIMITIVE_TYPE, vertexCount, GL_UNSIGNED_INT);
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.Render(vertexCount);
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
-					andContext.Render();
+					ANDGLContext.Render();
 #endif
 			}
 
@@ -111,15 +111,15 @@ namespace BF
 					dxContext.SwapBuffers();
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.SwapBuffers();
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.SwapBuffers();
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 					webGLContext.SwapBuffers();
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
-					andContext.SwapBuffers();
+					ANDGLContext.SwapBuffers();
 #endif
 			}
 
@@ -131,16 +131,16 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableDepthBuffer(state);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -155,15 +155,15 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableDepthMask(state);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -178,15 +178,15 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableBlending(state);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -201,16 +201,16 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableVsync(state);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -225,16 +225,16 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.EnableScissor(state);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -249,15 +249,15 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.SetScissor(rectangle);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
@@ -272,15 +272,15 @@ namespace BF
 				}
 				else if (renderAPI == RenderAPI::OpenGL)
 					winGLContext.SetViewport(rectangle);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_WEB
+#elif defined(BF_PLATFORM_WEB)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 				if (renderAPI == RenderAPI::OpenGL)
 				{
 				}

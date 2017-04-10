@@ -9,7 +9,7 @@ namespace BF
 {
 	namespace Platform
 	{
-		namespace WebGL
+		namespace Web
 		{
 			using namespace BF::Graphics::API;
 			using namespace BF::Application;
@@ -29,8 +29,9 @@ namespace BF
 				self->MainLoop();
 			}
 
-			void WEBEngineEntryPoint::Run()
+			void WEBEngineEntryPoint::Run(Application::Scene& mainScene)
 			{
+				this->mainScene = &mainScene;
 				emscripten_set_main_loop_arg(FunctionCallBack, this, 0, true);
 			}
 
@@ -42,6 +43,8 @@ namespace BF
 					{
 						webWindow.Initialize();
 						context.Initialize();
+						SceneManager::AddNewScene(mainScene);
+						SceneManager::GetScene(0).Run();
 						state = State::Render;
 						break;
 					}

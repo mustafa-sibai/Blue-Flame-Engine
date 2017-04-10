@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Platform
 	{
-		namespace WebGL
+		namespace Web
 		{
 			using namespace BF::Math;
 			using namespace BF::Input;

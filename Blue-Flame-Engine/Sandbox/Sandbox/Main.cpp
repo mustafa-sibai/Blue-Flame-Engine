@@ -8,7 +8,6 @@
 #include "_3DScene.h"
 #include "_3DScene2.h"
 #include "InputTests.h"
-#include "AndroidTestScene.h"
 
 //#include <windows.h>
 //#include <string>
@@ -48,10 +47,6 @@ int main()
 	//BF::Application::SceneManager::AddNewScene(new InputTests());
 	
 	//BF::Application::SceneManager::AddNewScene(new _3DScene2::_3DScene2());
-
-	//BF::Application::SceneManager::GetScene(0).Run();
-	//BF::Application::SceneManager::GetScene(1).Run();
-	//BF::Application::SceneManager::GetScene(2).Run();
 
 	engine.Run(_2DScene::_2DScene());
 

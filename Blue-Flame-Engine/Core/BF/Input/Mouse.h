@@ -1,10 +1,10 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINWindow.h"
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXWindow.h"
-#elif BF_PLATFORM_WEB
-	#include "BF/Platform/WebGL/WEBWindow.h"
+#elif defined(BF_PLATFORM_WEB)
+	#include "BF/Platform/Web/WEBWindow.h"
 #endif
 
 #include "BF/Math/Vector2.h"
@@ -20,8 +20,8 @@ namespace BF
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINWindow;
-#elif BF_PLATFORM_WEB
-			friend class BF::Platform::WebGL::WEBWindow;
+#elif defined(BF_PLATFORM_WEB)
+			friend class BF::Platform::Web::WEBWindow;
 #endif
 			private:
 				static Math::Vector2 position;

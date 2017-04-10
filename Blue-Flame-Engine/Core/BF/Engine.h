@@ -2,11 +2,11 @@
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
 #elif defined (BF_PLATFORM_WEB)
-	#include "BF/Platform/WebGL/WEBEngineEntryPoint.h"
+	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
 #elif defined (BF_PLATFORM_ANDROID)
-#include "BF/Platform/Android/ANDEngineEntryPoint.h"
-#include "BF/Application/Window.h"
-#include "BF/Graphics/API/Context.h"
+	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
+	#include "BF/Application/Window.h"
+	#include "BF/Graphics/API/Context.h"
 #endif
 
 #include "BF/Common.h"
@@ -30,7 +30,7 @@ namespace BF
 #ifdef BF_PLATFORM_WINDOWS
 			static Platform::Windows::WINEngineEntryPoint* winEngineEntryPoint;
 #elif defined (BF_PLATFORM_WEB)
-			static Platform::WebGL::WEBEngineEntryPoint* webEngineEntryPoint;
+			static Platform::Web::WEBEngineEntryPoint* webEngineEntryPoint;
 #elif defined (BF_PLATFORM_ANDROID)
 			static Platform::Android::ANDEngineEntryPoint* andEngineEntryPoint;
 #endif
@@ -44,7 +44,7 @@ namespace BF
 			static inline Platform::Windows::WINWindow& GetWindow() { return winEngineEntryPoint->GetWindow(); }
 			static inline Graphics::API::Context& GetContext() { return winEngineEntryPoint->GetContext(); }
 #elif defined (BF_PLATFORM_WEB)
-			static inline Platform::WebGL::WEBWindow& GetWindow() { return webEngineEntryPoint->GetWindow(); }
+			static inline Platform::Web::WEBWindow& GetWindow() { return webEngineEntryPoint->GetWindow(); }
 			static inline Graphics::API::Context& GetContext() { return webEngineEntryPoint->GetContext(); }
 #elif defined (BF_PLATFORM_ANDROID)
 			static inline Platform::Android::ANDWindow& GetWindow() { return andEngineEntryPoint->GetWindow(); }

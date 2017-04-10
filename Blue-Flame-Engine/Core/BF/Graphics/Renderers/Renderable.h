@@ -51,7 +51,7 @@ namespace BF
 					unsigned int zLayer;
 
 				public:
-					enum class Type { None, Line, RegularPolygon, Sprite };
+					enum class Type { Null, Line, RegularPolygon, Sprite };
 					Type type;
 
 					Renderable();

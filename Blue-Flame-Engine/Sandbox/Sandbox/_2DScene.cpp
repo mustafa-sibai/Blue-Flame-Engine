@@ -134,7 +134,7 @@ namespace _2DScene
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 		//Scene::Render();
 
-		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
+		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
 		spriteRenderer.Render(line);
 		spriteRenderer.Render(rp);
 		spriteRenderer.Render(sprite1);

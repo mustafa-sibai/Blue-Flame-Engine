@@ -50,6 +50,10 @@ namespace BF
 					if (wglewIsSupported("WGL_ARB_create_context") == 1)
 					{
 						HGLRC context = wglCreateContextAttribsARB(hDC, 0, attribs);
+
+						if (context == nullptr)
+							BF_LOG_FATAL("Failed to create an OpenGL context.");
+
 						wglMakeCurrent(NULL, NULL);
 						wglDeleteContext(tempContext);
 						wglMakeCurrent(hDC, context);
@@ -62,8 +66,6 @@ namespace BF
 						BF_LOG_ERROR("Failed to create an OpenGL 3.x and above context.");
 					}
 
-					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
-
 					BF_LOG_INFO("OPENGL VERSION %s", (char*)glGetString(GL_VERSION));
 					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 					BF_LOG_INFO("Status: Using GLEW %s", glewGetString(GLEW_VERSION));
@@ -72,6 +74,7 @@ namespace BF
 					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
 					BF_LOG_INFO("%d", r);
 
+					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
 					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				}
 

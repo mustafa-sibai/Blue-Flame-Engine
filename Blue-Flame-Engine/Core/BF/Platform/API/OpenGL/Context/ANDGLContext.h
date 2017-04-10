@@ -13,7 +13,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API ANDContext
+				class BF_API ANDGLContext
 				{
 					//private:
 						//std::thread renderThread;
@@ -23,8 +23,8 @@ namespace BF
 					EGLint height;
 
 				public:
-					ANDContext();
-					~ANDContext();
+					ANDGLContext();
+					~ANDGLContext();
 
 					void Initialize();
 					void Clear(const Graphics::Color& color);

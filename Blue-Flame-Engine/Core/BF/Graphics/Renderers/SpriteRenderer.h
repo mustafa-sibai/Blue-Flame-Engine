@@ -17,7 +17,7 @@ namespace BF
 			{
 				public:
 					enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { None, BackToFront, FrontToBack };
+					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
 					API::Shader shader;

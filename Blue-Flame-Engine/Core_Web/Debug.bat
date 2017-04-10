@@ -1,4 +1,4 @@
-CALL mkdir ..\Output\Core\WebGL\Debug\
+CALL mkdir ..\Output\Core\Web\Debug\
 CALL emcc ^
  "../Core/BF/Engine.cpp" ^
  "../Core/BF/Application/Scene.cpp" ^
@@ -59,14 +59,14 @@ CALL emcc ^
  "../Core/BF/Platform/API/OpenGL/GLShader.cpp" ^
  "../Core/BF/Platform/API/OpenGL/GLTexture2D.cpp" ^
  "../Core/BF/Platform/API/OpenGL/GLVertexBuffer.cpp" ^
- "../Core/BF/Platform/WebGL/WEBEngineEntryPoint.cpp" ^
- "../Core/BF/Platform/WebGL/WEBWindow.cpp" ^
+ "../Core/BF/Platform/Web/WEBEngineEntryPoint.cpp" ^
+ "../Core/BF/Platform/Web/WEBWindow.cpp" ^
  "../Core/BF/System/Timer.cpp" ^
  -I "../Core/" ^
  -I "../Dependency/FreeImage/Source/" ^
  -I "../Dependency/FreeType/include/" ^
  -I "../Dependency/TinyXML-2/" ^
- -D BF_PLATFORM_WEBGL ^
+ -D BF_PLATFORM_WEB ^
  -std=c++14 ^
  -O0 ^
- -o ../Output/Core/WebGL/Debug/Core.bc
+ -o ../Output/Core/Web/Debug/Core.bc

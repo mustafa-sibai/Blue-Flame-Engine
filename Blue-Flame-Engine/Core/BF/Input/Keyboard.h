@@ -1,7 +1,7 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINWindow.h"
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXWindow.h"
 #endif
 
@@ -18,7 +18,7 @@ namespace BF
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINWindow;
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 			friend class BF::Platform::Linux::LXWindow;
 #endif
 		public:
@@ -31,7 +31,7 @@ namespace BF
 				CapsLock = 0x14, A = 0x41, S = 0x53, D = 0x44, F = 0x46, G, H, J = 0x4A, K, L, Semicolon = 0xBA, Quote = 0xDE, Enter = 0x0D, Numpad4 = 0x64, Numpad5, Numpad6,
 				LeftShift = 0x10, Z = 0x5A, X = 0x58, C = 0x43, V = 0x56, B = 0x42, N = 0x4E, M = 0x4D, Comma = 0xBC, Period = 0xBE, Slash, RightShift = 0x10, UpArrow = 0x26, Numpad1 = 0x61, Numpad2, Numpad3, NumpadEnter = 0x0D,
 				LeftControl = 0x11, WindowKey = 0x5B, LeftAlt = 0x12, Space = 0x20, RightAlt = 0x12, Menu = 0x5D, RightControl = 0x11, LeftArrow = 0x25, DownArrow = 0x28, RightArrow = 0x27, Numpad0 = 0x60, NumpadDecimal = 0x6E
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 				F1 = 0x43, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11 = 0x5f, F12,
 				Num0 = 0x13, Num1 = 0xa, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9,
 				NumPad0 = 0x5a, NumPad1 = 0x57, NumPad2, NumPad3, NumPad4 = 0x53, NumPad5, NumPad6, NumPad7 = 0x4f, NumPad8, NumPad9,
@@ -44,7 +44,7 @@ namespace BF
 			};
 
 #ifdef BF_PLATFORM_WEB
-			const std::string HTML5KeyCodes[] =
+			const std::string HTML5KeyCodes[92] =
 			{
 				"Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Pause",
 				"Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace", "Insert", "Home", "PageUp", "NumpadDivide", "NumpadMultiply", "NumpadSubtract",
