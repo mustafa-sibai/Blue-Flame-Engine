@@ -18,7 +18,7 @@
 #include <BF/Graphics/API/VertexBuffer.h>
 #include <BF/Graphics/API/RenderTarget.h>
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 #include <BF/Graphics/API/VertexBufferLayout.h>
 #endif
 
@@ -29,7 +29,7 @@
 
 #include <BF/Graphics/Fonts/FontAtlas.h>
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 #include <BF/Graphics/Fonts/Font.h>
 
 #include <BF/Graphics/GUI/StyleSheet.h>

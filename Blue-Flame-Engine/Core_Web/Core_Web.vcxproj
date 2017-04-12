@@ -72,28 +72,29 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emscripten;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emsdk-x64\emscripten\1.37.9\system\include;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emscripten;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emsdk-x64\emscripten\1.37.9\system\include;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emscripten;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emsdk-x64\emscripten\1.37.9\system\include;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emscripten;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\emsdk-x64\emscripten\1.37.9\system\include;$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BF_PLATFORM_WEB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PreBuildEvent>
       <Command>Debug.bat</Command>
@@ -104,6 +105,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BF_PLATFORM_WEB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PreBuildEvent>
       <Command>Debug.bat</Command>
@@ -116,6 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BF_PLATFORM_WEB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -132,6 +135,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>BF_PLATFORM_WEB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -142,6 +146,18 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Core\BF\Input\Controller.cpp" />
+    <ClCompile Include="..\Core\BF\Input\Keyboard.cpp" />
+    <ClCompile Include="..\Core\BF\Input\Mouse.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\Web\WEBWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\Input\Controller.h" />
+    <ClInclude Include="..\Core\BF\Input\Keyboard.h" />
+    <ClInclude Include="..\Core\BF\Input\Mouse.h" />
+    <ClInclude Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.h" />
+    <ClInclude Include="..\Core\BF\Platform\Web\WEBWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

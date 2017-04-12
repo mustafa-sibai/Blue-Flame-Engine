@@ -63,4 +63,38 @@
       <UniqueIdentifier>{b6d7f3e6-68ca-41f4-9161-f441bb7ca3a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Core\BF\Input\Controller.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Keyboard.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Mouse.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.cpp">
+      <Filter>Source Files\BF\Platform\Web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Web\WEBWindow.cpp">
+      <Filter>Source Files\BF\Platform\Web</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\Input\Controller.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Keyboard.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Mouse.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.h">
+      <Filter>Source Files\BF\Platform\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Web\WEBWindow.h">
+      <Filter>Source Files\BF\Platform\Web</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

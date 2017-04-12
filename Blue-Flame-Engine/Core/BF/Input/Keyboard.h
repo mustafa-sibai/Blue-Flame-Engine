@@ -3,6 +3,8 @@
 	#include "BF/Platform/Windows/WINWindow.h"
 #elif defined(BF_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXWindow.h"
+#elif defined(BF_PLATFORM_WEB)
+	#include "BF/Platform/Web/WEBWindow.h"
 #endif
 
 #include <string>
@@ -20,6 +22,8 @@ namespace BF
 			friend class BF::Platform::Windows::WINWindow;
 #elif defined(BF_PLATFORM_LINUX)
 			friend class BF::Platform::Linux::LXWindow;
+#elif defined(BF_PLATFORM_WEB)
+			friend class BF::Platform::Web::WEBWindow;
 #endif
 		public:
 			enum class Key
@@ -42,18 +46,6 @@ namespace BF
 				Escape = 0x09, Tab = 0x17, Enter = 0x24, Space = 0x41
 #endif
 			};
-
-#ifdef BF_PLATFORM_WEB
-			const std::string HTML5KeyCodes[92] =
-			{
-				"Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Pause",
-				"Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Digit0", "Minus", "Equal", "Backspace", "Insert", "Home", "PageUp", "NumpadDivide", "NumpadMultiply", "NumpadSubtract",
-				"Tab", "KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "BracketLeft", "BracketRight", "Backslash", "Delete", "End", "PageDown", "Numpad7", "Numpad8", "Numpad9", "NumpadAdd",
-				"KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "Quote", "Enter", "Numpad4", "Numpad5", "Numpad6",
-				"KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "ArrowUp", "Numpad1", "Numpad2", "Numpad3", "NumpadEnter",
-				"Space", "ContextMenu", "ArrowLeft", "ArrowDown", "ArrowRight", "Numpad0", "NumpadDecimal"
-			};
-#endif
 
 		private:
 			static bool keys[BF_MAX_KEYS];

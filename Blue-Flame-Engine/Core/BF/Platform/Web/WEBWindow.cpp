@@ -1,6 +1,7 @@
 #include "WEBWindow.h"
 #include "BF/System/Log.h"
 #include "BF/Input/Mouse.h"
+#include "BF/Input/Keyboard.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -113,11 +114,35 @@ namespace BF
 
 			EM_BOOL WEBWindow::KeyboardCallback(int eventType, const EmscriptenKeyboardEvent *e, void *userData)
 			{
-				if (eventType == EMSCRIPTEN_EVENT_KEYPRESS)
-				{
-					BF_LOG_INFO("code s: %s", e->code);
-				}
+				Keyboard::keys[e->keyCode] = false;
 
+				if (eventType == EMSCRIPTEN_EVENT_KEYDOWN)
+					Keyboard::keys[e->keyCode] = true;
+				else if (eventType == EMSCRIPTEN_EVENT_KEYUP)
+					Keyboard::keys[e->keyCode] = false;
+
+				/*if ((eventType == EMSCRIPTEN_EVENT_KEYPRESS || eventType == EMSCRIPTEN_EVENT_KEYDOWN))
+				{
+					Keyboard::keys[*e->key] = true;
+				}
+				else if (eventType == EMSCRIPTEN_EVENT_KEYUP)
+				{
+					Keyboard::keys[*e->key] = false;
+				}*/
+
+				BF_LOG_INFO("%i-- event number: %i", e->keyCode, eventType);
+
+				/*if (eventType == EMSCRIPTEN_EVENT_KEYPRESS)
+				{
+				}*/
+
+				//only use e->which or e->keyCode
+				//we will only use event 2 which is keydown
+					//arrow use 2
+					//other keys use 2 and 1
+//#define EMSCRIPTEN_EVENT_KEYPRESS               1
+//#define EMSCRIPTEN_EVENT_KEYDOWN                2
+//#define EMSCRIPTEN_EVENT_KEYUP                  3
 				return 0;
 			}
 		}

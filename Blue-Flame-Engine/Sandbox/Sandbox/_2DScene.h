@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <vector>
-#include "TestPanel.h"
+//#include "TestPanel.h"
 
 namespace _2DScene
 {
@@ -44,7 +44,7 @@ namespace _2DScene
 			BF::Graphics::GUI::Button button;
 			BF::Graphics::GUI::Checkbox checkbox;
 
-			TestPanel panel;
+			//TestPanel panel;
 			BF::Graphics::Camera camera;
 
 			BF::AI::Waypoint waypoint;

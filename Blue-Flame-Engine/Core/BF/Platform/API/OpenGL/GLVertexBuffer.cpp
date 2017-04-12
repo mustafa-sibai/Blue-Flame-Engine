@@ -24,6 +24,8 @@ namespace BF
 
 				void GLVertexBuffer::Create(const void* data, unsigned int size)
 				{
+					this->size = size;
+
 					GLCall(glGenVertexArrays(1, &VAO));
 					GLCall(glBindVertexArray(0));
 
@@ -40,7 +42,7 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 					GLCall(return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 #elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-					return nullptr;
+					GLCall(return glMapBufferRange(GL_ARRAY_BUFFER, 0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
 #endif
 				}
 

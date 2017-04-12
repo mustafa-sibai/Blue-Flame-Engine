@@ -26,14 +26,23 @@ void InputTests::FixedUpdate()
 
 void InputTests::Update()
 {
+	if (BF::Input::Mouse::IsButtonPressed(BF::Input::Mouse::Button::Left))
+		BF_LOG_INFO("LEFT PRESSED !!");
+
+	if (BF::Input::Mouse::IsButtonPressed(BF::Input::Mouse::Button::Right))
+		BF_LOG_INFO("Right PRESSED !!");
+
+	if (BF::Input::Mouse::IsButtonPressed(BF::Input::Mouse::Button::Middle))
+		BF_LOG_INFO("Middle PRESSED !!");
+
 	/*
-	Window Issues:-
-	F10 not detected
-	print Screen not detected
-	Enter and Numpad Enter Should be different
-	Left and right shit should be different
-	Alt keys not working
-	Right and Left Control Should be different
+		Window Issues:-
+		F10 not detected
+		print Screen not detected
+		Enter and Numpad Enter Should be different
+		Left and right shit should be different
+		Alt keys not working
+		Right and Left Control Should be different
 	*/
 
 	if (Keyboard::IsKeyPressed(Keyboard::Key::Escape))
@@ -45,8 +54,8 @@ void InputTests::Update()
 	if (Keyboard::IsKeyPressed(Keyboard::Key::F2))
 		BF_LOG_INFO("F2");
 
-	if (Keyboard::IsKeyPressed(Keyboard::Key::F3))
-		BF_LOG_INFO("F3");
+	//if (Keyboard::IsKeyPressed(Keyboard::Key::F3))
+		//BF_LOG_INFO("F3");
 
 	if (Keyboard::IsKeyPressed(Keyboard::Key::F4))
 		BF_LOG_INFO("F4");

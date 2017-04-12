@@ -21,6 +21,7 @@ namespace BF
 					private:
 						GLuint VAO;
 						GLuint VBO;
+						unsigned int size;
 
 					public:
 						GLVertexBuffer();

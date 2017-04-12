@@ -1,6 +1,7 @@
 CALL mkdir ..\Output\Core\Web\Debug\
 CALL emcc ^
  "../Core/BF/Engine.cpp" ^
+ "../Core/BF/AI/Waypoint.cpp" ^
  "../Core/BF/Application/Scene.cpp" ^
  "../Core/BF/Application/SceneManager.cpp" ^
  "../Core/BF/Application/Window.cpp" ^
@@ -36,6 +37,7 @@ CALL emcc ^
  "../Core/BF/Graphics/Mesh.cpp" ^
  "../Core/BF/Graphics/Model.cpp" ^
  "../Core/BF/Graphics/Terrain.cpp" ^
+ "../Core/BF/Graphics/TextureAtlas.cpp" ^
  "../Core/BF/Graphics/TileMap.cpp" ^
  "../Core/BF/Input/Keyboard.cpp" ^
  "../Core/BF/Input/Mouse.cpp" ^
