@@ -6,7 +6,6 @@
 *.db
 *.obj
 *.lib
-*.dll
 *.fbx
 *.vs
 *.bc
