@@ -3,6 +3,7 @@
 #include "BF/Input/Keyboard.h"
 #include "BF/Input/Mouse.h"
 #include "BF/Math/Math.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -179,6 +180,9 @@ namespace BF
 
 						window->clientWidth = LOWORD(lParam);
 						window->clientHeight = HIWORD(lParam);
+
+						Engine::GetContext().SetViewport(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
+						Engine::GetContext().SetScissor(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
 						break;
 					}
 

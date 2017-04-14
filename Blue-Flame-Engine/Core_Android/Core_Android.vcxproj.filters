@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\Core\BF\Platform\Android\EJNI.cpp">
+      <Filter>BF\Platform\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Android\ANDEngineEntryPoint.cpp">
+      <Filter>BF\Platform\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Android\ANDWindow.cpp">
+      <Filter>BF\Platform\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\Scene.cpp">
+      <Filter>BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\SceneManager.cpp">
+      <Filter>BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\Window.cpp">
+      <Filter>BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Engine.cpp">
+      <Filter>BF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Math.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Matrix4.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Rectangle.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector2.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector3.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector4.cpp">
+      <Filter>BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\System\Timer.cpp">
+      <Filter>BF\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Context.cpp">
+      <Filter>BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\ANDContext.cpp">
+      <Filter>BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Color.cpp">
+      <Filter>BF\Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BF">
+      <UniqueIdentifier>{27f8b8d8-d7ac-4aaa-8adb-da56637a5182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\AI">
+      <UniqueIdentifier>{2f887339-4c36-4b87-a1ae-75a17bbec37a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Application">
+      <UniqueIdentifier>{03b411dd-7289-4ed4-8159-ccbc57f19858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics">
+      <UniqueIdentifier>{e0c80e9f-434f-4f0a-a4c4-f17df7ed97c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Audio">
+      <UniqueIdentifier>{a78572ba-6f36-4e8a-a048-21a0d1608f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Input">
+      <UniqueIdentifier>{81e709c3-e385-4a49-9915-530c5baa5960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\IO">
+      <UniqueIdentifier>{7075e15d-d28c-4e5a-b2d3-e16b6fa70d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Math">
+      <UniqueIdentifier>{c0050e21-4cc3-49cd-b541-b963cc4b0ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Network">
+      <UniqueIdentifier>{03e37a56-84cc-4e6b-ad17-a6dc8f02fcd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Platform">
+      <UniqueIdentifier>{757832f6-2257-49ae-83b6-9f1b6eb0ad88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\System">
+      <UniqueIdentifier>{262b36cb-0da3-4a3c-8bf5-1b5efec2d173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics\Animation">
+      <UniqueIdentifier>{7e6e05da-81c1-4d97-a66c-20db964726a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics\API">
+      <UniqueIdentifier>{93daa461-8d77-4229-ba42-24ff081ce9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics\Fonts">
+      <UniqueIdentifier>{d970c2e6-ba83-419c-b053-68ddaf51460d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics\GUI">
+      <UniqueIdentifier>{2f361781-c9b9-4844-89de-01f0b65f8d20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Graphics\Renderers">
+      <UniqueIdentifier>{a142360f-3b9d-4c0f-ac05-c30bcc3cd199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\IO\FileFormats">
+      <UniqueIdentifier>{ff1db046-a23e-4826-8465-f7382e3dd8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Platform\API">
+      <UniqueIdentifier>{863f6701-4c33-43bc-b05b-696d062512cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Platform\API\OpenGL">
+      <UniqueIdentifier>{c8b990ea-e91b-42fa-99c0-20a0a45c0942}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BF\Platform\Android">
+      <UniqueIdentifier>{18e4a872-f6e1-488b-8c58-1836a44427bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\System\Log.h">
+      <Filter>BF\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Android\EJNI.h">
+      <Filter>BF\Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Common.h">
+      <Filter>BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Android\ANDEngineEntryPoint.h">
+      <Filter>BF\Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Android\ANDWindow.h">
+      <Filter>BF\Platform\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\Scene.h">
+      <Filter>BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\SceneManager.h">
+      <Filter>BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\Window.h">
+      <Filter>BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\WindowStyle.h">
+      <Filter>BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\BlueFlame.h">
+      <Filter>BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Engine.h">
+      <Filter>BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Math.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Matrix4.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Rectangle.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector2.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector3.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector4.h">
+      <Filter>BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\System\Timer.h">
+      <Filter>BF\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Context.h">
+      <Filter>BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\ANDContext.h">
+      <Filter>BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Color.h">
+      <Filter>BF\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

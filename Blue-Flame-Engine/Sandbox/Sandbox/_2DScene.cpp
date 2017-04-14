@@ -27,7 +27,7 @@ namespace _2DScene
 	}
 
 	_2DScene::_2DScene() :
-		button(*this), checkbox(*this), panel(*this), font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
+		button(*this), checkbox(*this)/*, panel(*this)*/, font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
 	{
 		t = new Texture2D(spriteRenderer.GetShader());
 		t2 = new Texture2D(spriteRenderer.GetShader());
@@ -108,6 +108,8 @@ namespace _2DScene
 
 	void _2DScene::Update()
 	{
+		//This is temporary.
+		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		//Scene::Update();
 		camera.Update();
 		//waypoint.Update();
@@ -132,7 +134,7 @@ namespace _2DScene
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 		//Scene::Render();
 
-		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
+		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
 		spriteRenderer.Render(line);
 		spriteRenderer.Render(rp);
 		spriteRenderer.Render(sprite1);

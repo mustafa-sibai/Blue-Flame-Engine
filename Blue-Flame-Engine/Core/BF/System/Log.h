@@ -15,9 +15,9 @@ static void SetConsoleColor(int colorCode)
 #define BF_LOG_INFO(x, ...)		do { SetConsoleColor(15); printf("[INFO]: "); printf(x, __VA_ARGS__); printf("\n"); SetConsoleColor(15); } while(false)
 #define BF_LOG_WARNING(x, ...)	do { SetConsoleColor(14); printf("[WARNING]: "); printf(x, __VA_ARGS__); printf(" Filename: %s Line: %d\n", __FILENAME__, __LINE__); SetConsoleColor(15); } while(false)
 #define BF_LOG_ERROR(x, ...)	do { SetConsoleColor(12); printf("[ERROR]: "); printf(x, __VA_ARGS__); printf(" Filename: %s Line: %d\n", __FILENAME__, __LINE__); SetConsoleColor(15); } while(false)
-#define BF_LOG_FATAL(x, ...)	do { SetConsoleColor(79); printf("[FATAL]: "); printf(x, __VA_ARGS__); printf(" Filename: %s Line: %d\n", __FILENAME__, __LINE__); SetConsoleColor(15); } while(false)
+#define BF_LOG_FATAL(x, ...)	do { SetConsoleColor(79); printf("[FATAL]: "); printf(x, __VA_ARGS__); throw printf(" Filename: %s Line: %d\n", __FILENAME__, __LINE__); SetConsoleColor(15); } while(false)
 
-#elif BF_PLATFORM_ANDROID
+#elif defined(BF_PLATFORM_ANDROID)
 
 #include <strings.h>
 #include <android/log.h>
@@ -27,7 +27,7 @@ static void SetConsoleColor(int colorCode)
 #define BF_LOG_ERROR(...)	do { __android_log_print(ANDROID_LOG_ERROR, "Blue Flame Engine: [ERROR]", __VA_ARGS__); } while(false)
 #define BF_LOG_FATAL(...)	do { __android_log_print(ANDROID_LOG_FATAL, "Blue Flame Engine: [FATAL]", __VA_ARGS__); } while(false)
 
-#elif BF_PLATFORM_WEBGL
+#elif defined(BF_PLATFORM_WEB)
 #include <stdio.h>
 #include <string.h>
 

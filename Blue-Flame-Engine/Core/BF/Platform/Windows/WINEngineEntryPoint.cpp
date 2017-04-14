@@ -23,7 +23,7 @@ namespace BF
 			{
 			}
 
-			void WINEngineEntryPoint::Run()
+			void WINEngineEntryPoint::Run(Scene& mainScene)
 			{
 				BF_LOG_INFO("Engine Run");
 				while (state != State::Exit)
@@ -34,6 +34,8 @@ namespace BF
 					{
 						winWindow.Initialize();
 						context.Initialize();
+						SceneManager::AddNewScene(&mainScene);
+						SceneManager::GetScene(0).Run();
 						state = State::Render;
 						break;
 					}

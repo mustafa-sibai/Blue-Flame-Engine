@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
-#include "StyleSheet.h"
-#include "Widget.h"
+#include "BF/Graphics/GUI/StyleSheet.h"
+#include "BF/Graphics/GUI/Widget.h"
 #include "BF/Common.h"
 
 namespace BF

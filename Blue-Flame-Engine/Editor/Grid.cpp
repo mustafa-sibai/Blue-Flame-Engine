@@ -9,7 +9,7 @@ namespace Editor
 	using namespace BF::Graphics;
 	using namespace BF::Graphics::Renderers;
 
-	Grid::Grid(Math::Rectangle& rectangle) : 
+	Grid::Grid(Math::Rectangle& rectangle) :
 		rectangle(rectangle)
 	{
 		tileWidth = 64;
@@ -28,20 +28,26 @@ namespace Editor
 	void Grid::Initialize(SpriteRenderer& spriteRenderer)
 	{
 		this->spriteRenderer = &spriteRenderer;
-	}
 
-	void Grid::Render()
-	{
 		for (int x = 0; x < rectangle.width + 1; x++)
 		{
 			linePosition = Vector2(rectangle.x + (tileWidth * x), rectangle.y);
-			spriteRenderer->RenderLine(linePosition, Vector2(linePosition.x, linePosition.y + (rectangle.height * tileHeight)), 1, Color(0.0f, 0.0f, 0.0f, 1.0f));
+			horizontalLines.push_back(LineShape(linePosition, Vector2(linePosition.x, linePosition.y + (rectangle.height * tileHeight)), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
 		}
 
 		for (int y = 0; y < rectangle.height + 1; y++)
 		{
 			linePosition = Vector2(rectangle.x, rectangle.y + (tileHeight * y));
-			spriteRenderer->RenderLine(linePosition, Vector2(linePosition.x + (rectangle.width * tileWidth), linePosition.y), 1, Color(0.0f, 0.0f, 0.0f, 1.0f));
+			verticalLines.push_back(LineShape(linePosition, Vector2(linePosition.x + (rectangle.width * tileWidth), linePosition.y), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
 		}
+	}
+
+	void Grid::Render()
+	{
+		for (size_t i = 0; i < horizontalLines.size(); i++)
+			spriteRenderer->Render(horizontalLines[i]);
+
+		for (size_t i = 0; i < verticalLines.size(); i++)
+			spriteRenderer->Render(verticalLines[i]);
 	}
 }

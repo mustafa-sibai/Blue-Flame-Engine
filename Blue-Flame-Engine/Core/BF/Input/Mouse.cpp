@@ -35,7 +35,7 @@ namespace BF
 
 			ClientToScreen(Engine::GetWindow().GetHWND(), &point);
 			SetCursorPos(point.x, point.y);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 #endif
 		}
 
@@ -43,7 +43,7 @@ namespace BF
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			ShowCursor(value);
-#elif BF_PLATFORM_LINUX
+#elif defined(BF_PLATFORM_LINUX)
 #endif
 		}
 	}

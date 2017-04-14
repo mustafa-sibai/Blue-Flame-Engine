@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>10160a5139d90b02;nobleltejv</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;x64</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;VisualStudio_android-23_x86_phone</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ShowAllFiles>true</ShowAllFiles>
+  </PropertyGroup>
+</Project>

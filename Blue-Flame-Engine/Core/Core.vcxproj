@@ -248,25 +248,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Output\FreeImageLib\Windows\x64\Binary\Debug;$(SolutionDir)Dependency\FreeType\Output\Windows\x64\Binary\Debug;$(SolutionDir)Dependency\TinyXML-2\Output\Windows\x64\Binary\Debug-Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Output\FreeImageLib\Windows\x64\Binary\Release;$(SolutionDir)Dependency\FreeType\Output\Windows\x64\Binary\Release;$(SolutionDir)Dependency\TinyXML-2\Output\Windows\x64\Binary\Release-Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -275,7 +275,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -285,6 +285,7 @@
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Link>
@@ -302,7 +303,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -320,6 +321,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -335,7 +337,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -352,6 +354,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
@@ -367,7 +370,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -390,6 +393,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
+
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>

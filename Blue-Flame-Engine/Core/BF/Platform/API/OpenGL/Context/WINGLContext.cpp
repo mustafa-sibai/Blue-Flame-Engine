@@ -16,7 +16,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				WINGLContext::WINGLContext()
+				WINGLContext::WINGLContext() : 
+					initialized(false)
 				{
 				}
 
@@ -49,9 +50,14 @@ namespace BF
 					if (wglewIsSupported("WGL_ARB_create_context") == 1)
 					{
 						HGLRC context = wglCreateContextAttribsARB(hDC, 0, attribs);
+
+						if (context == nullptr)
+							BF_LOG_FATAL("Failed to create an OpenGL context.");
+
 						wglMakeCurrent(NULL, NULL);
 						wglDeleteContext(tempContext);
 						wglMakeCurrent(hDC, context);
+						initialized = true;
 					}
 					else
 					{
@@ -59,8 +65,6 @@ namespace BF
 						wglDeleteContext(tempContext);
 						BF_LOG_ERROR("Failed to create an OpenGL 3.x and above context.");
 					}
-
-					GLCall(glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));
 
 					BF_LOG_INFO("OPENGL VERSION %s", (char*)glGetString(GL_VERSION));
 					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
@@ -70,6 +74,7 @@ namespace BF
 					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
 					BF_LOG_INFO("%d", r);
 
+					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
 					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				}
 
@@ -172,6 +177,12 @@ namespace BF
 				{
 					int height = Engine::GetWindow().GetClientHeight() - rectangle.height - rectangle.y;
 					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientHeight() - height - rectangle.y);
+				}
+
+				void WINGLContext::SetViewport(const Math::Rectangle& rectangle)
+				{
+					if(initialized)
+						GLCall(glViewport(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
 				}
 			}
 		}

@@ -31,7 +31,7 @@ namespace Editor
 	void ScenePanel::Load(const StyleSheet& StyleSheet, const string& widgetName)
 	{
 		Panel::Load(StyleSheet, widgetName);
-		paintTile.SetCurrentTile(Sprite(&tileSheetPanel.texture, Vector2(0.0f, 0.0f), 0, Math::Rectangle(0, 0, grid.tileWidth, grid.tileHeight), Color(1.0f)));
+		//paintTile.SetCurrentTile(Sprite(&tileSheetPanel.texture, Vector2(0.0f, 0.0f), 0, Math::Rectangle(0, 0, grid.tileWidth, grid.tileHeight), Color(1.0f)));
 		SetRectangle(Math::Rectangle((int)position.x, (int)position.y, 1130, 1010));
 		//SetContentRectangle(Math::Rectangle((int)position.x, (int)position.y, texture.GetTextureData().width, texture.GetTextureData().height));
 	}

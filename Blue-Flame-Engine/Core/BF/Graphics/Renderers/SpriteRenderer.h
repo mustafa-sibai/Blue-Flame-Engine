@@ -17,7 +17,7 @@ namespace BF
 			{
 				public:
 					enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { None, BackToFront, FrontToBack };
+					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
 					API::Shader shader;
@@ -43,9 +43,7 @@ namespace BF
 					void Initialize();
 					void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					void Render(const Renderable& renderable);
-					//void Render(Sprite&&) = delete;
-					//void RenderLine(const Math::Vector2& startPoint, const Math::Vector2& endPoint, float thickness, const Color& color);
-					//void RenderRectangle(const Math::Rectangle& rectangle, const Color& color);
+					void Render(Renderable&&) = delete;
 
 					void RenderText(const Fonts::FontAtlas& fontAtlas, const std::string& text, const Math::Vector2& position, const Color& color);
 					void End();

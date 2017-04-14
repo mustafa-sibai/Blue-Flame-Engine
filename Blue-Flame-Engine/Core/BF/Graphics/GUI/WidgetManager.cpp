@@ -47,7 +47,7 @@ namespace BF
 
 			void WidgetManager::Render()
 			{
-				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::None);
+				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
 				for (size_t i = 0; i < widgets.size(); i++)
 					widgets[i]->Render();
 				spriteRenderer.SetScissor(Math::Rectangle(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));

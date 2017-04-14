@@ -10,10 +10,10 @@ namespace BF
 		{
 			class BF_API RegularPolygon : public Renderable
 			{
-			public:
-				RegularPolygon();
-				RegularPolygon(const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
-				~RegularPolygon();
+				public:
+					RegularPolygon();
+					RegularPolygon(const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
+					~RegularPolygon();
 			};
 		}
 	}

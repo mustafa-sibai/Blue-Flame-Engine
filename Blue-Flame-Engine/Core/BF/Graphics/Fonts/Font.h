@@ -24,7 +24,7 @@ namespace BF
 			public:
 				enum class Language
 				{
-					None, English
+					Null, English
 				};
 
 				FT_Library library;

@@ -12,8 +12,8 @@ namespace Editor
 	using namespace BF::Math;
 	using namespace BF::Input;
 
-	TileSheetPanel::TileSheetPanel(Scene& scene) :
-		Panel(scene), rectangle(0, 0, 500, 1000), gridRectangle(rectangle.x, rectangle.y, 10, 10), texture(spriteRenderer->GetShader()), grid(gridRectangle)
+	TileSheetPanel::TileSheetPanel(Scene& scene, PaintTile& paintTile) :
+		Panel(scene), paintTile(paintTile), rectangle(0, 0, 500, 1000), gridRectangle(rectangle.x, rectangle.y, 10, 10), texture(spriteRenderer->GetShader()), grid(gridRectangle)
 	{
 	}
 
@@ -42,13 +42,28 @@ namespace Editor
 	{
 		Panel::Update();
 		tilesheet.SetPosition(GetContentPosition());
+
+		if (grid.IsMouseInGrid())
+		{
+			Vector2 indexedOffset = Vector2(floor(grid.GetRectangle().x / (float)grid.tileWidth), floor(grid.GetRectangle().y / (float)grid.tileHeight));
+			Vector2 offset = Vector2(grid.GetRectangle().x - (indexedOffset.x * grid.tileWidth), grid.GetRectangle().y - (indexedOffset.y * grid.tileHeight));
+
+			Vector2 indexedPosition = Vector2((int)((Mouse::GetPosition().x - offset.x) / grid.tileWidth), (int)((Mouse::GetPosition().y - offset.y) / grid.tileHeight));
+			Vector2 position = Vector2((indexedPosition.x * grid.tileWidth) + offset.x, indexedPosition.y * (grid.tileHeight) + offset.y);
+			highlighter = RegularPolygon(Math::Rectangle(position.x, position.y, 64, 64), 0, Color(0.2f, 0.2f, 0.75f, 0.75f));
+
+			if (Mouse::IsButtonPressed(Mouse::Button::Left))
+			{
+				paintTile.SetCurrentTile(Sprite(&texture, Math::Rectangle(position.x, position.y, 64, 64), 0, Math::Rectangle(position.x, position.y, 64, 64), Color(1.0f, 1.0f, 1.0f, 1.0f)));
+			}
+		}
 	}
 
 	void TileSheetPanel::Render()
 	{
 		Panel::Render();
-		grid.Render();
 		spriteRenderer->Render(tilesheet);
-		spriteRenderer->RenderRectangle(Math::Rectangle(Mouse::GetPosition().x, Mouse::GetPosition().y, 64, 64), Color(0.0f, 0.0f, 1.0f, 0.5f));
+		spriteRenderer->Render(highlighter);
+		grid.Render();
 	}
 }
