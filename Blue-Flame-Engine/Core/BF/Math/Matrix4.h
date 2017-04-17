@@ -1,5 +1,5 @@
 #pragma once
-#include "Math.h"
+#include "BF/Math/Math.h"
 #include "BF/Common.h"
 
 #define BF_MATRIX_COLUMN_SIZE 4

@@ -1,6 +1,6 @@
 #pragma once
-#include <EGL/egl.h>
-#include <GLES3/gl3.h>
+#include "DependencyHeaders/EGL/egl.h"
+#include "DependencyHeaders/GLES3/gl3.h"
 #include "BF/Graphics/Color.h"
 
 namespace BF

@@ -36,24 +36,24 @@ namespace BF
 
 			class BF_API SpriteAnimation
 			{
-			private:
-				SpriteAnimationData* data;
-				Renderers::SpriteRenderer& spriteRenderer;
-				API::Shader& shader;
-				API::Texture2D texture;
-				Renderers::Sprite sprite;
+				private:
+					SpriteAnimationData* data;
+					Renderers::SpriteRenderer& spriteRenderer;
+					API::Shader& shader;
+					API::Texture2D texture;
+					Renderers::Sprite sprite;
 
-				System::Timer timer;
-				int keyFrameIndex = 0;
+					System::Timer timer;
+					int keyFrameIndex = 0;
 
-			public:
-				SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer, API::Shader& shader);
-				~SpriteAnimation();
+				public:
+					SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer, API::Shader& shader);
+					~SpriteAnimation();
 
-				void Initialize();
-				void Load(const std::string& filename);
-				void Update();
-				void Render();
+					void Initialize();
+					void Load(const std::string& filename);
+					void Update();
+					void Render();
 			};
 		}
 	}

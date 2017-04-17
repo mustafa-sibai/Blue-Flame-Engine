@@ -1,7 +1,9 @@
 #pragma once
 #include <android/native_window.h>
-#include <EGL/egl.h>
+#include "DependencyHeaders/EGL/eglplatform.h"
+#include "DependencyHeaders/EGL/egl.h"
 #include "BF/Platform/API/OpenGL/Context/ANDGLContext.h"
+#include "BF/Application/Window.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -10,7 +12,7 @@ namespace BF
 	{
 		namespace Android
 		{
-			class BF_API ANDWindow
+			class BF_API ANDWindow : public Application::Window
 			{
 				friend class BF::Platform::API::OpenGL::ANDGLContext;
 
@@ -26,7 +28,7 @@ namespace BF
 					EGLint format;
 
 				public:
-					ANDWindow();
+					ANDWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style);
 					~ANDWindow();
 
 					void Initialize(ANativeWindow* window);

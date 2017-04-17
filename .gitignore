@@ -1,17 +1,10 @@
 *.log
 *.idb
-*.pdb
 *.tlog
 *.ilk
 *.db
-*.obj
-*.lib
-*.fbx
 *.vs
-*.bc
-*.o
 *.recipe
 Blue-Flame-Engine/Sandbox_Android/.gradle
 Blue-Flame-Engine/Sandbox_Android/app/build
 Blue-Flame-Engine/Sandbox_Android/app/src/main/jniLibs
-Blue-Flame-Engine/Sandbox/Assets/Models/untitled.bfx

@@ -1,7 +1,7 @@
 #pragma once
-#include <AL/al.h>
-#include <AL/alc.h>
-#include <AL/alext.h>
+#include "DependencyHeaders/OpenAL-Soft/AL/al.h"
+#include "DependencyHeaders/OpenAL-Soft/AL/alc.h"
+#include "DependencyHeaders/OpenAL-Soft/AL/alext.h"
 #include "BF/IO/WAVLoader.h"
 #include "BF/Common.h"
 

@@ -1,5 +1,5 @@
 #include "BFALoader.h"
-#include "FileFormats/BFAFormat.h"
+#include "BF/IO/FileFormats/BFAFormat.h"
 
 namespace BF
 {

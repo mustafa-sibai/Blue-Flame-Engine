@@ -6,8 +6,8 @@
 	#include "BF/Platform/API/OpenGL/GLTexture2D.h"
 #endif
 
-#include "Shader.h"
-#include "Texture.h"
+#include "BF/Graphics/API/Shader.h"
+#include "BF/Graphics/API/Texture.h"
 #include "BF/Common.h"
 
 namespace BF

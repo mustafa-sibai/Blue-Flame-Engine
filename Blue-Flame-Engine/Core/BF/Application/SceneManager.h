@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Scene.h"
+#include "BF/Application/Scene.h"
 #include "BF/Common.h"
 
 namespace BF

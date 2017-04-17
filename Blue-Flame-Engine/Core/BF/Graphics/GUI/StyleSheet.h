@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include <tinyxml2.h>
-#include "Widget.h"
+#include "DependencyHeaders/TinyXML-2/tinyxml2.h"
+#include "BF/Graphics/GUI/Widget.h"
 #include "BF/Graphics/Renderers/Sprite.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"

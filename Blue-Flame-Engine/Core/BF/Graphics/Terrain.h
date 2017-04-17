@@ -1,8 +1,8 @@
 #pragma once
-#include "API/Shader.h"
-#include "API/VertexBuffer.h"
-#include "API/IndexBuffer.h"
-#include "API/VertexBufferLayout.h"
+#include "BF/Graphics/API/Shader.h"
+#include "BF/Graphics/API/VertexBuffer.h"
+#include "BF/Graphics/API/IndexBuffer.h"
+#include "BF/Graphics/API/VertexBufferLayout.h"
 #include "BF/Common.h"
 
 namespace BF

@@ -52,7 +52,7 @@ namespace BF
 #elif defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 				{
-					shader.Load("Assets/Shaders/GLSL/SpriteRenderer/VertexShader.glsl", "Assets/Shaders/GLSL/SpriteRenderer/PixelShader.glsl");
+					shader.Load("Assets/Shaders/GLSL-ES3.0/SpriteRenderer/VertexShader.glsl", "Assets/Shaders/GLSL-ES3.0/SpriteRenderer/PixelShader.glsl");
 				}
 #endif
 				shader.Bind();

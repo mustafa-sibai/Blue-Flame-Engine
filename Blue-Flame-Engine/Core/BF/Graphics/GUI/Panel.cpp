@@ -1,5 +1,5 @@
 #include "Panel.h"
-#include "WidgetManager.h"
+#include "BF/Graphics/GUI/WidgetManager.h"
 
 namespace BF
 {

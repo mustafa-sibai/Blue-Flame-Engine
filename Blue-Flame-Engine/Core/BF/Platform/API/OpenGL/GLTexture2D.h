@@ -1,9 +1,9 @@
 #pragma once
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
-	#include <GL/glew.h>
+	#include "DependencyHeaders/GLEW/GL/glew.h"
 #elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-	#include <GLES3/gl3.h>
-	#include <GLES3/gl2ext.h>
+	#include "DependencyHeaders/GLES3/gl3.h"
+	#include "DependencyHeaders/GLES3/gl2ext.h"
 #endif
 
 #include "GLShader.h"

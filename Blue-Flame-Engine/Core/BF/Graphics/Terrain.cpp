@@ -1,7 +1,7 @@
 #include "Terrain.h"
-#include "BF/Math/Math.h"
 #include "BF/Engine.h"
-#include "Mesh.h"
+#include "BF/Graphics/Mesh.h"
+#include "BF/Math/Math.h"
 #include "BF/IO/ImageLoader.h"
 #include "BF/System/Log.h"
 

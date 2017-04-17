@@ -99,7 +99,7 @@ namespace BF
 
 								if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
 								{
-									BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
+									//BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
 									SceneManager::GetScene(i).frameRateTimer.Reset();
 									FPS = 0;
 									FUPS = 0;

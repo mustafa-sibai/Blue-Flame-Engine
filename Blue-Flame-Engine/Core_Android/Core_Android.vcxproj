@@ -50,7 +50,13 @@
     <ClCompile Include="..\Core\BF\Platform\Android\ANDEngineEntryPoint.cpp" />
     <ClCompile Include="..\Core\BF\Platform\Android\ANDWindow.cpp" />
     <ClCompile Include="..\Core\BF\Platform\Android\EJNI.cpp" />
-    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\ANDContext.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\ANDGLContext.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLError.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="..\Core\BF\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +78,13 @@
     <ClInclude Include="..\Core\BF\Platform\Android\ANDEngineEntryPoint.h" />
     <ClInclude Include="..\Core\BF\Platform\Android\ANDWindow.h" />
     <ClInclude Include="..\Core\BF\Platform\Android\EJNI.h" />
-    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\ANDContext.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\ANDGLContext.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLError.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="..\Core\BF\System\Log.h" />
     <ClInclude Include="..\Core\BF\System\Timer.h" />
   </ItemGroup>
@@ -150,49 +162,49 @@
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <TargetName>libCore</TargetName>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -202,6 +214,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -222,6 +235,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -242,6 +256,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -262,6 +277,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -282,6 +298,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -302,6 +319,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -322,6 +340,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -342,6 +361,7 @@
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
       <CLanguageStandard>Default</CLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>

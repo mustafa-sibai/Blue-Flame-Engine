@@ -1,7 +1,7 @@
 #pragma once
-#include "Widget.h"
+#include "BF/Graphics/GUI/Widget.h"
 #include "BF/Application/Scene.h"
-#include "Scrollbar.h"
+#include "BF/Graphics/GUI/Scrollbar.h"
 #include "BF/Common.h"
 
 namespace BF

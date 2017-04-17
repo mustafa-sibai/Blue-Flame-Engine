@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include <FreeImage.h>
-#include <Utilities.h>
+#include "DependencyHeaders/FreeImage/FreeImage.h"
+#include "DependencyHeaders/FreeImage/Utilities.h"
 #include "BF/Common.h"
 
 namespace BF

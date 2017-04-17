@@ -1,6 +1,6 @@
 #pragma once
-#include <GL/glew.h>
-#include <GL/wglew.h>
+#include "DependencyHeaders/GLEW/GL/glew.h"
+#include "DependencyHeaders/GLEW/GL/wglew.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"

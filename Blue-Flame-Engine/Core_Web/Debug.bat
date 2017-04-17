@@ -65,9 +65,6 @@ CALL emcc ^
  "../Core/BF/Platform/Web/WEBWindow.cpp" ^
  "../Core/BF/System/Timer.cpp" ^
  -I "../Core/" ^
- -I "../Dependency/FreeImage/Source/" ^
- -I "../Dependency/FreeType/include/" ^
- -I "../Dependency/TinyXML-2/" ^
  -D BF_PLATFORM_WEB ^
  -std=c++14 ^
  -O0 ^

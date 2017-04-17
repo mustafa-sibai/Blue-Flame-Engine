@@ -2,7 +2,7 @@
 #include <string>
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Math/Math.h"
-#include "Character.h"
+#include "BF/Graphics/Fonts/Character.h"
 
 namespace BF
 {

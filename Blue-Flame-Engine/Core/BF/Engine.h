@@ -5,14 +5,12 @@
 	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
 #elif defined (BF_PLATFORM_ANDROID)
 	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
-	#include "BF/Application/Window.h"
-	#include "BF/Graphics/API/Context.h"
 #endif
 
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 170408
+#define BF_ENGINE_MINOR_VERSION 170417
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF

@@ -1,7 +1,7 @@
 #pragma once
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#include <EGL/egl.h>
+#include "DependencyHeaders/emscripten/emscripten.h"
+#include "DependencyHeaders/emscripten/html5.h"
+#include "DependencyHeaders/EGL/egl.h"
 #include "BF/Application/Window.h"
 #include "BF/Platform/API/OpenGL/Context/WEBGLContext.h"
 #include "BF/Common.h"

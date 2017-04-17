@@ -110,49 +110,49 @@
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Dependency;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -161,6 +161,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
@@ -179,6 +180,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
@@ -197,6 +199,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
@@ -215,6 +218,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
@@ -233,6 +237,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
@@ -251,6 +256,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
@@ -269,6 +275,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>
@@ -287,6 +294,7 @@
       </PrecompiledHeaderFile>
       <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>

@@ -1,6 +1,6 @@
 #pragma once
-#include "Color.h"
-#include "API/Texture2D.h"
+#include "BF/Graphics/Color.h"
+#include "BF/Graphics/API/Texture2D.h"
 #include "BF/Common.h"
 
 namespace BF

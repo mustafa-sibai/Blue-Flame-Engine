@@ -248,26 +248,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Output\FreeImageLib\Windows\x64\Binary\Debug;$(SolutionDir)Dependency\FreeType\Output\Windows\x64\Binary\Debug;$(SolutionDir)Dependency\TinyXML-2\Output\Windows\x64\Binary\Debug-Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\GLEW\lib;$(SolutionDir)Dependency\OpenAL-Soft\libs;$(SolutionDir)Dependency\FreeImage\Output\FreeImageLib\Windows\x64\Binary\Release;$(SolutionDir)Dependency\FreeType\Output\Windows\x64\Binary\Release;$(SolutionDir)Dependency\TinyXML-2\Output\Windows\x64\Binary\Release-Lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Release;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Release;$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Core;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -275,7 +275,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -294,7 +294,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -303,7 +303,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -325,7 +325,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -337,7 +337,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -358,7 +358,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -370,7 +370,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
@@ -397,7 +397,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\OpenAL-Soft\bin\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

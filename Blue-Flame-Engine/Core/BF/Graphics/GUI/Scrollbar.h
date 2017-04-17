@@ -1,6 +1,6 @@
 #pragma once
-#include "Widget.h"
-#include "ScrollbarSlider.h"
+#include "BF/Graphics/GUI/Widget.h"
+#include "BF/Graphics/GUI/ScrollbarSlider.h"
 #include "BF/Application/Scene.h"
 #include "BF/Common.h"
 

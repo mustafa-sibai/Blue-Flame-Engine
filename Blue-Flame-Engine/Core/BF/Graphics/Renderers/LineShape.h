@@ -1,5 +1,5 @@
 #pragma once
-#include "Renderable.h"
+#include "BF/Graphics/Renderers/Renderable.h"
 #include "BF/Common.h"
 
 namespace BF

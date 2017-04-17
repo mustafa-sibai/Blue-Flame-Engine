@@ -1,11 +1,11 @@
 #pragma once
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include "Rectangle.h"
-#include "Vector2.h"
-#include "Vector3.h"
-#include "Vector4.h"
-#include "Matrix4.h"
+#include "BF/Math/Rectangle.h"
+#include "BF/Math/Vector2.h"
+#include "BF/Math/Vector3.h"
+#include "BF/Math/Vector4.h"
+#include "BF/Math/Matrix4.h"
 
 namespace BF
 {

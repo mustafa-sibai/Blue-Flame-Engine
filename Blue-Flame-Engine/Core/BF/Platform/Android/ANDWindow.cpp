@@ -7,7 +7,8 @@ namespace BF
 	{
 		namespace Android
 		{
-			ANDWindow::ANDWindow()
+			ANDWindow::ANDWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
+				Window(title, rectangle, style)
 			{
 				BF_LOG_INFO("~AWindow");
 			}

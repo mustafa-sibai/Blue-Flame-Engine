@@ -4,8 +4,8 @@
 #include "BF/Graphics/Renderers/Sprite.h"
 #include "BF/Graphics/Fonts/FontAtlas.h"
 #include "BF/Graphics/Color.h"
-#include "LineShape.h"
-#include "RegularPolygon.h"
+#include "BF/Graphics/Renderers/LineShape.h"
+#include "BF/Graphics/Renderers/RegularPolygon.h"
 
 namespace BF
 {

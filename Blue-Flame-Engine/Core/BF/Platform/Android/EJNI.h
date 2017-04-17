@@ -1,5 +1,5 @@
 #pragma once
-#include <EGL/egl.h>
+#include "DependencyHeaders/EGL/egl.h"
 #include <android/native_window.h>
 #include "BF/Common.h"
 #include <thread>

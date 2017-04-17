@@ -8,8 +8,8 @@
 
 #include <string>
 #include <vector>
-#include "Shader.h"
-#include "Texture.h"
+#include "BF/Graphics/API/Shader.h"
+#include "BF/Graphics/API/Texture.h"
 #include "BF/Common.h"
 
 namespace BF

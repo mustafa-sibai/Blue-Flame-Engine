@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Mesh.h"
+#include "BF/Graphics/Mesh.h"
 #include "BF/IO/BFXLoader.h"
 #include "BF/Common.h"
 

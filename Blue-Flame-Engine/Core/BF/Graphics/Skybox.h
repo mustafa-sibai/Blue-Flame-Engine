@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "API/VertexBuffer.h"
-#include "API/IndexBuffer.h"
-#include "API/TextureCube.h"
+#include "BF/Graphics/API/VertexBuffer.h"
+#include "BF/Graphics/API/IndexBuffer.h"
+#include "BF/Graphics/API/TextureCube.h"
 #include "BF/Common.h"
 
 namespace BF

@@ -71,25 +71,25 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)Core;$(SolutionDir)Dependency\GLEW\include;$(SolutionDir)Dependency\FreeImage\Source;$(SolutionDir)Dependency\OpenAL-Soft\include;$(SolutionDir)Dependency\FreeType\include;$(SolutionDir)Dependency\TinyXML-2;$(SolutionDir)Dependency\FBX-SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\FBX-SDK\lib\release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,6 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Core.lib;libfbxsdk-mt.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -111,6 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,6 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -141,6 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BF_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

@@ -1,11 +1,11 @@
 #pragma once
 #include <vector>
-#include "API/VertexBuffer.h"
-#include "API/IndexBuffer.h"
-#include "API/VertexBufferLayout.h"
-#include "API/Texture2D.h"
+#include "BF/Graphics/API/VertexBuffer.h"
+#include "BF/Graphics/API/IndexBuffer.h"
+#include "BF/Graphics/API/VertexBufferLayout.h"
+#include "BF/Graphics/API/Texture2D.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
-#include "Color.h"
 #include "BF/Common.h"
 
 namespace BF

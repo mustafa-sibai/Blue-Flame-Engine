@@ -1,5 +1,5 @@
 #include "BFXLoader.h"
-#include "FileFormats/BFXFormat.h"
+#include "BF/IO/FileFormats/BFXFormat.h"
 
 namespace BF
 {

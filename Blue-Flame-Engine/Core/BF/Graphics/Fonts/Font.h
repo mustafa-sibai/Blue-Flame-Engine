@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
-#include <ft2build.h>
+#include "DependencyHeaders/FreeType/ft2build.h"
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Graphics/TextureAtlas.h"
+#include "BF/Graphics/Fonts/FontAtlas.h"
+#include "BF/Graphics/Fonts/Character.h"
 #include "BF/Math/Math.h"
-#include "FontAtlas.h"
-#include "Character.h"
 #include "BF/Common.h"
 
 #include FT_FREETYPE_H

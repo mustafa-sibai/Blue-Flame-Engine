@@ -29,7 +29,7 @@ namespace BF
 #elif defined (BF_PLATFORM_WEB)
 		Engine::webEngineEntryPoint = new WEBEngineEntryPoint(WEBWindow(window.title, window.rectangle, window.style), renderAPI);
 #elif defined (BF_PLATFORM_ANDROID)
-		Engine::andEngineEntryPoint = new ANDEngineEntryPoint(ANDWindow(), renderAPI);
+		Engine::andEngineEntryPoint = new ANDEngineEntryPoint(ANDWindow(window.title, window.rectangle, window.style), renderAPI);
 #endif
 		BF_LOG_INFO("Blue Flame Engine v%d.%d.%d", BF_ENGINE_MAJOR_VERSION, BF_ENGINE_MINOR_VERSION, BF_ENGINE_PATCH_VERSION);
 	}
