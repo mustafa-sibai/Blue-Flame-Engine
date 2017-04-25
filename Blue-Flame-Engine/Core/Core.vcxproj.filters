@@ -33,9 +33,6 @@
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\API\Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\API\Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -252,6 +249,9 @@
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Graphics\API\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\Window.h">
@@ -273,9 +273,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\API\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\API\Texture2D.h">
@@ -524,5 +521,25 @@
     <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Graphics\API\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
   </ItemGroup>
 </Project>

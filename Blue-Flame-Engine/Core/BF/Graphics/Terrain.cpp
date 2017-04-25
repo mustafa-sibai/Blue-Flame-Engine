@@ -38,16 +38,16 @@ namespace BF
 #if BF_PLATFORM_WINDOWS
 			if (Context::GetRenderAPI() == RenderAPI::DirectX)
 			{
-				shader.Load("../Sandbox/Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "../Sandbox/Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
+				shader.LoadFromFile("../Sandbox/Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "../Sandbox/Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
 			}
 			else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			{
-				shader.Load("../Sandbox/Assets/Shaders/GLSL/3D/VertexShader.glsl", "../Sandbox/Assets/Shaders/GLSL/3D/PixelShader.glsl");
+				shader.LoadFromFile("../Sandbox/Assets/Shaders/GLSL/3D/VertexShader.glsl", "../Sandbox/Assets/Shaders/GLSL/3D/PixelShader.glsl");
 			}
 #elif defined(BF_PLATFORM_LINUX)
 			if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			{
-				shader->Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
+				shader.LoadFromFile("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
 			}
 #endif
 

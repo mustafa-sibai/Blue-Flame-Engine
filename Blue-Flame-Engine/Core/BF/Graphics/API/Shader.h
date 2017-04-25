@@ -15,6 +15,8 @@ namespace BF
 	{
 		namespace API
 		{
+			enum class BF_API ShaderType { _3D, _3DMipAF, Light, SpriteRenderer, TextureCube };
+
 			class BF_API Shader
 			{
 				friend class VertexBuffer;
@@ -31,7 +33,8 @@ namespace BF
 					Shader();
 					~Shader();
 
-					void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
+					void LoadStandardShader(ShaderType type);
+					void LoadFromFile(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
 					void CleanUp();
 
 					void Bind() const;

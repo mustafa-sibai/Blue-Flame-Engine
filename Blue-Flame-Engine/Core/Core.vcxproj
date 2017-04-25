@@ -191,6 +191,23 @@
     <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h" />
     <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3DMipAF\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Light\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>
     <RootNamespace>Core</RootNamespace>
@@ -250,24 +267,28 @@
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Release;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Release;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

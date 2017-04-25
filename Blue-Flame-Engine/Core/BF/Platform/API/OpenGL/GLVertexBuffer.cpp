@@ -1,5 +1,5 @@
 #include "GLVertexBuffer.h"
-#include "GLError.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
 {

@@ -1,6 +1,6 @@
 #include "GLFramebuffer.h"
 #include "BF/Engine.h"
-#include "GLError.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
 {

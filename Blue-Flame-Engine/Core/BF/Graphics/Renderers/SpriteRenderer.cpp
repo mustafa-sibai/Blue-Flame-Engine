@@ -35,26 +35,7 @@ namespace BF
 			{
 				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
-#ifdef BF_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-				{
-					shader.Load("../Sandbox/Assets/Shaders/HLSL/Compiled/SpriteRenderer/VertexShader.cso", "../Sandbox/Assets/Shaders/HLSL/Compiled/SpriteRenderer/PixelShader.cso");
-				}
-				else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-				{
-					shader.Load("../Sandbox/Assets/Shaders/GLSL/SpriteRenderer/VertexShader.glsl", "../Sandbox/Assets/Shaders/GLSL/SpriteRenderer/PixelShader.glsl");
-				}
-#elif defined (BF_PLATFORM_LINUX)
-				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-				{
-					shader->Load("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
-				}
-#elif defined (BF_PLATFORM_WEB)
-				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-				{
-					shader.Load("Assets/Shaders/GLSL-ES3.0/SpriteRenderer/VertexShader.glsl", "Assets/Shaders/GLSL-ES3.0/SpriteRenderer/PixelShader.glsl");
-				}
-#endif
+				shader.LoadStandardShader(ShaderType::SpriteRenderer);
 				shader.Bind();
 
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);

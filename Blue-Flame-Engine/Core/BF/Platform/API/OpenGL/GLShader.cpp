@@ -1,5 +1,6 @@
 #include "GLShader.h"
-#include "GLError.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
+#include "BF/Graphics/API/Shader.h"
 
 namespace BF
 {
@@ -11,6 +12,7 @@ namespace BF
 			{
 				using namespace std;
 				using namespace BF::IO;
+				using namespace BF::Graphics::API;
 
 				GLShader::GLShader() :
 					programID(0), result(GL_FALSE), errorLength(0)
@@ -43,15 +45,12 @@ namespace BF
 					return shaderID;
 				}
 
-				void GLShader::Load(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
+				void GLShader::CreateProgram(GLuint& compiledVertexShader, GLuint& compiledPixelShader)
 				{
-					GLuint vertexShader = CompileShader(FileLoader::LoadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
-					GLuint pixelShader = CompileShader(FileLoader::LoadTextFile(pixelShaderFilePath), GL_FRAGMENT_SHADER);
-
 					GLCall(programID = glCreateProgram());
 
-					GLCall(glAttachShader(programID, vertexShader));
-					GLCall(glAttachShader(programID, pixelShader));
+					GLCall(glAttachShader(programID, compiledVertexShader));
+					GLCall(glAttachShader(programID, compiledPixelShader));
 					GLCall(glLinkProgram(programID));
 
 					GLCall(glGetProgramiv(programID, GL_LINK_STATUS, &result));
@@ -63,10 +62,81 @@ namespace BF
 						BF_LOG_ERROR("Link Error: %s", &ProgramErrorMessage[0]);
 					}
 
-					GLCall(glDetachShader(programID, vertexShader));
-					GLCall(glDetachShader(programID, pixelShader));
-					GLCall(glDeleteShader(vertexShader));
-					GLCall(glDeleteShader(pixelShader));
+					GLCall(glDetachShader(programID, compiledVertexShader));
+					GLCall(glDetachShader(programID, compiledPixelShader));
+					GLCall(glDeleteShader(compiledVertexShader));
+					GLCall(glDeleteShader(compiledPixelShader));
+				}
+
+				void GLShader::LoadStandardShader(ShaderType type)
+				{
+					string vertexShader, pixelShader;
+
+					switch (type)
+					{
+						case ShaderType::_3D:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/Shader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
+						case ShaderType::_3DMipAF:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/3DMipAF/GLSL-Core4.5/Shader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/3DMipAF/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
+						case ShaderType::Light:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/Light/GLSL-Core4.5/Shader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/Light/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
+						case ShaderType::SpriteRenderer:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/SpriteRenderer/GLSL-Core4.5/Shader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/SpriteRenderer/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
+						case ShaderType::TextureCube:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/TextureCube/GLSL-Core4.5/Shader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/TextureCube/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
+						default:
+						{
+							break;
+						}
+					}
+
+					GLuint compiledVertexShader = CompileShader(vertexShader, GL_VERTEX_SHADER);
+					GLuint compiledPixelShader = CompileShader(pixelShader, GL_FRAGMENT_SHADER);
+
+					CreateProgram(compiledVertexShader, compiledPixelShader);
+				}
+
+				void GLShader::LoadFromFile(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
+				{
+					GLuint compiledVertexShader = CompileShader(FileLoader::LoadTextFile(vertexShaderFilePath), GL_VERTEX_SHADER);
+					GLuint compiledPixelShader = CompileShader(FileLoader::LoadTextFile(pixelShaderFilePath), GL_FRAGMENT_SHADER);
+
+					CreateProgram(compiledVertexShader, compiledPixelShader);
 				}
 
 				void GLShader::Bind() const

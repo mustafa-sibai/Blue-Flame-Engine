@@ -2,3 +2,4 @@ Blue-Flame-Engine/Dependency/** filter=lfs diff=lfs merge=lfs -text
 Blue-Flame-Engine/Tools/** filter=lfs diff=lfs merge=lfs -text
 Blue-Flame-Engine/Sandbox/Assets/** filter=lfs diff=lfs merge=lfs -text
 Blue-Flame-Engine/Sandbox_Web/Assets** filter=lfs diff=lfs merge=lfs -text
+Demos/Engine/** filter=lfs diff=lfs merge=lfs -text

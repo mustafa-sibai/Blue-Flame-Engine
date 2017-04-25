@@ -1,7 +1,7 @@
 #include "GLTexture2D.h"
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Math/Math.h"
-#include "GLError.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
 {

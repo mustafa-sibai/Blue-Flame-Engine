@@ -11,6 +11,14 @@
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace API
+		{
+			enum class ShaderType;
+		}
+	}
+
 	namespace Platform
 	{
 		namespace API
@@ -24,19 +32,21 @@ namespace BF
 						GLint result;
 						int errorLength;
 
-					private:
-						GLuint CompileShader(const std::string& shaderCode, GLenum shaderType);
-
 					public:
 						GLShader();
 						~GLShader();
 
-						void Load(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
+						void LoadStandardShader(Graphics::API::ShaderType type);
+						void LoadFromFile(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
 
 						void Bind() const;
 						void Unbind() const;
 
 						inline const GLuint& GetProgramID() const { return programID; }
+
+					private:
+						GLuint CompileShader(const std::string& shaderCode, GLenum shaderType);
+						void CreateProgram(GLuint& compiledVertexShader, GLuint& compiledPixelShader);
 				};
 			}
 		}

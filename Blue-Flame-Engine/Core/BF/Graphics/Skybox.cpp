@@ -42,7 +42,7 @@ namespace BF
 			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(float) * 3, 0);
 			vertexBuffer.SetLayout(vertexBufferLayout);
 
-			shader.Load(vertexShaderFilename, pixelShaderFilename);
+			shader.LoadFromFile(vertexShaderFilename, pixelShaderFilename);
 			textureCube.Load(filenames, Texture::Wrap::ClampToEdge, Texture::Filter::Bilinear);
 		}
 

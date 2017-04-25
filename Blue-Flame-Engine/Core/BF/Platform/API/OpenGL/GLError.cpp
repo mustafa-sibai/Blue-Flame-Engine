@@ -1,4 +1,5 @@
 #include "GLError.h"
+
 namespace BF
 {
 	namespace Platform

@@ -17,7 +17,20 @@ namespace BF
 			{
 			}
 
-			void Shader::Load(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
+			void Shader::LoadStandardShader(ShaderType type)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (Context::GetRenderAPI() == RenderAPI::DirectX)
+				{
+				}
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glShader.LoadStandardShader(type);
+#endif
+			}
+
+			void Shader::LoadFromFile(const string& vertexShaderFilePath, const string& pixelShaderFilePath)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -25,7 +38,7 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glShader.Load(vertexShaderFilePath, pixelShaderFilePath);
+					glShader.LoadFromFile(vertexShaderFilePath, pixelShaderFilePath);
 #endif
 			}
 
