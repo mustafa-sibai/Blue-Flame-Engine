@@ -14,6 +14,11 @@ namespace BF
 			return (value - max) / (max - min);
 		}
 
+		float Lerp(float value1, float value2, float time)
+		{
+			return value1 + (value2 - value1) * time;
+		}
+
 		int Min(int a, int b)
 		{
 			return a < b ? a : b;

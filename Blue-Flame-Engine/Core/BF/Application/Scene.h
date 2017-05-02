@@ -32,6 +32,7 @@ namespace BF
 
 			private:
 				System::Timer frameTimer;
+				System::Timer fixedUpdateTimer;
 				System::Timer frameRateTimer;
 #if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
 				Graphics::GUI::WidgetManager widgetManager;
@@ -56,7 +57,7 @@ namespace BF
 			protected:
 				virtual void Initialize();
 				virtual void Load();
-				virtual void FixedUpdate();
+				//virtual void FixedUpdate();
 				virtual void Update();
 				virtual void Render();
 		};

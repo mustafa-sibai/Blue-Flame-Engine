@@ -67,7 +67,7 @@ namespace _2DScene
 			void Initialize() override;
 			void Load() override;
 			void Update() override;
-			void FixedUpdate() override;
+			//void FixedUpdate() override;
 			void Render() override;
 
 			static bool TimeFunction(void* this_pointer);

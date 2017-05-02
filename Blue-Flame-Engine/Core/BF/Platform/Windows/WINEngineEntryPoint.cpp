@@ -2,9 +2,6 @@
 #include "BF/Application/SceneManager.h"
 #include "BF/System/Log.h"
 
-#define BF_FRAME_RATE_TARGET 60.0f
-#define BF_FRAME_TIME_TARGET 1000.0f / BF_FRAME_RATE_TARGET
-
 namespace BF
 {
 	namespace Platform
@@ -15,8 +12,9 @@ namespace BF
 			using namespace BF::Application;
 
 			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI) :
-				winWindow(winWindow), context(renderAPI)
+				winWindow(winWindow), context(renderAPI), frameRateTarget(0.0f), frameTimeTarget(0.0f)
 			{
+				LimitFrameRate(60.0f);
 			}
 
 			WINEngineEntryPoint::~WINEngineEntryPoint()
@@ -30,80 +28,82 @@ namespace BF
 				{
 					switch (state)
 					{
-					case State::Initialize:
-					{
-						winWindow.Initialize();
-						context.Initialize();
-						SceneManager::AddNewScene(&mainScene);
-						SceneManager::GetScene(0).Run();
-						state = State::Render;
-						break;
-					}
-
-					case State::Render:
-					{
-						for (int i = 0; i < SceneManager::GetScenes().size(); i++)
+						case State::Initialize:
 						{
-							if (SceneManager::GetScene(i).IsRunning())
+							winWindow.Initialize();
+							context.Initialize();
+							SceneManager::AddNewScene(&mainScene);
+							SceneManager::GetScene(0).Run();
+							state = State::Render;
+							break;
+						}
+
+						case State::Render:
+						{
+							for (int i = 0; i < SceneManager::GetScenes().size(); i++)
 							{
-								if (!SceneManager::GetScene(i).initialized)
+								if (SceneManager::GetScene(i).IsRunning())
 								{
-									SceneManager::GetScene(i).Initialize();
-									SceneManager::GetScene(i).initialized = true;
-								}
-
-								if (!SceneManager::GetScene(i).loaded)
-								{
-									SceneManager::GetScene(i).Load();
-									SceneManager::GetScene(i).loaded = true;
-								}
-
-								SceneManager::GetScene(i).frameTimer.Reset();
-								if (timesToRunFixedUpdate > 0)
-								{
-									SceneManager::GetScene(i).FixedUpdate();
-									timesToRunFixedUpdate--;
-									FUPS++;
-								}
-
-								winWindow.Update();
-								SceneManager::GetScene(i).Update();
-								SceneManager::GetScene(i).Render();
-								elapsedFrameTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
-
-								FPS++;
-								totalTime += elapsedFrameTime;
-
-								if (totalTime >= BF_FRAME_TIME_TARGET)
-								{
-									extra += totalTime - BF_FRAME_TIME_TARGET;
-									timesToRunFixedUpdate++;
-
-									if (extra >= BF_FRAME_TIME_TARGET)
+									if (!SceneManager::GetScene(i).initialized)
 									{
-										timesToRunFixedUpdate++;
-										extra -= BF_FRAME_TIME_TARGET;
+										SceneManager::GetScene(i).Initialize();
+										SceneManager::GetScene(i).initialized = true;
 									}
 
-									totalTime = 0;
-								}
+									if (!SceneManager::GetScene(i).loaded)
+									{
+										SceneManager::GetScene(i).Load();
+										SceneManager::GetScene(i).loaded = true;
+									}
 
-								if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
-								{
-									BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
-									SceneManager::GetScene(i).frameRateTimer.Reset();
-									FPS = 0;
-									FUPS = 0;
+									winWindow.Update();
+
+									if (frameTimeTarget != 0.0f)
+									{
+										if (SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds() >= frameTimeTarget)
+										{
+											deltaTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
+											SceneManager::GetScene(i).frameTimer.Reset();
+											SceneManager::GetScene(i).Update();
+											SceneManager::GetScene(i).Render();
+											FPS++;
+										}
+									}
+									else
+									{
+										deltaTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
+										SceneManager::GetScene(i).frameTimer.Reset();
+										SceneManager::GetScene(i).Update();
+										SceneManager::GetScene(i).Render();
+										FPS++;
+									}
+
+									if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
+									{
+										BF_LOG_INFO("Frames: %d, LastFrameTime: %f", FPS, deltaTime);
+										SceneManager::GetScene(i).frameRateTimer.Reset();
+										FPS = 0;
+									}
 								}
 							}
+							break;
 						}
-						break;
-					}
 
-					default:
-						break;
+						default:
+							break;
 					}
 				}
+			}
+
+			void WINEngineEntryPoint::LimitFrameRate(double limit)
+			{
+				if (limit != 0.0f)
+				{
+					frameRateTarget = limit;
+					frameTimeTarget = 1000.0f / frameRateTarget;
+				}
+				else
+					frameTimeTarget = 0.0f;
 			}
 		}
 	}

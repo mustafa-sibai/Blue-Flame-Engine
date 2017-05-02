@@ -31,6 +31,9 @@ namespace BF
 			Vector3& operator*=(const Vector3& right);
 			Vector3& operator/=(const Vector3& right);
 
+			bool operator==(const Vector3& right);
+			bool operator!=(const Vector3& right);
+
 			friend BF_API std::ostream& operator<<(std::ostream& os, const Vector3& vector);
 		};
 	}

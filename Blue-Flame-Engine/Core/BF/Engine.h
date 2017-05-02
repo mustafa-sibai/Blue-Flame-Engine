@@ -10,7 +10,7 @@
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 170426
+#define BF_ENGINE_MINOR_VERSION 170430
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF
@@ -38,7 +38,10 @@ namespace BF
 
 			void Run(Application::Scene& mainScene);
 
+			static void LimitFrameRate(double limit);
+
 #ifdef BF_PLATFORM_WINDOWS
+			static inline double GetDeltaTime() { return winEngineEntryPoint->GetDeltaTime(); }
 			static inline Platform::Windows::WINWindow& GetWindow() { return winEngineEntryPoint->GetWindow(); }
 			static inline Graphics::API::Context& GetContext() { return winEngineEntryPoint->GetContext(); }
 #elif defined (BF_PLATFORM_WEB)

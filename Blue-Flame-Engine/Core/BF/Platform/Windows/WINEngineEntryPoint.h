@@ -20,9 +20,9 @@ namespace BF
 					WINWindow winWindow;
 					Graphics::API::Context context;
 
-					double totalTime, extra;
-					int FPS, FUPS, timesToRunFixedUpdate;
-					double elapsedFrameTime;
+					double deltaTime;
+					double frameRateTarget, frameTimeTarget;
+					unsigned int FPS;
 
 				public:
 					enum class State { Initialize, Render, Exit };
@@ -33,7 +33,9 @@ namespace BF
 					~WINEngineEntryPoint();
 
 					void Run(Application::Scene& mainScene);
+					void LimitFrameRate(double limit);
 
+					inline double GetDeltaTime() const { return deltaTime; }
 					inline WINWindow& GetWindow() { return winWindow; }
 					inline Graphics::API::Context& GetContext() { return context; }
 			};

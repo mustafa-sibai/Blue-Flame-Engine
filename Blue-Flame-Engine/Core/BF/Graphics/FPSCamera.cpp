@@ -42,14 +42,14 @@ namespace BF
 			if (Keyboard::IsKeyPressed(Keyboard::Key::D))
 				position += cameraFront.Cross(cameraUp).Normalize() * movmentSpeed;
 
-			BF::Input::Mouse::SetPosition(windowCenter);
-			yaw += (Mouse::GetPosition().x - windowCenter.x) * sensitivity;
-			pitch += (windowCenter.y - Mouse::GetPosition().y) * sensitivity;
+			//BF::Input::Mouse::SetPosition(windowCenter);
+			//yaw += (Mouse::GetPosition().x - windowCenter.x) * sensitivity;
+			//pitch += (windowCenter.y - Mouse::GetPosition().y) * sensitivity;
 
-			if (pitch > 89.0f)
+			/*if (pitch > 89.0f)
 				pitch = 89.0f;
 			if (pitch < -89.0f)
-				pitch = -89.0f;
+				pitch = -89.0f;*/
 
 			cameraFront.x = cos(ToRadians(yaw)) * cos(ToRadians(pitch));
 			cameraFront.y = sin(ToRadians(pitch));

@@ -79,6 +79,16 @@ namespace BF
 			return *this;
 		}
 
+		bool Color::operator==(const Color &right)
+		{
+			return r == right.r && g == right.g && b == right.b && a == right.a ? true : false;
+		}
+
+		bool Color::operator!=(const Color &right)
+		{
+			return r != right.r || g != right.g || b != right.b || a != right.a ? true : false;
+		}
+
 		std::ostream& operator<<(std::ostream& os, const Color& color)
 		{
 			return os << "{" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << "}";

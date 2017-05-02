@@ -100,6 +100,16 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector3::operator==(const Vector3 &right)
+		{
+			return x == right.x && y == right.y && z == right.z ? true : false;
+		}
+
+		bool Vector3::operator!=(const Vector3 &right)
+		{
+			return x != right.x || y != right.y || z != right.z ? true : false;
+		}
+
 		std::ostream& operator<<(std::ostream& os, const Vector3& vector)
 		{
 			return os << "{" << vector.x << ", " << vector.y << ", " << vector.z << "}";

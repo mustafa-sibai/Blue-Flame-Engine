@@ -22,6 +22,7 @@ namespace _3DScene
 	{
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		//BF::Engine::GetContext().EnableVsync(true);
+		BF::Engine::LimitFrameRate(0.0f);
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
@@ -81,14 +82,16 @@ namespace _3DScene
 		light.position.w = 1.0f;
 	}
 
-	void _3DScene::FixedUpdate()
+	/*void _3DScene::FixedUpdate()
 	{
-		angle += 0.5f;
-		fpsCamera.Update();
-	}
+
+	}*/
 
 	void _3DScene::Update()
 	{
+		angle += 0.1f * BF::Engine::GetDeltaTime();
+		fpsCamera.Update();
+
 		if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::A))
 			BF_LOG_INFO("A Pressed !");
 

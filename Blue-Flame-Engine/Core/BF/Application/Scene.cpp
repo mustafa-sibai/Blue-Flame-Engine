@@ -28,9 +28,9 @@ namespace BF
 #endif
 		}
 
-		void Scene::FixedUpdate()
+		/*void Scene::FixedUpdate()
 		{
-		}
+		}*/
 
 		void Scene::Update()
 		{

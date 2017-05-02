@@ -1,12 +1,16 @@
 #pragma once
 #include "BF/BlueFlame.h"
+#include "Snake.h"
+#include "Food.h"
 
 class MainScene : public BF::Application::Scene
 {
 private:
 	BF::Graphics::Camera camera;
 	BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
-	BF::Graphics::Renderers::RegularPolygon rectangle;
+
+	Snake snake;
+	Food food;
 
 public:
 	MainScene();
@@ -15,7 +19,6 @@ public:
 private:
 	void Initialize() override;
 	void Load() override;
-	void FixedUpdate() override;
 	void Update() override;
 	void Render() override;
 };

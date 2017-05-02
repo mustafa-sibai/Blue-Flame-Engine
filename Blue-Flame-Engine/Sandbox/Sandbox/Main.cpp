@@ -48,7 +48,8 @@ int main()
 	
 	//BF::Application::SceneManager::AddNewScene(new _3DScene2::_3DScene2());
 
-	engine.Run(_2DScene::_2DScene());
+	//engine.Run(_2DScene::_2DScene());
+	engine.Run(_3DScene::_3DScene());
 
 	/*
 		TCHAR  buffer[MAX_PATH];

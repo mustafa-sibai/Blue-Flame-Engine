@@ -13,6 +13,7 @@ namespace BF
 	{
 		float ToRadians(float Degrees);
 		float Normalize(float value, float min, float max);
+		float Lerp(float value1, float value2, float time);
 
 		int Min(int a, int b);
 		float Min(float a, float b);

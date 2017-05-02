@@ -20,9 +20,9 @@ void InputTests::Load()
 {
 }
 
-void InputTests::FixedUpdate()
+/*void InputTests::FixedUpdate()
 {
-}
+}*/
 
 void InputTests::Update()
 {

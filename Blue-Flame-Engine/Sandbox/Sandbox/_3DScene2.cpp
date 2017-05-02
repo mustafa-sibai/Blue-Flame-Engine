@@ -73,14 +73,16 @@ namespace _3DScene2
 		material.specularMap.Load("Assets/Textures/specularMap.png", Texture::Wrap::ClampToBorder, Texture::Filter::AnisotropicX16);
 	}
 
-	void _3DScene2::FixedUpdate()
+	/*void _3DScene2::FixedUpdate()
 	{
-		angle += 0.5f;
-		fpsCamera.Update();
-	}
+
+	}*/
 
 	void _3DScene2::Update()
 	{
+		angle += 0.5f;
+		fpsCamera.Update();
+
 		if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::A))
 			BF_LOG_INFO("A Pressed !");
 

@@ -92,6 +92,16 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector2::operator==(const Vector2 &right)
+		{
+			return x == right.x && y == right.y ? true : false;
+		}
+
+		bool Vector2::operator!=(const Vector2 &right)
+		{
+			return x != right.x || y != right.y ? true : false;
+		}
+
 		std::ostream& operator<<(std::ostream& os, const Vector2& vector)
 		{
 			return os << "{" << vector.x << ", " << vector.y << "}";

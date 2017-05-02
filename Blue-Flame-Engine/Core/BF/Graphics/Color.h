@@ -25,6 +25,9 @@ namespace BF
 			Color& operator*=(const Color& right);
 			Color& operator/=(const Color& right);
 
+			bool operator==(const Color& right);
+			bool operator!=(const Color& right);
+
 			friend BF_API std::ostream& operator<<(std::ostream& os, const Color& color);
 		};
 	}

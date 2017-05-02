@@ -55,4 +55,15 @@ namespace BF
 		andEngineEntryPoint->Run(mainScene);
 #endif
 	}
+
+	void Engine::LimitFrameRate(double limit)
+	{
+#ifdef BF_PLATFORM_WINDOWS
+		winEngineEntryPoint->LimitFrameRate(limit);
+#elif defined (BF_PLATFORM_WEB)
+		webEngineEntryPoint->LimitFrameRate(limit);
+#elif defined (BF_PLATFORM_ANDROID)
+		andEngineEntryPoint->LimitFrameRate(limit);
+#endif
+	}
 }

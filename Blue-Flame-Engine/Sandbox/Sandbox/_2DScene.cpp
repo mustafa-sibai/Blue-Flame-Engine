@@ -42,6 +42,7 @@ namespace _2DScene
 	void _2DScene::Initialize()
 	{
 		//Scene::Initialize();
+		//Engine::GetContext().EnableVsync(true);
 
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		spriteRenderer.Initialize();
@@ -93,13 +94,13 @@ namespace _2DScene
 		//renderTarget.Create(800, 600, Texture::Format::R8G8B8, Texture::TextureWrap::ClampToBorder, Texture::TextureFilter::Neatest);
 	}
 
-	void _2DScene::FixedUpdate()
+/*	void _2DScene::FixedUpdate()
 	{
 		//Scene::FixedUpdate();
 
 		//BF_WARNING("TICKS");
 		//spriteAnimation.Update();
-	}
+	}*/
 
 	void DoButtonWork()
 	{
