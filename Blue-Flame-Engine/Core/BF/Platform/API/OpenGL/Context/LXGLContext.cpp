@@ -1,4 +1,7 @@
 #include "LXGLContext.h"
+#include "BF/Engine.h"
+#include "BF/Graphics/API/Context.h"
+#include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
 {
@@ -8,6 +11,9 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::Graphics;
+				using namespace BF::Graphics::API;
+
 				static bool ctxErrorOccurred = false;
 				static int ctxErrorHandler(Display* display, XErrorEvent* errorEvent)
 				{
@@ -15,8 +21,16 @@ namespace BF
 					return 0;
 				}
 
-				LXGLContext::LXGLContext(Linux::LXWindow* lxWindow) :
-					lxWindow(lxWindow), context(NULL)
+				LXGLContext::LXGLContext() :
+					context(NULL)
+				{
+				}
+
+				LXGLContext::~LXGLContext()
+				{
+				}
+
+				void LXGLContext::Initialize()
 				{
 					// Install an X error handler so the application won't exit if GL 3.0
 					// context allocation fails.
@@ -37,22 +51,18 @@ namespace BF
 					fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 				}
 
-				LXGLContext::~LXGLContext()
-				{
-				}
-
 				void LXGLContext::CreateContext(bool createOldContext)
 				{
 					if (createOldContext)
-						context = glXCreateNewContext(lxWindow->GetDisplay(), lxWindow->GetFrameBufferConfig(), GLX_RGBA_TYPE, 0, True);
+						context = glXCreateNewContext(Engine::GetWindow().GetDisplay(), Engine::GetWindow().GetFrameBufferConfig(), GLX_RGBA_TYPE, 0, True);
 					else
 					{
 						if (glxewIsSupported("GLX_ARB_create_context"))
 						{
 							if (context)
 							{
-								glXMakeCurrent(lxWindow->GetDisplay(), 0, 0);
-								glXDestroyContext(lxWindow->GetDisplay(), context);
+								glXMakeCurrent(Engine::GetWindow().GetDisplay(), 0, 0);
+								glXDestroyContext(Engine::GetWindow().GetDisplay(), context);
 								context = NULL;
 							}
 
@@ -65,7 +75,7 @@ namespace BF
 								None
 							};
 
-							context = glXCreateContextAttribsARB(lxWindow->GetDisplay(), lxWindow->GetFrameBufferConfig(), 0, True, context_attribs);
+							context = glXCreateContextAttribsARB(Engine::GetWindow().GetDisplay(), Engine::GetWindow().GetFrameBufferConfig(), 0, True, context_attribs);
 						}
 						else
 							printf("glXCreateContextAttribsARB() not found. Could not create new context\n");
@@ -75,7 +85,7 @@ namespace BF
 				void LXGLContext::FinishCreatingContext(int(*oldHandler)(Display*, XErrorEvent*))
 				{
 					// Sync to ensure any errors generated are processed.
-					XSync(lxWindow->GetDisplay(), False);
+					XSync(Engine::GetWindow().GetDisplay(), False);
 
 					// Restore the original error handler
 					XSetErrorHandler(oldHandler);
@@ -85,12 +95,12 @@ namespace BF
 						printf("Failed to create an OpenGL context\n");
 					}
 
-					if (!glXIsDirect(lxWindow->GetDisplay(), context))
+					if (!glXIsDirect(Engine::GetWindow().GetDisplay(), context))
 						printf("Indirect GLX rendering context obtained\n");
 					else
 						printf("Direct GLX rendering context obtained\n");
 
-					glXMakeCurrent(lxWindow->GetDisplay(), lxWindow->GetWindow(), context);
+					glXMakeCurrent(Engine::GetWindow().GetDisplay(), Engine::GetWindow().GetXWindow(), context);
 
 					if (!ctxErrorOccurred && context)
 					{
@@ -106,21 +116,13 @@ namespace BF
 						fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 				}
 
-				void LXGLContext::Clear(Math::Vector4 color)
-				{
-					glClearColor(color.x, color.y, color.z, color.w);
-					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-					glEnable(GL_DEPTH_TEST);
-				}
-
-				void LXGLContext::Draw(GLenum mode, GLsizei count, GLenum type)
-				{
-					glDrawElements(mode, count, type, nullptr);
-				}
-
 				void LXGLContext::SwapBuffers()
 				{
-					glXSwapBuffers(lxWindow->GetDisplay(), lxWindow->GetWindow());
+					glXSwapBuffers(Engine::GetWindow().GetDisplay(), Engine::GetWindow().GetXWindow());
+				}
+
+				void LXGLContext::CleanUp()
+				{
 				}
 			}
 		}

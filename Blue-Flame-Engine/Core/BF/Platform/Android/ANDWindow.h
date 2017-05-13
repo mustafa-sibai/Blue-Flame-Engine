@@ -1,7 +1,6 @@
 #pragma once
+#define INCLUDE_OPENGL
 #include <android/native_window.h>
-#include "DependencyHeaders/EGL/eglplatform.h"
-#include "DependencyHeaders/EGL/egl.h"
 #include "BF/Platform/API/OpenGL/Context/ANDGLContext.h"
 #include "BF/Application/Window.h"
 #include "BF/Common.h"

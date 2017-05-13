@@ -1,9 +1,9 @@
 #pragma once
-#include "DependencyHeaders/EGL/egl.h"
+#define INCLUDE_OPENGL
 #include <android/native_window.h>
-#include "BF/Common.h"
 #include <thread>
 #include <mutex>
+#include "BF/Common.h"
 
 namespace BF
 {

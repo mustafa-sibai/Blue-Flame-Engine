@@ -1,4 +1,6 @@
 #include "ImageLoader.h"
+#include "DependencyHeaders/FreeImage/FreeImage.h"
+#include "DependencyHeaders/FreeImage/Utilities.h"
 
 namespace BF
 {
@@ -12,7 +14,7 @@ namespace BF
 
 			FIBITMAP* dib = nullptr;
 			uint8_t* bits = nullptr;
-			
+
 			fif = FreeImage_GetFileType(filename.c_str(), 0);
 
 			if (fif == FIF_UNKNOWN)
@@ -27,7 +29,7 @@ namespace BF
 			if (!dib)
 				std::cout << "file not found" << std::endl;
 
-			if(!FreeImage_FlipVertical(dib))
+			if (!FreeImage_FlipVertical(dib))
 				std::cout << "failed to flip image" << std::endl;
 
 			FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(dib);

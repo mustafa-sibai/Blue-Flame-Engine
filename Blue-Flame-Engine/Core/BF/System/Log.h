@@ -27,7 +27,8 @@ static void SetConsoleColor(int colorCode)
 #define BF_LOG_ERROR(...)	do { __android_log_print(ANDROID_LOG_ERROR, "Blue Flame Engine: [ERROR]", __VA_ARGS__); } while(false)
 #define BF_LOG_FATAL(...)	do { __android_log_print(ANDROID_LOG_FATAL, "Blue Flame Engine: [FATAL]", __VA_ARGS__); } while(false)
 
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BF_PLATFORM_WEB) || defined(BF_PLATFORM_LINUX)
+
 #include <stdio.h>
 #include <string.h>
 

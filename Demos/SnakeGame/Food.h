@@ -4,17 +4,18 @@
 class Food
 {
 private:
+	BF::Graphics::Renderers::SpriteRenderer& spriteRenderer;
 	BF::Graphics::Renderers::RegularPolygon food;
 	BF::Math::Rectangle rectangle;
 
 public:
-	Food();
+	Food(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer);
 	~Food();
 
 	void Initialize();
 	void Load();
 	void Update();
-	void Render(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer);
+	void Render();
 
 	void GenerateRandomPosition();
 

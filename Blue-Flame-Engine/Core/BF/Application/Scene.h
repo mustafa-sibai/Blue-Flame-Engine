@@ -1,6 +1,9 @@
 #pragma once
+
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
+#elif defined(BF_PLATFORM_LINUX)
+	#include "BF/Platform/Linux/LXEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_WEB)
 	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_ANDROID)
@@ -10,7 +13,9 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/Graphics/API/Context.h"
-#include "BF/Graphics/GUI/WidgetManager.h"
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+	#include "BF/Graphics/GUI/WidgetManager.h"
+#endif
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
@@ -24,6 +29,8 @@ namespace BF
 
 #ifdef BF_PLATFORM_WINDOWS
 				friend class BF::Platform::Windows::WINEngineEntryPoint;
+#elif defined(BF_PLATFORM_LINUX)
+			friend class BF::Platform::Linux::LXEngineEntryPoint;
 #elif defined(BF_PLATFORM_WEB)
 				friend class BF::Platform::Web::WEBEngineEntryPoint;
 #elif defined(BF_PLATFORM_ANDROID)
@@ -34,7 +41,7 @@ namespace BF
 				System::Timer frameTimer;
 				System::Timer fixedUpdateTimer;
 				System::Timer frameRateTimer;
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				Graphics::GUI::WidgetManager widgetManager;
 #endif
 				bool run;
@@ -50,7 +57,7 @@ namespace BF
 				inline void Stop() { run = false; }
 
 				inline bool IsRunning() const { return run; }
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 #endif
 

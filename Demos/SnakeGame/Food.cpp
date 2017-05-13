@@ -7,7 +7,8 @@ using namespace BF::Graphics::Renderers;
 using namespace BF::Math;
 using namespace BF::Input;
 
-Food::Food()
+Food::Food(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer) :
+	spriteRenderer(spriteRenderer)
 {
 	srand(time(NULL));
 }
@@ -29,7 +30,7 @@ void Food::Update()
 {
 }
 
-void Food::Render(SpriteRenderer& spriteRenderer)
+void Food::Render()
 {
 	spriteRenderer.Render(food);
 }

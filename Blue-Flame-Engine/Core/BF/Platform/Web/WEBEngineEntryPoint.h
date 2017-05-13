@@ -21,9 +21,14 @@ namespace BF
 					Graphics::API::Context context;
 					Application::Scene* mainScene;
 
+					//--------------------------- THIS TO BE REMOVED AND CHANGED LIKE THE WINDOWS VERION -----------------------
 					double totalTime, extra;
 					int FPS, FUPS, timesToRunFixedUpdate;
 					double elapsedFrameTime;
+					//--------------------------- THIS TO BE REMOVED AND CHANGED LIKE THE WINDOWS VERION -----------------------
+
+					double deltaTime;
+					double frameRateTarget, frameTimeTarget;
 
 				public:
 					enum class State { Initialize, Render, Exit };
@@ -34,6 +39,7 @@ namespace BF
 					~WEBEngineEntryPoint();
 
 					void Run(Application::Scene& mainScene);
+					void LimitFrameRate(double limit);
 
 					inline WEBWindow& GetWindow() { return webWindow; }
 					inline Graphics::API::Context& GetContext() { return context; }

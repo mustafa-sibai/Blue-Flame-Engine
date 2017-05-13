@@ -1,7 +1,6 @@
 #pragma once
 #include <stdio.h>
-#include "BF/Platform/Linux/LXWindow.h"
-#include "BF/Math/Vector4.h"
+#include "BF/Platform/API/OpenGL/GLContext.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -12,25 +11,24 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API LXGLContext
+				class BF_API LXGLContext : public GLContext
 				{
 					private:
-						Linux::LXWindow* lxWindow;
 						GLXContext context;
 						const unsigned short OPENGL_CONTEXT_MAJOR_VERSION = 4;
 						const unsigned short OPENGL_CONTEXT_MINOR_VERSION = 5;
 
+					public:
+						LXGLContext();
+						~LXGLContext();
+
+						void Initialize() override;
+						void SwapBuffers() override;
+						void CleanUp() override;
+
 					private:
 						void CreateContext(bool createOldContext);
 						void FinishCreatingContext(int(*oldHandler)(Display*, XErrorEvent*));
-
-					public:
-						LXGLContext(Linux::LXWindow* lxWindow);
-						~LXGLContext();
-
-						void Clear(Math::Vector4 color);
-						void Draw(GLenum mode, GLsizei count, GLenum type);
-						void SwapBuffers();
 				};
 			}
 		}

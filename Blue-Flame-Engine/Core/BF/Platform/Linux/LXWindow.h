@@ -1,41 +1,44 @@
 #pragma once
 #include <stdio.h>
-#include <GL/glew.h>
-#include <GL/glxew.h>
-#include "BF/Application/WindowStyle.h"
+#include <string>
+#include "DependencyHeaders/GLEW/GL/glew.h"
+#include "DependencyHeaders/GLEW/GL/glxew.h"
+#include "BF/Application/Window.h"
+#include "BF/Common.h"
 
 namespace BF
 {
+	typedef Window XWindow;
+
 	namespace Application { class Window; }
 
 	namespace Platform
 	{
 		namespace Linux
 		{
-			class BF_API LXWindow
+			class BF_API LXWindow : public Application::Window
 			{
 				private:
-					Application::Window* window;
-
 					Display* display;
-					Window xwindow;
+					XWindow xwindow;
 					XEvent xEvent;
 					GLXFBConfig frameBufferConfig;
 
 				private:
 					void CheckGLXVersion();
 					GLXFBConfig GetBestFrameBufferConfig(int framebuffer_attribs[]);
-					void CreateWindow(Application::Window* window, GLXFBConfig frameBuffer);
+					void CreateWindow(GLXFBConfig frameBuffer);
 
 				public:
-					LXWindow(Application::Window* window);
+					LXWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style);
 					~LXWindow();
 
+					void Initialize();
 					void Update();
 					bool IsOpen();
 
 					inline Display* GetDisplay() const { return display; }
-					inline Window GetWindow() const { return xwindow; }
+					inline XWindow GetXWindow() const { return xwindow; }
 					inline GLXFBConfig GetFrameBufferConfig() const { return frameBufferConfig; }
 			};
 		}

@@ -2,7 +2,7 @@
 #include "DependencyHeaders/OpenAL-Soft/AL/al.h"
 #include "DependencyHeaders/OpenAL-Soft/AL/alc.h"
 #include "DependencyHeaders/OpenAL-Soft/AL/alext.h"
-#include <BF/Common.h>
+#include "BF/Common.h"
 
 namespace BF
 {

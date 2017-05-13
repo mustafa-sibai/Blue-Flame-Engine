@@ -8,7 +8,7 @@ using namespace BF::Math;
 using namespace BF::Input;
 
 MainScene::MainScene() :
-	snake(food)
+	snake(spriteRenderer, food), food(spriteRenderer), hud(spriteRenderer, snake)
 {
 }
 
@@ -23,12 +23,14 @@ void MainScene::Initialize()
 
 	snake.Initialize();
 	food.Initialize();
+	hud.Initialize();
 }
 
 void MainScene::Load()
 {
 	snake.Load();
 	food.Load();
+	hud.Load();
 }
 
 void MainScene::Update()
@@ -36,14 +38,18 @@ void MainScene::Update()
 	camera.Update();
 	snake.Update();
 	food.Update();
+	hud.Update();
 }
 
 void MainScene::Render()
 {
 	Engine::GetContext().Clear(Color(0.0f, 0.0f, 0.0f, 1.0f));
+
 	spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
-	snake.Render(spriteRenderer);
-	food.Render(spriteRenderer);
+	snake.Render();
+	food.Render();
+	hud.Render();
 	spriteRenderer.End();
+
 	Engine::GetContext().SwapBuffers();
 }

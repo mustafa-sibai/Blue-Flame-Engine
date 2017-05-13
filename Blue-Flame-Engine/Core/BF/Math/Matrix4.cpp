@@ -1,4 +1,5 @@
 #include "Matrix4.h"
+#include <string.h>
 
 namespace BF
 {

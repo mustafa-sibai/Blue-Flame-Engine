@@ -3,6 +3,7 @@
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Math/Math.h"
 #include "BF/Graphics/Fonts/Character.h"
+#include "BF/Common.h"
 
 namespace BF
 {
@@ -10,7 +11,7 @@ namespace BF
 	{
 		namespace Fonts
 		{
-			class FontAtlas
+			class BF_API FontAtlas
 			{
 				public:
 					std::string fontName;

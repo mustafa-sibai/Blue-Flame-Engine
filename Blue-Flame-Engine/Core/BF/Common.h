@@ -1,4 +1,3 @@
-#pragma once
 #ifdef BF_PLATFORM_WINDOWS
 	#pragma warning (disable:4251)
 #endif

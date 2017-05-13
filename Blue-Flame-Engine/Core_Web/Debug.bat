@@ -54,6 +54,7 @@ CALL emcc ^
  "../Core/BF/Math/Vector3.cpp" ^
  "../Core/BF/Math/Vector4.cpp" ^
  "../Core/BF/Platform/API/OpenGL/Context/WEBGLContext.cpp" ^
+ "../Core/BF/Platform/API/OpenGL/GLContext.cpp" ^
  "../Core/BF/Platform/API/OpenGL/GLConstentBuffer.cpp" ^
  "../Core/BF/Platform/API/OpenGL/GLError.cpp" ^
  "../Core/BF/Platform/API/OpenGL/GLFramebuffer.cpp" ^

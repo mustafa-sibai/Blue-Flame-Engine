@@ -1,6 +1,5 @@
 #include "WINGLContext.h"
 #include "BF/Engine.h"
-#include "BF/Graphics/API/Context.h"
 #include "BF/Platform/API/OpenGL/GLError.h"
 
 #define OPENGL_CONTEXT_MAJOR_VERSION 4
@@ -14,10 +13,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				using namespace BF::Graphics::API;
-
-				WINGLContext::WINGLContext() : 
-					initialized(false)
+				WINGLContext::WINGLContext()
 				{
 				}
 
@@ -78,51 +74,6 @@ namespace BF
 					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				}
 
-				void WINGLContext::SetPrimitiveType(PrimitiveType primitiveType)
-				{
-					switch (primitiveType)
-					{
-						case PrimitiveType::PointList:
-						{
-							GL_PRIMITIVE_TYPE = GL_POINTS;
-							break;
-						}
-						case PrimitiveType::LineList:
-						{
-							GL_PRIMITIVE_TYPE = GL_LINES;
-							break;
-						}
-						case PrimitiveType::LineStrip:
-						{
-							GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
-							break;
-						}
-						case PrimitiveType::TriangleList:
-						{
-							GL_PRIMITIVE_TYPE = GL_TRIANGLES;
-							break;
-						}
-						case PrimitiveType::TriangeStrip:
-						{
-							GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
-							break;
-						}
-						default:
-							break;
-					}
-				}
-
-				void WINGLContext::Clear(const Graphics::Color& color)
-				{
-					GLCall(glClearColor(color.r, color.g, color.b, color.a));
-					GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-				}
-
-				void WINGLContext::Render(GLsizei count)
-				{
-					GLCall(glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr));
-				}
-
 				void WINGLContext::SwapBuffers()
 				{
 					wglSwapLayerBuffers(hDC, WGL_SWAP_MAIN_PLANE);
@@ -133,56 +84,9 @@ namespace BF
 					DeleteDC(hDC);
 				}
 
-				void WINGLContext::EnableDepthBuffer(bool state)
-				{
-					if (state)
-						GLCall(glEnable(GL_DEPTH_TEST));
-					else
-						GLCall(glDisable(GL_DEPTH_TEST));
-				}
-
-				void WINGLContext::EnableDepthMask(bool state)
-				{
-					if (state)
-						GLCall(glDepthMask(GL_TRUE));
-					else
-						GLCall(glDepthMask(GL_FALSE));
-				}
-
-				void WINGLContext::EnableBlending(bool state)
-				{
-					if (state)
-					{
-						GLCall(glEnable(GL_BLEND));
-						GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-					}
-					else
-						GLCall(glDisable(GL_BLEND));
-				}
-
 				void WINGLContext::EnableVsync(bool state)
 				{
 					wglSwapIntervalEXT(state);
-				}
-
-				void WINGLContext::EnableScissor(bool state)
-				{
-					if (state)
-						glEnable(GL_SCISSOR_TEST);
-					else
-						glDisable(GL_SCISSOR_TEST);
-				}
-
-				void WINGLContext::SetScissor(const Math::Rectangle& rectangle)
-				{
-					int height = Engine::GetWindow().GetClientHeight() - rectangle.height - rectangle.y;
-					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientHeight() - height - rectangle.y);
-				}
-
-				void WINGLContext::SetViewport(const Math::Rectangle& rectangle)
-				{
-					if(initialized)
-						GLCall(glViewport(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
 				}
 			}
 		}

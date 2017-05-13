@@ -1,4 +1,5 @@
 #include "FileLoader.h"
+#include <string>
 #include "BF/System//Log.h"
 
 namespace BF

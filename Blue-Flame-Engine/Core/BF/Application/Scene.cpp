@@ -16,14 +16,14 @@ namespace BF
 
 		void Scene::Initialize()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 			widgetManager.Initialize();
 #endif
 		}
 
 		void Scene::Load()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 			widgetManager.Load();
 #endif
 		}
@@ -34,14 +34,14 @@ namespace BF
 
 		void Scene::Update()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 			widgetManager.Update();
 #endif
 		}
 
 		void Scene::Render()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
+#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 			widgetManager.Render();
 #endif
 		}

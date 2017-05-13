@@ -1,4 +1,5 @@
 #include "WAVLoader.h"
+#include <string.h>
 
 namespace BF
 {

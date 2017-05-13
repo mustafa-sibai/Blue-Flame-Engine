@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Sandbox">
+      <UniqueIdentifier>{476e8b60-b05c-4383-ace3-d0d5d2f42469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{22aa619a-b5ef-4a56-9d6b-7165aa8d69aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures">
+      <UniqueIdentifier>{7680f53f-1114-4b0d-9d95-457c2a572d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{c740fb4d-06fe-4a55-bad2-7a6a7f5712ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\GUI">
+      <UniqueIdentifier>{ef446985-c864-4435-ac11-1be55369eba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Textures\wall">
+      <UniqueIdentifier>{beeafc65-f223-48d9-ac0c-8f5514553a1c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Sandbox\Sandbox\_2DScene.cpp">
+      <Filter>Sandbox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandbox\Sandbox\Main.cpp">
+      <Filter>Sandbox</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Sandbox\Sandbox\_2DScene.h">
+      <Filter>Sandbox</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Sandbox\Assets\Textures\wall\brickwall.jpg">
+      <Filter>Assets\Textures\wall</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\wall\brickwall_normal.jpg">
+      <Filter>Assets\Textures\wall</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\wall\specularMap.jpg">
+      <Filter>Assets\Textures\wall</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\diffuseMap.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\grass.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\GUI.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\normalMap.jpg">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\player.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\road.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\silver.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\specularMap.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\test2.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\tilea1.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\tilea5.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+    <Image Include="..\Sandbox\Assets\Textures\Untitled.png">
+      <Filter>Assets\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Sandbox\Assets\Textures\Cube.mtl">
+      <Filter>Assets\Textures</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\Sandbox\Assets\Textures\Cube.obj">
+      <Filter>Assets\Textures</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Sandbox\Assets\GUI\StyleSheet.xml">
+      <Filter>Assets\GUI</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\Sandbox\Assets\Fonts\arial.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+</Project>

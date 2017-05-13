@@ -18,35 +18,32 @@ namespace BF
 		{
 			class BF_API Font
 			{
-			private:
-				unsigned int startUnicode, endUnicode;
+				private:
+					FT_Library library;
+					FT_Error error;
+					FT_Face face;
 
-			public:
-				enum class Language
-				{
-					Null, English
-				};
+					TextureAtlas textureAtlas;
+					API::Texture2D* texture;
 
-				FT_Library library;
-				FT_Error error;
-				FT_Face face;
+					unsigned int startUnicode, endUnicode;
 
-				TextureAtlas textureAtlas;
-				API::Texture2D* texture;
+				public:
+					enum class Language
+					{
+						Null, English
+					};
 
-				unsigned int charPixelSize = 90;
+				public:
+					Font(const API::Shader& shader);
+					~Font();
 
-			public:
-				Font(const API::Shader& shader);
-				~Font();
+					FontAtlas* Load(const std::string& filename, unsigned int charPixelSize, Language language);
 
-				FontAtlas* Load(const std::string& filename, Language language);
-				
-
-			private:
-				void CreateTextureAtlas(int startUnicode, int endUnicode);
-				void PrepareGlyph(unsigned int unicode);
-				void CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int glyphWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height);
+				private:
+					void CreateTextureAtlas(int startUnicode, int endUnicode);
+					void PrepareGlyph(unsigned int unicode);
+					void CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int glyphWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height);
 			};
 		}
 	}

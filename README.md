@@ -37,7 +37,7 @@ A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 <ul>
 <li>Windows - OpenGL 4.5:- working</li>
 <li>Windows - DirectX 11:- broken</li>
-<li>Linux - OpenGL 4.5:- broken</li>
+<li>Linux - OpenGL 4.5:- working</li>
 <li>Android - OpenGL ES 3.0:- working</li>
 <li>Web - OpenGL ES 3.0:- working</li>
 </ul>

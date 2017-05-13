@@ -1,13 +1,7 @@
 #pragma once
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
-	#include "DependencyHeaders/GLEW/GL/glew.h"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-	#include "DependencyHeaders/GLES3/gl3.h"
-	#include "DependencyHeaders/GLES3/gl2ext.h"
-#endif
-
 #include "GLShader.h"
 #include "BF/Graphics/API/Texture.h"
+#include "BF/Platform/API/OpenGL/GLCommon.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -39,6 +33,7 @@ namespace BF
 
 					private:
 						int GetGLTextureFormat(Graphics::API::Texture::Format format) const;
+						int GetGLTextureInternalFormat(Graphics::API::Texture::Format format) const;
 						int GetGLTextureWrap(Graphics::API::Texture::Wrap wrap) const;
 				};
 			}

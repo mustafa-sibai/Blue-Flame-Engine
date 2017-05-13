@@ -45,7 +45,7 @@ namespace BF
 #elif defined(BF_PLATFORM_WEB)
 					Platform::API::OpenGL::WEBGLContext webGLContext;
 #elif defined(BF_PLATFORM_ANDROID)
-					Platform::API::OpenGL::ANDGLContext ANDGLContext;
+					Platform::API::OpenGL::ANDGLContext andGLContext;
 #endif
 				public:
 					Context(RenderAPI renderAPI);

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <string.h>
 #include "BF/Common.h"
 
 namespace BF

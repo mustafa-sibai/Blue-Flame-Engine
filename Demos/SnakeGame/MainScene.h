@@ -2,6 +2,7 @@
 #include "BF/BlueFlame.h"
 #include "Snake.h"
 #include "Food.h"
+#include "HUD.h"
 
 class MainScene : public BF::Application::Scene
 {
@@ -11,6 +12,7 @@ private:
 
 	Snake snake;
 	Food food;
+	HUD hud;
 
 public:
 	MainScene();

@@ -35,6 +35,8 @@ namespace BF
 				emscripten_set_main_loop_arg(FunctionCallBack, this, 0, true);
 			}
 
+			//-------------------------------------- THIS TO BE REMOVED AND CHANGED LIKE THE WINDOWS VERION -------------------------------------------
+
 			void WEBEngineEntryPoint::MainLoop()
 			{
 				switch (state)
@@ -70,7 +72,7 @@ namespace BF
 								SceneManager::GetScene(i).frameTimer.Reset();
 								if (timesToRunFixedUpdate > 0)
 								{
-									SceneManager::GetScene(i).FixedUpdate();
+									//SceneManager::GetScene(i).FixedUpdate();
 									timesToRunFixedUpdate--;
 									FUPS++;
 								}
@@ -117,6 +119,19 @@ namespace BF
 					default:
 						break;
 				}
+			}
+
+			//-------------------------------------- THIS TO BE REMOVED AND CHANGED LIKE THE WINDOWS VERION -------------------------------------------
+
+			void WEBEngineEntryPoint::LimitFrameRate(double limit)
+			{
+				if (limit != 0.0f)
+				{
+					frameRateTarget = limit;
+					frameTimeTarget = 1000.0f / frameRateTarget;
+				}
+				else
+					frameTimeTarget = 0.0f;
 			}
 		}
 	}

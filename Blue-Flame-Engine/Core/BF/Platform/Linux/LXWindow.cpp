@@ -10,8 +10,16 @@ namespace BF
 		{
 			using namespace BF::Input;
 
-			LXWindow::LXWindow(Application::Window* window) :
-				window(window), display(nullptr), xwindow(0), xEvent(), frameBufferConfig(nullptr)
+			LXWindow::LXWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
+				Window(title, rectangle, style)
+			{
+			}
+
+			LXWindow::~LXWindow()
+			{
+			}
+
+			void LXWindow::Initialize()
 			{
 				display = XOpenDisplay(NULL);
 
@@ -42,7 +50,7 @@ namespace BF
 
 				CheckGLXVersion();
 				frameBufferConfig = GetBestFrameBufferConfig(framebuffer_attribs);
-				CreateWindow(window, frameBufferConfig);
+				CreateWindow(frameBufferConfig);
 			}
 
 			void LXWindow::CheckGLXVersion()
@@ -88,7 +96,7 @@ namespace BF
 				return fbc[bestFBC];
 			}
 
-			void LXWindow::CreateWindow(Application::Window* window, GLXFBConfig frameBuffer)
+			void LXWindow::CreateWindow(GLXFBConfig frameBuffer)
 			{
 				XVisualInfo *visualInfo = glXGetVisualFromFBConfig(display, frameBuffer);
 
@@ -99,23 +107,15 @@ namespace BF
 				windowAttributes.border_pixel = 0;
 				windowAttributes.event_mask = StructureNotifyMask;
 
-				xwindow = XCreateWindow(display, RootWindow(display, visualInfo->screen), window->positionX, window->positionY, window->width, window->height, 0,
+				xwindow = XCreateWindow(display, RootWindow(display, visualInfo->screen), rectangle.x, rectangle.y, rectangle.width, rectangle.height, 0,
 					visualInfo->depth, InputOutput, visualInfo->visual, CWBorderPixel | CWColormap | CWEventMask, &windowAttributes);
-				if (!window)
-				{
-					printf("Failed to create window.\n");
-				}
 
 				XFree(visualInfo);
 
 				XSelectInput(display, xwindow, KeyPressMask | KeyReleaseMask);
 
-				XStoreName(display, xwindow, window->title);
+				XStoreName(display, xwindow, title.c_str());
 				XMapWindow(display, xwindow);
-			}
-
-			LXWindow::~LXWindow()
-			{
 			}
 
 			void LXWindow::Update()

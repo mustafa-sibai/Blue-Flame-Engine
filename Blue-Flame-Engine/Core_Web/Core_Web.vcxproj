@@ -72,22 +72,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Core\Web\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Web\$(Platform)\Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -153,6 +153,15 @@
     <ClCompile Include="..\Core\BF\Input\Controller.cpp" />
     <ClCompile Include="..\Core\BF\Input\Keyboard.cpp" />
     <ClCompile Include="..\Core\BF\Input\Mouse.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLContext.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLError.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.cpp" />
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.cpp" />
     <ClCompile Include="..\Core\BF\Platform\Web\WEBWindow.cpp" />
   </ItemGroup>
@@ -160,6 +169,16 @@
     <ClInclude Include="..\Core\BF\Input\Controller.h" />
     <ClInclude Include="..\Core\BF\Input\Keyboard.h" />
     <ClInclude Include="..\Core\BF\Input\Mouse.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLCommon.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLContext.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLError.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.h" />
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="..\Core\BF\Platform\Web\WEBEngineEntryPoint.h" />
     <ClInclude Include="..\Core\BF\Platform\Web\WEBWindow.h" />
   </ItemGroup>

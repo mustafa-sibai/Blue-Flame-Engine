@@ -1,54 +1,30 @@
 #pragma once
-#include "DependencyHeaders/GLEW/GL/glew.h"
-#include "DependencyHeaders/GLEW/GL/wglew.h"
-#include "BF/Graphics/Color.h"
-#include "BF/Math/Math.h"
+#include "BF/Platform/API/OpenGL/GLContext.h"
 #include "BF/Common.h"
 
 namespace BF
 {
-	namespace Graphics
-	{
-		namespace API
-		{
-			enum class PrimitiveType;
-		}
-	}
-
 	namespace Platform
 	{
 		namespace API
 		{
 			namespace OpenGL
 			{
-				class BF_API WINGLContext
+				class BF_API WINGLContext : public GLContext
 				{
 					private:
 						HDC hDC;
 						HGLRC context;
-						GLuint GL_PRIMITIVE_TYPE;
-
-						bool initialized;
 
 					public:
 						WINGLContext();
 						~WINGLContext();
 
-						void Initialize();
-						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
-						void Clear(const Graphics::Color& color);
-						void Render(GLsizei count);
-						void SwapBuffers();
-						void CleanUp();
+						void Initialize() override;
+						void SwapBuffers() override;
+						void CleanUp() override;
 
-						void EnableDepthBuffer(bool state);
-						void EnableDepthMask(bool state);
-						void EnableBlending(bool state);
-						void EnableVsync(bool state);
-						void EnableScissor(bool state);
-
-						void SetScissor(const Math::Rectangle& rectangle);
-						void SetViewport(const Math::Rectangle& rectangle);
+						void EnableVsync(bool state) override;
 				};
 			}
 		}

@@ -7,8 +7,8 @@ using namespace BF::Graphics::Renderers;
 using namespace BF::Math;
 using namespace BF::Input;
 
-Snake::Snake(Food& food) :
-	food(food), deltaTime(0.0f)
+Snake::Snake(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer, Food& food) :
+	spriteRenderer(spriteRenderer), food(food), deltaTime(0.0f), score(0)
 {
 	step = 32.0f;
 }
@@ -44,7 +44,17 @@ void Snake::Update()
 	{
 		for (size_t i = 0; i < snakeHeads.size(); i++)
 		{
-			snakeHeads[i].SetPosition(snakeHeads[i].GetPosition() + (movmentDirection * step));
+			if (i == 0)
+			{
+				previousPosition = snakeHeads[0].GetPosition();
+				snakeHeads[i].SetPosition(snakeHeads[i].GetPosition() + (movmentDirection * step));
+			}
+			else
+			{
+				currentPosition = snakeHeads[i].GetPosition();
+				snakeHeads[i].SetPosition(previousPosition);
+				previousPosition = currentPosition;
+			}
 		}
 
 		deltaTime = 0.0f;
@@ -62,10 +72,11 @@ void Snake::Update()
 
 		snakeHeads.push_back(Renderers::RegularPolygon(rec, 0, Color(0.0f, 0.0f, 1.0f, 1.0f)));
 		food.GenerateRandomPosition();
+		score++;
 	}
 }
 
-void Snake::Render(SpriteRenderer& spriteRenderer)
+void Snake::Render()
 {
 	for (size_t i = 0; i < snakeHeads.size(); i++)
 		spriteRenderer.Render(snakeHeads[i]);

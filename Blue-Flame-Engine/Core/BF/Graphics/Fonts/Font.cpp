@@ -40,7 +40,7 @@ namespace BF
 			{
 			}
 
-			FontAtlas* Font::Load(const string& filename, Language language)
+			FontAtlas* Font::Load(const string& filename, unsigned int charPixelSize, Language language)
 			{
 				vector<Character>* characters = new vector<Character>();
 
@@ -48,7 +48,7 @@ namespace BF
 				if (error != FT_Err_Ok)
 					cout << "ERROR !!" << endl;
 
-				error = FT_New_Face(library, "Assets/Fonts/arial.ttf", 0, &face);
+				error = FT_New_Face(library, filename.c_str(), 0, &face);
 
 				if (error == FT_Err_Unknown_File_Format)
 					cout << "ERROR: Unknown File Format !!" << endl;
@@ -61,7 +61,6 @@ namespace BF
 				error = FT_Set_Pixel_Sizes(face, 0, charPixelSize);
 				if (error != FT_Err_Ok)
 					cout << "ERROR !!" << endl;
-
 
 				if (language == Language::English)
 				{

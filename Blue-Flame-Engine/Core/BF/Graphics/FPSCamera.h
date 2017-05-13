@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/Graphics/Camera.h"
+#include "BF/Common.h"
 
 namespace BF
 {

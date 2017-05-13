@@ -79,6 +79,33 @@
     <ClCompile Include="..\Core\BF\Platform\Web\WEBWindow.cpp">
       <Filter>Source Files\BF\Platform\Web</Filter>
     </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLContext.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLError.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Core\BF\Input\Controller.h">
@@ -95,6 +122,36 @@
     </ClInclude>
     <ClInclude Include="..\Core\BF\Platform\Web\WEBWindow.h">
       <Filter>Source Files\BF\Platform\Web</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLCommon.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLContext.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLError.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

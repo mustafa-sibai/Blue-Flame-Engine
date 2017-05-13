@@ -8,7 +8,7 @@ namespace _2DScene
 	using namespace BF::Graphics;
 	using namespace BF::Graphics::API;
 	using namespace BF::Graphics::Renderers;
-	using namespace BF::Graphics::GUI;
+	//using namespace BF::Graphics::GUI;
 	using namespace BF::Math;
 	using namespace BF::System;
 
@@ -27,7 +27,7 @@ namespace _2DScene
 	}
 
 	_2DScene::_2DScene() :
-		button(*this), checkbox(*this)/*, panel(*this)*/, font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
+		/*button(*this), checkbox(*this), panel(*this),*/ font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
 	{
 		t = new Texture2D(spriteRenderer.GetShader());
 		t2 = new Texture2D(spriteRenderer.GetShader());
@@ -57,7 +57,7 @@ namespace _2DScene
 		t3->Load("Assets/Textures/Untitled.png");
 		t4->Load("Assets/Textures/silver.png");
 
-		sprite1 = Sprite(t, Vector2(0.0f, 0.0f), 0, Color(1.0f, 1.0f, 1.0f, 1.0f));
+		sprite1 = Sprite(t2, Vector2(0.0f, 0.0f), 0, Color(1.0f, 1.0f, 1.0f, 1.0f));
 		sprite2 = Sprite(t, Vector2(100.0f, 100.0f), 0, BF::Math::Rectangle(32, 0, 32, 32), Color(1.0f));
 		sprite3 = Sprite(t, Vector2(300.0f, 100.0f), 0, BF::Math::Rectangle(64, 0, 32, 32), Color(1.0f));
 		sprite4 = Sprite(t, Vector2(300.0f, 300.0f), 0, BF::Math::Rectangle(96, 0, 32, 32), Color(1.0f));
@@ -81,7 +81,9 @@ namespace _2DScene
 		//waypoints.push_back(Waypoint::Node(Vector2(300.0f, 300.0f), TimeFunction));
 		//waypoints.push_back(Waypoint::Node(Vector2(100.0f, 300.0f), TimeFunction));
 
-		//fontAtlas = font.Load("", BF::Graphics::Fonts::Font::Language::English);
+		fontAtlas = font.Load("Assets/Fonts/arial.ttf", 50, BF::Graphics::Fonts::Font::Language::English);
+
+		BF_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
 		//fontSprite = Sprite(fontAtlas->texture, BF::Math::Vector3(350.0f, 350.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		//tileMap.Load("Assets/Maps/TileMap.bfm");
@@ -89,7 +91,7 @@ namespace _2DScene
 
 		//button.AddOnClickListener(DoButtonWork);
 
-		button.SetPosition(Vector2(100, 100));
+		//button.SetPosition(Vector2(100, 100));
 
 		//renderTarget.Create(800, 600, Texture::Format::R8G8B8, Texture::TextureWrap::ClampToBorder, Texture::TextureFilter::Neatest);
 	}
@@ -110,6 +112,8 @@ namespace _2DScene
 	void _2DScene::Update()
 	{
 		//This is temporary.
+		BF_LOG_INFO("w: %i h: %i", Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
+
 		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		//Scene::Update();
 		camera.Update();
@@ -174,7 +178,7 @@ namespace _2DScene
 		//spriteRenderer.Draw(sprite3);
 		//spriteRenderer.Draw(sprite4);
 		//spriteRenderer.Render(fontSprite);
-		//spriteRenderer.RenderText(*fontAtlas, "Blue Flame Engine !", BF::Math::Vector3(0.0f, 50.0f, 0.0f), BF::Math::Vector4(0.0f, 0.0f, 1.0f, 1.0f));
+		spriteRenderer.RenderText(*fontAtlas, "Blue Flame Engine !", BF::Math::Vector2(250.0f, 500.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
 		//spriteRenderer.RenderText(*fontAtlas, "a b c d e f g h i j k l m n o p q r s t u v w x y z", BF::Math::Vector3(0.0f, 150.0f, 0.0f), BF::Math::Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 		//spriteRenderer.RenderText(*fontAtlas, "A B C D E F G H I J K L MNOPQRSTUVWXYZ", BF::Math::Vector3(0.0f, 250.0f, 0.0f), BF::Math::Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 		//spriteRenderer.Draw(sprite5);

@@ -31,7 +31,7 @@ namespace BF
 					if (format == Texture::Format::R8)
 						GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
 
-					GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GetGLTextureFormat(format), textureData.width, textureData.height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData.buffer));
+					GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GetGLTextureInternalFormat(format), textureData.width, textureData.height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData.buffer));
 
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetGLTextureWrap(wrap)));
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetGLTextureWrap(wrap)));
@@ -77,7 +77,9 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(2.0f, AFLevel)));
+#endif
 							break;
 						}
 						case Texture::Filter::AnisotropicX4:
@@ -85,7 +87,9 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(4.0f, AFLevel)));
+#endif
 							break;
 						}
 						case Texture::Filter::AnisotropicX8:
@@ -93,7 +97,9 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(8.0f, AFLevel)));
+#endif
 							break;
 						}
 						case Texture::Filter::AnisotropicX16:
@@ -101,7 +107,9 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(16.0f, AFLevel)));
+#endif
 							break;
 						}
 						default:
@@ -143,6 +151,18 @@ namespace BF
 						case Texture::Format::R8G8B8: return GL_RGB;
 						case Texture::Format::R8G8B8A8: return GL_RGBA;
 						default: return GL_RGBA;
+					}
+				}
+
+				int GLTexture2D::GetGLTextureInternalFormat(Texture::Format format) const
+				{
+					switch (format)
+					{
+						case Texture::Format::R8: return GL_R8;
+						case Texture::Format::R8G8: return GL_RG8;
+						case Texture::Format::R8G8B8: return GL_RGB8;
+						case Texture::Format::R8G8B8A8: return GL_RGBA8;
+						default: return GL_RGBA8;
 					}
 				}
 

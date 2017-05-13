@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include <string>
+#include <string.h>
 #include "BF/Graphics/Mesh.h"
 #include "BF/Common.h"
 

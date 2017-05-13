@@ -6,6 +6,7 @@
 #include "BF/Graphics/Color.h"
 #include "BF/Graphics/Renderers/LineShape.h"
 #include "BF/Graphics/Renderers/RegularPolygon.h"
+#include "BF/Common.h"
 
 namespace BF
 {

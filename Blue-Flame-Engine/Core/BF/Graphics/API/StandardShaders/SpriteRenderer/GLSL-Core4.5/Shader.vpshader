@@ -46,6 +46,6 @@ void main()
 	else if(rt == 1)
 		color = fragmentColor * texture(textures, UV);
 	else if(rt == 2)
-		color = fragmentColor * texture(textures, UV);
+		color = fragmentColor * texture(textures, UV).r;
 }
 )";

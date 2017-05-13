@@ -1,7 +1,6 @@
 #pragma once
 //#include <thread>
-#include "DependencyHeaders/EGL/egl.h"
-#include "DependencyHeaders/GLES3/gl3.h"
+#include "BF/Platform/API/OpenGL/GLContext.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 

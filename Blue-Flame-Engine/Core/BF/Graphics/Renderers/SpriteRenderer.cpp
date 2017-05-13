@@ -248,69 +248,68 @@ namespace BF
 			{
 				Rectangle prevPos;
 				Vector2 pos = position;
-				const Texture2D* previousTexture = nullptr;
 
-				if (submitSprite)
+				if (currentBoundTexture != nullptr)
 				{
-					if (previousTexture != nullptr)
+					if (fontAtlas.texture != currentBoundTexture)
 					{
-						if (fontAtlas.texture != previousTexture)
-						{
-							if (submitType == SubmitType::StaticSubmit)
-								return;
+						if (submitType == SubmitType::StaticSubmit)
+							return;
 
-							newDrawCall = true;
+						newDrawCall = true;
 
-							End();
-							Begin(submitType, sortingOrder);
-						}
+						End();
+						Begin(submitType, sortingOrder);
 					}
+				}
 
+				if (currentBoundTexture != fontAtlas.texture)
+				{
 					fontAtlas.texture->Bind();
-					previousTexture = fontAtlas.texture;
+					currentBoundTexture = fontAtlas.texture;
+				}
 
-					for (size_t i = 0; i < text.length(); i++)
-					{
-						unsigned int unicode = text[i] - 32;
-						Rectangle scissorRectangle = fontAtlas.characters[0][unicode].scissorRectangle;
+				for (size_t i = 0; i < text.length(); i++)
+				{
+					unsigned int unicode = text[i] - 32;
+					Rectangle scissorRectangle = fontAtlas.characters[0][unicode].scissorRectangle;
 
-						Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
-						CalculateUV(fontAtlas.texture, scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+					CalculateUV(fontAtlas.texture, scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
-						pos += Vector2(prevPos.x + fontAtlas.characters[0][unicode].bearing.x, 0.0f);
-						prevPos.x = fontAtlas.characters[0][unicode].scissorRectangle.width;
-						pos.y = position.y + (fontAtlas.characters[0][unicode].charPixelSize - fontAtlas.characters[0][unicode].bearing.y);
+					pos += Vector2(prevPos.x + fontAtlas.characters[0][unicode].bearing.x, 0.0f);
+					prevPos.x = fontAtlas.characters[0][unicode].scissorRectangle.width;
+					pos.y = position.y + (fontAtlas.characters[0][unicode].charPixelSize - fontAtlas.characters[0][unicode].bearing.y);
 
-						//Top Left
-						spriteBuffer->position = pos;
-						spriteBuffer->color = color;
-						spriteBuffer->UV = topLeftUV;
-						spriteBuffer->renderingType = 2;
-						spriteBuffer++;
+					//Top Left
+					spriteBuffer->position = pos;
+					spriteBuffer->color = color;
+					spriteBuffer->UV = topLeftUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
 
-						//Top Right
-						spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y);
-						spriteBuffer->color = color;
-						spriteBuffer->UV = topRightUV;
-						spriteBuffer->renderingType = 2;
-						spriteBuffer++;
+					//Top Right
+					spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y);
+					spriteBuffer->color = color;
+					spriteBuffer->UV = topRightUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
 
-						//Bottom Right
-						spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
-						spriteBuffer->color = color;
-						spriteBuffer->UV = bottomRightUV;
-						spriteBuffer->renderingType = 2;
-						spriteBuffer++;
+					//Bottom Right
+					spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
+					spriteBuffer->color = color;
+					spriteBuffer->UV = bottomRightUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
 
-						//Bottom Left
-						spriteBuffer->position = Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
-						spriteBuffer->color = color;
-						spriteBuffer->UV = bottomLeftUV;
-						spriteBuffer->renderingType = 2;
-						spriteBuffer++;
+					//Bottom Left
+					spriteBuffer->position = Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
+					spriteBuffer->color = color;
+					spriteBuffer->UV = bottomLeftUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
 
-						indexCount += SPRITE_INDICES;
-					}
+					indexCount += SPRITE_INDICES;
 				}
 			}
 
@@ -363,16 +362,16 @@ namespace BF
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
 				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-					1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
 
 				*topRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-					1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
 
 				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-					1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
 				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-					1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="BF\AI\Waypoint.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
+    <ClCompile Include="BF\Application\SceneManager.cpp" />
     <ClCompile Include="BF\Application\Window.cpp" />
     <ClCompile Include="BF\Audio\Sound.cpp" />
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\RenderTarget.cpp" />
     <ClCompile Include="BF\Graphics\API\Shader.cpp" />
     <ClCompile Include="BF\Graphics\API\Texture.cpp" />
     <ClCompile Include="BF\Graphics\API\Texture2D.cpp" />
@@ -36,9 +38,14 @@
     <ClCompile Include="BF\Graphics\API\VertexBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
+    <ClCompile Include="BF\Graphics\Color.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Button.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Panel.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Scrollbar.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\ScrollbarSlider.cpp" />
     <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Widget.cpp" />
     <ClCompile Include="BF\Graphics\GUI\WidgetManager.cpp" />
@@ -46,12 +53,16 @@
     <ClCompile Include="BF\Graphics\Material.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\Renderable.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Skybox.cpp" />
+    <ClCompile Include="BF\Graphics\Terrain.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Graphics\TileMap.cpp" />
+    <ClCompile Include="BF\Input\Controller.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
     <ClCompile Include="BF\IO\BFALoader.cpp" />
@@ -68,39 +79,29 @@
     <ClCompile Include="BF\Math\Vector4.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXError.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXIndexBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXShader.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXTexture2D.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXVertexBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLContext.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLError.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLIndexBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLShader.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLTexture2D.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLTextureCube.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
-    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
-    <ClCompile Include="BF\Application\SceneManager.cpp" />
-    <ClCompile Include="BF\System\Timer.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXError.cpp" />
-    <ClCompile Include="BF\Input\Controller.cpp" />
-    <ClCompile Include="BF\Graphics\Color.cpp" />
-    <ClCompile Include="BF\Network\Server.cpp" />
-    <ClCompile Include="BF\Network\Client.cpp" />
-    <ClCompile Include="BF\Graphics\Terrain.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Panel.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
-    <ClCompile Include="BF\Graphics\API\RenderTarget.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Scrollbar.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\ScrollbarSlider.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
+    <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
+    <ClCompile Include="BF\System\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
+    <ClInclude Include="BF\Application\Scene.h" />
+    <ClInclude Include="BF\Application\SceneManager.h" />
     <ClInclude Include="BF\Application\Window.h" />
     <ClInclude Include="BF\Application\WindowStyle.h" />
     <ClInclude Include="BF\Audio\Sound.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
+    <ClInclude Include="BF\Graphics\API\RenderTarget.h" />
     <ClInclude Include="BF\Graphics\API\Shader.h" />
     <ClInclude Include="BF\Graphics\API\Texture.h" />
     <ClInclude Include="BF\Graphics\API\Texture2D.h" />
@@ -119,11 +121,16 @@
     <ClInclude Include="BF\Graphics\API\VertexBuffer.h" />
     <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h" />
     <ClInclude Include="BF\Graphics\Camera.h" />
+    <ClInclude Include="BF\Graphics\Color.h" />
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
     <ClInclude Include="BF\Graphics\Fonts\Font.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
     <ClInclude Include="BF\Graphics\GUI\Button.h" />
+    <ClInclude Include="BF\Graphics\GUI\Checkbox.h" />
+    <ClInclude Include="BF\Graphics\GUI\Panel.h" />
+    <ClInclude Include="BF\Graphics\GUI\Scrollbar.h" />
+    <ClInclude Include="BF\Graphics\GUI\ScrollbarSlider.h" />
     <ClInclude Include="BF\Graphics\GUI\StyleSheet.h" />
     <ClInclude Include="BF\Graphics\GUI\Widget.h" />
     <ClInclude Include="BF\Graphics\GUI\WidgetManager.h" />
@@ -131,14 +138,18 @@
     <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
+    <ClInclude Include="BF\Graphics\Renderers\LineShape.h" />
+    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h" />
     <ClInclude Include="BF\Graphics\Renderers\Renderable.h" />
     <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
     <ClInclude Include="BF\Graphics\Skybox.h" />
+    <ClInclude Include="BF\Graphics\Terrain.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
+    <ClInclude Include="BF\Input\Controller.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
     <ClInclude Include="BF\IO\BFALoader.h" />
@@ -158,38 +169,26 @@
     <ClInclude Include="BF\Math\Vector4.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXError.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXIndexBuffer.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXShader.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXTexture2D.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXVertexBuffer.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLCommon.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLContext.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLError.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLIndexBuffer.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLShader.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLTexture2D.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLTextureCube.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
+    <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Log.h" />
-    <ClInclude Include="BF\Application\Scene.h" />
-    <ClInclude Include="BF\Application\SceneManager.h" />
     <ClInclude Include="BF\System\Timer.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXError.h" />
-    <ClInclude Include="BF\Input\Controller.h" />
-    <ClInclude Include="BF\Graphics\Color.h" />
-    <ClInclude Include="BF\Network\Server.h" />
-    <ClInclude Include="BF\Network\Client.h" />
-    <ClInclude Include="BF\Graphics\Terrain.h" />
-    <ClInclude Include="BF\Graphics\GUI\Panel.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h" />
-    <ClInclude Include="BF\Graphics\API\RenderTarget.h" />
-    <ClInclude Include="BF\Graphics\GUI\Scrollbar.h" />
-    <ClInclude Include="BF\Graphics\GUI\ScrollbarSlider.h" />
-    <ClInclude Include="BF\Graphics\GUI\Checkbox.h" />
-    <ClInclude Include="BF\Graphics\Renderers\LineShape.h" />
-    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h" />
-    <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -295,7 +294,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -323,7 +322,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -356,7 +355,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
@@ -389,7 +388,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>

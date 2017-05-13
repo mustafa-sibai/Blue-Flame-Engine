@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{16453b95-42cb-4533-82b2-1620e9cbd4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF">
+      <UniqueIdentifier>{65e09972-4e44-461b-ab5d-4de3d788cc5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\AI">
+      <UniqueIdentifier>{fd9e0323-cdda-4ccd-a1f6-6b6bd3eb2ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Application">
+      <UniqueIdentifier>{6b01f559-069c-4dff-9297-c00bc230b86b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics">
+      <UniqueIdentifier>{e2c72c3f-764d-4d3b-9324-ecf4b7d487ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Input">
+      <UniqueIdentifier>{5745b4fb-6556-49bb-9f00-af68a73ca169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\IO">
+      <UniqueIdentifier>{ba838f7e-cf0a-4793-ba8e-539deb3b79b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Math">
+      <UniqueIdentifier>{9203f5d5-9128-480b-8da6-7edfedaa0aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Network">
+      <UniqueIdentifier>{0cec66d9-c2ab-49c2-ad13-3d4cddf8d816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\System">
+      <UniqueIdentifier>{541a5b59-1dd9-464c-9717-47a4043a8f91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform">
+      <UniqueIdentifier>{09213db8-aeb3-40e4-8c8e-c5f4888ad0de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API">
+      <UniqueIdentifier>{75080089-bcf3-4d16-b0a7-75958c08df26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\API\OpenGL">
+      <UniqueIdentifier>{de6b004d-59b2-45c0-9e7c-9e0da6098de6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Platform\Linux">
+      <UniqueIdentifier>{77dc6f1a-7afc-48c4-9e0b-1ca7cde680e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders">
+      <UniqueIdentifier>{31f41292-9303-4d62-88d7-7cb5c71db9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\GLEW">
+      <UniqueIdentifier>{4aff3168-6503-4be2-808c-7bf94223171d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\GLEW\GL">
+      <UniqueIdentifier>{275d0a34-0c9b-4433-bba8-aa6af4f51af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API">
+      <UniqueIdentifier>{df2b53ac-a90f-4b29-af58-105c68b80756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\IO\FileFormats">
+      <UniqueIdentifier>{2bc82ab5-801a-4be9-a46d-f45f740f2c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\FreeImage">
+      <UniqueIdentifier>{118f9682-01e3-4a2c-b630-3614ddc5092f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Renderers">
+      <UniqueIdentifier>{b26086cd-3497-4e36-8473-f3717282b9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Animation">
+      <UniqueIdentifier>{f6b0d9a4-37dc-4e08-aaf1-72e1fc104f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\Fonts">
+      <UniqueIdentifier>{41191d9e-50b7-4f46-9772-7e5a034507c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\FreeType">
+      <UniqueIdentifier>{d951f74d-3d4f-4486-a95c-63d6fc8f01cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\FreeType\freetype">
+      <UniqueIdentifier>{6b9bfb2d-560c-442d-9509-61b000f1fb53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\FreeType\freetype\config">
+      <UniqueIdentifier>{26e971d4-595d-4e67-a80a-fff28db8ea6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders">
+      <UniqueIdentifier>{7ded1fe6-2fef-402b-ae2c-01838d433d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders\3D">
+      <UniqueIdentifier>{30a34820-5a99-484f-bcfc-bdfaee013339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders\3DMipAF">
+      <UniqueIdentifier>{86f2da3f-48b3-4fee-9728-0f02d4ac02d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders\Light">
+      <UniqueIdentifier>{b142a5bd-3f5e-45a2-b9ce-d19e72dbcc1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders\TextureCube">
+      <UniqueIdentifier>{a64631cd-6932-4071-9c66-2ba5845f14d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\API\StandardShaders\SpriteRenderer">
+      <UniqueIdentifier>{b4cdb760-a5a0-49bd-b4c0-71995dc5fc85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BF\Graphics\GUI">
+      <UniqueIdentifier>{f4c90157-b782-42f0-8b8f-a58f0a7f81f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DependencyHeaders\TinyXML-2">
+      <UniqueIdentifier>{1312c3ff-e1fc-4962-afe6-262633a85928}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Core\BF\Math\Math.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Matrix4.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Rectangle.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector2.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector3.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Math\Vector4.cpp">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\System\Timer.cpp">
+      <Filter>Source Files\BF\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLError.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\FileLoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBufferLayout.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\ImageLoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\WAVLoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Controller.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Keyboard.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Input\Mouse.cpp">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Linux\LXEngineEntryPoint.cpp">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\Linux\LXWindow.cpp">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\Window.cpp">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Context.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\Context\LXGLContext.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Color.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Engine.cpp">
+      <Filter>Source Files\BF</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLShader.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\ConstentBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\IndexBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Shader.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Texture.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\VertexBuffer.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\Scene.cpp">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Application\SceneManager.cpp">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\Texture2D.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\RenderTarget.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\API\TextureCube.cpp">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Camera.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\FPSCamera.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Light.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Material.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Mesh.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Model.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Skybox.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Terrain.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\TextureAtlas.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\TileMap.cpp">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\BFALoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\BFMLoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\IO\BFXLoader.cpp">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Animation\SpriteAnimation.cpp">
+      <Filter>Source Files\BF\Graphics\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\LineShape.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\RegularPolygon.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\Renderable.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\Sprite.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Renderers\SpriteRenderer.cpp">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Platform\API\OpenGL\GLContext.cpp">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\AI\Waypoint.cpp">
+      <Filter>Source Files\BF\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\Fonts\Font.cpp">
+      <Filter>Source Files\BF\Graphics\Fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\Button.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\Checkbox.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\Panel.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\Scrollbar.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\ScrollbarSlider.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\StyleSheet.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\Widget.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Core\BF\Graphics\GUI\WidgetManager.cpp">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Core\BF\Math\Math.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Matrix4.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Rectangle.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector2.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector3.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Math\Vector4.h">
+      <Filter>Source Files\BF\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\empty.h" />
+    <ClInclude Include="..\Core\BF\Common.h">
+      <Filter>Source Files\BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\System\Log.h">
+      <Filter>Source Files\BF\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\System\Timer.h">
+      <Filter>Source Files\BF\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLConstentBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLError.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLIndexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLVertexBuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\GLEW\GL\eglew.h">
+      <Filter>Source Files\DependencyHeaders\GLEW\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\GLEW\GL\glew.h">
+      <Filter>Source Files\DependencyHeaders\GLEW\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\GLEW\GL\glxew.h">
+      <Filter>Source Files\DependencyHeaders\GLEW\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\GLEW\GL\wglew.h">
+      <Filter>Source Files\DependencyHeaders\GLEW\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeImage\FreeImage.h">
+      <Filter>Source Files\DependencyHeaders\FreeImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeImage\Utilities.h">
+      <Filter>Source Files\DependencyHeaders\FreeImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\ft2build.h">
+      <Filter>Source Files\DependencyHeaders\FreeType</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\freetype.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftadvanc.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftautoh.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftbbox.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftbdf.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftbitmap.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftbzip2.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftcache.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftcffdrv.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftchapters.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftcid.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\fterrdef.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\fterrors.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftfntfmt.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftgasp.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftglyph.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftgxval.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftgzip.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftimage.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftincrem.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftlcdfil.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftlist.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftlzw.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftmac.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftmm.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftmodapi.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftmoderr.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftotval.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftoutln.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftpfr.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftrender.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftsizes.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftsnames.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftstroke.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftsynth.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftsystem.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\fttrigon.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftttdrv.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\fttypes.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ftwinfnt.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\t1tables.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ttnameid.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\tttables.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\tttags.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\ttunpat.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\config\ftconfig.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\config\ftheader.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\config\ftmodule.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\config\ftoption.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\FreeType\freetype\config\ftstdlib.h">
+      <Filter>Source Files\DependencyHeaders\FreeType\freetype\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\FileLoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBufferLayout.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\ImageLoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\WAVLoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Controller.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Keyboard.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Input\Mouse.h">
+      <Filter>Source Files\BF\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Linux\LXEngineEntryPoint.h">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\Linux\LXWindow.h">
+      <Filter>Source Files\BF\Platform\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\Window.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\WindowStyle.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Context.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\Context\LXGLContext.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Color.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\BlueFlame.h">
+      <Filter>Source Files\BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Engine.h">
+      <Filter>Source Files\BF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLShader.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\ConstentBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\IndexBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Shader.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Texture.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\VertexBuffer.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\Scene.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Application\SceneManager.h">
+      <Filter>Source Files\BF\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLFramebuffer.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTexture2D.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLTextureCube.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\Texture2D.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\RenderTarget.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\API\TextureCube.h">
+      <Filter>Source Files\BF\Graphics\API</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Camera.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\FPSCamera.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Light.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Material.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Mesh.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Model.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Skybox.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Terrain.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\TextureAtlas.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\TileData.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\TileMap.h">
+      <Filter>Source Files\BF\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\BFALoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\BFMLoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\BFXLoader.h">
+      <Filter>Source Files\BF\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\FileFormats\BFAFormat.h">
+      <Filter>Source Files\BF\IO\FileFormats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\FileFormats\BFMFormat.h">
+      <Filter>Source Files\BF\IO\FileFormats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\IO\FileFormats\BFXFormat.h">
+      <Filter>Source Files\BF\IO\FileFormats</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Animation\SpriteAnimation.h">
+      <Filter>Source Files\BF\Graphics\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\LineShape.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\RegularPolygon.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\Renderable.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\Sprite.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Renderers\SpriteRenderer.h">
+      <Filter>Source Files\BF\Graphics\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Fonts\FontAtlas.h">
+      <Filter>Source Files\BF\Graphics\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Fonts\Character.h">
+      <Filter>Source Files\BF\Graphics\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLContext.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\AI\Waypoint.h">
+      <Filter>Source Files\BF\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Platform\API\OpenGL\GLCommon.h">
+      <Filter>Source Files\BF\Platform\API\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\Fonts\Font.h">
+      <Filter>Source Files\BF\Graphics\Fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\Button.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\Checkbox.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\Panel.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\Scrollbar.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\ScrollbarSlider.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\StyleSheet.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\Widget.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\BF\Graphics\GUI\WidgetManager.h">
+      <Filter>Source Files\BF\Graphics\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Core\DependencyHeaders\TinyXML-2\tinyxml2.h">
+      <Filter>Source Files\DependencyHeaders\TinyXML-2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Core\BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader">
+      <Filter>Source Files\BF\Graphics\API\StandardShaders\3D</Filter>
+    </None>
+    <None Include="..\Core\BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader">
+      <Filter>Source Files\BF\Graphics\API\StandardShaders\3DMipAF</Filter>
+    </None>
+    <None Include="..\Core\BF\Graphics\API\StandardShaders\Light\GLSL-Core4.5\Shader.vpshader">
+      <Filter>Source Files\BF\Graphics\API\StandardShaders\Light</Filter>
+    </None>
+    <None Include="..\Core\BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-Core4.5\Shader.vpshader">
+      <Filter>Source Files\BF\Graphics\API\StandardShaders\SpriteRenderer</Filter>
+    </None>
+    <None Include="..\Core\BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader">
+      <Filter>Source Files\BF\Graphics\API\StandardShaders\TextureCube</Filter>
+    </None>
+  </ItemGroup>
+</Project>

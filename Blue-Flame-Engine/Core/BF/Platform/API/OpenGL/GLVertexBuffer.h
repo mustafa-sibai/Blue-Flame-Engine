@@ -1,11 +1,6 @@
 #pragma once
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
-	#include "DependencyHeaders/GLEW/GL/glew.h"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-	#include "DependencyHeaders/GLES3/gl3.h"
-#endif
-
 #include "BF/Graphics/API/VertexBufferLayout.h"
+#include "BF/Platform/API/OpenGL/GLCommon.h"
 #include "BF/Common.h"
 
 namespace BF

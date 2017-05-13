@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <string.h>
 #include "BF/Graphics/Animation/SpriteAnimation.h"
 #include "BF/Common.h"
 

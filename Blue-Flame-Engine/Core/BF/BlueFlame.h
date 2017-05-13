@@ -7,7 +7,7 @@
 
 #include <BF/AI/Waypoint.h>
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BF_PLATFORM_WINDOWS)
 #include <BF/Audio/Sound.h>
 #include <BF/Audio/SoundManager.h>
 #endif
@@ -31,7 +31,9 @@
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 #include <BF/Graphics/Fonts/Font.h>
+#endif
 
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
 #include <BF/Graphics/GUI/StyleSheet.h>
 #include <BF/Graphics/GUI/Button.h>
 #include <BF/Graphics/GUI/Checkbox.h>

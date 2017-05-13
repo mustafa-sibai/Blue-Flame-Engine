@@ -4,7 +4,7 @@ CALL emcc ^
  "../Sandbox/Sandbox/InputTests.cpp" ^
  "../Sandbox/Sandbox/_2DScene.cpp" ^
  "../Output/Core/Web/Debug/Core.bc" ^
- "../Dependency/libs/FreeImage/Web/x64/Debug/FreeImage.bc" ^
+ "../Dependency/libs/FreeImage/Web/Debug/FreeImage.bc" ^
  "../Dependency/libs/FreeType/Web/Debug/FreeType.bc" ^
  "../Dependency/libs/TinyXML-2/Web/Debug/TinyXML-2.bc" ^
  -I "../Core/" ^

@@ -1,7 +1,5 @@
 #include "WEBGLContext.h"
 #include "BF/Engine.h"
-#include "BF/System/Log.h"
-#include "BF/Graphics/API/Context.h"
 #include "BF/Platform/API/OpenGL/GLError.h"
 
 #define OPENGL_CONTEXT_MAJOR_VERSION 3
@@ -15,8 +13,6 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				using namespace BF::Graphics::API;
-
 				WEBGLContext::WEBGLContext()
 				{
 				}
@@ -48,55 +44,14 @@ namespace BF
 					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
 				}
 
-				void WEBGLContext::SetPrimitiveType(PrimitiveType primitiveType)
-				{
-					switch (primitiveType)
-					{
-					case PrimitiveType::PointList:
-					{
-						GL_PRIMITIVE_TYPE = GL_POINTS;
-						break;
-					}
-					case PrimitiveType::LineList:
-					{
-						GL_PRIMITIVE_TYPE = GL_LINES;
-						break;
-					}
-					case PrimitiveType::LineStrip:
-					{
-						GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
-						break;
-					}
-					case PrimitiveType::TriangleList:
-					{
-						GL_PRIMITIVE_TYPE = GL_TRIANGLES;
-						break;
-					}
-					case PrimitiveType::TriangeStrip:
-					{
-						GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
-						break;
-					}
-					default:
-						break;
-					}
-				}
-
-				void WEBGLContext::Clear(Graphics::Color color)
-				{
-					GLCall(glClearColor(color.r, color.g, color.b, color.a));
-					GLCall(glClear(GL_COLOR_BUFFER_BIT));
-				}
-
-				void WEBGLContext::Render(GLsizei count)
-				{
-					GLCall(glDrawElements(GL_PRIMITIVE_TYPE, count, GL_UNSIGNED_INT, nullptr));
-				}
-
 				void WEBGLContext::SwapBuffers()
 				{
 					if (eglSwapInterval(Engine::GetWindow().display, 0) != EGL_TRUE)
 						BF_LOG_ERROR("eglSwapInterval() returned error %d", eglGetError());
+				}
+
+				void WEBGLContext::CleanUp()
+				{
 				}
 			}
 		}
