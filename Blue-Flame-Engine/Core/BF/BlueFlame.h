@@ -23,7 +23,7 @@
 #endif
 
 #include <BF/Graphics/API/IndexBuffer.h>
-#include <BF/Graphics/API/ConstentBuffer.h>
+#include <BF/Graphics/API/ConstantBuffer.h>
 
 #include <BF/Graphics/Renderers/SpriteRenderer.h>
 

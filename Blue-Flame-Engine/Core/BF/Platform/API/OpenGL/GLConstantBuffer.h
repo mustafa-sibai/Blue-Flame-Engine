@@ -10,14 +10,14 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLConstentBuffer
+				class BF_API GLConstantBuffer
 				{
 					private:
 						GLuint buffer;
 
 					public:
-						GLConstentBuffer();
-						~GLConstentBuffer();
+						GLConstantBuffer();
+						~GLConstantBuffer();
 
 						void Create(unsigned int size, unsigned int bindingIndex);
 						void Update(const void* data, unsigned int size);

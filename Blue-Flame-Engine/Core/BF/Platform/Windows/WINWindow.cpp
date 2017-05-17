@@ -188,13 +188,16 @@ namespace BF
 
 					case WM_KEYDOWN:
 					{
-						Keyboard::keys[(unsigned char)wParam] = true;
+						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Null || 
+							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Up)
+							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Pressed;
+
 						break;
 					}
 
 					case WM_KEYUP:
 					{
-						Keyboard::keys[(unsigned char)wParam] = false;
+						Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
 						break;
 					}
 

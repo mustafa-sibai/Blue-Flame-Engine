@@ -1,6 +1,6 @@
 #pragma once
 #include "BF/Math/Math.h"
-#include "BF/Graphics/API/ConstentBuffer.h"
+#include "BF/Graphics/API/ConstantBuffer.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -18,7 +18,7 @@ namespace BF
 					Math::Vector4 cameraPosition;
 				};
 
-				API::ConstentBuffer constentBuffer;
+				API::ConstantBuffer constantBuffer;
 
 			protected:
 				SystemBuffer systemBuffer;

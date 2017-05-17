@@ -66,9 +66,6 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLIndexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,12 +76,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\API\Context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp">
@@ -249,6 +240,15 @@
     <ClCompile Include="BF\AI\Waypoint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Graphics\API\ConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\DirectX\DXConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Platform\API\OpenGL\GLConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -320,9 +320,6 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLIndexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\API\VertexBufferLayout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -333,12 +330,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\API\Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\API\ConstentBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Platform\API\DirectX\DXContext.h">
@@ -519,6 +510,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Platform\API\OpenGL\GLCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\ConstantBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\DirectX\DXConstantBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Platform\API\OpenGL\GLConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

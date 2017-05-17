@@ -12,7 +12,7 @@ namespace BF
 		using namespace BF::Math;
 
 		FPSCamera::FPSCamera() : 
-			movmentSpeed(0.5f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f)
+			movmentSpeed(0.5f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
 		{
 		}
 
@@ -33,27 +33,33 @@ namespace BF
 
 		void FPSCamera::Update()
 		{
-			if (Keyboard::IsKeyPressed(Keyboard::Key::W))
+			if (Keyboard::IsKeyDown(Keyboard::Key::Code::W))
 				position += cameraFront * movmentSpeed;
-			if (Keyboard::IsKeyPressed(Keyboard::Key::S))
+			if (Keyboard::IsKeyDown(Keyboard::Key::Code::S))
 				position -= cameraFront * movmentSpeed;
-			if (Keyboard::IsKeyPressed(Keyboard::Key::A))
-				position -= cameraFront.Cross(cameraUp).Normalize() * movmentSpeed;
-			if (Keyboard::IsKeyPressed(Keyboard::Key::D))
-				position += cameraFront.Cross(cameraUp).Normalize() * movmentSpeed;
+			if (Keyboard::IsKeyDown(Keyboard::Key::Code::D))
+				position += cameraUp.Cross(cameraFront).Normalize() * movmentSpeed;
+			if (Keyboard::IsKeyDown(Keyboard::Key::Code::A))
+				position -= cameraUp.Cross(cameraFront).Normalize() * movmentSpeed;
 
-			//BF::Input::Mouse::SetPosition(windowCenter);
-			//yaw += (Mouse::GetPosition().x - windowCenter.x) * sensitivity;
-			//pitch += (windowCenter.y - Mouse::GetPosition().y) * sensitivity;
+			if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Escape))
+				lockMouseToCenter = lockMouseToCenter == false ? true : false;
 
-			/*if (pitch > 89.0f)
-				pitch = 89.0f;
-			if (pitch < -89.0f)
-				pitch = -89.0f;*/
+			if (lockMouseToCenter)
+			{
+				BF::Input::Mouse::SetPosition(windowCenter);
+				yaw += (Mouse::GetPosition().x - windowCenter.x) * sensitivity;
+				pitch += (windowCenter.y - Mouse::GetPosition().y) * sensitivity;
 
-			cameraFront.x = cos(ToRadians(yaw)) * cos(ToRadians(pitch));
+				if (pitch > 89.0f)
+					pitch = 89.0f;
+				if (pitch < -89.0f)
+					pitch = -89.0f;
+			}
+
+			cameraFront.x = sin(ToRadians(yaw)) * cos(ToRadians(pitch));
 			cameraFront.y = sin(ToRadians(pitch));
-			cameraFront.z = sin(ToRadians(yaw)) * cos(ToRadians(pitch));
+			cameraFront.z = cos(ToRadians(yaw)) * cos(ToRadians(pitch));
 			cameraFront = cameraFront.Normalize();
 
 			systemBuffer.viewMatrix = Matrix4::LookAt(position, position + cameraFront, cameraUp);

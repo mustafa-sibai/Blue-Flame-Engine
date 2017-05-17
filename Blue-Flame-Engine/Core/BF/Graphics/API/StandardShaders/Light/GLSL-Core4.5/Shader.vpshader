@@ -1,0 +1,29 @@
+vertexShader = R"(
+#version 450 core
+layout(location = 0) in vec3 inPosition;
+
+layout (std140, binding = 0) uniform shader_data
+{
+	mat4 buffer_modelMatrix;
+	mat4 buffer_viewMatrix;
+	mat4 buffer_projectionMatrix;
+	vec4 cameraPos;
+};
+
+void main()
+{
+	vec4 worldSpace = buffer_modelMatrix * vec4(inPosition.xyz, 1.0f);
+	gl_Position = buffer_projectionMatrix * buffer_viewMatrix * worldSpace;
+}
+)";
+
+pixelShader = R"(
+#version 450 core
+
+out vec4 color;
+
+void main() 
+{
+	color = vec4(1.0f);
+}
+)";

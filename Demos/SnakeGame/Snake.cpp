@@ -29,13 +29,13 @@ void Snake::Load()
 
 void Snake::Update()
 {
-	if (Keyboard::IsKeyPressed(Keyboard::Key::D) && movmentDirection != Vector2(-1.0f, 0.0f))
+	if (Keyboard::IsKeyPressed(Keyboard::Key::Code::D) && movmentDirection != Vector2(-1.0f, 0.0f))
 		movmentDirection = Vector2(1.0f, 0.0f);
-	else if (Keyboard::IsKeyPressed(Keyboard::Key::A) && movmentDirection != Vector2(1.0f, 0.0f))
+	else if (Keyboard::IsKeyPressed(Keyboard::Key::Code::A) && movmentDirection != Vector2(1.0f, 0.0f))
 		movmentDirection = Vector2(-1.0f, 0.0f);
-	else if (Keyboard::IsKeyPressed(Keyboard::Key::W) && movmentDirection != Vector2(0.0f, 1.0f))
+	else if (Keyboard::IsKeyPressed(Keyboard::Key::Code::W) && movmentDirection != Vector2(0.0f, 1.0f))
 		movmentDirection = Vector2(0.0f, -1.0f);
-	else if (Keyboard::IsKeyPressed(Keyboard::Key::S) && movmentDirection != Vector2(0.0f, -1.0f))
+	else if (Keyboard::IsKeyPressed(Keyboard::Key::Code::S) && movmentDirection != Vector2(0.0f, -1.0f))
 		movmentDirection = Vector2(0.0f, 1.0f);
 
 	deltaTime += Engine::GetDeltaTime();

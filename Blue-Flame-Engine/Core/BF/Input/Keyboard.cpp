@@ -4,21 +4,48 @@ namespace BF
 {
 	namespace Input
 	{
-		bool Keyboard::keys[BF_MAX_KEYS];
+		Keyboard::Key Keyboard::keys[BF_MAX_KEYS];
 
 		Keyboard::Keyboard()
 		{
-			for (unsigned int i = 0; i < BF_MAX_KEYS; i++)
-				keys[i] = false;
 		}
 
 		Keyboard::~Keyboard()
 		{
 		}
 
-		bool Keyboard::IsKeyPressed(Key key)
+		bool Keyboard::IsKeyPressed(Key::Code keyCode)
 		{
-			return keys[(unsigned char)key];
+			if (keys[(unsigned char)keyCode].state == Key::State::Pressed)
+			{
+				keys[(unsigned char)keyCode].state = Key::State::Down;
+				return true;
+			}
+
+			return false;
+		}
+
+		bool Keyboard::IsKeyDown(Key::Code keyCode)
+		{
+			if (keys[(unsigned char)keyCode].state == Key::State::Pressed ||
+				keys[(unsigned char)keyCode].state == Key::State::Down)
+			{
+				keys[(unsigned char)keyCode].state = Key::State::Down;
+				return true;
+			}
+
+			return false;
+		}
+
+		bool Keyboard::IsKeyUp(Key::Code keyCode)
+		{
+			if (keys[(unsigned char)keyCode].state == Key::State::Up)
+			{
+				keys[(unsigned char)keyCode].state = Key::State::Null;
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

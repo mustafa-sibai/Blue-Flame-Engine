@@ -5,9 +5,9 @@
 //#include <BF/Platform/API/Vulkan/VKContext.h>
 
 #include "_2DScene.h"
-//#include "_3DScene.h"
+#include "_3DScene.h"
 //#include "_3DScene2.h"
-//#include "InputTests.h"
+#include "InputTests.h"
 
 //#include <windows.h>
 //#include <string>
@@ -38,19 +38,16 @@ int main()
 
 	//BF_LOG_INFO("MAIN FUNCTION");
 
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(800, 250, 800, 600), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(800, 250, 1920, 1080), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
-	//BF::Application::SceneManager::AddNewScene(new _2DScene::_2DScene());
-	//BF::Application::SceneManager::AddNewScene(new _3DScene::_3DScene());
-	//BF::Application::SceneManager::AddNewScene(new InputTests());
-	
-	//BF::Application::SceneManager::AddNewScene(new _3DScene2::_3DScene2());
-	_2DScene::_2DScene _2d;
 
-	engine.Run(_2d);
-	//engine.Run(_3DScene::_3DScene());
+	_3DScene::_3DScene scene;
+	//_2DScene::_2DScene scene;
+	//InputTests scene;
+
+	engine.Run(scene);
 
 	/*
 		TCHAR  buffer[MAX_PATH];

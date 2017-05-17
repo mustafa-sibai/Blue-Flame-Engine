@@ -27,8 +27,8 @@ namespace _3DScene2
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
 		skybox.Initialize();
 
-		constentBuffer.Create(sizeof(LightBuffer), 1);
-		materialConstentBuffer.Create(sizeof(material.colorBuffer), 2);
+		constantBuffer.Create(sizeof(LightBuffer), 1);
+		materialConstantBuffer.Create(sizeof(material.colorBuffer), 2);
 
 		//terrain.Initialize();
 	}
@@ -63,7 +63,7 @@ namespace _3DScene2
 											"Assets/TextureCubes/LancellottiChapel/posy.jpg", "Assets/TextureCubes/LancellottiChapel/negy.jpg",
 											"Assets/TextureCubes/LancellottiChapel/posz.jpg", "Assets/TextureCubes/LancellottiChapel/negz.jpg" };
 
-		skybox.Load(filenames, "Assets/Shaders/GLSL/TextureCube/VertexShader.glsl", "Assets/Shaders/GLSL/TextureCube/PixelShader.glsl");
+		skybox.Load(filenames);
 
 		planeModel.Load("Assets/Models/Plane.bfx");
 		cubeModel.Load("Assets/Models/Cube.bfx");
@@ -145,7 +145,7 @@ namespace _3DScene2
 		material.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		material.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		material.colorBuffer.shininess = 32.0f;
-		materialConstentBuffer.Update(&material, sizeof(material.colorBuffer));
+		materialConstantBuffer.Update(&material, sizeof(material.colorBuffer));
 		material.Bind();
 
 		cubeModel.Render();
@@ -154,14 +154,14 @@ namespace _3DScene2
 
 		lightShader.Bind();
 
-		light.position = Vector4(9.0f, 20.0f, 0.0f, 1.0f);
+		light.posDir = Vector4(9.0f, 20.0f, 0.0f, 1.0f);
 
 		light.ambientColor	= Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.diffuseColor	= Color(0.5f, 0.5f, 0.5f, 1.0f);
 		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		constentBuffer.Update(&light, sizeof(LightBuffer));
+		constantBuffer.Update(&light, sizeof(LightBuffer));
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(light.position.x, light.position.y, light.position.z)) * Matrix4::Scale(Vector3(0.1f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(light.posDir.x, light.posDir.y, light.posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
 		lightModel.Render();
 
 		lightShader.Unbind();

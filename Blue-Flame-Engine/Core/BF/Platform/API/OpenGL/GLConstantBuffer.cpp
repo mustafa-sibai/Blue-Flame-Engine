@@ -1,4 +1,4 @@
-#include "GLConstentBuffer.h"
+#include "GLConstantBuffer.h"
 #include "BF/Platform/API/OpenGL/GLError.h"
 
 namespace BF
@@ -9,17 +9,17 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				GLConstentBuffer::GLConstentBuffer() :
+				GLConstantBuffer::GLConstantBuffer() :
 					buffer(0)
 				{
 				}
 
-				GLConstentBuffer::~GLConstentBuffer()
+				GLConstantBuffer::~GLConstantBuffer()
 				{
 					GLCall(glDeleteBuffers(1, &buffer));
 				}
 
-				void GLConstentBuffer::Create(unsigned int size, unsigned int bindingIndex)
+				void GLConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
 				{
 					GLCall(glGenBuffers(1, &buffer));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
@@ -29,7 +29,7 @@ namespace BF
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 
-				void GLConstentBuffer::Update(const void* data, unsigned int size)
+				void GLConstantBuffer::Update(const void* data, unsigned int size)
 				{
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
 					GLCall(glBufferSubData(GL_UNIFORM_BUFFER, 0, size, data));

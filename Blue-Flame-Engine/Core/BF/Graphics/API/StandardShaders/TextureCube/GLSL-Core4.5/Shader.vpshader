@@ -1,0 +1,33 @@
+vertexShader = R"(
+#version 450 core
+layout(location = 0) in vec3 inPosition;
+
+layout (std140, binding = 0) uniform shader_data
+{
+	mat4 buffer_modelMatrix;
+	mat4 buffer_viewMatrix;
+	mat4 buffer_projectionMatrix;
+};
+
+out vec3 texCoords;
+
+void main()
+{
+	gl_Position = buffer_projectionMatrix * mat4(mat3(buffer_viewMatrix)) * vec4(inPosition.xyz, 1.0f);
+	texCoords = inPosition;
+}
+)";
+
+pixelShader = R"(
+#version 450 core
+
+in vec3 texCoords;
+out vec4 color;
+
+uniform samplerCube skybox;
+
+void main() 
+{
+	color = texture(skybox, texCoords);
+}
+)";

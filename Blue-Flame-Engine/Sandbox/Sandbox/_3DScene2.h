@@ -10,8 +10,8 @@ namespace _3DScene2
 	{
 		private:
 			BF::Graphics::API::Shader shader, lightShader;
-			BF::Graphics::API::ConstentBuffer constentBuffer;
-			BF::Graphics::API::ConstentBuffer materialConstentBuffer;
+			BF::Graphics::API::ConstantBuffer constantBuffer;
+			BF::Graphics::API::ConstantBuffer materialConstantBuffer;
 			BF::Graphics::Model lightModel;
 			BF::Graphics::Model cubeModel;
 			BF::Graphics::Model planeModel;

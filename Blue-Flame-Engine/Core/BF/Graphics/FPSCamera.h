@@ -10,6 +10,7 @@ namespace BF
 		{
 			private:
 				float movmentSpeed, sensitivity, yaw, pitch;
+				bool lockMouseToCenter;
 
 			public:
 				Math::Vector3 cameraFront, cameraUp;

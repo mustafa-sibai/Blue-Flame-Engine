@@ -1,4 +1,4 @@
-#include "DXConstentBuffer.h"
+#include "DXConstantBuffer.h"
 #include "BF/Engine.h"
 #include "DXError.h"
 
@@ -10,16 +10,16 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				DXConstentBuffer::DXConstentBuffer() :
+				DXConstantBuffer::DXConstantBuffer() :
 					buffer(nullptr)
 				{
 				}
 
-				DXConstentBuffer::~DXConstentBuffer()
+				DXConstantBuffer::~DXConstantBuffer()
 				{
 				}
 
-				void DXConstentBuffer::Create(unsigned int size)
+				void DXConstantBuffer::Create(unsigned int size)
 				{
 					//Align the buffer to be a multiple of 16
 					int remainder = size % 16;
@@ -38,7 +38,7 @@ namespace BF
 					Engine::GetContext().GetDXContext().GetContext()->VSSetConstantBuffers(0, 1, &buffer);
 				}
 
-				void DXConstentBuffer::Update(void* data)
+				void DXConstantBuffer::Update(void* data)
 				{
 					//TODO: Slow should use map instead.
 					Engine::GetContext().GetDXContext().GetContext()->UpdateSubresource(buffer, 0, 0, data, 0, 0);

@@ -1,4 +1,4 @@
-#include "ConstentBuffer.h"
+#include "ConstantBuffer.h"
 #include "BF/Graphics/API/Context.h"
 
 namespace BF
@@ -7,35 +7,35 @@ namespace BF
 	{
 		namespace API
 		{
-			ConstentBuffer::ConstentBuffer()
+			ConstantBuffer::ConstantBuffer()
 			{
 			}
 
-			ConstentBuffer::~ConstentBuffer()
+			ConstantBuffer::~ConstantBuffer()
 			{
 			}
 
-			void ConstentBuffer::Create(unsigned int size, unsigned int bindingIndex)
+			void ConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxConstentBuffer.Create(size);
+					dxConstantBuffer.Create(size);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstentBuffer.Create(size, bindingIndex);
+					glConstantBuffer.Create(size, bindingIndex);
 #endif
 			}
 
-			void ConstentBuffer::Update(void* data, unsigned int size)
+			void ConstantBuffer::Update(void* data, unsigned int size)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxConstentBuffer.Update(data);
+					dxConstantBuffer.Update(data);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstentBuffer.Update(data, size);
+					glConstantBuffer.Update(data, size);
 #endif
 			}
 		}

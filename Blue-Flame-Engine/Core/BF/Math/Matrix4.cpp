@@ -125,8 +125,8 @@ namespace BF
 			Matrix4 viewMatrix = Matrix4::Identity();
 
 			Vector3 forward = (target - eye).Normalize();
-			Vector3 right = forward.Cross(upVector).Normalize();
-			Vector3 up = right.Cross(forward);
+			Vector3 right = upVector.Cross(forward).Normalize();
+			Vector3 up = forward.Cross(right);
 
 			viewMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = right.x;
 			viewMatrix.elements[0 + 1 * BF_MATRIX_COLUMN_SIZE] = right.y;

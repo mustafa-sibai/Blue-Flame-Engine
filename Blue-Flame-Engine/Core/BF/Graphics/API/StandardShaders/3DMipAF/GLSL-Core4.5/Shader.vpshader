@@ -1,0 +1,120 @@
+vertexShader = R"(
+#version 450 core
+layout(location = 0) in vec3 inPosition;
+//layout(location = 1) in vec4 inColor;
+layout(location = 1) in vec2 inUV;
+layout(location = 2) in vec3 inNormals;
+
+layout (std140, binding = 0) uniform camera_data
+{
+	mat4 buffer_modelMatrix;
+	mat4 buffer_viewMatrix;
+	mat4 buffer_projectionMatrix;
+	vec4 cameraPos;
+};
+
+out struct data
+{
+	vec4 fragmentColor;
+	vec2 UV;
+	vec3 normals;
+	vec3 pixelPosition;
+	vec3 cameraPos;
+	vec3 cubeMapTexCoords;
+} shared_data;
+
+void main()
+{
+	vec4 worldSpace = buffer_modelMatrix * vec4(inPosition.xyz, 1.0f);
+	gl_Position = buffer_projectionMatrix * buffer_viewMatrix * worldSpace;
+
+	//shared_data.fragmentColor = inColor;
+	shared_data.UV = inUV;
+
+	//Should be done on the CPU side. But it's fine for now.
+	shared_data.normals = mat3(transpose(inverse(buffer_modelMatrix))) * inNormals;
+	shared_data.pixelPosition = worldSpace.xyz;
+	shared_data.cameraPos = cameraPos.xyz;
+
+	shared_data.cubeMapTexCoords = inPosition;
+}
+)";
+
+pixelShader = R"(
+#version 450 core
+
+struct Light
+{
+	vec4 position;
+	vec4 ambientColor;
+	vec4 diffuseColor;
+	vec4 specularColor;
+};
+
+struct Material
+{
+	vec4 ambientColor;
+	vec4 diffuseColor;
+	vec4 specularColor;
+	float shininess;
+};
+
+layout (std140, binding = 1) uniform LightUniform
+{
+	Light light;
+};
+
+layout (std140, binding = 2) uniform MaterialUniform
+{
+	Material material;
+};
+
+in struct data
+{
+	vec4 fragmentColor;
+	vec2 UV;
+	vec3 normals;
+	vec3 pixelPosition;
+	vec3 cameraPos;
+	vec3 cubeMapTexCoords;
+} shared_data;
+
+out vec4 color;
+
+uniform sampler2D diffuseMap;
+uniform sampler2D specularMap;
+
+uniform samplerCube skybox;
+
+void main() 
+{
+	vec3 ambientLight = vec3(light.ambientColor * material.ambientColor * texture(diffuseMap, shared_data.UV));
+
+	vec3 norm = normalize(shared_data.normals);
+	vec3 lightDirection = normalize(light.position.xyz - shared_data.pixelPosition);
+	float diffuse = max(0.0f, dot(lightDirection, norm) * 0.91f);
+	vec3 diffuseLight = vec3(light.diffuseColor * diffuse * material.diffuseColor * texture(diffuseMap, shared_data.UV));
+
+	vec3 viewDir = normalize(shared_data.cameraPos - shared_data.pixelPosition);
+	vec3 reflectDir = reflect(-lightDirection, norm);  
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+	vec3 specular = vec3(light.specularColor * spec * material.specularColor * texture(specularMap, shared_data.UV));
+
+	vec3 result = ambientLight + diffuseLight + specular;
+
+
+	/*vec3 I = normalize(shared_data.pixelPosition - shared_data.cameraPos);
+    vec3 R = reflect(I, normalize(shared_data.normals));
+    color = texture(skybox, R);*/
+
+	color = vec4(result, 1.0f);
+	//color = vec4(result, 1.0f) * texture(skybox, R);
+	//color = vec4(texture(skyboxs, shared_data.cubeMapTexCoords));
+
+	//color = texture(diffuseMap, shared_data.UV);
+
+	//color = vec4(diffuseLight, 1.0f)  * texture(textures[texID], shared_data.UV);
+	//color = shared_data.fragmentColor;
+	//color = vec4(diffuseLight, 1.0f) * shared_data.fragmentColor;
+}
+)";

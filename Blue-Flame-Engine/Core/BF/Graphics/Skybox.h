@@ -26,7 +26,7 @@ namespace BF
 			~Skybox();
 
 			void Initialize();
-			void Load(const std::vector<std::string>& filenames, const std::string& vertexShaderFilename, const std::string& pixelShaderFilename);
+			void Load(const std::vector<std::string>& filenames);
 			void Render();
 
 			void Bind();

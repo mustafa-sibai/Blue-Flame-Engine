@@ -27,7 +27,7 @@
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
     <ClCompile Include="BF\Engine.cpp" />
     <ClCompile Include="BF\Graphics\Animation\SpriteAnimation.cpp" />
-    <ClCompile Include="BF\Graphics\API\ConstentBuffer.cpp" />
+    <ClCompile Include="BF\Graphics\API\ConstantBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\RenderTarget.cpp" />
@@ -77,7 +77,7 @@
     <ClCompile Include="BF\Math\Vector2.cpp" />
     <ClCompile Include="BF\Math\Vector3.cpp" />
     <ClCompile Include="BF\Math\Vector4.cpp" />
-    <ClCompile Include="BF\Platform\API\DirectX\DXConstentBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\DirectX\DXConstantBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXError.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXIndexBuffer.cpp" />
@@ -85,7 +85,7 @@
     <ClCompile Include="BF\Platform\API\DirectX\DXTexture2D.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXVertexBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\Context\WINGLContext.cpp" />
-    <ClCompile Include="BF\Platform\API\OpenGL\GLConstentBuffer.cpp" />
+    <ClCompile Include="BF\Platform\API\OpenGL\GLConstantBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLContext.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLError.cpp" />
     <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp" />
@@ -110,7 +110,7 @@
     <ClInclude Include="BF\Common.h" />
     <ClInclude Include="BF\Engine.h" />
     <ClInclude Include="BF\Graphics\Animation\SpriteAnimation.h" />
-    <ClInclude Include="BF\Graphics\API\ConstentBuffer.h" />
+    <ClInclude Include="BF\Graphics\API\ConstantBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
     <ClInclude Include="BF\Graphics\API\RenderTarget.h" />
@@ -167,7 +167,7 @@
     <ClInclude Include="BF\Math\Vector2.h" />
     <ClInclude Include="BF\Math\Vector3.h" />
     <ClInclude Include="BF\Math\Vector4.h" />
-    <ClInclude Include="BF\Platform\API\DirectX\DXConstentBuffer.h" />
+    <ClInclude Include="BF\Platform\API\DirectX\DXConstantBuffer.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXError.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXIndexBuffer.h" />
@@ -176,7 +176,7 @@
     <ClInclude Include="BF\Platform\API\DirectX\DXVertexBuffer.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\Context\WINGLContext.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLCommon.h" />
-    <ClInclude Include="BF\Platform\API\OpenGL\GLConstentBuffer.h" />
+    <ClInclude Include="BF\Platform\API\OpenGL\GLConstantBuffer.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLContext.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLError.h" />
     <ClInclude Include="BF\Platform\API\OpenGL\GLFramebuffer.h" />

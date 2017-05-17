@@ -10,14 +10,17 @@ namespace _3DScene
 	{
 		private:
 			BF::Graphics::API::Shader shader, lightShader;
-			BF::Graphics::API::ConstentBuffer constentBuffer;
-			BF::Graphics::API::ConstentBuffer materialConstentBuffer;
+			BF::Graphics::API::ConstantBuffer constantBuffer;
+			BF::Graphics::API::ConstantBuffer materialConstantBuffer;
 			BF::Graphics::Model lightModel;
 			BF::Graphics::Model cubeModel;
 			BF::Graphics::Model planeModel;
 			BF::Graphics::Model wallModel;
 			BF::Graphics::FPSCamera fpsCamera;
 			//BF::Graphics::Terrain terrain;
+
+			bool directionalLight;
+			float lightAngle;
 
 			BF::Graphics::LightBuffer light;
 			BF::Graphics::Material floorMaterial;
