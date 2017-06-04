@@ -53,11 +53,11 @@
     <ClCompile Include="BF\Graphics\Material.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\Renderable.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Skybox.cpp" />
     <ClCompile Include="BF\Graphics\Terrain.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
@@ -97,6 +97,7 @@
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -138,11 +139,11 @@
     <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
-    <ClInclude Include="BF\Graphics\Renderers\LineShape.h" />
-    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h" />
-    <ClInclude Include="BF\Graphics\Renderers\Renderable.h" />
-    <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.h" />
     <ClInclude Include="BF\Graphics\Skybox.h" />
     <ClInclude Include="BF\Graphics\Terrain.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
@@ -189,11 +190,13 @@
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\System\Timer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\OldShader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\HLSL5.0\Shader.vpshader" />

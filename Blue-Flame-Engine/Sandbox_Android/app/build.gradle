@@ -4,7 +4,7 @@ model {
     android {
         compileSdkVersion = 23
         buildToolsVersion = "25.0.2"
-		//buildToolsVersion = "19.1.0"
+		//buildToolsVersion = "23.0.3"
         
 		defaultConfig.with {
             applicationId = "com.Sandbox.Sandbox"

@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Graphics/Renderers/Renderable.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Common.h"
 

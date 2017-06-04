@@ -15,15 +15,17 @@ namespace BF
 		struct BF_API MeshVertexData
 		{
 			Math::Vector3 position;
-			//Color color;
 			Math::Vector2 texcoord;
 			Math::Vector3 normal;
+			Math::Vector3 tangent;
+			Math::Vector3 binormal;
+			//Color color;
 
 			MeshVertexData() :
-				position(0), texcoord(0), normal(0) { }
+				position(0), texcoord(0), normal(0), tangent(0), binormal(0) { }
 
-			MeshVertexData(Math::Vector3 position, /*Color color,*/ Math::Vector2 texcoord, Math::Vector3 normal) :
-				position(position), /*color(color), */texcoord(texcoord), normal(normal)
+			MeshVertexData(Math::Vector3 position, /*Color color,*/ Math::Vector2 texcoord, Math::Vector3 normal, Math::Vector3 tangent, Math::Vector3 binormal) :
+				position(position), /*color(color), */texcoord(texcoord), normal(normal), tangent(tangent), binormal(binormal)
 			{
 			}
 		};

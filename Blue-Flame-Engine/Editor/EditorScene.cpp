@@ -28,9 +28,9 @@ namespace Editor
 		Scene::Load();
 	}
 
-	void EditorScene::FixedUpdate()
+	/*void EditorScene::FixedUpdate()
 	{
-	}
+	}*/
 
 	void EditorScene::Update()
 	{

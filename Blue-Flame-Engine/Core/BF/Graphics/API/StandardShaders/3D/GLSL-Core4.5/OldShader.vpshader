@@ -56,6 +56,8 @@ void main()
 pixelShader = R"(
 #version 450 core
 
+#define TOTAL_LIGHTS 4
+
 struct Light
 {
 	vec4 posDir;
@@ -88,7 +90,7 @@ struct Material
 
 layout (std140, binding = 1) uniform LightUniform
 {
-	PointLight light;
+	PointLight light[TOTAL_LIGHTS];
 };
 
 layout (std140, binding = 2) uniform MaterialUniform
@@ -177,9 +179,10 @@ void main()
 
 	//vec3 finalColor = CalculateDirectionalLight(light, normal, viewDir);
 
-	finalColor = CalculateInfiniteLight(light, normal, viewDir); 
+	for(int i = 0; i < TOTAL_LIGHTS; i++)
+		finalColor += CalculateInfiniteLight(light[i], normal, viewDir); 
 
-	color = vec4(finalColor, 1.0f);
+	color = vec4(GameCorrection(finalColor), 1.0f);
 
 	//vec3 I = normalize(shared_data.pixelPosition - shared_data.cameraPos);
     //vec3 R = reflect(I, normalize(shared_data.normals));

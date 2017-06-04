@@ -25,7 +25,7 @@
 #include <BF/Graphics/API/IndexBuffer.h>
 #include <BF/Graphics/API/ConstantBuffer.h>
 
-#include <BF/Graphics/Renderers/SpriteRenderer.h>
+#include <BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h>
 
 #include <BF/Graphics/Fonts/FontAtlas.h>
 

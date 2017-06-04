@@ -5,7 +5,8 @@
 //#include <BF/Platform/API/Vulkan/VKContext.h>
 
 #include "_2DScene.h"
-#include "_3DScene.h"
+//#include "_3DScene.h"
+#include "new3DScene.h"
 //#include "_3DScene2.h"
 #include "InputTests.h"
 
@@ -43,7 +44,9 @@ int main()
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
 
-	_3DScene::_3DScene scene;
+	
+	new3DScene::new3DScene scene;
+	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//InputTests scene;
 

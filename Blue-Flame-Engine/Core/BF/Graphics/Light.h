@@ -14,6 +14,11 @@ namespace BF
 			Color ambientColor;
 			Color diffuseColor;
 			Color specularColor;
+
+			float constant = 1.0f;
+			float linear = 0.35f;
+			float quadratic = 0.44f;
+			float padding;
 		};
 	}
 }

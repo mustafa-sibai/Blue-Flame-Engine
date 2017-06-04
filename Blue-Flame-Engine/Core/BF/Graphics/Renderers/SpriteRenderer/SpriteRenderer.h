@@ -1,11 +1,11 @@
 #pragma once
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
-#include "BF/Graphics/Renderers/Sprite.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
 #include "BF/Graphics/Fonts/FontAtlas.h"
 #include "BF/Graphics/Color.h"
-#include "BF/Graphics/Renderers/LineShape.h"
-#include "BF/Graphics/Renderers/RegularPolygon.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/LineShape.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/RegularPolygon.h"
 #include "BF/Common.h"
 
 namespace BF

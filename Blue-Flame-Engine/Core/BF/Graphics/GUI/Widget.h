@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "BF/Graphics/Renderers/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Common.h"
 
 #define BF_WIDGET_DATA_SPRITES_LENGTH 8

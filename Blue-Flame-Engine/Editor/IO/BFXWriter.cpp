@@ -19,7 +19,7 @@ namespace Editor
 		{
 			bfxFormat.fileHeader = "BFX FILE";
 			bfxFormat.majorFileVersion = 0;
-			bfxFormat.minorFileVersion = 1;
+			bfxFormat.minorFileVersion = 2;
 			bfxFormat.meshCount = (unsigned int)mesh->size();
 
 			FILE* file;

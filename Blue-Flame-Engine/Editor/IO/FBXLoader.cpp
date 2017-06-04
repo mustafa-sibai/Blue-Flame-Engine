@@ -137,12 +137,14 @@ namespace Editor
 					ctrlPointIndex = mesh->GetPolygonVertex(i, j);
 
 					Vector3 normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter);
+					Vector3 tangent = ReadTangent(mesh, ctrlPointIndex, vertexCounter);
+					Vector3 binormal = ReadBinormal(mesh, ctrlPointIndex, vertexCounter);
 					Vector2 UV;
 
 					for (int k = 0; k < 1; k++)
 						UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), k);
 
-					MeshVertexData vertex(controlPoints[0][ctrlPointIndex], UV, normal);
+					MeshVertexData vertex(controlPoints[0][ctrlPointIndex], UV, normal, tangent, binormal);
 
 					/*if (vertices->size() > 0)
 					{
@@ -241,6 +243,140 @@ namespace Editor
 			}
 
 			return outNormal;
+		}
+
+		Vector3 FBXLoader::ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter)
+		{
+			if (inMesh->GetElementTangentCount() < 1)
+			{
+				std::cout << "Invalid Tangent Number" << std::endl;
+				return Vector3();
+			}
+
+			Vector3 outTangent;
+
+			FbxGeometryElementTangent* vertexTangent = inMesh->GetElementTangent(0);
+			switch (vertexTangent->GetMappingMode())
+			{
+			case FbxGeometryElement::eByControlPoint:
+				switch (vertexTangent->GetReferenceMode())
+				{
+				case FbxGeometryElement::eDirect:
+				{
+					outTangent.x = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inCtrlPointIndex).mData[0]);
+					outTangent.y = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inCtrlPointIndex).mData[1]);
+					outTangent.z = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inCtrlPointIndex).mData[2]);
+				}
+				break;
+
+				case FbxGeometryElement::eIndexToDirect:
+				{
+					int index = vertexTangent->GetIndexArray().GetAt(inCtrlPointIndex);
+					outTangent.x = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[0]);
+					outTangent.y = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[1]);
+					outTangent.z = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[2]);
+				}
+				break;
+
+				default:
+					std::cout << "Invalid Reference" << std::endl;
+				}
+				break;
+
+			case FbxGeometryElement::eByPolygonVertex:
+				switch (vertexTangent->GetReferenceMode())
+				{
+				case FbxGeometryElement::eDirect:
+				{
+					outTangent.x = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inVertexCounter).mData[0]);
+					outTangent.y = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inVertexCounter).mData[1]);
+					outTangent.z = static_cast<float>(vertexTangent->GetDirectArray().GetAt(inVertexCounter).mData[2]);
+				}
+				break;
+
+				case FbxGeometryElement::eIndexToDirect:
+				{
+					int index = vertexTangent->GetIndexArray().GetAt(inVertexCounter);
+					outTangent.x = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[0]);
+					outTangent.y = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[1]);
+					outTangent.z = static_cast<float>(vertexTangent->GetDirectArray().GetAt(index).mData[2]);
+				}
+				break;
+
+				default:
+					std::cout << "Invalid Reference" << std::endl;
+				}
+				break;
+			}
+
+			return outTangent;
+		}
+
+		Vector3 FBXLoader::ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter)
+		{
+			if (inMesh->GetElementBinormalCount() < 1)
+			{
+				std::cout << "Invalid Binormal Number" << std::endl;
+				return Vector3();
+			}
+
+			Vector3 outBinormal;
+
+			FbxGeometryElementBinormal* vertexBinormal = inMesh->GetElementBinormal(0);
+			switch (vertexBinormal->GetMappingMode())
+			{
+			case FbxGeometryElement::eByControlPoint:
+				switch (vertexBinormal->GetReferenceMode())
+				{
+				case FbxGeometryElement::eDirect:
+				{
+					outBinormal.x = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[0]);
+					outBinormal.y = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[1]);
+					outBinormal.z = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inCtrlPointIndex).mData[2]);
+				}
+				break;
+
+				case FbxGeometryElement::eIndexToDirect:
+				{
+					int index = vertexBinormal->GetIndexArray().GetAt(inCtrlPointIndex);
+					outBinormal.x = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[0]);
+					outBinormal.y = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[1]);
+					outBinormal.z = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[2]);
+				}
+				break;
+
+				default:
+					std::cout << "Invalid Reference" << std::endl;
+				}
+				break;
+
+			case FbxGeometryElement::eByPolygonVertex:
+				switch (vertexBinormal->GetReferenceMode())
+				{
+				case FbxGeometryElement::eDirect:
+				{
+					outBinormal.x = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inVertexCounter).mData[0]);
+					outBinormal.y = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inVertexCounter).mData[1]);
+					outBinormal.z = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(inVertexCounter).mData[2]);
+				}
+				break;
+
+				case FbxGeometryElement::eIndexToDirect:
+				{
+					int index = vertexBinormal->GetIndexArray().GetAt(inVertexCounter);
+					outBinormal.x = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[0]);
+					outBinormal.y = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[1]);
+					outBinormal.z = static_cast<float>(vertexBinormal->GetDirectArray().GetAt(index).mData[2]);
+				}
+				break;
+
+				default:
+					std::cout << "Invalid Reference" << std::endl;
+				}
+				break;
+			}
+
+			return outBinormal;
 		}
 
 		Vector2 FBXLoader::ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer)

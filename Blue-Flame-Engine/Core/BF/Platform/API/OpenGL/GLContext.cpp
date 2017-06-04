@@ -90,9 +90,17 @@ namespace BF
 				void GLContext::EnableDepthMask(bool state)
 				{
 					if (state)
+					{
 						GLCall(glDepthMask(GL_TRUE));
+
+						GLCall(glDepthFunc(GL_LESS));
+					}
 					else
+					{
 						GLCall(glDepthMask(GL_FALSE));
+
+						GLCall(glDepthFunc(GL_EQUAL));
+					}
 				}
 
 				void GLContext::EnableBlending(bool state)
@@ -100,7 +108,8 @@ namespace BF
 					if (state)
 					{
 						GLCall(glEnable(GL_BLEND));
-						GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+						//GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+						GLCall(glBlendFunc(GL_ONE, GL_ONE));
 					}
 					else
 						GLCall(glDisable(GL_BLEND));

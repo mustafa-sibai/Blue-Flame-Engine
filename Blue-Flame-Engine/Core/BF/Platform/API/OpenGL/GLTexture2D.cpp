@@ -109,6 +109,7 @@ namespace BF
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(16.0f, AFLevel)));
+							//GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -10.4f));
 #endif
 							break;
 						}

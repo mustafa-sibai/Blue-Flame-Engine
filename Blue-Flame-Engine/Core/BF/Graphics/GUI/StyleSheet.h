@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include "DependencyHeaders/TinyXML-2/tinyxml2.h"
 #include "BF/Graphics/GUI/Widget.h"
-#include "BF/Graphics/Renderers/Sprite.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 

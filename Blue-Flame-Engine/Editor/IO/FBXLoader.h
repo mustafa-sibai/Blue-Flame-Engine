@@ -35,6 +35,8 @@ namespace Editor
 				void ReadControlPoints(FbxMesh* mesh);
 				void ProcessMesh(FbxMesh* mesh);
 				BF::Math::Vector3 ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter);
+				BF::Math::Vector3 ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter);
+				BF::Math::Vector3 ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter);
 				BF::Math::Vector2 ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer);
 				//void LoadUVInformation(FbxMesh* pMesh);
 

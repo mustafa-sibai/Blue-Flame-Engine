@@ -79,7 +79,7 @@ namespace BF
 					float normalizedData = Normalize(data[((x * stride) + (z * width * stride))], 0, 256);
 
 					vertices[x + (z * ROW_VERTICES)] = MeshVertexData(Vector3(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z),
-						Vector2(), Vector3(0.0f, 1.0f, 0.0f));
+						Vector2(), Vector3(0.0f, 1.0f, 0.0f), Vector3(), Vector3());
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{

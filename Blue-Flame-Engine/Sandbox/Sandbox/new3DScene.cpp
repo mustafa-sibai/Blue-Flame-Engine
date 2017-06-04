@@ -1,6 +1,6 @@
-#include "_3DScene.h"
+#include "new3DScene.h"
 
-namespace _3DScene
+namespace new3DScene
 {
 	using namespace BF::Application;
 	using namespace BF::Graphics;
@@ -10,18 +10,18 @@ namespace _3DScene
 	using namespace BF::System;
 	using namespace BF::Input;
 
-	_3DScene::_3DScene() :
+	new3DScene::new3DScene() :
 		cubeModel(shader), crateModel(shader), planeModel(shader),
-		lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },
+		/*lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },*/
 		floorMaterial(shader), crateMaterial(shader), directionalLight(false)
 	{
 	}
 
-	_3DScene::~_3DScene()
+	new3DScene::~new3DScene()
 	{
 	}
 
-	void _3DScene::Initialize()
+	void new3DScene::Initialize()
 	{
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		//BF::Engine::GetContext().EnableVsync(true);
@@ -31,13 +31,13 @@ namespace _3DScene
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
 		skybox.Initialize();
 
-		constantBuffer.Create(sizeof(Lights), 1);
+		constantBuffer.Create(sizeof(LightBuffer), 1);
 		materialConstantBuffer.Create(sizeof(floorMaterial.colorBuffer), 2);
 
 		//terrain.Initialize();
 	}
 
-	void _3DScene::Load()
+	void new3DScene::Load()
 	{
 		//terrain.Load("Assets/HeightMaps/heightmap2.bmp");
 
@@ -68,11 +68,12 @@ namespace _3DScene
 		cubeModel.Load("Assets/Models/Cube.bfx");
 
 		//------------------------------------------ Light Models ----------------------------------------------
-		for (size_t i = 0; i < 4; i++)
+		/*for (size_t i = 0; i < 4; i++)
 		{
 			lightModel[i].Load("Assets/Models/Cube.bfx");
 			lights.lights[i].posDir.w = 1.0f;
-		}
+		}*/
+		lights.posDir.w = 1.0f;
 		//------------------------------------------ Light Models ----------------------------------------------
 
 		//, Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16
@@ -90,7 +91,7 @@ namespace _3DScene
 
 	}*/
 
-	void _3DScene::Update()
+	void new3DScene::Update()
 	{
 		angle += 0.1f * BF::Engine::GetDeltaTime();
 		fpsCamera.Update();
@@ -118,33 +119,117 @@ namespace _3DScene
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::L))
-			lights.lights[lightIndex].posDir.x += 0.5f;
+			lights.posDir.x += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::J))
-			lights.lights[lightIndex].posDir.x -= 0.5f;
+			lights.posDir.x -= 0.5f;
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::P))
-			lights.lights[lightIndex].posDir.y += 0.5f;
+			lights.posDir.y += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::Semicolon))
-			lights.lights[lightIndex].posDir.y -= 0.5f;
+			lights.posDir.y -= 0.5f;
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::I))
-			lights.lights[lightIndex].posDir.z += 0.5f;
+			lights.posDir.z += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::K))
-			lights.lights[lightIndex].posDir.z -= 0.5f;
+			lights.posDir.z -= 0.5f;
 	}
 
-	void _3DScene::Render()
+	void new3DScene::Render()
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		skybox.Render();
+		//skybox.Render();
 
-		skybox.Bind();
+		
+
+		//----------------------------------------------- Light 1 -------------------------------------------
+		//lightShader.Bind();
+
+		/*lights.ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+		lights.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		constantBuffer.Update(&lights, sizeof(LightBuffer));
+
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(lights.posDir.x, lights.posDir.y, lights.posDir.z)) * Matrix4::Scale(Vector3(0.1f)));*/
+
+		/*
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (directionalLight)
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3()) * Matrix4::Scale(Vector3(0.1f)));
+			else
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(lights.lights[i].posDir.x, lights.lights[i].posDir.y, lights.lights[i].posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
+		
+			lightModel[i].Render();
+		}
+		*/
+		
+
+		//lightShader.Unbind();
+		//----------------------------------------------- Light 1 -------------------------------------------
+
+
+		//terrain.Render();
+
+		RenderAllModels();
+
+		BF::Engine::GetContext().EnableBlending(true);
+		BF::Engine::GetContext().EnableDepthMask(false);
+
+		lights.posDir = Vector4(-3.5f, 0.0f, 0.0f, 1.0f);
+		lights.ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+		lights.diffuseColor = Color(5.0f, 0.0f, 0.0f, 1.0f);
+		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		constantBuffer.Update(&lights, sizeof(LightBuffer));
+
+		RenderAllModels();
+
+		lights.posDir = Vector4(2.5f, 0.0f, 0.0f, 1.0f);
+		lights.ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+		lights.diffuseColor = Color(0.0f, 5.0f, 0.0f, 1.0f);
+		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		constantBuffer.Update(&lights, sizeof(LightBuffer));
+
+		RenderAllModels();
+
+		BF::Engine::GetContext().EnableDepthMask(true);
+		BF::Engine::GetContext().EnableBlending(false);
+
+
+
+
+
+
+		/*
+		BF::Engine::GetContext().EnableBlending(true);
+		BF::Engine::GetContext().EnableDepthMask(false);
+
+		lights.posDir = Vector4(2.5f, 0.0f, 0.0f, 1.0f);
+		lights.ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+		lights.diffuseColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
+		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+		constantBuffer.Update(&lights, sizeof(LightBuffer));
+
+		BF::Engine::GetContext().EnableDepthMask(true);
+		BF::Engine::GetContext().EnableBlending(false);
+
+		RenderAllModels();*/
+
+
+		BF::Engine::GetContext().SwapBuffers();
+	}
+
+	void new3DScene::RenderAllModels()
+	{
 		shader.Bind();
 
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
@@ -177,39 +262,5 @@ namespace _3DScene
 		cubeModel.Render();
 
 		shader.Unbind();
-		skybox.Unbind();
-
-
-		//----------------------------------------------- Light 1 -------------------------------------------
-		lightShader.Bind();
-
-		for (size_t i = 0; i < 4; i++)
-		{
-			lights.lights[i].ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
-			lights.lights[i].diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-			lights.lights[i].specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		}
-
-		constantBuffer.Update(&lights, sizeof(Lights));
-
-		for (size_t i = 0; i < 4; i++)
-		{
-			if (directionalLight)
-				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3()) * Matrix4::Scale(Vector3(0.1f)));
-			else
-				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(lights.lights[i].posDir.x, lights.lights[i].posDir.y, lights.lights[i].posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
-		
-			lightModel[i].Render();
-		}
-
-		
-
-		lightShader.Unbind();
-		//----------------------------------------------- Light 1 -------------------------------------------
-
-
-		//terrain.Render();
-
-		BF::Engine::GetContext().SwapBuffers();
 	}
 }
