@@ -25,10 +25,6 @@ namespace BF
 					unsigned int FPS;
 
 				public:
-					enum class State { Initialize, Render, Exit };
-					State state;
-
-				public:
 					LXEngineEntryPoint(const LXWindow& lxWindow, Graphics::API::RenderAPI renderAPI);
 					~LXEngineEntryPoint();
 

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SnakeGame", "SnakeGame\SnakeGame.vcxproj", "{431F6D4B-28F3-471C-BC14-983A6090047A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pong", "Pong\Pong.vcxproj", "{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{431F6D4B-28F3-471C-BC14-983A6090047A}.Release|x64.Build.0 = Release|x64
 		{431F6D4B-28F3-471C-BC14-983A6090047A}.Release|x86.ActiveCfg = Release|Win32
 		{431F6D4B-28F3-471C-BC14-983A6090047A}.Release|x86.Build.0 = Release|Win32
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Debug|x64.ActiveCfg = Debug|x64
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Debug|x64.Build.0 = Debug|x64
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Debug|x86.Build.0 = Debug|Win32
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Release|x64.ActiveCfg = Release|x64
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Release|x64.Build.0 = Release|x64
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Release|x86.ActiveCfg = Release|Win32
+		{82B896E5-EFCA-4B53-96F9-B2D940C9D2BD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

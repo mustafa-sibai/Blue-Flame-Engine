@@ -26,20 +26,20 @@ namespace BF
 			void ANDEngineEntryPoint::Run(Scene& mainScene)
 			{
 				BF_LOG_INFO("Engine Run");
-				while (state != State::Exit)
+				while (Engine::state != Engine::State::Exit)
 				{
-					switch (state)
+					switch (Engine::state)
 					{
-					case State::Initialize:
+					case Engine::State::Initialize:
 					{
 						context.Initialize();
 						SceneManager::AddNewScene(&mainScene);
 						SceneManager::GetScene(0).Run();
-						state = State::Render;
+						Engine::state = Engine::State::Render;
 						break;
 					}
 
-					case State::Render:
+					case Engine::State::Render:
 					{
 						for (int i = 0; i < SceneManager::GetScenes().size(); i++)
 						{

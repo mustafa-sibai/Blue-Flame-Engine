@@ -25,10 +25,6 @@ namespace BF
 					unsigned int FPS;
 
 				public:
-					enum class State { Initialize, Render, Exit };
-					State state;
-
-				public:
 					WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI);
 					~WINEngineEntryPoint();
 
