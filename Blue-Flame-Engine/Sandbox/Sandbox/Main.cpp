@@ -7,7 +7,8 @@
 #include "_2DScene.h"
 //#include "_3DScene.h"
 #include "new3DScene.h"
-//#include "_3DScene2.h"
+#include "_3DScene_AF_Test.h"
+#include "_3D_Scene_Single_Light_Test.h"
 #include "InputTests.h"
 
 //#include <windows.h>
@@ -46,6 +47,8 @@ int main()
 
 	
 	new3DScene::new3DScene scene;
+	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test scene;
+	//_3DScene_AF_Test::_3DScene_AF_Test scene;
 	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//InputTests scene;

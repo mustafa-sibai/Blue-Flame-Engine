@@ -1,6 +1,6 @@
 #pragma once
-#include <BF/Graphics/Renderers/Sprite.h>
-#include <BF/Graphics/Renderers/SpriteRenderer.h>
+#include <BF/Graphics/Renderers/SpriteRenderer/Sprite.h>
+#include <BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h>
 #include "Grid.h"
 #include "TileMap.h"
 

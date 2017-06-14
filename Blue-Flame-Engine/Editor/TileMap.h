@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <BF/Graphics/API/Texture2D.h>
 #include <BF/Graphics/TileData.h>
-#include <BF/Graphics/Renderers/SpriteRenderer.h>
+#include <BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h>
 
 namespace Editor
 {

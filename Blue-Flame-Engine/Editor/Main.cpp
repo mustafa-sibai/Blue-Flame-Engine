@@ -137,10 +137,10 @@ int main()
 	*/
 	//-------------------------------------------------------------------------------------------------
 	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
+	fbxloader.Load("../Sandbox/Assets/Models/TexturedCube/TexturedCube.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/TexturedCube/TexturedCube");
 	//-------------------------------------------------------------------------------------------------
 	
 

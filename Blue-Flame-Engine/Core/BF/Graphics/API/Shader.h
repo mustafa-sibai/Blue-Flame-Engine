@@ -15,7 +15,7 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class BF_API ShaderType { _3D, _3DMipAF, Light, SpriteRenderer, TextureCube };
+			enum class BF_API ShaderType { SingleLight3D, _3D, _3DMipAF, Light, SpriteRenderer, TextureCube };
 
 			class BF_API Shader
 			{

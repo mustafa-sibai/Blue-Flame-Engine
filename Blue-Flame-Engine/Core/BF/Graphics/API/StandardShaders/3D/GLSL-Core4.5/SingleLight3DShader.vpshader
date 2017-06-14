@@ -162,19 +162,18 @@ vec3 CalculateInfiniteLight(PointLight light, vec3 normal, vec3 viewDir)
 	return (ambient + diffuse + specular).rgb;
 }  
 
-//On nvidia 1050ti, the model that has no normal mapping data appears black and lighting calculation does not work. if it is switched to vertex normals it works again.
 void main() 
 {
 	//Normal Map
-	vec3 normal = texture(normalMap, shared_data.UV).rgb;
-	normal = normalize(normal * 2.0 - 1.0);   
-	normal = normalize(shared_data.TBN * normal); 
+	//vec3 normal = texture(normalMap, shared_data.UV).rgb;
+	//normal = normalize(normal * 2.0 - 1.0);   
+	//normal = normalize(shared_data.TBN * normal); 
 
-    vec3 viewDir  = /*shared_data.TBN **/ normalize(shared_data.cameraPos - shared_data.pixelPosition);  
+    //vec3 viewDir  = /*shared_data.TBN **/ normalize(shared_data.cameraPos - shared_data.pixelPosition);  
 
 	//Vertex Normals
-	//vec3 normal = normalize(shared_data.normals);
-	//vec3 viewDir  = normalize(shared_data.cameraPos - shared_data.pixelPosition);  
+	vec3 normal = normalize(shared_data.normals);
+	vec3 viewDir  = normalize(shared_data.cameraPos - shared_data.pixelPosition);  
 
 	//vec3 finalColor = CalculateDirectionalLight(light, normal, viewDir);
 

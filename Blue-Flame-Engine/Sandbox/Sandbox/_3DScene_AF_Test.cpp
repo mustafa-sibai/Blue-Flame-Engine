@@ -1,6 +1,6 @@
-#include "_3DScene2.h"
+#include "_3DScene_AF_Test.h"
 
-namespace _3DScene2
+namespace _3DScene_AF_Test
 {
 	using namespace BF::Application;
 	using namespace BF::Graphics;
@@ -9,16 +9,16 @@ namespace _3DScene2
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	_3DScene2::_3DScene2() :
+	_3DScene_AF_Test::_3DScene_AF_Test() :
 		cubeModel(shader), planeModel(shader), lightModel(lightShader), material(shader)
 	{
 	}
 
-	_3DScene2::~_3DScene2()
+	_3DScene_AF_Test::~_3DScene_AF_Test()
 	{
 	}
 
-	void _3DScene2::Initialize()
+	void _3DScene_AF_Test::Initialize()
 	{
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		//BF::Engine::GetContext().EnableVsync(true);
@@ -33,7 +33,7 @@ namespace _3DScene2
 		//terrain.Initialize();
 	}
 
-	void _3DScene2::Load()
+	void _3DScene_AF_Test::Load()
 	{
 		//terrain.Load("Assets/HeightMaps/heightmap2.bmp");
 
@@ -78,7 +78,7 @@ namespace _3DScene2
 
 	}*/
 
-	void _3DScene2::Update()
+	void _3DScene_AF_Test::Update()
 	{
 		angle += 0.5f;
 		fpsCamera.Update();
@@ -118,7 +118,7 @@ namespace _3DScene2
 			BF_LOG_INFO("Back Pressed !");
 	}
 
-	void _3DScene2::Render()
+	void _3DScene_AF_Test::Render()
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
@@ -154,7 +154,7 @@ namespace _3DScene2
 
 		lightShader.Bind();
 
-		light.posDir = Vector4(9.0f, 20.0f, 0.0f, 1.0f);
+		light.posDir = Vector4(2.0f, 2.0f, 0.0f, 1.0f);
 
 		light.ambientColor	= Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.diffuseColor	= Color(0.5f, 0.5f, 0.5f, 1.0f);

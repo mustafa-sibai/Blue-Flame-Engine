@@ -74,6 +74,15 @@ namespace BF
 
 					switch (type)
 					{
+					case ShaderType::SingleLight3D:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/SingleLight3DShader.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/SingleLight3DShader.vpshader"
+#endif
+							break;
+						}
 						case ShaderType::_3D:
 						{
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
