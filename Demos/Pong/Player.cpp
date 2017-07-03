@@ -34,7 +34,7 @@ void Player::Update()
 	if (Keyboard::IsKeyDown(Keyboard::Key::Code::UpArrow))
 		playerPosition.y -= speed;
 
-	playerPosition.y = BF::Math::Clamp(playerPosition.y, 0.0f, (float)Engine::GetWindow().GetClientHeight() - 128.0f);
+	playerPosition.y = Clamp(playerPosition.y, 0.0f, (float)Engine::GetWindow().GetClientHeight() - 128.0f);
 	player.SetPosition(playerPosition);
 }
 

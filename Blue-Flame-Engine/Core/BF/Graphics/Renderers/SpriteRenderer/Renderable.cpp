@@ -27,21 +27,11 @@ namespace BF
 				this->rectangle.y = (int)position.y;
 			}
 
-			void Renderable::SetColor(const Color& color)
-			{
-				this->color = color;
-			}
-
 			void Renderable::SetRectangle(const Math::Rectangle& rectangle)
 			{
 				this->rectangle = rectangle;
 				this->position.x = (float)rectangle.x;
 				this->position.y = (float)rectangle.y;
-			}
-
-			void Renderable::SetZLayer(unsigned int zLayer)
-			{
-				this->zLayer = zLayer;
 			}
 		}
 	}

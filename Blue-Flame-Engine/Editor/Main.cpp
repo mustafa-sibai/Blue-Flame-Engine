@@ -137,10 +137,12 @@ int main()
 	*/
 	//-------------------------------------------------------------------------------------------------
 	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/TexturedCube/TexturedCube.fbx");
+	fbxloader.Load("../Sandbox/Assets/Models/Thors Hammer.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/TexturedCube/TexturedCube");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Thors Hammer");
+
+	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------
 	
 

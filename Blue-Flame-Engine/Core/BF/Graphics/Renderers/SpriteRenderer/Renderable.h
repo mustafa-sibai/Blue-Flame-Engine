@@ -47,6 +47,8 @@ namespace BF
 				protected:
 					Math::Vector2 position;
 					Math::Rectangle rectangle;
+
+				public:
 					Color color;
 					unsigned int zLayer;
 
@@ -59,14 +61,10 @@ namespace BF
 					~Renderable();
 
 					void SetPosition(const Math::Vector2& position);
-					void SetColor(const Color& color);
 					void SetRectangle(const Math::Rectangle& rectangle);
-					void SetZLayer(unsigned int zLayer);
 
 					inline const Math::Vector2& GetPosition() const { return position; }
-					inline const Color& GetColor() const { return color; }
 					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
-					inline unsigned int GetZLayer() const { return zLayer; }
 			};
 		}
 	}

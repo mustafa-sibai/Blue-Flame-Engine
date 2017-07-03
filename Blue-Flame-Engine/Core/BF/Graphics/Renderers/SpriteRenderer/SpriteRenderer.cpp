@@ -87,6 +87,48 @@ namespace BF
 					renderables.push_back(&renderable);
 			}
 
+			SpriteRenderer& SpriteRenderer::operator=(const SpriteRenderer& spriteRenderer)
+			{
+				this->shader = spriteRenderer.shader;
+				this->vertexBuffer = spriteRenderer.vertexBuffer;
+				this->indexBuffer = spriteRenderer.indexBuffer;
+				this->vertexBufferLayout = spriteRenderer.vertexBufferLayout;
+
+				this->spriteBuffer = new SpriteBuffer();
+				this->spriteBuffer->color = spriteRenderer.spriteBuffer->color;
+				this->spriteBuffer->position = spriteRenderer.spriteBuffer->position;
+				this->spriteBuffer->renderingType = spriteRenderer.spriteBuffer->renderingType;
+				this->spriteBuffer->UV = spriteRenderer.spriteBuffer->UV;
+
+				this->indexCount = spriteRenderer.indexCount;
+				this->renderables = spriteRenderer.renderables;
+
+				this->submitType = spriteRenderer.submitType;
+				this->sortingOrder = spriteRenderer.sortingOrder;
+				this->submitSprite = spriteRenderer.submitSprite;
+				this->newDrawCall = spriteRenderer.newDrawCall;
+
+				/*
+					API::Shader shader;
+					API::VertexBuffer vertexBuffer;
+					API::IndexBuffer indexBuffer;
+					API::VertexBufferLayout vertexBufferLayout;
+
+					SpriteBuffer* spriteBuffer;
+					unsigned int indexCount;
+
+					std::vector<const Renderable*> renderables;
+
+					SubmitType submitType;
+					SortingOrder sortingOrder;
+					bool submitSprite, newDrawCall;
+
+					static const BF::Graphics::API::Texture2D* currentBoundTexture;
+				*/
+
+				return *this;
+			}
+
 			void SpriteRenderer::MapLineBuffer(const LineShape& lineShape)
 			{
 				Vector2 normal = Vector2(lineShape.endPoint.y - lineShape.startPoint.y, -(lineShape.endPoint.x - lineShape.startPoint.x)).Normalize() * lineShape.thickness;

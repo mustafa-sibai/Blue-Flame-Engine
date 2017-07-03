@@ -53,6 +53,8 @@ namespace BF
 
 					inline const API::Shader& GetShader() const { return shader; }
 
+					SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
+
 				private:
 					void MapLineBuffer(const LineShape& lineShape);
 					void MapPolygonBuffer(const RegularPolygon& regularPolygon);

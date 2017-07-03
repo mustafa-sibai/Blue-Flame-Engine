@@ -17,7 +17,9 @@ namespace BF
 			~Vector4();
 
 			float Dot(const Vector4& vector) const;
+			float Distance(const Vector4& vector) const;
 			float Magnitude() const;
+			Vector4 Direction(const Vector4& vector) const;
 			Vector4 Normalize() const;
 
 			friend BF_API Vector4 operator+(const Vector4& left, const Vector4& right);

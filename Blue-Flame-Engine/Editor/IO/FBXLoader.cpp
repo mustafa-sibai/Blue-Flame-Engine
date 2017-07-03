@@ -249,7 +249,7 @@ namespace Editor
 		{
 			if (inMesh->GetElementTangentCount() < 1)
 			{
-				std::cout << "Invalid Tangent Number" << std::endl;
+				//std::cout << "Invalid Tangent Number" << std::endl;
 				return Vector3();
 			}
 
@@ -316,7 +316,7 @@ namespace Editor
 		{
 			if (inMesh->GetElementBinormalCount() < 1)
 			{
-				std::cout << "Invalid Binormal Number" << std::endl;
+				//std::cout << "Invalid Binormal Number" << std::endl;
 				return Vector3();
 			}
 

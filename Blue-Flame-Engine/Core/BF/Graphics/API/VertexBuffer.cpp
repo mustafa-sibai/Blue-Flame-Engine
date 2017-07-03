@@ -86,6 +86,17 @@ namespace BF
 					glVertexBuffer.Unbind();
 #endif
 			}
+
+			VertexBuffer& VertexBuffer::operator=(const VertexBuffer& vertexBuffer)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				//this->dxVertexBuffer = vertexBuffer.dxVertexBuffer;
+#endif
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+				this->glVertexBuffer = vertexBuffer.glVertexBuffer;
+#endif	
+				return *this;
+			}
 		}
 	}
 }

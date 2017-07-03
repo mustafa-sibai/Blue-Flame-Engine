@@ -32,19 +32,21 @@ namespace _3D_Scene_Single_Light_Test
 	{
 		shader.LoadStandardShader(ShaderType::SingleLight3D);
 		BF::Engine::GetContext().EnableDepthBuffer(true);
-		cubeModel.Load("Assets/Models/TexturedCube/TexturedCube.bfx");
-
+		//cubeModel.Load("Assets/Models/TexturedCube/TexturedCube.bfx");
+		//cubeModel.Load("Assets/Models/Chess_Scene2.bfx");
+		cubeModel.Load("Assets/Models/Thors Hammer.bfx");
+		
 		cubeMaterial.diffuseMap.Load("Assets/Textures/diffuseMap.png");
 		cubeMaterial.specularMap.Load("Assets/Textures/specularMap.png");
 		cubeMaterial.normalMap.Load("Assets/Textures/normalMap.jpg");
 
-		cubeMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		cubeMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		cubeMaterial.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		cubeMaterial.colorBuffer.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
+		cubeMaterial.colorBuffer.diffuseColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
+		cubeMaterial.colorBuffer.specularColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
 		cubeMaterial.colorBuffer.shininess = 128.0f;
 		materialConstantBuffer.Update(&cubeMaterial, sizeof(cubeMaterial.colorBuffer));
 
-		light.posDir = Vector4(0.0f, 0.0f, 0.0f, 1.0f);
+		light.posDir = Vector4(0.0f, -1.0f, 8.0f, 1.0f);
 		light.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		light.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);

@@ -29,9 +29,20 @@ namespace BF
 			return x * vector.x + y * vector.y;
 		}
 
+		float Vector2::Distance(const Vector2& vector) const
+		{
+			Vector2 d = Direction(vector);
+			return sqrt((d.x * d.x + d.y * d.y));
+		}
+
 		float Vector2::Magnitude() const
 		{
 			return (float)sqrt(Dot(*this));
+		}
+
+		Vector2 Vector2::Direction(const Vector2& vector) const
+		{
+			return Vector2(abs(vector.x - x), abs(vector.y - y));
 		}
 
 		Vector2 Vector2::Normalize() const
