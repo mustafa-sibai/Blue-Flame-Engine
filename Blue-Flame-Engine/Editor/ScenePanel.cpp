@@ -20,9 +20,9 @@ namespace Editor
 	{
 	}
 
-	void ScenePanel::Initialize(SpriteRenderer& spriteRenderer)
+	void ScenePanel::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 	{
-		Panel::Initialize(spriteRenderer);
+		Panel::Initialize(spriteRenderer, zLayer);
 		paintTile.Initialize(spriteRenderer);
 		grid.Initialize(spriteRenderer);
 		tilemap.Initialize();

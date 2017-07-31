@@ -41,8 +41,12 @@ namespace _2DScene
 			
 			BF::Graphics::TileMap tileMap;
 			
-			//BF::Graphics::GUI::Button button;
+			BF::Graphics::GUI::Button button;
+			BF::Graphics::GUI::Button button2;
+			BF::Graphics::GUI::Button button3;
 			//BF::Graphics::GUI::Checkbox checkbox;
+
+			BF::Graphics::Renderers::RegularPolygon rpp;
 
 			//TestPanel panel;
 			BF::Graphics::Camera camera;

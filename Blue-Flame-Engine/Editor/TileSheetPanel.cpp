@@ -21,9 +21,9 @@ namespace Editor
 	{
 	}
 
-	void TileSheetPanel::Initialize(SpriteRenderer& spriteRenderer)
+	void TileSheetPanel::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 	{
-		Panel::Initialize(spriteRenderer);
+		Panel::Initialize(spriteRenderer, zLayer);
 		grid.Initialize(spriteRenderer);
 	}
 

@@ -26,6 +26,8 @@ namespace BF
 
 				public:
 					std::vector<Widget*> widgets;
+					Widget* currentWidget;
+					Widget* previousWidget;
 
 				public:
 					WidgetManager();

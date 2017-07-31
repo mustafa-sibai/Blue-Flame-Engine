@@ -18,9 +18,9 @@ namespace BF
 			{
 			}
 
-			void Checkbox::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void Checkbox::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
-				Widget::Initialize(spriteRenderer);
+				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
 			void Checkbox::Load(const StyleSheet& StyleSheet, const string& widgetName)

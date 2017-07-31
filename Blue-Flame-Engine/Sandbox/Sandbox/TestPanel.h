@@ -12,7 +12,7 @@ public:
 	~TestPanel();
 
 protected:
-	void Initialize(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer) override;
+	void Initialize(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer, int zLayer) override;
 	void Load(const BF::Graphics::GUI::StyleSheet& StyleSheet, const std::string& widgetName) override;
 	void Update() override;
 	void Render() override;

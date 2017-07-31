@@ -27,7 +27,7 @@ namespace _2DScene
 	}
 
 	_2DScene::_2DScene() :
-		/*button(*this), checkbox(*this), panel(*this),*/ font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
+		button(*this), button2(*this), button3(*this), /*checkbox(*this), panel(*this),*/ font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
 	{
 		t = new Texture2D(spriteRenderer.GetShader());
 		t2 = new Texture2D(spriteRenderer.GetShader());
@@ -41,16 +41,17 @@ namespace _2DScene
 
 	void _2DScene::Initialize()
 	{
-		//Scene::Initialize();
+		Scene::Initialize();
 		//Engine::GetContext().EnableVsync(true);
 
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		spriteRenderer.Initialize();
+		tileMap.Initialize();
 	}
 
 	void _2DScene::Load()
 	{
-		//Scene::Load();
+		Scene::Load();
 
 		t->Load("Assets/Textures/tilea5.png");
 		t2->Load("Assets/Textures/test2.png");
@@ -58,7 +59,7 @@ namespace _2DScene
 		t4->Load("Assets/Textures/silver.png");
 
 		sprite1 = Sprite(t2, Vector2(0.0f, 0.0f), 0, Color(1.0f, 1.0f, 1.0f, 1.0f));
-		sprite2 = Sprite(t, Vector2(100.0f, 100.0f), 0, BF::Math::Rectangle(32, 0, 32, 32), Color(1.0f));
+		sprite2 = Sprite(t, Vector2(0.0f, 0.0f), 1, Color(1.0f));
 		sprite3 = Sprite(t, Vector2(300.0f, 100.0f), 0, BF::Math::Rectangle(64, 0, 32, 32), Color(1.0f));
 		sprite4 = Sprite(t, Vector2(300.0f, 300.0f), 0, BF::Math::Rectangle(96, 0, 32, 32), Color(1.0f));
 		sprite5 = Sprite(t, Vector2(100.0f, 300.0f), 0, BF::Math::Rectangle(128, 0, 32, 32), Color(1.0f));
@@ -71,10 +72,11 @@ namespace _2DScene
 		node2 = Waypoint::Node(Vector2(300.0f, 100.0f));
 
 		line = LineShape(Vector2(0.0f, 100.0f), Vector2(800.0f, 100.0f), 5, 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
-		line2 = LineShape(Vector2(0.0f, 300.0f), Vector2(800.0f, 300.0f), 5, 0, Color(1.0f, 0.0f, 0.0f, 1.0f));
+		line2 = LineShape(Vector2(0.0f, 300.0f), Vector2(800.0f, 300.0f), 5, 3, Color(1.0f, 0.0f, 0.0f, 1.0f));
 
 		rp = RegularPolygon(Math::Rectangle(225, 200, 64, 64), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
 		rp2 = RegularPolygon(Math::Rectangle(225, 400, 64, 64), 0, Color(1.0f, 0.0f, 0.0f, 1.0f));
+		rpp = RegularPolygon(Math::Rectangle(225, 0, 64, 64), 6, Color(0.0f, 1.0f, 0.0f, 1.0f));
 
 		//waypoints.push_back(Waypoint::Node(Vector2(100.0f, 100.0f), TimeFunction));
 		//waypoints.push_back(Waypoint::Node(Vector2(300.0f, 100.0f), TimeFunction));
@@ -86,12 +88,18 @@ namespace _2DScene
 		BF_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
 		//fontSprite = Sprite(fontAtlas->texture, BF::Math::Vector3(350.0f, 350.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
-		//tileMap.Load("Assets/Maps/TileMap.bfm");
+		tileMap.Load("Assets/Maps/TileMap.bfm");
 		//spriteAnimation.Load("Assets/Animation/spriteAnimation.bfa");
 
 		//button.AddOnClickListener(DoButtonWork);
 
-		//button.SetPosition(Vector2(100, 100));
+		button.SetRectangle(BF::Math::Rectangle(700, 100, 300, 300));
+		button2.SetRectangle(BF::Math::Rectangle(900, 100, 200, 50));
+		button3.SetRectangle(BF::Math::Rectangle(925, 125, 200, 150));
+
+		button.SetZLayer(4);
+		button2.SetZLayer(0);
+		button3.SetZLayer(0);
 
 		//renderTarget.Create(800, 600, Texture::Format::R8G8B8, Texture::TextureWrap::ClampToBorder, Texture::TextureFilter::Neatest);
 	}
@@ -112,11 +120,21 @@ namespace _2DScene
 	void _2DScene::Update()
 	{
 		//This is temporary.
-		BF_LOG_INFO("w: %i h: %i", Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
+		//BF_LOG_INFO("w: %i h: %i", Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
 
 		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
-		//Scene::Update();
+		Scene::Update();
 		camera.Update();
+
+		if (button.IsPressed())
+			BF_LOG_INFO("PRESSED");
+
+		if (button2.IsPressed())
+			BF_LOG_INFO("PRESSED2");
+
+		if (button3.IsPressed())
+			BF_LOG_INFO("PRESSED3");
+
 		//waypoint.Update();
 
 		/*waypoint.GoTo(node);
@@ -137,14 +155,17 @@ namespace _2DScene
 	{
 		//renderTarget.Bind();
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
-		//Scene::Render();
+		Scene::Render();
 
-		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
-		spriteRenderer.Render(line);
+		//spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
+
+		/*spriteRenderer.Render(line);
 		spriteRenderer.Render(rp);
-		spriteRenderer.Render(sprite1);
+		spriteRenderer.Render(sprite2);
 		spriteRenderer.Render(line2);
 		spriteRenderer.Render(rp2);
+		spriteRenderer.Render(rpp);*/
+		
 		//spriteRenderer.RenderLine(Vector2(0.0f, 300.0f), Vector2(800.0f, 300.0f), 5, Color(1.0f, 0.0f, 0.0f, 1.0f));
 
 
@@ -178,16 +199,16 @@ namespace _2DScene
 		//spriteRenderer.Draw(sprite3);
 		//spriteRenderer.Draw(sprite4);
 		//spriteRenderer.Render(fontSprite);
-		spriteRenderer.RenderText(*fontAtlas, "Blue Flame Engine !", BF::Math::Vector2(250.0f, 500.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
+		//spriteRenderer.RenderText(*fontAtlas, "Blue Flame Engine !", BF::Math::Vector2(250.0f, 500.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
 		//spriteRenderer.RenderText(*fontAtlas, "a b c d e f g h i j k l m n o p q r s t u v w x y z", BF::Math::Vector3(0.0f, 150.0f, 0.0f), BF::Math::Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 		//spriteRenderer.RenderText(*fontAtlas, "A B C D E F G H I J K L MNOPQRSTUVWXYZ", BF::Math::Vector3(0.0f, 250.0f, 0.0f), BF::Math::Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 		//spriteRenderer.Draw(sprite5);
 		//spriteRenderer.DrawRectangle(BF::Math::Rectangle(1200, 800, 100, 100), BF::Math::Vector4(1.0, 0.0, 1.0, 1.0));
 
 		//spriteAnimation.Render();
-		spriteRenderer.End();
+		//spriteRenderer.End();
 
-		//tileMap.Draw();
+		tileMap.Render();
 		//renderTarget.Unbind();
 
 

@@ -50,6 +50,8 @@ namespace BF
 					bool pressed;
 					bool pressedAndReleased;
 
+					int zLayer;
+
 					void(*OnClickCallBack)(void*);
 					void* callBackPointer;
 
@@ -61,6 +63,7 @@ namespace BF
 
 					virtual void SetPosition(const Math::Vector2& position);
 					virtual void SetRectangle(const Math::Rectangle& rectangle);
+					void SetZLayer(int zLayer);
 
 					inline Math::Vector2 GetPosition() const { return currentSprite->GetPosition(); }
 					inline Math::Rectangle GetRectangle() const { return currentSprite->GetRectangle(); }
@@ -69,8 +72,10 @@ namespace BF
 					inline bool IsPressed() const { return pressed; }
 					inline bool IsPressedAndReleased() const { return pressedAndReleased; }
 
+					inline int GetZLayer() const { return zLayer; }
+
 				protected:
-					virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer);
+					virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer);
 					virtual void Load(const StyleSheet& StyleSheet, const std::string& widgetName);
 					virtual void Update();
 					virtual void Render();
@@ -79,6 +84,8 @@ namespace BF
 
 				private:
 					bool IsMouseOnWidget();
+					void FireAction();
+					void SetCurrentSpriteToNormal();
 			};
 		}
 	}

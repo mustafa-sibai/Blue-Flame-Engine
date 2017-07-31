@@ -19,9 +19,9 @@ TestPanel::~TestPanel()
 {
 }
 
-void TestPanel::Initialize(SpriteRenderer& spriteRenderer)
+void TestPanel::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 {
-	Panel::Initialize(spriteRenderer);
+	Panel::Initialize(spriteRenderer, zLayer);
 }
 
 void TestPanel::Load(const StyleSheet& StyleSheet, const string& widgetName)

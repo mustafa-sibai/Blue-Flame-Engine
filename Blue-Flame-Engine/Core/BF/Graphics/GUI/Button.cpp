@@ -16,9 +16,9 @@ namespace BF
 			{
 			}
 
-			void Button::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void Button::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
-				Widget::Initialize(spriteRenderer);
+				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
 			void Button::Load(const StyleSheet& StyleSheet, const std::string& widgetName)

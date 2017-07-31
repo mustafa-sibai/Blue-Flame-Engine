@@ -108,24 +108,6 @@ namespace BF
 				this->submitSprite = spriteRenderer.submitSprite;
 				this->newDrawCall = spriteRenderer.newDrawCall;
 
-				/*
-					API::Shader shader;
-					API::VertexBuffer vertexBuffer;
-					API::IndexBuffer indexBuffer;
-					API::VertexBufferLayout vertexBufferLayout;
-
-					SpriteBuffer* spriteBuffer;
-					unsigned int indexCount;
-
-					std::vector<const Renderable*> renderables;
-
-					SubmitType submitType;
-					SortingOrder sortingOrder;
-					bool submitSprite, newDrawCall;
-
-					static const BF::Graphics::API::Texture2D* currentBoundTexture;
-				*/
-
 				return *this;
 			}
 

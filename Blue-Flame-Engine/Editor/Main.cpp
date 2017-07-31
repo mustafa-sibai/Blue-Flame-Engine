@@ -41,7 +41,7 @@ int main()
 	*/
 	//-----------------------------------------------------------------------
 
-	/*
+
 	BF::Graphics::TileMapData tileMapData;
 	tileMapData.textures.push_back("Assets/Textures/grass.png");
 	tileMapData.textures.push_back("Assets/Textures/road.png");
@@ -103,7 +103,7 @@ int main()
 	tiledata8.textureID = 1;
 	tiledata8.rectangle = BF::Math::Rectangle(pos.x - (size.x / 2), pos.y - (size.x / 4), size.x, size.y);
 	tiledata8.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
-	*/
+	
 	//-----------------------------------------------------------------------
 
 	//Rendering
@@ -120,7 +120,7 @@ int main()
 	tileMapData.tilesData.push_back(tiledata5);
 
 	tileMapData.tilesData.push_back(tiledata1);*/
-/*
+
 	tileMapData.tilesData.push_back(tiledata0);
 	tileMapData.tilesData.push_back(tiledata1);
 	tileMapData.tilesData.push_back(tiledata2);
@@ -134,15 +134,15 @@ int main()
 	BFMWriter writer;
 	writer.WriteToFile("../Sandbox/Assets/Maps/TileMap", tileMapData);
 	//-------------------------------------------------------------------------------------------------
-	*/
+	
 	//-------------------------------------------------------------------------------------------------
-	FBXLoader fbxloader;
+	/*FBXLoader fbxloader;
 	fbxloader.Load("../Sandbox/Assets/Models/Thors Hammer.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
 	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Thors Hammer");
 
-	std::system("PAUSE");
+	std::system("PAUSE");*/
 	//-------------------------------------------------------------------------------------------------
 	
 
