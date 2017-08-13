@@ -27,8 +27,22 @@ namespace BF
 				sprites[7] = Second state disabled sprite
 				*/
 				Renderers::Sprite sprites[BF_WIDGET_DATA_SPRITES_LENGTH];
+				Fonts::Font* font;
+
+				std::string text;
+
+				enum class TextAlignment 
+				{ 
+					TopLeft,	TopCenter,	  TopRight,
+					MiddleLeft, MiddleCenter, MiddleRight,
+					BottomLeft, BottomCenter, BottomRight
+				} textAlignment;
+
+				Math::Vector2 textPosition;
+				Math::Vector2 textSize;
 
 				int minWidth = 0, minHeight = 0;
+				bool renderText = false;
 			};
 
 			class BF_API Widget
@@ -50,8 +64,6 @@ namespace BF
 					bool pressed;
 					bool pressedAndReleased;
 
-					int zLayer;
-
 					void(*OnClickCallBack)(void*);
 					void* callBackPointer;
 
@@ -64,6 +76,7 @@ namespace BF
 					virtual void SetPosition(const Math::Vector2& position);
 					virtual void SetRectangle(const Math::Rectangle& rectangle);
 					void SetZLayer(int zLayer);
+					void SetTextAlignment(WidgetData::TextAlignment textAlignment);
 
 					inline Math::Vector2 GetPosition() const { return currentSprite->GetPosition(); }
 					inline Math::Rectangle GetRectangle() const { return currentSprite->GetRectangle(); }
@@ -72,7 +85,7 @@ namespace BF
 					inline bool IsPressed() const { return pressed; }
 					inline bool IsPressedAndReleased() const { return pressedAndReleased; }
 
-					inline int GetZLayer() const { return zLayer; }
+					inline int GetZLayer() const { return currentSprite->zLayer; }
 
 				protected:
 					virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer);

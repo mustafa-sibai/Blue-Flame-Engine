@@ -15,12 +15,15 @@ namespace BF
 			{
 				public:
 					std::string fontName;
-					unsigned int textSize;
+
+					unsigned int fontPixelSize;
+					float fontMaxYBearing;
+
 					const API::Texture2D* texture;
 					const std::vector<Character>* characters;
 
-				FontAtlas(const std::string& fontName, unsigned int textSize, const API::Texture2D* texture, const std::vector<Character>* characters) :
-					fontName(fontName), textSize(textSize), texture(texture), characters(characters)
+				FontAtlas(const std::string& fontName, unsigned int fontPixelSize, float fontMaxYBearing, const API::Texture2D* texture, const std::vector<Character>* characters) :
+					fontName(fontName), fontPixelSize(fontPixelSize), fontMaxYBearing(fontMaxYBearing), texture(texture), characters(characters)
 				{
 				}
 			};

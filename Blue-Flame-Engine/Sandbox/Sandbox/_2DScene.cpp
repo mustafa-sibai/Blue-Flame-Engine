@@ -27,7 +27,7 @@ namespace _2DScene
 	}
 
 	_2DScene::_2DScene() :
-		button(*this), button2(*this), button3(*this), /*checkbox(*this), panel(*this),*/ font(spriteRenderer.GetShader()), waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
+		button(*this), button2(*this), button3(*this), /*checkbox(*this), panel(*this),*/ font(spriteRenderer.GetShader()) /*, font2(spriteRenderer.GetShader())*/, waypoint(sprite1, waypoints)/*, renderTarget(spriteRenderer.GetShader())*/ //, spriteAnimation(spriteRenderer, spriteRenderer.GetSpriteShader())
 	{
 		t = new Texture2D(spriteRenderer.GetShader());
 		t2 = new Texture2D(spriteRenderer.GetShader());
@@ -68,6 +68,10 @@ namespace _2DScene
 		sprite7 = Sprite(t4, BF::Math::Rectangle(0, 0, 1920, 1080), 0, Color(1.0f));
 		sprite8 = Sprite(t3, BF::Math::Rectangle(0, 0, 1920, 1080), 0, Color(1.0f));
 
+		font.Load("Assets/Fonts/arial.ttf", 120, BF::Graphics::Fonts::FontAtlasFactory::Language::English);
+		text = Text(&font, "Blue Flame Engine !", Vector2(10, 10), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
+		BF_LOG_INFO("%f, %f", text.GetPosition().x, text.GetPosition().y);
+		BF_LOG_INFO("%i, %i, %i, %i", text.GetRectangle().x, text.GetRectangle().y, text.GetRectangle().width, text.GetRectangle().height);
 		node = Waypoint::Node(Vector2(100.0f, 100.0f));
 		node2 = Waypoint::Node(Vector2(300.0f, 100.0f));
 
@@ -83,9 +87,15 @@ namespace _2DScene
 		//waypoints.push_back(Waypoint::Node(Vector2(300.0f, 300.0f), TimeFunction));
 		//waypoints.push_back(Waypoint::Node(Vector2(100.0f, 300.0f), TimeFunction));
 
-		fontAtlas = font.Load("Assets/Fonts/arial.ttf", 50, BF::Graphics::Fonts::Font::Language::English);
+		//font2.Load("Assets/Fonts/arial.ttf", 20, BF::Graphics::Fonts::FontAtlasFactory::Language::English);
 
-		BF_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
+		/*Math::Vector2 v1 = font.MeasureString("Blue Flame Engine !");
+		BF_LOG_INFO("%f, %f", v1.x, v1.y);
+
+		Math::Vector2 v = font2.MeasureString("Blue Flame Engine 22!");
+		BF_LOG_INFO("%f, %f", v.x, v.y);*/
+
+		//BF_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
 		//fontSprite = Sprite(fontAtlas->texture, BF::Math::Vector3(350.0f, 350.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		tileMap.Load("Assets/Maps/TileMap.bfm");
@@ -157,7 +167,7 @@ namespace _2DScene
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 		Scene::Render();
 
-		//spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
+		spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 
 		/*spriteRenderer.Render(line);
 		spriteRenderer.Render(rp);
@@ -199,14 +209,20 @@ namespace _2DScene
 		//spriteRenderer.Draw(sprite3);
 		//spriteRenderer.Draw(sprite4);
 		//spriteRenderer.Render(fontSprite);
-		//spriteRenderer.RenderText(*fontAtlas, "Blue Flame Engine !", BF::Math::Vector2(250.0f, 500.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
+		//spriteRenderer.RenderText(font, "Blue Flame Engine !", BF::Math::Vector2(0.0f, 0.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
+		//spriteRenderer.RenderText(font, "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz", BF::Math::Vector2(0.0f, 0.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
+
+		spriteRenderer.Render(text);
+		//spriteRenderer.RenderText(font2, "Blue Flame Engine 22!", BF::Math::Vector2(0.0f, 0.0f), BF::Graphics::Color(0.0f, 0.0f, 1.0f, 1.0f));
+		
+		
 		//spriteRenderer.RenderText(*fontAtlas, "a b c d e f g h i j k l m n o p q r s t u v w x y z", BF::Math::Vector3(0.0f, 150.0f, 0.0f), BF::Math::Vector4(0.0f, 1.0f, 0.0f, 1.0f));
 		//spriteRenderer.RenderText(*fontAtlas, "A B C D E F G H I J K L MNOPQRSTUVWXYZ", BF::Math::Vector3(0.0f, 250.0f, 0.0f), BF::Math::Vector4(1.0f, 0.0f, 0.0f, 1.0f));
 		//spriteRenderer.Draw(sprite5);
 		//spriteRenderer.DrawRectangle(BF::Math::Rectangle(1200, 800, 100, 100), BF::Math::Vector4(1.0, 0.0, 1.0, 1.0));
 
 		//spriteAnimation.Render();
-		//spriteRenderer.End();
+		spriteRenderer.End();
 
 		tileMap.Render();
 		//renderTarget.Unbind();

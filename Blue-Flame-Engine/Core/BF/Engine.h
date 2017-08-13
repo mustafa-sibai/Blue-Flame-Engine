@@ -12,7 +12,7 @@
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 170703
+#define BF_ENGINE_MINOR_VERSION 170814
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF

@@ -37,8 +37,10 @@ namespace _2DScene
 
 			BF::Graphics::Renderers::Sprite fontSprite;
 			BF::Graphics::Fonts::Font font;
-			BF::Graphics::Fonts::FontAtlas* fontAtlas;
-			
+			BF::Graphics::Renderers::Text text;
+
+			//BF::Graphics::Fonts::Font font2;
+
 			BF::Graphics::TileMap tileMap;
 			
 			BF::Graphics::GUI::Button button;

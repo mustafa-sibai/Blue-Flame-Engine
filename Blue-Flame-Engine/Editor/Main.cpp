@@ -12,10 +12,10 @@ using namespace Editor::IO;
 
 int main()
 {
-	/*BF::Engine engine(BF::Application::Window("Blue Flame Editor", BF::Math::Rectangle(0, 0, 1920, 1080), BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Editor", BF::Math::Rectangle(0, 0, 1920, 1080), BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
 
 	Editor::EditorScene scene;
-	engine.Run(scene);*/
+	engine.Run(scene);
 
 	/*
 	//-------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ int main()
 	*/
 	//-----------------------------------------------------------------------
 
-
+	/*
 	BF::Graphics::TileMapData tileMapData;
 	tileMapData.textures.push_back("Assets/Textures/grass.png");
 	tileMapData.textures.push_back("Assets/Textures/road.png");
@@ -103,7 +103,7 @@ int main()
 	tiledata8.textureID = 1;
 	tiledata8.rectangle = BF::Math::Rectangle(pos.x - (size.x / 2), pos.y - (size.x / 4), size.x, size.y);
 	tiledata8.scissorRectangle = BF::Math::Rectangle(0, 0, size.x, size.y);
-	
+	*/
 	//-----------------------------------------------------------------------
 
 	//Rendering
@@ -120,7 +120,7 @@ int main()
 	tileMapData.tilesData.push_back(tiledata5);
 
 	tileMapData.tilesData.push_back(tiledata1);*/
-
+/*
 	tileMapData.tilesData.push_back(tiledata0);
 	tileMapData.tilesData.push_back(tiledata1);
 	tileMapData.tilesData.push_back(tiledata2);
@@ -132,7 +132,7 @@ int main()
 	tileMapData.tilesData.push_back(tiledata8);
 	
 	BFMWriter writer;
-	writer.WriteToFile("../Sandbox/Assets/Maps/TileMap", tileMapData);
+	writer.WriteToFile("../Sandbox/Assets/Maps/TileMap", tileMapData);*/
 	//-------------------------------------------------------------------------------------------------
 	
 	//-------------------------------------------------------------------------------------------------

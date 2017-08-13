@@ -239,8 +239,8 @@ namespace BF
 
 					viewPort.TopLeftX = 0;
 					viewPort.TopLeftY = 0;
-					viewPort.Width = Engine::GetWindow().GetClientWidth();
-					viewPort.Height = Engine::GetWindow().GetClientHeight();
+					viewPort.Width = (float)Engine::GetWindow().GetClientWidth();
+					viewPort.Height = (float)Engine::GetWindow().GetClientHeight();
 					viewPort.MinDepth = 0.0f;
 					viewPort.MaxDepth = 1.0f;
 					context->RSSetViewports(1, &viewPort);

@@ -10,7 +10,7 @@
 #include "_3DScene_AF_Test.h"
 #include "_3D_Scene_Single_Light_Test.h"
 #include "InputTests.h"
-
+#include "GUIScene.h"
 //#include <windows.h>
 //#include <string>
 //#include <iostream>
@@ -51,6 +51,7 @@ int main()
 	//_3DScene_AF_Test::_3DScene_AF_Test scene;
 	//_3DScene::_3DScene scene;
 	_2DScene::_2DScene scene;
+	//GUIScene::GUIScene scene;
 	//InputTests scene;
 
 	engine.Run(scene);

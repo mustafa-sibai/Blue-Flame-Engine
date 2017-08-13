@@ -11,7 +11,7 @@ namespace BF
 			using namespace BF::Graphics::Renderers;
 
 			WidgetManager::WidgetManager() :
-				styleSheet(spriteRenderer.GetShader())
+				styleSheet(spriteRenderer.GetShader()), currentWidget(nullptr), previousWidget(nullptr)
 			{
 			}
 
@@ -29,7 +29,7 @@ namespace BF
 				spriteRenderer.Initialize();
 
 				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Initialize(spriteRenderer, i);
+					widgets[i]->Initialize(spriteRenderer, (int)i);
 			}
 
 			void WidgetManager::Load()

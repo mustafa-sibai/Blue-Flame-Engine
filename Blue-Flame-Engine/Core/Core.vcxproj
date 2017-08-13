@@ -39,7 +39,7 @@
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
     <ClCompile Include="BF\Graphics\Color.cpp" />
-    <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
@@ -98,6 +98,9 @@
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Label.cpp" />
+    <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -124,7 +127,7 @@
     <ClInclude Include="BF\Graphics\Camera.h" />
     <ClInclude Include="BF\Graphics\Color.h" />
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
-    <ClInclude Include="BF\Graphics\Fonts\Font.h" />
+    <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
     <ClInclude Include="BF\Graphics\GUI\Button.h" />
@@ -191,6 +194,9 @@
     <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\System\Timer.h" />
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
+    <ClInclude Include="BF\Graphics\GUI\Label.h" />
+    <ClInclude Include="BF\Graphics\Fonts\Font.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Text.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
