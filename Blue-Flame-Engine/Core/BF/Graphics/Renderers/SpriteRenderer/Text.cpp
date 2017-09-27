@@ -38,7 +38,7 @@ namespace BF
 				this->font = font;
 			}
 
-			void Text::SetText(const std::string& text)
+			void Text::SetText(const string& text)
 			{
 				Vector2 position = Text::position;
 

@@ -22,7 +22,7 @@ namespace BF
 			{
 			private:
 				const Shader& shader;
-				std::vector<TextureData> textureCubes;
+				std::vector<TextureData*> textureCubes;
 
 #ifdef BF_PLATFORM_WINDOWS
 				//Platform::API::DirectX::GLTextureCube dxTexture2D;
@@ -34,8 +34,8 @@ namespace BF
 				TextureCube(const Shader& shader);
 				~TextureCube();
 
-				void Load(const std::vector<std::string>& fileNames);
-				void Load(const std::vector<std::string>& fileNames, Wrap wrap, Filter filter);
+				void Load(const std::vector<std::string>& filenames);
+				void Load(const std::vector<std::string>& filenames, Wrap wrap, Filter filter);
 
 				void Bind() const;
 				void Unbind() const;

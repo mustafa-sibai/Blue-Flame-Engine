@@ -14,7 +14,7 @@ namespace GUIScene
 	using namespace BF::System;
 
 	GUIScene::GUIScene() :
-		button(*this)
+		button(*this), label(*this)
 	{
 	}
 
@@ -31,6 +31,7 @@ namespace GUIScene
 
 		//button.SetRectangle(BF::Math::Rectangle(700, 100, 300, 300));
 		//button.SetZLayer(0);
+
 	}
 
 	void GUIScene::Load()

@@ -1,5 +1,6 @@
 ﻿#include "FontAtlasFactory.h"
 #include "BF/System/Log.h"
+#include "BF/IO/ResourceManager.h"
 
 namespace BF
 {
@@ -10,6 +11,7 @@ namespace BF
 			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Math;
+			using namespace BF::IO;
 
 			struct Glyph
 			{
@@ -39,33 +41,23 @@ namespace BF
 
 			unsigned int FontAtlasFactory::startUnicode = 0;
 			unsigned int FontAtlasFactory::endUnicode = 0;
-
-			std::vector<FontAtlas*> FontAtlasFactory::fontAtlases;
-
-			FontAtlas* FontAtlasFactory::GetFontAtlas(const std::string& filename, unsigned int charPixelSize, Language language, const Shader& shader)
+			
+			FontAtlas* FontAtlasFactory::GetFontAtlas(const string& filename, unsigned int charPixelSize, Language language, const Shader& shader)
 			{
-				LoadFont(filename);
-
-				for (size_t i = 0; i < fontAtlases.size(); i++)
+				if (ResourceManager::Exist(filename + to_string(charPixelSize)))
 				{
-					if (fontAtlases[i][0].fontName == face->family_name && fontAtlases[i][0].fontPixelSize == charPixelSize)
-						return fontAtlases[i];
+					return (FontAtlas*)ResourceManager::GetResource(filename + to_string(charPixelSize));
 				}
-
-				fontAtlases.push_back(Create(face->family_name, charPixelSize, language, shader));
-				return fontAtlases[fontAtlases.size() - 1];
-			}
-
-			void FontAtlasFactory::Remove(FontAtlas* fontAtlas)
-			{
-				for (size_t i = 0; i < fontAtlases.size(); i++)
+				else
 				{
-					if (fontAtlases[i] == fontAtlas)
-						fontAtlases.erase(fontAtlases.begin() + i);
+					LoadFont(filename);
+
+					ResourceManager::Add(filename + to_string(charPixelSize), Create(face->family_name, charPixelSize, language, shader));
+					return (FontAtlas*)ResourceManager::GetResource(filename + to_string(charPixelSize));
 				}
 			}
 
-			void FontAtlasFactory::LoadFont(const std::string& filename)
+			void FontAtlasFactory::LoadFont(const string& filename)
 			{
 				if (!freeTypeInitialized)
 				{
@@ -151,14 +143,10 @@ namespace BF
 				}
 
 				Texture2D* texture = new Texture2D(shader);
-				texture->Create(textureAtlas.GetTextureData(), Texture2D::Format::R8);
+				texture->Create(*textureAtlas.GetTextureData(), Texture2D::Format::R8);
 				FT_Done_Face(face);
 				//FT_Done_FreeType(library);
 				return new FontAtlas(fontName, charPixelSize, maxYBearing, texture, characters);
-			}
-
-			void FontAtlasFactory::CreateTextureAtlas(int startUnicode, int endUnicode)
-			{
 			}
 
 			void FontAtlasFactory::PrepareGlyph(unsigned int unicode)

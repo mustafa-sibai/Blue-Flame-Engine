@@ -450,17 +450,17 @@ namespace BF
 
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
-				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*topRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+				*topRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
-				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

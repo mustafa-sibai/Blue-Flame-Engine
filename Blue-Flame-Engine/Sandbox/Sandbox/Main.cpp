@@ -11,6 +11,7 @@
 #include "_3D_Scene_Single_Light_Test.h"
 #include "InputTests.h"
 #include "GUIScene.h"
+#include "PhysicsScene.h"
 //#include <windows.h>
 //#include <string>
 //#include <iostream>
@@ -40,7 +41,7 @@ int main()
 
 	//BF_LOG_INFO("MAIN FUNCTION");
 
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(800, 250, 1920, 1080), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(0, 0, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
@@ -51,6 +52,7 @@ int main()
 	//_3DScene_AF_Test::_3DScene_AF_Test scene;
 	//_3DScene::_3DScene scene;
 	_2DScene::_2DScene scene;
+	//PhysicsScene::PhysicsScene scene;
 	//GUIScene::GUIScene scene;
 	//InputTests scene;
 
@@ -79,7 +81,7 @@ int main()
 
 	/*
 		TCHAR  buffer[MAX_PATH];
-		GetModuleFileName(NULL, buffer, MAX_PATH);
+		GetModulefilename(NULL, buffer, MAX_PATH);
 
 		for (size_t i = 0; i < MAX_PATH; i++)
 		{

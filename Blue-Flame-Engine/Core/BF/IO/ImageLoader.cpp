@@ -1,19 +1,27 @@
+#include "BF/System/Log.h"
 #include "ImageLoader.h"
-#include "DependencyHeaders/FreeImage/FreeImage.h"
-#include "DependencyHeaders/FreeImage/Utilities.h"
+#include "BF/Graphics/API/Texture.h"
 
 namespace BF
 {
 	namespace IO
 	{
-		uint8_t* ImageLoader::Load(const std::string& filename, unsigned int* width, unsigned int* height)
+		using namespace std;
+		using namespace BF::Graphics::API;
+
+		bool ImageLoader::initialised = false;
+
+		Texture::TextureData* ImageLoader::Load(const string& filename)
 		{
-			FreeImage_Initialise();
+			if (!initialised)
+			{
+				FreeImage_Initialise();
+				initialised = true;
+			}
 
 			FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 
 			FIBITMAP* dib = nullptr;
-			uint8_t* bits = nullptr;
 
 			fif = FreeImage_GetFileType(filename.c_str(), 0);
 
@@ -21,33 +29,45 @@ namespace BF
 				fif = FreeImage_GetFIFFromFilename(filename.c_str());
 
 			if (fif == FIF_UNKNOWN)
-				std::cout << "FIF_UNKNOWN" << std::endl;
+				BF_LOG_ERROR("FIF_UNKNOWN");
 
 			if (FreeImage_FIFSupportsReading(fif))
 				dib = FreeImage_Load(fif, filename.c_str());
 
 			if (!dib)
-				std::cout << "file not found" << std::endl;
+				BF_LOG_ERROR("file not found");
 
 			if (!FreeImage_FlipVertical(dib))
-				std::cout << "failed to flip image" << std::endl;
+				BF_LOG_ERROR("failed to flip image");
 
-			FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(dib);
+			FIBITMAP* bitmap = nullptr;
+			bitmap = FreeImage_ConvertTo32Bits(dib);
 
-			bits = FreeImage_GetBits(bitmap);
-			*width = FreeImage_GetWidth(bitmap);
-			*height = FreeImage_GetHeight(bitmap);
+			Texture::TextureData* textureData = new Texture::TextureData();
+			textureData->freeImage_bitmap = bitmap;
+			textureData->buffer = FreeImage_GetBits(bitmap);
+			textureData->width = FreeImage_GetWidth(bitmap);
+			textureData->height = FreeImage_GetHeight(bitmap);
 
-			if ((bits == 0) || (*width == 0) || (*height == 0))
-				std::cout << "file courrpted" << std::endl;
+			if ((textureData->buffer == 0) || (textureData->width == 0) || (textureData->height == 0))
+				BF_LOG_ERROR("file courrpted");
 
 			if (FreeImage_GetRedMask(bitmap) == 0xff0000)
-				SwapRedBlue32(bitmap);
+				FreeImage_SwapRedBlue32(bitmap);
 
 			FreeImage_Unload(dib);
-			//FreeImage_Unload(bitmap);
-			FreeImage_DeInitialise();
-			return bits;
+			return textureData;
+		}
+
+		void ImageLoader::Unload(Texture::TextureData* textureData)
+		{
+			FreeImage_Unload(reinterpret_cast<FIBITMAP*>(textureData->freeImage_bitmap));
+		}
+
+		void ImageLoader::DeInitialise()
+		{
+			if (initialised)
+				FreeImage_DeInitialise();
 		}
 	}
 }

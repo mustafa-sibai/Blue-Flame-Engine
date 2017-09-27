@@ -28,8 +28,6 @@ namespace BF
 					static unsigned int startUnicode;
 					static unsigned int endUnicode;
 
-					static std::vector<FontAtlas*> fontAtlases;
-
 				public:
 					enum class Language
 					{
@@ -42,12 +40,10 @@ namespace BF
 
 				public:
 					static FontAtlas* GetFontAtlas(const std::string& filename, unsigned int charPixelSize, Language language, const API::Shader& shader);
-					static void Remove(FontAtlas* fontAtlas);
 
-				private:
+				public:
 					static void LoadFont(const std::string& filename);
 					static FontAtlas* Create(const std::string& fontName, unsigned int charPixelSize, Language language, const API::Shader& shader);
-					void CreateTextureAtlas(int startUnicode, int endUnicode);
 					static void PrepareGlyph(unsigned int unicode);
 					static void CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int glyphWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height);
 			};

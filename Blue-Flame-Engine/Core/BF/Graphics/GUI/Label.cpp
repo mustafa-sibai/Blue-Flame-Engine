@@ -26,7 +26,6 @@ namespace BF
 			void Label::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
 			{
 				Widget::Load(StyleSheet, "Label");
-
 			}
 
 			void Label::Update()

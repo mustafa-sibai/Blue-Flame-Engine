@@ -6,9 +6,9 @@ namespace BF
 {
 	namespace IO
 	{
-		std::string FileLoader::LoadTextFile(const std::string& fileName)
+		std::string FileLoader::LoadTextFile(const std::string& filename)
 		{
-			std::ifstream file(fileName, std::ios::in);
+			std::ifstream file(filename, std::ios::in);
 			std::string data = "", line = "";
 
 			if (file.is_open())
@@ -17,15 +17,15 @@ namespace BF
 					data += line + "\n";
 			}
 			else
-				BF_LOG_FATAL("Could not read text file %s", fileName.c_str());
+				BF_LOG_FATAL("Could not read text file %s", filename.c_str());
 
 			return data;
 		}
 
-		char* FileLoader::LoadBinaryFile(const std::string& fileName, size_t* size)
+		char* FileLoader::LoadBinaryFile(const std::string& filename, size_t* size)
 		{
 			char* data = nullptr;
-			std::ifstream stream(fileName, std::ifstream::in | std::ifstream::binary);
+			std::ifstream stream(filename, std::ifstream::in | std::ifstream::binary);
 
 			if (stream.good())
 			{
@@ -37,7 +37,7 @@ namespace BF
 				stream.close();
 			}
 			else
-				BF_LOG_FATAL("Could not read binary file %s", fileName.c_str());
+				BF_LOG_FATAL("Could not read binary file %s", filename.c_str());
 
 			return data;
 		}

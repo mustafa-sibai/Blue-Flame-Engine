@@ -44,10 +44,10 @@ namespace BF
 					Texture2D(const Shader& shader);
 					~Texture2D();
 
-					void Load(const std::string& fileName);
-					void Load(const std::string& fileName, Wrap wrap, Filter filter);
-					void Create(const TextureData& textureData, Format format);
-					void Create(const TextureData& textureData, Format format, Wrap wrap, Filter filter);
+					void Load(const std::string& filename);
+					void Load(const std::string& filename, Wrap wrap, Filter filter);
+					void Create(TextureData& textureData, Format format, Wrap wrap, Filter filter);
+					void Create(TextureData& textureData, Format format);
 
 					void Bind() const;
 					void Bind(const std::string& samplerName, unsigned int index) const;

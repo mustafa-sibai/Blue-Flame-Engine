@@ -189,6 +189,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sandbox\PhysicsScene.cpp" />
     <ClCompile Include="Sandbox\GUIScene.cpp" />
     <ClCompile Include="Sandbox\InputTests.cpp" />
     <ClCompile Include="Sandbox\Main.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Sandbox\_3D_Scene_Single_Light_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sandbox\PhysicsScene.h" />
     <ClInclude Include="Sandbox\GUIScene.h" />
     <ClInclude Include="Sandbox\InputTests.h" />
     <ClInclude Include="Sandbox\new3DScene.h" />

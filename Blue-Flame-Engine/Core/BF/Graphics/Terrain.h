@@ -3,6 +3,7 @@
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
+#include "BF/Graphics/API/Texture.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -17,8 +18,7 @@ namespace BF
 			API::IndexBuffer indexBuffer;
 			API::VertexBufferLayout vertexBufferLayout;
 		
-			uint8_t* data;
-			unsigned int width, height;
+			API::Texture::TextureData* textureData;
 
 		public:
 			Terrain();

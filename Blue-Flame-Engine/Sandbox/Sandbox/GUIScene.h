@@ -10,6 +10,7 @@ namespace GUIScene
 			//BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 
 			BF::Graphics::GUI::Button button;
+			BF::Graphics::GUI::Label label;
 
 		public:
 			GUIScene();

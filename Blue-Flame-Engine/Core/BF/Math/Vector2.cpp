@@ -103,14 +103,34 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector2::operator>(const Vector2& right)
+		{
+			return this->Magnitude() > right.Magnitude();
+		}
+
+		bool Vector2::operator>=(const Vector2& right)
+		{
+			return this->Magnitude() >= right.Magnitude();
+		}
+
+		bool Vector2::operator<(const Vector2& right)
+		{
+			return this->Magnitude() < right.Magnitude();
+		}
+
+		bool Vector2::operator<=(const Vector2& right)
+		{
+			return this->Magnitude() <= right.Magnitude();
+		}
+
 		bool Vector2::operator==(const Vector2 &right)
 		{
-			return x == right.x && y == right.y ? true : false;
+			return x == right.x && y == right.y;
 		}
 
 		bool Vector2::operator!=(const Vector2 &right)
 		{
-			return x != right.x || y != right.y ? true : false;
+			return !(*this == right);
 		}
 
 		std::ostream& operator<<(std::ostream& os, const Vector2& vector)

@@ -9,7 +9,7 @@ namespace BF
 		using namespace BF::Math;
 
 		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices/*, vector<Material>* materials*/) :
-			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices)/*, materials(materials), textureFileName("")*/
+			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices)/*, materials(materials), texturefilename("")*/
 		{
 		}
 
@@ -36,9 +36,9 @@ namespace BF
 			}*/
 		}
 
-		void Mesh::SetTextureFileName(string textureFileName)
+		void Mesh::SetTexturefilename(string textureFilename)
 		{
-			this->textureFileName = textureFileName;
+			this->textureFilename = textureFilename;
 		}
 
 		void Mesh::Bind() const

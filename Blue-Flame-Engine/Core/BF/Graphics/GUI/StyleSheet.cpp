@@ -28,14 +28,14 @@ namespace BF
 				tinyxml2::XMLDocument xmlDocument;
 				xmlDocument.LoadFile(filename.c_str());
 
-				string textureFilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("StyleSheet")->Attribute("Path");
-				texture->Load(textureFilename);
+				string texturefilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("StyleSheet")->Attribute("Path");
+				texture->Load(texturefilename);
 
-				string fontFilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
+				string fontfilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
 				const char* size = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Size");
-				font->Load(fontFilename, atoi(size), FontAtlasFactory::Language::English);
+				font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
 
-				//LoadWidget(xmlDocument, "Text");
+				LoadWidget(xmlDocument, "Label");
 				LoadWidget(xmlDocument, "Button");
 				LoadWidget(xmlDocument, "Checkbox");
 				LoadWidget(xmlDocument, "Panel");
@@ -122,19 +122,22 @@ namespace BF
 				widgetData.minWidth = rectangle.x;
 				widgetData.minHeight = rectangle.y;
 
-				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Normal");
-				widgetData.sprites[0] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Hovered");
-				widgetData.sprites[1] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-				scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Pressed");
-				widgetData.sprites[2] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-				if (DoesTypeExist(xmlDocument, widgetName, "FirstState", "Disabled"))
+				if (DoesStateExist(xmlDocument, widgetName, "FirstState"))
 				{
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Disabled");
-					widgetData.sprites[3] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Normal");
+					widgetData.sprites[0] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Hovered");
+					widgetData.sprites[1] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Pressed");
+					widgetData.sprites[2] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+					if (DoesTypeExist(xmlDocument, widgetName, "FirstState", "Disabled"))
+					{
+						scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Disabled");
+						widgetData.sprites[3] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+					}
 				}
 
 				if (DoesStateExist(xmlDocument, widgetName, "SecondState"))

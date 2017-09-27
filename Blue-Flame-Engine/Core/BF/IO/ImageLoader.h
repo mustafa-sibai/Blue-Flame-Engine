@@ -1,14 +1,24 @@
 #pragma once
-#include <iostream>
+#include <string>
+#include "DependencyHeaders/FreeImage/FreeImage.h"
+#include "DependencyHeaders/FreeImage/Utilities.h"
+#include "BF/Graphics/API/Texture.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace IO
 	{
-		struct BF_API ImageLoader
+		class BF_API ImageLoader
 		{
-			static uint8_t* Load(const std::string& filename, unsigned int* width, unsigned int* height);
+			private:
+				static bool initialised;
+
+			public:
+				static BF::Graphics::API::Texture::TextureData* Load(const std::string& filename);
+				static void Unload(BF::Graphics::API::Texture::TextureData* textureData);
+
+				static void DeInitialise();
 		};
 	}
 }
