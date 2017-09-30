@@ -12,7 +12,7 @@ namespace BF
 			useGravity(false), speed(1.5f), renderable(renderable)
 		{
 			//if (useGravity)
-				direction = Vector2(0.1f, 1.0f);
+			direction = Vector2(0.5f, 1.0f);
 		}
 
 		Rigidbody2D::~Rigidbody2D()
@@ -23,8 +23,16 @@ namespace BF
 		{
 			renderable.SetPosition(renderable.GetPosition() + veclotiy);
 			veclotiy += direction * speed;
+		}
 
-			BF_LOG_INFO("%f, %f", veclotiy.x, veclotiy.y);
+		BF::Math::Rectangle Rigidbody2D::CheckNextFrameCollision()
+		{
+			BF::Math::Rectangle rectangle = renderable.GetRectangle();
+
+			rectangle.x += veclotiy.x;
+			rectangle.y += veclotiy.y;
+
+			return rectangle;
 		}
 	}
 }

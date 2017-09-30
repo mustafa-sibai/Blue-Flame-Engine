@@ -51,8 +51,8 @@ int main()
 	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test scene;
 	//_3DScene_AF_Test::_3DScene_AF_Test scene;
 	//_3DScene::_3DScene scene;
-	_2DScene::_2DScene scene;
-	//PhysicsScene::PhysicsScene scene;
+	//_2DScene::_2DScene scene;
+	PhysicsScene::PhysicsScene scene;
 	//GUIScene::GUIScene scene;
 	//InputTests scene;
 

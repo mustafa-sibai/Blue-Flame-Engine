@@ -16,6 +16,7 @@ namespace BF
 				float speed;
 				Math::Vector2 direction;
 				Math::Vector2 veclotiy;
+				//Math::Vector2 testVeclotiy;
 				bool correctCollisionPosition = false;
 
 			public:
@@ -23,6 +24,7 @@ namespace BF
 				~Rigidbody2D();
 
 				void Update();
+				BF::Math::Rectangle CheckNextFrameCollision();
 		};
 	}
 }
