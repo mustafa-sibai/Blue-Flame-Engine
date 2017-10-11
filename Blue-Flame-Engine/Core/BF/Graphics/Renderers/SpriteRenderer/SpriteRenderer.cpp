@@ -84,7 +84,31 @@ namespace BF
 			void SpriteRenderer::Render(const Renderable& renderable)
 			{
 				if (submitSprite)
-					renderables.push_back(&renderable);
+					renderables.emplace_back(&renderable);
+			}
+
+			SpriteRenderer& SpriteRenderer::operator=(const SpriteRenderer& spriteRenderer)
+			{
+				this->shader = spriteRenderer.shader;
+				this->vertexBuffer = spriteRenderer.vertexBuffer;
+				this->indexBuffer = spriteRenderer.indexBuffer;
+				this->vertexBufferLayout = spriteRenderer.vertexBufferLayout;
+
+				this->spriteBuffer = new SpriteBuffer();
+				this->spriteBuffer->color = spriteRenderer.spriteBuffer->color;
+				this->spriteBuffer->position = spriteRenderer.spriteBuffer->position;
+				this->spriteBuffer->renderingType = spriteRenderer.spriteBuffer->renderingType;
+				this->spriteBuffer->UV = spriteRenderer.spriteBuffer->UV;
+
+				this->indexCount = spriteRenderer.indexCount;
+				this->renderables = spriteRenderer.renderables;
+
+				this->submitType = spriteRenderer.submitType;
+				this->sortingOrder = spriteRenderer.sortingOrder;
+				this->submitSprite = spriteRenderer.submitSprite;
+				this->newDrawCall = spriteRenderer.newDrawCall;
+
+				return *this;
 			}
 
 			void SpriteRenderer::MapLineBuffer(const LineShape& lineShape)
@@ -211,47 +235,11 @@ namespace BF
 				indexCount += SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapBuffer()
+			void SpriteRenderer::MapTextBuffer(const Text& text)
 			{
-				if (submitSprite)
-				{
-					for (size_t i = 0; i < renderables.size(); i++)
-					{
-						switch (renderables[i][0].type)
-						{
-						case Renderable::Type::Line:
-						{
-							LineShape& line = (LineShape&)renderables[i][0];
-							MapLineBuffer(line);
-							break;
-						}
-						case Renderable::Type::RegularPolygon:
-						{
-							RegularPolygon& regularPolygon = (RegularPolygon&)renderables[i][0];
-							MapPolygonBuffer(regularPolygon);
-							break;
-						}
-						case Renderable::Type::Sprite:
-						{
-							Sprite& sprite = (Sprite&)renderables[i][0];
-							MapSpriteBuffer(sprite);
-							break;
-						}
-						default:
-							break;
-						}
-					}
-				}
-			}
-
-			void SpriteRenderer::RenderText(const FontAtlas& fontAtlas, const string& text, const Vector2& position, const Color& color)
-			{
-				Rectangle prevPos;
-				Vector2 pos = position;
-
 				if (currentBoundTexture != nullptr)
 				{
-					if (fontAtlas.texture != currentBoundTexture)
+					if (text.font->fontAtlas->texture != currentBoundTexture)
 					{
 						if (submitType == SubmitType::StaticSubmit)
 							return;
@@ -263,53 +251,154 @@ namespace BF
 					}
 				}
 
-				if (currentBoundTexture != fontAtlas.texture)
+				if (currentBoundTexture != text.font->fontAtlas->texture)
 				{
-					fontAtlas.texture->Bind();
-					currentBoundTexture = fontAtlas.texture;
+					text.font->fontAtlas->texture->Bind();
+					currentBoundTexture = text.font->fontAtlas->texture;
 				}
 
-				for (size_t i = 0; i < text.length(); i++)
+				for (size_t i = 0; i < text.characters.size(); i++)
 				{
-					unsigned int unicode = text[i] - 32;
-					Rectangle scissorRectangle = fontAtlas.characters[0][unicode].scissorRectangle;
-
 					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
-					CalculateUV(fontAtlas.texture, scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
-
-					pos += Vector2(prevPos.x + fontAtlas.characters[0][unicode].bearing.x, 0.0f);
-					prevPos.x = fontAtlas.characters[0][unicode].scissorRectangle.width;
-					pos.y = position.y + (fontAtlas.characters[0][unicode].charPixelSize - fontAtlas.characters[0][unicode].bearing.y);
+					CalculateUV(text.font->fontAtlas->texture, text.characters[i].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
 					//Top Left
-					spriteBuffer->position = pos;
-					spriteBuffer->color = color;
+					spriteBuffer->position = text.characters[i].position;
+					spriteBuffer->color = text.color;
 					spriteBuffer->UV = topLeftUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y);
-					spriteBuffer->color = color;
+					spriteBuffer->position = Vector2(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y);
+					spriteBuffer->color = text.color;
 					spriteBuffer->UV = topRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position = Vector2(pos.x + (float)scissorRectangle.width, pos.y + (float)scissorRectangle.height);
-					spriteBuffer->color = color;
+					spriteBuffer->position = Vector2(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
+					spriteBuffer->color = text.color;
 					spriteBuffer->UV = bottomRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position = Vector2((float)pos.x, pos.y + (float)scissorRectangle.height);
-					spriteBuffer->color = color;
+					spriteBuffer->position = Vector2((float)text.characters[i].position.x, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
+					spriteBuffer->color = text.color;
 					spriteBuffer->UV = bottomLeftUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					indexCount += SPRITE_INDICES;
+				}
+			}
+
+			/*
+			void SpriteRenderer::MapTextBuffer(const Text& text)
+			{
+				Vector2 position = text.position;
+
+				if (currentBoundTexture != nullptr)
+				{
+					if (text.font->fontAtlas->texture != currentBoundTexture)
+					{
+						if (submitType == SubmitType::StaticSubmit)
+							return;
+
+						newDrawCall = true;
+
+						End();
+						Begin(submitType, sortingOrder);
+					}
+				}
+
+				if (currentBoundTexture != text.font->fontAtlas->texture)
+				{
+					text.font->fontAtlas->texture->Bind();
+					currentBoundTexture = text.font->fontAtlas->texture;
+				}
+
+				for (size_t i = 0; i < text.text.length(); i++)
+				{
+					unsigned int unicode = text.text[i] - 32;
+					Rectangle scissorRectangle = text.font->fontAtlas->characters[0][unicode].scissorRectangle;
+
+					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+					CalculateUV(text.font->fontAtlas->texture, scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+
+					position += Vector2(text.font->fontAtlas->characters[0][unicode].bearing.x, 0.0f);
+					position.y = text.position.y + text.font->fontAtlas->fontMaxYBearing - text.font->fontAtlas->characters[0][unicode].bearing.y;
+
+					//Top Left
+					spriteBuffer->position = position;
+					spriteBuffer->color = text.color;
+					spriteBuffer->UV = topLeftUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
+
+					//Top Right
+					spriteBuffer->position = Vector2(position.x + (float)scissorRectangle.width, position.y);
+					spriteBuffer->color = text.color;
+					spriteBuffer->UV = topRightUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
+
+					//Bottom Right
+					spriteBuffer->position = Vector2(position.x + (float)scissorRectangle.width, position.y + (float)scissorRectangle.height);
+					spriteBuffer->color = text.color;
+					spriteBuffer->UV = bottomRightUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
+
+					//Bottom Left
+					spriteBuffer->position = Vector2((float)position.x, position.y + (float)scissorRectangle.height);
+					spriteBuffer->color = text.color;
+					spriteBuffer->UV = bottomLeftUV;
+					spriteBuffer->renderingType = 2;
+					spriteBuffer++;
+
+					indexCount += SPRITE_INDICES;
+					position.x += text.font->fontAtlas->characters[0][unicode].scissorRectangle.width;
+				}
+			}*/
+
+			void SpriteRenderer::MapBuffer()
+			{
+				if (submitSprite)
+				{
+					for (size_t i = 0; i < renderables.size(); i++)
+					{
+						switch (renderables[i][0].type)
+						{
+							case Renderable::Type::Line:
+							{
+								LineShape& line = (LineShape&)renderables[i][0];
+								MapLineBuffer(line);
+								break;
+							}
+							case Renderable::Type::RegularPolygon:
+							{
+								RegularPolygon& regularPolygon = (RegularPolygon&)renderables[i][0];
+								MapPolygonBuffer(regularPolygon);
+								break;
+							}
+							case Renderable::Type::Sprite:
+							{
+								Sprite& sprite = (Sprite&)renderables[i][0];
+								MapSpriteBuffer(sprite);
+								break;
+							}
+							case Renderable::Type::Text:
+							{
+								Text& text = (Text&)renderables[i][0];
+								MapTextBuffer(text);
+								break;
+							}
+							default:
+								break;
+						}
+					}
 				}
 			}
 
@@ -361,17 +450,17 @@ namespace BF
 
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
 			{
-				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*topRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-									1.0f / ((float)texture->GetTextureData().height / (float)scissorRectangle.y));
+				*topRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData().width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
-				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData().width / (float)scissorRectangle.x),
-										1.0f / ((float)texture->GetTextureData().height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

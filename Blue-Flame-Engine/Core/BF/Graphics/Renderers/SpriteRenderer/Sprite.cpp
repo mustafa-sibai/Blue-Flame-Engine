@@ -15,8 +15,8 @@ namespace BF
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector2& position, unsigned int zLayer, const Color& color) :
-				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, texture2D->GetTextureData().width, texture2D->GetTextureData().height), zLayer, color, Type::Sprite),
-				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height)
+				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height), zLayer, color, Type::Sprite),
+				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 			{
 			}
 
@@ -28,7 +28,7 @@ namespace BF
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Color& color) :
 				Renderable(Math::Vector2((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, Type::Sprite),
-				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData().width, texture2D->GetTextureData().height)
+				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 			{
 			}
 

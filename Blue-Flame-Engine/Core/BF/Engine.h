@@ -12,7 +12,7 @@
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 170517
+#define BF_ENGINE_MINOR_VERSION 171012
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF
@@ -26,16 +26,25 @@ namespace BF
 
 	class BF_API Engine
 	{
-		public:
+		private:
 #ifdef BF_PLATFORM_WINDOWS
+			friend class Platform::Windows::WINEngineEntryPoint;
+			friend class Platform::Windows::WINWindow;
 			static Platform::Windows::WINEngineEntryPoint* winEngineEntryPoint;
 #elif defined (BF_PLATFORM_LINUX)
+			friend class Platform::Linux::LXEngineEntryPoint;
 			static Platform::Linux::LXEngineEntryPoint* lxEngineEntryPoint;
 #elif defined (BF_PLATFORM_WEB)
+			friend class Platform::Web::WEBEngineEntryPoint;
 			static Platform::Web::WEBEngineEntryPoint* webEngineEntryPoint;
 #elif defined (BF_PLATFORM_ANDROID)
+			friend class Platform::Android::ANDEngineEntryPoint;
 			static Platform::Android::ANDEngineEntryPoint* andEngineEntryPoint;
 #endif
+
+			enum class State { None, Initialize, Render, Exit };
+			static State state;
+
 		public:
 			Engine(const Application::Window& window, Graphics::API::RenderAPI renderAPI);
 			~Engine();

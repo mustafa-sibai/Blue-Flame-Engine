@@ -1,6 +1,6 @@
 #include "Texture2D.h"
 #include "BF/Graphics/API/Context.h"
-#include "BF/IO/ImageLoader.h"
+
 
 namespace BF
 {
@@ -9,7 +9,6 @@ namespace BF
 		namespace API
 		{
 			using namespace std;
-			using namespace BF::IO;
 
 			Texture2D::Texture2D(const Shader& shader) :
 				shader(shader), glTexture2D(shader.glShader)
@@ -20,37 +19,37 @@ namespace BF
 			{
 			}
 
-			void Texture2D::Load(const string& fileName)
+			void Texture2D::Load(const string& filename)
 			{
-				textureData.buffer = ImageLoader::Load(fileName, &textureData.width, &textureData.height);
+				Texture::Load(filename);
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
+					dxTexture2D.Create(*textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
+					glTexture2D.Create(*textureData, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
-			void Texture2D::Load(const string& fileName, Wrap wrap, Filter filter)
+			void Texture2D::Load(const string& filename, Wrap wrap, Filter filter)
 			{
-				textureData.buffer = ImageLoader::Load(fileName, &textureData.width, &textureData.height);
+				Texture::Load(filename);
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
+					dxTexture2D.Create(*textureData, Format::R8G8B8A8, wrap, filter);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, Format::R8G8B8A8, wrap, filter);
+					glTexture2D.Create(*textureData, Format::R8G8B8A8, wrap, filter);
 #endif
 			}
 
-			void Texture2D::Create(const TextureData& textureData, Format format)
+			void Texture2D::Create(TextureData& textureData, Format format)
 			{
-				this->textureData = textureData;
+				this->textureData = &textureData;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -62,9 +61,9 @@ namespace BF
 #endif
 			}
 
-			void Texture2D::Create(const TextureData& textureData, Format format, Wrap wrap, Filter filter)
+			void Texture2D::Create(TextureData& textureData, Format format, Wrap wrap, Filter filter)
 			{
-				this->textureData = textureData;
+				this->textureData = &textureData;
 
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)

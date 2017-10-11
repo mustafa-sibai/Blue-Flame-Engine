@@ -18,36 +18,54 @@
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\_3DScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sandbox\_2DScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sandbox\TestPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\_3DScene2.cpp">
+    <ClCompile Include="Sandbox\InputTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\InputTests.cpp">
+    <ClCompile Include="Sandbox\new3DScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\_3DScene_AF_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\_3D_Scene_Single_Light_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\GUIScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\PhysicsScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sandbox\_3DScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sandbox\_2DScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sandbox\TestPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sandbox\_3DScene2.h">
+    <ClInclude Include="Sandbox\InputTests.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sandbox\InputTests.h">
+    <ClInclude Include="Sandbox\new3DScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\_3DScene_AF_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\_3D_Scene_Single_Light_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\GUIScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\PhysicsScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

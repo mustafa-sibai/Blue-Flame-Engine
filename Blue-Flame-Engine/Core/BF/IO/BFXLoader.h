@@ -3,6 +3,7 @@
 #include <vector>
 #include <string.h>
 #include "BF/Graphics/Mesh.h"
+#include "BF/IO/FileFormats/BFXFormat.h"
 #include "BF/Common.h"
 
 namespace BF

@@ -29,9 +29,20 @@ namespace BF
 			return x * vector.x + y * vector.y;
 		}
 
+		float Vector2::Distance(const Vector2& vector) const
+		{
+			Vector2 d = Direction(vector);
+			return sqrt((d.x * d.x + d.y * d.y));
+		}
+
 		float Vector2::Magnitude() const
 		{
 			return (float)sqrt(Dot(*this));
+		}
+
+		Vector2 Vector2::Direction(const Vector2& vector) const
+		{
+			return Vector2(abs(vector.x - x), abs(vector.y - y));
 		}
 
 		Vector2 Vector2::Normalize() const
@@ -92,14 +103,34 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector2::operator>(const Vector2& right)
+		{
+			return this->Magnitude() > right.Magnitude();
+		}
+
+		bool Vector2::operator>=(const Vector2& right)
+		{
+			return this->Magnitude() >= right.Magnitude();
+		}
+
+		bool Vector2::operator<(const Vector2& right)
+		{
+			return this->Magnitude() < right.Magnitude();
+		}
+
+		bool Vector2::operator<=(const Vector2& right)
+		{
+			return this->Magnitude() <= right.Magnitude();
+		}
+
 		bool Vector2::operator==(const Vector2 &right)
 		{
-			return x == right.x && y == right.y ? true : false;
+			return x == right.x && y == right.y;
 		}
 
 		bool Vector2::operator!=(const Vector2 &right)
 		{
-			return x != right.x || y != right.y ? true : false;
+			return !(*this == right);
 		}
 
 		std::ostream& operator<<(std::ostream& os, const Vector2& vector)

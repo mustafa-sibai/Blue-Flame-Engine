@@ -16,13 +16,16 @@ namespace BF
 
 		void TextureAtlas::Create(unsigned int width, unsigned int height, Format format)
 		{
-			textureData.width = width;
-			textureData.height = height;
+			if (textureData == nullptr)
+				textureData = new TextureData();
 
-			bufferSize = textureData.width * textureData.height * ((unsigned int)format / 8);
+			textureData->width = width;
+			textureData->height = height;
 
-			textureData.buffer = new uint8_t[bufferSize];
-			memset(textureData.buffer, 0, sizeof(uint8_t) * bufferSize);
+			bufferSize = textureData->width * textureData->height * ((unsigned int)format / 8);
+
+			textureData->buffer = new uint8_t[bufferSize];
+			memset(textureData->buffer, 0, sizeof(uint8_t) * bufferSize);
 		}
 
 		void TextureAtlas::AddTexture(const Math::Rectangle& rectangle, uint8_t* data)
@@ -32,7 +35,7 @@ namespace BF
 			{
 				for (int col = rectangle.x; col < rectangle.x + rectangle.width; col++)
 				{
-					textureData.buffer[col + (row * textureData.width)] = data[(col - rectangle.x) + ((row - rectangle.y) * rectangle.width)];
+					textureData->buffer[col + (row * textureData->width)] = data[(col - rectangle.x) + ((row - rectangle.y) * rectangle.width)];
 				}
 			}
 		}

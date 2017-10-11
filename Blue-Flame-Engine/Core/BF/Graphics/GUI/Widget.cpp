@@ -24,9 +24,10 @@ namespace BF
 			{
 			}
 
-			void Widget::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void Widget::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
 				this->spriteRenderer = &spriteRenderer;
+				SetZLayer(zLayer);
 			}
 
 			void Widget::Load(const StyleSheet& StyleSheet, const string& widgetName)
@@ -45,6 +46,58 @@ namespace BF
 			{
 				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetPosition(position);
+			}
+
+			void Widget::SetZLayer(int zLayer)
+			{
+				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+					widgetData.sprites[i].zLayer = zLayer;
+			}
+
+			void Widget::SetTextAlignment(WidgetData::TextAlignment textAlignment)
+			{
+				switch (textAlignment)
+				{
+				case WidgetData::TextAlignment::TopLeft:
+				{
+					widgetData.textPosition = GetPosition();
+					break;
+				}
+				case WidgetData::TextAlignment::TopCenter:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::TopRight:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::MiddleLeft:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::MiddleCenter:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::MiddleRight:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::BottomLeft:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::BottomCenter:
+				{
+					break;
+				}
+				case WidgetData::TextAlignment::BottomRight:
+				{
+					break;
+				}
+				default:
+					break;
+				}
 			}
 
 			void Widget::SetRectangle(const Math::Rectangle& rectangle)
@@ -69,6 +122,25 @@ namespace BF
 				return false;
 			}
 
+			void Widget::FireAction()
+			{
+				if (hovered && pressed && !Mouse::IsButtonPressed(Mouse::Button::Left))
+				{
+					pressed = false;
+					currentSprite = &widgetData.sprites[currentState + 0];
+
+					if (OnClickCallBack != nullptr && callBackPointer != nullptr)
+						OnClickCallBack(callBackPointer);
+
+					pressedAndReleased = true;
+				}
+			}
+
+			void Widget::SetCurrentSpriteToNormal()
+			{
+				currentSprite = &widgetData.sprites[currentState + 0];
+			}
+
 			void Widget::Update()
 			{
 				pressedAndReleased = false;
@@ -89,16 +161,7 @@ namespace BF
 					pressed = true;
 				}
 
-				if (hovered && pressed && !Mouse::IsButtonPressed(Mouse::Button::Left))
-				{
-					pressed = false;
-					currentSprite = &widgetData.sprites[currentState + 0];
-
-					if(OnClickCallBack != nullptr && callBackPointer != nullptr)
-						OnClickCallBack(callBackPointer);
-
-					pressedAndReleased = true;
-				}
+				FireAction();
 
 				if (!Mouse::IsButtonPressed(Mouse::Button::Left))
 				{
@@ -110,6 +173,12 @@ namespace BF
 			void Widget::Render()
 			{
 				spriteRenderer->Render(*currentSprite);
+
+				if (widgetData.renderText)
+				{
+					//spriteRenderer->RenderText(*widgetData.font, "", )
+				}
+				
 			}
 
 			void Widget::SwitchState()

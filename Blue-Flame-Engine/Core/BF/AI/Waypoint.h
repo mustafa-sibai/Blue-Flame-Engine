@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Math/Math.h"
-#include "BF/Graphics/Renderers/Sprite.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 

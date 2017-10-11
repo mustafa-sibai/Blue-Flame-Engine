@@ -16,6 +16,8 @@ namespace BF
 	using namespace BF::Platform::Android;
 #endif
 
+	Engine::State Engine::state = Engine::State::Initialize;
+
 #ifdef BF_PLATFORM_WINDOWS
 	WINEngineEntryPoint* Engine::winEngineEntryPoint = nullptr;
 #elif defined (BF_PLATFORM_LINUX)

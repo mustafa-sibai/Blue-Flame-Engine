@@ -16,26 +16,28 @@ namespace Editor
 		class FBXLoader
 		{
 			private:
-				std::vector<BF::Math::Vector3>* controlPoints;
-				std::vector<BF::Graphics::MeshVertexData>* vertices;
-				std::vector<unsigned int>* indices;
+				std::vector<BF::Math::Vector3> controlPoints;
+				std::vector<void*> vertices;
+				std::vector<unsigned int> indices;
 				//std::vector<Graphics::Material>* materials;
 				unsigned int triCount;
-				std::vector<BF::Graphics::Mesh>* meshes;
+				std::vector<BF::Graphics::Mesh> meshes;
 
 			public:
 				FBXLoader();
 				~FBXLoader();
 				void Load(const char* filename);
 
-				const std::vector<BF::Graphics::Mesh>* GetMeshs() const { return meshes; }
+				const std::vector<BF::Graphics::Mesh>& GetMeshs() const { return meshes; }
 
 			private:
 				FbxAMatrix GetNodeTransform(FbxNode *pNode);
 				void ReadControlPoints(FbxMesh* mesh);
 				void ProcessMesh(FbxMesh* mesh);
-				BF::Math::Vector3 ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter);
-				BF::Math::Vector2 ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer);
+				BF::Math::Vector3 ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasNormals);
+				BF::Math::Vector3 ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasTangent);
+				BF::Math::Vector3 ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasBinormal);
+				BF::Math::Vector2 ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer, bool& hasUV);
 				//void LoadUVInformation(FbxMesh* pMesh);
 
 				//void ProcessMaterials(FbxNode* inNode);

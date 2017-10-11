@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "BF/Graphics/Renderers/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Graphics/GUI/StyleSheet.h"
 #include "BF/Graphics/GUI/Widget.h"
 #include "BF/Common.h"
@@ -26,6 +26,8 @@ namespace BF
 
 				public:
 					std::vector<Widget*> widgets;
+					Widget* currentWidget;
+					Widget* previousWidget;
 
 				public:
 					WidgetManager();

@@ -189,19 +189,25 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sandbox\PhysicsScene.cpp" />
+    <ClCompile Include="Sandbox\GUIScene.cpp" />
     <ClCompile Include="Sandbox\InputTests.cpp" />
     <ClCompile Include="Sandbox\Main.cpp" />
+    <ClCompile Include="Sandbox\new3DScene.cpp" />
     <ClCompile Include="Sandbox\_2DScene.cpp" />
-    <ClCompile Include="Sandbox\_3DScene.cpp" />
     <ClCompile Include="Sandbox\TestPanel.cpp" />
-    <ClCompile Include="Sandbox\_3DScene2.cpp" />
+    <ClCompile Include="Sandbox\_3DScene_AF_Test.cpp" />
+    <ClCompile Include="Sandbox\_3D_Scene_Single_Light_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sandbox\PhysicsScene.h" />
+    <ClInclude Include="Sandbox\GUIScene.h" />
     <ClInclude Include="Sandbox\InputTests.h" />
+    <ClInclude Include="Sandbox\new3DScene.h" />
     <ClInclude Include="Sandbox\_2DScene.h" />
-    <ClInclude Include="Sandbox\_3DScene.h" />
     <ClInclude Include="Sandbox\TestPanel.h" />
-    <ClInclude Include="Sandbox\_3DScene2.h" />
+    <ClInclude Include="Sandbox\_3DScene_AF_Test.h" />
+    <ClInclude Include="Sandbox\_3D_Scene_Single_Light_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\3DMipAF\PixelShader.glsl" />

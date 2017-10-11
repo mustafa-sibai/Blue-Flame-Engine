@@ -1,11 +1,12 @@
 #pragma once
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
-#include "BF/Graphics/Renderers/Sprite.h"
-#include "BF/Graphics/Fonts/FontAtlas.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
+#include "BF/Graphics/Fonts/Font.h"
 #include "BF/Graphics/Color.h"
-#include "BF/Graphics/Renderers/LineShape.h"
-#include "BF/Graphics/Renderers/RegularPolygon.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/LineShape.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/RegularPolygon.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Text.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -46,17 +47,20 @@ namespace BF
 					void Render(const Renderable& renderable);
 					void Render(Renderable&&) = delete;
 
-					void RenderText(const Fonts::FontAtlas& fontAtlas, const std::string& text, const Math::Vector2& position, const Color& color);
+					//void RenderText(const Fonts::Font& font, const std::string& text, const Math::Vector2& position, const Color& color);
 					void End();
 
 					void SetScissor(const Math::Rectangle& rectangle);
 
 					inline const API::Shader& GetShader() const { return shader; }
 
+					SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
+
 				private:
 					void MapLineBuffer(const LineShape& lineShape);
 					void MapPolygonBuffer(const RegularPolygon& regularPolygon);
 					void MapSpriteBuffer(const Sprite& sprite);
+					void MapTextBuffer(const Text& text);
 					void MapBuffer();
 					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
 			};

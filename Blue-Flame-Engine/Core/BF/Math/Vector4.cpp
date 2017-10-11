@@ -28,9 +28,20 @@ namespace BF
 			return x * vector.x + y * vector.y + z * vector.z + w * vector.w;
 		}
 
+		float Vector4::Distance(const Vector4& vector) const
+		{
+			Vector4 d = Direction(vector);
+			return sqrt((d.x * d.x + d.y * d.y + d.z * d.z + d.w * d.w));
+		}
+
 		float Vector4::Magnitude() const
 		{
 			return (float)sqrt(Dot(*this));
+		}
+
+		Vector4 Vector4::Direction(const Vector4& vector) const
+		{
+			return Vector4(abs(vector.x - x), abs(vector.y - y), abs(vector.z - z), abs(vector.w - w));
 		}
 
 		Vector4 Vector4::Normalize() const
@@ -99,14 +110,34 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector4::operator>(const Vector4& right)
+		{
+			return this->Magnitude() > right.Magnitude();
+		}
+
+		bool Vector4::operator>=(const Vector4& right)
+		{
+			return this->Magnitude() >= right.Magnitude();
+		}
+
+		bool Vector4::operator<(const Vector4& right)
+		{
+			return this->Magnitude() < right.Magnitude();
+		}
+
+		bool Vector4::operator<=(const Vector4& right)
+		{
+			return this->Magnitude() <= right.Magnitude();
+		}
+
 		bool Vector4::operator==(const Vector4 &right)
 		{
-			return x == right.x && y == right.y && z == right.z && w == right.w ? true : false;
+			return x == right.x && y == right.y && z == right.z && w == right.w;
 		}
 
 		bool Vector4::operator!=(const Vector4 &right)
 		{
-			return x != right.x || y != right.y || z != right.z || w != right.w ? true : false;
+			return !(*this == right);
 		}
 
 		std::ostream& operator<<(std::ostream& os, const Vector4& vector)

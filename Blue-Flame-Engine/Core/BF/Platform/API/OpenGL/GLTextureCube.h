@@ -22,7 +22,7 @@ namespace BF
 						GLTextureCube();
 						~GLTextureCube();
 
-						void Create(std::vector<Graphics::API::Texture::TextureData>& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
+						void Create(std::vector<Graphics::API::Texture::TextureData*>& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
 						void Bind() const;
 						void Unbind() const;
 

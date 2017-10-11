@@ -11,7 +11,9 @@ namespace _3DScene
 	using namespace BF::Input;
 
 	_3DScene::_3DScene() :
-		cubeModel(shader), planeModel(shader), wallModel(shader), lightModel(lightShader), floorMaterial(shader), wallMaterial(shader), directionalLight(false)
+		cubeModel(shader), crateModel(shader), planeModel(shader),
+		lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },
+		floorMaterial(shader), crateMaterial(shader), directionalLight(false)
 	{
 	}
 
@@ -29,7 +31,7 @@ namespace _3DScene
 		fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
 		skybox.Initialize();
 
-		constantBuffer.Create(sizeof(LightBuffer), 1);
+		constantBuffer.Create(sizeof(Lights), 1);
 		materialConstantBuffer.Create(sizeof(floorMaterial.colorBuffer), 2);
 
 		//terrain.Initialize();
@@ -61,20 +63,26 @@ namespace _3DScene
 
 		skybox.Load(filenames);
 
+		crateModel.Load("Assets/Models/Crate/Crate.bfx");
 		planeModel.Load("Assets/Models/Plane.bfx");
-		wallModel.Load("Assets/Models/Plane.bfx");
 		cubeModel.Load("Assets/Models/Cube.bfx");
-		lightModel.Load("Assets/Models/Cube.bfx");
+
+		//------------------------------------------ Light Models ----------------------------------------------
+		for (size_t i = 0; i < 4; i++)
+		{
+			lightModel[i].Load("Assets/Models/Cube.bfx");
+			lights.lights[i].posDir.w = 1.0f;
+		}
+		//------------------------------------------ Light Models ----------------------------------------------
+
 		//, Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16
 		floorMaterial.diffuseMap.Load("Assets/Textures/diffuseMap.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
 		floorMaterial.specularMap.Load("Assets/Textures/specularMap.png");
 		floorMaterial.normalMap.Load("Assets/Textures/normalMap.jpg");
 
-		wallMaterial.diffuseMap.Load("Assets/Textures/wall/brickwall.jpg", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
-		wallMaterial.specularMap.Load("Assets/Textures/wall/specularMap.jpg");
-		wallMaterial.normalMap.Load("Assets/Textures/wall/brickwall_normal.jpg");
-
-		light.posDir.w = 1.0f;
+		crateMaterial.diffuseMap.Load("Assets/Models/Crate/Crate/Crate_color.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
+		crateMaterial.normalMap.Load("Assets/Models/Crate/Crate/Crate_normal.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
+		crateMaterial.specularMap.Load("Assets/Models/Crate/Crate/Crate_specular.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
 	}
 
 	/*void _3DScene::FixedUpdate()
@@ -89,6 +97,19 @@ namespace _3DScene
 
 		//BF_LOG_INFO("%f, %f, %f", fpsCamera.GetPosition().x, fpsCamera.GetPosition().y, fpsCamera.GetPosition().z);
 
+		if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Num1))
+			lightIndex = 0;
+
+		if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Num2))
+			lightIndex = 1;
+
+		if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Num3))
+			lightIndex = 2;
+
+		if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Num4))
+			lightIndex = 3;
+
+
 		if (Keyboard::IsKeyPressed(Keyboard::Key::Code::U))
 			directionalLight = true;
 
@@ -97,25 +118,24 @@ namespace _3DScene
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::L))
-			light.posDir.x++;
+			lights.lights[lightIndex].posDir.x += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::J))
-			light.posDir.x--;
+			lights.lights[lightIndex].posDir.x -= 0.5f;
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::P))
-			light.posDir.y++;
+			lights.lights[lightIndex].posDir.y += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::Semicolon))
-			light.posDir.y--;
+			lights.lights[lightIndex].posDir.y -= 0.5f;
 
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::I))
-			light.posDir.z++;
+			lights.lights[lightIndex].posDir.z += 0.5f;
 
 		if (Keyboard::IsKeyDown(Keyboard::Key::Code::K))
-			light.posDir.z--;
-
+			lights.lights[lightIndex].posDir.z -= 0.5f;
 	}
 
 	void _3DScene::Render()
@@ -130,15 +150,16 @@ namespace _3DScene
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
 		planeModel.Render();
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, 15.0f, 10.0f)) * Matrix4::Rotate(90.0f, Vector3(1, 0, 0)) * Matrix4::Scale(Vector3(10.0f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f)));
 
-		wallMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		wallMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		wallMaterial.colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
-		wallMaterial.colorBuffer.shininess = 32.0f;
-		materialConstantBuffer.Update(&wallMaterial, sizeof(wallMaterial.colorBuffer));
-		wallMaterial.Bind();
-		wallModel.Render();
+		crateMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		crateMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		crateMaterial.colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
+		crateMaterial.colorBuffer.shininess = 8.0f;
+		materialConstantBuffer.Update(&crateMaterial, sizeof(crateMaterial.colorBuffer));
+		crateMaterial.Bind();
+
+		crateModel.Render();
 
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
 
@@ -149,7 +170,7 @@ namespace _3DScene
 		floorMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		floorMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		floorMaterial.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		floorMaterial.colorBuffer.shininess = 32.0f;
+		floorMaterial.colorBuffer.shininess = 128.0f;
 		materialConstantBuffer.Update(&floorMaterial, sizeof(floorMaterial.colorBuffer));
 		floorMaterial.Bind();
 
@@ -158,21 +179,34 @@ namespace _3DScene
 		shader.Unbind();
 		skybox.Unbind();
 
+
+		//----------------------------------------------- Light 1 -------------------------------------------
 		lightShader.Bind();
 
-		light.ambientColor = Color(0.2f, 0.2f, 0.2f, 1.0f);
-		light.diffuseColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		constantBuffer.Update(&light, sizeof(LightBuffer));
+		for (size_t i = 0; i < 4; i++)
+		{
+			lights.lights[i].ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+			lights.lights[i].diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+			lights.lights[i].specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
 
-		if (directionalLight)
-			fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3()) * Matrix4::Scale(Vector3(0.1f)));
-		else
-			fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(light.posDir.x, light.posDir.y, light.posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
+		constantBuffer.Update(&lights, sizeof(Lights));
 
-		lightModel.Render();
+		for (size_t i = 0; i < 4; i++)
+		{
+			if (directionalLight)
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3()) * Matrix4::Scale(Vector3(0.1f)));
+			else
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(lights.lights[i].posDir.x, lights.lights[i].posDir.y, lights.lights[i].posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
+		
+			lightModel[i].Render();
+		}
+
+		
 
 		lightShader.Unbind();
+		//----------------------------------------------- Light 1 -------------------------------------------
+
 
 		//terrain.Render();
 

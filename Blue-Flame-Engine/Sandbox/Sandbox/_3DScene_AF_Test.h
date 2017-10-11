@@ -4,9 +4,9 @@
 #include <chrono>
 #include <vector>
 
-namespace _3DScene2
+namespace _3DScene_AF_Test
 {
-	class _3DScene2 : public BF::Application::Scene
+	class _3DScene_AF_Test : public BF::Application::Scene
 	{
 		private:
 			BF::Graphics::API::Shader shader, lightShader;
@@ -25,8 +25,8 @@ namespace _3DScene2
 			float angle = 0;
 
 		public:
-			_3DScene2();
-			~_3DScene2();
+			_3DScene_AF_Test();
+			~_3DScene_AF_Test();
 
 		private:
 			void Initialize() override;

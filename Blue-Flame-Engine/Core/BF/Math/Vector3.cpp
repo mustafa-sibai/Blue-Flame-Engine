@@ -28,14 +28,25 @@ namespace BF
 			return x * vector.x + y * vector.y + z * vector.z;
 		}
 
-		Vector3 Vector3::Cross(const Vector3& vector) const
+		float Vector3::Distance(const Vector3& vector) const
 		{
-			return Vector3(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x);
+			Vector3 d = Direction(vector);
+			return sqrt((d.x * d.x + d.y * d.y + d.z * d.z));
 		}
 
 		float Vector3::Magnitude() const
 		{
 			return (float)sqrt(Dot(*this));
+		}
+
+		Vector3 Vector3::Cross(const Vector3& vector) const
+		{
+			return Vector3(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x);
+		}
+
+		Vector3 Vector3::Direction(const Vector3& vector) const
+		{
+			return Vector3(abs(vector.x - x), abs(vector.y - y), abs(vector.z - z));
 		}
 
 		Vector3 Vector3::Normalize() const
@@ -100,14 +111,34 @@ namespace BF
 			return *this;
 		}
 
+		bool Vector3::operator>(const Vector3& right)
+		{
+			return this->Magnitude() > right.Magnitude();
+		}
+
+		bool Vector3::operator>=(const Vector3& right)
+		{
+			return this->Magnitude() >= right.Magnitude();
+		}
+
+		bool Vector3::operator<(const Vector3& right)
+		{
+			return this->Magnitude() < right.Magnitude();
+		}
+
+		bool Vector3::operator<=(const Vector3& right)
+		{
+			return this->Magnitude() <= right.Magnitude();
+		}
+
 		bool Vector3::operator==(const Vector3 &right)
 		{
-			return x == right.x && y == right.y && z == right.z ? true : false;
+			return x == right.x && y == right.y && z == right.z;
 		}
 
 		bool Vector3::operator!=(const Vector3 &right)
 		{
-			return x != right.x || y != right.y || z != right.z ? true : false;
+			return !(*this == right);
 		}
 
 		std::ostream& operator<<(std::ostream& os, const Vector3& vector)

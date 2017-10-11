@@ -392,6 +392,52 @@ void InputTests::Update()
 
 	//---------------------------------------------------------
 
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Up))
+		BF_LOG_INFO("Up Pressed !");
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Down))
+		BF_LOG_INFO("Down Pressed !");
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Left))
+		BF_LOG_INFO("Left Pressed !");
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Right))
+		BF_LOG_INFO("Right Pressed !");
+
+	//---------------------------------------------------------
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::LeftShoulder))
+		BF_LOG_INFO("LeftShoulder Pressed !");
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::RightShoulder))
+		BF_LOG_INFO("RightShoulder Pressed !");
+
+	BF_LOG_INFO("leftBumperX %f, leftBumperY %f RightBumperX %f, RightBumperY %f ", BF::Input::Controllers::Primary().GetLeftStike().x, BF::Input::Controllers::Primary().GetLeftStike().y,
+																					BF::Input::Controllers::Primary().GetRightStike().x, BF::Input::Controllers::Primary().GetRightStike().y);
+	//---------------------------------------------------------
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Start))
+		BF_LOG_INFO("Start Pressed !");
+
+	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Back))
+		BF_LOG_INFO("Back Pressed !");
+
+	//---------------------------------------------------------
+
+	if (BF::Input::Controllers::Secondary().IsButtonPressed(BF::Input::Controller::Button::A))
+		BF_LOG_INFO("A Pressed !");
+
+	if (BF::Input::Controllers::Secondary().IsButtonPressed(BF::Input::Controller::Button::B))
+		BF_LOG_INFO("B Pressed !");
+
+	if (BF::Input::Controllers::Secondary().IsButtonPressed(BF::Input::Controller::Button::X))
+		BF_LOG_INFO("X Pressed !");
+
+	if (BF::Input::Controllers::Secondary().IsButtonPressed(BF::Input::Controller::Button::Y))
+		BF_LOG_INFO("Y Pressed !");
+
+	//---------------------------------------------------------
+
 	if (BF::Input::Controllers::Secondary().IsButtonPressed(BF::Input::Controller::Button::Up))
 		BF_LOG_INFO("Up Pressed !");
 

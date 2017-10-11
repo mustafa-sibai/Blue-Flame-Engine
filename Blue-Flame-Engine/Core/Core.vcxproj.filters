@@ -171,25 +171,7 @@
     <ClCompile Include="BF\Graphics\TileMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Fonts\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\API\RenderTarget.cpp">
@@ -247,6 +229,48 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\API\OpenGL\GLConstantBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Fonts\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\GUI\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\PhysicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\Rigidbody2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\IO\Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\IO\ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -431,21 +455,6 @@
     <ClInclude Include="BF\Graphics\TileData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\LineShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -453,9 +462,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Fonts\Character.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Fonts\Font.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\API\RenderTarget.h">
@@ -521,6 +527,51 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Fonts\Font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\GUI\Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\PhysicsEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\Rigidbody2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\IO\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\IO\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\VertexData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -537,6 +588,12 @@
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
-    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\OldShader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\SingleLight3DShader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVNTB.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\P.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PN.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUV.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVN.vpshader" />
   </ItemGroup>
 </Project>

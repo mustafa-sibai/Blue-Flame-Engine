@@ -1,5 +1,6 @@
 #include "WidgetManager.h"
 #include "BF/Engine.h"
+#include "BF/System/Log.h"
 
 namespace BF
 {
@@ -10,7 +11,7 @@ namespace BF
 			using namespace BF::Graphics::Renderers;
 
 			WidgetManager::WidgetManager() :
-				styleSheet(spriteRenderer.GetShader())
+				styleSheet(spriteRenderer.GetShader()), currentWidget(nullptr), previousWidget(nullptr)
 			{
 			}
 
@@ -28,7 +29,7 @@ namespace BF
 				spriteRenderer.Initialize();
 
 				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Initialize(spriteRenderer);
+					widgets[i]->Initialize(spriteRenderer, (int)i);
 			}
 
 			void WidgetManager::Load()
@@ -42,12 +43,32 @@ namespace BF
 			void WidgetManager::Update()
 			{
 				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Update();
+				{
+					if (widgets[i]->IsMouseOnWidget())
+					{
+						if (currentWidget == nullptr || currentWidget->GetZLayer() < widgets[i]->GetZLayer())
+							currentWidget = widgets[i];
+					}
+				}
+
+				if (previousWidget != nullptr)
+					if (currentWidget != previousWidget || previousWidget->IsMouseOnWidget())
+						previousWidget->SetCurrentSpriteToNormal();
+
+				if (currentWidget != nullptr)
+				{
+					currentWidget->Update();
+					previousWidget = currentWidget;
+					currentWidget = nullptr;
+				}
 			}
+
+			Widget* currentWidget;
+			Widget* previousWidget;
 
 			void WidgetManager::Render()
 			{
-				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::Null);
+				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 				for (size_t i = 0; i < widgets.size(); i++)
 					widgets[i]->Render();
 				spriteRenderer.SetScissor(Math::Rectangle(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));

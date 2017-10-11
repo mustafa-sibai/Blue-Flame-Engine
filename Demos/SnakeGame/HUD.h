@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/BlueFlame.h"
+#include "BF/Graphics/Renderers/SpriteRenderer/Text.h"
 #include "Snake.h"
 
 class HUD
@@ -7,7 +8,7 @@ class HUD
 private:
 	BF::Graphics::Renderers::SpriteRenderer& spriteRenderer;
 	BF::Graphics::Fonts::Font font;
-	BF::Graphics::Fonts::FontAtlas* fontAtlas;
+	BF::Graphics::Renderers::Text text;
 
 	const Snake& snake;
 	std::string scoreText;

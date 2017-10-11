@@ -17,10 +17,10 @@ namespace BF
 			{
 			}
 
-			void Scrollbar::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void Scrollbar::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
-				Widget::Initialize(spriteRenderer);
-				slider.Initialize(spriteRenderer);
+				Widget::Initialize(spriteRenderer, zLayer);
+				slider.Initialize(spriteRenderer, zLayer);
 			}
 
 			void Scrollbar::Load(const StyleSheet& StyleSheet, const std::string& widgetName)

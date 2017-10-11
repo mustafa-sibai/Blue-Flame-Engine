@@ -16,26 +16,22 @@ namespace BF
 		{
 			class BF_API ANDEngineEntryPoint
 			{
-			private:
-				ANDWindow andWindow;
-				Graphics::API::Context context;
+				private:
+					ANDWindow andWindow;
+					Graphics::API::Context context;
 
-				double totalTime, extra;
-				int FPS, FUPS, timesToRunFixedUpdate;
-				double elapsedFrameTime;
+					double totalTime, extra;
+					int FPS, FUPS, timesToRunFixedUpdate;
+					double elapsedFrameTime;
 
-			public:
-				enum class State { None, Initialize, Render, Exit };
-				State state;
+				public:
+					ANDEngineEntryPoint(const ANDWindow& andWindow, Graphics::API::RenderAPI renderAPI);
+					~ANDEngineEntryPoint();
 
-			public:
-				ANDEngineEntryPoint(const ANDWindow& andWindow, Graphics::API::RenderAPI renderAPI);
-				~ANDEngineEntryPoint();
+					void Run(Application::Scene& mainScene);
 
-				void Run(Application::Scene& mainScene);
-
-				inline ANDWindow& GetWindow() { return andWindow; }
-				inline Graphics::API::Context& GetContext() { return context; }
+					inline ANDWindow& GetWindow() { return andWindow; }
+					inline Graphics::API::Context& GetContext() { return context; }
 			};
 		}
 	}

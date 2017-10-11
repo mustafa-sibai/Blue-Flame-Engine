@@ -41,7 +41,7 @@ namespace BF
 				void GLFramebuffer::Bind() const
 				{
 					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, buffer));
-					glViewport(0, 0, texture2D->textureData.width, texture2D->textureData.height);
+					glViewport(0, 0, texture2D->textureData->width, texture2D->textureData->height);
 				}
 
 				void GLFramebuffer::Unbind() const

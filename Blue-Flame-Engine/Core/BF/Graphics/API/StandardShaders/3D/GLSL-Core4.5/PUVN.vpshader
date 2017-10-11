@@ -1,9 +1,8 @@
 vertexShader = R"(
 #version 450 core
 layout(location = 0) in vec3 inPosition;
-//layout(location = 1) in vec4 inColor;
 layout(location = 1) in vec2 inUV;
-layout(location = 2) in vec3 inNormals;
+layout(location = 2) in vec3 inNormal;
 
 layout (std140, binding = 0) uniform camera_data
 {
@@ -15,7 +14,6 @@ layout (std140, binding = 0) uniform camera_data
 
 out struct data
 {
-	vec4 fragmentColor;
 	vec2 UV;
 	vec3 normals;
 	vec3 pixelPosition;
@@ -32,7 +30,7 @@ void main()
 	shared_data.UV = inUV;
 
 	//Should be done on the CPU side. But it's fine for now.
-	shared_data.normals = mat3(transpose(inverse(buffer_modelMatrix))) * inNormals;
+	shared_data.normals = mat3(transpose(inverse(buffer_modelMatrix))) * inNormal;
 	shared_data.pixelPosition = worldSpace.xyz;
 	shared_data.cameraPos = cameraPos.xyz;
 
@@ -54,15 +52,15 @@ struct Light
 
 struct PointLight
 {
-	vec4 position;
-
+	vec4 posDir;
+	
 	vec4 ambientColor;
 	vec4 diffuseColor;
 	vec4 specularColor;
 
 	float constant;
-    float linear;
-    float quadratic;
+	float linear;
+	float quadratic;
 };
 
 struct Material
@@ -75,7 +73,7 @@ struct Material
 
 layout (std140, binding = 1) uniform LightUniform
 {
-	Light light;
+	PointLight light;
 };
 
 layout (std140, binding = 2) uniform MaterialUniform
@@ -85,7 +83,6 @@ layout (std140, binding = 2) uniform MaterialUniform
 
 in struct data
 {
-	vec4 fragmentColor;
 	vec2 UV;
 	vec3 normals;
 	vec3 pixelPosition;
@@ -100,6 +97,8 @@ uniform sampler2D specularMap;
 uniform sampler2D normalMap;
 
 uniform samplerCube skybox;
+
+vec3 finalColor;
 
 vec3 CalculateDirectionalLight(Light light, vec3 normal, vec3 viewDir)
 {
@@ -120,42 +119,47 @@ vec3 CalculateDirectionalLight(Light light, vec3 normal, vec3 viewDir)
     return (ambient + diffuse + specular).rgb;
 }  
 
-vec3 CalculateInfiniteLight(Light light, vec3 normal, vec3 viewDir)
+vec3 CalculateInfiniteLight(PointLight light, vec3 normal, vec3 viewDir)
 {
 	vec3 lightDirection = normalize(light.posDir.xyz - shared_data.pixelPosition);
-	
-	//vec3 norm = normalize(shared_data.normals);
-	
+
 	// Diffuse shading
-	float diff = max(0.0f, dot(lightDirection, normal) * 0.91f);
+	float diff = max(0.0f, dot(lightDirection, normal));
 
 	// Specular shading
 	vec3 reflectDir = reflect(-lightDirection, normal);  
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
 	
+	// Attenuation
+    float distance    = length(light.posDir.xyz - shared_data.pixelPosition);
+    float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
+
 	// Combine results
-	vec4 ambient 		= light.ambientColor 		 * material.ambientColor  * texture(diffuseMap, shared_data.UV);
-	vec4 diffuse 		= light.diffuseColor  * diff * material.diffuseColor  * texture(diffuseMap, shared_data.UV);
-	vec4 specular 		= light.specularColor * spec * material.specularColor * texture(specularMap, shared_data.UV);
+	vec4 ambient  = light.ambientColor 		   * material.ambientColor  * texture(diffuseMap, shared_data.UV) * attenuation;
+	vec4 diffuse  = light.diffuseColor  * diff * material.diffuseColor  * texture(diffuseMap, shared_data.UV) * attenuation;
+	vec4 specular = light.specularColor * spec * material.specularColor * texture(specularMap, shared_data.UV) * attenuation;
 
 	return (ambient + diffuse + specular).rgb;
 }  
 
+//On nvidia 1050ti, the model that has no normal mapping data appears black and lighting calculation does not work. if it is switched to vertex normals it works again.
 void main() 
 {
-    vec3 normal = texture(normalMap, shared_data.UV).rgb;
-	vec3 norm = normalize(normal * 2.0 - 1.0);
+	//Vertex Normals
+	vec3 normal = normalize(shared_data.normals);
+	vec3 viewDir  = normalize(shared_data.cameraPos - shared_data.pixelPosition);  
 
-	//vec3 finalColor = CalculateDirectionalLight(light, normalize(shared_data.normals), normalize(shared_data.cameraPos - shared_data.pixelPosition));
-	vec3 finalColor = CalculateInfiniteLight(light, normalize(shared_data.normals), normalize(shared_data.cameraPos - shared_data.pixelPosition));
-	
+	//vec3 finalColor = CalculateDirectionalLight(light, normal, viewDir);
+
+	finalColor = CalculateInfiniteLight(light, normal, viewDir); 
+
 	color = vec4(finalColor, 1.0f);
 
 	//vec3 I = normalize(shared_data.pixelPosition - shared_data.cameraPos);
     //vec3 R = reflect(I, normalize(shared_data.normals));
     //color = texture(skybox, R);
 
-	//color = vec4(norm, 1.0f);
+	//color = vec4(normal, 1.0f);
 	//color = vec4(texture(skybox, shared_data.cubeMapTexCoords));
 }
 )";

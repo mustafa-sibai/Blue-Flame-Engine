@@ -14,18 +14,19 @@ namespace BF
 			TextureCube::TextureCube(const Shader& shader) :
 				shader(shader)
 			{
+				textureCubes.reserve(6);
 			}
 
 			TextureCube::~TextureCube()
 			{
 			}
 
-			void TextureCube::Load(const vector<string>& fileNames)
+			void TextureCube::Load(const vector<string>& filenames)
 			{
-				for (size_t i = 0; i < fileNames.size(); i++)
+				for (size_t i = 0; i < filenames.size(); i++)
 				{
-					textureData.buffer = ImageLoader::Load(fileNames[i], &textureData.width, &textureData.height);
-					textureCubes.push_back(textureData);
+					Texture::Load(filenames[i]);
+					textureCubes.emplace_back(textureData);
 				}
 
 #ifdef BF_PLATFORM_WINDOWS
@@ -38,12 +39,12 @@ namespace BF
 #endif
 			}
 
-			void TextureCube::Load(const vector<string>& fileNames, Wrap textureWrap, Filter textureFilter)
+			void TextureCube::Load(const vector<string>& filenames, Wrap textureWrap, Filter textureFilter)
 			{
-				for (size_t i = 0; i < fileNames.size(); i++)
+				for (size_t i = 0; i < filenames.size(); i++)
 				{
-					textureData.buffer = ImageLoader::Load(fileNames[i], &textureData.width, &textureData.height);
-					textureCubes.push_back(textureData);
+					Texture::Load(filenames[i]);
+					textureCubes.emplace_back(textureData);
 				}
 
 #ifdef BF_PLATFORM_WINDOWS

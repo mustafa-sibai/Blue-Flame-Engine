@@ -39,7 +39,7 @@
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
     <ClCompile Include="BF\Graphics\Color.cpp" />
-    <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
@@ -53,11 +53,11 @@
     <ClCompile Include="BF\Graphics\Material.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\LineShape.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\RegularPolygon.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\Renderable.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\Sprite.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Skybox.cpp" />
     <ClCompile Include="BF\Graphics\Terrain.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
@@ -97,6 +97,14 @@
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Label.cpp" />
+    <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Text.cpp" />
+    <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
+    <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
+    <ClCompile Include="BF\IO\Resource.cpp" />
+    <ClCompile Include="BF\IO\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -123,7 +131,7 @@
     <ClInclude Include="BF\Graphics\Camera.h" />
     <ClInclude Include="BF\Graphics\Color.h" />
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
-    <ClInclude Include="BF\Graphics\Fonts\Font.h" />
+    <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
     <ClInclude Include="BF\Graphics\GUI\Button.h" />
@@ -138,17 +146,18 @@
     <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
-    <ClInclude Include="BF\Graphics\Renderers\LineShape.h" />
-    <ClInclude Include="BF\Graphics\Renderers\RegularPolygon.h" />
-    <ClInclude Include="BF\Graphics\Renderers\Renderable.h" />
-    <ClInclude Include="BF\Graphics\Renderers\Sprite.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.h" />
     <ClInclude Include="BF\Graphics\Skybox.h" />
     <ClInclude Include="BF\Graphics\Terrain.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
+    <ClInclude Include="BF\Graphics\VertexData.h" />
     <ClInclude Include="BF\Input\Controller.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
@@ -189,12 +198,26 @@
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\System\Timer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
+    <ClInclude Include="BF\Graphics\GUI\Label.h" />
+    <ClInclude Include="BF\Graphics\Fonts\Font.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Text.h" />
+    <ClInclude Include="BF\Physics\PhysicsEngine.h" />
+    <ClInclude Include="BF\Physics\Rigidbody2D.h" />
+    <ClInclude Include="BF\IO\Resource.h" />
+    <ClInclude Include="BF\IO\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\HLSL5.0\Shader.vpshader" />
-    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\OldShader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\P.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PN.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUV.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVN.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVNTB.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\SingleLight3DShader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\HLSL5.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\Light\GLSL-Core4.5\Shader.vpshader" />
@@ -210,7 +233,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>
     <RootNamespace>Core</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -322,7 +345,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
@@ -371,6 +394,9 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>LIBCMTD</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMTD %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
@@ -388,7 +414,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>

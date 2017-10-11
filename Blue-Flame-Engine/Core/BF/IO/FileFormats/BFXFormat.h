@@ -15,8 +15,11 @@ namespace BF
 
 				unsigned int meshCount;
 
+				int meshType;
+
 				unsigned int vertexBufferSize;
 				uint8_t* vertexBuffer;
+
 				unsigned int indexBufferSize;
 				uint8_t* indexBuffer;
 			};

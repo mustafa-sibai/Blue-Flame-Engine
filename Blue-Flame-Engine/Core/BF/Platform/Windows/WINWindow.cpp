@@ -169,6 +169,7 @@ namespace BF
 				{
 					case WM_DESTROY:
 					{
+						Engine::state = Engine::State::Exit;
 						PostQuitMessage(0);
 						break;
 					}

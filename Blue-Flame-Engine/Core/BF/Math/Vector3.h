@@ -17,9 +17,12 @@ namespace BF
 			~Vector3();
 
 			float Dot(const Vector3& vector) const;
-			Vector3 Cross(const Vector3& vector) const;
+			float Distance(const Vector3& vector) const;
 			float Magnitude() const;
+			Vector3 Cross(const Vector3& vector) const;
+			Vector3 Direction(const Vector3& vector) const;
 			Vector3 Normalize() const;
+
 
 			friend BF_API Vector3 operator+(const Vector3& left, const Vector3& right);
 			friend BF_API Vector3 operator-(const Vector3& left, const Vector3& right);
@@ -30,6 +33,11 @@ namespace BF
 			Vector3& operator-=(const Vector3& right);
 			Vector3& operator*=(const Vector3& right);
 			Vector3& operator/=(const Vector3& right);
+
+			bool operator>(const Vector3& right);
+			bool operator>=(const Vector3& right);
+			bool operator<(const Vector3& right);
+			bool operator<=(const Vector3& right);
 
 			bool operator==(const Vector3& right);
 			bool operator!=(const Vector3& right);

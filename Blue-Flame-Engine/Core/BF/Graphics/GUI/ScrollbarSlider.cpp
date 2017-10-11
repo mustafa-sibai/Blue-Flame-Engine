@@ -25,9 +25,9 @@ namespace BF
 			{
 			}
 
-			void ScrollbarSlider::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void ScrollbarSlider::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
-				Widget::Initialize(spriteRenderer);
+				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
 			void ScrollbarSlider::Load(const StyleSheet& StyleSheet, const std::string& widgetName)

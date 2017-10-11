@@ -1,49 +1,36 @@
 #pragma once
-#include <iostream>
-#include "DependencyHeaders/FreeType/ft2build.h"
-#include "BF/Graphics/API/Texture2D.h"
-#include "BF/Graphics/TextureAtlas.h"
-#include "BF/Graphics/Fonts/FontAtlas.h"
-#include "BF/Graphics/Fonts/Character.h"
-#include "BF/Math/Math.h"
+#include "BF/Graphics/Fonts/FontAtlasFactory.h"
 #include "BF/Common.h"
-
-#include FT_FREETYPE_H
 
 namespace BF
 {
 	namespace Graphics
 	{
+		namespace Renderers
+		{
+			class Text;
+			class SpriteRenderer;
+		}
+
 		namespace Fonts
 		{
 			class BF_API Font
 			{
+				friend class BF::Graphics::Renderers::Text;
+				friend class BF::Graphics::Renderers::SpriteRenderer;
+
 				private:
-					FT_Library library;
-					FT_Error error;
-					FT_Face face;
-
-					TextureAtlas textureAtlas;
-					API::Texture2D* texture;
-
-					unsigned int startUnicode, endUnicode;
-
-				public:
-					enum class Language
-					{
-						Null, English
-					};
+					const API::Shader& shader;
+					FontAtlas* fontAtlas;
 
 				public:
 					Font(const API::Shader& shader);
 					~Font();
 
-					FontAtlas* Load(const std::string& filename, unsigned int charPixelSize, Language language);
+					void Load(const std::string& filename, unsigned int charPixelSize, FontAtlasFactory::Language language);
 
-				private:
-					void CreateTextureAtlas(int startUnicode, int endUnicode);
-					void PrepareGlyph(unsigned int unicode);
-					void CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int glyphWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height);
+					inline const std::string& GetName() const { return fontAtlas->fontName; }
+					inline unsigned int GetPixelSize() const { return fontAtlas->fontPixelSize; }
 			};
 		}
 	}

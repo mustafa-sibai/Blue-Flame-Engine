@@ -13,7 +13,7 @@ namespace BF
 			}
 
 			RegularPolygon::RegularPolygon(const Rectangle& rectangle, unsigned int zLayer, const Color& color) :
-				Renderable(Vector2(rectangle.x, rectangle.y), rectangle, zLayer, color, Type::RegularPolygon)
+				Renderable(Vector2((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, Type::RegularPolygon)
 			{
 			}
 

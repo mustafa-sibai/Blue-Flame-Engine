@@ -21,9 +21,9 @@ namespace Editor
 	{
 	}
 
-	void TileSheetPanel::Initialize(SpriteRenderer& spriteRenderer)
+	void TileSheetPanel::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 	{
-		Panel::Initialize(spriteRenderer);
+		Panel::Initialize(spriteRenderer, zLayer);
 		grid.Initialize(spriteRenderer);
 	}
 
@@ -35,7 +35,7 @@ namespace Editor
 		texture.Load("../Sandbox/Assets/Textures/tilea5.png");
 		tilesheet = Sprite(&texture, Math::Vector2((float)rectangle.x, (float)rectangle.y), 0, Color(1.0f));
 
-		SetContentRectangle(Math::Rectangle(rectangle.x, rectangle.y, texture.GetTextureData().width, texture.GetTextureData().height));
+		SetContentRectangle(Math::Rectangle(rectangle.x, rectangle.y, texture.GetTextureData()->width, texture.GetTextureData()->height));
 	}
 
 	void TileSheetPanel::Update()

@@ -12,46 +12,42 @@ namespace BF
 {
 	namespace Graphics
 	{
-		struct BF_API MeshVertexData
-		{
-			Math::Vector3 position;
-			//Color color;
-			Math::Vector2 texcoord;
-			Math::Vector3 normal;
-
-			MeshVertexData() :
-				position(0), texcoord(0), normal(0) { }
-
-			MeshVertexData(Math::Vector3 position, /*Color color,*/ Math::Vector2 texcoord, Math::Vector3 normal) :
-				position(position), /*color(color), */texcoord(texcoord), normal(normal)
-			{
-			}
-		};
-
 		class BF_API Mesh
 		{
+			public:
+				#include "VertexData.h"
+
+				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
+				VertexStructVersion vertexStructVersion;
+
 			private:
 				API::VertexBuffer* vertexBuffer;
 				API::IndexBuffer* indexBuffer;
 				//std::vector<API::Texture2D*>* textures;
-				std::vector<MeshVertexData>* vertices;
+				void* vertices;
 				//std::vector<Material>* materials;
-				std::vector<unsigned int>* indices;
-				std::string textureFileName;
+				std::vector<unsigned int>& indices;
+				std::string textureFilename;
 
 			public:
-				Mesh(std::vector<MeshVertexData>* vertices, std::vector<unsigned int>* indices/*, std::vector<Material>* materials*/);
+				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, std::vector<Material>* materials*/);
 				~Mesh();
 
-				void SetBuffers(const API::Shader& shader);
-				void SetTextureFileName(std::string textureFileName);
+				void SetBuffers(const API::Shader& shader, unsigned int bufferSize);
+				void SetTexturefilename(std::string textureFilename);
 
 				void Bind() const;
 				void Unbind() const;
 
+			private:
+				unsigned int getVerticesCount() const;
+
+			public:
 				inline API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
-				inline std::vector<MeshVertexData>* GetVertices() const { return vertices; }
-				inline std::vector<unsigned int>* GetIndices() const { return indices; }
+				inline void* GetVertices() const { return vertices; }
+				inline unsigned int GetVerticesCount() const { return getVerticesCount(); }
+				inline std::vector<unsigned int>& GetIndices() const { return indices; }
+
 		};
 	}
 }

@@ -18,7 +18,7 @@ namespace Editor
 
 		void Initialize() override;
 		void Load() override;
-		void FixedUpdate() override;
+		//void FixedUpdate() override;
 		void Update() override;
 		void Render() override;
 	};

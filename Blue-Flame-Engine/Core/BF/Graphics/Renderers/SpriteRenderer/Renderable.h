@@ -33,25 +33,44 @@ namespace BF
 					{
 						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
 						{
+							if (renderableA->rectangle.y <= renderableB->rectangle.y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
 							if (renderableA->rectangle.y < renderableB->rectangle.y)
-								return true;
-							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
-								return true;
-							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
-								return false;
-							else
-								return false;
+							{
+								if (renderableA->zLayer == renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							if (renderableA->rectangle.y >= renderableB->rectangle.y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							return false;
 						}
 					};
 
 				protected:
 					Math::Vector2 position;
 					Math::Rectangle rectangle;
+
+				public:
 					Color color;
 					unsigned int zLayer;
 
 				public:
-					enum class Type { Null, Line, RegularPolygon, Sprite };
+					enum class Type { Null, Line, RegularPolygon, Sprite, Text };
 					Type type;
 
 					Renderable();
@@ -59,14 +78,10 @@ namespace BF
 					~Renderable();
 
 					void SetPosition(const Math::Vector2& position);
-					void SetColor(const Color& color);
 					void SetRectangle(const Math::Rectangle& rectangle);
-					void SetZLayer(unsigned int zLayer);
 
 					inline const Math::Vector2& GetPosition() const { return position; }
-					inline const Color& GetColor() const { return color; }
 					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
-					inline unsigned int GetZLayer() const { return zLayer; }
 			};
 		}
 	}

@@ -7,6 +7,8 @@ namespace BF
 {
 	namespace Input
 	{
+		using namespace BF::Math;
+
 		Controller Controllers::controller[XUSER_MAX_COUNT];
 		System::Timer Controllers::timer;
 
@@ -43,8 +45,17 @@ namespace BF
 				buttons[(unsigned char)Button::Up] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) != 0);
 				buttons[(unsigned char)Button::Down] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) != 0);
 
+				buttons[(unsigned char)Button::LeftShoulder] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) != 0);
+				buttons[(unsigned char)Button::RightShoulder] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) != 0);
+
 				buttons[(unsigned char)Button::Start] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_START) != 0);
 				buttons[(unsigned char)Button::Back] = ((state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) != 0);
+
+				leftTrigger = (float)state.Gamepad.bLeftTrigger / 255;
+				rightTrigger = (float)state.Gamepad.bRightTrigger / 255;
+
+				leftStick = CalculateStickPosition(Vector2(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY), Vector2(0.05f));
+				rightStick = CalculateStickPosition(Vector2(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY), Vector2(0.05f));
 			}
 			else if (ID != -1)
 				ID = -1;
@@ -53,6 +64,19 @@ namespace BF
 		bool Controller::IsButtonPressed(Button button) const
 		{
 			return buttons[(unsigned char)button];
+		}
+
+		Vector2 Controller::CalculateStickPosition(Vector2 stickPosition, Vector2 stickDeadZone)
+		{
+			Vector2 normalizedPosition = Vector2(Max(-1.0f, stickPosition.x / 32767.0f), Max(-1.0f, stickPosition.y / 32767.0f));
+
+			Vector2 stick((abs(normalizedPosition.x) < stickDeadZone.x ? 0 : (abs(normalizedPosition.x) - stickDeadZone.x) * (normalizedPosition.x / abs(normalizedPosition.x))),
+						(abs(normalizedPosition.y) < stickDeadZone.y ? 0 : (abs(normalizedPosition.y) - stickDeadZone.y) * (normalizedPosition.y / abs(normalizedPosition.y))));
+
+			if (stickDeadZone.x > 0) stick.x /= 1 - stickDeadZone.x;
+			if (stickDeadZone.y > 0) stick.y /= 1 - stickDeadZone.y;
+
+			return stick;
 		}
 
 		bool Controller::IsDeviceConnected(int portNumber)

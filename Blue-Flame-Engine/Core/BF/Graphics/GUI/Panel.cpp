@@ -17,11 +17,11 @@ namespace BF
 			{
 			}
 
-			void Panel::Initialize(Renderers::SpriteRenderer& spriteRenderer)
+			void Panel::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
 			{
-				Widget::Initialize(spriteRenderer);
-				horizontalScrollbar.Initialize(spriteRenderer);
-				verticalScrollbar.Initialize(spriteRenderer);
+				Widget::Initialize(spriteRenderer, zLayer);
+				horizontalScrollbar.Initialize(spriteRenderer, zLayer);
+				verticalScrollbar.Initialize(spriteRenderer, zLayer);
 			}
 
 			void Panel::Load(const StyleSheet& StyleSheet, const std::string& widgetName)

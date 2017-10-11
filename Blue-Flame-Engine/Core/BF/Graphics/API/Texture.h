@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include "BF/IO/Resource.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -11,15 +12,20 @@ namespace BF
 			class BF_API Texture
 			{
 				public:
-					struct TextureData
+					struct TextureData : public BF::IO::Resource
 					{
 						unsigned int width;
 						unsigned int height;
 						uint8_t* buffer;
+						void* freeImage_bitmap;
 
-						TextureData() : width(0), height(0), buffer(nullptr) {};
+						TextureData() :
+							width(0), height(0), buffer(nullptr), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
+						{
+						}
+
 						TextureData(unsigned int width, unsigned int height, uint8_t* buffer) :
-							width(width), height(height), buffer(buffer)
+							width(width), height(height), buffer(buffer), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
 						{
 						}
 					};
@@ -76,7 +82,7 @@ namespace BF
 					*/
 
 				protected:
-					TextureData textureData;
+					TextureData* textureData;
 					Format format;
 					Wrap wrap;
 					Filter filter;
@@ -84,8 +90,10 @@ namespace BF
 					Texture();
 					~Texture();
 
+					void Load(const std::string& filename);
+
 				public:
-					inline const TextureData& GetTextureData() const { return textureData; }
+					inline TextureData* GetTextureData() const { return textureData; }
 			};
 		}
 	}

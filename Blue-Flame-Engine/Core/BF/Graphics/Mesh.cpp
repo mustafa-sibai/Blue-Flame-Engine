@@ -8,8 +8,8 @@ namespace BF
 		using namespace BF::Graphics::API;
 		using namespace BF::Math;
 
-		Mesh::Mesh(vector<MeshVertexData>* vertices, vector<unsigned int>* indices/*, vector<Material>* materials*/) :
-			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices)/*, materials(materials), textureFileName("")*/
+		Mesh::Mesh(void* vertices, vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, vector<Material>* materials*/) :
+			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)/*, materials(materials), texturefilename("")*/
 		{
 		}
 
@@ -17,14 +17,16 @@ namespace BF
 		{
 		}
 
-		void Mesh::SetBuffers(const Shader& shader)
+		void Mesh::SetBuffers(const Shader& shader, unsigned int bufferSize)
 		{
 			vertexBuffer = new VertexBuffer(shader);
 			indexBuffer = new IndexBuffer();
 			//textures = new std::vector<Texture2D*>();
 
-			vertexBuffer->Create(&vertices[0][0], (unsigned int)vertices->size() * sizeof(MeshVertexData));
-			indexBuffer->Create(&indices[0][0], (unsigned int)indices->size());
+			vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * bufferSize);
+			indexBuffer->Create(&indices[0], (unsigned int)indices.size());
+
+
 
 			/*for (size_t i = 0; i < materials->size(); i++)
 			{
@@ -36,9 +38,9 @@ namespace BF
 			}*/
 		}
 
-		void Mesh::SetTextureFileName(string textureFileName)
+		void Mesh::SetTexturefilename(string textureFilename)
 		{
-			this->textureFileName = textureFileName;
+			this->textureFilename = textureFilename;
 		}
 
 		void Mesh::Bind() const
@@ -53,6 +55,43 @@ namespace BF
 			vertexBuffer->Unbind();
 			//for (size_t i = 0; i < textures->size(); i++)
 				//textures[0][i]->Unbind();
+		}
+
+		unsigned int Mesh::getVerticesCount() const
+		{
+			switch (vertexStructVersion)
+			{
+				case Mesh::VertexStructVersion::P:
+				{
+					return (unsigned int)((vector<Mesh::PVertexData*>*)vertices)->size();
+					break;
+				}
+				case Mesh::VertexStructVersion::PUV:
+				{
+					return (unsigned int)((vector<Mesh::PUVVertexData*>*)vertices)->size();
+					break;
+				}
+				case Mesh::VertexStructVersion::PN:
+				{
+					return (unsigned int)((vector<Mesh::PNVertexData*>*)vertices)->size();
+					break;
+				}
+				case Mesh::VertexStructVersion::PUVN:
+				{
+					return (unsigned int)((vector<Mesh::PUVNVertexData*>*)vertices)->size();
+					break;
+				}
+				case Mesh::VertexStructVersion::PUVNTB:
+				{
+					return (unsigned int)((vector<Mesh::PUVNTBVertexData*>*)vertices)->size();
+					break;
+				}
+				default:
+				{
+					return 0;
+					break;
+				}
+			}
 		}
 	}
 }

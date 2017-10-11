@@ -34,6 +34,8 @@ namespace BF
 					void Unmap() const;
 					void Bind() const;
 					void Unbind() const;
+
+					VertexBuffer& operator=(const VertexBuffer& vertexBuffer);
 			};
 		}
 	}

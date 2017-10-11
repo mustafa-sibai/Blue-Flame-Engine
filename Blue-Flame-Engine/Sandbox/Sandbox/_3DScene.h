@@ -12,19 +12,20 @@ namespace _3DScene
 			BF::Graphics::API::Shader shader, lightShader;
 			BF::Graphics::API::ConstantBuffer constantBuffer;
 			BF::Graphics::API::ConstantBuffer materialConstantBuffer;
-			BF::Graphics::Model lightModel;
+			BF::Graphics::Model lightModel[4];
 			BF::Graphics::Model cubeModel;
+			BF::Graphics::Model crateModel;
 			BF::Graphics::Model planeModel;
-			BF::Graphics::Model wallModel;
 			BF::Graphics::FPSCamera fpsCamera;
 			//BF::Graphics::Terrain terrain;
 
 			bool directionalLight;
 			float lightAngle;
+			int lightIndex = 0;
 
-			BF::Graphics::LightBuffer light;
+			BF::Graphics::Lights lights;
 			BF::Graphics::Material floorMaterial;
-			BF::Graphics::Material wallMaterial;
+			BF::Graphics::Material crateMaterial;
 
 			BF::Graphics::Skybox skybox;
 			float angle = 0;

@@ -1,5 +1,5 @@
 #pragma once
-#include <BF/Graphics/Renderers/SpriteRenderer.h>
+#include <BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h>
 
 namespace Editor
 {

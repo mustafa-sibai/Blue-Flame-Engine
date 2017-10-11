@@ -43,7 +43,18 @@ namespace BF
 				position -= cameraUp.Cross(cameraFront).Normalize() * movmentSpeed;
 
 			if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Escape))
-				lockMouseToCenter = lockMouseToCenter == false ? true : false;
+			{
+				if (!lockMouseToCenter)
+				{
+					lockMouseToCenter = true;
+					BF::Input::Mouse::ShowMouseCursor(false);
+				}
+				else if(lockMouseToCenter)
+				{
+					lockMouseToCenter = false;
+					BF::Input::Mouse::ShowMouseCursor(true);
+				}
+			}
 
 			if (lockMouseToCenter)
 			{
