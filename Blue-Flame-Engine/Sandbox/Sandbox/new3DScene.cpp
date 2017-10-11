@@ -11,9 +11,9 @@ namespace new3DScene
 	using namespace BF::Input;
 
 	new3DScene::new3DScene() :
-		cubeModel(shader), crateModel(shader), planeModel(shader),
+		/*cubeModel(shader),*/ crateModel(PUVNTB)/*, planeModel(PUVN)*/,
 		/*lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },*/
-		floorMaterial(shader), crateMaterial(shader), directionalLight(false)
+		/*floorMaterial(PUVN),*/ crateMaterial(PUVNTB), directionalLight(false)
 	{
 	}
 
@@ -23,6 +23,8 @@ namespace new3DScene
 
 	void new3DScene::Initialize()
 	{
+		BF::Input::Mouse::ShowMouseCursor(true);
+
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		//BF::Engine::GetContext().EnableVsync(true);
 		BF::Engine::LimitFrameRate(60.0f);
@@ -32,7 +34,7 @@ namespace new3DScene
 		skybox.Initialize();
 
 		constantBuffer.Create(sizeof(LightBuffer), 1);
-		materialConstantBuffer.Create(sizeof(floorMaterial.colorBuffer), 2);
+		materialConstantBuffer.Create(sizeof(crateMaterial.colorBuffer), 2);
 
 		//terrain.Initialize();
 	}
@@ -40,7 +42,7 @@ namespace new3DScene
 	void new3DScene::Load()
 	{
 		//terrain.Load("Assets/HeightMaps/heightmap2.bmp");
-
+		/*
 #if BF_PLATFORM_WINDOWS
 		if (Context::GetRenderAPI() == RenderAPI::DirectX)
 			lightShader.LoadFromFile("Assets/Shaders/HLSL/Compiled/Light/VertexShader.cso", "Assets/Shaders/HLSL/Compiled/Light/PixelShader.cso");
@@ -54,8 +56,16 @@ namespace new3DScene
 		else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 			shader.LoadStandardShader(ShaderType::_3D);
 #endif
+		*/
 
-		shader.Bind();
+		P.LoadStandardShader(ShaderType::P);
+		PUV.LoadStandardShader(ShaderType::PUV);
+		PN.LoadStandardShader(ShaderType::PN);
+		PUVN.LoadStandardShader(ShaderType::PUVN);
+		PUVNTB.LoadStandardShader(ShaderType::PUVNTB);
+
+		//shader.Bind();
+		//PUVN.Bind();
 
 		std::vector<std::string> filenames{ "Assets/TextureCubes/LancellottiChapel/posx.jpg", "Assets/TextureCubes/LancellottiChapel/negx.jpg",
 											"Assets/TextureCubes/LancellottiChapel/posy.jpg", "Assets/TextureCubes/LancellottiChapel/negy.jpg",
@@ -63,9 +73,12 @@ namespace new3DScene
 
 		skybox.Load(filenames);
 
-		crateModel.Load("Assets/Models/Crate/Crate.bfx");
-		planeModel.Load("Assets/Models/Plane.bfx");
-		cubeModel.Load("Assets/Models/Cube.bfx");
+		//crateModel.Load("Assets/Models/Crate/Crate.bfx");
+		//crateModel.Load("Assets/Models/halfTexturedCube.bfx");
+		crateModel.Load("Assets/Models/TexturedCube/TexturedCube.bfx");
+
+		//planeModel.Load("Assets/Models/Plane.bfx");
+		//cubeModel.Load("Assets/Models/Cube.bfx");
 
 		//------------------------------------------ Light Models ----------------------------------------------
 		/*for (size_t i = 0; i < 4; i++)
@@ -77,9 +90,9 @@ namespace new3DScene
 		//------------------------------------------ Light Models ----------------------------------------------
 
 		//, Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16
-		floorMaterial.diffuseMap.Load("Assets/Textures/diffuseMap.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
+		/*floorMaterial.diffuseMap.Load("Assets/Textures/diffuseMap.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
 		floorMaterial.specularMap.Load("Assets/Textures/specularMap.png");
-		floorMaterial.normalMap.Load("Assets/Textures/normalMap.jpg");
+		floorMaterial.normalMap.Load("Assets/Textures/normalMap.jpg");*/
 
 		crateMaterial.diffuseMap.Load("Assets/Models/Crate/Crate/Crate_color.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
 		crateMaterial.normalMap.Load("Assets/Models/Crate/Crate/Crate_normal.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
@@ -143,7 +156,7 @@ namespace new3DScene
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		//skybox.Render();
+		skybox.Render();
 
 		//----------------------------------------------- Light 1 -------------------------------------------
 		//lightShader.Bind();
@@ -175,6 +188,7 @@ namespace new3DScene
 
 		//terrain.Render();
 
+		/*
 		RenderAllModels();
 
 		BF::Engine::GetContext().EnableBlending(true);
@@ -199,28 +213,32 @@ namespace new3DScene
 		RenderAllModels();
 
 		BF::Engine::GetContext().EnableDepthMask(true);
-		BF::Engine::GetContext().EnableBlending(false);
+		BF::Engine::GetContext().EnableBlending(false);*/
+		
 
 
 
 
 
-
-		/*
-		BF::Engine::GetContext().EnableBlending(true);
-		BF::Engine::GetContext().EnableDepthMask(false);
+		
+		//BF::Engine::GetContext().EnableBlending(true);
+		//BF::Engine::GetContext().EnableDepthMask(false);
 
 		lights.posDir = Vector4(2.5f, 0.0f, 0.0f, 1.0f);
-		lights.ambientColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+		lights.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		lights.diffuseColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
 		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 
+		lights.constant = 1.0f;
+		lights.linear = 0.045f;
+		lights.quadratic = 0.0075f;
+
 		constantBuffer.Update(&lights, sizeof(LightBuffer));
 
-		BF::Engine::GetContext().EnableDepthMask(true);
-		BF::Engine::GetContext().EnableBlending(false);
+		//BF::Engine::GetContext().EnableDepthMask(true);
+		//BF::Engine::GetContext().EnableBlending(false);
 
-		RenderAllModels();*/
+		RenderAllModels();
 
 
 		BF::Engine::GetContext().SwapBuffers();
@@ -228,10 +246,10 @@ namespace new3DScene
 
 	void new3DScene::RenderAllModels()
 	{
-		shader.Bind();
+		PUVNTB.Bind();
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
-		planeModel.Render();
+		//fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
+		//planeModel.Render();
 
 		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f)));
 
@@ -244,21 +262,21 @@ namespace new3DScene
 
 		crateModel.Render();
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
+		//fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
 
 		//material.colorBuffer.ambientColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
 		//material.colorBuffer.diffuseColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
 		//material.colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 
-		floorMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		/*floorMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		floorMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		floorMaterial.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		floorMaterial.colorBuffer.shininess = 128.0f;
 		materialConstantBuffer.Update(&floorMaterial, sizeof(floorMaterial.colorBuffer));
-		floorMaterial.Bind();
+		floorMaterial.Bind();*/
 
-		cubeModel.Render();
+		//cubeModel.Render();
 
-		shader.Unbind();
+		PUVNTB.Unbind();
 	}
 }

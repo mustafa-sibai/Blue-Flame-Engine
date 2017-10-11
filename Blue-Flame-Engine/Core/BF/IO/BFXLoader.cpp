@@ -1,5 +1,5 @@
 #include "BFXLoader.h"
-#include "BF/IO/FileFormats/BFXFormat.h"
+#include "BF/System/Log.h"
 
 namespace BF
 {
@@ -22,7 +22,7 @@ namespace BF
 
 			if (!file)
 			{
-				printf("Error: Could not find/open BFX filename: %s\n", filename.c_str());
+				BF_LOG_ERROR("Error: Could not find/open BFX filename: %s\n", filename.c_str());
 				fclose(file);
 				return nullptr;
 			}
@@ -31,7 +31,7 @@ namespace BF
 			fileHeader[8] = '\0';
 			if (strcmp(fileHeader, "BFX FILE") != 0)
 			{
-				printf("Error: Wrong file format: %s\n", filename.c_str());
+				BF_LOG_ERROR("Error: Wrong file format: %s\n", filename.c_str());
 				fclose(file);
 				return nullptr;
 			}
@@ -42,15 +42,52 @@ namespace BF
 
 			for (size_t i = 0; i < bfxFormat.meshCount; i++)
 			{
+				fread(&bfxFormat.meshType, sizeof(int), 1, file);
 				fread(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
-				vector<MeshVertexData>* verticess = new vector<MeshVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshVertexData));
-				fread(&verticess[0][0], bfxFormat.vertexBufferSize, 1, file);
+
+				void* vertices = nullptr;
+
+				switch ((Mesh::VertexStructVersion)bfxFormat.meshType)
+				{
+					case Mesh::VertexStructVersion::P:
+					{
+						vertices = new vector<Mesh::PVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PVertexData));
+						fread(&(*(vector<Mesh::PVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+						break;
+					}
+					case Mesh::VertexStructVersion::PUV:
+					{
+						vertices = new vector<Mesh::PUVVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVVertexData));
+						fread(&(*(vector<Mesh::PUVVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+						break;
+					}
+					case Mesh::VertexStructVersion::PN:
+					{
+						vertices = new vector<Mesh::PNVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PNVertexData));
+						fread(&(*(vector<Mesh::PNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+						break;
+					}
+					case Mesh::VertexStructVersion::PUVN:
+					{
+						vertices = new vector<Mesh::PUVNVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVNVertexData));
+						fread(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+						break;
+					}
+					case Mesh::VertexStructVersion::PUVNTB:
+					{
+						vertices = new vector<Mesh::PUVNTBVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVNTBVertexData));
+						fread(&(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+						break;
+					}
+					default:
+						break;
+				}
 
 				fread(&bfxFormat.indexBufferSize, sizeof(unsigned int), 1, file);
-				vector<unsigned int>* indicess = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
-				fread(&indicess[0][0], bfxFormat.indexBufferSize, 1, file);
+				vector<unsigned int>* indices = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
+				fread(&(*indices)[0], bfxFormat.indexBufferSize, 1, file);
 
-				model->push_back(Mesh(verticess, indicess));
+				model->push_back(Mesh(vertices, *indices, (Mesh::VertexStructVersion)bfxFormat.meshType));
 			}
 
 			fclose(file);

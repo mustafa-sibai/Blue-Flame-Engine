@@ -51,16 +51,16 @@ namespace BF
 			}
 #endif
 
-			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(MeshVertexData), 0);
-			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(MeshVertexData), sizeof(Vector3));
-			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(MeshVertexData), sizeof(Vector3) + sizeof(Vector2));
+			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), 0);
+			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(Mesh::PUVNVertexData), sizeof(Vector3));
+			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), sizeof(Vector3) + sizeof(Vector2));
 		}
 
 		void Terrain::Load(const std::string& filename)
 		{
 			textureData = BF::IO::ImageLoader::Load(filename);
 
-			MeshVertexData* vertices = new MeshVertexData[VERTICES_SIZE];
+			Mesh::PUVNVertexData* vertices = new Mesh::PUVNVertexData[VERTICES_SIZE];
 
 			Vector3 startingPosition;
 			Vector2 size = Vector2(2.0f, 2.0f);
@@ -78,8 +78,7 @@ namespace BF
 
 					float normalizedData = Normalize(textureData->buffer[((x * stride) + (z * textureData->width * stride))], 0, 256);
 
-					vertices[x + (z * ROW_VERTICES)] = MeshVertexData(Vector3(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z),
-						Vector2(), Vector3(0.0f, 1.0f, 0.0f), Vector3(), Vector3());
+					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z), Vector2(), Vector3(0.0f, 1.0f, 0.0f));
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{
@@ -96,7 +95,7 @@ namespace BF
 				}
 			}
 
-			vertexBuffer.Create(vertices, (unsigned int)VERTICES_SIZE * sizeof(MeshVertexData));
+			vertexBuffer.Create(vertices, (unsigned int)VERTICES_SIZE * sizeof(Mesh::PUVNVertexData));
 			indexBuffer.Create(indecies, INDICES_SIZE);
 
 			vertexBuffer.SetLayout(vertexBufferLayout);

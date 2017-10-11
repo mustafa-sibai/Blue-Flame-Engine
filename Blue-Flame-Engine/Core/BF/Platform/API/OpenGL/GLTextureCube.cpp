@@ -20,13 +20,13 @@ namespace BF
 				{
 				}
 
-				void GLTextureCube::Create(vector<Texture::TextureData>& textureData, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
+				void GLTextureCube::Create(vector<Texture::TextureData*>& textureData, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
 				{
 					GLCall(glGenTextures(1, &textureID));
 					GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, textureID));
 
 					for (GLuint i = 0; i < textureData.size(); i++)
-						GLCall(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GetGLTextureFormat(format), textureData[i].width, textureData[i].height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData[i].buffer));
+						GLCall(glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GetGLTextureFormat(format), textureData[i][0].width, textureData[i][0].height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData[i][0].buffer));
 
 					GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GetGLTextureWrap(wrap)));
 					GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GetGLTextureWrap(wrap)));

@@ -16,8 +16,8 @@ namespace BF
 			Color specularColor;
 
 			float constant = 1.0f;
-			float linear = 0.35f;
-			float quadratic = 0.44f;
+			float linear = 0.0014f;
+			float quadratic = 0.000007f;
 			float padding;
 		};
 	}

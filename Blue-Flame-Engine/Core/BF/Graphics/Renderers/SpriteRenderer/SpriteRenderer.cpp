@@ -84,7 +84,7 @@ namespace BF
 			void SpriteRenderer::Render(const Renderable& renderable)
 			{
 				if (submitSprite)
-					renderables.push_back(&renderable);
+					renderables.emplace_back(&renderable);
 			}
 
 			SpriteRenderer& SpriteRenderer::operator=(const SpriteRenderer& spriteRenderer)

@@ -41,7 +41,7 @@ int main()
 
 	//BF_LOG_INFO("MAIN FUNCTION");
 
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(0, 0, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
@@ -52,9 +52,9 @@ int main()
 	//_3DScene_AF_Test::_3DScene_AF_Test scene;
 	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
-	PhysicsScene::PhysicsScene scene;
+	//PhysicsScene::PhysicsScene scene;
 	//GUIScene::GUIScene scene;
-	//InputTests scene;
+	InputTests scene;
 
 	engine.Run(scene);
 	BF::Math::Vector3 v;

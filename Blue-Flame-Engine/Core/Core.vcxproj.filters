@@ -569,6 +569,9 @@
     <ClInclude Include="BF\IO\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Graphics\VertexData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -585,8 +588,12 @@
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
-    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\OldShader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\SingleLight3DShader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVNTB.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\P.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PN.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUV.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVN.vpshader" />
   </ItemGroup>
 </Project>

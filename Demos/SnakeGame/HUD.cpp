@@ -20,19 +20,22 @@ HUD::~HUD()
 
 void HUD::Initialize()
 {
+
 }
 
 void HUD::Load()
 {
-	fontAtlas = font.Load("Assets/Fonts/arial.ttf", 50, Font::Language::English);
+	font.Load("Assets/Fonts/arial.ttf", 50, FontAtlasFactory::Language::English);
+	
 }
 
 void HUD::Update()
 {
 	scoreText = "Score: " + std::to_string(snake.GetScore());
+	text = Text(&font, scoreText, Vector2(), 0, Color(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
 void HUD::Render()
 {
-	spriteRenderer.RenderText(*fontAtlas, scoreText, Vector2(), Color(1.0f, 1.0f, 1.0f, 1.0f));
+	spriteRenderer.Render(text);
 }

@@ -12,10 +12,10 @@ using namespace Editor::IO;
 
 int main()
 {
-	BF::Engine engine(BF::Application::Window("Blue Flame Editor", BF::Math::Rectangle(0, 0, 1920, 1080), BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
+	//BF::Engine engine(BF::Application::Window("Blue Flame Editor", BF::Math::Rectangle(0, 0, 1920, 1080), BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
 
-	Editor::EditorScene scene;
-	engine.Run(scene);
+	//Editor::EditorScene scene;
+	//engine.Run(scene);
 
 	/*
 	//-------------------------------------------------------------------------------------------------
@@ -137,12 +137,19 @@ int main()
 	
 	//-------------------------------------------------------------------------------------------------
 	/*FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/Thors Hammer.fbx");
+	fbxloader.Load("../Sandbox/Assets/Models/halfTexturedCube.fbx");
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Thors Hammer");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/halfTexturedCube");*/
 
-	std::system("PAUSE");*/
+	
+	FBXLoader fbxloader;
+	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
+
+	BFXWriter bfxWriter(fbxloader.GetMeshs());
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+	
+	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------
 	
 

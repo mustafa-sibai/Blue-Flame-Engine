@@ -14,6 +14,7 @@ namespace BF
 			TextureCube::TextureCube(const Shader& shader) :
 				shader(shader)
 			{
+				textureCubes.reserve(6);
 			}
 
 			TextureCube::~TextureCube()
@@ -25,7 +26,7 @@ namespace BF
 				for (size_t i = 0; i < filenames.size(); i++)
 				{
 					Texture::Load(filenames[i]);
-					textureCubes.push_back(textureData);
+					textureCubes.emplace_back(textureData);
 				}
 
 #ifdef BF_PLATFORM_WINDOWS
@@ -33,26 +34,26 @@ namespace BF
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, TextureWrap::Repeat, TextureFilter::Neatest);*/
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				/*if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTextureCube.Create(textureCubes, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);*/
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glTextureCube.Create(textureCubes, Format::R8G8B8A8, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
 			void TextureCube::Load(const vector<string>& filenames, Wrap textureWrap, Filter textureFilter)
 			{
-				/*for (size_t i = 0; i < filenames.size(); i++)
+				for (size_t i = 0; i < filenames.size(); i++)
 				{
-					textureData = ImageLoader::Load(filenames[i]);
-					textureCubes.push_back(*textureData);
-				}*/
+					Texture::Load(filenames[i]);
+					textureCubes.emplace_back(textureData);
+				}
 
 #ifdef BF_PLATFORM_WINDOWS
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxTexture2D.Create(textureData, Format::R8G8B8A8, textureWrap, textureFilter);*/
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				/*if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTextureCube.Create(textureCubes, Format::R8G8B8A8, textureWrap, textureFilter);*/
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glTextureCube.Create(textureCubes, Format::R8G8B8A8, textureWrap, textureFilter);
 #endif
 			}
 
