@@ -77,8 +77,8 @@ namespace BF
 					Renderable(const Math::Vector2& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type);
 					~Renderable();
 
-					void SetPosition(const Math::Vector2& position);
-					void SetRectangle(const Math::Rectangle& rectangle);
+					virtual void SetPosition(const Math::Vector2& position);
+					virtual void SetRectangle(const Math::Rectangle& rectangle);
 
 					inline const Math::Vector2& GetPosition() const { return position; }
 					inline const Math::Rectangle& GetRectangle() const { return rectangle; }

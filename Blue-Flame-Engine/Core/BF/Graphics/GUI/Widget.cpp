@@ -24,7 +24,7 @@ namespace BF
 			{
 			}
 
-			void Widget::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
+			void Widget::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 			{
 				this->spriteRenderer = &spriteRenderer;
 				SetZLayer(zLayer);
@@ -54,53 +54,7 @@ namespace BF
 					widgetData.sprites[i].zLayer = zLayer;
 			}
 
-			void Widget::SetTextAlignment(WidgetData::TextAlignment textAlignment)
-			{
-				switch (textAlignment)
-				{
-				case WidgetData::TextAlignment::TopLeft:
-				{
-					widgetData.textPosition = GetPosition();
-					break;
-				}
-				case WidgetData::TextAlignment::TopCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::TopRight:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleLeft:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleRight:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomLeft:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomRight:
-				{
-					break;
-				}
-				default:
-					break;
-				}
-			}
-
-			void Widget::SetRectangle(const Math::Rectangle& rectangle)
+			void Widget::SetRectangle(const Rectangle& rectangle)
 			{
 				Math::Rectangle temp = rectangle;
 				temp.width = Max(widgetData.minWidth, rectangle.width);
@@ -173,12 +127,7 @@ namespace BF
 			void Widget::Render()
 			{
 				spriteRenderer->Render(*currentSprite);
-
-				if (widgetData.renderText)
-				{
-					//spriteRenderer->RenderText(*widgetData.font, "", )
-				}
-				
+				spriteRenderer->Render(widgetData.text);
 			}
 
 			void Widget::SwitchState()

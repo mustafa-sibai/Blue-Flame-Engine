@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "BF/Math/Vector2.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -14,8 +15,9 @@ namespace BF
 			Rectangle(int x, int y, int width, int height);
 
 			bool Intersect(const Rectangle& rectangle) const;
-			Rectangle& IntersectRectangle(const Rectangle& rectangle) const;
+			Rectangle IntersectRectangle(const Rectangle& rectangle) const;
 			int Area() const;
+			Vector2 Center() const;
 
 			friend Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle);
 			friend Rectangle operator-(const Rectangle& leftRectangle, const Rectangle& rightRectangle);

@@ -40,7 +40,6 @@ int main()
 	//BF::Platform::API::Vulkan::VKContext vKContext;
 
 	//BF_LOG_INFO("MAIN FUNCTION");
-
 	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
@@ -53,31 +52,10 @@ int main()
 	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//PhysicsScene::PhysicsScene scene;
-	//GUIScene::GUIScene scene;
-	InputTests scene;
+	GUIScene::GUIScene scene;
+	//InputTests scene;
 
 	engine.Run(scene);
-	BF::Math::Vector3 v;
-	BF::Math::Vector3 v1(10.0f, 20.0f, 30.0f);
-
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
-	BF_LOG_WARNING("%f %f %f %f", v1.x, v1.y, v1.z);
-
-	v = v1;
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
-
-	v.x = 100.0f;
-	v.y = 200.0f;
-	v.z = 400.0f;
-
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
-
-
-
-	BF::Math::Vector2 vv1(-7, -4);
-	BF::Math::Vector2 vv2(17, 6.5);
-
-	BF_LOG_INFO("%f", vv1.Distance(vv2));
 
 	/*
 		TCHAR  buffer[MAX_PATH];

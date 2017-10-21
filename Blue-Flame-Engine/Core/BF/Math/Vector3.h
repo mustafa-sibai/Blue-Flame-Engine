@@ -22,7 +22,9 @@ namespace BF
 			Vector3 Cross(const Vector3& vector) const;
 			Vector3 Direction(const Vector3& vector) const;
 			Vector3 Normalize() const;
-
+			Vector3 Center() const;
+			Vector3 Min();
+			Vector3 Max();
 
 			friend BF_API Vector3 operator+(const Vector3& left, const Vector3& right);
 			friend BF_API Vector3 operator-(const Vector3& left, const Vector3& right);

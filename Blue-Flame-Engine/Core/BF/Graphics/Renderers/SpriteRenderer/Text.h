@@ -13,19 +13,37 @@ namespace BF
 			{
 				friend class SpriteRenderer;
 
+				public:
+					enum class TextAlignment
+					{
+						TopLeft, TopCenter, TopRight,
+						MiddleLeft, MiddleCenter, MiddleRight,
+						BottomLeft, BottomCenter, BottomRight
+					};
+
 				private:
 					const Fonts::Font* font;
 					std::vector<Fonts::Character> characters;
 					std::string text;
+					Math::Rectangle scissorRectangle;
+					Math::Vector2 textAlignmentOffset;
+
+					TextAlignment alignment;
 
 				public:
 					Text();
-					Text(const Fonts::Font* font, const std::string& text, const Math::Vector2& position, unsigned int zLayer, const Color& color);
-					Text(const Fonts::Font* font, const std::string& text, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
+					Text(const Fonts::Font* font, const std::string& text, const Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color);
 					~Text();
 
 					void SetFont(const Fonts::Font* font);
 					void SetText(const std::string& text);
+					void SetTextAlignment(TextAlignment textAlignment);
+
+					void SetPosition(const Math::Vector2& position) override;
+					void SetRectangle(const Math::Rectangle& rectangle) override;
+
+				private:
+					Math::Vector2 GetTextAlignmentOffset(TextAlignment textAlignment);
 			};
 		}
 	}

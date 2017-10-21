@@ -21,7 +21,7 @@ namespace BF
 
 			void WidgetManager::AddWidget(Widget* widget)
 			{
-				widgets.push_back(widget);
+				widgets.emplace_back(widget);
 			}
 
 			void WidgetManager::Initialize()
@@ -62,9 +62,6 @@ namespace BF
 					currentWidget = nullptr;
 				}
 			}
-
-			Widget* currentWidget;
-			Widget* previousWidget;
 
 			void WidgetManager::Render()
 			{

@@ -21,6 +21,9 @@ namespace BF
 			float Magnitude() const;
 			Vector4 Direction(const Vector4& vector) const;
 			Vector4 Normalize() const;
+			Vector4 Center() const;
+			Vector4 Min();
+			Vector4 Max();
 
 			friend BF_API Vector4 operator+(const Vector4& left, const Vector4& right);
 			friend BF_API Vector4 operator-(const Vector4& left, const Vector4& right);

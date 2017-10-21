@@ -6,12 +6,14 @@ namespace BF
 	{
 		namespace Renderers
 		{
+			using namespace BF::Math;
+
 			Renderable::Renderable() :
 				position(), zLayer(0), rectangle(), color()
 			{
 			}
 
-			Renderable::Renderable(const Math::Vector2& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type) :
+			Renderable::Renderable(const Vector2& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type) :
 				position(position), rectangle(rectangle), zLayer(zLayer), color(color), type(type)
 			{
 			}
@@ -20,14 +22,14 @@ namespace BF
 			{
 			}
 
-			void Renderable::SetPosition(const Math::Vector2& position)
+			void Renderable::SetPosition(const Vector2& position)
 			{
 				this->position = position;
 				this->rectangle.x = (int)position.x;
 				this->rectangle.y = (int)position.y;
 			}
 
-			void Renderable::SetRectangle(const Math::Rectangle& rectangle)
+			void Renderable::SetRectangle(const Rectangle& rectangle)
 			{
 				this->rectangle = rectangle;
 				this->position.x = (float)rectangle.x;

@@ -1,5 +1,6 @@
 #include "Vector2.h"
 #include "BF/System/Log.h"
+#include "BF/Math/Math.h"
 
 namespace BF
 {
@@ -55,6 +56,21 @@ namespace BF
 				return Vector2(0);
 		}
 
+		Vector2 Vector2::Center() const
+		{
+			return Vector2(x / 2, y / 2);
+		}
+
+		Vector2 Vector2::Min()
+		{
+			return Vector2(Math::Min(x, y));
+		}
+
+		Vector2 Vector2::Max()
+		{
+			return Vector2(Math::Max(x, y));
+		}
+
 		Vector2 operator+(const Vector2& left, const Vector2& right)
 		{
 			return Vector2(left.x + right.x, left.y + right.y);
@@ -77,50 +93,50 @@ namespace BF
 
 		Vector2& Vector2::operator+=(const Vector2& right)
 		{
-			this->x += right.x;
-			this->y += right.y;
+			x += right.x;
+			y += right.y;
 			return *this;
 		}
 
 		Vector2& Vector2::operator-=(const Vector2& right)
 		{
-			this->x -= right.x;
-			this->y -= right.y;
+			x -= right.x;
+			y -= right.y;
 			return *this;
 		}
 
 		Vector2& Vector2::operator*=(const Vector2& right)
 		{
-			this->x *= right.x;
-			this->y *= right.y;
+			x *= right.x;
+			y *= right.y;
 			return *this;
 		}
 
 		Vector2& Vector2::operator/=(const Vector2& right)
 		{
-			this->x /= right.x;
-			this->y /= right.y;
+			x /= right.x;
+			y /= right.y;
 			return *this;
 		}
 
 		bool Vector2::operator>(const Vector2& right)
 		{
-			return this->Magnitude() > right.Magnitude();
+			return Magnitude() > right.Magnitude();
 		}
 
 		bool Vector2::operator>=(const Vector2& right)
 		{
-			return this->Magnitude() >= right.Magnitude();
+			return Magnitude() >= right.Magnitude();
 		}
 
 		bool Vector2::operator<(const Vector2& right)
 		{
-			return this->Magnitude() < right.Magnitude();
+			return Magnitude() < right.Magnitude();
 		}
 
 		bool Vector2::operator<=(const Vector2& right)
 		{
-			return this->Magnitude() <= right.Magnitude();
+			return Magnitude() <= right.Magnitude();
 		}
 
 		bool Vector2::operator==(const Vector2 &right)

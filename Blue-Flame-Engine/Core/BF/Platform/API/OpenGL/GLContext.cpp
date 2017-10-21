@@ -108,8 +108,8 @@ namespace BF
 					if (state)
 					{
 						GLCall(glEnable(GL_BLEND));
-						//GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
-						GLCall(glBlendFunc(GL_ONE, GL_ONE));
+						GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+						//GLCall(glBlendFunc(GL_ONE, GL_ONE));
 					}
 					else
 						GLCall(glDisable(GL_BLEND));

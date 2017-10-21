@@ -13,10 +13,9 @@ namespace BF
 			using namespace BF::Math;
 
 			StyleSheet::StyleSheet(const API::Shader& shader) :
-				styleSheetNode("GUIStyle")
+				shader(shader), styleSheetNode("GUIStyle")
 			{
 				texture = new Texture2D(shader);
-				font = new Font(shader);
 			}
 
 			StyleSheet::~StyleSheet()
@@ -31,11 +30,7 @@ namespace BF
 				string texturefilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("StyleSheet")->Attribute("Path");
 				texture->Load(texturefilename);
 
-				string fontfilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
-				const char* size = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Size");
-				font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
-
-				LoadWidget(xmlDocument, "Label");
+				//LoadWidget(xmlDocument, "Label");
 				LoadWidget(xmlDocument, "Button");
 				LoadWidget(xmlDocument, "Checkbox");
 				LoadWidget(xmlDocument, "Panel");
@@ -63,33 +58,42 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
-			void StyleSheet::TextAlignment(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData)
+			void StyleSheet::SetText(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData)
 			{
 				if (HasText(xmlDocument, widgetName))
 				{
-					widgetData.text = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("String");
+					string fontfilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
+					const char* size = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Size");
+
+					widgetData.font = new Font(shader);
+					widgetData.font->Load(fontfilename, atoi("20"), FontAtlasFactory::Language::English);
+
+					std::string text = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("String");
 					std::string alignment = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Alignment");
+					Text::TextAlignment textAlignment;
 
 					if (alignment == "TopLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopLeft;
+						textAlignment = Text::TextAlignment::TopLeft;
 					else if (alignment == "TopCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopCenter;
+						textAlignment = Text::TextAlignment::TopCenter;
 					else if (alignment == "TopRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopRight;
+						textAlignment = Text::TextAlignment::TopRight;
 
 					else if (alignment == "MiddleLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleLeft;
+						textAlignment = Text::TextAlignment::MiddleLeft;
 					else if (alignment == "MiddleCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleCenter;
+						textAlignment = Text::TextAlignment::MiddleCenter;
 					else if (alignment == "MiddleRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleRight;
+						textAlignment = Text::TextAlignment::MiddleRight;
 
 					else if (alignment == "BottomLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomLeft;
+						textAlignment = Text::TextAlignment::BottomLeft;
 					else if (alignment == "BottomCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomCenter;
+						textAlignment = Text::TextAlignment::BottomCenter;
 					else if (alignment == "BottomRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomRight;
+						textAlignment = Text::TextAlignment::BottomRight;
+
+					widgetData.text = Text(widgetData.font, text, widgetData.sprites[0].GetRectangle(), textAlignment, 0, Color(0.0f, 0.0f, 0.0f, 1.0f));
 				}
 			}
 
@@ -113,11 +117,7 @@ namespace BF
 				WidgetData widgetData;
 				Rectangle rectangle, scissorRectangle;
 
-				widgetData.font = font;
-
 				rectangle = ReadWidgetDimensions(xmlDocument, widgetName, "Dimensions");
-
-				TextAlignment(xmlDocument, widgetName, "Text", widgetData);
 
 				widgetData.minWidth = rectangle.x;
 				widgetData.minHeight = rectangle.y;
@@ -157,6 +157,8 @@ namespace BF
 						widgetData.sprites[7] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
 					}
 				}
+
+				SetText(xmlDocument, widgetName, "Text", widgetData);
 
 				widgetsData.insert({ widgetName, widgetData });
 			}

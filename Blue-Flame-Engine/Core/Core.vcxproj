@@ -146,6 +146,7 @@
     <ClInclude Include="BF\Graphics\Material.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
+    <ClInclude Include="BF\Graphics\PredefinedColors.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.h" />

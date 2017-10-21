@@ -46,8 +46,6 @@ namespace BF
 					void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					void Render(const Renderable& renderable);
 					void Render(Renderable&&) = delete;
-
-					//void RenderText(const Fonts::Font& font, const std::string& text, const Math::Vector2& position, const Color& color);
 					void End();
 
 					void SetScissor(const Math::Rectangle& rectangle);

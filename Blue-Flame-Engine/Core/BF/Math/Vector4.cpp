@@ -1,4 +1,5 @@
 #include "Vector4.h"
+#include "Math.h"
 
 namespace BF
 {
@@ -54,6 +55,25 @@ namespace BF
 				return Vector4(0);
 		}
 
+		Vector4 Vector4::Center() const
+		{
+			return Vector4(x / 2, y / 2, z / 2, w / 2);
+		}
+
+		Vector4 Vector4::Min()
+		{
+			float min = Math::Min(x, y);
+			float min2 = Math::Min(z, w);
+			return Vector4(Math::Min(min, min2));
+		}
+
+		Vector4 Vector4::Max()
+		{
+			float max = Math::Max(x, y);
+			float max2 = Math::Max(z, w);
+			return Vector4(Math::Max(max, max2));
+		}
+
 		Vector4 operator+(const Vector4& left, const Vector4& right)
 		{
 			return Vector4(left.x + right.x, left.y + right.y, left.z + right.z, left.w + right.w);
@@ -76,58 +96,58 @@ namespace BF
 
 		Vector4& Vector4::operator+=(const Vector4& right)
 		{
-			this->x += right.x;
-			this->y += right.y;
-			this->z += right.z;
-			this->w += right.w;
+			x += right.x;
+			y += right.y;
+			z += right.z;
+			w += right.w;
 			return *this;
 		}
 
 		Vector4& Vector4::operator-=(const Vector4& right)
 		{
-			this->x -= right.x;
-			this->y -= right.y;
-			this->z -= right.z;
-			this->w -= right.w;
+			x -= right.x;
+			y -= right.y;
+			z -= right.z;
+			w -= right.w;
 			return *this;
 		}
 
 		Vector4& Vector4::operator*=(const Vector4& right)
 		{
-			this->x *= right.x;
-			this->y *= right.y;
-			this->z *= right.z;
-			this->w *= right.w;
+			x *= right.x;
+			y *= right.y;
+			z *= right.z;
+			w *= right.w;
 			return *this;
 		}
 
 		Vector4& Vector4::operator/=(const Vector4& right)
 		{
-			this->x /= right.x;
-			this->y /= right.y;
-			this->z /= right.z;
-			this->w /= right.w;
+			x /= right.x;
+			y /= right.y;
+			z /= right.z;
+			w /= right.w;
 			return *this;
 		}
 
 		bool Vector4::operator>(const Vector4& right)
 		{
-			return this->Magnitude() > right.Magnitude();
+			return Magnitude() > right.Magnitude();
 		}
 
 		bool Vector4::operator>=(const Vector4& right)
 		{
-			return this->Magnitude() >= right.Magnitude();
+			return Magnitude() >= right.Magnitude();
 		}
 
 		bool Vector4::operator<(const Vector4& right)
 		{
-			return this->Magnitude() < right.Magnitude();
+			return Magnitude() < right.Magnitude();
 		}
 
 		bool Vector4::operator<=(const Vector4& right)
 		{
-			return this->Magnitude() <= right.Magnitude();
+			return Magnitude() <= right.Magnitude();
 		}
 
 		bool Vector4::operator==(const Vector4 &right)

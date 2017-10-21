@@ -69,7 +69,7 @@ namespace _2DScene
 		sprite8 = Sprite(t3, BF::Math::Rectangle(0, 0, 1920, 1080), 0, Color(1.0f));
 
 		font.Load("Assets/Fonts/arial.ttf", 120, BF::Graphics::Fonts::FontAtlasFactory::Language::English);
-		text = Text(&font, "Blue Flame Engine !", Vector2(10, 10), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
+		//text = Text(&font, "Blue Flame Engine !", Vector2(10, 10), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
 		BF_LOG_INFO("%f, %f", text.GetPosition().x, text.GetPosition().y);
 		BF_LOG_INFO("%i, %i, %i, %i", text.GetRectangle().x, text.GetRectangle().y, text.GetRectangle().width, text.GetRectangle().height);
 		node = Waypoint::Node(Vector2(100.0f, 100.0f));

@@ -1,4 +1,5 @@
 #include "Vector3.h"
+#include "Math.h"
 
 namespace BF
 {
@@ -59,6 +60,23 @@ namespace BF
 				return Vector3(0);
 		}
 
+		Vector3 Vector3::Center() const
+		{
+			return Vector3(x / 2, y / 2, z / 2);
+		}
+
+		Vector3 Vector3::Min()
+		{
+			float min = Math::Min(x, y);
+			return Vector3(Math::Min(min, z));
+		}
+
+		Vector3 Vector3::Max()
+		{
+			float max = Math::Max(x, y);
+			return Vector3(Math::Max(max, z));
+		}
+
 		Vector3 operator+(const Vector3& left, const Vector3& right)
 		{
 			return Vector3(left.x + right.x, left.y + right.y, left.z + right.z);
@@ -81,54 +99,54 @@ namespace BF
 
 		Vector3& Vector3::operator+=(const Vector3& right)
 		{
-			this->x += right.x;
-			this->y += right.y;
-			this->z += right.z;
+			x += right.x;
+			y += right.y;
+			z += right.z;
 			return *this;
 		}
 
 		Vector3& Vector3::operator-=(const Vector3& right)
 		{
-			this->x -= right.x;
-			this->y -= right.y;
-			this->z -= right.z;
+			x -= right.x;
+			y -= right.y;
+			z -= right.z;
 			return *this;
 		}
 
 		Vector3& Vector3::operator*=(const Vector3& right)
 		{
-			this->x *= right.x;
-			this->y *= right.y;
-			this->z *= right.z;
+			x *= right.x;
+			y *= right.y;
+			z *= right.z;
 			return *this;
 		}
 
 		Vector3& Vector3::operator/=(const Vector3& right)
 		{
-			this->x /= right.x;
-			this->y /= right.y;
-			this->z /= right.z;
+			x /= right.x;
+			y /= right.y;
+			z /= right.z;
 			return *this;
 		}
 
 		bool Vector3::operator>(const Vector3& right)
 		{
-			return this->Magnitude() > right.Magnitude();
+			return Magnitude() > right.Magnitude();
 		}
 
 		bool Vector3::operator>=(const Vector3& right)
 		{
-			return this->Magnitude() >= right.Magnitude();
+			return Magnitude() >= right.Magnitude();
 		}
 
 		bool Vector3::operator<(const Vector3& right)
 		{
-			return this->Magnitude() < right.Magnitude();
+			return Magnitude() < right.Magnitude();
 		}
 
 		bool Vector3::operator<=(const Vector3& right)
 		{
-			return this->Magnitude() <= right.Magnitude();
+			return Magnitude() <= right.Magnitude();
 		}
 
 		bool Vector3::operator==(const Vector3 &right)

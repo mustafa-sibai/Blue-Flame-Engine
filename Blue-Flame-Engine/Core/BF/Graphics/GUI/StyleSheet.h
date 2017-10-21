@@ -16,10 +16,10 @@ namespace BF
 			class BF_API StyleSheet
 			{
 				private:
+					const API::Shader& shader;
 					std::string styleSheetNode;
 					std::unordered_map<std::string, WidgetData> widgetsData;
 					API::Texture2D* texture;
-					Fonts::Font* font;
 
 				public:
 					StyleSheet(const API::Shader& shader);
@@ -32,7 +32,7 @@ namespace BF
 				private:
 					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state, const std::string& type);
 					Math::Rectangle ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type);
-					void TextAlignment(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData);
+					void SetText(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData);
 					bool DoesStateExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state);
 					bool DoesTypeExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state, const std::string& type);
 					bool HasText(const tinyxml2::XMLDocument& xmlDocument, const std::string& name);
