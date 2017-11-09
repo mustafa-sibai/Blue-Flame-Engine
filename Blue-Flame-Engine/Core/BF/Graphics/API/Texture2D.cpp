@@ -10,8 +10,7 @@ namespace BF
 		{
 			using namespace std;
 
-			Texture2D::Texture2D(const Shader& shader) :
-				shader(shader), glTexture2D(shader.glShader)
+			Texture2D::Texture2D()
 			{
 			}
 
@@ -87,7 +86,7 @@ namespace BF
 #endif
 			}
 
-			void Texture2D::Bind(const string& samplerName, unsigned int index) const
+			void Texture2D::Bind(const Shader& shader, const string& samplerName, unsigned int index) const
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -95,7 +94,7 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Bind(samplerName, index);
+					glTexture2D.Bind(shader.glShader, samplerName, index);
 #endif
 			}
 

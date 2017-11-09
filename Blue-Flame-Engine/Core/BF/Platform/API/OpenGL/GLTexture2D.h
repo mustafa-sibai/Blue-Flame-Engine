@@ -17,17 +17,16 @@ namespace BF
 					friend class GLFramebuffer;
 
 					private:
-						const GLShader& glShader;
 						GLuint textureID;
 						float AFLevel;
 
 					public:
-						GLTexture2D(const GLShader& glShader);
+						GLTexture2D();
 						~GLTexture2D();
 
 						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
 						void Bind() const;
-						void Bind(const std::string& samplerName, unsigned int index) const;
+						void Bind(const GLShader& glShader, const std::string& samplerName, unsigned int index) const;
 						void Unbind() const;
 						void Unbind(const std::string& samplerName, unsigned int index) const;
 

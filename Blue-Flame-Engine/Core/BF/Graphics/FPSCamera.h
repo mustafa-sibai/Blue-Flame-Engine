@@ -13,8 +13,8 @@ namespace BF
 				bool lockMouseToCenter;
 
 			public:
-				Math::Vector3 cameraFront, cameraUp;
-				Math::Vector2 windowCenter;
+				Math::Vector3f cameraFront, cameraUp;
+				Math::Vector2f windowCenter;
 
 			public:
 				FPSCamera();

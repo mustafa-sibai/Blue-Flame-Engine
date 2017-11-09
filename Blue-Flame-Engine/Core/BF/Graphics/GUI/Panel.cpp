@@ -31,7 +31,7 @@ namespace BF
 				verticalScrollbar.Load(StyleSheet, "");
 			}
 
-			void Panel::SetPosition(const Math::Vector2& position)
+			void Panel::SetPosition(const Math::Vector2f& position)
 			{
 				Widget::SetPosition(position);
 				SetContentPosition(position);
@@ -40,14 +40,14 @@ namespace BF
 				scissorRectangle.y = (int)position.y;
 			}
 
-			void Panel::SetContentPosition(const Math::Vector2& contentPosition)
+			void Panel::SetContentPosition(const Math::Vector2f& contentPosition)
 			{
 				this->contentPosition = contentPosition;
 				contentRectangle.x = (int)contentPosition.x + contentLocalRectangle.x;
 				contentRectangle.y = (int)contentPosition.y + contentLocalRectangle.y;
 			}
 
-			void Panel::SetContentLocalPosition(const Math::Vector2& contentLocalPosition)
+			void Panel::SetContentLocalPosition(const Math::Vector2f& contentLocalPosition)
 			{
 				this->contentLocalPosition = contentLocalPosition;
 				this->contentPosition = GetPosition() + contentLocalPosition;
@@ -61,19 +61,19 @@ namespace BF
 			void Panel::SetRectangle(const Math::Rectangle& rectangle)
 			{
 				Widget::SetRectangle(rectangle);
-				SetPosition(Math::Vector2((float)rectangle.x, (float)rectangle.y));
+				SetPosition(Math::Vector2f((float)rectangle.x, (float)rectangle.y));
 			}
 
 			void Panel::SetContentRectangle(const Math::Rectangle& contentRectangle)
 			{
 				this->contentRectangle = contentRectangle;
-				SetContentPosition(Math::Vector2((float)contentRectangle.x, (float)contentRectangle.y));
+				SetContentPosition(Math::Vector2f((float)contentRectangle.x, (float)contentRectangle.y));
 			}
 
 			void Panel::SetContentLocalRectangle(const Math::Rectangle& contentLocalRectangle)
 			{
 				this->contentLocalRectangle = contentLocalRectangle;
-				SetContentLocalPosition(Math::Vector2((float)contentLocalPosition.x, (float)contentLocalPosition.y));
+				SetContentLocalPosition(Math::Vector2f((float)contentLocalPosition.x, (float)contentLocalPosition.y));
 			}
 
 			void Panel::SetScissorRectangle(Math::Rectangle scissorRectangle)

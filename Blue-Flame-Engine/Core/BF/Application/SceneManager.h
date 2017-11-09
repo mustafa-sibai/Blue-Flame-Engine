@@ -11,12 +11,15 @@ namespace BF
 		{
 			private:
 				static std::vector<Scene*> scenes;
+				static Scene* currentScene;
 
 			public:
 				static void AddNewScene(Scene* scene);
+				static void LoadScene(int index);
 
 				static inline const std::vector<Scene*>& GetScenes() { return scenes; }
 				static inline Scene& GetScene(int index) { return *scenes[index]; }
+				static inline Scene& GetCurrentScene() { return *currentScene; }
 		};
 	}
 }

@@ -24,7 +24,7 @@ namespace BF
 			friend class BF::Platform::Web::WEBWindow;
 #endif
 			private:
-				static Math::Vector2 position;
+				static Math::Vector2f position;
 				static bool insideWindowClient;
 				static bool buttons[BF_MAX_MOUSE_BUTTONS];
 
@@ -36,10 +36,10 @@ namespace BF
 				~Mouse();
 
 				static bool IsButtonPressed(Button button);
-				static void SetPosition(Math::Vector2 position);
+				static void SetPosition(Math::Vector2f position);
 
 				static void ShowMouseCursor(bool value);
-				inline static Math::Vector2 GetPosition() { return position; }
+				inline static Math::Vector2f GetPosition() { return position; }
 				inline static bool IsInsideWindowClient()
 				{
 					if (!insideWindowClient)

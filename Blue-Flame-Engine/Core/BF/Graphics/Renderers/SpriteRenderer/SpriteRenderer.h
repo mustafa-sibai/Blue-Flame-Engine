@@ -60,7 +60,7 @@ namespace BF
 					void MapSpriteBuffer(const Sprite& sprite);
 					void MapTextBuffer(const Text& text);
 					void MapBuffer();
-					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2* topLeft, Math::Vector2* topRight, Math::Vector2* bottomRight, Math::Vector2* bottomLeft);
+					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2f* topLeft, Math::Vector2f* topRight, Math::Vector2f* bottomRight, Math::Vector2f* bottomLeft);
 			};
 		}
 	}

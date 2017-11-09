@@ -42,15 +42,15 @@ namespace BF
 				this->callBackPointer = callBackPointers;
 			}
 
-			void Widget::SetPosition(const Vector2& position)
+			void Widget::SetPosition(const Vector2f& position)
 			{
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetPosition(position);
 			}
 
 			void Widget::SetZLayer(int zLayer)
 			{
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].zLayer = zLayer;
 			}
 
@@ -60,7 +60,7 @@ namespace BF
 				temp.width = Max(widgetData.minWidth, rectangle.width);
 				temp.height = Max(widgetData.minHeight, rectangle.height);
 
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetRectangle(temp);
 			}
 

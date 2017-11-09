@@ -15,7 +15,7 @@ namespace BF
 		class BF_API Mesh
 		{
 			public:
-				#include "VertexData.h"
+				#include "VertexData.inl"
 
 				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
 				VertexStructVersion vertexStructVersion;

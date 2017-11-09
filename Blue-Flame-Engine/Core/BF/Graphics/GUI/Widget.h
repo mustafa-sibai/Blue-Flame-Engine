@@ -61,11 +61,11 @@ namespace BF
 
 					void AddOnClickListener(void(*OnClickCallBack)(void*), void* obj);
 
-					virtual void SetPosition(const Math::Vector2& position);
+					virtual void SetPosition(const Math::Vector2f& position);
 					virtual void SetRectangle(const Math::Rectangle& rectangle);
 					void SetZLayer(int zLayer);
 
-					inline Math::Vector2 GetPosition() const { return currentSprite->GetPosition(); }
+					inline Math::Vector2f GetPosition() const { return currentSprite->GetPosition(); }
 					inline Math::Rectangle GetRectangle() const { return currentSprite->GetRectangle(); }
 
 					inline bool IsHovered() const { return hovered; }

@@ -9,13 +9,13 @@ namespace BF
 		{
 			struct Character
 			{
-				Math::Vector2 position;
+				Math::Vector2f position;
 				Math::Rectangle scissorRectangle;
 
-				Math::Vector2 bearing;
-				Math::Vector2 advance;
+				Math::Vector2i bearing;
+				Math::Vector2i advance;
 
-				Character(Math::Vector2 position, Math::Rectangle scissorRectangle, Math::Vector2 bearing, Math::Vector2 advance) :
+				Character(const Math::Vector2f& position, const Math::Rectangle& scissorRectangle, const Math::Vector2i& bearing, const Math::Vector2i& advance) :
 					position(position), scissorRectangle(scissorRectangle), bearing(bearing), advance(advance)
 				{
 				}

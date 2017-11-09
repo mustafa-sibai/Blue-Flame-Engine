@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #pragma once
 #include "BF/Platform/Windows/WINWindow.h"
 #include <Xinput.h>
@@ -26,8 +25,8 @@ namespace BF
 				float leftTrigger;
 				float rightTrigger;
 
-				Math::Vector2 leftStick;
-				Math::Vector2 rightStick;
+				Math::Vector2f leftStick;
+				Math::Vector2f rightStick;
 
 			public:
 				enum class Button { A, B, X, Y, Left, Right, Up, Down, LeftShoulder, RightShoulder, Start, Back };
@@ -38,13 +37,13 @@ namespace BF
 
 				bool IsButtonPressed(Button button) const;
 
-				Math::Vector2 CalculateStickPosition(Math::Vector2 stickPosition, Math::Vector2 stickDeadZone);
+				Math::Vector2f CalculateStickPosition(const Math::Vector2f& stickPosition, const Math::Vector2f& stickDeadZone);
 
 				inline float GetLeftTrigger() const { return leftTrigger; }
 				inline float GetRightTrigger() const { return rightTrigger; }
 
-				inline const Math::Vector2& GetLeftStike() const { return leftStick; }
-				inline const Math::Vector2& GetRightStike() const { return rightStick; }
+				inline const Math::Vector2f& GetLeftStike() const { return leftStick; }
+				inline const Math::Vector2f& GetRightStike() const { return rightStick; }
 
 			private:
 				void Update();
@@ -74,4 +73,3 @@ namespace BF
 		};
 	}
 }
-#endif

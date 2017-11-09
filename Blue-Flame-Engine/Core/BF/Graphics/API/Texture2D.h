@@ -32,8 +32,6 @@ namespace BF
 				friend class BF::Platform::API::OpenGL::GLFramebuffer;
 
 				private:
-					const Shader& shader;
-
 #ifdef BF_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXTexture2D dxTexture2D;
 #endif
@@ -41,7 +39,7 @@ namespace BF
 					Platform::API::OpenGL::GLTexture2D glTexture2D;
 #endif
 				public:
-					Texture2D(const Shader& shader);
+					Texture2D();
 					~Texture2D();
 
 					void Load(const std::string& filename);
@@ -50,7 +48,7 @@ namespace BF
 					void Create(TextureData& textureData, Format format);
 
 					void Bind() const;
-					void Bind(const std::string& samplerName, unsigned int index) const;
+					void Bind(const Shader& shader, const std::string& samplerName, unsigned int index) const;
 					void Unbind() const;
 					void Unbind(const std::string& samplerName, unsigned int index) const;
 			};

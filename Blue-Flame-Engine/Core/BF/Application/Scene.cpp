@@ -1,12 +1,15 @@
 #include "Scene.h"
 #include "BF/System/Log.h"
 
+
 namespace BF
 {
 	namespace Application
 	{
+		using namespace BF::Graphics::Renderers;
+
 		Scene::Scene() :
-			run(false), initialized(false), loaded(false), fixedUpdateTicks(0)
+			initialized(false), loaded(false), fixedUpdateTicks(0)
 		{
 		}
 
@@ -16,16 +19,16 @@ namespace BF
 
 		void Scene::Initialize()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Initialize();
-#endif
+			spriteRenderer.Initialize();
+
+			for (size_t i = 0; i < gameNodes.size(); i++)
+				gameNodes[i]->Initialize();
 		}
 
 		void Scene::Load()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Load();
-#endif
+			for (size_t i = 0; i < gameNodes.size(); i++)
+				gameNodes[i]->Load();
 		}
 
 		/*void Scene::FixedUpdate()
@@ -34,16 +37,69 @@ namespace BF
 
 		void Scene::Update()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Update();
-#endif
+			for (size_t i = 0; i < gameNodes.size(); i++)
+				gameNodes[i]->Update();
 		}
 
 		void Scene::Render()
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Render();
-#endif
+			for (size_t i = 0; i < gameNodes.size(); i++)
+			{
+				switch (gameNodes[i]->nodeType)
+				{
+					case GameNode::NodeType::Sprite:
+					{
+						spriteRenderer.Render(*(RegularPolygon*)gameNodes[i]);
+						break;
+					}
+					case GameNode::NodeType::Mesh:
+					{
+						break;
+					}
+					case GameNode::NodeType::Audio:
+					{
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+
+				RenderNode(gameNodes[i]);
+			}
+
+			spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
+			spriteRenderer.End();
+		}
+
+		void Scene::RenderNode(GameNode* node)
+		{
+			for (size_t i = 0; i < node->gameNodes.size(); i++)
+			{
+				RenderNode(node->gameNodes[i]);
+
+				switch (gameNodes[i]->nodeType)
+				{
+					case GameNode::NodeType::Sprite:
+					{
+						spriteRenderer.Render(*(RegularPolygon*)(node->gameNodes[i]));
+						break;
+					}
+					case GameNode::NodeType::Mesh:
+					{
+						break;
+					}
+					case GameNode::NodeType::Audio:
+					{
+						break;
+					}
+					default:
+					{
+						break;
+					}
+				}
+			}
 		}
 	}
 }

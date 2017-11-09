@@ -15,7 +15,7 @@ namespace BF
 			using namespace BF::Application;
 			using namespace BF::Math;
 
-			WINWindow::WINWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
+			WINWindow::WINWindow(const std::string& title, const Math::Rectangle& rectangle, BF::Application::WindowStyle style) :
 				Window(title, rectangle, style)
 			{
 			}
@@ -86,12 +86,12 @@ namespace BF
 				{
 					if (ScreenToClient(hWnd, &mousePosition))
 					{
-						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= clientWidth && mousePosition.y <= clientHeight)
+						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= (int)clientWidth && mousePosition.y <= (int)clientHeight)
 							Mouse::insideWindowClient = true;
 						else
 							Mouse::insideWindowClient = false;
 
-						Mouse::position = Vector2(Clamp((float)mousePosition.x, 0.0f, (float)clientWidth), Clamp((float)mousePosition.y, 0.0f, (float)clientHeight));
+						Mouse::position = Vector2f(Clamp((float)mousePosition.x, 0.0f, (float)clientWidth), Clamp((float)mousePosition.y, 0.0f, (float)clientHeight));
 					}
 				}
 

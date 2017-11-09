@@ -14,8 +14,8 @@ namespace BF
 
 				bool useGravity;
 				float speed;
-				Math::Vector2 direction;
-				Math::Vector2 veclotiy;
+				Math::Vector2f direction;
+				Math::Vector2f veclotiy;
 				//Math::Vector2 testVeclotiy;
 				bool correctCollisionPosition = false;
 

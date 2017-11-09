@@ -52,8 +52,8 @@ namespace BF
 #endif
 
 			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), 0);
-			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(Mesh::PUVNVertexData), sizeof(Vector3));
-			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), sizeof(Vector3) + sizeof(Vector2));
+			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f));
+			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f) + sizeof(Vector2f));
 		}
 
 		void Terrain::Load(const std::string& filename)
@@ -62,8 +62,8 @@ namespace BF
 
 			Mesh::PUVNVertexData* vertices = new Mesh::PUVNVertexData[VERTICES_SIZE];
 
-			Vector3 startingPosition;
-			Vector2 size = Vector2(2.0f, 2.0f);
+			Vector3f startingPosition;
+			Vector2f size = Vector2f(2.0f, 2.0f);
 			int stride = 32 / 8;
 			unsigned int* indecies = new unsigned int[INDICES_SIZE];
 			int index = 0;
@@ -78,7 +78,7 @@ namespace BF
 
 					float normalizedData = Normalize(textureData->buffer[((x * stride) + (z * textureData->width * stride))], 0, 256);
 
-					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z), Vector2(), Vector3(0.0f, 1.0f, 0.0f));
+					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{

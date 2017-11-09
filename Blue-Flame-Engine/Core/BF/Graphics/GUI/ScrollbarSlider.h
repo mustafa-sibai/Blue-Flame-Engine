@@ -23,7 +23,7 @@ namespace BF
 
 				int length;
 				bool doonce = false;
-				Math::Vector2 delta;
+				Math::Vector2f delta;
 
 			public:
 				ScrollbarSlider(Scrollbar& scrollbar, Orientation orientation);

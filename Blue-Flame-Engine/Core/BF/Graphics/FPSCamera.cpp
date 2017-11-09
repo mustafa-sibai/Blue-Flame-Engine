@@ -24,9 +24,9 @@ namespace BF
 		{
 			Camera::Initialize(projectionMatrix);
 
-			cameraFront = Vector3(0.0f, 0.0f, 1.0f);
-			cameraUp = Vector3(0.0f, 1.0f, 0.0f);
-			windowCenter = Vector2(floor((float)Engine::GetWindow().GetClientWidth() / 2.0f), floor((float)Engine::GetWindow().GetClientHeight() / 2.0f));
+			cameraFront = Vector3f(0.0f, 0.0f, 1.0f);
+			cameraUp = Vector3f(0.0f, 1.0f, 0.0f);
+			windowCenter = Vector2f(floor((float)Engine::GetWindow().GetClientWidth() / 2.0f), floor((float)Engine::GetWindow().GetClientHeight() / 2.0f));
 			BF::Input::Mouse::ShowMouseCursor(false);
 			BF::Input::Mouse::SetPosition(windowCenter);
 		}
@@ -74,7 +74,7 @@ namespace BF
 			cameraFront = cameraFront.Normalize();
 
 			systemBuffer.viewMatrix = Matrix4::LookAt(position, position + cameraFront, cameraUp);
-			systemBuffer.cameraPosition = Vector4(position.x, position.y, position.z, 1.0f);
+			systemBuffer.cameraPosition = Vector4f(position.x, position.y, position.z, 1.0f);
 			Camera::Update();
 		}
 	}

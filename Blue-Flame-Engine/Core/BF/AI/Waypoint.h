@@ -17,12 +17,12 @@ namespace BF
 				friend class Waypoint;
 
 				private:
-					Math::Vector2 position;
+					Math::Vector2f position;
 					bool arrived;
 
 				public:
 					Node() = default;
-					Node(Math::Vector2 position) : position(position), arrived(false) { }
+					Node(Math::Vector2f position) : position(position), arrived(false) { }
 
 					inline bool HasArrived() const { return arrived; }
 			};
@@ -33,8 +33,8 @@ namespace BF
 
 			Node* previousNode;
 
-			Math::Vector2 position;
-			Math::Vector2 direction;
+			Math::Vector2f position;
+			Math::Vector2f direction;
 			unsigned int currentIndex;
 			float length;
 			bool reachedFinalWaypoint;

@@ -16,13 +16,12 @@ namespace BF
 			class BF_API StyleSheet
 			{
 				private:
-					const API::Shader& shader;
 					std::string styleSheetNode;
 					std::unordered_map<std::string, WidgetData> widgetsData;
 					API::Texture2D* texture;
 
 				public:
-					StyleSheet(const API::Shader& shader);
+					StyleSheet();
 					~StyleSheet();
 
 					void Load(const std::string& filename);

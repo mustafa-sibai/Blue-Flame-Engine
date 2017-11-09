@@ -19,7 +19,7 @@ namespace BF
 				Scrollbar horizontalScrollbar;
 				Scrollbar verticalScrollbar;
 
-				Math::Vector2 contentPosition, contentLocalPosition;
+				Math::Vector2f contentPosition, contentLocalPosition;
 				Math::Rectangle contentRectangle, contentLocalRectangle;
 				Math::Rectangle scissorRectangle;
 
@@ -27,16 +27,16 @@ namespace BF
 				Panel(Application::Scene& scene);
 				~Panel();
 
-				void SetPosition(const Math::Vector2& position) override;
-				void SetContentLocalPosition(const Math::Vector2& contentLocalPosition);
+				void SetPosition(const Math::Vector2f& position) override;
+				void SetContentLocalPosition(const Math::Vector2f& contentLocalPosition);
 
 				void SetRectangle(const Math::Rectangle& rectangle) override;
 				void SetContentLocalRectangle(const Math::Rectangle& contentLocalRectangle);
 
 				void SetScissorRectangle(Math::Rectangle scissorRectangle);
 
-				inline const Math::Vector2& GetContentPosition() const { return contentPosition; }
-				inline const Math::Vector2& GetContentLocalPosition() const { return contentLocalPosition; }
+				inline const Math::Vector2f& GetContentPosition() const { return contentPosition; }
+				inline const Math::Vector2f& GetContentLocalPosition() const { return contentLocalPosition; }
 
 				inline const Math::Rectangle& GetContentRectangle() const { return contentRectangle; }
 				inline const Math::Rectangle& GetContentLocalRectangle() const { return contentLocalRectangle; }
@@ -49,7 +49,7 @@ namespace BF
 				void Update() override;
 				void Render() override;
 
-				void SetContentPosition(const Math::Vector2& contentPosition);
+				void SetContentPosition(const Math::Vector2f& contentPosition);
 				void SetContentRectangle(const Math::Rectangle& contentRectangle);
 			};
 		}

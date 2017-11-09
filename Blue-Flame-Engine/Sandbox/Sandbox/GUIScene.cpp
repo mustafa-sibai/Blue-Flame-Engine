@@ -13,8 +13,7 @@ namespace GUIScene
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	GUIScene::GUIScene() :
-		button(*this), font(spriteRenderer.GetShader()), font2(spriteRenderer.GetShader()), t(spriteRenderer.GetShader())
+	GUIScene::GUIScene()
 	{
 	}
 
@@ -47,7 +46,7 @@ namespace GUIScene
 		text = Text(&font, "Blue Flame Engine !", Math::Rectangle(100, 0, 400, 200), Text::TextAlignment::MiddleCenter, 1, Color(1.0f, 1.0f, 1.0f, 1.0f));
 		text2 = Text(&font2, "WTF", Math::Rectangle(50, 100, 400, 200), Text::TextAlignment::MiddleCenter, 1, Color(1.0f, 1.0f, 1.0f, 1.0f));
 
-		ss = Sprite(&t, Vector2(400, 0), 0, Color(1.0f));
+		ss = Sprite(&t, Vector2f(400, 0), 0, Color(1.0f));
 
 		//text.SetTextAlignment(Text::TextAlignment::TopCenter);
 		text.SetRectangle(Math::Rectangle(50, 0, 0, 0));

@@ -1,5 +1,4 @@
 #include "Rigidbody2D.h"
-#include "BF/System/Log.h"
 #include "BF/Engine.h"
 
 namespace BF
@@ -12,7 +11,7 @@ namespace BF
 			useGravity(false), speed(1.5f), renderable(renderable)
 		{
 			//if (useGravity)
-			direction = Vector2(0.5f, 1.0f);
+			direction = Vector2f(0.5f, 1.0f);
 		}
 
 		Rigidbody2D::~Rigidbody2D()
@@ -29,8 +28,8 @@ namespace BF
 		{
 			BF::Math::Rectangle rectangle = renderable.GetRectangle();
 
-			rectangle.x += veclotiy.x;
-			rectangle.y += veclotiy.y;
+			rectangle.x += (int)veclotiy.x;
+			rectangle.y += (int)veclotiy.y;
 
 			return rectangle;
 		}

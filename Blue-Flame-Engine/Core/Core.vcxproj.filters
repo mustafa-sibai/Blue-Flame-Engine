@@ -30,15 +30,6 @@
     <ClCompile Include="BF\Math\Rectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Math\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Math\Vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Math\Vector4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -271,6 +262,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\IO\ResourceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Network\Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Network\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\GameNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -569,10 +575,25 @@
     <ClInclude Include="BF\IO\Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\VertexData.h">
+    <ClInclude Include="BF\Graphics\PredefinedColors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\PredefinedColors.h">
+    <ClInclude Include="BF\Network\Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Network\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuStrip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\GameNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\VertexData.inl">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -598,5 +619,14 @@
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PN.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUV.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVN.vpshader" />
+    <None Include="BF\Math\Vector2.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\Math\Vector3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\Math\Vector4.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

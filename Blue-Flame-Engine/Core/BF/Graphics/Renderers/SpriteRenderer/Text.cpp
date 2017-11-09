@@ -18,7 +18,7 @@ namespace BF
 			}
 
 			Text::Text(const Fonts::Font* font, const std::string& text, const Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color) :
-				Renderable(Vector2(scissorRectangle.x, scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, Type::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
+				Renderable(Vector2f((float)scissorRectangle.x, (float)scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, Type::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 			{
 				SetText(text);
 			}
@@ -33,104 +33,104 @@ namespace BF
 				SetPosition(position);
 			}
 
-			void Text::SetPosition(const Vector2& position)
+			void Text::SetPosition(const Vector2f& position)
 			{
 				Renderable::SetPosition(position);
-				scissorRectangle.x = position.x;
-				scissorRectangle.y = position.y;
+				scissorRectangle.x = (int)position.x;
+				scissorRectangle.y = (int)position.y;
 				textAlignmentOffset = GetTextAlignmentOffset(alignment);
-				Vector2 pos = position + textAlignmentOffset;
+				Vector2f pos = position + Vector2f((float)textAlignmentOffset.x, (float)textAlignmentOffset.y);
 
 				rectangle.width = 0;
 				rectangle.height = 0;
 
 				for (size_t i = 0; i < text.length(); i++)
 				{
-					unsigned int unicode = text[i] - 32;
+					int unicode = text[i] - 32;
 					pos.y = position.y + textAlignmentOffset.y + font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y;
 
-					characters[i] = Character(pos, font->fontAtlas->characters[0][unicode].scissorRectangle, Vector2(), Vector2());
+					characters[i] = Character(pos, font->fontAtlas->characters[0][unicode].scissorRectangle, Vector2i(), Vector2i());
 					pos.x += font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 
 					if (i < text.length() - 1)
-						rectangle.width += font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
+						rectangle.width += (int)font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 					else
 						rectangle.width += font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 
 					if (font->fontAtlas->characters[0][unicode].scissorRectangle.height + (font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y) > rectangle.height)
-						rectangle.height = font->fontAtlas->characters[0][unicode].scissorRectangle.height + (font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y);
+						rectangle.height = font->fontAtlas->characters[0][unicode].scissorRectangle.height + (int)(font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y);
 				}
 			}
 
 			void Text::SetRectangle(const Rectangle& rectangle)
 			{
-				SetPosition(Vector2(rectangle.x, rectangle.y));
+				SetPosition(Vector2f((float)rectangle.x, (float)rectangle.y));
 			}
 
-			Math::Vector2 Text::GetTextAlignmentOffset(TextAlignment textAlignment)
+			Math::Vector2i Text::GetTextAlignmentOffset(TextAlignment textAlignment)
 			{
 				switch (textAlignment)
 				{
 					case TextAlignment::TopLeft:
 					{
-						return Vector2(0, 0);
+						return Vector2i(0, 0);
 						break;
 					}
 					case TextAlignment::TopCenter:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						Vector2 scissorRectangleSize = Vector2(scissorRectangle.width, scissorRectangle.height);
-						return Vector2((int)(scissorRectangleSize.Center().x - textSize.Center().x), (int)scissorRectangle.y);
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						Vector2i scissorRectangleSize = Vector2i(scissorRectangle.width, scissorRectangle.height);
+						return Vector2i(scissorRectangleSize.Center().x - textSize.Center().x, scissorRectangle.y);
 						break;
 					}
 					case TextAlignment::TopRight:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						return Vector2((int)(scissorRectangle.width - textSize.x), (int)scissorRectangle.y);
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						return Vector2i(scissorRectangle.width - textSize.x, scissorRectangle.y);
 						break;
 					}
 					case TextAlignment::MiddleLeft:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						Vector2 scissorRectangleSize = Vector2(scissorRectangle.width, scissorRectangle.height);
-						return Vector2(0, (int)(scissorRectangleSize.Center().y - textSize.Center().y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						Vector2i scissorRectangleSize = Vector2i(scissorRectangle.width, scissorRectangle.height);
+						return Vector2i(0, scissorRectangleSize.Center().y - textSize.Center().y);
 						break;
 					}
 					case TextAlignment::MiddleCenter:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						Vector2 scissorRectangleSize = Vector2(scissorRectangle.width, scissorRectangle.height);
-						return Vector2((int)(scissorRectangleSize.Center().x - textSize.Center().x), (int)(scissorRectangleSize.Center().y - textSize.Center().y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						Vector2i scissorRectangleSize = Vector2i(scissorRectangle.width, scissorRectangle.height);
+						return Vector2i(scissorRectangleSize.Center().x - textSize.Center().x, scissorRectangleSize.Center().y - textSize.Center().y);
 						break;
 					}
 					case TextAlignment::MiddleRight:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						return Vector2((int)(scissorRectangle.width - textSize.x), (int)(scissorRectangle.Center().y - textSize.Center().y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						return Vector2i(scissorRectangle.width - textSize.x, scissorRectangle.Center().y - textSize.Center().y);
 						break;
 					}
 					case TextAlignment::BottomLeft:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						return Vector2(0, (int)(scissorRectangle.y + scissorRectangle.height - textSize.y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						return Vector2i(0, scissorRectangle.y + scissorRectangle.height - textSize.y);
 						break;
 					}
 					case TextAlignment::BottomCenter:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						Vector2 scissorRectangleSize = Vector2(scissorRectangle.width, scissorRectangle.height);
-						return Vector2((int)(scissorRectangleSize.Center().x - textSize.Center().x), (int)(scissorRectangle.y + scissorRectangle.height - textSize.y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						Vector2i scissorRectangleSize = Vector2i(scissorRectangle.width, scissorRectangle.height);
+						return Vector2i(scissorRectangleSize.Center().x - textSize.Center().x, scissorRectangle.y + scissorRectangle.height - textSize.y);
 						break;
 					}
 					case TextAlignment::BottomRight:
 					{
-						Vector2 textSize = Vector2(rectangle.width, rectangle.height);
-						return Vector2((int)(scissorRectangle.width - textSize.x), (int)(scissorRectangle.y + scissorRectangle.height - textSize.y));
+						Vector2i textSize = Vector2i(rectangle.width, rectangle.height);
+						return Vector2i(scissorRectangle.width - textSize.x, scissorRectangle.y + scissorRectangle.height - textSize.y);
 						break;
 					}
 					default:
 					{
-						return Vector2(0, 0);
+						return Vector2i(0, 0);
 						break;
 					}
 				}
@@ -145,7 +145,7 @@ namespace BF
 			void Text::SetText(const string& text)
 			{
 				Text::text = text;
-				Vector2 pos = position;
+				Vector2f pos = position;
 				rectangle.width = 0;
 				rectangle.height = 0;
 
@@ -154,19 +154,19 @@ namespace BF
 
 				for (size_t i = 0; i < text.length(); i++)
 				{
-					unsigned int unicode = text[i] - 32;
+					int unicode = text[i] - 32;
 					pos.y = position.y + font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y;
 
-					characters.emplace_back(Character(pos, font->fontAtlas->characters[0][unicode].scissorRectangle, Vector2(), Vector2()));
+					characters.emplace_back(Character(pos, font->fontAtlas->characters[0][unicode].scissorRectangle, Vector2i(), Vector2i()));
 					pos.x += font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 
 					if (i < text.length() - 1)
-						rectangle.width += font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
+						rectangle.width += (int)font->fontAtlas->characters[0][unicode].bearing.x + font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 					else
 						rectangle.width += font->fontAtlas->characters[0][unicode].scissorRectangle.width;
 
 					if (font->fontAtlas->characters[0][unicode].scissorRectangle.height + (font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y) > rectangle.height)
-						rectangle.height = font->fontAtlas->characters[0][unicode].scissorRectangle.height + (font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y);
+						rectangle.height = font->fontAtlas->characters[0][unicode].scissorRectangle.height + (int)(font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y);
 				}
 
 				SetTextAlignment(alignment);

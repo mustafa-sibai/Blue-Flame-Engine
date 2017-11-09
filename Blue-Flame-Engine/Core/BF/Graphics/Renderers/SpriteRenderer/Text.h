@@ -26,7 +26,7 @@ namespace BF
 					std::vector<Fonts::Character> characters;
 					std::string text;
 					Math::Rectangle scissorRectangle;
-					Math::Vector2 textAlignmentOffset;
+					Math::Vector2i textAlignmentOffset;
 
 					TextAlignment alignment;
 
@@ -39,11 +39,11 @@ namespace BF
 					void SetText(const std::string& text);
 					void SetTextAlignment(TextAlignment textAlignment);
 
-					void SetPosition(const Math::Vector2& position) override;
+					void SetPosition(const Math::Vector2f& position) override;
 					void SetRectangle(const Math::Rectangle& rectangle) override;
 
 				private:
-					Math::Vector2 GetTextAlignmentOffset(TextAlignment textAlignment);
+					Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
 			};
 		}
 	}

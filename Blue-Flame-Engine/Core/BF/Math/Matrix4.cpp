@@ -45,7 +45,7 @@ namespace BF
 			return identityMatrix;
 		}
 
-		Matrix4 Matrix4::Translate(const Vector3& translation)
+		Matrix4 Matrix4::Translate(const Vector3f& translation)
 		{
 			Matrix4 translateMatrix = Matrix4::Identity();
 
@@ -56,7 +56,7 @@ namespace BF
 			return translateMatrix;
 		}
 
-		Matrix4 Matrix4::Scale(const Vector3& scale)
+		Matrix4 Matrix4::Scale(const Vector3f& scale)
 		{
 			Matrix4 scaleMatrix = Matrix4::Identity();
 
@@ -67,7 +67,7 @@ namespace BF
 			return scaleMatrix;
 		}
 
-		Matrix4 Matrix4::Rotate(float angle, const Vector3& axis)
+		Matrix4 Matrix4::Rotate(float angle, const Vector3f& axis)
 		{
 			Matrix4 rotationMatrix = Matrix4::Identity();
 
@@ -120,13 +120,13 @@ namespace BF
 			return orthographicMatrix;
 		}
 
-		Matrix4 Matrix4::LookAt(const Vector3 &eye, const Vector3 &target, const Vector3 &upVector)
+		Matrix4 Matrix4::LookAt(const Vector3f& eye, const Vector3f& target, const Vector3f& upVector)
 		{
 			Matrix4 viewMatrix = Matrix4::Identity();
 
-			Vector3 forward = (target - eye).Normalize();
-			Vector3 right = upVector.Cross(forward).Normalize();
-			Vector3 up = forward.Cross(right);
+			Vector3f forward = (target - eye).Normalize();
+			Vector3f right = upVector.Cross(forward).Normalize();
+			Vector3f up = forward.Cross(right);
 
 			viewMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = right.x;
 			viewMatrix.elements[0 + 1 * BF_MATRIX_COLUMN_SIZE] = right.y;

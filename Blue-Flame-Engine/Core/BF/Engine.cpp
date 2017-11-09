@@ -55,16 +55,16 @@ namespace BF
 #endif
 	}
 
-	void Engine::Run(Scene& mainScene)
+	void Engine::Run(Application::App& app)
 	{
 #ifdef BF_PLATFORM_WINDOWS
-		winEngineEntryPoint->Run(mainScene);
+		winEngineEntryPoint->Run(app);
 #elif defined (BF_PLATFORM_LINUX)
-		lxEngineEntryPoint->Run(mainScene);
+		lxEngineEntryPoint->Run(app);
 #elif defined (BF_PLATFORM_WEB)
-		webEngineEntryPoint->Run(mainScene);
+		webEngineEntryPoint->Run(app);
 #elif defined (BF_PLATFORM_ANDROID)
-		andEngineEntryPoint->Run(mainScene);
+		andEngineEntryPoint->Run(app);
 #endif
 	}
 

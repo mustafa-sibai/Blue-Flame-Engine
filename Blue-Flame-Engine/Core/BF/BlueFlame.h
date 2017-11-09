@@ -1,9 +1,15 @@
 #pragma once
+#if defined (BF_PLATFORM_WINDOWS)
+#include <BF/Network/Server.h>
+#include <BF/Network/Client.h>
+#endif
+
 #include <BF/Engine.h>
 
 #include <BF/Application/Window.h>
 #include <BF/Application/Scene.h>
 #include <BF/Application/SceneManager.h>
+#include <BF/Application/App.h>
 
 #include <BF/AI/Waypoint.h>
 
@@ -52,7 +58,9 @@
 #include <BF/Graphics/Material.h>
 #include <BF/Graphics/Light.h>
 
+#if defined (BF_PLATFORM_WINDOWS)
 #include <BF/Input/Controller.h>
+#endif
 #include <BF/Input/Keyboard.h>
 #include <BF/Input/Mouse.h>
 

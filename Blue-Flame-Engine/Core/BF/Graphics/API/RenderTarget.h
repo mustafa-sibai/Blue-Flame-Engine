@@ -27,7 +27,7 @@ namespace BF
 					Texture2D texture2D;
 
 				public:
-					RenderTarget(const Shader& shader);
+					RenderTarget();
 					~RenderTarget();
 
 					void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);

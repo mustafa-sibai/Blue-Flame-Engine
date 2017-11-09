@@ -25,10 +25,10 @@ namespace BF
 				API::Texture2D specularMap;
 				API::Texture2D normalMap;
 
-				Material(const API::Shader& shader);
+				Material();
 				~Material();
 
-				void Bind();
+				void Bind(const API::Shader& shader);
 				void Unbind();
 		};
 	}

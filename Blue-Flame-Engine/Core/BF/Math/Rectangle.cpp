@@ -49,9 +49,9 @@ namespace BF
 			return this->width * this->height;
 		}
 
-		Vector2 Rectangle::Center() const
+		Vector2i Rectangle::Center() const
 		{
-			return Vector2(x + (width / 2), y + (height / 2));
+			return Vector2i(x + (width / 2), y + (height / 2));
 		}
 
 		Rectangle& Rectangle::operator+=(const Rectangle& right)

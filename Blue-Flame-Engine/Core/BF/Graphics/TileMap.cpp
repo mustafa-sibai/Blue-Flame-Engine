@@ -29,7 +29,7 @@ namespace BF
 
 			for (size_t i = 0; i < tileMapData->textures.size(); i++)
 			{
-				Texture2D* texture = new Texture2D(spriteRenderer.GetShader());
+				Texture2D* texture = new Texture2D();
 				texture->Load(tileMapData->textures[i]);
 				textures.push_back(texture);
 			}

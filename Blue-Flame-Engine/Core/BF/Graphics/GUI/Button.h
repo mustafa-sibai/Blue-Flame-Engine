@@ -12,7 +12,7 @@ namespace BF
 			class BF_API Button : public Widget
 			{
 				public:
-					Button(Application::Scene& scene);
+					Button();
 					~Button();
 
 				private:

@@ -20,11 +20,10 @@ namespace BF
 				friend class BF::Graphics::Renderers::SpriteRenderer;
 
 				private:
-					const API::Shader& shader;
 					FontAtlas* fontAtlas;
 
 				public:
-					Font(const API::Shader& shader);
+					Font();
 					~Font();
 
 					void Load(const std::string& filename, unsigned int charPixelSize, FontAtlasFactory::Language language);

@@ -11,9 +11,9 @@ namespace BF
 		{
 			struct BF_API SpriteBuffer
 			{
-				Math::Vector2 position;
+				Math::Vector2f position;
 				Color color;
-				Math::Vector2 UV;
+				Math::Vector2f UV;
 				float renderingType;
 			};
 
@@ -27,8 +27,8 @@ namespace BF
 
 				public:
 					Sprite();
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2& position, unsigned int zLayer, const Color& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2& position, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2f& position, unsigned int zLayer, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2f& position, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
 					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
 					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
 					~Sprite();

@@ -12,7 +12,7 @@
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 171021
+#define BF_ENGINE_MINOR_VERSION 171109
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF
@@ -46,10 +46,10 @@ namespace BF
 			static State state;
 
 		public:
-			Engine(const Application::Window& window, Graphics::API::RenderAPI renderAPI);
+			Engine(const BF::Application::Window& window, Graphics::API::RenderAPI renderAPI);
 			~Engine();
 
-			void Run(Application::Scene& mainScene);
+			void Run(Application::App& app);
 
 			static void LimitFrameRate(double limit);
 

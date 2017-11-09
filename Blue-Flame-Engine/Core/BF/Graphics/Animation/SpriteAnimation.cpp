@@ -9,8 +9,8 @@ namespace BF
 		{
 			using namespace std;
 
-			SpriteAnimation::SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer, API::Shader& shader) :
-				spriteRenderer(spriteRenderer), shader(shader), texture(shader)
+			SpriteAnimation::SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer) :
+				spriteRenderer(spriteRenderer)
 			{
 			}
 

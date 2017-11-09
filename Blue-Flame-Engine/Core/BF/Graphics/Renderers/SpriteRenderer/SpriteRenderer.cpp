@@ -39,9 +39,9 @@ namespace BF
 				shader.Bind();
 
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);
-				vertexBufferLayout.Push(1, "COLOR", VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2));
-				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color));
-				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2) + sizeof(Color) + sizeof(Vector2));
+				vertexBufferLayout.Push(1, "COLOR", VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2f));
+				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color));
+				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color) + sizeof(Vector2f));
 
 				unsigned int* indecies = new unsigned int[INDICES_SIZE];
 				int index = 0;
@@ -113,33 +113,33 @@ namespace BF
 
 			void SpriteRenderer::MapLineBuffer(const LineShape& lineShape)
 			{
-				Vector2 normal = Vector2(lineShape.endPoint.y - lineShape.startPoint.y, -(lineShape.endPoint.x - lineShape.startPoint.x)).Normalize() * lineShape.thickness;
+				Vector2f normal = Vector2f(lineShape.endPoint.y - lineShape.startPoint.y, -(lineShape.endPoint.x - lineShape.startPoint.x)).Normalize() * lineShape.thickness;
 
 				//Top Left
 				spriteBuffer->position = lineShape.startPoint + normal;
 				spriteBuffer->color = lineShape.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2(lineShape.endPoint.x + normal.x, lineShape.endPoint.y + normal.y);
+				spriteBuffer->position = Vector2f(lineShape.endPoint.x + normal.x, lineShape.endPoint.y + normal.y);
 				spriteBuffer->color = lineShape.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2(lineShape.endPoint.x - normal.x, lineShape.endPoint.y - normal.y);
+				spriteBuffer->position = Vector2f(lineShape.endPoint.x - normal.x, lineShape.endPoint.y - normal.y);
 				spriteBuffer->color = lineShape.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
 				spriteBuffer->position = lineShape.startPoint - normal;
 				spriteBuffer->color = lineShape.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
@@ -149,30 +149,30 @@ namespace BF
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon& regularPolygon)
 			{
 				//Top Left
-				spriteBuffer->position = Vector2((float)regularPolygon.rectangle.x, (float)regularPolygon.rectangle.y);
+				spriteBuffer->position = Vector2f((float)regularPolygon.rectangle.x, (float)regularPolygon.rectangle.y);
 				spriteBuffer->color = regularPolygon.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)regularPolygon.rectangle.y);
+				spriteBuffer->position = Vector2f((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)regularPolygon.rectangle.y);
 				spriteBuffer->color = regularPolygon.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->position = Vector2f((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
 				spriteBuffer->color = regularPolygon.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2((float)regularPolygon.rectangle.x, (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->position = Vector2f((float)regularPolygon.rectangle.x, (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
 				spriteBuffer->color = regularPolygon.color;
-				spriteBuffer->UV = Vector2(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
@@ -201,7 +201,7 @@ namespace BF
 					currentBoundTexture = sprite.texture2D;
 				}
 
-				Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 				CalculateUV(sprite.texture2D, sprite.scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
 				//Top Left
@@ -212,21 +212,21 @@ namespace BF
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2(sprite.position.x + sprite.rectangle.width, sprite.position.y);
+				spriteBuffer->position = Vector2f(sprite.position.x + sprite.rectangle.width, sprite.position.y);
 				spriteBuffer->color = sprite.color;
 				spriteBuffer->UV = topRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2(sprite.position.x + sprite.rectangle.width, sprite.position.y + sprite.rectangle.height);
+				spriteBuffer->position = Vector2f(sprite.position.x + sprite.rectangle.width, sprite.position.y + sprite.rectangle.height);
 				spriteBuffer->color = sprite.color;
 				spriteBuffer->UV = bottomRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2(sprite.position.x, sprite.position.y + sprite.rectangle.height);
+				spriteBuffer->position = Vector2f(sprite.position.x, sprite.position.y + sprite.rectangle.height);
 				spriteBuffer->color = sprite.color;
 				spriteBuffer->UV = bottomLeftUV;
 				spriteBuffer->renderingType = 1;
@@ -259,7 +259,7 @@ namespace BF
 
 				for (size_t i = 0; i < text.characters.size(); i++)
 				{
-					Vector2 topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+					Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 					CalculateUV(text.font->fontAtlas->texture, text.characters[i].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
 					//Top Left
@@ -270,21 +270,21 @@ namespace BF
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position = Vector2(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y);
+					spriteBuffer->position = Vector2f(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y);
 					spriteBuffer->color = text.color;
 					spriteBuffer->UV = topRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position = Vector2(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
+					spriteBuffer->position = Vector2f(text.characters[i].position.x + (float)text.characters[i].scissorRectangle.width, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
 					spriteBuffer->color = text.color;
 					spriteBuffer->UV = bottomRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position = Vector2((float)text.characters[i].position.x, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
+					spriteBuffer->position = Vector2f((float)text.characters[i].position.x, text.characters[i].position.y + (float)text.characters[i].scissorRectangle.height);
 					spriteBuffer->color = text.color;
 					spriteBuffer->UV = bottomLeftUV;
 					spriteBuffer->renderingType = 2;
@@ -379,18 +379,18 @@ namespace BF
 				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 
-			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2* topLeft, Vector2* topRight, Vector2* bottomRight, Vector2* bottomLeft)
+			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2f* topLeft, Vector2f* topRight, Vector2f* bottomRight, Vector2f* bottomLeft)
 			{
-				*topLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+				*topLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
 									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*topRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+				*topRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
 									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
-				*bottomRight = Vector2(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
+				*bottomRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
 										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
-				*bottomLeft = Vector2(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
+				*bottomLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
 										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}

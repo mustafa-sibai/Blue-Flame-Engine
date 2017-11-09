@@ -17,6 +17,7 @@
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif
 #include "BF/System/Timer.h"
+#include "BF/Application/GameNode.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -38,35 +39,39 @@ namespace BF
 #endif
 
 			private:
+				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+
+			private:
 				System::Timer frameTimer;
 				System::Timer fixedUpdateTimer;
 				System::Timer frameRateTimer;
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				Graphics::GUI::WidgetManager widgetManager;
 #endif
-				bool run;
 				bool initialized;
 				bool loaded;
 				int fixedUpdateTicks;
 
 			public:
+				std::vector<GameNode*> gameNodes;
+
+			public:
 				Scene();
 				~Scene();
 
-				inline void Run() { run = true; }
-				inline void Stop() { run = false; }
-
-				inline bool IsRunning() const { return run; }
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 #endif
 
-			protected:
+		public:
 				virtual void Initialize();
 				virtual void Load();
 				//virtual void FixedUpdate();
 				virtual void Update();
 				virtual void Render();
+
+		private:
+			void RenderNode(GameNode* node);
 		};
 	}
 }

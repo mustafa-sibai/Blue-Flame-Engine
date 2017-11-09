@@ -15,14 +15,14 @@ namespace BF
 					Math::Matrix4 modelMatrix;
 					Math::Matrix4 viewMatrix;
 					Math::Matrix4 projectionMatrix;
-					Math::Vector4 cameraPosition;
+					Math::Vector4f cameraPosition;
 				};
 
 				API::ConstantBuffer constantBuffer;
 
 			protected:
 				SystemBuffer systemBuffer;
-				Math::Vector3 position, direction;
+				Math::Vector3f position, direction;
 
 			public:
 				Camera();
@@ -38,7 +38,7 @@ namespace BF
 				inline const Math::Matrix4& GetSetModelMatrix() const { return systemBuffer.modelMatrix; }
 				inline const Math::Matrix4& GetViewMatrix() const { return systemBuffer.viewMatrix; }
 				inline const Math::Matrix4& GetProjectionMatrix() const { return systemBuffer.projectionMatrix; }
-				inline const Math::Vector3& GetPosition() const { return position; }
+				inline const Math::Vector3f& GetPosition() const { return position; }
 		};
 	}
 }

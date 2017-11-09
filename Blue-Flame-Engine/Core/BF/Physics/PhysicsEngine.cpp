@@ -30,7 +30,7 @@ namespace BF
 						if (rigidbodies[i]->veclotiy > 0)
 						{
 							rigidbodies[i]->veclotiy = 0;
-							rigidbodies[i]->renderable.SetPosition(rigidbodies[i + 1]->renderable.GetPosition() - rigidbodies[i]->renderable.GetRectangle().height);
+							rigidbodies[i]->renderable.SetPosition(rigidbodies[i + 1]->renderable.GetPosition() - (float)rigidbodies[i]->renderable.GetRectangle().height);
 						}
 						else if (rigidbodies[i + 1]->veclotiy > 0)
 						{
@@ -38,11 +38,11 @@ namespace BF
 							{
 								Math::Rectangle ir = rigidbodies[i]->CheckNextFrameCollision().IntersectRectangle(rigidbodies[i + 1]->CheckNextFrameCollision());
 
-								Vector2 d = rigidbodies[i + 1]->direction;
-								Vector2 v = Min(ir.width, ir.height) * d;
+								Vector2f d = rigidbodies[i + 1]->direction;
+								Vector2f v = Min((float)ir.width, (float)ir.height) * d;
 
 								Math::Rectangle r = rigidbodies[i + 1]->CheckNextFrameCollision();
-								Vector2 p(r.x, r.y);
+								Vector2f p((float)r.x, (float)r.y);
 
 								rigidbodies[i + 1]->renderable.SetPosition(p - v);
 								rigidbodies[i + 1]->correctCollisionPosition = true;

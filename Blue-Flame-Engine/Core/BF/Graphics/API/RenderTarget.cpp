@@ -6,8 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			RenderTarget::RenderTarget(const Shader& shader) : 
-				texture2D(shader)
+			RenderTarget::RenderTarget()
 			{
 			}
 

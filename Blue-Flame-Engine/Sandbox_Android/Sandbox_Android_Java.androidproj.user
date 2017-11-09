@@ -5,7 +5,25 @@
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
     <AndroidDeviceID>10160a5139d90b02;nobleltejv</AndroidDeviceID>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>10160a5139d90b02;nobleltejv</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>10160a5139d90b02;nobleltejv</AndroidDeviceID>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'">
     <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -13,7 +31,23 @@
     <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
     <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -22,7 +56,25 @@
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
     <AndroidDeviceID>emulator-5554;x64</AndroidDeviceID>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;x64</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;x64</AndroidDeviceID>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
     <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -31,7 +83,25 @@
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
     <AndroidDeviceID>emulator-5554;VisualStudio_android-23_x86_phone</AndroidDeviceID>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;VisualStudio_android-23_x86_phone</AndroidDeviceID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+    <AndroidDeviceID>emulator-5554;VisualStudio_android-23_x86_phone</AndroidDeviceID>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
+    <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
     <LaunchActivity>com.Sandbox.Sandbox</LaunchActivity>
     <DebuggerFlavor>AndroidDebugger</DebuggerFlavor>
   </PropertyGroup>

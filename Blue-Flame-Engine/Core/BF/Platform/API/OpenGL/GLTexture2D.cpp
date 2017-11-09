@@ -14,8 +14,8 @@ namespace BF
 				using namespace std;
 				using namespace BF::Graphics::API;
 
-				GLTexture2D::GLTexture2D(const GLShader& glShader) :
-					glShader(glShader), textureID(0), AFLevel(0.0f)
+				GLTexture2D::GLTexture2D() :
+					textureID(0), AFLevel(0.0f)
 				{
 				}
 
@@ -125,7 +125,7 @@ namespace BF
 					GLCall(glBindTexture(GL_TEXTURE_2D, textureID));
 				}
 
-				void GLTexture2D::Bind(const string& samplerName, unsigned int index) const
+				void GLTexture2D::Bind(const GLShader& glShader, const string& samplerName, unsigned int index) const
 				{
 					GLCall(glActiveTexture(GL_TEXTURE0 + index));
 					GLCall(glBindTexture(GL_TEXTURE_2D, textureID));

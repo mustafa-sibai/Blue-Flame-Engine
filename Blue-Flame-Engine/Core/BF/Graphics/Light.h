@@ -9,7 +9,7 @@ namespace BF
 	{
 		struct LightBuffer
 		{
-			Math::Vector4 posDir;
+			Math::Vector4f posDir;
 
 			Color ambientColor;
 			Color diffuseColor;

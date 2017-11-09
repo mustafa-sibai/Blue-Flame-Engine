@@ -1,4 +1,5 @@
 #include "StyleSheet.h"
+#include "BF/Engine.h"
 
 namespace BF
 {
@@ -12,10 +13,10 @@ namespace BF
 			using namespace BF::Graphics::Fonts;
 			using namespace BF::Math;
 
-			StyleSheet::StyleSheet(const API::Shader& shader) :
-				shader(shader), styleSheetNode("GUIStyle")
+			StyleSheet::StyleSheet() : 
+				styleSheetNode("GUIStyle")
 			{
-				texture = new Texture2D(shader);
+				texture = new Texture2D();
 			}
 
 			StyleSheet::~StyleSheet()
@@ -36,6 +37,7 @@ namespace BF
 				LoadWidget(xmlDocument, "Panel");
 				LoadWidget(xmlDocument, "Scrollbar");
 				LoadWidget(xmlDocument, "ScrollbarSlider");
+				LoadWidget(xmlDocument, "MenuStrip");
 			}
 
 			Math::Rectangle StyleSheet::ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName, const string& state, const string& type)
@@ -52,10 +54,23 @@ namespace BF
 			{
 				const char* x = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("MinWidth");
 				const char* y = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("MinHeight");
-				const char* width = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Width");
-				const char* height = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Height");
+				const char* char_width = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Width");
+				const char* char_height = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Height");
 
-				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
+				unsigned int width = 0;
+				unsigned int height = 0;
+
+				if (strcmp(char_width, "ScreenWidth") == 0)
+					width = BF::Engine::GetWindow().GetClientWidth();
+				else
+					width = atoi(char_width);
+
+				if (strcmp(char_height, "ScreenHeight") == 0)
+					height = BF::Engine::GetWindow().GetClientHeight();
+				else
+					height = atoi(char_height);
+
+				return Rectangle(atoi(x), atoi(y), width, height);
 			}
 
 			void StyleSheet::SetText(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData)
@@ -65,7 +80,7 @@ namespace BF
 					string fontfilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
 					const char* size = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Size");
 
-					widgetData.font = new Font(shader);
+					widgetData.font = new Font();
 					widgetData.font->Load(fontfilename, atoi("20"), FontAtlasFactory::Language::English);
 
 					std::string text = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("String");

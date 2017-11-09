@@ -1,6 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Client-Debug|Win32">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|Win32">
+      <Configuration>Client-Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -17,8 +33,25 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|Win32">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|Win32">
+      <Configuration>Server-Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
     <ClCompile Include="BF\Application\SceneManager.cpp" />
@@ -74,9 +107,8 @@
     <ClCompile Include="BF\Math\Math.cpp" />
     <ClCompile Include="BF\Math\Matrix4.cpp" />
     <ClCompile Include="BF\Math\Rectangle.cpp" />
-    <ClCompile Include="BF\Math\Vector2.cpp" />
-    <ClCompile Include="BF\Math\Vector3.cpp" />
-    <ClCompile Include="BF\Math\Vector4.cpp" />
+    <ClCompile Include="BF\Network\Client.cpp" />
+    <ClCompile Include="BF\Network\Server.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXConstantBuffer.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXContext.cpp" />
     <ClCompile Include="BF\Platform\API\DirectX\DXError.cpp" />
@@ -105,8 +137,11 @@
     <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp" />
+    <ClCompile Include="BF\Application\GameNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
     <ClInclude Include="BF\Application\Scene.h" />
     <ClInclude Include="BF\Application\SceneManager.h" />
@@ -158,7 +193,7 @@
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
-    <ClInclude Include="BF\Graphics\VertexData.h" />
+    <ClInclude Include="BF\Graphics\VertexData.inl" />
     <ClInclude Include="BF\Input\Controller.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
@@ -177,6 +212,8 @@
     <ClInclude Include="BF\Math\Vector2.h" />
     <ClInclude Include="BF\Math\Vector3.h" />
     <ClInclude Include="BF\Math\Vector4.h" />
+    <ClInclude Include="BF\Network\Client.h" />
+    <ClInclude Include="BF\Network\Server.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXConstantBuffer.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXContext.h" />
     <ClInclude Include="BF\Platform\API\DirectX\DXError.h" />
@@ -207,6 +244,8 @@
     <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
     <ClInclude Include="BF\IO\ResourceManager.h" />
+    <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuStrip.h" />
+    <ClInclude Include="BF\Application\GameNode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -230,14 +269,31 @@
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Math\Vector2.inl" />
+    <None Include="BF\Math\Vector3.inl" />
+    <None Include="BF\Math\Vector4.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>
     <RootNamespace>Core</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -252,6 +308,22 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -259,7 +331,37 @@
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -275,17 +377,55 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
@@ -299,6 +439,20 @@
     <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Release;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Release;$(LibraryPath);$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Release;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Release;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Release;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Release;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -306,7 +460,35 @@
     <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|Win32'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|Win32'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|Win32'">
+    <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <TargetName>BlueFlame</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|Win32'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
@@ -331,6 +513,58 @@
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
 
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -372,6 +606,64 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <Version>
+      </Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <Version>
+      </Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -403,6 +695,74 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
 
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>LIBCMTD</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMTD %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMTD</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>LIBCMTD</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMTD %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -442,6 +802,80 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
 
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>
+      </FloatingPointExceptions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <Version>
+      </Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <FloatingPointExceptions>
+      </FloatingPointExceptions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <Version>
+      </Version>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>

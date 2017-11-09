@@ -7,7 +7,7 @@ namespace BF
 	{
 		using namespace BF::Math;
 
-		Vector2 Mouse::position(0.0f);
+		Vector2f Mouse::position(0.0f);
 		bool Mouse::insideWindowClient = false;
 		bool Mouse::buttons[BF_MAX_MOUSE_BUTTONS];
 
@@ -26,7 +26,7 @@ namespace BF
 			return buttons[(unsigned char)button];
 		}
 
-		void Mouse::SetPosition(Vector2 position)
+		void Mouse::SetPosition(Vector2f position)
 		{
 #ifdef BF_PLATFORM_WINDOWS
 			POINT point;

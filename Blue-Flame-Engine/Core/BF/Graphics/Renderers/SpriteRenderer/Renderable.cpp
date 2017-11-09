@@ -13,7 +13,7 @@ namespace BF
 			{
 			}
 
-			Renderable::Renderable(const Vector2& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type) :
+			Renderable::Renderable(const Vector2f& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type) :
 				position(position), rectangle(rectangle), zLayer(zLayer), color(color), type(type)
 			{
 			}
@@ -22,7 +22,7 @@ namespace BF
 			{
 			}
 
-			void Renderable::SetPosition(const Vector2& position)
+			void Renderable::SetPosition(const Vector2f& position)
 			{
 				this->position = position;
 				this->rectangle.x = (int)position.x;

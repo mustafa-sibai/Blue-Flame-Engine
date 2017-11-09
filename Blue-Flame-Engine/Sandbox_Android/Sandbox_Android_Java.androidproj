@@ -1,6 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Client-Debug|ARM">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|ARM64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x86">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x86">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
@@ -33,6 +65,38 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x86">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x86">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <AndroidBuildType>Gradle</AndroidBuildType>
@@ -50,7 +114,27 @@
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
@@ -60,7 +144,27 @@
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
@@ -70,7 +174,27 @@
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
@@ -80,7 +204,27 @@
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <TargetName>$(TargetName)</TargetName>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <TargetName>$(TargetName)</TargetName>
     <AndroidAPILevel>android-23</AndroidAPILevel>
@@ -100,7 +244,23 @@
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -108,7 +268,23 @@
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -116,7 +292,23 @@
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -124,7 +316,23 @@
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>

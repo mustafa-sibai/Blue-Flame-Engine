@@ -39,7 +39,6 @@ namespace BF
 				private:
 					SpriteAnimationData* data;
 					Renderers::SpriteRenderer& spriteRenderer;
-					API::Shader& shader;
 					API::Texture2D texture;
 					Renderers::Sprite sprite;
 
@@ -47,7 +46,7 @@ namespace BF
 					int keyFrameIndex = 0;
 
 				public:
-					SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer, API::Shader& shader);
+					SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer);
 					~SpriteAnimation();
 
 					void Initialize();

@@ -1,5 +1,6 @@
 #include "Button.h"
 #include "BF/Graphics/GUI/WidgetManager.h"
+#include "BF/Application/SceneManager.h"
 
 namespace BF
 {
@@ -7,9 +8,9 @@ namespace BF
 	{
 		namespace GUI
 		{
-			Button::Button(Application::Scene& scene)
+			Button::Button()
 			{
-				scene.GetWidgetManager().AddWidget(this);
+				BF::Application::SceneManager::GetCurrentScene().GetWidgetManager().AddWidget(this);
 			}
 
 			Button::~Button()

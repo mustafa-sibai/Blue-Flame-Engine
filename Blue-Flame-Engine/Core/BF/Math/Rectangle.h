@@ -17,7 +17,7 @@ namespace BF
 			bool Intersect(const Rectangle& rectangle) const;
 			Rectangle IntersectRectangle(const Rectangle& rectangle) const;
 			int Area() const;
-			Vector2 Center() const;
+			Vector2i Center() const;
 
 			friend Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle);
 			friend Rectangle operator-(const Rectangle& leftRectangle, const Rectangle& rightRectangle);

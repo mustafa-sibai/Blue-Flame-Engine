@@ -1,8 +1,6 @@
 #include "Controller.h"
 #include "BF/System/Log.h"
 
-#ifdef BF_PLATFORM_WINDOWS
-
 namespace BF
 {
 	namespace Input
@@ -54,8 +52,8 @@ namespace BF
 				leftTrigger = (float)state.Gamepad.bLeftTrigger / 255;
 				rightTrigger = (float)state.Gamepad.bRightTrigger / 255;
 
-				leftStick = CalculateStickPosition(Vector2(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY), Vector2(0.05f));
-				rightStick = CalculateStickPosition(Vector2(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY), Vector2(0.05f));
+				leftStick = CalculateStickPosition(Vector2f(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY), Vector2f(0.05f));
+				rightStick = CalculateStickPosition(Vector2f(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY), Vector2f(0.05f));
 			}
 			else if (ID != -1)
 				ID = -1;
@@ -66,11 +64,11 @@ namespace BF
 			return buttons[(unsigned char)button];
 		}
 
-		Vector2 Controller::CalculateStickPosition(Vector2 stickPosition, Vector2 stickDeadZone)
+		Vector2f Controller::CalculateStickPosition(const Vector2f& stickPosition, const Vector2f& stickDeadZone)
 		{
-			Vector2 normalizedPosition = Vector2(Max(-1.0f, stickPosition.x / 32767.0f), Max(-1.0f, stickPosition.y / 32767.0f));
+			Vector2f normalizedPosition = Vector2f(Max(-1.0f, stickPosition.x / 32767.0f), Max(-1.0f, stickPosition.y / 32767.0f));
 
-			Vector2 stick((abs(normalizedPosition.x) < stickDeadZone.x ? 0 : (abs(normalizedPosition.x) - stickDeadZone.x) * (normalizedPosition.x / abs(normalizedPosition.x))),
+			Vector2f stick((abs(normalizedPosition.x) < stickDeadZone.x ? 0 : (abs(normalizedPosition.x) - stickDeadZone.x) * (normalizedPosition.x / abs(normalizedPosition.x))),
 						(abs(normalizedPosition.y) < stickDeadZone.y ? 0 : (abs(normalizedPosition.y) - stickDeadZone.y) * (normalizedPosition.y / abs(normalizedPosition.y))));
 
 			if (stickDeadZone.x > 0) stick.x /= 1 - stickDeadZone.x;
@@ -133,4 +131,3 @@ namespace BF
 		}
 	}
 }
-#endif

@@ -6,8 +6,7 @@ namespace BF
 	{
 		using namespace BF::Graphics::API;
 
-		Material::Material(const Shader& shader) :
-			diffuseMap(shader), specularMap(shader), normalMap(shader)
+		Material::Material()
 		{
 		}
 
@@ -15,11 +14,11 @@ namespace BF
 		{
 		}
 
-		void Material::Bind()
+		void Material::Bind(const Shader& shader)
 		{
-			diffuseMap.Bind("diffuseMap", 1);
-			specularMap.Bind("specularMap", 2);
-			normalMap.Bind("normalMap", 3);
+			diffuseMap.Bind(shader, "diffuseMap", 1);
+			specularMap.Bind(shader, "specularMap", 2);
+			normalMap.Bind(shader, "normalMap", 3);
 		}
 
 		void Material::Unbind()

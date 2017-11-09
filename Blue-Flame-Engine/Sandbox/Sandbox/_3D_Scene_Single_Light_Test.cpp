@@ -12,7 +12,7 @@ namespace _3D_Scene_Single_Light_Test
 	using namespace BF::Input;
 
 	_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test() :
-		cubeModel(shader), cubeMaterial(shader)
+		cubeModel(shader)
 	{
 	}
 
@@ -46,7 +46,7 @@ namespace _3D_Scene_Single_Light_Test
 		cubeMaterial.colorBuffer.shininess = 128.0f;
 		materialConstantBuffer.Update(&cubeMaterial, sizeof(cubeMaterial.colorBuffer));
 
-		light.posDir = Vector4(0.0f, -1.0f, 8.0f, 1.0f);
+		light.posDir = Vector4f(0.0f, -1.0f, 8.0f, 1.0f);
 		light.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		light.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -61,9 +61,9 @@ namespace _3D_Scene_Single_Light_Test
 	void _3D_Scene_Single_Light_Test::Render()
 	{
 		Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, 0.0f, 10.0f)) * Matrix4::Scale(Vector3(1.0f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(0.0f, 0.0f, 10.0f)) * Matrix4::Scale(Vector3f(1.0f)));
 		shader.Bind();
-		cubeMaterial.Bind();
+		cubeMaterial.Bind(shader);
 		cubeModel.Render();
 		cubeMaterial.Unbind();
 		shader.Unbind();
