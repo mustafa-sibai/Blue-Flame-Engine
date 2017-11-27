@@ -138,7 +138,6 @@
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
     <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp" />
-    <ClCompile Include="BF\Application\GameNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -234,7 +233,6 @@
     <ClInclude Include="BF\Platform\API\OpenGL\GLVertexBuffer.h" />
     <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
-    <ClInclude Include="BF\System\Log.h" />
     <ClInclude Include="BF\System\Timer.h" />
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
     <ClInclude Include="BF\Graphics\GUI\Label.h" />
@@ -246,6 +244,7 @@
     <ClInclude Include="BF\IO\ResourceManager.h" />
     <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuStrip.h" />
     <ClInclude Include="BF\Application\GameNode.h" />
+    <ClInclude Include="BF\System\Debug.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -272,6 +271,7 @@
     <None Include="BF\Math\Vector2.inl" />
     <None Include="BF\Math\Vector3.inl" />
     <None Include="BF\Math\Vector4.inl" />
+    <None Include="BF\System\Debug.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDB20F4C-0F5C-43C1-8165-569F68720BDF}</ProjectGuid>

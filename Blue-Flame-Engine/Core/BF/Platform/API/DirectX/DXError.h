@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -9,13 +9,13 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				const char* GetDXError(HRESULT hr);
+				std::string GetDXError(HRESULT hr);
 
 #ifdef _DEBUG
 #define DXCall(stmt) \
 				do { HRESULT hr = stmt; \
 					 if (hr != S_OK) \
-						BF_LOG_ERROR("D3D11 %s - %s", GetDXError(hr), #stmt); \
+						BF_LOG_ERROR("D3D11 " + GetDXError(hr) + " - " + #stmt); \
 				} while (false)
 #else
 #define DXCall(stmt) stmt

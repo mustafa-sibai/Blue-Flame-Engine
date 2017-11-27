@@ -1,6 +1,6 @@
 #include "WidgetManager.h"
 #include "BF/Engine.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {

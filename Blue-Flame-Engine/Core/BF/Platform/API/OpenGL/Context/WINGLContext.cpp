@@ -41,7 +41,7 @@ namespace BF
 
 					GLenum err = glewInit();
 					if (GLEW_OK != err)
-						BF_LOG_ERROR("Error: %s", glewGetErrorString(err));
+						BF_LOG_ERROR("Error: " + std::string((const char*)glewGetErrorString(err)));
 
 					if (wglewIsSupported("WGL_ARB_create_context") == 1)
 					{
@@ -62,13 +62,13 @@ namespace BF
 						BF_LOG_ERROR("Failed to create an OpenGL 3.x and above context.");
 					}
 
-					BF_LOG_INFO("OPENGL VERSION %s", (char*)glGetString(GL_VERSION));
-					BF_LOG_INFO("Graphics Card: %s - %s", glGetString(GL_VENDOR), glGetString(GL_RENDERER));
-					BF_LOG_INFO("Status: Using GLEW %s", glewGetString(GLEW_VERSION));
+					BF_LOG_INFO("OPENGL VERSION " + std::string((char*)glGetString(GL_VERSION)));
+					BF_LOG_INFO("Graphics Card: " + std::string((char*)glGetString(GL_VENDOR)) + " - " + std::string((char*)glGetString(GL_RENDERER)));
+					BF_LOG_INFO("Status: Using GLEW " + std::string((char*)glewGetString(GLEW_VERSION)));
 
 					GLint r;
 					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
-					BF_LOG_INFO("%d", r);
+					BF_LOG_INFO(r);
 
 					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
 					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

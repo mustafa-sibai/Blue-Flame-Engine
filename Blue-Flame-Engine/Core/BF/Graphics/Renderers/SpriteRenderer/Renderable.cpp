@@ -7,15 +7,17 @@ namespace BF
 		namespace Renderers
 		{
 			using namespace BF::Math;
+			using namespace BF::Application;
 
 			Renderable::Renderable() :
 				position(), zLayer(0), rectangle(), color()
 			{
 			}
 
-			Renderable::Renderable(const Vector2f& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type) :
-				position(position), rectangle(rectangle), zLayer(zLayer), color(color), type(type)
+			Renderable::Renderable(const Vector2f& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, NodeType nodeType) :
+				position(position), rectangle(rectangle), zLayer(zLayer), color(color)
 			{
+				GameNode::nodeType = nodeType;
 			}
 
 			Renderable::~Renderable()

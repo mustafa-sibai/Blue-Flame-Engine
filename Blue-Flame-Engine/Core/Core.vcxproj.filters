@@ -273,9 +273,6 @@
     <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Application\GameNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Application\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -300,9 +297,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Platform\API\OpenGL\GLError.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\System\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Math\Math.h">
@@ -596,6 +590,9 @@
     <ClInclude Include="BF\Graphics\VertexData.inl">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\System\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -626,6 +623,9 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="BF\Math\Vector4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\System\Debug.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "Widget.h"
 #include "BF/Graphics/GUI/StyleSheet.h"
 #include "BF/Input/Mouse.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -13,11 +13,13 @@ namespace BF
 			using namespace std;
 			using namespace BF::Math;
 			using namespace BF::Input;
+			using namespace BF::Application;
 			using namespace BF::Graphics::Renderers;
 
 			Widget::Widget() :
 				currentSprite(nullptr), OnClickCallBack(nullptr), callBackPointer(nullptr), currentState(0), mouseNotPressedOnWidget(false), hovered(false), pressed(false), pressedAndReleased(false)
 			{
+				GameNode::nodeType = GameNode::NodeType::GUI;
 			}
 
 			Widget::~Widget()

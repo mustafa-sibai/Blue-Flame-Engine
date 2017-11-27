@@ -1,5 +1,4 @@
 #include "Rectangle.h"
-#include "BF/System/Log.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -120,29 +119,24 @@ namespace BF
 			return !(*this == right);
 		}
 
-		Rectangle operator+(const Rectangle& leftRectangle, const Rectangle& rightRectangle)
+		Rectangle operator+(const Rectangle& left, const Rectangle& right)
 		{
-			return Rectangle(leftRectangle.x + rightRectangle.x, leftRectangle.y + rightRectangle.y, leftRectangle.width + rightRectangle.width, leftRectangle.height + rightRectangle.height);
+			return Rectangle(left.x + right.x, left.y + right.y, left.width + right.width, left.height + right.height);
 		}
 
-		Rectangle operator-(const Rectangle& leftRectangle, const Rectangle& rightRectangle)
+		Rectangle operator-(const Rectangle& left, const Rectangle& right)
 		{
-			return Rectangle(leftRectangle.x - rightRectangle.x, leftRectangle.y - rightRectangle.y, leftRectangle.width - rightRectangle.width, leftRectangle.height * rightRectangle.height);
+			return Rectangle(left.x - right.x, left.y - right.y, left.width - right.width, left.height * right.height);
 		}
 
-		Rectangle operator*(const Rectangle& leftRectangle, const Rectangle& rightRectangle)
+		Rectangle operator*(const Rectangle& left, const Rectangle& right)
 		{
-			return Rectangle(leftRectangle.x * rightRectangle.x, leftRectangle.y * rightRectangle.y, leftRectangle.width * rightRectangle.width, leftRectangle.height * rightRectangle.height);
+			return Rectangle(left.x * right.x, left.y * right.y, left.width * right.width, left.height * right.height);
 		}
 
-		Rectangle operator/(const Rectangle& leftRectangle, const Rectangle& rightRectangle)
+		Rectangle operator/(const Rectangle& left, const Rectangle& right)
 		{
-			return Rectangle(leftRectangle.x / rightRectangle.x, leftRectangle.y / rightRectangle.y, leftRectangle.width / rightRectangle.width, leftRectangle.height / rightRectangle.height);
-		}
-
-		ostream& operator<<(ostream& os, const Rectangle& rectangle)
-		{
-			return os << "{" << rectangle.x << ", " << rectangle.y << ", " << rectangle.width << ", " << rectangle.height << "}";
+			return Rectangle(left.x / right.x, left.y / right.y, left.width / right.width, left.height / right.height);
 		}
 	}
 }

@@ -9,6 +9,7 @@
 #include "GUIScene.h"
 #include "PhysicsScene.h"
 #include "TestApp.h"
+#include "BF/System/Debug.h"
 
 int main()
 {
@@ -64,6 +65,5 @@ int main()
 
 	system("PAUSE");
 	*/
-	system("PAUSE");
 	return 0;
 }

@@ -19,6 +19,7 @@
 #include "BF/System/Timer.h"
 #include "BF/Application/GameNode.h"
 #include "BF/Common.h"
+#include <unordered_map>
 
 namespace BF
 {
@@ -52,8 +53,7 @@ namespace BF
 				bool loaded;
 				int fixedUpdateTicks;
 
-			public:
-				std::vector<GameNode*> gameNodes;
+				std::unordered_map<std::string, GameNode*> gameNodes;
 
 			public:
 				Scene();
@@ -63,12 +63,16 @@ namespace BF
 				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 #endif
 
-		public:
+			public:
 				virtual void Initialize();
 				virtual void Load();
 				//virtual void FixedUpdate();
 				virtual void Update();
 				virtual void Render();
+
+				GameNode* instantiate(std::string name, GameNode* gameNode);
+				GameNode* instantiate(std::string name, GameNode* gameNode, GameNode* parent);
+				void Destroy(GameNode* gameNode);
 
 		private:
 			void RenderNode(GameNode* node);

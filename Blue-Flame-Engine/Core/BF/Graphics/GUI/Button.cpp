@@ -1,6 +1,5 @@
 #include "Button.h"
 #include "BF/Graphics/GUI/WidgetManager.h"
-#include "BF/Application/SceneManager.h"
 
 namespace BF
 {
@@ -8,21 +7,23 @@ namespace BF
 	{
 		namespace GUI
 		{
+			using namespace std;
+			using namespace BF::Graphics::Renderers;
+
 			Button::Button()
 			{
-				BF::Application::SceneManager::GetCurrentScene().GetWidgetManager().AddWidget(this);
 			}
 
 			Button::~Button()
 			{
 			}
 
-			void Button::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
+			void Button::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 			{
 				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
-			void Button::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
+			void Button::Load(const StyleSheet& StyleSheet, const string& widgetName)
 			{
 				Widget::Load(StyleSheet, "Button");
 			}

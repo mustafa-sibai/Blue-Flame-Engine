@@ -300,27 +300,27 @@ namespace BF
 				{
 					for (size_t i = 0; i < renderables.size(); i++)
 					{
-						switch (renderables[i][0].type)
+						switch (renderables[i][0].nodeType)
 						{
-							case Renderable::Type::Line:
+							case Renderable::NodeType::Line:
 							{
 								LineShape& line = (LineShape&)renderables[i][0];
 								MapLineBuffer(line);
 								break;
 							}
-							case Renderable::Type::RegularPolygon:
+							case Renderable::NodeType::RegularPolygon:
 							{
 								RegularPolygon& regularPolygon = (RegularPolygon&)renderables[i][0];
 								MapPolygonBuffer(regularPolygon);
 								break;
 							}
-							case Renderable::Type::Sprite:
+							case Renderable::NodeType::Sprite:
 							{
 								Sprite& sprite = (Sprite&)renderables[i][0];
 								MapSpriteBuffer(sprite);
 								break;
 							}
-							case Renderable::Type::Text:
+							case Renderable::NodeType::Text:
 							{
 								Text& text = (Text&)renderables[i][0];
 								MapTextBuffer(text);

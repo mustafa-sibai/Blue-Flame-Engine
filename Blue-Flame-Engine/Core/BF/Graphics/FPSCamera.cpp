@@ -2,7 +2,7 @@
 #include "BF/Engine.h"
 #include "BF/Input/Mouse.h"
 #include "BF/Input/Keyboard.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {

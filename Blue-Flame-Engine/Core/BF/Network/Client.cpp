@@ -1,5 +1,5 @@
 #include "Client.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 #define SERVER_IP_ADDRESS "127.0.0.1"
 #define SERVER_PORT "27015"
@@ -21,7 +21,7 @@ namespace BF
 			BF_LOG_INFO("Initializing Winsock 2");
 			iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 			if (iResult != 0) 
-				BF_LOG_ERROR("WSAStartup failed with error: %d\n", iResult);
+				BF_LOG_ERROR("WSAStartup failed with error: " + std::to_string(iResult));
 
 			ZeroMemory(&hints, sizeof(hints));
 			hints.ai_family = AF_UNSPEC;
@@ -32,7 +32,7 @@ namespace BF
 			iResult = getaddrinfo(SERVER_IP_ADDRESS, SERVER_PORT, &hints, &result);
 			if (iResult != 0) 
 			{
-				BF_LOG_ERROR("getaddrinfo failed with error: %d\n", iResult);
+				BF_LOG_ERROR("getaddrinfo failed with error: " + std::to_string(iResult));
 				WSACleanup();
 			}
 		}
@@ -46,7 +46,7 @@ namespace BF
 				ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
 				if (ConnectSocket == INVALID_SOCKET) 
 				{
-					BF_LOG_ERROR("socket failed with error: %ld\n", WSAGetLastError());
+					BF_LOG_ERROR("socket failed with error: " + std::to_string(WSAGetLastError()));
 					WSACleanup();
 				}
 
@@ -65,7 +65,7 @@ namespace BF
 
 			if (ConnectSocket == INVALID_SOCKET) 
 			{
-				BF_LOG_ERROR("Unable to connect to server!\n");
+				BF_LOG_ERROR("Unable to connect to server!");
 				WSACleanup();
 			}
 		}

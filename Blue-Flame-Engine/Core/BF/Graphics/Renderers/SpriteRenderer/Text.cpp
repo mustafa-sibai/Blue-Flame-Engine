@@ -1,5 +1,5 @@
 #include "Text.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -18,7 +18,7 @@ namespace BF
 			}
 
 			Text::Text(const Fonts::Font* font, const std::string& text, const Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color) :
-				Renderable(Vector2f((float)scissorRectangle.x, (float)scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, Type::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
+				Renderable(Vector2f((float)scissorRectangle.x, (float)scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, NodeType::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 			{
 				SetText(text);
 			}

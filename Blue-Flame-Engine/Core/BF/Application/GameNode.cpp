@@ -10,11 +10,16 @@ namespace BF
 		{
 		}
 
+		GameNode::GameNode(NodeType nodeType) : 
+			nodeType(nodeType)
+		{
+		}
+
 		GameNode::~GameNode()
 		{
 		}
 
-		void GameNode::Initialize()
+		/*void GameNode::Initialize()
 		{
 		}
 
@@ -26,12 +31,14 @@ namespace BF
 		{
 		}*/
 
-		void GameNode::Update()
+
+
+		/*void GameNode::Update()
 		{
 		}
 
 		void GameNode::Render()
 		{
-		}
+		}*/
 	}
 }

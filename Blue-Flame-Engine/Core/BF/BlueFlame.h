@@ -69,4 +69,4 @@
 #include <BF/Physics/PhysicsEngine.h>
 
 #include <BF/System/Timer.h>
-#include <BF/System/Log.h>
+#include <BF/System/Debug.h>

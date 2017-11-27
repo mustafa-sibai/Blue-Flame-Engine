@@ -1,6 +1,6 @@
 #include "WINEngineEntryPoint.h"
 #include "BF/Application/App.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -63,7 +63,7 @@ namespace BF
 
 							if (app.frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
 							{
-								BF_LOG_INFO("Frames: %d, LastFrameTime: %f", FPS, deltaTime);
+								BF_LOG_INFO("Frames: " + std::to_string(FPS) + " LastFrameTime: " + std::to_string(deltaTime));
 								app.frameRateTimer.Reset();
 								FPS = 0;
 							}

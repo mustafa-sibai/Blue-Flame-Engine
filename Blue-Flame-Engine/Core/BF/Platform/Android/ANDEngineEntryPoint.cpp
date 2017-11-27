@@ -1,6 +1,6 @@
 #include "ANDEngineEntryPoint.h"
 #include "BF/Application/SceneManager.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 #define BF_FRAME_RATE_TARGET 60.0f
 #define BF_FRAME_TIME_TARGET 1000.0f / BF_FRAME_RATE_TARGET
@@ -89,7 +89,7 @@ namespace BF
 
 								if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
 								{
-									BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
+									BF_LOG_INFO("Frames: " + FPS + "FUPS: " + FUPS + " FrameTime: " + elapsedFrameTime);
 									SceneManager::GetScene(i).frameRateTimer.Reset();
 									FPS = 0;
 									FUPS = 0;

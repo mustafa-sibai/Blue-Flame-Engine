@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				const char* GetDXError(HRESULT hr)
+				std::string GetDXError(HRESULT hr)
 				{
 					switch (hr)
 					{

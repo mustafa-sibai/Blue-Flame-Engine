@@ -1,5 +1,5 @@
 ﻿#include "FontAtlasFactory.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 #include "BF/IO/ResourceManager.h"
 
 namespace BF

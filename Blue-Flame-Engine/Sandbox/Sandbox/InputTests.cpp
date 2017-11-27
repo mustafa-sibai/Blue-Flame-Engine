@@ -412,8 +412,7 @@ void InputTests::Update()
 	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::RightShoulder))
 		BF_LOG_INFO("RightShoulder Pressed !");
 
-	BF_LOG_INFO("leftBumperX %f, leftBumperY %f RightBumperX %f, RightBumperY %f ", BF::Input::Controllers::Primary().GetLeftStike().x, BF::Input::Controllers::Primary().GetLeftStike().y,
-																					BF::Input::Controllers::Primary().GetRightStike().x, BF::Input::Controllers::Primary().GetRightStike().y);
+	BF_LOG_INFO("leftBumper " + BF::Input::Controllers::Primary().GetLeftStike() + " RightBumper " + BF::Input::Controllers::Primary().GetRightStike());
 	//---------------------------------------------------------
 
 	if (BF::Input::Controllers::Primary().IsButtonPressed(BF::Input::Controller::Button::Start))

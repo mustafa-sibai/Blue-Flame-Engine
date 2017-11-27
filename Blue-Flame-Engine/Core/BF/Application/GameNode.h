@@ -1,29 +1,45 @@
 #pragma once
-#include <vector>
+#include <unordered_map>
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Application
 	{
+		class Scene;
+
 		class BF_API GameNode
 		{
-			public:
-				enum class NodeType { Sprite, Mesh, Audio };
+			friend BF::Application::Scene;
+
+			protected:
+				enum class NodeType { Null, Line, RegularPolygon, Sprite, Text, GUI, Mesh, Audio };
 				NodeType nodeType;
 
-				std::vector<GameNode*> gameNodes;
+			public:
+				unsigned int id;
+				std::string name;
+				std::unordered_map<std::string, GameNode*> gameNodes;
+/*
+			public:
+				GameNode();
 
+			protected:
+				GameNode(NodeType nodeType);
+				~GameNode();*/
+
+/*
 			public:
 				GameNode();
 				~GameNode();
 
 			public:
-				virtual void Initialize();
-				virtual void Load();
+				virtual void Initialize() = 0;
+				virtual void Load() = 0;
 				//virtual void FixedUpdate();
-				virtual void Update();
-				virtual void Render();
+				virtual void Update() = 0;
+				virtual void Render() = 0;
+				*/
 		};
 	}
 }

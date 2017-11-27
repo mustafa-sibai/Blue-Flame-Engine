@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				const char* GetGLError(GLenum error)
+				std::string GetGLError(GLenum error)
 				{
 					switch (error)
 					{

@@ -1,5 +1,5 @@
 #include "Server.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 #define SERVER_PORT "27015"
 
@@ -21,7 +21,7 @@ namespace BF
 			BF_LOG_INFO("Initializing Winsock 2");
 			iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 			if (iResult != 0) 
-				BF_LOG_ERROR("WSAStartup failed with error: %d\n", iResult);
+				BF_LOG_ERROR("WSAStartup failed with error: " + std::to_string(iResult));
 
 			ZeroMemory(&hints, sizeof(hints));
 			hints.ai_family = AF_INET;
@@ -33,7 +33,7 @@ namespace BF
 			iResult = getaddrinfo(NULL, SERVER_PORT, &hints, &result);
 			if (iResult != 0) 
 			{
-				BF_LOG_ERROR("getaddrinfo failed with error: %d\n", iResult);
+				BF_LOG_ERROR("getaddrinfo failed with error: " + std::to_string(iResult));
 				WSACleanup();
 			}
 
@@ -41,7 +41,7 @@ namespace BF
 			listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 			if (listenSocket == INVALID_SOCKET) 
 			{
-				BF_LOG_ERROR("socket failed with error: %ld\n", WSAGetLastError());
+				BF_LOG_ERROR("socket failed with error: " + std::to_string(WSAGetLastError()));
 				freeaddrinfo(result);
 				WSACleanup();
 			}
@@ -51,7 +51,7 @@ namespace BF
 			iResult = bind(listenSocket, result->ai_addr, (int)result->ai_addrlen);
 			if (iResult == SOCKET_ERROR) 
 			{
-				BF_LOG_ERROR("bind failed with error: %d\n", WSAGetLastError());
+				BF_LOG_ERROR("bind failed with error: " + std::to_string(WSAGetLastError()));
 				freeaddrinfo(result);
 				closesocket(listenSocket);
 				WSACleanup();
@@ -66,7 +66,7 @@ namespace BF
 			iResult = listen(listenSocket, SOMAXCONN);
 			if (iResult == SOCKET_ERROR) 
 			{
-				BF_LOG_ERROR("listen failed with error: %d\n", WSAGetLastError());
+				BF_LOG_ERROR("listen failed with error: " + std::to_string(WSAGetLastError()));
 				closesocket(listenSocket);
 				WSACleanup();
 			}
@@ -78,7 +78,7 @@ namespace BF
 			clientSocket = accept(listenSocket, NULL, NULL);
 			if (clientSocket == INVALID_SOCKET)
 			{
-				BF_LOG_ERROR("accept failed with error: %d\n", WSAGetLastError());
+				BF_LOG_ERROR("accept failed with error: " + std::to_string(WSAGetLastError()));
 				closesocket(listenSocket);
 				WSACleanup();
 			}
@@ -96,7 +96,7 @@ namespace BF
 			iResult = shutdown(clientSocket, SD_SEND);
 			if (iResult == SOCKET_ERROR) 
 			{
-				printf("shutdown failed with error: %d\n", WSAGetLastError());
+				BF_LOG_ERROR("shutdown failed with error: " + std::to_string(WSAGetLastError()));
 				closesocket(clientSocket);
 				WSACleanup();
 			}

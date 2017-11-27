@@ -71,11 +71,8 @@ namespace BF
 					unsigned int zLayer;
 
 				public:
-					enum class Type { Null, Line, RegularPolygon, Sprite, Text };
-					Type type;
-
 					Renderable();
-					Renderable(const Math::Vector2f& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, Type type);
+					Renderable(const Math::Vector2f& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, NodeType nodeType);
 					~Renderable();
 
 					virtual void SetPosition(const Math::Vector2f& position);

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 
 namespace BF
 {
@@ -39,6 +40,9 @@ namespace BF
 
 			bool operator==(const Vector3& right);
 			bool operator!=(const Vector3& right);
+
+			friend std::string operator+(const std::string& left, const Vector3& right) { return left + "{" + std::to_string(right.x) + ", " + std::to_string(right.y) + ", " + std::to_string(right.z) + "}"; }
+			friend std::string operator+(const Vector3& left, const std::string& right) { return "{" + std::to_string(left.x) + ", " + std::to_string(left.y) + ", " + std::to_string(left.z) + "}" + right; }
 
 			friend Vector3 operator+(const Vector3& left, const Vector3& right) { return Vector3(left.x + right.x, left.y + right.y, left.z + right.z); }
 			friend Vector3 operator-(const Vector3& left, const Vector3& right) { return Vector3(left.x - right.x, left.y - right.y, left.z - right.z); }

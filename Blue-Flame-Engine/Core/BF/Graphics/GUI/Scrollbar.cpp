@@ -1,6 +1,6 @@
 #include "Scrollbar.h"
 #include "BF/Graphics/GUI/Panel.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {

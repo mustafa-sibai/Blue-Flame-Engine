@@ -1,5 +1,5 @@
 #include "BFXLoader.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -22,7 +22,7 @@ namespace BF
 
 			if (!file)
 			{
-				BF_LOG_ERROR("Error: Could not find/open BFX filename: %s\n", filename.c_str());
+				BF_LOG_ERROR("Error: Could not find/open BFX filename: " + filename + "\n");
 				fclose(file);
 				return nullptr;
 			}
@@ -31,7 +31,7 @@ namespace BF
 			fileHeader[8] = '\0';
 			if (strcmp(fileHeader, "BFX FILE") != 0)
 			{
-				BF_LOG_ERROR("Error: Wrong file format: %s\n", filename.c_str());
+				BF_LOG_ERROR("Error: Wrong file format: " + filename + "\n");
 				fclose(file);
 				return nullptr;
 			}

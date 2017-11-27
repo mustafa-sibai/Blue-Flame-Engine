@@ -3,7 +3,7 @@
 #include "BF/Graphics/Mesh.h"
 #include "BF/Math/Math.h"
 #include "BF/IO/ImageLoader.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 #define TERRAIN_WIDTH		256
 #define TERRAIN_HEIGHT		256

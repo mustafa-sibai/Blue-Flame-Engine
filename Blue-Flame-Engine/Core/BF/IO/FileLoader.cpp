@@ -1,6 +1,6 @@
 #include "FileLoader.h"
 #include <string>
-#include "BF/System//Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -17,7 +17,7 @@ namespace BF
 					data += line + "\n";
 			}
 			else
-				BF_LOG_FATAL("Could not read text file %s", filename.c_str());
+				BF_LOG_FATAL("Could not read text file " + filename + "\n");
 
 			return data;
 		}
@@ -37,7 +37,7 @@ namespace BF
 				stream.close();
 			}
 			else
-				BF_LOG_FATAL("Could not read binary file %s", filename.c_str());
+				BF_LOG_FATAL("Could not read binary file " + filename + "\n");
 
 			return data;
 		}

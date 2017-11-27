@@ -24,7 +24,6 @@ namespace BF
 					Renderers::SpriteRenderer spriteRenderer;
 					StyleSheet styleSheet;
 
-				public:
 					std::vector<Widget*> widgets;
 					Widget* currentWidget;
 					Widget* previousWidget;

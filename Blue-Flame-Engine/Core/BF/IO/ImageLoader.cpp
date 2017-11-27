@@ -1,4 +1,4 @@
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 #include "ImageLoader.h"
 #include "BF/Graphics/API/Texture.h"
 
