@@ -1,6 +1,5 @@
 #pragma once
 #include "BF/Graphics/GUI/Widget.h"
-#include "BF/Application/Scene.h"
 #include "BF/Graphics/GUI/Scrollbar.h"
 #include "BF/Common.h"
 
@@ -24,7 +23,7 @@ namespace BF
 				Math::Rectangle scissorRectangle;
 
 			public:
-				Panel(Application::Scene& scene);
+				Panel();
 				~Panel();
 
 				void SetPosition(const Math::Vector2f& position) override;
@@ -45,7 +44,7 @@ namespace BF
 
 			protected:
 				void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer) override;
-				void Load(const StyleSheet& StyleSheet, const std::string& widgetName) override;
+				void Load(const StyleSheet& styleSheet, const std::string& widgetName) override;
 				void Update() override;
 				void Render() override;
 

@@ -1,6 +1,5 @@
 #include "WidgetManager.h"
 #include "BF/Engine.h"
-#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -22,27 +21,24 @@ namespace BF
 			void WidgetManager::AddWidget(Widget* widget)
 			{
 				widgets.emplace_back(widget);
+
+				widgets[widgets.size() - 1]->Initialize(spriteRenderer, (int)(widgets.size() - 1));
+				widgets[widgets.size() - 1]->Load(styleSheet, "");
 			}
 
 			void WidgetManager::Initialize()
 			{
 				spriteRenderer.Initialize();
-
-				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Initialize(spriteRenderer, (int)i);
 			}
 
 			void WidgetManager::Load()
 			{
 				styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
-
-				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Load(styleSheet, "");
 			}
 
 			void WidgetManager::Update()
 			{
-				for (size_t i = 0; i < widgets.size(); i++)
+				/*for (size_t i = 0; i < widgets.size(); i++)
 				{
 					if (widgets[i]->IsMouseOnWidget())
 					{
@@ -60,6 +56,11 @@ namespace BF
 					currentWidget->Update();
 					previousWidget = currentWidget;
 					currentWidget = nullptr;
+				}*/
+
+				for (size_t i = 0; i < widgets.size(); i++)
+				{
+					widgets[i]->Update();
 				}
 			}
 

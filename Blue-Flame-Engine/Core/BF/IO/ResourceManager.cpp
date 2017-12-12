@@ -16,17 +16,17 @@ namespace BF
 		{
 		}
 
-		void ResourceManager::Add(string name, Resource* resource)
+		void ResourceManager::Add(const string& name, Resource* resource)
 		{
 			resources.insert({ name, resource });
 		}
 
-		bool ResourceManager::Exist(string name)
+		bool ResourceManager::Exist(const string& name)
 		{
 			return resources.count(name);
 		}
 
-		Resource* ResourceManager::GetResource(string name)
+		Resource* ResourceManager::GetResource(const string& name)
 		{
 			return resources.at(name);
 		}

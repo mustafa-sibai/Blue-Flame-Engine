@@ -20,7 +20,7 @@ namespace BF
 		{
 		}
 
-		void FPSCamera::Initialize(const Math::Matrix4& projectionMatrix)
+		void FPSCamera::Initialize(const Matrix4& projectionMatrix)
 		{
 			Camera::Initialize(projectionMatrix);
 
@@ -33,13 +33,13 @@ namespace BF
 
 		void FPSCamera::Update()
 		{
-			if (Keyboard::IsKeyDown(Keyboard::Key::Code::W))
+			if (Keyboard::IsKeyHeldDown(Keyboard::Key::Code::W))
 				position += cameraFront * movmentSpeed;
-			if (Keyboard::IsKeyDown(Keyboard::Key::Code::S))
+			if (Keyboard::IsKeyHeldDown(Keyboard::Key::Code::S))
 				position -= cameraFront * movmentSpeed;
-			if (Keyboard::IsKeyDown(Keyboard::Key::Code::D))
+			if (Keyboard::IsKeyHeldDown(Keyboard::Key::Code::D))
 				position += cameraUp.Cross(cameraFront).Normalize() * movmentSpeed;
-			if (Keyboard::IsKeyDown(Keyboard::Key::Code::A))
+			if (Keyboard::IsKeyHeldDown(Keyboard::Key::Code::A))
 				position -= cameraUp.Cross(cameraFront).Normalize() * movmentSpeed;
 
 			if (Keyboard::IsKeyPressed(Keyboard::Key::Code::Escape))
@@ -47,12 +47,12 @@ namespace BF
 				if (!lockMouseToCenter)
 				{
 					lockMouseToCenter = true;
-					BF::Input::Mouse::ShowMouseCursor(false);
+					Mouse::ShowMouseCursor(false);
 				}
 				else if(lockMouseToCenter)
 				{
 					lockMouseToCenter = false;
-					BF::Input::Mouse::ShowMouseCursor(true);
+					Mouse::ShowMouseCursor(true);
 				}
 			}
 

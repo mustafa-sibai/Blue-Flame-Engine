@@ -21,14 +21,14 @@ namespace BF
 
 			public:
 				ColorBuffer colorBuffer;
-				API::Texture2D diffuseMap;
-				API::Texture2D specularMap;
-				API::Texture2D normalMap;
+				BF::Graphics::API::Texture2D diffuseMap;
+				BF::Graphics::API::Texture2D specularMap;
+				BF::Graphics::API::Texture2D normalMap;
 
 				Material();
 				~Material();
 
-				void Bind(const API::Shader& shader);
+				void Bind(const BF::Graphics::API::Shader& shader);
 				void Unbind();
 		};
 	}

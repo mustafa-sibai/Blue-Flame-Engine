@@ -32,7 +32,7 @@ namespace BF
 				
 					if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 					{
-						BF_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!");
+						BF_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!", "");
 					}
 
 					glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -2,7 +2,6 @@
 #include "BF/Graphics/GUI/Scrollbar.h"
 #include "BF/Graphics/GUI/Panel.h"
 #include "BF/Input/Mouse.h"
-#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -32,9 +31,9 @@ namespace BF
 				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
-			void ScrollbarSlider::Load(const StyleSheet& StyleSheet, const string& widgetName)
+			void ScrollbarSlider::Load(const StyleSheet& styleSheet, const string& widgetName)
 			{
-				Widget::Load(StyleSheet, "ScrollbarSlider");
+				Widget::Load(styleSheet, "ScrollbarSlider");
 			}
 
 			void ScrollbarSlider::Update()

@@ -9,8 +9,8 @@ namespace BF
 		struct BF_API TileData
 		{
 			int textureID;
-			Math::Rectangle rectangle;
-			Math::Rectangle scissorRectangle;
+			BF::Math::Rectangle rectangle;
+			BF::Math::Rectangle scissorRectangle;
 		};
 	}
 }

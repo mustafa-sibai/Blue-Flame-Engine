@@ -1,5 +1,7 @@
 #include "WINEngineEntryPoint.h"
 #include "BF/Application/App.h"
+#include "BF/Input/Keyboard.h"
+#include "BF/Input/Mouse.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -10,6 +12,7 @@ namespace BF
 		{
 			using namespace BF::Graphics::API;
 			using namespace BF::Application;
+			using namespace BF::Input;
 
 			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI) :
 				winWindow(winWindow), context(renderAPI), frameRateTarget(0.0f), frameTimeTarget(0.0f)
@@ -49,6 +52,8 @@ namespace BF
 									app.frameTimer.Reset();
 									app.Update();
 									app.Render();
+									Mouse::Update();
+									Keyboard::Update();
 									FPS++;
 								}
 							}
@@ -58,12 +63,14 @@ namespace BF
 								app.frameTimer.Reset();
 								app.Update();
 								app.Render();
+								Mouse::Update();
+								Keyboard::Update();
 								FPS++;
 							}
 
 							if (app.frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
 							{
-								BF_LOG_INFO("Frames: " + std::to_string(FPS) + " LastFrameTime: " + std::to_string(deltaTime));
+								BF_LOG_INFO("Frames: " + std::to_string(FPS) + " LastFrameTime: " + std::to_string(deltaTime), "");
 								app.frameRateTimer.Reset();
 								FPS = 0;
 							}

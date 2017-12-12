@@ -21,8 +21,8 @@ namespace BF
 				VertexStructVersion vertexStructVersion;
 
 			private:
-				API::VertexBuffer* vertexBuffer;
-				API::IndexBuffer* indexBuffer;
+				BF::Graphics::API::VertexBuffer* vertexBuffer;
+				BF::Graphics::API::IndexBuffer* indexBuffer;
 				//std::vector<API::Texture2D*>* textures;
 				void* vertices;
 				//std::vector<Material>* materials;
@@ -33,7 +33,7 @@ namespace BF
 				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, std::vector<Material>* materials*/);
 				~Mesh();
 
-				void SetBuffers(const API::Shader& shader, unsigned int bufferSize);
+				void SetBuffers(const BF::Graphics::API::Shader& shader, unsigned int bufferSize);
 				void SetTexturefilename(std::string textureFilename);
 
 				void Bind() const;
@@ -43,7 +43,7 @@ namespace BF
 				unsigned int getVerticesCount() const;
 
 			public:
-				inline API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
+				inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
 				inline void* GetVertices() const { return vertices; }
 				inline unsigned int GetVerticesCount() const { return getVerticesCount(); }
 				inline std::vector<unsigned int>& GetIndices() const { return indices; }

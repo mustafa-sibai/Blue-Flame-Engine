@@ -51,7 +51,7 @@ namespace BF
 							rigidbodies[i + 1]->veclotiy = 0;
 						}
 
-						BF_LOG_INFO("COLLIIISIONONNN !!");
+						BF_LOG_INFO("COLLIIISIONONNN !!", "");
 					}
 				}
 			}

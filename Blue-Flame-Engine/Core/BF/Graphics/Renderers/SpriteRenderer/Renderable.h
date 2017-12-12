@@ -63,8 +63,8 @@ namespace BF
 					};
 
 				protected:
-					Math::Vector2f position;
-					Math::Rectangle rectangle;
+					BF::Math::Vector2f position;
+					BF::Math::Rectangle rectangle;
 
 				public:
 					Color color;
@@ -72,14 +72,14 @@ namespace BF
 
 				public:
 					Renderable();
-					Renderable(const Math::Vector2f& position, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, NodeType nodeType);
+					Renderable(const BF::Math::Vector2f& position, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, NodeType nodeType);
 					~Renderable();
 
-					virtual void SetPosition(const Math::Vector2f& position);
-					virtual void SetRectangle(const Math::Rectangle& rectangle);
+					virtual void SetPosition(const BF::Math::Vector2f& position);
+					virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
 
-					inline const Math::Vector2f& GetPosition() const { return position; }
-					inline const Math::Rectangle& GetRectangle() const { return rectangle; }
+					inline const BF::Math::Vector2f& GetPosition() const { return position; }
+					inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
 			};
 		}
 	}

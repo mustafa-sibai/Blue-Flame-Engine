@@ -29,16 +29,16 @@ namespace BF
 				fif = FreeImage_GetFIFFromFilename(filename.c_str());
 
 			if (fif == FIF_UNKNOWN)
-				BF_LOG_ERROR("FIF_UNKNOWN");
+				BF_LOG_ERROR("FIF_UNKNOWN", "");
 
 			if (FreeImage_FIFSupportsReading(fif))
 				dib = FreeImage_Load(fif, filename.c_str());
 
 			if (!dib)
-				BF_LOG_ERROR("file not found");
+				BF_LOG_ERROR("file not found", "");
 
 			if (!FreeImage_FlipVertical(dib))
-				BF_LOG_ERROR("failed to flip image");
+				BF_LOG_ERROR("failed to flip image", "");
 
 			FIBITMAP* bitmap = nullptr;
 			bitmap = FreeImage_ConvertTo32Bits(dib);
@@ -50,7 +50,7 @@ namespace BF
 			textureData->height = FreeImage_GetHeight(bitmap);
 
 			if ((textureData->buffer == 0) || (textureData->width == 0) || (textureData->height == 0))
-				BF_LOG_ERROR("file courrpted");
+				BF_LOG_ERROR("file courrpted", "");
 
 			if (FreeImage_GetRedMask(bitmap) == 0xff0000)
 				FreeImage_SwapRedBlue32(bitmap);

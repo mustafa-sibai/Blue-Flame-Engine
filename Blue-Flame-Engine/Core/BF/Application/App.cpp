@@ -16,26 +16,22 @@ namespace BF
 
 		void App::Initialize()
 		{
-			BF::Application::SceneManager::GetScenes()[0]->Initialize();
+			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
 		}
 
 		void App::Load()
 		{
-			BF::Application::SceneManager::GetScenes()[0]->Load();
+			//BF::Application::SceneManager::GetScenes()[0]->Load();
 		}
-
-		/*void Scene::FixedUpdate()
-		{
-		}*/
 
 		void App::Update()
 		{
-			BF::Application::SceneManager::GetScenes()[0]->Update();
+			//BF::Application::SceneManager::GetScenes()[0]->Update();
 		}
 
 		void App::Render()
 		{
-			BF::Application::SceneManager::GetScenes()[0]->Render();
+			//BF::Application::SceneManager::GetScenes()[0]->Render();
 		}
 	}
 }

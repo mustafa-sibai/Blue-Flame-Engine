@@ -11,9 +11,9 @@ namespace BF
 		{
 			struct BF_API SpriteBuffer
 			{
-				Math::Vector2f position;
+				BF::Math::Vector2f position;
 				Color color;
-				Math::Vector2f UV;
+				BF::Math::Vector2f UV;
 				float renderingType;
 			};
 
@@ -22,22 +22,22 @@ namespace BF
 				friend class SpriteRenderer;
 
 				private:
-					const Graphics::API::Texture2D* texture2D;
-					Math::Rectangle scissorRectangle;
+					const BF::Graphics::API::Texture2D* texture2D;
+					BF::Math::Rectangle scissorRectangle;
 
 				public:
 					Sprite();
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2f& position, unsigned int zLayer, const Color& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Vector2f& position, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
-					Sprite(const Graphics::API::Texture2D* texture2D, const Math::Rectangle& rectangle, unsigned int zLayer, const Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
+					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
 					~Sprite();
 
-					void SetTexture(const Graphics::API::Texture2D* texture2D);
-					void SetScissorRectangle(const Math::Rectangle& scissorRectangle);
+					void SetTexture(const BF::Graphics::API::Texture2D* texture2D);
+					void SetScissorRectangle(const BF::Math::Rectangle& scissorRectangle);
 
-					inline const Graphics::API::Texture2D* GetTexture() const { return texture2D; }
-					inline const Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
+					inline const BF::Graphics::API::Texture2D* GetTexture() const { return texture2D; }
+					inline const BF::Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
 			};
 		}
 	}

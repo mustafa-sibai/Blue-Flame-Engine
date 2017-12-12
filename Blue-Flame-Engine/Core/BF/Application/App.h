@@ -49,7 +49,6 @@ namespace BF
 		public:
 			virtual void Initialize();
 			virtual void Load();
-			//virtual void FixedUpdate();
 			virtual void Update();
 			virtual void Render();
 		};

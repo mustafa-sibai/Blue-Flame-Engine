@@ -1,6 +1,5 @@
 #pragma once
 #include "BF/Graphics/GUI/Widget.h"
-#include "BF/Graphics/GUI/MenuStrip/MenuItem.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -11,19 +10,19 @@ namespace BF
 		{
 			namespace MenuStrip
 			{
-				class BF_API MenuStrip : public Widget
+				class BF_API MenuItem : public Widget
 				{
+					friend class MenuStrip;
+
 					private:
 						const StyleSheet* styleSheet;
-						bool active;
-						bool resetCurrentSprite;
 
 					public:
-						std::vector<MenuItem*> menuItems;
+						std::vector<MenuItem> menuItems;
 
 					public:
-						MenuStrip();
-						~MenuStrip();
+						MenuItem();
+						~MenuItem();
 
 						const MenuItem& Instantiate(std::string name);
 

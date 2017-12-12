@@ -9,8 +9,7 @@ using namespace BF::Graphics::API;
 using namespace BF::Application;
 using namespace BF::Math;
 
-TestPanel::TestPanel(Scene& scene) :
-	Panel(scene)
+TestPanel::TestPanel(Scene& scene)
 {
 	t = new Texture2D();
 }

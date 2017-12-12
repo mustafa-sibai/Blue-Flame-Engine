@@ -22,28 +22,28 @@ namespace BF
 					};
 
 				private:
-					const Fonts::Font* font;
+					const BF::Graphics::Fonts::Font* font;
 					std::vector<Fonts::Character> characters;
 					std::string text;
-					Math::Rectangle scissorRectangle;
-					Math::Vector2i textAlignmentOffset;
+					BF::Math::Rectangle scissorRectangle;
+					BF::Math::Vector2i textAlignmentOffset;
 
 					TextAlignment alignment;
 
 				public:
 					Text();
-					Text(const Fonts::Font* font, const std::string& text, const Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color);
 					~Text();
 
-					void SetFont(const Fonts::Font* font);
+					void SetFont(const BF::Graphics::Fonts::Font* font);
 					void SetText(const std::string& text);
 					void SetTextAlignment(TextAlignment textAlignment);
 
-					void SetPosition(const Math::Vector2f& position) override;
-					void SetRectangle(const Math::Rectangle& rectangle) override;
+					void SetPosition(const BF::Math::Vector2f& position) override;
+					void SetRectangle(const BF::Math::Rectangle& rectangle) override;
 
 				private:
-					Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
+					BF::Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
 			};
 		}
 	}

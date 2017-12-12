@@ -1,5 +1,5 @@
 #pragma once
-#include <string.h>
+#include <string>
 #include "BF/Graphics/Animation/SpriteAnimation.h"
 #include "BF/Common.h"
 
@@ -10,7 +10,7 @@ namespace BF
 		class BF_API BFALoader
 		{
 			public:
-				static Graphics::Animation::SpriteAnimationData* Load(const std::string& filename);
+				static BF::Graphics::Animation::SpriteAnimationData* Load(const std::string& filename);
 		};
 	}
 }

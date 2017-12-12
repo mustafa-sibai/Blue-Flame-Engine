@@ -13,13 +13,13 @@ namespace BF
 				friend class SpriteRenderer;
 
 				private:
-					Math::Vector2f startPoint;
-					Math::Vector2f endPoint;
+					BF::Math::Vector2f startPoint;
+					BF::Math::Vector2f endPoint;
 					float thickness;
 
 				public:
 					LineShape();
-					LineShape(const Math::Vector2f& startPoint, const Math::Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color);
+					LineShape(const BF::Math::Vector2f& startPoint, const BF::Math::Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color);
 					~LineShape();
 			};
 		}

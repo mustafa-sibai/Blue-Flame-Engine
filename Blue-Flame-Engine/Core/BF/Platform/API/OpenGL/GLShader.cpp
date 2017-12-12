@@ -39,7 +39,7 @@ namespace BF
 					{
 						vector<char> shaderErrorMessage(errorLength + 1);
 						GLCall(glGetShaderInfoLog(shaderID, errorLength, NULL, &shaderErrorMessage[0]));
-						BF_LOG_ERROR("Compile Error: " + std::string(&shaderErrorMessage[0]));
+						BF_LOG_ERROR("Compile Error: ", &shaderErrorMessage[0]);
 					}
 
 					return shaderID;
@@ -59,7 +59,7 @@ namespace BF
 					{
 						vector<char> ProgramErrorMessage(errorLength + 1);
 						GLCall(glGetProgramInfoLog(programID, errorLength, NULL, &ProgramErrorMessage[0]));
-						BF_LOG_ERROR("Link Error: " + std::string(&ProgramErrorMessage[0]));
+						BF_LOG_ERROR("Link Error: ", &ProgramErrorMessage[0]);
 					}
 
 					GLCall(glDetachShader(programID, compiledVertexShader));

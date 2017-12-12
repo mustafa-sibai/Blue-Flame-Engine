@@ -5,7 +5,7 @@ inline void Debug::Log(T value, Debug::LogLevel level)
 	{
 		case Debug::LogLevel::Info:
 		{		
-			std::cout << "[INFO]: " << value << std::endl;
+			std::cout << "[INFO]: " << value;
 			break;
 		}
 		case Debug::LogLevel::Warning:
@@ -44,10 +44,12 @@ static void SetConsoleColor(int colorCode)
 
 #define __filename__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 
-#define BF_LOG_INFO(x)		do { BF::System::SetConsoleColor(15); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Info);																	BF::System::SetConsoleColor(15); } while(false)
-#define BF_LOG_WARNING(x)	do { BF::System::SetConsoleColor(14); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Warning);	printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
-#define BF_LOG_ERROR(x)		do { BF::System::SetConsoleColor(12); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Error);	printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
-#define BF_LOG_FATAL(x)		do { BF::System::SetConsoleColor(79); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Fatal);	printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
+#define BF_LOG_INFO(x, ...)		do { BF::System::SetConsoleColor(15); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Info);		printf(__VA_ARGS__); printf("\n");												 BF::System::SetConsoleColor(15); } while(false)
+#define BF_LOG_WARNING(x, ...)	do { BF::System::SetConsoleColor(14); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Warning);	printf(__VA_ARGS__); printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
+#define BF_LOG_ERROR(x, ...)	do { BF::System::SetConsoleColor(12); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Error);	printf(__VA_ARGS__); printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
+#define BF_LOG_FATAL(x, ...)	do { BF::System::SetConsoleColor(79); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Fatal);	printf(__VA_ARGS__); printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
+
+#define BF_IS_NULL(x) x == NULL ? NULL : x; if(x == NULL) BF_LOG_FATAL("This value is NULL ", #x);
 
 #elif defined(BF_PLATFORM_ANDROID)
 /*

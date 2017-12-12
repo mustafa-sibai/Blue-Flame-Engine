@@ -15,7 +15,7 @@ namespace BF
 #define DXCall(stmt) \
 				do { HRESULT hr = stmt; \
 					 if (hr != S_OK) \
-						BF_LOG_ERROR("D3D11 " + GetDXError(hr) + " - " + #stmt); \
+						BF_LOG_ERROR("D3D11 " + GetDXError(hr) + " - " + #stmt, ""); \
 				} while (false)
 #else
 #define DXCall(stmt) stmt

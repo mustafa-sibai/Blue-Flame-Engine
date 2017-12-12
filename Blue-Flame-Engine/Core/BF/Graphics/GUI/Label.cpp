@@ -1,5 +1,4 @@
 #include "Label.h"
-#include "BF/Graphics/GUI/WidgetManager.h"
 
 namespace BF
 {
@@ -9,9 +8,8 @@ namespace BF
 		{
 			using namespace BF::Graphics::Fonts;
 
-			Label::Label(Application::Scene& scene)
+			Label::Label()
 			{
-				scene.GetWidgetManager().AddWidget(this);
 			}
 
 			Label::~Label()
@@ -23,9 +21,9 @@ namespace BF
 				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
-			void Label::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
+			void Label::Load(const StyleSheet& styleSheet, const std::string& widgetName)
 			{
-				Widget::Load(StyleSheet, "Label");
+				Widget::Load(styleSheet, "Label");
 			}
 
 			void Label::Update()

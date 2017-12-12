@@ -14,10 +14,10 @@ namespace BF
 			struct KeyFrame
 			{
 				float time;
-				Math::Rectangle scissorRectangle;
+				BF::Math::Rectangle scissorRectangle;
 
 				KeyFrame() = default;
-				KeyFrame(float time, const Math::Rectangle& scissorRectangle) :
+				KeyFrame(float time, const BF::Math::Rectangle& scissorRectangle) :
 					time(time), scissorRectangle(scissorRectangle)
 				{
 				}
@@ -38,15 +38,15 @@ namespace BF
 			{
 				private:
 					SpriteAnimationData* data;
-					Renderers::SpriteRenderer& spriteRenderer;
-					API::Texture2D texture;
+					BF::Graphics::Renderers::SpriteRenderer& spriteRenderer;
+					BF::Graphics::API::Texture2D texture;
 					Renderers::Sprite sprite;
 
 					System::Timer timer;
 					int keyFrameIndex = 0;
 
 				public:
-					SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer);
+					SpriteAnimation(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer);
 					~SpriteAnimation();
 
 					void Initialize();

@@ -5,8 +5,8 @@ namespace BF
 	namespace Graphics
 	{
 		using namespace std;
-		using namespace BF::Graphics::API;
 		using namespace BF::Math;
+		using namespace BF::Graphics::API;
 
 		Mesh::Mesh(void* vertices, vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, vector<Material>* materials*/) :
 			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)/*, materials(materials), texturefilename("")*/

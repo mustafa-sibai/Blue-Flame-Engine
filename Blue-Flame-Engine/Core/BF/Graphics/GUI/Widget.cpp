@@ -1,7 +1,6 @@
 #include "Widget.h"
 #include "BF/Graphics/GUI/StyleSheet.h"
 #include "BF/Input/Mouse.h"
-#include "BF/System/Debug.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -32,9 +31,9 @@ namespace BF
 				SetZLayer(zLayer);
 			}
 
-			void Widget::Load(const StyleSheet& StyleSheet, const string& widgetName)
+			void Widget::Load(const StyleSheet& styleSheet, const string& widgetName)
 			{
-				widgetData = StyleSheet.GetWidget(widgetName);
+				widgetData = styleSheet.GetWidget(widgetName);
 				currentSprite = &widgetData.sprites[0];
 			}
 
@@ -80,7 +79,7 @@ namespace BF
 
 			void Widget::FireAction()
 			{
-				if (hovered && pressed && !Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (hovered && pressed && !Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					pressed = false;
 					currentSprite = &widgetData.sprites[currentState + 0];
@@ -108,10 +107,10 @@ namespace BF
 				else
 					currentSprite = &widgetData.sprites[currentState + 0];
 
-				if (!hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!hovered && Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 					mouseNotPressedOnWidget = true;
 
-				if (!mouseNotPressedOnWidget && hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!mouseNotPressedOnWidget && hovered && Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					currentSprite = &widgetData.sprites[currentState + 2];
 					pressed = true;
@@ -119,7 +118,7 @@ namespace BF
 
 				FireAction();
 
-				if (!Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					mouseNotPressedOnWidget = false;
 					pressed = false;

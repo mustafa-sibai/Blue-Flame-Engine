@@ -13,14 +13,14 @@ namespace BF
 				bool lockMouseToCenter;
 
 			public:
-				Math::Vector3f cameraFront, cameraUp;
-				Math::Vector2f windowCenter;
+				BF::Math::Vector3f cameraFront, cameraUp;
+				BF::Math::Vector2f windowCenter;
 
 			public:
 				FPSCamera();
 				~FPSCamera();
 
-				void Initialize(const Math::Matrix4& projectionMatrix) override;
+				void Initialize(const BF::Math::Matrix4& projectionMatrix) override;
 				void Update() override;
 		};
 	}

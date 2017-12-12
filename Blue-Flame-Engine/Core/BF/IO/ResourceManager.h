@@ -16,9 +16,9 @@ namespace BF
 				ResourceManager();
 				~ResourceManager();
 
-				static void Add(std::string name, Resource* resource);
-				static bool Exist(std::string name);
-				static Resource* GetResource(std::string name);
+				static void Add(const std::string& name, Resource* resource);
+				static bool Exist(const std::string& name);
+				static Resource* GetResource(const std::string& name);
 		};
 	}
 }

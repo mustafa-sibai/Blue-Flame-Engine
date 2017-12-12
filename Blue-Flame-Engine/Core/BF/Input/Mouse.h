@@ -1,5 +1,6 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
+	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
 	#include "BF/Platform/Windows/WINWindow.h"
 #elif defined(BF_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXWindow.h"
@@ -19,27 +20,49 @@ namespace BF
 		class BF_API Mouse
 		{
 #ifdef BF_PLATFORM_WINDOWS
+			friend class BF::Platform::Windows::WINEngineEntryPoint;
 			friend class BF::Platform::Windows::WINWindow;
 #elif defined(BF_PLATFORM_WEB)
 			friend class BF::Platform::Web::WEBWindow;
 #endif
-			private:
-				static Math::Vector2f position;
-				static bool insideWindowClient;
-				static bool buttons[BF_MAX_MOUSE_BUTTONS];
 
 			public:
-				enum class Button { Left, Right, Middle, X1, X2 };
+				struct Button
+				{
+					friend class BF::Input::Mouse;
+
+#ifdef BF_PLATFORM_WINDOWS
+					friend class BF::Platform::Windows::WINWindow;
+#elif defined(BF_PLATFORM_LINUX)
+					friend class BF::Platform::Linux::LXWindow;
+#elif defined(BF_PLATFORM_WEB)
+					friend class BF::Platform::Web::WEBWindow;
+#endif
+					enum class Code { Left, Right, Middle, X1, X2 };
+
+				private:
+					enum class State { NotPressed, Pressed, TransitionState, HeldDown, Up };
+					State state;
+				};
+
+			private:
+				static BF::Math::Vector2f position;
+				static bool insideWindowClient;
+				static Button buttons[BF_MAX_MOUSE_BUTTONS];
 
 			public:
 				Mouse();
 				~Mouse();
 
-				static bool IsButtonPressed(Button button);
-				static void SetPosition(Math::Vector2f position);
+				static bool IsButtonPressed(Button::Code buttonCode);
+				static bool IsButtonHeldDown(Button::Code buttonCode);
+				static bool IsButtonUp(Button::Code buttonCode);
+
+				static void SetPosition(BF::Math::Vector2f position);
 
 				static void ShowMouseCursor(bool value);
-				inline static Math::Vector2f GetPosition() { return position; }
+
+				inline static BF::Math::Vector2f GetPosition() { return position; }
 				inline static bool IsInsideWindowClient()
 				{
 					if (!insideWindowClient)
@@ -53,6 +76,9 @@ namespace BF
 
 					return false;
 				}
+
+			private:
+				static void Update();
 		};
 	}
 }

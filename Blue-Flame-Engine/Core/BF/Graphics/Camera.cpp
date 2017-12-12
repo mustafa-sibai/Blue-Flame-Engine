@@ -15,7 +15,7 @@ namespace BF
 		{
 		}
 
-		void Camera::Initialize(const Math::Matrix4& projectionMatrix)
+		void Camera::Initialize(const Matrix4& projectionMatrix)
 		{
 			systemBuffer.modelMatrix = Matrix4::Identity();
 			systemBuffer.viewMatrix = Matrix4::Identity();
@@ -29,19 +29,19 @@ namespace BF
 			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
 		}
 
-		void Camera::SetModelMatrix(const Math::Matrix4& modelMatrix)
+		void Camera::SetModelMatrix(const Matrix4& modelMatrix)
 		{
 			systemBuffer.modelMatrix = modelMatrix;
 			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
 		}
 
-		void Camera::SetViewMatrix(const Math::Matrix4& viewMatrix)
+		void Camera::SetViewMatrix(const Matrix4& viewMatrix)
 		{
 			systemBuffer.viewMatrix = viewMatrix;
 			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
 		}
 
-		void Camera::SetProjectionMatrix(const Math::Matrix4& projectionMatrix)
+		void Camera::SetProjectionMatrix(const Matrix4& projectionMatrix)
 		{
 			systemBuffer.projectionMatrix = projectionMatrix;
 			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));

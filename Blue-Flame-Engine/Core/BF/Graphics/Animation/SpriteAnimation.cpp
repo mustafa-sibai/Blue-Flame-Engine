@@ -8,8 +8,11 @@ namespace BF
 		namespace Animation
 		{
 			using namespace std;
+			using namespace BF::IO;
+			using namespace BF::Graphics::Renderers;
+			using namespace BF::Math;
 
-			SpriteAnimation::SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer) :
+			SpriteAnimation::SpriteAnimation(SpriteRenderer& spriteRenderer) :
 				spriteRenderer(spriteRenderer)
 			{
 			}
@@ -24,10 +27,10 @@ namespace BF
 
 			void SpriteAnimation::Load(const string& filename)
 			{
-				data = IO::BFALoader::Load(filename);
+				data = BFALoader::Load(filename);
 				texture.Load(data->textureName);
 
-				sprite = Renderers::Sprite(&texture, Math::Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
+				sprite = Sprite(&texture, Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
 				timer.Reset();
 			}
 

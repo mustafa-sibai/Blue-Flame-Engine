@@ -64,11 +64,11 @@ namespace BF
 #endif
 
 			public:
-				virtual void Initialize();
-				virtual void Load();
-				//virtual void FixedUpdate();
-				virtual void Update();
-				virtual void Render();
+				void Initialize();
+				void Load();
+				//void FixedUpdate();
+				void Update();
+				void Render();
 
 				GameNode* instantiate(std::string name, GameNode* gameNode);
 				GameNode* instantiate(std::string name, GameNode* gameNode, GameNode* parent);

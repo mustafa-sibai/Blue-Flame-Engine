@@ -189,8 +189,10 @@ namespace BF
 
 					case WM_KEYDOWN:
 					{
-						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Null || 
-							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Up)
+						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::TransitionState)
+							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::HeldDown;
+
+						if(Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::NotPressed)
 							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Pressed;
 
 						break;
@@ -198,43 +200,67 @@ namespace BF
 
 					case WM_KEYUP:
 					{
-						Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
+						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::HeldDown ||
+							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::TransitionState)
+							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
+
 						break;
 					}
 
 					case WM_LBUTTONDOWN:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Left] = true;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::NotPressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Pressed;
+
 						break;
 					}
 
 					case WM_LBUTTONUP:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Left] = false;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::Pressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
+
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::HeldDown)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
+
 						break;
 					}
 
 					case WM_MBUTTONDOWN:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Middle] = true;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::NotPressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Pressed;
+
 						break;
 					}
 
 					case WM_MBUTTONUP:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Middle] = false;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::Pressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
+
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::HeldDown)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
+
 						break;
 					}
 
 					case WM_RBUTTONDOWN:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Right] = true;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::NotPressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Pressed;
+
 						break;
 					}
 
 					case WM_RBUTTONUP:
 					{
-						Mouse::buttons[(unsigned char)Mouse::Button::Right] = false;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::Pressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
+
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::HeldDown)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
+
 						break;
 					}
 
@@ -243,9 +269,15 @@ namespace BF
 						int buttonID = GET_XBUTTON_WPARAM(wParam);
 
 						if (buttonID == 1)
-							Mouse::buttons[(unsigned char)Mouse::Button::X1] = true;
+						{
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::NotPressed)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Pressed;
+						}
 						else if (buttonID == 2)
-							Mouse::buttons[(unsigned char)Mouse::Button::X2] = true;
+						{
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::NotPressed)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Pressed;
+						}
 						break;
 					}
 
@@ -254,9 +286,22 @@ namespace BF
 						int buttonID = GET_XBUTTON_WPARAM(wParam);
 
 						if (buttonID == 1)
-							Mouse::buttons[(unsigned char)Mouse::Button::X1] = false;
+						{
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::Pressed)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
+
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::HeldDown)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
+						}
 						else if (buttonID == 2)
-							Mouse::buttons[(unsigned char)Mouse::Button::X2] = false;
+						{
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::Pressed)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
+
+							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::HeldDown)
+								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
+						}
+
 						break;
 					}
 

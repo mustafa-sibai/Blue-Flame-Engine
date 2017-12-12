@@ -12,21 +12,21 @@ namespace BF
 	{
 		class BF_API Terrain
 		{
-		private:
-			API::Shader shader;
-			API::VertexBuffer vertexBuffer;
-			API::IndexBuffer indexBuffer;
-			API::VertexBufferLayout vertexBufferLayout;
-		
-			API::Texture::TextureData* textureData;
+			private:
+				BF::Graphics::API::Shader shader;
+				BF::Graphics::API::VertexBuffer vertexBuffer;
+				BF::Graphics::API::IndexBuffer indexBuffer;
+				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
-		public:
-			Terrain();
-			~Terrain();
+				BF::Graphics::API::Texture::TextureData* textureData;
 
-			void Initialize();
-			void Load(const std::string& filename);
-			void Render();
+			public:
+				Terrain();
+				~Terrain();
+
+				void Initialize();
+				void Load(const std::string& filename);
+				void Render();
 		};
 	}
 }

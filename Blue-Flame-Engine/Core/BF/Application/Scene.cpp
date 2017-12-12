@@ -1,7 +1,6 @@
 #include "Scene.h"
 #include "BF/System/Debug.h"
 
-
 namespace BF
 {
 	namespace Application

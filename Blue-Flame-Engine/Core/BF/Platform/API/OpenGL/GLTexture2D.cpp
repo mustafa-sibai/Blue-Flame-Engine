@@ -46,7 +46,7 @@ namespace BF
 						else
 						{
 							filter = Texture::Filter::Trilinear;
-							BF_LOG_WARNING("Anisotropic filtering is not supported on this hardware. The engine will fall back to Trilinear filtering.");
+							BF_LOG_WARNING("Anisotropic filtering is not supported on this hardware. The engine will fall back to Trilinear filtering.", "");
 						}
 					}
 #endif

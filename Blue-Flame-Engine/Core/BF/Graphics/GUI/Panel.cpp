@@ -7,10 +7,9 @@ namespace BF
 	{
 		namespace GUI
 		{
-			Panel::Panel(Application::Scene& scene) :
+			Panel::Panel() :
 				horizontalScrollbar(*this, ScrollbarSlider::Orientation::Horizontal), verticalScrollbar(*this, ScrollbarSlider::Orientation::Vertical)
 			{
-				scene.GetWidgetManager().AddWidget(this);
 			}
 
 			Panel::~Panel()
@@ -24,11 +23,11 @@ namespace BF
 				verticalScrollbar.Initialize(spriteRenderer, zLayer);
 			}
 
-			void Panel::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
+			void Panel::Load(const StyleSheet& styleSheet, const std::string& widgetName)
 			{
-				Widget::Load(StyleSheet, "Panel");
-				horizontalScrollbar.Load(StyleSheet, "");
-				verticalScrollbar.Load(StyleSheet, "");
+				Widget::Load(styleSheet, "Panel");
+				horizontalScrollbar.Load(styleSheet, "");
+				verticalScrollbar.Load(styleSheet, "");
 			}
 
 			void Panel::SetPosition(const Math::Vector2f& position)

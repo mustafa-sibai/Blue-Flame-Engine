@@ -63,16 +63,16 @@ namespace BF
 				{
 					error = FT_Init_FreeType(&library);
 					if (error != FT_Err_Ok)
-						BF_LOG_ERROR("Could not initialize FreeType !");
+						BF_LOG_ERROR("Could not initialize FreeType !", "");
 					else
 						freeTypeInitialized = true;
 				}
 
 				error = FT_New_Face(library, filename.c_str(), 0, &face);
 				if (error == FT_Err_Unknown_File_Format)
-					BF_LOG_ERROR("FreeType: Unknown file format !");
+					BF_LOG_ERROR("FreeType: Unknown file format !", "");
 				else if (error)
-					BF_LOG_ERROR("FreeType: file not found !");
+					BF_LOG_ERROR("FreeType: file not found !", "");
 
 				//cout << "family_name: " << face->family_name << " style_name: " << face->style_name << endl;
 				//cout << "face_index: " << face->face_index << " num_faces: " << face->num_faces << " num_glyphs: " << face->num_glyphs << endl;
@@ -84,7 +84,7 @@ namespace BF
 
 				error = FT_Set_Pixel_Sizes(face, 0, charPixelSize);
 				if (error != FT_Err_Ok)
-					BF_LOG_ERROR("FreeType: could not set pixel size !");
+					BF_LOG_ERROR("FreeType: could not set pixel size !", "");
 
 				if (language == Language::English)
 				{

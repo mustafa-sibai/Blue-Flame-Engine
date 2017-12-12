@@ -138,6 +138,8 @@
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
     <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuItem.cpp" />
+    <ClCompile Include="BF\IO\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -245,6 +247,8 @@
     <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuStrip.h" />
     <ClInclude Include="BF\Application\GameNode.h" />
     <ClInclude Include="BF\System\Debug.h" />
+    <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuItem.h" />
+    <ClInclude Include="BF\IO\SceneLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -415,21 +419,21 @@
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Debug;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Debug;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Release;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Debug;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -504,10 +508,11 @@
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox\Windows\$(Platform)\Binary\$(Configuration)\"
@@ -532,10 +537,11 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -558,10 +564,11 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <PostBuildEvent>
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
@@ -584,13 +591,14 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32sd.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
@@ -615,13 +623,14 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32sd.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
@@ -644,13 +653,14 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32s.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32sd.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
@@ -676,7 +686,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -712,7 +722,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -746,7 +756,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -780,7 +790,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -819,7 +829,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
@@ -856,7 +866,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
-      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>

@@ -26,9 +26,9 @@ namespace BF
 					sprites[6] = Second state pressed sprite
 					sprites[7] = Second state disabled sprite
 				*/
-				Renderers::Sprite sprites[BF_WIDGET_DATA_SPRITES_LENGTH];
-				Fonts::Font* font = nullptr;
-				Renderers::Text text;
+				BF::Graphics::Renderers::Sprite sprites[BF_WIDGET_DATA_SPRITES_LENGTH];
+				BF::Graphics::Fonts::Font* font = nullptr;
+				BF::Graphics::Renderers::Text text;
 
 				int minWidth = 0, minHeight = 0;
 			};
@@ -38,11 +38,11 @@ namespace BF
 				friend class WidgetManager;
 
 				protected:
-					Renderers::SpriteRenderer* spriteRenderer;
+					BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
 
-				private:
+				//private:
 					WidgetData widgetData;
-					Renderers::Sprite* currentSprite;
+					BF::Graphics::Renderers::Sprite* currentSprite;
 
 					unsigned char currentState;
 
@@ -61,12 +61,14 @@ namespace BF
 
 					void AddOnClickListener(void(*OnClickCallBack)(void*), void* obj);
 
-					virtual void SetPosition(const Math::Vector2f& position);
-					virtual void SetRectangle(const Math::Rectangle& rectangle);
+					virtual void SetPosition(const BF::Math::Vector2f& position);
+					virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
 					void SetZLayer(int zLayer);
 
-					inline Math::Vector2f GetPosition() const { return currentSprite->GetPosition(); }
-					inline Math::Rectangle GetRectangle() const { return currentSprite->GetRectangle(); }
+					inline BF::Graphics::Renderers::Text& GetText() { return widgetData.text; }
+
+					inline BF::Math::Vector2f GetPosition() const { return currentSprite->GetPosition(); }
+					inline BF::Math::Rectangle GetRectangle() const { return currentSprite->GetRectangle(); }
 
 					inline bool IsHovered() const { return hovered; }
 					inline bool IsPressed() const { return pressed; }
@@ -75,14 +77,14 @@ namespace BF
 					inline int GetZLayer() const { return currentSprite->zLayer; }
 
 				protected:
-					virtual void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer);
-					virtual void Load(const StyleSheet& StyleSheet, const std::string& widgetName);
+					virtual void Initialize(BF::Graphics::Renderers::SpriteRenderer& spriteRenderer, int zLayer);
+					virtual void Load(const StyleSheet& styleSheet, const std::string& widgetName);
 					virtual void Update();
 					virtual void Render();
 
 					void SwitchState();
 
-				private:
+			protected:
 					bool IsMouseOnWidget();
 					void FireAction();
 					void SetCurrentSpriteToNormal();

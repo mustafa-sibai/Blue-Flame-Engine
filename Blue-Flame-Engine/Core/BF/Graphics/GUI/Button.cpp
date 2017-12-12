@@ -1,5 +1,4 @@
 #include "Button.h"
-#include "BF/Graphics/GUI/WidgetManager.h"
 
 namespace BF
 {
@@ -23,9 +22,9 @@ namespace BF
 				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
-			void Button::Load(const StyleSheet& StyleSheet, const string& widgetName)
+			void Button::Load(const StyleSheet& styleSheet, const string& widgetName)
 			{
-				Widget::Load(StyleSheet, "Button");
+				Widget::Load(styleSheet, "Button");
 			}
 
 			void Button::Update()

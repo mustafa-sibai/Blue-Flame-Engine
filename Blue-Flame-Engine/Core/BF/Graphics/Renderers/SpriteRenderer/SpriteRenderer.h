@@ -22,10 +22,10 @@ namespace BF
 					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
-					API::Shader shader;
-					API::VertexBuffer vertexBuffer;
-					API::IndexBuffer indexBuffer;
-					API::VertexBufferLayout vertexBufferLayout;
+					BF::Graphics::API::Shader shader;
+					BF::Graphics::API::VertexBuffer vertexBuffer;
+					BF::Graphics::API::IndexBuffer indexBuffer;
+					BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
@@ -48,9 +48,9 @@ namespace BF
 					void Render(Renderable&&) = delete;
 					void End();
 
-					void SetScissor(const Math::Rectangle& rectangle);
+					void SetScissor(const BF::Math::Rectangle& rectangle);
 
-					inline const API::Shader& GetShader() const { return shader; }
+					inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
 
 					SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
 
@@ -60,7 +60,7 @@ namespace BF
 					void MapSpriteBuffer(const Sprite& sprite);
 					void MapTextBuffer(const Text& text);
 					void MapBuffer();
-					void CalculateUV(const API::Texture2D* texture, const Math::Rectangle& scissorRectangle, Math::Vector2f* topLeft, Math::Vector2f* topRight, Math::Vector2f* bottomRight, Math::Vector2f* bottomLeft);
+					void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
 			};
 		}
 	}

@@ -13,7 +13,7 @@ namespace TestApp
 			TestApp();
 			~TestApp();
 
-		private:
+		public:
 			void Initialize() override;
 			void Load() override;
 			void Update() override;

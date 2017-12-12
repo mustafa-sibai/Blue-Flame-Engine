@@ -39,7 +39,7 @@ namespace BF
 #elif defined (BF_PLATFORM_ANDROID)
 		Engine::andEngineEntryPoint = new ANDEngineEntryPoint(ANDWindow(window.GetTitle(), window.GetRectangle(), window.GetStyle()), renderAPI);
 #endif
-		BF_LOG_INFO("Blue Flame Engine v" + std::to_string(BF_ENGINE_MAJOR_VERSION) + "." + std::to_string(BF_ENGINE_MINOR_VERSION) + "." + std::to_string(BF_ENGINE_PATCH_VERSION));
+		BF_LOG_INFO("Blue Flame Engine v" + std::to_string(BF_ENGINE_MAJOR_VERSION) + "." + std::to_string(BF_ENGINE_MINOR_VERSION) + "." + std::to_string(BF_ENGINE_PATCH_VERSION), "");
 	}
 
 	Engine::~Engine()

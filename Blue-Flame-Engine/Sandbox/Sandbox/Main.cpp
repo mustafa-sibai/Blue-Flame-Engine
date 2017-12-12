@@ -1,13 +1,13 @@
 #include <BF/BlueFlame.h>
 
-#include "_2DScene.h"
+//#include "_2DScene.h"
 //#include "_3DScene.h"
-#include "new3DScene.h"
-#include "_3DScene_AF_Test.h"
-#include "_3D_Scene_Single_Light_Test.h"
-#include "InputTests.h"
-#include "GUIScene.h"
-#include "PhysicsScene.h"
+//#include "new3DScene.h"
+//#include "_3DScene_AF_Test.h"
+//#include "_3D_Scene_Single_Light_Test.h"
+//#include "InputTests.h"
+//#include "GUIScene.h"
+//#include "PhysicsScene.h"
 #include "TestApp.h"
 #include "BF/System/Debug.h"
 

@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <string.h>
+#include <string>
 #include "BF/Graphics/TileMap.h"
 #include "BF/Common.h"
 
@@ -12,7 +10,7 @@ namespace BF
 		class BF_API BFMLoader
 		{
 			public:
-				static Graphics::TileMapData* Load(const std::string& filename);
+				static BF::Graphics::TileMapData* Load(const std::string& filename);
 		};
 	}
 }

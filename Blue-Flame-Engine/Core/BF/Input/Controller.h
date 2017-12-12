@@ -25,8 +25,8 @@ namespace BF
 				float leftTrigger;
 				float rightTrigger;
 
-				Math::Vector2f leftStick;
-				Math::Vector2f rightStick;
+				BF::Math::Vector2f leftStick;
+				BF::Math::Vector2f rightStick;
 
 			public:
 				enum class Button { A, B, X, Y, Left, Right, Up, Down, LeftShoulder, RightShoulder, Start, Back };
@@ -37,13 +37,13 @@ namespace BF
 
 				bool IsButtonPressed(Button button) const;
 
-				Math::Vector2f CalculateStickPosition(const Math::Vector2f& stickPosition, const Math::Vector2f& stickDeadZone);
+				BF::Math::Vector2f CalculateStickPosition(const BF::Math::Vector2f& stickPosition, const BF::Math::Vector2f& stickDeadZone);
 
 				inline float GetLeftTrigger() const { return leftTrigger; }
 				inline float GetRightTrigger() const { return rightTrigger; }
 
-				inline const Math::Vector2f& GetLeftStike() const { return leftStick; }
-				inline const Math::Vector2f& GetRightStike() const { return rightStick; }
+				inline const BF::Math::Vector2f& GetLeftStike() const { return leftStick; }
+				inline const BF::Math::Vector2f& GetRightStike() const { return rightStick; }
 
 			private:
 				void Update();
@@ -56,10 +56,7 @@ namespace BF
 
 			private:
 				static Controller controller[XUSER_MAX_COUNT];
-				static System::Timer timer;
-
-			private:
-				static void Update();
+				static BF::System::Timer timer;
 
 			public:
 				inline static const Controller& Primary() { return controller[0]; }
@@ -68,6 +65,7 @@ namespace BF
 				inline static const Controller& Quaternary() { return controller[3]; }
 
 			private:
+				static void Update();
 				static void FindNewDevices();
 				static int* GetOtherControllersIndecies(int controllerIndex);
 		};

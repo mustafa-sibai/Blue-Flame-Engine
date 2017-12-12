@@ -18,7 +18,7 @@ namespace BF
 				do { stmt; \
 					GLenum error = glGetError(); \
 					if (error != GL_NO_ERROR) \
-						BF_LOG_ERROR("OpenGL " + GetGLError(error) + " - " + #stmt); \
+						BF_LOG_ERROR("OpenGL " + GetGLError(error) + " - " + #stmt, ""); \
 				} while (false)
 #else
 #define GLCall(stmt) stmt

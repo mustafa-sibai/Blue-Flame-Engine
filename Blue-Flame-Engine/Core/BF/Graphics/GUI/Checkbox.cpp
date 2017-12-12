@@ -8,10 +8,9 @@ namespace BF
 		{
 			using namespace std;
 
-			Checkbox::Checkbox(Application::Scene& scene) :
+			Checkbox::Checkbox() :
 				checked(false)
 			{
-				scene.GetWidgetManager().AddWidget(this);
 			}
 
 			Checkbox::~Checkbox()
@@ -23,9 +22,9 @@ namespace BF
 				Widget::Initialize(spriteRenderer, zLayer);
 			}
 
-			void Checkbox::Load(const StyleSheet& StyleSheet, const string& widgetName)
+			void Checkbox::Load(const StyleSheet& styleSheet, const string& widgetName)
 			{
-				Widget::Load(StyleSheet, "Checkbox");
+				Widget::Load(styleSheet, "Checkbox");
 			}
 
 			void Checkbox::Update()
