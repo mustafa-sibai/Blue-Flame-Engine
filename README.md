@@ -39,13 +39,13 @@ A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 
 <br>
 
-<b>Platform state as of 17/04/2017:-</b>
+<b>Platform state as of 15/12/2017:-</b>
 <ul>
 <li>Windows - OpenGL 4.5:- working</li>
 <li>Windows - DirectX 11:- broken</li>
-<li>Linux - OpenGL 4.5:- working</li>
-<li>Android - OpenGL ES 3.0:- working</li>
-<li>Web - OpenGL ES 3.0:- working</li>
+<li>Linux - OpenGL 4.5:- broken</li>
+<li>Android - OpenGL ES 3.0:- broken</li>
+<li>Web - OpenGL ES 3.0:- broken</li>
 </ul>
 
 <a href="https://trello.com/b/vznbwo4t" target="_blank"><img src="https://www.cluedin.net/images/providers/trello.png" width="75"></a> 
