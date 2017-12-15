@@ -1,4 +1,8 @@
 # Blue Flame Engine
+<p align="center"> 
+<img src="https://i.imgur.com/c01mP3E.png">
+</p>
+
 A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 
 <b>**Note:- For the most recent build of the engine, please check out the unstable branch of the repository.</b>
