@@ -49,7 +49,7 @@ static void SetConsoleColor(int colorCode)
 #define BF_LOG_ERROR(x, ...)	do { BF::System::SetConsoleColor(12); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Error);	printf(__VA_ARGS__); printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
 #define BF_LOG_FATAL(x, ...)	do { BF::System::SetConsoleColor(79); BF::System::Debug::Log(x, BF::System::Debug::LogLevel::Fatal);	printf(__VA_ARGS__); printf(" Filename: %s Line: %d\n", __filename__, __LINE__); BF::System::SetConsoleColor(15); } while(false)
 
-#define BF_IS_NULL(x) x == NULL ? NULL : x; if(x == NULL) BF_LOG_FATAL("This value is NULL ", #x);
+#define BF_IS_NULL(x) x == NULL ? NULL : x; if(x == NULL) BF_LOG_FATAL(#x, " is NULL");
 
 #elif defined(BF_PLATFORM_ANDROID)
 /*

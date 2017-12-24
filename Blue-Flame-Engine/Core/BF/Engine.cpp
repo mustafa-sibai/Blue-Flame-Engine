@@ -68,6 +68,11 @@ namespace BF
 #endif
 	}
 
+	void Engine::Exit()
+	{
+		state = State::Exit;
+	}
+
 	void Engine::LimitFrameRate(double limit)
 	{
 #ifdef BF_PLATFORM_WINDOWS

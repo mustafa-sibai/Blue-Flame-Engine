@@ -9,6 +9,8 @@ namespace TestApp
 			BF::Graphics::Camera camera;
 			BF::Application::Scene* scene;
 
+			BF::Graphics::GUI::MenuStrip::MenuItem* exitItem;
+
 		public:
 			TestApp();
 			~TestApp();

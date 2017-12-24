@@ -144,6 +144,8 @@ namespace BF
 
 			void Text::SetText(const string& text)
 			{
+				BF_IS_NULL(font);
+
 				Text::text = text;
 				Vector2f pos = position;
 				rectangle.width = 0;

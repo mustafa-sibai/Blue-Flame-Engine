@@ -40,7 +40,7 @@ namespace BF
 				for (size_t i = 0; i < WIDGET_ARRAY_LENGTH; i++)
 				{
 					tinyxml2::XMLElement* widgetNode = GetXMLNode(root, widgetNames[i]);
-					LoadWidget(root, widgetNode, widgetNames[i]);
+					LoadWidget(widgetNode, widgetNames[i]);
 				}
 			}
 
@@ -77,15 +77,15 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), width, height);
 			}
 
-			void StyleSheet::SetText(tinyxml2::XMLElement* root, tinyxml2::XMLElement* widgetNode, WidgetData& widgetData)
+			void StyleSheet::SetText(tinyxml2::XMLElement* widgetNode, WidgetData& widgetData)
 			{
 				if (HasText(widgetNode))
 				{
-					const char* fontfilename = BF_IS_NULL(root->FirstChildElement("DefaultFont")->Attribute("Path"));
-					const char* size = BF_IS_NULL(root->FirstChildElement("DefaultFont")->Attribute("Size"));
+					const char* fontfilename = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Path"));
+					const char* size = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Size"));
 
-					widgetData.font = new Font();
-					widgetData.font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
+					Font* font = new Font();
+					font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
 
 					const char* text = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("String")->Attribute("Value"));
 					const char* alignment = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Alignment")->Attribute("Value"));
@@ -118,7 +118,8 @@ namespace BF
 					else if (strcmp(alignment, "BottomRight") == 0)
 						textAlignment = Text::TextAlignment::BottomRight;
 
-					widgetData.text = Text(widgetData.font, text, widgetData.sprites[0].GetRectangle(), textAlignment, 0, Color(stof(r), stof(g), stof(b), stof(a)));
+					widgetData.text = Text(font, text, widgetData.sprites[0].GetRectangle(), textAlignment, 0, Color(stof(r), stof(g), stof(b), stof(a)));
+					widgetData.hasText = true;
 				}
 			}
 
@@ -137,7 +138,7 @@ namespace BF
 				return widgetNode->FirstChildElement("Text") == NULL ? false : true;
 			}
 
-			void StyleSheet::LoadWidget(tinyxml2::XMLElement* root, tinyxml2::XMLElement* widgetNode, const std::string& widgetName)
+			void StyleSheet::LoadWidget(tinyxml2::XMLElement* widgetNode, const std::string& widgetName)
 			{
 				WidgetData widgetData;
 				Rectangle rectangle, scissorRectangle;
@@ -183,7 +184,7 @@ namespace BF
 					}
 				}
 
-				SetText(root, widgetNode, widgetData);
+				SetText(widgetNode, widgetData);
 				widgetsData.insert({ widgetName, widgetData });
 			}
 

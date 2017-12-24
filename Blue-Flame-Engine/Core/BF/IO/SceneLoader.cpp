@@ -50,7 +50,7 @@ namespace BF
 					const char* b		= BF_IS_NULL(e->FirstChildElement("Color")->Attribute("B"));
 					const char* a		= BF_IS_NULL(e->FirstChildElement("Color")->Attribute("A"));
 					
-					scene->instantiate(nodeName, new RegularPolygon(Rectangle(atoi(x), atoi(y), atoi(width), atoi(height)), atoi(zLayer), Color(stof(r), stof(g), stof(b), stof(a))));
+					scene->Instantiate(nodeName, new RegularPolygon(Rectangle(atoi(x), atoi(y), atoi(width), atoi(height)), atoi(zLayer), Color(stof(r), stof(g), stof(b), stof(a))));
 				}
 				else if (strcmp(nodeType, "Button") == 0)
 				{
@@ -90,7 +90,7 @@ namespace BF
 					else if (strcmp(alignment, "BottomRight") == 0)
 						textAlignment = Text::TextAlignment::BottomRight;
 
-					Button* button = (Button*)scene->instantiate(nodeName, new Button());
+					Button* button = (Button*)scene->Instantiate(nodeName, new Button());
 
 					button->SetRectangle(Rectangle(atoi(x), atoi(y), atoi(width), atoi(height)));
 					button->GetText().SetText(text);

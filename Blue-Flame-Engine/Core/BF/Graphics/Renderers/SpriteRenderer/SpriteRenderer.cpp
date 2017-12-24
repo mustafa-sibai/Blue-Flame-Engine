@@ -1,6 +1,7 @@
 #include "SpriteRenderer.h"
 #include <algorithm>
 #include "BF/Engine.h"
+#include "BF/System/Debug.h"
 
 #define MAX_SPRITES		60000
 #define SPRITE_VERTICES 4
@@ -239,6 +240,8 @@ namespace BF
 			{
 				if (currentBoundTexture != nullptr)
 				{
+					BF_IS_NULL(text.font);
+
 					if (text.font->fontAtlas->texture != currentBoundTexture)
 					{
 						if (submitType == SubmitType::StaticSubmit)

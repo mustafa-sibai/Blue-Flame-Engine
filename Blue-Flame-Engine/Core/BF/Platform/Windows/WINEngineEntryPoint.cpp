@@ -10,6 +10,7 @@ namespace BF
 	{
 		namespace Windows
 		{
+			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Application;
 			using namespace BF::Input;
@@ -36,7 +37,10 @@ namespace BF
 							context.Initialize();
 							app.Initialize();
 							app.Load();
-							Engine::state = Engine::State::Render;
+
+							if(Engine::state != Engine::State::Exit)
+								Engine::state = Engine::State::Render;
+
 							break;
 						}
 
@@ -70,7 +74,7 @@ namespace BF
 
 							if (app.frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
 							{
-								BF_LOG_INFO("Frames: " + std::to_string(FPS) + " LastFrameTime: " + std::to_string(deltaTime), "");
+								BF_LOG_INFO("Frames: " + to_string(FPS) + " LastFrameTime: " + to_string(deltaTime), "");
 								app.frameRateTimer.Reset();
 								FPS = 0;
 							}

@@ -27,8 +27,8 @@ namespace BF
 					sprites[7] = Second state disabled sprite
 				*/
 				BF::Graphics::Renderers::Sprite sprites[BF_WIDGET_DATA_SPRITES_LENGTH];
-				BF::Graphics::Fonts::Font* font = nullptr;
 				BF::Graphics::Renderers::Text text;
+				bool hasText = false;
 
 				int minWidth = 0, minHeight = 0;
 			};

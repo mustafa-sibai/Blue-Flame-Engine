@@ -13,19 +13,21 @@ namespace BF
 			{
 				class BF_API MenuStrip : public Widget
 				{
+					friend class MenuItem;
+
 					private:
 						const StyleSheet* styleSheet;
 						bool active;
-						bool resetCurrentSprite;
-
-					public:
 						std::vector<MenuItem*> menuItems;
+						MenuItem* activeMenuItemOnMenuStrip;
+						MenuItem* activeSubMenuItem;
+						MenuItem* previousActiveSubMenuItem;
 
 					public:
 						MenuStrip();
 						~MenuStrip();
 
-						const MenuItem& Instantiate(std::string name);
+						MenuItem* Instantiate(const std::string& name);
 
 					private:
 						void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer) override;

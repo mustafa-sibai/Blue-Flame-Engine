@@ -12,7 +12,7 @@
 #include "BF/Common.h"
 
 #define BF_ENGINE_MAJOR_VERSION 0
-#define BF_ENGINE_MINOR_VERSION 171213
+#define BF_ENGINE_MINOR_VERSION 171225
 #define BF_ENGINE_PATCH_VERSION 0
 
 namespace BF
@@ -50,6 +50,7 @@ namespace BF
 			~Engine();
 
 			void Run(Application::App& app);
+			static void Exit();
 
 			static void LimitFrameRate(double limit);
 

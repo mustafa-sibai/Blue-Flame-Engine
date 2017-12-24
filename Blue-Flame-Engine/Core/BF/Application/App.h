@@ -46,7 +46,6 @@ namespace BF
 			App();
 			~App();
 
-		public:
 			virtual void Initialize();
 			virtual void Load();
 			virtual void Update();

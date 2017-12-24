@@ -70,8 +70,8 @@ namespace BF
 				void Update();
 				void Render();
 
-				GameNode* instantiate(std::string name, GameNode* gameNode);
-				GameNode* instantiate(std::string name, GameNode* gameNode, GameNode* parent);
+				GameNode* Instantiate(const std::string& name, GameNode* gameNode);
+				GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
 				void Destroy(GameNode* gameNode);
 
 		private:

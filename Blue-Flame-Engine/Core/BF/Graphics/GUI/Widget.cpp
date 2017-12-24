@@ -69,8 +69,8 @@ namespace BF
 			{
 				//if (Mouse::IsInsideWindowClient())
 				{
-					if (Mouse::GetPosition().x >= currentSprite->GetRectangle().x && Mouse::GetPosition().x <= currentSprite->GetRectangle().x + currentSprite->GetRectangle().width &&
-						Mouse::GetPosition().y >= currentSprite->GetRectangle().y && Mouse::GetPosition().y <= currentSprite->GetRectangle().y + currentSprite->GetRectangle().height)
+					if (Mouse::GetPosition().x >= currentSprite->GetRectangle().x + 1 && Mouse::GetPosition().x <= currentSprite->GetRectangle().x + currentSprite->GetRectangle().width - 1 &&
+						Mouse::GetPosition().y >= currentSprite->GetRectangle().y + 1 && Mouse::GetPosition().y <= currentSprite->GetRectangle().y + currentSprite->GetRectangle().height - 1)
 						return true;
 				}
 
@@ -128,7 +128,9 @@ namespace BF
 			void Widget::Render()
 			{
 				spriteRenderer->Render(*currentSprite);
-				spriteRenderer->Render(widgetData.text);
+
+				if (widgetData.hasText)
+					spriteRenderer->Render(widgetData.text);
 			}
 
 			void Widget::SwitchState()

@@ -5,6 +5,7 @@ namespace BF
 {
 	namespace Application
 	{
+		using namespace std;
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::GUI;
 
@@ -86,7 +87,7 @@ namespace BF
 			widgetManager.Render();
 		}
 
-		GameNode* Scene::instantiate(std::string name, GameNode* gameNode)
+		GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)
 		{
 			gameNodes.insert({ name, gameNode });
 
@@ -130,7 +131,7 @@ namespace BF
 			return gameNode;
 		}
 
-		GameNode* Scene::instantiate(std::string name, GameNode* gameNode, GameNode* parent)
+		GameNode* Scene::Instantiate(const string& name, GameNode* gameNode, GameNode* parent)
 		{
 			parent->gameNodes.insert({ name, gameNode });
 			return gameNode;
