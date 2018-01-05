@@ -17,7 +17,7 @@ namespace BF
 				NodeType nodeType;
 
 			public:
-				unsigned int id;
+				int index;
 				std::string name;
 				std::unordered_map<std::string, GameNode*> gameNodes;
 /*

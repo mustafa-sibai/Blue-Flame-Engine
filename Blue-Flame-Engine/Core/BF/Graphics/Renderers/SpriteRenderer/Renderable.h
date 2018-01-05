@@ -19,25 +19,35 @@ namespace BF
 					{
 						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
 						{
+							/*if (renderableA == nullptr || renderableB == nullptr)
+								return true;
 							if (renderableA->rectangle.y > renderableB->rectangle.y)
 								return true;
 							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
 								return true;
 							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
 								return false;
-							else
+							else*/
 								return false;
 						}
 					};
 
 					struct BackToFront
 					{
-						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						bool operator() (Renderable* renderableA, Renderable* renderableB) const
 						{
+							if (renderableA == nullptr)
+								return false;
+
+							if (renderableB == nullptr)
+								return true;
+
 							if (renderableA->rectangle.y <= renderableB->rectangle.y)
 							{
 								if (renderableA->zLayer < renderableB->zLayer)
 								{
+									renderableA->index--;
+									renderableB->index++;
 									return true;
 								}
 							}

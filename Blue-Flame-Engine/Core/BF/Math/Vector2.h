@@ -49,6 +49,15 @@ namespace BF
 				friend Vector2 operator/(const Vector2& left, const Vector2& right) { return Vector2(left.x / right.x, left.y / right.y); }
 
 				friend std::ostream& operator<<(std::ostream& os, const Vector2& vector) { return os << "{" << vector.x << ", " << vector.y << "}"; }
+
+				static inline Vector2 Zero()	{ return Vector2(0, 0); }
+				static inline Vector2 One()		{ return Vector2(1, 1); }
+
+				static inline Vector2 Up()		{ return Vector2(0, -1); }
+				static inline Vector2 Down()	{ return Vector2(0,  1); }
+
+				static inline Vector2 Right()	{ return Vector2( 1, 0); }
+				static inline Vector2 Left()	{ return Vector2(-1, 0); }
 		};
 
 #include "Vector2.inl"

@@ -2,7 +2,7 @@
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
 
-#define WIDGET_ARRAY_LENGTH 8
+#define WIDGET_ARRAY_LENGTH 10
 
 namespace BF
 {
@@ -35,7 +35,7 @@ namespace BF
 				const char* texturefilename = BF_IS_NULL(root->FirstChildElement("StyleSheet")->Attribute("Path"));
 				texture->Load(texturefilename);
 
-				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button", "Checkbox", "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2" };
+				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button", "Checkbox", "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2", "TabWindow", "TabWindow/Tab" };
 
 				for (size_t i = 0; i < WIDGET_ARRAY_LENGTH; i++)
 				{

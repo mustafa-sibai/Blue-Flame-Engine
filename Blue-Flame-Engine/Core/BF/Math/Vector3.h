@@ -50,7 +50,19 @@ namespace BF
 				friend Vector3 operator*(const Vector3& left, const Vector3& right) { return Vector3(left.x * right.x, left.y * right.y, left.z * right.z); }
 				friend Vector3 operator/(const Vector3& left, const Vector3& right) { return Vector3(left.x / right.x, left.y / right.y, left.z / right.z); }
 
-				friend std::ostream& operator<<(std::ostream& os, const Vector3& vector) { return os << "{" << vector.x << ", " << vector.y << ", " << vector.z "}"; }
+				friend std::ostream& operator<<(std::ostream& os, const Vector3& vector) { return os << "{" << vector.x << ", " << vector.y << ", " << vector.z << "}"; }
+				
+				static inline Vector3 Zero()	{ return Vector3(0, 0, 0); }
+				static inline Vector3 One()		{ return Vector3(1, 1, 1); }
+
+				static inline Vector3 Up()		{ return Vector3(0, -1, 0); }
+				static inline Vector3 Down()	{ return Vector3(0,  1, 0); }
+
+				static inline Vector3 Right()	{ return Vector3( 1, 0, 0); }
+				static inline Vector3 Left()	{ return Vector3(-1, 0, 0); }
+
+				static inline Vector3 Forward() { return Vector3(0, 0,  1); }
+				static inline Vector3 Back()	{ return Vector3(0, 0, -1); }
 		};
 
 #include "Vector3.inl"

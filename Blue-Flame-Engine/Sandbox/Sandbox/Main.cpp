@@ -9,7 +9,6 @@
 //#include "GUIScene.h"
 //#include "PhysicsScene.h"
 #include "TestApp.h"
-#include "BF/System/Debug.h"
 
 int main()
 {
@@ -45,7 +44,7 @@ int main()
 
 	system("PAUSE");
 #endif
-	
+
 	/*
 		TCHAR  buffer[MAX_PATH];
 		GetModulefilename(NULL, buffer, MAX_PATH);

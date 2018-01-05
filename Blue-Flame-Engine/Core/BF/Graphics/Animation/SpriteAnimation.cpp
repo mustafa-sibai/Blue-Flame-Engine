@@ -49,7 +49,7 @@ namespace BF
 
 			void SpriteAnimation::Render()
 			{
-				spriteRenderer.Render(sprite);
+				//spriteRenderer.Render(sprite);
 			}
 		}
 	}

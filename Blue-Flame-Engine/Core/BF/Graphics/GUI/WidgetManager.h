@@ -21,10 +21,11 @@ namespace BF
 				friend class BF::Application::Scene;
 
 				private:
-					Renderers::SpriteRenderer spriteRenderer;
+					//Renderers::SpriteRenderer spriteRenderer;
 					StyleSheet styleSheet;
 
 					std::vector<Widget*> widgets;
+					std::vector<int> nullIndices;
 					Widget* currentWidget;
 					Widget* previousWidget;
 
@@ -33,6 +34,7 @@ namespace BF
 					~WidgetManager();
 
 					void AddWidget(Widget* widget);
+					void RemoveWidget(Widget* widget);
 
 				private:
 					void Initialize();

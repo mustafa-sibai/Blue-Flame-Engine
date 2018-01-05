@@ -11,6 +11,11 @@
 
 namespace BF
 {
+	namespace Application
+	{
+		class Scene;
+	}
+
 	namespace Graphics
 	{
 		namespace Renderers
@@ -22,6 +27,8 @@ namespace BF
 					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
+					BF::Application::Scene& scene;
+
 					BF::Graphics::API::Shader shader;
 					BF::Graphics::API::VertexBuffer vertexBuffer;
 					BF::Graphics::API::IndexBuffer indexBuffer;
@@ -30,29 +37,36 @@ namespace BF
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					std::vector<const Renderable*> renderables;
+					std::vector<Renderable*> renderables;
+					std::vector<Renderable*> removeList;
+					int nullCount;
 
-					SubmitType submitType;
+					//SubmitType submitType;
 					SortingOrder sortingOrder;
 					bool submitSprite, newDrawCall;
 
 					static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
 				public:
-					SpriteRenderer();
+					SpriteRenderer(BF::Application::Scene& scene);
 					~SpriteRenderer();
 
 					void Initialize();
-					void Begin(SubmitType submitType, SortingOrder sortingOrder);
-					void Render(const Renderable& renderable);
-					void Render(Renderable&&) = delete;
-					void End();
+
+					void Submit(Renderable& renderable);
+					void Remove(Renderable& renderable);
+					void Render(SortingOrder sortingOrder);
+
+					//void Begin(SubmitType submitType, SortingOrder sortingOrder);
+					//void Render(const Renderable& renderable);
+					//void Render(Renderable&&) = delete;
+					//void End();
 
 					void SetScissor(const BF::Math::Rectangle& rectangle);
 
 					inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
 
-					SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
+					//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
 
 				private:
 					void MapLineBuffer(const LineShape& lineShape);

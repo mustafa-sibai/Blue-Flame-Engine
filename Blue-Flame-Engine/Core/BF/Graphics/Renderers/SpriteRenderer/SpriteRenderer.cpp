@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
+#include "BF/Application/Scene.h"
 
 #define MAX_SPRITES		60000
 #define SPRITE_VERTICES 4
@@ -16,15 +17,16 @@ namespace BF
 		namespace Renderers
 		{
 			using namespace std;
-			using namespace BF::Graphics::API;
-			using namespace BF::Graphics::Renderers;
-			using namespace BF::Graphics::Fonts;
 			using namespace BF::Math;
+			using namespace BF::Application;
+			using namespace BF::Graphics::API;
+			using namespace BF::Graphics::Fonts;
+			using namespace BF::Graphics::Renderers;
 
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
-			SpriteRenderer::SpriteRenderer() :
-				vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false)
+			SpriteRenderer::SpriteRenderer(Scene& scene) :
+				scene(scene), vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false), nullCount(0)
 			{
 			}
 
@@ -71,7 +73,77 @@ namespace BF
 				delete[] indecies;
 			}
 
-			void SpriteRenderer::Begin(SubmitType submitType, SortingOrder sortingOrder)
+			void SpriteRenderer::Submit(Renderable& renderable)
+			{
+				int index = 0;
+
+				if (nullCount <= 0)
+				{
+					renderables.emplace_back(&renderable);
+
+					index = renderables.size() - 1;
+					renderables[index]->index = index;
+				}
+				else
+				{
+					index = (renderables.size() - 1) - (nullCount - 1);
+					renderables[index] = &renderable;
+					renderables[index]->index = index;
+					nullCount--;
+				}
+			}
+
+			void SpriteRenderer::Remove(Renderable& renderable)
+			{
+				removeList.emplace_back(&renderable);
+				//renderables[renderable.index] = nullptr;
+				//nullCount++;
+			}
+
+			void SpriteRenderer::Render(SortingOrder sortingOrder)
+			{
+				this->sortingOrder = sortingOrder;
+
+				shader.Bind();
+				spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
+
+				if (submitSprite)
+				{
+					if (!newDrawCall)
+					{
+						for (size_t i = 0; i < removeList.size(); i++)
+						{
+							int index = removeList[i]->index;
+							renderables[index] = nullptr;
+							scene.gameNodes.erase(removeList[i]->name);
+							delete (RegularPolygon*)renderables[index];
+							nullCount++;
+						}
+						removeList.clear();
+
+						if (sortingOrder == SortingOrder::BackToFront)
+							sort(renderables.begin(), renderables.end(), Renderable::BackToFront());
+						else if (sortingOrder == SortingOrder::FrontToBack)
+							sort(renderables.begin(), renderables.end(), Renderable::FrontToBack());
+
+						MapBuffer();
+						vertexBuffer.Unmap();
+					}
+					else
+						vertexBuffer.Unmap();
+				}
+
+				vertexBuffer.Bind();
+				indexBuffer.Bind();
+				Engine::GetContext().Draw(indexCount);
+				indexBuffer.Unbind();
+				vertexBuffer.Unbind();
+
+				indexCount = 0;
+				newDrawCall = false;
+			}
+
+			/*void SpriteRenderer::Begin(SubmitType submitType, SortingOrder sortingOrder)
 			{
 				this->submitType = submitType;
 				this->sortingOrder = sortingOrder;
@@ -80,15 +152,15 @@ namespace BF
 
 				if (submitSprite)
 					spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
-			}
+			}*/
 
-			void SpriteRenderer::Render(const Renderable& renderable)
+			/*void SpriteRenderer::Render(const Renderable& renderable)
 			{
 				if (submitSprite)
 					renderables.emplace_back(&renderable);
-			}
+			}*/
 
-			SpriteRenderer& SpriteRenderer::operator=(const SpriteRenderer& spriteRenderer)
+			/*SpriteRenderer& SpriteRenderer::operator=(const SpriteRenderer& spriteRenderer)
 			{
 				this->shader = spriteRenderer.shader;
 				this->vertexBuffer = spriteRenderer.vertexBuffer;
@@ -110,7 +182,7 @@ namespace BF
 				this->newDrawCall = spriteRenderer.newDrawCall;
 
 				return *this;
-			}
+			}*/
 
 			void SpriteRenderer::MapLineBuffer(const LineShape& lineShape)
 			{
@@ -182,7 +254,7 @@ namespace BF
 
 			void SpriteRenderer::MapSpriteBuffer(const Sprite& sprite)
 			{
-				if (currentBoundTexture != nullptr)
+				/*if (currentBoundTexture != nullptr)
 				{
 					if (sprite.texture2D != currentBoundTexture)
 					{
@@ -194,7 +266,7 @@ namespace BF
 						End();
 						Begin(submitType, sortingOrder);
 					}
-				}
+				}*/
 
 				if (currentBoundTexture != sprite.texture2D)
 				{
@@ -238,7 +310,7 @@ namespace BF
 
 			void SpriteRenderer::MapTextBuffer(const Text& text)
 			{
-				if (currentBoundTexture != nullptr)
+				/*if (currentBoundTexture != nullptr)
 				{
 					BF_IS_NULL(text.font);
 
@@ -252,7 +324,7 @@ namespace BF
 						End();
 						Begin(submitType, sortingOrder);
 					}
-				}
+				}*/
 
 				if (currentBoundTexture != text.font->fontAtlas->texture)
 				{
@@ -303,7 +375,12 @@ namespace BF
 				{
 					for (size_t i = 0; i < renderables.size(); i++)
 					{
-						switch (renderables[i][0].nodeType)
+						if (renderables[i] == nullptr)
+							break;
+
+						renderables[i]->index = i;
+
+						switch (renderables[i]->nodeType)
 						{
 							case Renderable::NodeType::Line:
 							{
@@ -336,7 +413,7 @@ namespace BF
 				}
 			}
 
-			void SpriteRenderer::End()
+			/*void SpriteRenderer::End()
 			{
 				if (submitSprite)
 				{
@@ -373,12 +450,11 @@ namespace BF
 
 					newDrawCall = false;
 				}
-			}
+			}*/
 
 			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
 			{
-				End();
-				Begin(submitType, sortingOrder);
+				Render(sortingOrder);
 				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 

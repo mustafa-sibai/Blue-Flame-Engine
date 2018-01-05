@@ -47,6 +47,9 @@ namespace BF
 			{
 				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetPosition(position);
+
+				if (widgetData.hasText)
+					widgetData.text.SetPosition(position);
 			}
 
 			void Widget::SetZLayer(int zLayer)
@@ -63,6 +66,9 @@ namespace BF
 
 				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetRectangle(temp);
+
+				if (widgetData.hasText)
+					widgetData.text.SetRectangle(rectangle);
 			}
 
 			bool Widget::IsMouseOnWidget()
@@ -127,10 +133,10 @@ namespace BF
 
 			void Widget::Render()
 			{
-				spriteRenderer->Render(*currentSprite);
+				/*spriteRenderer->Render(*currentSprite);
 
 				if (widgetData.hasText)
-					spriteRenderer->Render(widgetData.text);
+					spriteRenderer->Render(widgetData.text);*/
 			}
 
 			void Widget::SwitchState()

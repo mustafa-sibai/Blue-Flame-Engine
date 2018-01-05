@@ -1,5 +1,6 @@
 #include "TestApp.h"
 #include "BF/IO/SceneLoader.h"
+#include "BF/Graphics/GUI/TabWindow/TabWindow.h"
 
 namespace TestApp
 {
@@ -33,11 +34,17 @@ namespace TestApp
 		scene->Initialize();
 		scene->Load();
 
-		RegularPolygon* regularPolygon = (RegularPolygon*)scene->Instantiate("regularPolygon", new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 0, Color::Blues::DarkBlue()));
-		RegularPolygon* regularPolygon2 = (RegularPolygon*)scene->Instantiate("regularPolygon2", new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 0, Color::Blues::DarkBlue()));
-		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Reds::DarkRed()), regularPolygon);
+		RegularPolygon* regularPolygon = (RegularPolygon*)scene->Instantiate("regularPolygon", new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
+		RegularPolygon* regularPolygon2 = (RegularPolygon*)scene->Instantiate("regularPolygon2", new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 2, Color::Blues::DarkBlue()));
+		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow())/*, regularPolygon*/);
+
+		scene->Destroy(regularPolygon);
+
+		RegularPolygon* regularPolygon4 = (RegularPolygon*)scene->Instantiate("regularPolygon4", new RegularPolygon(Math::Rectangle(0, 420, 100, 100), 0, Color::Greys::DarkGray())/*, regularPolygon*/);
+
 		//Button* b = (Button*)scene->instantiate("button", new Button());
 		
+		/*
 		MenuStrip::MenuStrip* m = (MenuStrip::MenuStrip*)scene->Instantiate("MenuStrip", new MenuStrip::MenuStrip());
 		MenuStrip::MenuItem* fileMenu = m->Instantiate("File");
 		MenuStrip::MenuItem* newMenu = fileMenu->Instantiate("New");
@@ -59,6 +66,14 @@ namespace TestApp
 		MenuStrip::MenuItem* helpMenu = m->Instantiate("Help");
 		helpMenu->Instantiate("About");
 
+		BF::Graphics::GUI::TabWindow::TabWindow* tabWindow = (BF::Graphics::GUI::TabWindow::TabWindow*)scene->Instantiate("tabWindow", new BF::Graphics::GUI::TabWindow::TabWindow());
+		tabWindow->SetPosition(Vector2f(100, 100));
+		//delete tabWindow;
+
+		scene->Destroy(tabWindow);
+		*/
+
+
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 	}
 
@@ -72,9 +87,9 @@ namespace TestApp
 		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		scene->Update();
 		camera.Update();
-
+		/*
 		if (exitItem->IsPressed())
-			Engine::Exit();
+			Engine::Exit();*/
 	}
 
 	void TestApp::Render()

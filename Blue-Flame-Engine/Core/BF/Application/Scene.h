@@ -28,6 +28,7 @@ namespace BF
 		class BF_API Scene
 		{
 			friend class BF::Engine;
+			friend class BF::Graphics::Renderers::SpriteRenderer;
 
 #ifdef BF_PLATFORM_WINDOWS
 				friend class BF::Platform::Windows::WINEngineEntryPoint;
@@ -42,12 +43,11 @@ namespace BF
 			private:
 				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 
-			private:
-				System::Timer frameTimer;
-				System::Timer fixedUpdateTimer;
-				System::Timer frameRateTimer;
+				BF::System::Timer frameTimer;
+				BF::System::Timer fixedUpdateTimer;
+				BF::System::Timer frameRateTimer;
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				Graphics::GUI::WidgetManager widgetManager;
+				BF::Graphics::GUI::WidgetManager widgetManager;
 #endif
 				bool initialized;
 				bool loaded;
@@ -60,7 +60,7 @@ namespace BF
 				~Scene();
 
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
+				inline BF::Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 #endif
 
 			public:

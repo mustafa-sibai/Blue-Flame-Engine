@@ -10,7 +10,7 @@ namespace BF
 		using namespace BF::Graphics::GUI;
 
 		Scene::Scene() :
-			initialized(false), loaded(false), fixedUpdateTicks(0)
+			initialized(false), loaded(false), fixedUpdateTicks(0), spriteRenderer(*this)
 		{
 		}
 
@@ -81,14 +81,13 @@ namespace BF
 				RenderNode(gameNodes[i]);
 			}*/
 
-			//spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
-			//spriteRenderer.End();
-
+			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
 			widgetManager.Render();
 		}
 
 		GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)
 		{
+			gameNode->name = name;
 			gameNodes.insert({ name, gameNode });
 
 			switch (gameNode->nodeType)
@@ -99,6 +98,7 @@ namespace BF
 				}
 				case GameNode::NodeType::RegularPolygon:
 				{
+					spriteRenderer.Submit(*(RegularPolygon*)gameNode);
 					break;
 				}
 				case GameNode::NodeType::Sprite:
@@ -139,7 +139,47 @@ namespace BF
 
 		void Scene::Destroy(GameNode* gameNode)
 		{
-			gameNodes.erase(gameNode->name);
+			switch (gameNode->nodeType)
+			{
+				case GameNode::NodeType::Line:
+				{
+					break;
+				}
+				case GameNode::NodeType::RegularPolygon:
+				{
+					spriteRenderer.Remove(*(RegularPolygon*)gameNode);					
+					break;
+				}
+				case GameNode::NodeType::Sprite:
+				{
+					break;
+				}
+				case GameNode::NodeType::Text:
+				{
+					break;
+				}
+				case GameNode::NodeType::GUI:
+				{
+					widgetManager.RemoveWidget((Widget*)gameNode);
+					gameNodes.erase(gameNode->name);
+					delete (Widget*)gameNode;
+					break;
+				}
+				case GameNode::NodeType::Mesh:
+				{
+					break;
+				}
+				case GameNode::NodeType::Audio:
+				{
+					break;
+				}
+				default:
+				{
+					break;
+				}
+			}
+
+
 		}
 
 		void Scene::RenderNode(GameNode* node)

@@ -140,6 +140,11 @@
     <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp" />
     <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuItem.cpp" />
     <ClCompile Include="BF\IO\SceneLoader.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\TabWindow\TabWindow.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\TabWindow\Tab.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Slidebar\Slidebar.cpp" />
+    <ClCompile Include="BF\Graphics\GUI\Slidebar\Slider.cpp" />
+    <ClCompile Include="BF\System\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -249,6 +254,11 @@
     <ClInclude Include="BF\System\Debug.h" />
     <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuItem.h" />
     <ClInclude Include="BF\IO\SceneLoader.h" />
+    <ClInclude Include="BF\Graphics\GUI\TabWindow\TabWindow.h" />
+    <ClInclude Include="BF\Graphics\GUI\TabWindow\Tab.h" />
+    <ClInclude Include="BF\Graphics\GUI\Slidebar\Slidebar.h" />
+    <ClInclude Include="BF\Graphics\GUI\Slidebar\Slider.h" />
+    <ClInclude Include="BF\System\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

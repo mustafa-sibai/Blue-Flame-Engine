@@ -20,15 +20,36 @@ namespace BF
 
 			void WidgetManager::AddWidget(Widget* widget)
 			{
-				widgets.emplace_back(widget);
+				int index = 0;
 
-				widgets[widgets.size() - 1]->Initialize(spriteRenderer, (int)(widgets.size() - 1));
-				widgets[widgets.size() - 1]->Load(styleSheet, "");
+				if (nullIndices.size() <= 0)
+				{
+					widgets.emplace_back(widget);
+
+					index = widgets.size() - 1;
+					widgets[index]->index = index;
+					//widgets[index]->Initialize(spriteRenderer, index);
+					widgets[index]->Load(styleSheet, "");
+				}
+				else
+				{
+					index = nullIndices[0];
+					widgets[index] = widget;
+					widgets[index]->index = index;
+					//widgets[index]->Initialize(spriteRenderer, index);
+					widgets[index]->Load(styleSheet, "");
+				}
+			}
+
+			void WidgetManager::RemoveWidget(Widget* widget)
+			{
+				nullIndices.emplace_back(widget->index);
+				widgets[widget->index] = nullptr;
 			}
 
 			void WidgetManager::Initialize()
 			{
-				spriteRenderer.Initialize();
+				//spriteRenderer.Initialize();
 			}
 
 			void WidgetManager::Load()
@@ -60,17 +81,21 @@ namespace BF
 
 				for (size_t i = 0; i < widgets.size(); i++)
 				{
-					widgets[i]->Update();
+					if (widgets[i] != nullptr)
+						widgets[i]->Update();
 				}
 			}
 
 			void WidgetManager::Render()
 			{
-				spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
+				/*spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 				for (size_t i = 0; i < widgets.size(); i++)
-					widgets[i]->Render();
+				{
+					if (widgets[i] != nullptr)
+						widgets[i]->Render();
+				}
 				spriteRenderer.SetScissor(Math::Rectangle(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight()));
-				spriteRenderer.End();
+				spriteRenderer.End();*/
 			}
 		}
 	}

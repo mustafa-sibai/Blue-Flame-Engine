@@ -20,7 +20,7 @@ namespace BF
 
 		void TileMap::Initialize()
 		{
-			spriteRenderer.Initialize();
+			//spriteRenderer.Initialize();
 		}
 
 		void TileMap::Load(const string& filename)
@@ -44,12 +44,12 @@ namespace BF
 
 		void TileMap::Render()
 		{
-			spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
+			/*spriteRenderer.Begin(SpriteRenderer::SubmitType::DynamicSubmit, SpriteRenderer::SortingOrder::BackToFront);
 
 			for (size_t i = 0; i < sprites.size(); i++)
 				spriteRenderer.Render(sprites[i]);
 
-			spriteRenderer.End();
+			spriteRenderer.End();*/
 		}
 	}
 }
