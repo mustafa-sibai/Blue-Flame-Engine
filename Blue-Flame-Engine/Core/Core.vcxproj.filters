@@ -297,6 +297,12 @@
     <ClCompile Include="BF\System\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Application\Layers\LayerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\Layers\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -633,6 +639,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\System\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Layers\LayerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Layers\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

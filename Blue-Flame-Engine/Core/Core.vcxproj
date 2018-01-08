@@ -53,6 +53,7 @@
   <ItemGroup>
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
+    <ClCompile Include="BF\Application\Layers\Layer.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
     <ClCompile Include="BF\Application\SceneManager.cpp" />
     <ClCompile Include="BF\Application\Window.cpp" />
@@ -145,10 +146,12 @@
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slidebar.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slider.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
+    <ClCompile Include="BF\Application\Layers\LayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
+    <ClInclude Include="BF\Application\Layers\Layer.h" />
     <ClInclude Include="BF\Application\Scene.h" />
     <ClInclude Include="BF\Application\SceneManager.h" />
     <ClInclude Include="BF\Application\Window.h" />
@@ -259,6 +262,7 @@
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slidebar.h" />
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slider.h" />
     <ClInclude Include="BF\System\Random.h" />
+    <ClInclude Include="BF\Application\Layers\LayerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

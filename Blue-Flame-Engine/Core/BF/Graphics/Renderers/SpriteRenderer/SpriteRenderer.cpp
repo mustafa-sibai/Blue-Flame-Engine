@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
-#include "BF/Application/Scene.h"
+#include "BF/Application/Layers/LayerManager.h"
 
 #define MAX_SPRITES		60000
 #define SPRITE_VERTICES 4
@@ -25,8 +25,8 @@ namespace BF
 
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
-			SpriteRenderer::SpriteRenderer(Scene& scene) :
-				scene(scene), vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false), nullCount(0)
+			SpriteRenderer::SpriteRenderer(BF::Application::Layers::LayerManager& layerManager) :
+				layerManager(layerManager), vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false)/*, nullCount(0)*/
 			{
 			}
 
@@ -73,7 +73,7 @@ namespace BF
 				delete[] indecies;
 			}
 
-			void SpriteRenderer::Submit(Renderable& renderable)
+			/*void SpriteRenderer::Submit(Renderable& renderable)
 			{
 				int index = 0;
 
@@ -98,7 +98,7 @@ namespace BF
 				removeList.emplace_back(&renderable);
 				//renderables[renderable.index] = nullptr;
 				//nullCount++;
-			}
+			}*/
 
 			void SpriteRenderer::Render(SortingOrder sortingOrder)
 			{
@@ -111,7 +111,7 @@ namespace BF
 				{
 					if (!newDrawCall)
 					{
-						for (size_t i = 0; i < removeList.size(); i++)
+						/*for (size_t i = 0; i < removeList.size(); i++)
 						{
 							int index = removeList[i]->index;
 							renderables[index] = nullptr;
@@ -119,13 +119,13 @@ namespace BF
 							delete (RegularPolygon*)renderables[index];
 							nullCount++;
 						}
-						removeList.clear();
-
+						removeList.clear();*/
+						/*
 						if (sortingOrder == SortingOrder::BackToFront)
 							sort(renderables.begin(), renderables.end(), Renderable::BackToFront());
 						else if (sortingOrder == SortingOrder::FrontToBack)
 							sort(renderables.begin(), renderables.end(), Renderable::FrontToBack());
-
+						*/
 						MapBuffer();
 						vertexBuffer.Unmap();
 					}
@@ -373,41 +373,46 @@ namespace BF
 			{
 				if (submitSprite)
 				{
-					for (size_t i = 0; i < renderables.size(); i++)
+					for (size_t i = 0; i < layerManager.GetSize(); i++)
 					{
-						if (renderables[i] == nullptr)
-							break;
-
-						renderables[i]->index = i;
-
-						switch (renderables[i]->nodeType)
+						for (size_t j = 0; j < layerManager.GetLayer(i).GetSize(); j++)
 						{
-							case Renderable::NodeType::Line:
+							/*if (renderables[i] == nullptr)
+								break;
+
+							renderables[i]->index = i;
+							*/
+							GameNode& gameNode = layerManager.GetLayer(i).GetGameNode(j);
+
+							switch (gameNode.nodeType)
 							{
-								LineShape& line = (LineShape&)renderables[i][0];
-								MapLineBuffer(line);
-								break;
+								case Renderable::NodeType::Line:
+								{
+									LineShape& line = (LineShape&)gameNode;
+									MapLineBuffer(line);
+									break;
+								}
+								case Renderable::NodeType::RegularPolygon:
+								{
+									RegularPolygon& regularPolygon = (RegularPolygon&)gameNode;
+									MapPolygonBuffer(regularPolygon);
+									break;
+								}
+								case Renderable::NodeType::Sprite:
+								{
+									Sprite& sprite = (Sprite&)gameNode;
+									MapSpriteBuffer(sprite);
+									break;
+								}
+								case Renderable::NodeType::Text:
+								{
+									Text& text = (Text&)gameNode;
+									MapTextBuffer(text);
+									break;
+								}
+								default:
+									break;
 							}
-							case Renderable::NodeType::RegularPolygon:
-							{
-								RegularPolygon& regularPolygon = (RegularPolygon&)renderables[i][0];
-								MapPolygonBuffer(regularPolygon);
-								break;
-							}
-							case Renderable::NodeType::Sprite:
-							{
-								Sprite& sprite = (Sprite&)renderables[i][0];
-								MapSpriteBuffer(sprite);
-								break;
-							}
-							case Renderable::NodeType::Text:
-							{
-								Text& text = (Text&)renderables[i][0];
-								MapTextBuffer(text);
-								break;
-							}
-							default:
-								break;
 						}
 					}
 				}

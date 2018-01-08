@@ -6,11 +6,12 @@ namespace BF
 	namespace Application
 	{
 		using namespace std;
-		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::GUI;
+		using namespace BF::Graphics::Renderers;
+		using namespace BF::Application::Layers;
 
-		Scene::Scene() :
-			initialized(false), loaded(false), fixedUpdateTicks(0), spriteRenderer(*this)
+		Scene::Scene(BF::Application::Layers::LayerManager& layerManager) :
+			layerManager(layerManager), initialized(false), loaded(false), fixedUpdateTicks(0), spriteRenderer(layerManager)
 		{
 		}
 
@@ -98,7 +99,9 @@ namespace BF
 				}
 				case GameNode::NodeType::RegularPolygon:
 				{
-					spriteRenderer.Submit(*(RegularPolygon*)gameNode);
+					layerManager.GetLayer(0).Add(*gameNode);
+
+					//spriteRenderer.Submit(*(RegularPolygon*)gameNode);
 					break;
 				}
 				case GameNode::NodeType::Sprite:
@@ -147,7 +150,7 @@ namespace BF
 				}
 				case GameNode::NodeType::RegularPolygon:
 				{
-					spriteRenderer.Remove(*(RegularPolygon*)gameNode);					
+					//spriteRenderer.Remove(*(RegularPolygon*)gameNode);					
 					break;
 				}
 				case GameNode::NodeType::Sprite:

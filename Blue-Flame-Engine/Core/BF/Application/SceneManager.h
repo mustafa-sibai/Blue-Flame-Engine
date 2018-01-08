@@ -10,16 +10,21 @@ namespace BF
 		class BF_API SceneManager
 		{
 			private:
-				static std::vector<Scene*> scenes;
-				static Scene* currentScene;
+				BF::Application::Layers::LayerManager& layerManager;
+
+				std::vector<Scene*> scenes;
+				Scene* currentScene;
 
 			public:
-				static void AddNewScene(Scene* scene);
-				static void LoadScene(int index);
+				SceneManager(BF::Application::Layers::LayerManager& layerManager);
+				~SceneManager();
 
-				static inline const std::vector<Scene*>& GetScenes() { return scenes; }
-				static inline Scene& GetScene(int index) { return *scenes[index]; }
-				static inline Scene& GetCurrentScene() { return *currentScene; }
+				void AddScene();
+				Scene* LoadScene(int index);
+
+				inline std::vector<Scene*>& GetScenes() { return scenes; }
+				inline Scene& GetScene(int index) { return *scenes[index]; }
+				inline Scene& GetCurrentScene() { return *currentScene; }
 		};
 	}
 }

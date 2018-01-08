@@ -11,6 +11,8 @@
 
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
+#include "BF/Application/Layers/LayerManager.h"
+#include "BF/Application/SceneManager.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
@@ -34,9 +36,12 @@ namespace BF
 #endif
 
 		private:
-			System::Timer frameTimer;
-			System::Timer fixedUpdateTimer;
-			System::Timer frameRateTimer;
+			SceneManager sceneManager;
+			BF::Application::Layers::LayerManager layerManager;
+
+			BF::System::Timer frameTimer;
+			BF::System::Timer fixedUpdateTimer;
+			BF::System::Timer frameRateTimer;
 
 			bool initialized;
 			bool loaded;
@@ -50,6 +55,9 @@ namespace BF
 			virtual void Load();
 			virtual void Update();
 			virtual void Render();
+
+			inline SceneManager& GetSceneManager() { return sceneManager; }
+			inline BF::Application::Layers::LayerManager& GetLayerManager() { return layerManager; }
 		};
 	}
 }

@@ -23,7 +23,7 @@ namespace BF
 
 		Scene* SceneLoader::Load(const string& filename)
 		{
-			tinyxml2::XMLDocument xmlDocument;
+			/*tinyxml2::XMLDocument xmlDocument;
 			xmlDocument.LoadFile(filename.c_str());
 
 			tinyxml2::XMLElement* root = BF_IS_NULL(xmlDocument.FirstChildElement("Scene"));
@@ -99,7 +99,8 @@ namespace BF
 				}
 			}
 
-			return scene;
+			return scene;*/
+			return nullptr;
 		}
 	}
 }

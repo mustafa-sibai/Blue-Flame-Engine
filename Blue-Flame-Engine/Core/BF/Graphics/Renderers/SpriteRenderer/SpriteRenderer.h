@@ -13,7 +13,10 @@ namespace BF
 {
 	namespace Application
 	{
-		class Scene;
+		namespace Layers
+		{
+			class LayerManager;
+		}
 	}
 
 	namespace Graphics
@@ -27,7 +30,7 @@ namespace BF
 					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
-					BF::Application::Scene& scene;
+					//BF::Application::Scene& scene;
 
 					BF::Graphics::API::Shader shader;
 					BF::Graphics::API::VertexBuffer vertexBuffer;
@@ -37,9 +40,13 @@ namespace BF
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					std::vector<Renderable*> renderables;
-					std::vector<Renderable*> removeList;
-					int nullCount;
+					BF::Application::Layers::LayerManager& layerManager;
+
+					//std::vector<BF::Application::Layers::Layer>& layers;
+
+					//std::vector<Renderable*> renderables;
+					//std::vector<Renderable*> removeList;
+					//int nullCount;
 
 					//SubmitType submitType;
 					SortingOrder sortingOrder;
@@ -48,13 +55,13 @@ namespace BF
 					static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
 				public:
-					SpriteRenderer(BF::Application::Scene& scene);
+					SpriteRenderer(BF::Application::Layers::LayerManager& layerManager);
 					~SpriteRenderer();
 
 					void Initialize();
 
-					void Submit(Renderable& renderable);
-					void Remove(Renderable& renderable);
+					//void Submit(Renderable& renderable);
+					//void Remove(Renderable& renderable);
 					void Render(SortingOrder sortingOrder);
 
 					//void Begin(SubmitType submitType, SortingOrder sortingOrder);

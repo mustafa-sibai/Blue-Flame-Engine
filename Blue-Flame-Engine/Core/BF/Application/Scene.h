@@ -1,4 +1,5 @@
 #pragma once
+#include <unordered_map>
 
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
@@ -16,32 +17,35 @@
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif
-#include "BF/System/Timer.h"
+#include "BF/Application/Layers/LayerManager.h"
 #include "BF/Application/GameNode.h"
+#include "BF/System/Timer.h"
 #include "BF/Common.h"
-#include <unordered_map>
 
 namespace BF
 {
 	namespace Application
 	{
+		class SceneManager;
+
 		class BF_API Scene
 		{
 			friend class BF::Engine;
 			friend class BF::Graphics::Renderers::SpriteRenderer;
 
 #ifdef BF_PLATFORM_WINDOWS
-				friend class BF::Platform::Windows::WINEngineEntryPoint;
+			friend class BF::Platform::Windows::WINEngineEntryPoint;
 #elif defined(BF_PLATFORM_LINUX)
 			friend class BF::Platform::Linux::LXEngineEntryPoint;
 #elif defined(BF_PLATFORM_WEB)
-				friend class BF::Platform::Web::WEBEngineEntryPoint;
+			friend class BF::Platform::Web::WEBEngineEntryPoint;
 #elif defined(BF_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 
 			private:
 				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+				BF::Application::Layers::LayerManager& layerManager;
 
 				BF::System::Timer frameTimer;
 				BF::System::Timer fixedUpdateTimer;
@@ -56,7 +60,7 @@ namespace BF
 				std::unordered_map<std::string, GameNode*> gameNodes;
 
 			public:
-				Scene();
+				Scene(BF::Application::Layers::LayerManager& layerManager);
 				~Scene();
 
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
@@ -74,8 +78,8 @@ namespace BF
 				GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
 				void Destroy(GameNode* gameNode);
 
-		private:
-			void RenderNode(GameNode* node);
+			private:
+				void RenderNode(GameNode* node);
 		};
 	}
 }

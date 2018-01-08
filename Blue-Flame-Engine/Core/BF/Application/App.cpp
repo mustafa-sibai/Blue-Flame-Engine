@@ -1,12 +1,11 @@
 #include "App.h"
-#include "BF/Application/SceneManager.h"
 
 namespace BF
 {
 	namespace Application
 	{
 		App::App() :
-			initialized(false), loaded(false), fixedUpdateTicks(0)
+			initialized(false), loaded(false), fixedUpdateTicks(0), sceneManager(layerManager)
 		{
 		}
 
@@ -26,11 +25,13 @@ namespace BF
 
 		void App::Update()
 		{
+			sceneManager.GetCurrentScene().Update();
 			//BF::Application::SceneManager::GetScenes()[0]->Update();
 		}
 
 		void App::Render()
 		{
+			sceneManager.GetCurrentScene().Render();
 			//BF::Application::SceneManager::GetScenes()[0]->Render();
 		}
 	}

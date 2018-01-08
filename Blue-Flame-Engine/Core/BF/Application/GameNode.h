@@ -4,6 +4,14 @@
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace Renderers
+		{
+			class SpriteRenderer;
+		}
+	}
+
 	namespace Application
 	{
 		class Scene;
@@ -11,6 +19,7 @@ namespace BF
 		class BF_API GameNode
 		{
 			friend BF::Application::Scene;
+			friend BF::Graphics::Renderers::SpriteRenderer;
 
 			protected:
 				enum class NodeType { Null, Line, RegularPolygon, Sprite, Text, GUI, Mesh, Audio };

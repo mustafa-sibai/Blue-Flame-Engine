@@ -8,28 +8,33 @@ namespace BF
 	{
 		using namespace std;
 		using namespace BF::IO;
-		using namespace BF::Graphics::Renderers;
 
-		std::vector<Scene*> SceneManager::scenes;
-		Scene* SceneManager::currentScene = nullptr;
-
-
-		void SceneManager::AddNewScene(Scene* scene)
+		SceneManager::SceneManager(BF::Application::Layers::LayerManager& layerManager) :
+			layerManager(layerManager), currentScene(nullptr)
 		{
-			scenes.emplace_back(scene);
 		}
 
-		void SceneManager::LoadScene(int index)
+		SceneManager::~SceneManager()
+		{
+		}
+
+		void SceneManager::AddScene()
+		{
+			scenes.emplace_back(new Scene(layerManager));
+		}
+
+		Scene* SceneManager::LoadScene(int index)
 		{
 			if (index > scenes.size() - 1)
 			{
 				BF_LOG_ERROR("Could not load scene number " + to_string(index) + ". The current number of scenes added to the list is " + to_string(scenes.size() - 1), "");
-				return;
+				return nullptr;
 			}
 
 			currentScene = scenes[index];
 			currentScene->Initialize();
 			currentScene->Load();
+			return currentScene;
 		}
 	}
 }
