@@ -14,7 +14,7 @@ namespace BF
 			}
 
 			LineShape::LineShape(const Vector2f& startPoint, const Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color) :
-				Renderable(startPoint, Math::Rectangle(), zLayer, color, NodeType::Line), startPoint(startPoint), endPoint(endPoint), thickness(thickness)
+				Renderable(startPoint, Rectangle(), zLayer, color, RenderableType::Line), startPoint(startPoint), endPoint(endPoint), thickness(thickness)
 			{
 			}
 

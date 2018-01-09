@@ -6,8 +6,8 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			using namespace Graphics::API;
 			using namespace Math;
+			using namespace Graphics::API;
 
 			Sprite::Sprite() :
 				texture2D(nullptr), scissorRectangle()
@@ -15,25 +15,25 @@ namespace BF
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector2f& position, unsigned int zLayer, const Color& color) :
-				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height), zLayer, color, NodeType::Sprite),
+				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height), zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Vector2f& position, unsigned int zLayer, const Rectangle& scissorRectangle, const Color& color) :
-				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height), zLayer, color, NodeType::Sprite),
+				Renderable(position, Math::Rectangle((int)position.x, (int)position.y, scissorRectangle.width, scissorRectangle.height), zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(scissorRectangle)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Color& color) :
-				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, NodeType::Sprite),
+				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Rectangle& scissorRectangle, const Color& color) :
-				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, NodeType::Sprite),
+				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(scissorRectangle)
 			{
 			}

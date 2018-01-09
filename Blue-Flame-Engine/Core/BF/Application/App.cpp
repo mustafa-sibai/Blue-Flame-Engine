@@ -25,6 +25,7 @@ namespace BF
 
 		void App::Update()
 		{
+			layerManager.Update();
 			sceneManager.GetCurrentScene().Update();
 			//BF::Application::SceneManager::GetScenes()[0]->Update();
 		}

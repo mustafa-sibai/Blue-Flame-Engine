@@ -32,12 +32,12 @@ namespace TestApp
 
 		GetSceneManager().AddScene();
 		scene = GetSceneManager().LoadScene(0);
-		
 
+		
 		RegularPolygon* regularPolygon = (RegularPolygon*)scene->Instantiate("regularPolygon", new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
 		RegularPolygon* regularPolygon2 = (RegularPolygon*)scene->Instantiate("regularPolygon2", new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 2, Color::Blues::DarkBlue()));
 		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow())/*, regularPolygon*/);
-
+		
 		/*
 		scene->Destroy(regularPolygon);
 

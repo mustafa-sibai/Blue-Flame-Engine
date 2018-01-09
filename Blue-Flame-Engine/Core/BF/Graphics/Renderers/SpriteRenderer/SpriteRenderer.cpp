@@ -222,28 +222,28 @@ namespace BF
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon& regularPolygon)
 			{
 				//Top Left
-				spriteBuffer->position = Vector2f((float)regularPolygon.rectangle.x, (float)regularPolygon.rectangle.y);
+				spriteBuffer->position = Vector2f((float)regularPolygon.GetRectangle().x, (float)regularPolygon.GetRectangle().y);
 				spriteBuffer->color = regularPolygon.color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)regularPolygon.rectangle.y);
+				spriteBuffer->position = Vector2f((float)(regularPolygon.GetRectangle().x + regularPolygon.GetRectangle().width), (float)regularPolygon.GetRectangle().y);
 				spriteBuffer->color = regularPolygon.color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f((float)(regularPolygon.rectangle.x + regularPolygon.rectangle.width), (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->position = Vector2f((float)(regularPolygon.GetRectangle().x + regularPolygon.GetRectangle().width), (float)(regularPolygon.GetRectangle().y + regularPolygon.GetRectangle().height));
 				spriteBuffer->color = regularPolygon.color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f((float)regularPolygon.rectangle.x, (float)(regularPolygon.rectangle.y + regularPolygon.rectangle.height));
+				spriteBuffer->position = Vector2f((float)regularPolygon.GetRectangle().x, (float)(regularPolygon.GetRectangle().y + regularPolygon.GetRectangle().height));
 				spriteBuffer->color = regularPolygon.color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
@@ -382,31 +382,31 @@ namespace BF
 
 							renderables[i]->index = i;
 							*/
-							GameNode& gameNode = layerManager.GetLayer(i).GetGameNode(j);
+							Renderable& renderable = (Renderable&)layerManager.GetLayer(i).GetGameNode(j);
 
-							switch (gameNode.nodeType)
+							switch (renderable.renderableType)
 							{
-								case Renderable::NodeType::Line:
+								case Renderable::RenderableType::Line:
 								{
-									LineShape& line = (LineShape&)gameNode;
+									LineShape& line = (LineShape&)renderable;
 									MapLineBuffer(line);
 									break;
 								}
-								case Renderable::NodeType::RegularPolygon:
+								case Renderable::RenderableType::RegularPolygon:
 								{
-									RegularPolygon& regularPolygon = (RegularPolygon&)gameNode;
+									RegularPolygon& regularPolygon = (RegularPolygon&)renderable;
 									MapPolygonBuffer(regularPolygon);
 									break;
 								}
-								case Renderable::NodeType::Sprite:
+								case Renderable::RenderableType::Sprite:
 								{
-									Sprite& sprite = (Sprite&)gameNode;
+									Sprite& sprite = (Sprite&)renderable;
 									MapSpriteBuffer(sprite);
 									break;
 								}
-								case Renderable::NodeType::Text:
+								case Renderable::RenderableType::Text:
 								{
-									Text& text = (Text&)gameNode;
+									Text& text = (Text&)renderable;
 									MapTextBuffer(text);
 									break;
 								}

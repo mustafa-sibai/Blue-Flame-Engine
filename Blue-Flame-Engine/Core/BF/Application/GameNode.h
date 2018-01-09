@@ -4,11 +4,11 @@
 
 namespace BF
 {
-	namespace Graphics
+	namespace Application
 	{
-		namespace Renderers
+		namespace Layers
 		{
-			class SpriteRenderer;
+			class Layer;
 		}
 	}
 
@@ -19,25 +19,27 @@ namespace BF
 		class BF_API GameNode
 		{
 			friend BF::Application::Scene;
-			friend BF::Graphics::Renderers::SpriteRenderer;
+			friend BF::Application::Layers::Layer;
 
 			protected:
-				enum class NodeType { Null, Line, RegularPolygon, Sprite, Text, GUI, Mesh, Audio };
+				enum class NodeType { Null, Renderable, GUI, Mesh, Audio };
 				NodeType nodeType;
 
 			public:
-				int index;
+				int index = 0;
 				std::string name;
 				std::unordered_map<std::string, GameNode*> gameNodes;
-/*
+
+			/*
 			public:
 				GameNode();
 
 			protected:
 				GameNode(NodeType nodeType);
-				~GameNode();*/
+				~GameNode();
+			*/
 
-/*
+			/*
 			public:
 				GameNode();
 				~GameNode();
@@ -48,7 +50,7 @@ namespace BF
 				//virtual void FixedUpdate();
 				virtual void Update() = 0;
 				virtual void Render() = 0;
-				*/
+			*/
 		};
 	}
 }

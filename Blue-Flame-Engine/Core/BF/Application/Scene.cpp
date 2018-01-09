@@ -91,45 +91,10 @@ namespace BF
 			gameNode->name = name;
 			gameNodes.insert({ name, gameNode });
 
-			switch (gameNode->nodeType)
-			{
-				case GameNode::NodeType::Line:
-				{
-					break;
-				}
-				case GameNode::NodeType::RegularPolygon:
-				{
-					layerManager.GetLayer(0).Add(*gameNode);
-
-					//spriteRenderer.Submit(*(RegularPolygon*)gameNode);
-					break;
-				}
-				case GameNode::NodeType::Sprite:
-				{
-					break;
-				}
-				case GameNode::NodeType::Text:
-				{
-					break;
-				}
-				case GameNode::NodeType::GUI:
-				{
-					widgetManager.AddWidget((Widget*)gameNode);
-					break;
-				}
-				case GameNode::NodeType::Mesh:
-				{
-					break;
-				}
-				case GameNode::NodeType::Audio:
-				{
-					break;
-				}
-				default:
-				{
-					break;
-				}
-			}
+			if (gameNode->nodeType == GameNode::NodeType::GUI)
+				layerManager.GetLayer(1).Add(*gameNode);
+			else
+				layerManager.GetLayer(0).Add(*gameNode);
 
 			return gameNode;
 		}
@@ -144,7 +109,7 @@ namespace BF
 		{
 			switch (gameNode->nodeType)
 			{
-				case GameNode::NodeType::Line:
+				/*case GameNode::NodeType::Line:
 				{
 					break;
 				}
@@ -179,7 +144,7 @@ namespace BF
 				default:
 				{
 					break;
-				}
+				}*/
 			}
 
 

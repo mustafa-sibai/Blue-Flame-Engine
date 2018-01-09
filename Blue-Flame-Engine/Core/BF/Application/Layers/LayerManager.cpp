@@ -17,6 +17,12 @@ namespace BF
 			{
 			}
 
+			void LayerManager::Update()
+			{
+				for (size_t i = 0; i < layers.size(); i++)
+					layers[i].Update();
+			}
+
 			void LayerManager::AddLayer(const Layer& layer)
 			{
 				layers.emplace_back(layer);

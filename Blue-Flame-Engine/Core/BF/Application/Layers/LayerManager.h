@@ -18,6 +18,8 @@ namespace BF
 					LayerManager();
 					~LayerManager();
 
+					void Update();
+
 					void AddLayer(const Layer& layer);
 					void RemoveLayer(const Layer& layer);
 
