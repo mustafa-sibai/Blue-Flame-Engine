@@ -6,12 +6,12 @@ namespace BF
 	namespace Application
 	{
 		using namespace std;
-		using namespace BF::Graphics::GUI;
+		//using namespace BF::Graphics::GUI;
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Application::Layers;
 
-		Scene::Scene(BF::Application::Layers::LayerManager& layerManager) :
-			layerManager(layerManager), initialized(false), loaded(false), fixedUpdateTicks(0), spriteRenderer(layerManager)
+		Scene::Scene() :
+			initialized(false), loaded(false), fixedUpdateTicks(0), rootGameNode(nullptr)
 		{
 		}
 
@@ -19,21 +19,15 @@ namespace BF
 		{
 		}
 
-		void Scene::Initialize()
+		void Scene::Initialize(BF::Application::Layers::LayerManager& layerManager)
 		{
-			spriteRenderer.Initialize();
-			widgetManager.Initialize();
-			/*
-			for (size_t i = 0; i < gameNodes.size(); i++)
-				gameNodes[i]->Initialize();*/
+			rootGameNode = new GameNode();
+			rootGameNode->layerManager = &layerManager;
+			spriteRenderer.Initialize(layerManager);
 		}
 
 		void Scene::Load()
 		{
-			widgetManager.Load();
-
-			/*for (size_t i = 0; i < gameNodes.size(); i++)
-				gameNodes[i]->Load();*/
 		}
 
 		/*void Scene::FixedUpdate()
@@ -42,11 +36,6 @@ namespace BF
 
 		void Scene::Update()
 		{
-			/*for (size_t i = 0; i < gameNodes.size(); i++)
-				gameNodes[i]->Update();*/
-
-
-			widgetManager.Update();
 		}
 
 		void Scene::Render()
@@ -82,33 +71,31 @@ namespace BF
 				RenderNode(gameNodes[i]);
 			}*/
 
-			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
-			widgetManager.Render();
+			spriteRenderer.Render(/*SpriteRenderer::SortingOrder::BackToFront*/);
 		}
 
-		GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)
+		/*GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)
 		{
 			gameNode->name = name;
-			gameNodes.insert({ name, gameNode });
 
 			if (gameNode->nodeType == GameNode::NodeType::GUI)
-				layerManager.GetLayer(1).Add(*gameNode);
+				layerManager.GetLayer(1).AddGameNode(*gameNode);
 			else
-				layerManager.GetLayer(0).Add(*gameNode);
+				layerManager.GetLayer(0).AddGameNode(*gameNode);
 
 			return gameNode;
-		}
+		}*/
 
-		GameNode* Scene::Instantiate(const string& name, GameNode* gameNode, GameNode* parent)
+		/*GameNode* Scene::Instantiate(const string& name, GameNode* gameNode, GameNode* parent)
 		{
-			parent->gameNodes.insert({ name, gameNode });
+			parent->gameNodes.emplace_back(gameNode);
 			return gameNode;
-		}
+		}*/
 
-		void Scene::Destroy(GameNode* gameNode)
+		/*void Scene::Destroy(GameNode* gameNode)
 		{
 			switch (gameNode->nodeType)
-			{
+			{*/
 				/*case GameNode::NodeType::Line:
 				{
 					break;
@@ -145,13 +132,13 @@ namespace BF
 				{
 					break;
 				}*/
-			}
+			/*}
 
 
-		}
+		}*/
 
-		void Scene::RenderNode(GameNode* node)
-		{
+		/*void Scene::RenderNode(GameNode* node)
+		{*/
 			/*for (size_t i = 0; i < node->gameNodes.size(); i++)
 			{
 				RenderNode(node->gameNodes[i]);
@@ -181,6 +168,6 @@ namespace BF
 					}
 				}
 			}*/
-		}
+		//}
 	}
 }

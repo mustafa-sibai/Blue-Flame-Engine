@@ -565,9 +565,11 @@
   <ItemGroup>
     <ClCompile Include="Sandbox\Main.cpp" />
     <ClCompile Include="Sandbox\TestApp.cpp" />
+    <ClCompile Include="Sandbox\TerrainTestApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\TestApp.h" />
+    <ClInclude Include="Sandbox\TerrainTestApp.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\3DMipAF\PixelShader.glsl" />

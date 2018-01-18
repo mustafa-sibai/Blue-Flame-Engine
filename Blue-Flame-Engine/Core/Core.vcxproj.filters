@@ -141,9 +141,6 @@
     <ClCompile Include="BF\Graphics\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -187,12 +184,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Platform\API\OpenGL\GLFramebuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Application\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Application\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\IO\BFALoader.cpp">
@@ -297,10 +288,22 @@
     <ClCompile Include="BF\System\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Application\Layers\LayerManager.cpp">
+    <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\GameNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Application\Layers\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Application\Layers\LayerManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -461,9 +464,6 @@
     <ClInclude Include="BF\Graphics\Light.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -516,12 +516,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\BlueFlame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Application\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Application\SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\IO\BFALoader.h">
@@ -641,10 +635,19 @@
     <ClInclude Include="BF\System\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Application\Layers\LayerManager.h">
+    <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Application\Layers\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Layers\LayerManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -682,5 +685,6 @@
     <None Include="BF\System\Debug.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="BF\Graphics\API\StandardShaders\Terrain\GLSL-Core4.5\PUVN.vpshader" />
   </ItemGroup>
 </Project>

@@ -34,7 +34,7 @@ namespace BF
 			for (size_t i = 0; i < BF_MAX_KEYS; i++)
 			{
 				if (keys[i].state == Key::State::Pressed)
-					keys[i].state = Key::State::TransitionState;
+					keys[i].state = Key::State::HeldDown;
 
 				if (keys[i].state == Key::State::Up)
 					keys[i].state = Key::State::NotPressed;

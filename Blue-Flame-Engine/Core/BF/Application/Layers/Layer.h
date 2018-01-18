@@ -66,8 +66,8 @@ namespace BF
 
 					void Update();
 
-					void Add(GameNode& gameNode);
-					void Remove(GameNode& gameNode);
+					void AddGameNode(GameNode& gameNode);
+					void RemoveGameNode(GameNode& gameNode);
 
 					inline const std::string& GetName() { return name; }
 

@@ -1,5 +1,6 @@
 #include "WidgetManager.h"
 #include "BF/Engine.h"
+//#include "BF/Application/Layers/LayerManager.h"
 
 namespace BF
 {
@@ -9,8 +10,8 @@ namespace BF
 		{
 			using namespace BF::Graphics::Renderers;
 
-			WidgetManager::WidgetManager() :
-				currentWidget(nullptr), previousWidget(nullptr)
+			WidgetManager::WidgetManager(/*BF::Application::Layers::LayerManager& layerManager*/) :
+				/*layerManager(layerManager),*/ currentWidget(nullptr), previousWidget(nullptr)
 			{
 			}
 
@@ -18,7 +19,7 @@ namespace BF
 			{
 			}
 
-			void WidgetManager::AddWidget(Widget* widget)
+			/*void WidgetManager::AddWidget(Widget* widget)
 			{
 				int index = 0;
 
@@ -45,7 +46,7 @@ namespace BF
 			{
 				nullIndices.emplace_back(widget->index);
 				widgets[widget->index] = nullptr;
-			}
+			}*/
 
 			void WidgetManager::Initialize()
 			{
@@ -79,11 +80,11 @@ namespace BF
 					currentWidget = nullptr;
 				}*/
 
-				for (size_t i = 0; i < widgets.size(); i++)
+				/*for (size_t i = 0; i < layerManager.GetLayer(1).GetSize(); i++)
 				{
-					if (widgets[i] != nullptr)
-						widgets[i]->Update();
-				}
+					Widget& widget = (Widget&)layerManager.GetLayer(1).GetGameNode(i);
+					widget.Update();
+				}*/
 			}
 
 			void WidgetManager::Render()

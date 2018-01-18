@@ -11,7 +11,7 @@ namespace BF
 
 		float Normalize(float value, float min, float max)
 		{
-			return (value - max) / (max - min);
+			return (value - min) / (max - min);
 		}
 
 		float Lerp(float value1, float value2, float time)

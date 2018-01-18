@@ -55,8 +55,8 @@ namespace BF
 				static inline Vector3 Zero()	{ return Vector3(0, 0, 0); }
 				static inline Vector3 One()		{ return Vector3(1, 1, 1); }
 
-				static inline Vector3 Up()		{ return Vector3(0, -1, 0); }
-				static inline Vector3 Down()	{ return Vector3(0,  1, 0); }
+				static inline Vector3 Up()		{ return Vector3(0,  1, 0); }
+				static inline Vector3 Down()	{ return Vector3(0, -1, 0); }
 
 				static inline Vector3 Right()	{ return Vector3( 1, 0, 0); }
 				static inline Vector3 Left()	{ return Vector3(-1, 0, 0); }

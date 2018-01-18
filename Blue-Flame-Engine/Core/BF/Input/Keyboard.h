@@ -62,7 +62,7 @@ namespace BF
 					};
 
 					private:
-						enum class State { NotPressed, Pressed, TransitionState, HeldDown, Up };
+						enum class State { NotPressed, Pressed, HeldDown, Up };
 						State state;
 				};
 

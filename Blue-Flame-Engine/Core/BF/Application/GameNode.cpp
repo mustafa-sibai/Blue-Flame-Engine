@@ -1,17 +1,15 @@
 #include "GameNode.h"
+#include "BF/Application/Layers/LayerManager.h"
 
 namespace BF
 {
 	namespace Application
 	{
+		using namespace std;
 		using namespace BF::Application;
 
-		GameNode::GameNode()
-		{
-		}
-
-		GameNode::GameNode(NodeType nodeType) : 
-			nodeType(nodeType)
+		GameNode::GameNode() :
+			layerManager(nullptr)
 		{
 		}
 
@@ -19,26 +17,34 @@ namespace BF
 		{
 		}
 
-		/*void GameNode::Initialize()
+		GameNode* GameNode::Instantiate(const string& name, GameNode* gameNode)
 		{
+			gameNode->name = name;
+			gameNode->layerManager = layerManager;
+
+			switch (gameNode->nodeType)
+			{
+				case NodeType::Renderable:
+				{
+					layerManager->GetLayer(0).AddGameNode(*gameNode);
+					break;
+				}
+				case NodeType::GUI:
+				{
+
+					break;
+				}
+				default:
+					break;
+			}
+
+			gameNodes.emplace_back(gameNode);
+
+			return gameNode;
 		}
 
-		void GameNode::Load()
+		void GameNode::Destroy(GameNode* gameNode)
 		{
 		}
-
-		/*void Scene::FixedUpdate()
-		{
-		}*/
-
-
-
-		/*void GameNode::Update()
-		{
-		}
-
-		void GameNode::Render()
-		{
-		}*/
 	}
 }

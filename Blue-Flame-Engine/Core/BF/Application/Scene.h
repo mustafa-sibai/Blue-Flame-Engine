@@ -1,5 +1,4 @@
 #pragma once
-#include <unordered_map>
 
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
@@ -14,12 +13,12 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/Graphics/API/Context.h"
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+/*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 	#include "BF/Graphics/GUI/WidgetManager.h"
-#endif
+#endif*/
+#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Application/Layers/LayerManager.h"
 #include "BF/Application/GameNode.h"
-#include "BF/System/Timer.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -31,7 +30,6 @@ namespace BF
 		class BF_API Scene
 		{
 			friend class BF::Engine;
-			friend class BF::Graphics::Renderers::SpriteRenderer;
 
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;
@@ -45,38 +43,35 @@ namespace BF
 
 			private:
 				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
-				BF::Application::Layers::LayerManager& layerManager;
 
-				BF::System::Timer frameTimer;
-				BF::System::Timer fixedUpdateTimer;
-				BF::System::Timer frameRateTimer;
+/*
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				BF::Graphics::GUI::WidgetManager widgetManager;
-#endif
+#endif*/
 				bool initialized;
 				bool loaded;
 				int fixedUpdateTicks;
 
-				std::unordered_map<std::string, GameNode*> gameNodes;
+				GameNode* rootGameNode;
 
 			public:
-				Scene(BF::Application::Layers::LayerManager& layerManager);
+				Scene();
 				~Scene();
 
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+/*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				inline BF::Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
-#endif
+#endif*/
 
 			public:
-				void Initialize();
+				void Initialize(BF::Application::Layers::LayerManager& layerManager);
 				void Load();
 				//void FixedUpdate();
 				void Update();
 				void Render();
 
-				GameNode* Instantiate(const std::string& name, GameNode* gameNode);
-				GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
-				void Destroy(GameNode* gameNode);
+				//GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
+
+				inline GameNode& GetRootGameNode() { return *rootGameNode; }
 
 			private:
 				void RenderNode(GameNode* node);

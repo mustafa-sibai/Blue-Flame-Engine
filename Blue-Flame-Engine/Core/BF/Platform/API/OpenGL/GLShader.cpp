@@ -173,6 +173,15 @@ namespace BF
 #endif
 							break;
 						}
+						case ShaderType::Terrain:
+						{
+#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/Terrain/GLSL-Core4.5/PUVN.vpshader"
+#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+	#include "BF/Graphics/API/StandardShaders/TextureCube/GLSL-ES3.0/Shader.vpshader"
+#endif
+							break;
+						}
 						default:
 						{
 							break;

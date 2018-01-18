@@ -8,7 +8,7 @@
 
 #include <BF/Application/Window.h>
 #include <BF/Application/Scene.h>
-#include <BF/Application/SceneManager.h>
+//#include <BF/Application/SceneManager.h>
 #include <BF/Application/App.h>
 
 #include <BF/AI/Waypoint.h>
@@ -56,7 +56,7 @@
 #include <BF/Graphics/Model.h>
 #include <BF/Graphics/Terrain.h>
 
-#include <BF/Graphics/Material.h>
+#include <BF/Graphics/Materials/MeshMaterial.h>
 #include <BF/Graphics/Light.h>
 
 #if defined (BF_PLATFORM_WINDOWS)

@@ -21,8 +21,8 @@ namespace BF
 {
 	namespace Graphics
 	{
-		using namespace BF::Graphics::API;
 		using namespace BF::Math;
+		using namespace BF::Graphics::API;
 
 		Terrain::Terrain() :
 			vertexBuffer(shader)
@@ -35,21 +35,11 @@ namespace BF
 
 		void Terrain::Initialize()
 		{
-#if BF_PLATFORM_WINDOWS
-			if (Context::GetRenderAPI() == RenderAPI::DirectX)
-			{
-				shader.LoadFromFile("../Sandbox/Assets/Shaders/HLSL/Compiled/3D/VertexShader.cso", "../Sandbox/Assets/Shaders/HLSL/Compiled/3D/PixelShader.cso");
-			}
-			else if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-			{
-				shader.LoadFromFile("../Sandbox/Assets/Shaders/GLSL/3D/VertexShader.glsl", "../Sandbox/Assets/Shaders/GLSL/3D/PixelShader.glsl");
-			}
-#elif defined(BF_PLATFORM_LINUX)
-			if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-			{
-				shader.LoadFromFile("projects/Sandbox-Linux/Sandbox/VertexShader.glsl", "projects/Sandbox-Linux/Sandbox/FragmentShader.glsl");
-			}
-#endif
+			glEnable(GL_CULL_FACE);
+			glFrontFace(GL_CW);
+			glCullFace(GL_BACK);
+
+			shader.LoadStandardShader(ShaderType::Terrain);
 
 			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), 0);
 			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f));
@@ -68,17 +58,20 @@ namespace BF
 			unsigned int* indecies = new unsigned int[INDICES_SIZE];
 			int index = 0;
 
-			for (unsigned int z = 0; z < COLUMN_VERTICES; z++)
+			for (int z = 0; z < COLUMN_VERTICES; z++)
 			{
 				startingPosition.z = size.y * z;
 
-				for (unsigned int x = 0; x < ROW_VERTICES; x++)
+				for (int x = 0; x < ROW_VERTICES; x++)
 				{
 					startingPosition.x = size.x * x;
 
-					float normalizedData = Normalize(textureData->buffer[((x * stride) + (z * textureData->width * stride))], 0, 256);
+					int pixel = (x * stride) + (z * (int)textureData->width * stride);
+					int v = textureData->buffer[pixel];
 
-					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
+					float normalizedData = Normalize(v, 0, 256);
+
+					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), -startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{
@@ -92,6 +85,20 @@ namespace BF
 
 						index += 6;
 					}
+				}
+			}
+
+			for (int z = 0; z < COLUMN_VERTICES - 1; z++)
+			{
+				for (int x = 0; x < ROW_VERTICES - 1; x++)
+				{
+					const Vector3f &v0 = vertices[x + (z * ROW_VERTICES)].position;
+					const Vector3f &v1 = vertices[(x + 1) + (z * ROW_VERTICES)].position;
+					const Vector3f &v2 = vertices[(x + 1) + ((z + 1) * ROW_VERTICES)].position;
+
+					Vector3f N = ((v1 - v0).Cross(v2 - v0)).Normalize();
+
+					vertices[x + (z * ROW_VERTICES)].normal = N;
 				}
 			}
 

@@ -4,6 +4,7 @@
 #include "BF/Input/Mouse.h"
 #include "BF/Math/Math.h"
 #include "BF/Engine.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -189,10 +190,7 @@ namespace BF
 
 					case WM_KEYDOWN:
 					{
-						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::TransitionState)
-							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::HeldDown;
-
-						if(Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::NotPressed)
+						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::NotPressed)
 							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Pressed;
 
 						break;
@@ -201,7 +199,7 @@ namespace BF
 					case WM_KEYUP:
 					{
 						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::HeldDown ||
-							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::TransitionState)
+							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Pressed)
 							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
 
 						break;

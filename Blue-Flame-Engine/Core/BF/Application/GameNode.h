@@ -1,5 +1,6 @@
 #pragma once
-#include <unordered_map>
+#include <vector>
+#include <string>
 #include "BF/Common.h"
 
 namespace BF
@@ -9,6 +10,7 @@ namespace BF
 		namespace Layers
 		{
 			class Layer;
+			class LayerManager;
 		}
 	}
 
@@ -25,32 +27,20 @@ namespace BF
 				enum class NodeType { Null, Renderable, GUI, Mesh, Audio };
 				NodeType nodeType;
 
-			public:
-				int index = 0;
+			private:
 				std::string name;
-				std::unordered_map<std::string, GameNode*> gameNodes;
+				std::vector<GameNode*> gameNodes;
+				BF::Application::Layers::LayerManager* layerManager;
 
-			/*
 			public:
-				GameNode();
+				int layerIndex = 0;
 
-			protected:
-				GameNode(NodeType nodeType);
-				~GameNode();
-			*/
-
-			/*
 			public:
 				GameNode();
 				~GameNode();
 
-			public:
-				virtual void Initialize() = 0;
-				virtual void Load() = 0;
-				//virtual void FixedUpdate();
-				virtual void Update() = 0;
-				virtual void Render() = 0;
-			*/
+				GameNode* Instantiate(const std::string& name, GameNode* gameNode);
+				void Destroy(GameNode* gameNode);
 		};
 	}
 }

@@ -25,9 +25,9 @@ namespace BF
 		{
 			class BF_API SpriteRenderer
 			{
-				public:
+				/*public:
 					enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { Null, BackToFront, FrontToBack };
+					enum class SortingOrder { Null, BackToFront, FrontToBack };*/
 
 				private:
 					//BF::Application::Scene& scene;
@@ -40,7 +40,7 @@ namespace BF
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					BF::Application::Layers::LayerManager& layerManager;
+					BF::Application::Layers::LayerManager* layerManager;
 
 					//std::vector<BF::Application::Layers::Layer>& layers;
 
@@ -49,20 +49,20 @@ namespace BF
 					//int nullCount;
 
 					//SubmitType submitType;
-					SortingOrder sortingOrder;
+					//SortingOrder sortingOrder;
 					bool submitSprite, newDrawCall;
 
 					static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
 				public:
-					SpriteRenderer(BF::Application::Layers::LayerManager& layerManager);
+					SpriteRenderer();
 					~SpriteRenderer();
 
-					void Initialize();
+					void Initialize(BF::Application::Layers::LayerManager& layerManager);
 
 					//void Submit(Renderable& renderable);
 					//void Remove(Renderable& renderable);
-					void Render(SortingOrder sortingOrder);
+					void Render(/*SortingOrder sortingOrder*/);
 
 					//void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					//void Render(const Renderable& renderable);

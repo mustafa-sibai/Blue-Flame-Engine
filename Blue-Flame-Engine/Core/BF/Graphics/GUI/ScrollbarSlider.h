@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/Application/Scene.h"
+#include "BF/Graphics/GUI/Widget.h"
 #include "BF/Common.h"
 
 namespace BF

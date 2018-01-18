@@ -24,8 +24,8 @@ namespace BF
 		{
 			Camera::Initialize(projectionMatrix);
 
-			cameraFront = Vector3f(0.0f, 0.0f, 1.0f);
-			cameraUp = Vector3f(0.0f, 1.0f, 0.0f);
+			cameraFront = Vector3f::Forward();
+			cameraUp = Vector3f::Up();
 			windowCenter = Vector2f(floor((float)Engine::GetWindow().GetClientWidth() / 2.0f), floor((float)Engine::GetWindow().GetClientHeight() / 2.0f));
 			BF::Input::Mouse::ShowMouseCursor(false);
 			BF::Input::Mouse::SetPosition(windowCenter);

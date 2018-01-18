@@ -27,13 +27,13 @@ namespace BF
 				}
 			}
 
-			void Layer::Add(GameNode& gameNode)
+			void Layer::AddGameNode(GameNode& gameNode)
 			{
 				gameNodes.emplace_back(&gameNode);
 				sortLayer = true;
 			}
 
-			void Layer::Remove(GameNode& gameNode)
+			void Layer::RemoveGameNode(GameNode& gameNode)
 			{
 			}
 		}

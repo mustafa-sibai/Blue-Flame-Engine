@@ -53,9 +53,10 @@
   <ItemGroup>
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
+    <ClCompile Include="BF\Application\GameNode.cpp" />
     <ClCompile Include="BF\Application\Layers\Layer.cpp" />
+    <ClCompile Include="BF\Application\Layers\LayerManager.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
-    <ClCompile Include="BF\Application\SceneManager.cpp" />
     <ClCompile Include="BF\Application\Window.cpp" />
     <ClCompile Include="BF\Audio\Sound.cpp" />
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
@@ -84,7 +85,8 @@
     <ClCompile Include="BF\Graphics\GUI\Widget.cpp" />
     <ClCompile Include="BF\Graphics\GUI\WidgetManager.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
-    <ClCompile Include="BF\Graphics\Material.cpp" />
+    <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
+    <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
     <ClCompile Include="BF\Graphics\Model.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp" />
@@ -146,14 +148,13 @@
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slidebar.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slider.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
-    <ClCompile Include="BF\Application\Layers\LayerManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
     <ClInclude Include="BF\Application\Layers\Layer.h" />
+    <ClInclude Include="BF\Application\Layers\LayerManager.h" />
     <ClInclude Include="BF\Application\Scene.h" />
-    <ClInclude Include="BF\Application\SceneManager.h" />
     <ClInclude Include="BF\Application\Window.h" />
     <ClInclude Include="BF\Application\WindowStyle.h" />
     <ClInclude Include="BF\Audio\Sound.h" />
@@ -187,7 +188,8 @@
     <ClInclude Include="BF\Graphics\GUI\Widget.h" />
     <ClInclude Include="BF\Graphics\GUI\WidgetManager.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
-    <ClInclude Include="BF\Graphics\Material.h" />
+    <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
+    <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\PredefinedColors.h" />
@@ -262,7 +264,6 @@
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slidebar.h" />
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slider.h" />
     <ClInclude Include="BF\System\Random.h" />
-    <ClInclude Include="BF\Application\Layers\LayerManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -283,6 +284,7 @@
     <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\SpriteRenderer\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Terrain\GLSL-Core4.5\PUVN.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\TextureCube\HLSL5.0\Shader.vpshader" />
