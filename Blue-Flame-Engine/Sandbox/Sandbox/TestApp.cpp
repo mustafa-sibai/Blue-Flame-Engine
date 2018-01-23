@@ -37,10 +37,19 @@ namespace TestApp
 		//scene = GetSceneManager().LoadScene(0);
 
 		
-		RegularPolygon* regularPolygon =  (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon", new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
+		/*RegularPolygon* regularPolygon =  (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon", new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
 		RegularPolygon* regularPolygon2 = (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon2", new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 2, Color::Blues::DarkBlue()));
-		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow())/*, regularPolygon*/);
+		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow()));*/
 		
+
+		GameNode* regularPolygon = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon");
+		GameNode* regularPolygon2 = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon2");
+		GameNode* regularPolygon3 = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon3");
+
+		regularPolygon->AddComponent(new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
+		regularPolygon2->AddComponent(new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 2, Color::Blues::DarkBlue()));
+		regularPolygon3->AddComponent(new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow()));
+
 		/*
 		scene->Destroy(regularPolygon);
 

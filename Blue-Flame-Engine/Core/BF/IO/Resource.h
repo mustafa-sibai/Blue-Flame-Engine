@@ -15,7 +15,7 @@ namespace BF
 			Type type;
 
 			Resource(Type type);
-			~Resource();
+			virtual ~Resource();
 		};
 	}
 }

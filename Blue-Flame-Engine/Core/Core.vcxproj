@@ -148,6 +148,8 @@
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slidebar.cpp" />
     <ClCompile Include="BF\Graphics\GUI\Slidebar\Slider.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
+    <ClCompile Include="BF\Application\Component.cpp" />
+    <ClCompile Include="BF\Math\Ray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -264,6 +266,8 @@
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slidebar.h" />
     <ClInclude Include="BF\Graphics\GUI\Slidebar\Slider.h" />
     <ClInclude Include="BF\System\Random.h" />
+    <ClInclude Include="BF\Application\Component.h" />
+    <ClInclude Include="BF\Math\Ray.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

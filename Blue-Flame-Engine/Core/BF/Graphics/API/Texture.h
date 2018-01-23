@@ -88,7 +88,7 @@ namespace BF
 					Filter filter;
 
 					Texture();
-					~Texture();
+					virtual ~Texture();
 
 					void Load(const std::string& filename);
 

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "BF/Application/Component.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -23,13 +24,10 @@ namespace BF
 			friend BF::Application::Scene;
 			friend BF::Application::Layers::Layer;
 
-			protected:
-				enum class NodeType { Null, Renderable, GUI, Mesh, Audio };
-				NodeType nodeType;
-
 			private:
 				std::string name;
 				std::vector<GameNode*> gameNodes;
+				std::vector<Component*> components;
 				BF::Application::Layers::LayerManager* layerManager;
 
 			public:
@@ -37,10 +35,13 @@ namespace BF
 
 			public:
 				GameNode();
-				~GameNode();
+				virtual ~GameNode();
 
-				GameNode* Instantiate(const std::string& name, GameNode* gameNode);
+				GameNode* InstantiateChildGameNode(const std::string& name);
 				void Destroy(GameNode* gameNode);
+
+				void AddComponent(Component* component);
+				void RemoveComponent(Component* component);
 		};
 	}
 }

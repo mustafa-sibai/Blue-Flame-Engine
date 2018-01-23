@@ -26,7 +26,7 @@ namespace BF
 
 			public:
 				Camera();
-				~Camera();
+				virtual ~Camera();
 
 				virtual void Initialize(const BF::Math::Matrix4& projectionMatrix);
 				virtual void Update();

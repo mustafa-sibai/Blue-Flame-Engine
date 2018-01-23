@@ -17,7 +17,7 @@ namespace BF
 			Renderable::Renderable(const Vector2f& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, RenderableType renderableType) :
 				position(position), rectangle(rectangle), zLayer(zLayer), color(color), renderableType(renderableType)
 			{
-				GameNode::nodeType = GameNode::NodeType::Renderable;
+				Component::type = Component::Type::Renderable;
 			}
 
 			Renderable::~Renderable()

@@ -52,7 +52,7 @@ namespace BF
 
 		public:
 			App();
-			~App();
+			virtual ~App();
 
 			virtual void Initialize();
 			virtual void Load();

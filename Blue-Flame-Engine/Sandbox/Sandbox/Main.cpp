@@ -29,8 +29,8 @@ int main()
 	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//PhysicsScene::PhysicsScene scene;
-	//TestApp::TestApp testApp;
-	TerrainTestApp testApp;
+	TestApp::TestApp testApp;
+	//TerrainTestApp testApp;
 	//InputTests scene;
 
 	engine.Run(testApp);

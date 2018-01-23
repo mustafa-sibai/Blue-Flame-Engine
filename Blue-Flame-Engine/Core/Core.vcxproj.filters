@@ -306,6 +306,12 @@
     <ClCompile Include="BF\Application\Layers\LayerManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Application\Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Math\Ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -648,6 +654,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Application\Layers\LayerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Application\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Math\Ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

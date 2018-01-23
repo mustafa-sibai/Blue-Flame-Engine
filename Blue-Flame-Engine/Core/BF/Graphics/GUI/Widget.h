@@ -33,7 +33,7 @@ namespace BF
 				int minWidth = 0, minHeight = 0;
 			};
 
-			class BF_API Widget : public BF::Application::GameNode
+			class BF_API Widget : public BF::Application::Component
 			{
 				friend class WidgetManager;
 

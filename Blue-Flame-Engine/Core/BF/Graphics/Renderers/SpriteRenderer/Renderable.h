@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Application/GameNode.h"
+#include "BF/Application/Component.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
@@ -10,7 +10,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API Renderable : public BF::Application::GameNode
+			class BF_API Renderable : public BF::Application::Component
 			{
 				friend class SpriteRenderer;
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "BF/Application/GameNode.h"
+#include "BF/Application/Component.h"
 #include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
 #include "BF/Common.h"
 
@@ -15,48 +15,43 @@ namespace BF
 				private:
 					struct SortingFunction
 					{
-						bool operator() (GameNode* gameNodeA, GameNode* gameNodeB)
+						bool operator() (Component* componentA, Component* componentB)
 						{
-							if (gameNodeA->nodeType == GameNode::NodeType::Mesh && gameNodeB->nodeType == GameNode::NodeType::Renderable)
-								return true;
+							BF::Graphics::Renderers::Renderable* renderableA = ((BF::Graphics::Renderers::Renderable*)componentA);
+							BF::Graphics::Renderers::Renderable* renderableB = ((BF::Graphics::Renderers::Renderable*)componentB);
 
-							if (gameNodeA->nodeType == GameNode::NodeType::Renderable && gameNodeB->nodeType == GameNode::NodeType::Renderable)
+							if (renderableA->GetRectangle().y <= renderableB->GetRectangle().y)
 							{
-								BF::Graphics::Renderers::Renderable* renderableA = ((BF::Graphics::Renderers::Renderable*)gameNodeA);
-								BF::Graphics::Renderers::Renderable* renderableB = ((BF::Graphics::Renderers::Renderable*)gameNodeB);
-
-								if (renderableA->GetRectangle().y <= renderableB->GetRectangle().y)
+								if (renderableA->zLayer < renderableB->zLayer)
 								{
-									if (renderableA->zLayer < renderableB->zLayer)
-									{
-										//renderableA->index--;
-										//renderableB->index++;
-										return true;
-									}
-								}
-
-								if (renderableA->GetRectangle().y < renderableB->GetRectangle().y)
-								{
-									if (renderableA->zLayer == renderableB->zLayer)
-									{
-										return true;
-									}
-								}
-
-								if (renderableA->GetRectangle().y >= renderableB->GetRectangle().y)
-								{
-									if (renderableA->zLayer < renderableB->zLayer)
-									{
-										return true;
-									}
+									//renderableA->index--;
+									//renderableB->index++;
+									return true;
 								}
 							}
+
+							if (renderableA->GetRectangle().y < renderableB->GetRectangle().y)
+							{
+								if (renderableA->zLayer == renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							if (renderableA->GetRectangle().y >= renderableB->GetRectangle().y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
 							return false;
 						}
 					};
 
 					std::string name;
-					std::vector<GameNode*> gameNodes;
+					std::vector<Component*> components;
 
 					bool sortLayer;
 
@@ -66,13 +61,13 @@ namespace BF
 
 					void Update();
 
-					void AddGameNode(GameNode& gameNode);
-					void RemoveGameNode(GameNode& gameNode);
+					void AddComponent(Component& component);
+					void RemoveComponent(Component& component);
 
 					inline const std::string& GetName() { return name; }
 
-					inline GameNode& GetGameNode(int index) { return *gameNodes[index]; }
-					inline const size_t GetSize() { return gameNodes.size(); }
+					inline Component& GetComponent(int index) { return *components[index]; }
+					inline const size_t GetSize() { return components.size(); }
 			};
 		}
 	}

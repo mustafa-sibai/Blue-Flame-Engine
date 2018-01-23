@@ -19,7 +19,7 @@ namespace BF
 		{
 			class BF_API WidgetManager
 			{
-				friend class BF::Application::Scene;
+				//friend class BF::Application::Scene;
 
 				private:
 					StyleSheet styleSheet;

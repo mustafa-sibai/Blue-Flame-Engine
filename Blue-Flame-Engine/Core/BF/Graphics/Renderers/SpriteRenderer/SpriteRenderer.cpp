@@ -123,7 +123,7 @@ namespace BF
 							int index = removeList[i]->index;
 							renderables[index] = nullptr;
 							scene.gameNodes.erase(removeList[i]->name);
-							delete (RegularPolygon*)renderables[index];
+							delete renderables[index];
 							nullCount++;
 						}
 						removeList.clear();*/
@@ -385,12 +385,11 @@ namespace BF
 			{
 				if (submitSprite)
 				{
-
 					for (size_t i = 0; i < layerManager->GetSize(); i++)
 					{
 						for (size_t j = 0; j < layerManager->GetLayer(i).GetSize(); j++)
 						{
-							Renderable& renderable = (Renderable&)layerManager->GetLayer(i).GetGameNode(j);
+							Renderable& renderable = (Renderable&)layerManager->GetLayer(i).GetComponent(j);
 
 							switch (renderable.renderableType)
 							{

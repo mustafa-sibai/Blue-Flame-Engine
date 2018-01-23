@@ -22,18 +22,18 @@ namespace BF
 			{
 				if (sortLayer)
 				{
-					sort(gameNodes.begin(), gameNodes.end(), SortingFunction());
+					sort(components.begin(), components.end(), SortingFunction());
 					sortLayer = false;
 				}
 			}
 
-			void Layer::AddGameNode(GameNode& gameNode)
+			void Layer::AddComponent(Component& component)
 			{
-				gameNodes.emplace_back(&gameNode);
+				components.emplace_back(&component);
 				sortLayer = true;
 			}
 
-			void Layer::RemoveGameNode(GameNode& gameNode)
+			void Layer::RemoveComponent(Component& component)
 			{
 			}
 		}

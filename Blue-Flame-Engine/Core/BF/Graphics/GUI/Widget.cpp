@@ -18,7 +18,7 @@ namespace BF
 			Widget::Widget() :
 				currentSprite(nullptr), OnClickCallBack(nullptr), callBackPointer(nullptr), currentState(0), mouseNotPressedOnWidget(false), hovered(false), pressed(false), pressedAndReleased(false)
 			{
-				GameNode::nodeType = GameNode::NodeType::GUI;
+				Component::type = Component::Type::GUI;
 			}
 
 			Widget::~Widget()
