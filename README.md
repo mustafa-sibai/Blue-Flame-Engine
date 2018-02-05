@@ -52,6 +52,14 @@ A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 
 <br>
 
+<b>If you like what I'm doing here and would like to support the engine development, you can become a Patreon supporter.</b>
+
+<br>
+
+<a href="https://www.patreon.com/blueflameengine" target="_blank"><img src="https://camo.githubusercontent.com/11738c6634cc5f68845bdd5e0e70a0cc3ef09ee7/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f70617472656f6e5f7075626c69635f6173736574732f45657230695f70617472656f6e5f6c6f676f5f666c61742e706e67" width="150" height="150"></a>
+
+<br>
+
 This is the sponza scene running ony my game engine with basic diffuse lighting.
 ![alt tag](http://i.imgur.com/7Tsvk0S.jpg)
 
