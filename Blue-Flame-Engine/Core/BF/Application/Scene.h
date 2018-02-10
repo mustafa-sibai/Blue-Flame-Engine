@@ -18,7 +18,7 @@
 #endif*/
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Application/Layers/LayerManager.h"
-#include "BF/Application/GameNode.h"
+#include "BF/Application/GameObject.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -52,7 +52,7 @@ namespace BF
 				bool loaded;
 				int fixedUpdateTicks;
 
-				GameNode* rootGameNode;
+				GameObject* rootGameObject;
 
 			public:
 				Scene();
@@ -71,10 +71,10 @@ namespace BF
 
 				//GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
 
-				inline GameNode& GetRootGameNode() { return *rootGameNode; }
+				inline GameObject& GetRootGameNode() { return *rootGameObject; }
 
 			private:
-				void RenderNode(GameNode* node);
+				void RenderNode(GameObject* gameObject);
 		};
 	}
 }

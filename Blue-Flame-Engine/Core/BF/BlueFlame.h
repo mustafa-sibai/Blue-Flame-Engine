@@ -41,11 +41,11 @@
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
 #include <BF/Graphics/GUI/StyleSheet.h>
-#include <BF/Graphics/GUI/Label.h>
+/*#include <BF/Graphics/GUI/Label.h>
 #include <BF/Graphics/GUI/Button.h>
 #include <BF/Graphics/GUI/MenuStrip/MenuStrip.h>
 #include <BF/Graphics/GUI/Checkbox.h>
-#include <BF/Graphics/GUI/Panel.h>
+#include <BF/Graphics/GUI/Panel.h>*/
 #endif
 
 #include <BF/Graphics/Animation/SpriteAnimation.h>

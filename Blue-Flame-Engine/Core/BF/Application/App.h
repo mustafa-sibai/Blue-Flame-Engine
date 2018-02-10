@@ -12,6 +12,7 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/Application/Layers/LayerManager.h"
+#include "BF/Graphics/GUI/StyleSheet.h"
 //#include "BF/Application/SceneManager.h"
 #include "BF/Application/Scene.h"
 #include "BF/Graphics/API/Context.h"
@@ -49,6 +50,8 @@ namespace BF
 			bool initialized;
 			bool loaded;
 			int fixedUpdateTicks;
+
+			BF::Graphics::GUI::StyleSheet styleSheet;
 
 		public:
 			App();

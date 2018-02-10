@@ -13,23 +13,17 @@ namespace BF
 		{
 			class StyleSheet;
 
+			struct State
+			{
+				BF::Graphics::Renderers::Sprite normal;
+				BF::Graphics::Renderers::Sprite hovered;
+				BF::Graphics::Renderers::Sprite pressed;
+				BF::Graphics::Renderers::Sprite disabled;
+			};
+
 			struct WidgetData
 			{
-				/*
-					sprites[0] = First state normal sprite
-					sprites[1] = First state hovered sprite
-					sprites[2] = First state pressed sprite
-					sprites[3] = First state disabled sprite
-
-					sprites[4] = Second state normal sprite
-					sprites[5] = Second state hovered sprite
-					sprites[6] = Second state pressed sprite
-					sprites[7] = Second state disabled sprite
-				*/
-				BF::Graphics::Renderers::Sprite sprites[BF_WIDGET_DATA_SPRITES_LENGTH];
-				BF::Graphics::Renderers::Text text;
-				bool hasText = false;
-
+				std::vector<State> state;
 				int minWidth = 0, minHeight = 0;
 			};
 
@@ -59,7 +53,7 @@ namespace BF
 					Widget();
 					~Widget();
 
-					void AddOnClickListener(void(*OnClickCallBack)(void*), void* obj);
+					/*void AddOnClickListener(void(*OnClickCallBack)(void*), void* obj);
 
 					virtual void SetPosition(const BF::Math::Vector2f& position);
 					virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
@@ -87,7 +81,7 @@ namespace BF
 			protected:
 					bool IsMouseOnWidget();
 					void FireAction();
-					void SetCurrentSpriteToNormal();
+					void SetCurrentSpriteToNormal();*/
 			};
 		}
 	}

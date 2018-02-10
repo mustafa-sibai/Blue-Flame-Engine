@@ -1,6 +1,8 @@
 #include "TestApp.h"
 #include "BF/IO/SceneLoader.h"
-#include "BF/Graphics/GUI/TabWindow/TabWindow.h"
+#include "BF/Graphics/GUI2/Canves.h"
+#include "BF/Graphics/GUI2/Button.h"
+//#include "BF/Graphics/GUI/TabWindow/TabWindow.h"
 
 namespace TestApp
 {
@@ -14,8 +16,8 @@ namespace TestApp
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	TestApp::TestApp() :
-		exitItem(nullptr)
+	TestApp::TestApp()/* :
+		exitItem(nullptr)*/
 	{
 	}
 
@@ -42,13 +44,20 @@ namespace TestApp
 		RegularPolygon* regularPolygon3 = (RegularPolygon*)scene->GetRootGameNode().Instantiate("regularPolygon3", new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow()));*/
 		
 
-		GameNode* regularPolygon = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon");
-		GameNode* regularPolygon2 = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon2");
-		GameNode* regularPolygon3 = scene->GetRootGameNode().InstantiateChildGameNode("regularPolygon3");
+		GameObject* regularPolygon = scene->GetRootGameNode().InstantiateChildGameObject("regularPolygon");
+		GameObject* regularPolygon2 = scene->GetRootGameNode().InstantiateChildGameObject("regularPolygon2");
+		GameObject* regularPolygon3 = scene->GetRootGameNode().InstantiateChildGameObject("regularPolygon3");
 
 		regularPolygon->AddComponent(new RegularPolygon(Math::Rectangle(100, 120, 100, 100), 5, Color::Blues::DarkBlue()));
 		regularPolygon2->AddComponent(new RegularPolygon(Math::Rectangle(120, 0, 100, 100), 2, Color::Blues::DarkBlue()));
 		regularPolygon3->AddComponent(new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color::Yellows::Yellow()));
+
+
+		GameObject* canves = scene->GetRootGameNode().InstantiateChildGameObject("canves");
+		canves->AddComponent(new Canves());
+
+		GameObject* button = canves->InstantiateChildGameObject("Button");
+		button->AddComponent(new Button());
 
 		/*
 		scene->Destroy(regularPolygon);
@@ -92,7 +101,7 @@ namespace TestApp
 
 	void TestApp::Load()
 	{
-		
+		App::Load();
 	}
 
 	void TestApp::Update()

@@ -19,26 +19,29 @@ namespace BF
 	{
 		class Scene;
 
-		class BF_API GameNode
+		class BF_API GameObject
 		{
 			friend BF::Application::Scene;
 			friend BF::Application::Layers::Layer;
 
 			private:
-				std::string name;
-				std::vector<GameNode*> gameNodes;
+				std::vector<GameObject*> gameObjects;
 				std::vector<Component*> components;
 				BF::Application::Layers::LayerManager* layerManager;
 
 			public:
-				int layerIndex = 0;
+				bool Active;
+				std::string Name;
+				int LayerIndex;
 
 			public:
-				GameNode();
-				virtual ~GameNode();
+				GameObject();
+				virtual ~GameObject();
 
-				GameNode* InstantiateChildGameNode(const std::string& name);
-				void Destroy(GameNode* gameNode);
+				GameObject* InstantiateChildGameObject(const std::string& name);
+				void Destroy(GameObject* gameObject);
+
+				GameObject* InsertChildGameObject(GameObject& gameObject);
 
 				void AddComponent(Component* component);
 				void RemoveComponent(Component* component);

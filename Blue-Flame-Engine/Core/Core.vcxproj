@@ -53,7 +53,7 @@
   <ItemGroup>
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
-    <ClCompile Include="BF\Application\GameNode.cpp" />
+    <ClCompile Include="BF\Application\GameObject.cpp" />
     <ClCompile Include="BF\Application\Layers\Layer.cpp" />
     <ClCompile Include="BF\Application\Layers\LayerManager.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
@@ -76,14 +76,9 @@
     <ClCompile Include="BF\Graphics\Color.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Button.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Checkbox.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Panel.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Scrollbar.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\ScrollbarSlider.cpp" />
+    <ClCompile Include="BF\Graphics\GUI2\Button.cpp" />
+    <ClCompile Include="BF\Graphics\GUI2\Widget.cpp" />
     <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Widget.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\WidgetManager.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
@@ -133,23 +128,17 @@
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Label.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Text.cpp" />
     <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuStrip.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\MenuStrip\MenuItem.cpp" />
-    <ClCompile Include="BF\IO\SceneLoader.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\TabWindow\TabWindow.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\TabWindow\Tab.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Slidebar\Slidebar.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\Slidebar\Slider.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
     <ClCompile Include="BF\Application\Component.cpp" />
     <ClCompile Include="BF\Math\Ray.cpp" />
+    <ClCompile Include="BF\Graphics\GUI2\Canves.cpp" />
+    <ClCompile Include="BF\Graphics\GUI2\GUIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -181,14 +170,9 @@
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
-    <ClInclude Include="BF\Graphics\GUI\Button.h" />
-    <ClInclude Include="BF\Graphics\GUI\Checkbox.h" />
-    <ClInclude Include="BF\Graphics\GUI\Panel.h" />
-    <ClInclude Include="BF\Graphics\GUI\Scrollbar.h" />
-    <ClInclude Include="BF\Graphics\GUI\ScrollbarSlider.h" />
+    <ClInclude Include="BF\Graphics\GUI2\Button.h" />
+    <ClInclude Include="BF\Graphics\GUI2\Widget.h" />
     <ClInclude Include="BF\Graphics\GUI\StyleSheet.h" />
-    <ClInclude Include="BF\Graphics\GUI\Widget.h" />
-    <ClInclude Include="BF\Graphics\GUI\WidgetManager.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
@@ -249,25 +233,19 @@
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Timer.h" />
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
-    <ClInclude Include="BF\Graphics\GUI\Label.h" />
     <ClInclude Include="BF\Graphics\Fonts\Font.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Text.h" />
     <ClInclude Include="BF\Physics\PhysicsEngine.h" />
     <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
     <ClInclude Include="BF\IO\ResourceManager.h" />
-    <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuStrip.h" />
-    <ClInclude Include="BF\Application\GameNode.h" />
+    <ClInclude Include="BF\Application\GameObject.h" />
     <ClInclude Include="BF\System\Debug.h" />
-    <ClInclude Include="BF\Graphics\GUI\MenuStrip\MenuItem.h" />
-    <ClInclude Include="BF\IO\SceneLoader.h" />
-    <ClInclude Include="BF\Graphics\GUI\TabWindow\TabWindow.h" />
-    <ClInclude Include="BF\Graphics\GUI\TabWindow\Tab.h" />
-    <ClInclude Include="BF\Graphics\GUI\Slidebar\Slidebar.h" />
-    <ClInclude Include="BF\Graphics\GUI\Slidebar\Slider.h" />
     <ClInclude Include="BF\System\Random.h" />
     <ClInclude Include="BF\Application\Component.h" />
     <ClInclude Include="BF\Math\Ray.h" />
+    <ClInclude Include="BF\Graphics\GUI2\Canves.h" />
+    <ClInclude Include="BF\Graphics\GUI2\GUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

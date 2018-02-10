@@ -20,6 +20,7 @@ namespace BF
 
 		void App::Load()
 		{
+			styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 			//BF::Application::SceneManager::GetScenes()[0]->Load();
 		}
 

@@ -13,8 +13,10 @@ namespace BF
 			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers;
-			using namespace BF::Graphics::Fonts;
+			//using namespace BF::Graphics::Fonts;
 			using namespace BF::Math;
+
+			using namespace BF::Application;
 
 			StyleSheet::StyleSheet()
 			{
@@ -77,7 +79,7 @@ namespace BF
 				return Rectangle(atoi(x), atoi(y), width, height);
 			}
 
-			void StyleSheet::SetText(tinyxml2::XMLElement* widgetNode, WidgetData& widgetData)
+			/*void StyleSheet::SetText(tinyxml2::XMLElement* widgetNode, WidgetData& widgetData)
 			{
 				if (HasText(widgetNode))
 				{
@@ -121,7 +123,7 @@ namespace BF
 					widgetData.text = Text(font, text, widgetData.sprites[0].GetRectangle(), textAlignment, 0, Color(stof(r), stof(g), stof(b), stof(a)));
 					widgetData.hasText = true;
 				}
-			}
+			}*/
 
 			bool StyleSheet::DoesStateExist(tinyxml2::XMLElement* widgetNode, const string& state)
 			{
@@ -140,52 +142,46 @@ namespace BF
 
 			void StyleSheet::LoadWidget(tinyxml2::XMLElement* widgetNode, const std::string& widgetName)
 			{
-				WidgetData widgetData;
+				GameObject* gameObject = new GameObject();
+				Widget* widget = new Widget();
+				gameObject->AddComponent(widget);
+
 				Rectangle rectangle, scissorRectangle;
 
 				rectangle = ReadWidgetDimensions(widgetNode);
 
-				widgetData.minWidth = rectangle.x;
-				widgetData.minHeight = rectangle.y;
+				widget->minWidth = rectangle.x;
+				widget->minHeight = rectangle.y;
 
-				if (DoesStateExist(widgetNode, "FirstState"))
+				string stateNames[] = { "FirstState", "SecondState" };
+
+				for (size_t i = 0; i < 2; i++)
 				{
-					scissorRectangle = ReadWidgetData(widgetNode, "FirstState", "Normal");
-					widgetData.sprites[0] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(widgetNode, "FirstState", "Hovered");
-					widgetData.sprites[1] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(widgetNode, "FirstState", "Pressed");
-					widgetData.sprites[2] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					if (DoesTypeExist(widgetNode, "FirstState", "Disabled"))
+					if (DoesStateExist(widgetNode, stateNames[i]))
 					{
-						scissorRectangle = ReadWidgetData(widgetNode, "FirstState", "Disabled");
-						widgetData.sprites[3] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+						widget->states.emplace_back(State());
+
+						int index = widget->states.size() - 1;
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Normal");
+						widget->states[index].normal = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Hovered");
+						widget->states[index].hovered = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Pressed");
+						widget->states[index].pressed = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						if (DoesTypeExist(widgetNode, stateNames[i], "Disabled"))
+						{
+							scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Disabled");
+							widget->states[index].disabled = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+						}
 					}
 				}
 
-				if (DoesStateExist(widgetNode, "SecondState"))
-				{
-					scissorRectangle = ReadWidgetData(widgetNode, "SecondState", "Normal");
-					widgetData.sprites[4] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(widgetNode, "SecondState", "Hovered");
-					widgetData.sprites[5] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(widgetNode, "SecondState", "Pressed");
-					widgetData.sprites[6] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					if (DoesTypeExist(widgetNode, "SecondState", "Disabled"))
-					{
-						scissorRectangle = ReadWidgetData(widgetNode, "SecondState", "Disabled");
-						widgetData.sprites[7] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-					}
-				}
-
-				SetText(widgetNode, widgetData);
-				widgetsData.insert({ widgetName, widgetData });
+				/*SetText(widgetNode, widgetData);*/
+				widgets.insert({ widgetName, gameObject });
 			}
 
 			tinyxml2::XMLElement* StyleSheet::GetXMLNode(tinyxml2::XMLElement* root, const std::string& widgetName)

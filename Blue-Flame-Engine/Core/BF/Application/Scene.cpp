@@ -11,7 +11,7 @@ namespace BF
 		using namespace BF::Application::Layers;
 
 		Scene::Scene() :
-			initialized(false), loaded(false), fixedUpdateTicks(0), rootGameNode(nullptr)
+			initialized(false), loaded(false), fixedUpdateTicks(0), rootGameObject(nullptr)
 		{
 		}
 
@@ -21,8 +21,8 @@ namespace BF
 
 		void Scene::Initialize(BF::Application::Layers::LayerManager& layerManager)
 		{
-			rootGameNode = new GameNode();
-			rootGameNode->layerManager = &layerManager;
+			rootGameObject = new GameObject();
+			rootGameObject->layerManager = &layerManager;
 			spriteRenderer.Initialize(layerManager);
 		}
 

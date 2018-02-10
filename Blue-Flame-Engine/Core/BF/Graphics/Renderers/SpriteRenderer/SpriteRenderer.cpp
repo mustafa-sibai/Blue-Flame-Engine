@@ -389,34 +389,50 @@ namespace BF
 					{
 						for (size_t j = 0; j < layerManager->GetLayer(i).GetSize(); j++)
 						{
-							Renderable& renderable = (Renderable&)layerManager->GetLayer(i).GetComponent(j);
-
-							switch (renderable.renderableType)
+							switch (layerManager->GetLayer(i).GetComponent(j).type)
 							{
-								case Renderable::RenderableType::Line:
+								case BF::Application::Component::Type::Renderable:
 								{
-									LineShape& line = (LineShape&)renderable;
-									MapLineBuffer(line);
+									Renderable& renderable = (Renderable&)layerManager->GetLayer(i).GetComponent(j);
+
+									switch (renderable.renderableType)
+									{
+										case Renderable::RenderableType::Line:
+										{
+											LineShape& line = (LineShape&)renderable;
+											MapLineBuffer(line);
+											break;
+										}
+										case Renderable::RenderableType::RegularPolygon:
+										{
+											RegularPolygon& regularPolygon = (RegularPolygon&)renderable;
+											MapPolygonBuffer(regularPolygon);
+											break;
+										}
+										case Renderable::RenderableType::Sprite:
+										{
+											Sprite& sprite = (Sprite&)renderable;
+											MapSpriteBuffer(sprite);
+											break;
+										}
+										case Renderable::RenderableType::Text:
+										{
+											Text& text = (Text&)renderable;
+											MapTextBuffer(text);
+											break;
+										}
+										default:
+											break;
+									}
 									break;
 								}
-								case Renderable::RenderableType::RegularPolygon:
+
+								case BF::Application::Component::Type::GUI:
 								{
-									RegularPolygon& regularPolygon = (RegularPolygon&)renderable;
-									MapPolygonBuffer(regularPolygon);
+
 									break;
 								}
-								case Renderable::RenderableType::Sprite:
-								{
-									Sprite& sprite = (Sprite&)renderable;
-									MapSpriteBuffer(sprite);
-									break;
-								}
-								case Renderable::RenderableType::Text:
-								{
-									Text& text = (Text&)renderable;
-									MapTextBuffer(text);
-									break;
-								}
+
 								default:
 									break;
 							}
