@@ -249,34 +249,13 @@
     <ClCompile Include="BF\Application\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Application\Layers\Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Application\Layers\LayerManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Application\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Math\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\GUI2\Canves.cpp">
+    <ClCompile Include="BF\ECS\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\GUI2\GUIManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\GUI2\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\GUI2\Widget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Application\GameObject.cpp">
+    <ClCompile Include="BF\ECS\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -566,34 +545,13 @@
     <ClInclude Include="BF\Application\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Application\Layers\Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Application\Layers\LayerManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Application\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Math\Ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\GUI2\Canves.h">
+    <ClInclude Include="BF\ECS\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\GUI2\GUIManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\GUI2\Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\GUI2\Widget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\GUI\StyleSheet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Application\GameObject.h">
+    <ClInclude Include="BF\ECS\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

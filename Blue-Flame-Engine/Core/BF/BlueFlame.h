@@ -40,7 +40,7 @@
 #endif
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_WEB)
-#include <BF/Graphics/GUI/StyleSheet.h>
+//#include <BF/Graphics/GUI/StyleSheet.h>
 /*#include <BF/Graphics/GUI/Label.h>
 #include <BF/Graphics/GUI/Button.h>
 #include <BF/Graphics/GUI/MenuStrip/MenuStrip.h>

@@ -8,10 +8,10 @@ namespace BF
 		{
 			using namespace BF::Math;
 
-			LineShape::LineShape() :
+			/*LineShape::LineShape() :
 				thickness(0)
 			{
-			}
+			}*/
 
 			LineShape::LineShape(const Vector2f& startPoint, const Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color) :
 				Renderable(startPoint, Rectangle(), zLayer, color, RenderableType::Line), startPoint(startPoint), endPoint(endPoint), thickness(thickness)

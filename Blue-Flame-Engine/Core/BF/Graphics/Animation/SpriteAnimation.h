@@ -40,7 +40,7 @@ namespace BF
 					SpriteAnimationData* data;
 					BF::Graphics::Renderers::SpriteRenderer& spriteRenderer;
 					BF::Graphics::API::Texture2D texture;
-					Renderers::Sprite sprite;
+					//Renderers::Sprite sprite;
 
 					System::Timer timer;
 					int keyFrameIndex = 0;

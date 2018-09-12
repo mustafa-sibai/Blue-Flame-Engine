@@ -1,18 +1,18 @@
 #pragma once
 #ifdef BF_PLATFORM_WINDOWS
-#include "BF/Platform/Windows/WINEngineEntryPoint.h"
+	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_LINUX)
-#include "BF/Platform/Linux/LXEngineEntryPoint.h"
+	#include "BF/Platform/Linux/LXEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_WEB)
-#include "BF/Platform/Web/WEBEngineEntryPoint.h"
+	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_ANDROID)
-#include "BF/Platform/Android/ANDEngineEntryPoint.h"
+	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
-#include "BF/Application/Layers/LayerManager.h"
-#include "BF/Graphics/GUI/StyleSheet.h"
+//#include "BF/Application/Layers/LayerManager.h"
+//#include "BF/Graphics/GUI/StyleSheet.h"
 //#include "BF/Application/SceneManager.h"
 #include "BF/Application/Scene.h"
 #include "BF/Graphics/API/Context.h"
@@ -39,7 +39,7 @@ namespace BF
 
 		private:
 			//SceneManager sceneManager;
-			BF::Application::Layers::LayerManager layerManager;
+			//BF::Application::Layers::LayerManager layerManager;
 
 			Scene* mainScene;
 
@@ -51,7 +51,7 @@ namespace BF
 			bool loaded;
 			int fixedUpdateTicks;
 
-			BF::Graphics::GUI::StyleSheet styleSheet;
+			//BF::Graphics::GUI::StyleSheet styleSheet;
 
 		public:
 			App();
@@ -65,7 +65,7 @@ namespace BF
 			void SetMainScene(Scene& scene);
 
 			//inline SceneManager& GetSceneManager() { return sceneManager; }
-			inline BF::Application::Layers::LayerManager& GetLayerManager() { return layerManager; }
+			//inline BF::Application::Layers::LayerManager& GetLayerManager() { return layerManager; }
 		};
 	}
 }

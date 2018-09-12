@@ -12,10 +12,10 @@ namespace BF
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Fonts;
 
-			Text::Text() :
+			/*Text::Text() :
 				font(nullptr)
 			{
-			}
+			}*/
 
 			Text::Text(const Font* font, const string& text, const Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color) :
 				Renderable(Vector2f((float)scissorRectangle.x, (float)scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, RenderableType::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)

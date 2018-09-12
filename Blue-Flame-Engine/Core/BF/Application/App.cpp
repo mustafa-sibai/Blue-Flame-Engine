@@ -5,7 +5,7 @@ namespace BF
 	namespace Application
 	{
 		App::App() :
-			initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)//, sceneManager(layerManager)
+			initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
 		{
 		}
 
@@ -20,7 +20,7 @@ namespace BF
 
 		void App::Load()
 		{
-			styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
+			//styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 			//BF::Application::SceneManager::GetScenes()[0]->Load();
 		}
 
@@ -29,7 +29,7 @@ namespace BF
 			if (mainScene != nullptr)
 				mainScene->Update();
 
-			layerManager.Update();
+			//layerManager.Update();
 			//sceneManager.GetCurrentScene().Update();
 			//BF::Application::SceneManager::GetScenes()[0]->Update();
 		}
@@ -46,7 +46,7 @@ namespace BF
 		void App::SetMainScene(Scene& scene)
 		{
 			mainScene = &scene;
-			mainScene->Initialize(layerManager);
+			mainScene->Initialize();
 			mainScene->Load();
 		}
 	}

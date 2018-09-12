@@ -8,15 +8,12 @@
 //#include "InputTests.h"
 //#include "GUIScene.h"
 //#include "PhysicsScene.h"
-#include "TestApp.h"
-#include "TerrainTestApp.h"
+//#include "TestApp.h"
+//#include "TerrainTestApp.h"
+#include "ECSTestApp.h"
 
 int main()
 {
-	BF::Math::Vector3f z(0, 0, 1);
-
-	BF::Math::Vector3f y = z.Cross(BF::Math::Vector3f(1, 0, 0));
-
 #ifdef BF_NO_NET
 	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
@@ -29,11 +26,12 @@ int main()
 	//_3DScene::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//PhysicsScene::PhysicsScene scene;
-	TestApp::TestApp testApp;
+	//TestApp::TestApp testApp;
 	//TerrainTestApp testApp;
 	//InputTests scene;
+	ECSTestApp::ECSTestApp ecsTestApp;
 
-	engine.Run(testApp);
+	engine.Run(ecsTestApp);
 #elif defined (BF_CLIENT)
 	BF::Network::Client client;
 

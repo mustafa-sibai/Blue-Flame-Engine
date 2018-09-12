@@ -15,21 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sandbox\TestApp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sandbox\TerrainTestApp.cpp">
+    <ClCompile Include="Sandbox\ECSTestApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sandbox\TestApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sandbox\TerrainTestApp.h">
+    <ClInclude Include="Sandbox\ECSTestApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

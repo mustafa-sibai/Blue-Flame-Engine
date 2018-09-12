@@ -17,8 +17,10 @@
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif*/
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
-#include "BF/Application/Layers/LayerManager.h"
-#include "BF/Application/GameObject.h"
+//#include "BF/Application/Layers/LayerManager.h"
+//#include "BF/Application/GameObject.h"
+#include <vector>
+#include "BF/ECS/GameObject.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -43,16 +45,21 @@ namespace BF
 
 			private:
 				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+				std::vector<BF::ECS::GameObject*> gameObjects;
 
+			public:
+				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
+				BF::ECS::Component* AddComponentToGameObject(BF::ECS::GameObject* gameObject, BF::ECS::Component* component);
 /*
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				BF::Graphics::GUI::WidgetManager widgetManager;
 #endif*/
+		private:
 				bool initialized;
 				bool loaded;
 				int fixedUpdateTicks;
 
-				GameObject* rootGameObject;
+				//GameObject* rootGameObject;
 
 			public:
 				Scene();
@@ -63,7 +70,7 @@ namespace BF
 #endif*/
 
 			public:
-				void Initialize(BF::Application::Layers::LayerManager& layerManager);
+				void Initialize(/*BF::Application::Layers::LayerManager& layerManager*/);
 				void Load();
 				//void FixedUpdate();
 				void Update();
@@ -71,10 +78,10 @@ namespace BF
 
 				//GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
 
-				inline GameObject& GetRootGameNode() { return *rootGameObject; }
+				//inline GameObject& GetRootGameNode() { return *rootGameObject; }
 
 			private:
-				void RenderNode(GameObject* gameObject);
+				//void RenderNode(GameObject* gameObject);
 		};
 	}
 }

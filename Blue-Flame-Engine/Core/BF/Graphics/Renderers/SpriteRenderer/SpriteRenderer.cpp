@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
-#include "BF/Application/Layers/LayerManager.h"
+//#include "BF/Application/Layers/LayerManager.h"
 
 #define MAX_SPRITES		60000
 #define SPRITE_VERTICES 4
@@ -34,10 +34,8 @@ namespace BF
 			{
 			}
 
-			void SpriteRenderer::Initialize(BF::Application::Layers::LayerManager& layerManager)
+			void SpriteRenderer::Initialize()
 			{
-				this->layerManager = &layerManager;
-
 				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 				shader.LoadStandardShader(ShaderType::SpriteRenderer);
@@ -279,15 +277,18 @@ namespace BF
 						Begin(submitType, sortingOrder);
 					}
 				}*/
-
-				if (currentBoundTexture != sprite.texture2D)
-				{
-					sprite.texture2D->Bind();
-					currentBoundTexture = sprite.texture2D;
-				}
-
 				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
-				CalculateUV(sprite.texture2D, sprite.scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+
+				if (sprite.texture2D != nullptr)
+				{
+					if (currentBoundTexture != sprite.texture2D)
+					{
+						sprite.texture2D->Bind();
+						currentBoundTexture = sprite.texture2D;
+					}
+
+					CalculateUV(sprite.texture2D, sprite.scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+				}
 
 				//Top Left
 				spriteBuffer->position = sprite.position;
@@ -385,7 +386,40 @@ namespace BF
 			{
 				if (submitSprite)
 				{
-					for (size_t i = 0; i < layerManager->GetSize(); i++)
+					for (size_t i = 0; i < renderables.size(); i++)
+					{
+						switch (renderables[i]->renderableType)
+						{
+							case Renderable::RenderableType::Line:
+							{
+								LineShape& line = (LineShape&)renderables[i];
+								MapLineBuffer(line);
+								break;
+							}
+							case Renderable::RenderableType::RegularPolygon:
+							{
+								RegularPolygon* regularPolygon = (RegularPolygon*)renderables[i];
+								MapPolygonBuffer(*regularPolygon);
+								break;
+							}
+							case Renderable::RenderableType::Sprite:
+							{
+								Sprite* sprite = (Sprite*)renderables[i];
+								MapSpriteBuffer(*sprite);
+								break;
+							}
+							case Renderable::RenderableType::Text:
+							{
+								Text& text = (Text&)renderables[i];
+								MapTextBuffer(text);
+								break;
+							}
+							default:
+								break;
+						}
+					}
+
+					/*for (size_t i = 0; i < layerManager->GetSize(); i++)
 					{
 						for (size_t j = 0; j < layerManager->GetLayer(i).GetSize(); j++)
 						{
@@ -437,7 +471,7 @@ namespace BF
 									break;
 							}
 						}
-					}
+					}*/
 				}
 			}
 

@@ -13,10 +13,7 @@ namespace BF
 {
 	namespace Application
 	{
-		namespace Layers
-		{
-			class LayerManager;
-		}
+		class Scene;
 	}
 
 	namespace Graphics
@@ -25,6 +22,8 @@ namespace BF
 		{
 			class BF_API SpriteRenderer
 			{
+				friend class BF::Application::Scene;
+
 				/*public:
 					enum class SubmitType { StaticSubmit, DynamicSubmit };
 					enum class SortingOrder { Null, BackToFront, FrontToBack };*/
@@ -40,11 +39,7 @@ namespace BF
 					SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					BF::Application::Layers::LayerManager* layerManager;
-
-					//std::vector<BF::Application::Layers::Layer>& layers;
-
-					//std::vector<Renderable*> renderables;
+					std::vector<Renderable*> renderables;
 					//std::vector<Renderable*> removeList;
 					//int nullCount;
 
@@ -58,7 +53,7 @@ namespace BF
 					SpriteRenderer();
 					~SpriteRenderer();
 
-					void Initialize(BF::Application::Layers::LayerManager& layerManager);
+					void Initialize();
 
 					//void Submit(Renderable& renderable);
 					//void Remove(Renderable& renderable);

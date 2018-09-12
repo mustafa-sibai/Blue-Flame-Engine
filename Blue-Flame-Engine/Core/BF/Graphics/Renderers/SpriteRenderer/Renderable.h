@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Application/Component.h"
+#include "BF/ECS/Component.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
@@ -10,7 +10,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API Renderable : public BF::Application::Component
+			class BF_API Renderable : public BF::ECS::Component
 			{
 				friend class SpriteRenderer;
 
@@ -26,7 +26,7 @@ namespace BF
 					unsigned int zLayer;
 
 				public:
-					Renderable();
+					//Renderable();
 					Renderable(const BF::Math::Vector2f& position, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, RenderableType renderableType);
 					~Renderable();
 

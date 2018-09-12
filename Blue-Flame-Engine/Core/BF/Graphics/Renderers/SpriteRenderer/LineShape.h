@@ -18,7 +18,7 @@ namespace BF
 					float thickness;
 
 				public:
-					LineShape();
+					//LineShape();
 					LineShape(const BF::Math::Vector2f& startPoint, const BF::Math::Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color);
 					~LineShape();
 			};

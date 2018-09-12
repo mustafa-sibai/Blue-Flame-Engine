@@ -31,7 +31,7 @@ namespace BF
 					TextAlignment alignment;
 
 				public:
-					Text();
+					//Text();
 					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color);
 					~Text();
 

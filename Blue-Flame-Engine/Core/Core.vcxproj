@@ -53,9 +53,7 @@
   <ItemGroup>
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
-    <ClCompile Include="BF\Application\GameObject.cpp" />
-    <ClCompile Include="BF\Application\Layers\Layer.cpp" />
-    <ClCompile Include="BF\Application\Layers\LayerManager.cpp" />
+    <ClCompile Include="BF\ECS\GameObject.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
     <ClCompile Include="BF\Application\Window.cpp" />
     <ClCompile Include="BF\Audio\Sound.cpp" />
@@ -76,9 +74,6 @@
     <ClCompile Include="BF\Graphics\Color.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
     <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
-    <ClCompile Include="BF\Graphics\GUI2\Button.cpp" />
-    <ClCompile Include="BF\Graphics\GUI2\Widget.cpp" />
-    <ClCompile Include="BF\Graphics\GUI\StyleSheet.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
@@ -135,16 +130,12 @@
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
-    <ClCompile Include="BF\Application\Component.cpp" />
+    <ClCompile Include="BF\ECS\Component.cpp" />
     <ClCompile Include="BF\Math\Ray.cpp" />
-    <ClCompile Include="BF\Graphics\GUI2\Canves.cpp" />
-    <ClCompile Include="BF\Graphics\GUI2\GUIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
-    <ClInclude Include="BF\Application\Layers\Layer.h" />
-    <ClInclude Include="BF\Application\Layers\LayerManager.h" />
     <ClInclude Include="BF\Application\Scene.h" />
     <ClInclude Include="BF\Application\Window.h" />
     <ClInclude Include="BF\Application\WindowStyle.h" />
@@ -170,9 +161,6 @@
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
-    <ClInclude Include="BF\Graphics\GUI2\Button.h" />
-    <ClInclude Include="BF\Graphics\GUI2\Widget.h" />
-    <ClInclude Include="BF\Graphics\GUI\StyleSheet.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
@@ -239,13 +227,11 @@
     <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
     <ClInclude Include="BF\IO\ResourceManager.h" />
-    <ClInclude Include="BF\Application\GameObject.h" />
+    <ClInclude Include="BF\ECS\GameObject.h" />
     <ClInclude Include="BF\System\Debug.h" />
     <ClInclude Include="BF\System\Random.h" />
-    <ClInclude Include="BF\Application\Component.h" />
+    <ClInclude Include="BF\ECS\Component.h" />
     <ClInclude Include="BF\Math\Ray.h" />
-    <ClInclude Include="BF\Graphics\GUI2\Canves.h" />
-    <ClInclude Include="BF\Graphics\GUI2\GUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

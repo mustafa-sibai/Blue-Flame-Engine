@@ -6,12 +6,12 @@ namespace BF
 	namespace Application
 	{
 		using namespace std;
-		//using namespace BF::Graphics::GUI;
+		using namespace BF::ECS;
 		using namespace BF::Graphics::Renderers;
-		using namespace BF::Application::Layers;
+		//using namespace BF::Application::Layers;
 
 		Scene::Scene() :
-			initialized(false), loaded(false), fixedUpdateTicks(0), rootGameObject(nullptr)
+			initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
 		{
 		}
 
@@ -19,11 +19,11 @@ namespace BF
 		{
 		}
 
-		void Scene::Initialize(BF::Application::Layers::LayerManager& layerManager)
+		void Scene::Initialize(/*BF::Application::Layers::LayerManager& layerManager*/)
 		{
-			rootGameObject = new GameObject();
-			rootGameObject->layerManager = &layerManager;
-			spriteRenderer.Initialize(layerManager);
+			//rootGameObject = new GameObject();
+			//rootGameObject->layerManager = &layerManager;
+			spriteRenderer.Initialize();
 		}
 
 		void Scene::Load()
@@ -72,6 +72,23 @@ namespace BF
 			}*/
 
 			spriteRenderer.Render(/*SpriteRenderer::SortingOrder::BackToFront*/);
+		}
+
+		GameObject* Scene::AddGameObject(GameObject* gameObject)
+		{
+			gameObjects.emplace_back(gameObject);
+			return gameObject;
+		}
+
+		Component* Scene::AddComponentToGameObject(GameObject* gameObject, Component* component)
+		{
+			if (component->type == BF::ECS::Component::Type::Renderable)
+			{
+				gameObject->components.emplace_back(component);
+				spriteRenderer.renderables.emplace_back((Renderable*)component);
+			}
+
+			return component;
 		}
 
 		/*GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)

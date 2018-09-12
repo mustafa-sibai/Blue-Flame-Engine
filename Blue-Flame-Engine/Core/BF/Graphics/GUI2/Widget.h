@@ -19,7 +19,7 @@ namespace BF
 				BF::Graphics::Renderers::Sprite disabled;
 			};
 
-			class BF_API Widget : public BF::Application::Component
+			class BF_API Widget : public BF::ECS::Component
 			{
 				public:
 					std::vector<State> states;

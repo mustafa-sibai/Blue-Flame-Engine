@@ -26,7 +26,7 @@ namespace BF
 					BF::Math::Rectangle scissorRectangle;
 
 				public:
-					Sprite();
+					//Sprite();
 					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const Color& color);
 					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
 					Sprite(const Graphics::API::Texture2D* texture2D, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);

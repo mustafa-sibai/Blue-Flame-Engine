@@ -7,12 +7,13 @@ namespace BF
 		namespace Renderers
 		{
 			using namespace BF::Math;
-			using namespace BF::Application;
+			using namespace BF::ECS;
 
-			Renderable::Renderable() :
+			/*Renderable::Renderable() :
 				position(), zLayer(0), rectangle(), color()
 			{
-			}
+				Component::type = Component::Type::Renderable;
+			}*/
 
 			Renderable::Renderable(const Vector2f& position, const Rectangle& rectangle, unsigned int zLayer, const Color& color, RenderableType renderableType) :
 				position(position), rectangle(rectangle), zLayer(zLayer), color(color), renderableType(renderableType)
