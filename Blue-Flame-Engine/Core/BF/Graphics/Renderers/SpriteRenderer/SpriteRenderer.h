@@ -24,9 +24,9 @@ namespace BF
 			{
 				friend class BF::Application::Scene;
 
-				/*public:
-					enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { Null, BackToFront, FrontToBack };*/
+				public:
+					//enum class SubmitType { StaticSubmit, DynamicSubmit };
+					enum class SortingOrder { Null, BackToFront, FrontToBack };
 
 				private:
 					//BF::Application::Scene& scene;
@@ -44,7 +44,7 @@ namespace BF
 					//int nullCount;
 
 					//SubmitType submitType;
-					//SortingOrder sortingOrder;
+					SortingOrder sortingOrder;
 					bool submitSprite, newDrawCall;
 
 					static const BF::Graphics::API::Texture2D* currentBoundTexture;
@@ -57,7 +57,7 @@ namespace BF
 
 					//void Submit(Renderable& renderable);
 					//void Remove(Renderable& renderable);
-					void Render(/*SortingOrder sortingOrder*/);
+					void Render(SortingOrder sortingOrder);
 
 					//void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					//void Render(const Renderable& renderable);
@@ -71,10 +71,10 @@ namespace BF
 					//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
 
 				private:
-					void MapLineBuffer(const LineShape& lineShape);
-					void MapPolygonBuffer(const RegularPolygon& regularPolygon);
-					void MapSpriteBuffer(const Sprite& sprite);
-					void MapTextBuffer(const Text& text);
+					void MapLineBuffer(const LineShape* lineShape);
+					void MapPolygonBuffer(const RegularPolygon* regularPolygon);
+					void MapSpriteBuffer(const Sprite* sprite);
+					void MapTextBuffer(const Text* text);
 					void MapBuffer();
 					void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
 			};

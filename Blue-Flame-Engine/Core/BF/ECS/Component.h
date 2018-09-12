@@ -3,15 +3,23 @@
 
 namespace BF
 {
+	namespace Application
+	{
+		class Scene;
+	}
+
 	namespace ECS
 	{
 		class GameObject;
 
 		class BF_API Component
 		{
+			friend class BF::Application::Scene;
+
 			private:
 				static int globalID;
 				int id;
+				bool added;
 
 			public:
 				enum class Type { Null, Renderable, GUI, Mesh, Audio };

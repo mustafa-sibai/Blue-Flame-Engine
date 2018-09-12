@@ -20,6 +20,7 @@ namespace BF
 			private:
 				static int globalID;
 				int id;
+				bool added;
 				//std::vector<GameObject*> gameObjects;
 				std::vector<Component*> components;
 
@@ -28,7 +29,7 @@ namespace BF
 				std::string Name;
 
 			public:
-				GameObject();
+				GameObject(const std::string& name);
 				virtual ~GameObject();
 
 				inline int GetID() const { return id; }

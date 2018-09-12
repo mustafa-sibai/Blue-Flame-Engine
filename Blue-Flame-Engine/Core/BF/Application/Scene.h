@@ -50,6 +50,9 @@ namespace BF
 			public:
 				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
 				BF::ECS::Component* AddComponentToGameObject(BF::ECS::GameObject* gameObject, BF::ECS::Component* component);
+
+				void RemoveGameObject(BF::ECS::GameObject* gameObject);
+				void RemoveComponentFromGameObject(BF::ECS::GameObject* gameObject, BF::ECS::Component* component);
 /*
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				BF::Graphics::GUI::WidgetManager widgetManager;

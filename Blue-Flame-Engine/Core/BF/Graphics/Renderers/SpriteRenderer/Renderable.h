@@ -21,6 +21,54 @@ namespace BF
 					enum class RenderableType { Null, Line, RegularPolygon, Sprite, Text };
 					RenderableType renderableType;
 
+				private:
+					struct FrontToBack
+					{
+						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						{
+							if (renderableA->rectangle.y > renderableB->rectangle.y)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
+								return true;
+							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
+								return false;
+							else
+								return false;
+						}
+					};
+
+					struct BackToFront
+					{
+						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						{
+							if (renderableA->rectangle.y <= renderableB->rectangle.y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							if (renderableA->rectangle.y < renderableB->rectangle.y)
+							{
+								if (renderableA->zLayer == renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							if (renderableA->rectangle.y >= renderableB->rectangle.y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}
+
+							return false;
+						}
+					};
+
 				public:
 					Color color;
 					unsigned int zLayer;

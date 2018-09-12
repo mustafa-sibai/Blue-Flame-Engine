@@ -81,8 +81,14 @@ namespace ECSTestApp
 		scene->Destroy(tabWindow);
 		*/
 
-		GameObject* spriteGameObject = scene->AddGameObject(new GameObject());
-		RegularPolygon* regularPolygon = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 0, Color(1)));
+		spriteGameObject = scene->AddGameObject(new GameObject("First Game Object"));
+		//scene->AddGameObject(spriteGameObject);
+
+		regularPolygon = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 1, Color(1)));
+		regularPolygon2 = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(50, 0, 100, 100), 0, Color(0, 1, 0, 1)));
+
+
+		//(RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, regularPolygon);
 
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 	}
@@ -97,6 +103,25 @@ namespace ECSTestApp
 		App::Update();
 		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		camera.Update();
+
+		if (BF::Input::Keyboard::IsKeyPressed(BF::Input::Keyboard::Key::Code::A))
+		{
+			scene->RemoveGameObject(spriteGameObject);
+			std::cout << "WTDF" << std::endl;
+		}
+
+		if (BF::Input::Keyboard::IsKeyPressed(BF::Input::Keyboard::Key::Code::B))
+		{
+			regularPolygon->zLayer = 0;
+			regularPolygon2->zLayer = 1;
+			
+		}
+		if (BF::Input::Keyboard::IsKeyPressed(BF::Input::Keyboard::Key::Code::C))
+		{
+			regularPolygon->zLayer = 1;
+			regularPolygon2->zLayer = 0;
+		}
+		std::cout << regularPolygon->zLayer << std::endl;
 		/*
 		if (exitItem->IsPressed())
 			Engine::Exit();*/
