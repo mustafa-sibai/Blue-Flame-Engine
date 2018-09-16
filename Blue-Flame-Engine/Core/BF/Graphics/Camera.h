@@ -29,7 +29,6 @@ namespace BF
 				virtual ~Camera();
 
 				virtual void Initialize(const BF::Math::Matrix4& projectionMatrix);
-				virtual void Update();
 
 				void SetModelMatrix(const BF::Math::Matrix4& modelMatrix);
 				void SetViewMatrix(const BF::Math::Matrix4& viewMatrix);
@@ -39,6 +38,9 @@ namespace BF
 				inline const BF::Math::Matrix4& GetViewMatrix() const { return systemBuffer.viewMatrix; }
 				inline const BF::Math::Matrix4& GetProjectionMatrix() const { return systemBuffer.projectionMatrix; }
 				inline const BF::Math::Vector3f& GetPosition() const { return position; }
+			
+			protected:
+				virtual void Update();
 		};
 	}
 }

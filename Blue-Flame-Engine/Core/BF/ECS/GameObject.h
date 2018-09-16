@@ -33,6 +33,7 @@ namespace BF
 				virtual ~GameObject();
 
 				inline int GetID() const { return id; }
+				inline const std::vector<Component*>& GetComponents() const{ return components; }
 
 				/*GameObject* InstantiateChildGameObject(const std::string& name);
 				void Destroy(GameObject* gameObject);

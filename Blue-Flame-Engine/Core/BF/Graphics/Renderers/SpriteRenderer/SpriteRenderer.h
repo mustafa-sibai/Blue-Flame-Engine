@@ -26,7 +26,7 @@ namespace BF
 
 				public:
 					//enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { Null, BackToFront, FrontToBack };
+					enum class SortingOrder { BackToFront };
 
 				private:
 					//BF::Application::Scene& scene;

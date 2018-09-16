@@ -11,6 +11,7 @@
 //#include "TestApp.h"
 //#include "TerrainTestApp.h"
 #include "ECSTestApp.h"
+#include "Forward_Renderer_Test.h"
 
 int main()
 {
@@ -23,15 +24,16 @@ int main()
 	//new3DScene::new3DScene scene;
 	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test scene;
 	//_3DScene_AF_Test::_3DScene_AF_Test scene;
-	//_3DScene::_3DScene scene;
+	//_3DScenee::_3DScene scene;
 	//_2DScene::_2DScene scene;
 	//PhysicsScene::PhysicsScene scene;
 	//TestApp::TestApp testApp;
 	//TerrainTestApp testApp;
 	//InputTests scene;
-	ECSTestApp::ECSTestApp ecsTestApp;
+	//ECSTestApp::ECSTestApp scene;
+	Forward_Renderer_Test::Forward_Renderer_Test scene;
 
-	engine.Run(ecsTestApp);
+	engine.Run(scene);
 #elif defined (BF_CLIENT)
 	BF::Network::Client client;
 

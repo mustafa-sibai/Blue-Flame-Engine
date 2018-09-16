@@ -7,6 +7,7 @@ namespace BF
 	{
 		using namespace std;
 		using namespace BF::ECS;
+		using namespace BF::Graphics;
 		using namespace BF::Graphics::Renderers;
 		//using namespace BF::Application::Layers;
 
@@ -24,6 +25,7 @@ namespace BF
 			//rootGameObject = new GameObject();
 			//rootGameObject->layerManager = &layerManager;
 			spriteRenderer.Initialize();
+			forwardRenderer.Initialize();
 		}
 
 		void Scene::Load()
@@ -72,6 +74,7 @@ namespace BF
 			}*/
 
 			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
+			forwardRenderer.Render();
 		}
 
 		GameObject* Scene::AddGameObject(GameObject* gameObject)
@@ -94,8 +97,16 @@ namespace BF
 			{
 				if (component->type == BF::ECS::Component::Type::Renderable)
 				{
+					component->gameObject = gameObject;
 					gameObject->components.emplace_back(component);
 					spriteRenderer.renderables.emplace_back((Renderable*)component);
+					component->added = true;
+				}
+				else if (component->type == BF::ECS::Component::Type::Mesh)
+				{
+					component->gameObject = gameObject;
+					gameObject->components.emplace_back(component);
+					forwardRenderer.meshes.emplace_back((Mesh*)component);
 					component->added = true;
 				}
 			}

@@ -19,7 +19,7 @@ layout (std140, binding = 0) uniform shader_data
 
 void main()
 {
-	gl_Position = buffer_projectionMatrix /** buffer_viewMatrix * buffer_modelMatrix **/ * vec4(inPosition.xy, 0.0f, 1.0f);
+	gl_Position = buffer_projectionMatrix * buffer_viewMatrix /* * buffer_modelMatrix **/ * vec4(inPosition.xy, 0.0f, 1.0f);
 	fragmentColor = inColor;
 	UV = inUV;
 	renderingType = inRenderingType;

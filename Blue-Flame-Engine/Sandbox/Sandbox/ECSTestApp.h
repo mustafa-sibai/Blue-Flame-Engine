@@ -10,7 +10,7 @@ namespace ECSTestApp
 			BF::Application::Scene* scene;
 
 			BF::ECS::GameObject* spriteGameObject;
-			BF::Graphics::Renderers::RegularPolygon * regularPolygon;
+			BF::Graphics::Renderers::RegularPolygon* regularPolygon;
 			BF::Graphics::Renderers::RegularPolygon* regularPolygon2;
 
 			//BF::Graphics::GUI::MenuStrip::MenuItem* exitItem;

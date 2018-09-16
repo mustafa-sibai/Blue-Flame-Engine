@@ -22,21 +22,6 @@ namespace BF
 					RenderableType renderableType;
 
 				private:
-					struct FrontToBack
-					{
-						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
-						{
-							if (renderableA->rectangle.y > renderableB->rectangle.y)
-								return true;
-							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer < renderableB->zLayer)
-								return true;
-							else if (renderableA->rectangle.y == renderableB->rectangle.y && renderableA->zLayer == renderableB->zLayer)
-								return false;
-							else
-								return false;
-						}
-					};
-
 					struct BackToFront
 					{
 						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const

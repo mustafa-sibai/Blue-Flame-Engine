@@ -53,7 +53,6 @@
 #include <BF/Graphics/FPSCamera.h>
 #include <BF/Graphics/TileMap.h>
 #include <BF/Graphics/Skybox.h>
-#include <BF/Graphics/Model.h>
 #include <BF/Graphics/Terrain.h>
 
 #include <BF/Graphics/Materials/MeshMaterial.h>
@@ -68,6 +67,8 @@
 #include <BF/Math/Math.h>
 
 #include <BF/Physics/PhysicsEngine.h>
+
+#include <BF/IO/BFXLoader.h>
 
 #include <BF/System/Debug.h>
 #include <BF/System/Timer.h>

@@ -16,8 +16,15 @@ namespace BF
 			{
 			}
 
-			void MeshMaterial::Bind(const Shader& shader)
+			void MeshMaterial::Initialize()
 			{
+				materialConstantBuffer.Create(sizeof(colorBuffer), 2);
+			}
+
+			void MeshMaterial::Bind()
+			{
+				shader.Bind();
+				materialConstantBuffer.Update(&colorBuffer, sizeof(colorBuffer));
 				diffuseMap.Bind(shader, "diffuseMap", 1);
 				specularMap.Bind(shader, "specularMap", 2);
 				normalMap.Bind(shader, "normalMap", 3);
@@ -28,6 +35,7 @@ namespace BF
 				diffuseMap.Unbind();
 				specularMap.Unbind();
 				normalMap.Unbind();
+				shader.Unbind();
 			}
 		}
 	}

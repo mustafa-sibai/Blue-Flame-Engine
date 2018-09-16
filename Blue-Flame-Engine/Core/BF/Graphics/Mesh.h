@@ -4,7 +4,9 @@
 #include "BF/Graphics/API/IndexBuffer.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
 #include "BF/Graphics/API/Texture2D.h"
+#include "BF/Graphics/Materials/MeshMaterial.h"
 #include "BF/Graphics/Color.h"
+#include "BF/ECS/Component.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
@@ -12,7 +14,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Mesh
+		class BF_API Mesh : public BF::ECS::Component
 		{
 			public:
 				#include "VertexData.inl"
@@ -20,34 +22,30 @@ namespace BF
 				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
 				VertexStructVersion vertexStructVersion;
 
+				BF::Graphics::Materials::MeshMaterial* material;
+
 			private:
+				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 				BF::Graphics::API::VertexBuffer* vertexBuffer;
 				BF::Graphics::API::IndexBuffer* indexBuffer;
-				//std::vector<API::Texture2D*>* textures;
-				void* vertices;
-				//std::vector<Material>* materials;
 				std::vector<unsigned int>& indices;
-				std::string textureFilename;
+				void* vertices;
 
 			public:
-				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, std::vector<Material>* materials*/);
+				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion);
 				~Mesh();
 
-				void SetBuffers(const BF::Graphics::API::Shader& shader, unsigned int bufferSize);
-				void SetTexturefilename(std::string textureFilename);
+				void SetBuffers();
 
 				void Bind() const;
 				void Unbind() const;
 
-			private:
-				unsigned int getVerticesCount() const;
+				unsigned int GetVerticesCount() const;
 
 			public:
 				inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
 				inline void* GetVertices() const { return vertices; }
-				inline unsigned int GetVerticesCount() const { return getVerticesCount(); }
 				inline std::vector<unsigned int>& GetIndices() const { return indices; }
-
 		};
 	}
 }

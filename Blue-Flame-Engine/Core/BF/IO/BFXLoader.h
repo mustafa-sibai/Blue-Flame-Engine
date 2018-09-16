@@ -4,6 +4,7 @@
 #include <string.h>
 #include "BF/Graphics/Mesh.h"
 #include "BF/IO/FileFormats/BFXFormat.h"
+#include "BF/Application/Scene.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -13,7 +14,7 @@ namespace BF
 		class BF_API BFXLoader
 		{
 			public:
-				static std::vector<Graphics::Mesh>* Load(const std::string& filename);
+				static void Load(const std::string& filename, BF::Application::Scene& scene);
 		};
 	}
 }

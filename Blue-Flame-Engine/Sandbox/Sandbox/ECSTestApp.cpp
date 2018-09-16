@@ -91,6 +91,7 @@ namespace ECSTestApp
 		//(RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, regularPolygon);
 
 		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
+		//BF::Engine::GetContext().EnableVsync(false);
 	}
 
 	void ECSTestApp::Load()
@@ -98,11 +99,11 @@ namespace ECSTestApp
 		App::Load();
 	}
 
+	float speed = 0.0f;
+
 	void ECSTestApp::Update()
 	{
 		App::Update();
-		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
-		camera.Update();
 
 		if (BF::Input::Keyboard::IsKeyPressed(BF::Input::Keyboard::Key::Code::A))
 		{
@@ -121,7 +122,13 @@ namespace ECSTestApp
 			regularPolygon->zLayer = 1;
 			regularPolygon2->zLayer = 0;
 		}
-		std::cout << regularPolygon->zLayer << std::endl;
+
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::LeftArrow))
+		{
+			speed++;
+		}
+		camera.SetViewMatrix(Math::Matrix4::Translate(Vector3f(speed, 0.0, 0.0f)));
+
 		/*
 		if (exitItem->IsPressed())
 			Engine::Exit();*/

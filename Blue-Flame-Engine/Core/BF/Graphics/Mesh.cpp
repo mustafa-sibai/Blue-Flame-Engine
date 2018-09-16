@@ -8,43 +8,76 @@ namespace BF
 		using namespace BF::Math;
 		using namespace BF::Graphics::API;
 
-		Mesh::Mesh(void* vertices, vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, vector<Material>* materials*/) :
-			vertexBuffer(nullptr), indexBuffer(nullptr), /*textures(nullptr),*/ vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)/*, materials(materials), texturefilename("")*/
+		Mesh::Mesh(void* vertices, vector<unsigned int>& indices, VertexStructVersion vertexStructVersion) :
+			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)
 		{
+			Component::type = Component::Type::Mesh;
 		}
 
 		Mesh::~Mesh()
 		{
 		}
 
-		void Mesh::SetBuffers(const Shader& shader, unsigned int bufferSize)
+		void Mesh::SetBuffers()
 		{
-			vertexBuffer = new VertexBuffer(shader);
+			vertexBuffer = new VertexBuffer(material->shader);
 			indexBuffer = new IndexBuffer();
-			//textures = new std::vector<Texture2D*>();
 
-			vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * bufferSize);
-			indexBuffer->Create(&indices[0], (unsigned int)indices.size());
+			unsigned int vertexStructSize = 0;
 
-
-
-			/*for (size_t i = 0; i < materials->size(); i++)
+			switch (vertexStructVersion)
 			{
-				if (strcmp(materials[0][i].diffuseMapName.c_str(), "") != 0)
+				case Mesh::VertexStructVersion::P:
 				{
-					textures->push_back(new Texture2D(context, shader));
-					textures[0][textures->size() - 1]->Load(materials[0][i].diffuseMapName.c_str());
+					vertexStructSize = sizeof(Mesh::PVertexData);
+					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					break;
 				}
-			}*/
-		}
+				case Mesh::VertexStructVersion::PUV:
+				{
+					vertexStructSize = sizeof(Mesh::PUVVertexData);
+					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
+					break;
+				}
+				case Mesh::VertexStructVersion::PN:
+				{
+					vertexStructSize = sizeof(Mesh::PNVertexData);
+					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f));
+					break;
+				}
+				case Mesh::VertexStructVersion::PUVN:
+				{
+					vertexStructSize = sizeof(Mesh::PUVNVertexData);
+					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
+					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
+					break;
+				}
+				case Mesh::VertexStructVersion::PUVNTB:
+				{
+					vertexStructSize = sizeof(Mesh::PUVNTBVertexData);
+					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
+					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
+					vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f));
+					vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f) + sizeof(Vector3f));
+					break;
+				}
+				default:
+					break;
+			}
 
-		void Mesh::SetTexturefilename(string textureFilename)
-		{
-			this->textureFilename = textureFilename;
+			vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize);
+			GetVertexBuffer()->SetLayout(vertexBufferLayout);
+
+			indexBuffer->Create(&indices[0], (unsigned int)indices.size());
 		}
 
 		void Mesh::Bind() const
 		{
+			material->Bind();
 			vertexBuffer->Bind();
 			indexBuffer->Bind();
 		}
@@ -53,11 +86,10 @@ namespace BF
 		{
 			indexBuffer->Unbind();
 			vertexBuffer->Unbind();
-			//for (size_t i = 0; i < textures->size(); i++)
-				//textures[0][i]->Unbind();
+			material->Unbind();
 		}
 
-		unsigned int Mesh::getVerticesCount() const
+		unsigned int Mesh::GetVerticesCount() const
 		{
 			switch (vertexStructVersion)
 			{

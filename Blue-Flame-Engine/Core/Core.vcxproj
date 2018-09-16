@@ -78,7 +78,6 @@
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
-    <ClCompile Include="BF\Graphics\Model.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.cpp" />
@@ -165,7 +164,6 @@
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
-    <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\PredefinedColors.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h" />

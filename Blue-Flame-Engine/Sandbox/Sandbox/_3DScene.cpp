@@ -13,7 +13,7 @@ namespace _3DScene
 	_3DScene::_3DScene() :
 		cubeModel(shader), crateModel(shader), planeModel(shader),
 		lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },
-		floorMaterial(shader), crateMaterial(shader), directionalLight(false)
+		directionalLight(false)
 	{
 	}
 
@@ -71,7 +71,7 @@ namespace _3DScene
 		for (size_t i = 0; i < 4; i++)
 		{
 			lightModel[i].Load("Assets/Models/Cube.bfx");
-			lights.lights[i].posDir.w = 1.0f;
+			light.lights[i].posDir.w = 1.0f;
 		}
 		//------------------------------------------ Light Models ----------------------------------------------
 

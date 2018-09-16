@@ -128,8 +128,6 @@ namespace BF
 
 						if (sortingOrder == SortingOrder::BackToFront)
 							sort(renderables.begin(), renderables.end(), Renderable::BackToFront());
-						else if (sortingOrder == SortingOrder::FrontToBack)
-							sort(renderables.begin(), renderables.end(), Renderable::FrontToBack());
 						
 						MapBuffer();
 						vertexBuffer.Unmap();

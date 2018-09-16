@@ -17,6 +17,7 @@
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif*/
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/ForwardRenderer/ForwardRenderer.h"
 //#include "BF/Application/Layers/LayerManager.h"
 //#include "BF/Application/GameObject.h"
 #include <vector>
@@ -45,6 +46,7 @@ namespace BF
 
 			private:
 				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+				BF::Graphics::Renderers::ForwardRenderer forwardRenderer;
 				std::vector<BF::ECS::GameObject*> gameObjects;
 
 			public:
@@ -81,6 +83,7 @@ namespace BF
 
 				//GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
 
+				inline const std::vector<BF::ECS::GameObject*>& GetGameObjects() const { return gameObjects; }
 				//inline GameObject& GetRootGameNode() { return *rootGameObject; }
 
 			private:

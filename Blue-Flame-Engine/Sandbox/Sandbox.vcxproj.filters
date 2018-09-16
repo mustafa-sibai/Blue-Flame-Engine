@@ -18,14 +18,12 @@
     <ClCompile Include="Sandbox\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Sandbox\ECSTestApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Sandbox\ECSTestApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
@@ -46,5 +44,13 @@
     <FxCompile Include="Assets\Shaders\HLSL\3D\VertexShader.hlsl" />
     <FxCompile Include="Assets\Shaders\HLSL\SpriteRenderer\PixelShader.hlsl" />
     <FxCompile Include="Assets\Shaders\HLSL\SpriteRenderer\VertexShader.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sandbox\Forward_Renderer_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\ECSTestApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

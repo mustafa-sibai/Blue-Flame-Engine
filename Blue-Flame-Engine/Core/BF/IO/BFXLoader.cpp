@@ -6,15 +6,14 @@ namespace BF
 	namespace IO
 	{
 		using namespace std;
+		using namespace BF::ECS;
+		using namespace BF::Application;
 		using namespace BF::Graphics;
 		using namespace BF::IO::FileFormats;
 
-		static std::vector<Graphics::Mesh>* model;
-
-		vector<Mesh>* BFXLoader::Load(const string& filename)
+		void BFXLoader::Load(const string& filename, Scene& scene) 
 		{
 			char fileHeader[9];
-			model = new vector<Mesh>();
 			BFXFormat bfxFormat;
 
 			FILE* file;
@@ -24,7 +23,7 @@ namespace BF
 			{
 				BF_LOG_ERROR("Error: Could not find/open BFX filename: " + filename + "\n", "");
 				fclose(file);
-				return nullptr;
+				return;
 			}
 
 			fread(fileHeader, sizeof(char), 8, file);
@@ -33,7 +32,7 @@ namespace BF
 			{
 				BF_LOG_ERROR("Error: Wrong file format: " + filename + "\n", "");
 				fclose(file);
-				return nullptr;
+				return;
 			}
 
 			fread(&bfxFormat.majorFileVersion, sizeof(uint8_t), 1, file);
@@ -87,11 +86,11 @@ namespace BF
 				vector<unsigned int>* indices = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
 				fread(&(*indices)[0], bfxFormat.indexBufferSize, 1, file);
 
-				model->push_back(Mesh(vertices, *indices, (Mesh::VertexStructVersion)bfxFormat.meshType));
+				GameObject* gameObject = scene.AddGameObject(new GameObject("Mesh " + std::to_string(i)));
+				scene.AddComponentToGameObject(gameObject, new Mesh(vertices, *indices, (Mesh::VertexStructVersion)bfxFormat.meshType));
 			}
 
 			fclose(file);
-			return model;
 		}
 	}
 }
