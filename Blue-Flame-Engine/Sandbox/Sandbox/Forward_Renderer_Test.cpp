@@ -23,7 +23,7 @@ namespace Forward_Renderer_Test
 
 	void Forward_Renderer_Test::Initialize()
 	{
-		scene = new Scene();
+		scene = new Scene(fpsCamera);
 		SetMainScene(*scene);
 
 		App::Initialize();
@@ -45,13 +45,17 @@ namespace Forward_Renderer_Test
 		App::Load();
 
 		BF::IO::BFXLoader::Load("Assets/Models/TexturedCube/TexturedCube.bfx", *scene);
+		BF::IO::BFXLoader::Load("Assets/Models/Plane.bfx", *scene);
 
 		lights.posDir.w = 1.0f;
+
+		PUVNTB.LoadStandardShader(ShaderType::PUVN);
+		PN.LoadStandardShader(ShaderType::PN);
 
 		crateMaterial = new BF::Graphics::Materials::MeshMaterial();
 
 		crateMaterial->Initialize();
-		crateMaterial->shader.LoadStandardShader(ShaderType::PUVN);
+		crateMaterial->shader = &PUVNTB;
 
 		crateMaterial->diffuseMap.Load("Assets/Models/Crate/Crate/Crate_color.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
 		crateMaterial->normalMap.Load("Assets/Models/Crate/Crate/Crate_normal.png", Texture::Wrap::ClampToEdge, Texture::Filter::AnisotropicX16);
@@ -62,15 +66,39 @@ namespace Forward_Renderer_Test
 		crateMaterial->colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		crateMaterial->colorBuffer.shininess = 8.0f;
 
-		((Mesh*)scene->GetGameObjects()[0]->GetComponents()[0])->material = crateMaterial;
-		((Mesh*)scene->GetGameObjects()[0]->GetComponents()[0])->SetBuffers();
+		transform = (Transform*)scene->GetGameObjects()[0]->GetComponents()[0];
+		transform->position = Vector3f(0.0f, 0.0f, 5.0f);
+		transform->rotation = Vector3f(0, 1, 0);
+		transform->scale = Vector3f(1.0f);
+
+		((Mesh*)scene->GetGameObjects()[0]->GetComponents()[1])->material = crateMaterial;
+		((Mesh*)scene->GetGameObjects()[0]->GetComponents()[1])->SetBuffers();
+
+
+		planeMaterial = new BF::Graphics::Materials::MeshMaterial();
+
+		planeMaterial->Initialize();
+		planeMaterial->shader = &PN;
+
+		planeMaterial->colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		planeMaterial->colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		planeMaterial->colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
+		planeMaterial->colorBuffer.shininess = 8.0f;
+
+		Transform* planeTransform = (Transform*)scene->GetGameObjects()[1]->GetComponents()[0];
+		planeTransform->position = Vector3f(0.0f, -2.0f, 5.0f);
+		planeTransform->rotation = Vector3f(0, 0, 0);
+		planeTransform->scale = Vector3f(10.0f);
+
+		((Mesh*)scene->GetGameObjects()[1]->GetComponents()[1])->material = planeMaterial;
+		((Mesh*)scene->GetGameObjects()[1]->GetComponents()[1])->SetBuffers();
 	}
 
 	void Forward_Renderer_Test::Update()
 	{
 		App::Update();
 
-		angle += 0.1f * BF::Engine::GetDeltaTime();
+		transform->angle += 0.1f * BF::Engine::GetDeltaTime();
 		fpsCamera.Update();
 	}
 
@@ -78,18 +106,16 @@ namespace Forward_Renderer_Test
 	{
 		BF::Engine::GetContext().Clear(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		lights.posDir = Vector4f(2.5f, 0.0f, 0.0f, 1.0f);
-		lights.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
-		lights.diffuseColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
+		lights.posDir = Vector4f(2.0f, 1.0f, 0.0f, 1.0f);
+		lights.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+		lights.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 
 		lights.constant = 1.0f;
-		lights.linear = 0.045f;
-		lights.quadratic = 0.0075f;
+		lights.linear = 0.22f;
+		lights.quadratic = 0.20f;
 
 		constantBuffer.Update(&lights, sizeof(LightBuffer));
-
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(0.0f, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3f(0, 1, 0)) * Matrix4::Scale(Vector3f(1.0f)));
 
 		App::Render();
 		BF::Engine::GetContext().SwapBuffers();

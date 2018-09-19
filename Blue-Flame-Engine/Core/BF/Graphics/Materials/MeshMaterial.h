@@ -24,7 +24,7 @@ namespace BF
 
 				public:
 					ColorBuffer colorBuffer;
-					BF::Graphics::API::Shader shader;
+					BF::Graphics::API::Shader* shader;
 					BF::Graphics::API::ConstantBuffer materialConstantBuffer;
 					BF::Graphics::API::Texture2D diffuseMap;
 					BF::Graphics::API::Texture2D specularMap;

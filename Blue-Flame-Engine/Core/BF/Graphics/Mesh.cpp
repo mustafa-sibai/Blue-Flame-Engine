@@ -20,7 +20,7 @@ namespace BF
 
 		void Mesh::SetBuffers()
 		{
-			vertexBuffer = new VertexBuffer(material->shader);
+			vertexBuffer = new VertexBuffer(*material->shader);
 			indexBuffer = new IndexBuffer();
 
 			unsigned int vertexStructSize = 0;

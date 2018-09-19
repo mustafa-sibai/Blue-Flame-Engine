@@ -230,6 +230,7 @@
     <ClInclude Include="BF\System\Random.h" />
     <ClInclude Include="BF\ECS\Component.h" />
     <ClInclude Include="BF\Math\Ray.h" />
+    <ClInclude Include="BF\Graphics\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

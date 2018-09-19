@@ -21,7 +21,6 @@ namespace BF
 				static int globalID;
 				int id;
 				bool added;
-				//std::vector<GameObject*> gameObjects;
 				std::vector<Component*> components;
 
 			public:
@@ -34,14 +33,6 @@ namespace BF
 
 				inline int GetID() const { return id; }
 				inline const std::vector<Component*>& GetComponents() const{ return components; }
-
-				/*GameObject* InstantiateChildGameObject(const std::string& name);
-				void Destroy(GameObject* gameObject);
-
-				GameObject* InsertChildGameObject(GameObject& gameObject);
-
-				void AddComponent(Component* component);
-				void RemoveComponent(Component* component);*/
 		};
 	}
 }

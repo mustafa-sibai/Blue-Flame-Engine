@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "BF/Graphics/Transform.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -11,8 +12,8 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 		//using namespace BF::Application::Layers;
 
-		Scene::Scene() :
-			initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
+		Scene::Scene(Camera& camera) :
+			forwardRenderer(camera), initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
 		{
 		}
 
@@ -81,6 +82,8 @@ namespace BF
 		{
 			if (!gameObject->added)
 			{
+				gameObject->components.emplace_back(new Transform());
+				gameObject->components[0]->gameObject = gameObject;
 				gameObjects.emplace_back(gameObject);
 				gameObject->added = true;
 			}

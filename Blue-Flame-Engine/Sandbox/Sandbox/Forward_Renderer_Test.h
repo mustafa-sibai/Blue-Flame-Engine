@@ -17,10 +17,15 @@ namespace Forward_Renderer_Test
 			float lightAngle;
 			int lightIndex = 0;
 
+			BF::Graphics::API::Shader PUVNTB;
+			BF::Graphics::API::Shader PN;
+
+			BF::Graphics::Transform* transform;
+
 			BF::Graphics::LightBuffer lights;
 
 			BF::Graphics::Materials::MeshMaterial* crateMaterial;
-			BF::Graphics::Materials::MeshMaterial* crateMaterial2;
+			BF::Graphics::Materials::MeshMaterial* planeMaterial;
 
 			float angle = 0;
 

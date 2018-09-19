@@ -10,18 +10,17 @@
 	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
+#include <vector>
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
-#include "BF/Graphics/API/Context.h"
+#include "BF/ECS/GameObject.h"
 /*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif*/
+#include "BF/Graphics/Camera.h"
+#include "BF/Graphics/API/Context.h"
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Graphics/Renderers/ForwardRenderer/ForwardRenderer.h"
-//#include "BF/Application/Layers/LayerManager.h"
-//#include "BF/Application/GameObject.h"
-#include <vector>
-#include "BF/ECS/GameObject.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -67,7 +66,7 @@ namespace BF
 				//GameObject* rootGameObject;
 
 			public:
-				Scene();
+				Scene(BF::Graphics::Camera& camera);
 				~Scene();
 
 /*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)

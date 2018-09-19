@@ -58,6 +58,8 @@
 #include <BF/Graphics/Materials/MeshMaterial.h>
 #include <BF/Graphics/Light.h>
 
+#include <BF/Graphics/Transform.h>
+
 #if defined (BF_PLATFORM_WINDOWS)
 #include <BF/Input/Controller.h>
 #endif

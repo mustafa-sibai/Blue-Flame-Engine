@@ -31,7 +31,7 @@ namespace ECSTestApp
 		//BF::Engine::LimitFrameRate(1.0f);
 		//BF::Engine::GetContext().EnableVsync(false);
 
-		scene = new Scene();
+		scene = new Scene(camera);
 		SetMainScene(*scene);
 
 		//GetSceneManager().AddScene();
