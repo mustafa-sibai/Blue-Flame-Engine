@@ -1,7 +1,6 @@
 #include "Texture2D.h"
 #include "BF/Graphics/API/Context.h"
 
-
 namespace BF
 {
 	namespace Graphics

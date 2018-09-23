@@ -5,6 +5,14 @@
 
 namespace BF
 {
+	namespace Graphics
+	{
+		namespace API
+		{
+			enum class FramebufferFormat;
+		}
+	}
+
 	namespace Platform
 	{
 		namespace API
@@ -13,18 +21,21 @@ namespace BF
 			{
 				class BF_API GLFramebuffer
 				{
-				private:
-					const Graphics::API::Texture2D* texture2D;
-					GLuint buffer;
+					private:
+						const Graphics::API::Texture2D* texture2D;
+						GLuint buffer;
 
-				public:
-					GLFramebuffer();
-					~GLFramebuffer();
+					public:
+						GLFramebuffer();
+						~GLFramebuffer();
 
-					void Create(Graphics::API::Texture2D& texture2D);
+						void Create(Graphics::API::Texture2D& texture2D, BF::Graphics::API::FramebufferFormat format);
 
-					void Bind() const;
-					void Unbind() const;
+						void Bind() const;
+						void Unbind() const;
+
+					private:
+						int GetBufferFormat(BF::Graphics::API::FramebufferFormat format);
 				};
 			}
 		}

@@ -11,6 +11,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
+			using namespace BF::Graphics::Materials;
 			using namespace BF::Math;
 
 			ForwardRenderer::ForwardRenderer(Camera& camera) : 
@@ -24,6 +25,7 @@ namespace BF
 
 			void ForwardRenderer::Initialize()
 			{
+				materialConstantBuffer.Create(sizeof(MeshMaterial::ColorBuffer), 2);
 			}
 
 			void ForwardRenderer::Render()
@@ -31,8 +33,9 @@ namespace BF
 				for (size_t i = 0; i < meshes.size(); i++)
 				{
 					Transform* transform = (Transform*)meshes[i]->gameObject->GetComponents()[0];
-
 					camera.SetModelMatrix(Matrix4::Translate(transform->position) * Matrix4::Rotate(transform->angle, transform->rotation) * Matrix4::Scale(transform->scale));
+
+					materialConstantBuffer.Update(&meshes[i]->material->colorBuffer, sizeof(MeshMaterial::ColorBuffer));
 
 					meshes[i]->Bind();
 					Engine::GetContext().Draw((unsigned int)meshes[i]->GetIndices().size());

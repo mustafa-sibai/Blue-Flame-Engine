@@ -31,7 +31,10 @@ namespace BF
 					if (format == Texture::Format::R8)
 						GLCall(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
 
-					GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GetGLTextureInternalFormat(format), textureData.width, textureData.height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData.buffer));
+					if(format == Texture::Format::Depth)
+						GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GetGLTextureInternalFormat(format), textureData.width, textureData.height, 0, GetGLTextureFormat(format), GL_FLOAT, textureData.buffer));
+					else
+						GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GetGLTextureInternalFormat(format), textureData.width, textureData.height, 0, GetGLTextureFormat(format), GL_UNSIGNED_BYTE, textureData.buffer));
 
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GetGLTextureWrap(wrap)));
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetGLTextureWrap(wrap)));
@@ -151,6 +154,7 @@ namespace BF
 						case Texture::Format::R8G8: return GL_RG;
 						case Texture::Format::R8G8B8: return GL_RGB;
 						case Texture::Format::R8G8B8A8: return GL_RGBA;
+						case Texture::Format::Depth: return GL_DEPTH_COMPONENT;
 						default: return GL_RGBA;
 					}
 				}
@@ -163,6 +167,7 @@ namespace BF
 						case Texture::Format::R8G8: return GL_RG8;
 						case Texture::Format::R8G8B8: return GL_RGB8;
 						case Texture::Format::R8G8B8A8: return GL_RGBA8;
+						case Texture::Format::Depth: return GL_DEPTH_COMPONENT;
 						default: return GL_RGBA8;
 					}
 				}

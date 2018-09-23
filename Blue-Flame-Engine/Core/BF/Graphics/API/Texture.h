@@ -30,12 +30,12 @@ namespace BF
 						}
 					};
 
-					enum class Format { R8 = 8, R8G8 = 16, R8G8B8 = 24, R8G8B8A8 = 32 };
+					enum class Format { R8 = 8, R8G8 = 16, R8G8B8 = 24, R8G8B8A8 = 32, Depth };
 					enum class Wrap { Repeat, MirroredReapeat, ClampToEdge, ClampToBorder };
 					enum class Filter { Point, Bilinear, Trilinear, AnisotropicX2, AnisotropicX4, AnisotropicX8, AnisotropicX16 };
 
 					/*
-					typedef enum D3D11_FILTER { 
+					typedef enum D3D11_FILTER {
 					  D3D11_FILTER_MIN_MAG_MIP_POINT                           = 0,
 					  D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR                    = 0x1,
 					  D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT              = 0x4,

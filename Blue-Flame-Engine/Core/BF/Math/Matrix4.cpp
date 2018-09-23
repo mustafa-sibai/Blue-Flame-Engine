@@ -111,11 +111,11 @@ namespace BF
 			Matrix4 orthographicMatrix = Identity();
 
 			orthographicMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (right - left);
-			orthographicMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (top - bottom);
-			orthographicMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (nearZ - farZ);
-			orthographicMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = (left + right) / (left - right);
-			orthographicMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = (bottom + top) / (bottom - top);
-			orthographicMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = (farZ + nearZ) / (farZ - nearZ);
+			orthographicMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = -2.0f / (top - bottom);
+			orthographicMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (farZ - nearZ);
+			orthographicMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = -((right + left) / (right - left));
+			orthographicMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = -((top + bottom) / (top - bottom));
+			orthographicMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = -((farZ + nearZ) / (farZ - nearZ));
 
 			return orthographicMatrix;
 		}

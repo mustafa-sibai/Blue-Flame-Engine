@@ -22,6 +22,7 @@ namespace BF
 				private:
 					BF::Graphics::Camera& camera;
 					std::vector<BF::Graphics::Mesh*> meshes;
+					BF::Graphics::API::ConstantBuffer materialConstantBuffer;
 
 				public:
 					ForwardRenderer(BF::Graphics::Camera& camera);

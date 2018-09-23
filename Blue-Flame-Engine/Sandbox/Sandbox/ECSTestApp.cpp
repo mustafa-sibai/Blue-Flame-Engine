@@ -85,12 +85,12 @@ namespace ECSTestApp
 		//scene->AddGameObject(spriteGameObject);
 
 		regularPolygon = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(0, 0, 100, 100), 1, Color(1)));
-		regularPolygon2 = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(50, 0, 100, 100), 0, Color(0, 1, 0, 1)));
+		//regularPolygon2 = (RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, new RegularPolygon(Math::Rectangle(50, 0, 100, 100), 0, Color(0, 1, 0, 1)));
 
 
 		//(RegularPolygon*)scene->AddComponentToGameObject(spriteGameObject, regularPolygon);
 
-		camera.Initialize(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
+		camera.Initialize(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), -((int)Engine::GetWindow().GetClientHeight() / 2), (int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f));
 		//BF::Engine::GetContext().EnableVsync(false);
 	}
 
@@ -99,7 +99,8 @@ namespace ECSTestApp
 		App::Load();
 	}
 
-	float speed = 0.0f;
+	float x = 0.0f;
+	float y = 0.0f;
 
 	void ECSTestApp::Update()
 	{
@@ -123,11 +124,23 @@ namespace ECSTestApp
 			regularPolygon2->zLayer = 0;
 		}
 
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::RightArrow))
+		{
+			x++;
+		}
 		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::LeftArrow))
 		{
-			speed++;
+			x--;
 		}
-		camera.SetViewMatrix(Math::Matrix4::Translate(Vector3f(speed, 0.0, 0.0f)));
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::UpArrow))
+		{
+			y++;
+		}
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::DownArrow))
+		{
+			y--;
+		}
+		camera.SetViewMatrix(Math::Matrix4::Translate(Vector3f(x, y, 0.0f)));
 
 		/*
 		if (exitItem->IsPressed())
