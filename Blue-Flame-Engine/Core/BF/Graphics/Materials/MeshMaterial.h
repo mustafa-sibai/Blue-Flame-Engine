@@ -11,6 +11,15 @@ namespace BF
 		{
 			class BF_API MeshMaterial
 			{
+				private:
+					BF::Graphics::API::Texture2D diffuseMap;
+					BF::Graphics::API::Texture2D specularMap;
+					BF::Graphics::API::Texture2D normalMap;
+
+					bool diffuseMapActive;
+					bool specularMapActive;
+					bool normalMapActive;
+
 				public:
 					struct ColorBuffer
 					{
@@ -23,16 +32,18 @@ namespace BF
 
 					ColorBuffer colorBuffer;
 					BF::Graphics::API::Shader* shader;
-					BF::Graphics::API::Texture2D diffuseMap;
-					BF::Graphics::API::Texture2D specularMap;
-					BF::Graphics::API::Texture2D normalMap;
 
+				public:
 					MeshMaterial();
 					~MeshMaterial();
 
 					void Initialize();
 					void Bind();
 					void Unbind();
+
+					void SetDiffuseMap(const BF::Graphics::API::Texture2D& diffuseMap);
+					void SetSpecularMap(const BF::Graphics::API::Texture2D& specularMap);
+					void SetNormalMap(const BF::Graphics::API::Texture2D& normalMap);
 			};
 		}
 	}

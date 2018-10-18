@@ -149,7 +149,7 @@ namespace ECSTestApp
 
 	void ECSTestApp::Render()
 	{
-		BF::Engine::GetContext().Clear(Color::Reds::DarkRed());
+		//BF::Engine::GetContext().Clear(Color::Reds::DarkRed());
 		App::Render();
 		BF::Engine::GetContext().SwapBuffers();
 	}

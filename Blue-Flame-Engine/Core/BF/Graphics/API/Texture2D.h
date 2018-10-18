@@ -44,8 +44,8 @@ namespace BF
 
 					void Load(const std::string& filename);
 					void Load(const std::string& filename, Wrap wrap, Filter filter);
-					void Create(TextureData& textureData, Format format, Wrap wrap, Filter filter);
-					void Create(TextureData& textureData, Format format);
+					void Create(TextureData textureData, Format format, Wrap wrap, Filter filter);
+					void Create(TextureData textureData, Format format);
 
 					void Bind() const;
 					void Bind(const Shader& shader, const std::string& samplerName, unsigned int index) const;

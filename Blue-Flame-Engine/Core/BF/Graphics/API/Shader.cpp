@@ -9,8 +9,13 @@ namespace BF
 		{
 			using namespace std;
 
-			Shader::Shader()
+			int Shader::globalID = 0;
+
+			Shader::Shader() : 
+				id(0)
 			{
+				Shader::globalID++;
+				id = globalID;
 			}
 
 			Shader::~Shader()

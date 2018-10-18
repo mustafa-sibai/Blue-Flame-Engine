@@ -12,8 +12,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				DXVertexBuffer::DXVertexBuffer(const DXShader& dxShader) :
-					dxShader(dxShader), buffer(nullptr), inputLayout(nullptr), offset(0), stride(0)
+				DXVertexBuffer::DXVertexBuffer() :
+					buffer(nullptr), inputLayout(nullptr), offset(0), stride(0)
 				{
 				}
 
@@ -40,7 +40,7 @@ namespace BF
 					}
 				}
 
-				void DXVertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
+				void DXVertexBuffer::SetLayout(const DXShader& dxShader, const VertexBufferLayout& vertexBufferLayout)
 				{
 					D3D11_INPUT_ELEMENT_DESC* inputElementDesc = new D3D11_INPUT_ELEMENT_DESC[vertexBufferLayout.GetBufferElement().size()];
 

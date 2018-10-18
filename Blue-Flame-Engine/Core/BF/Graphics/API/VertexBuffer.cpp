@@ -7,10 +7,7 @@ namespace BF
 	{
 		namespace API
 		{
-			VertexBuffer::VertexBuffer(const Shader& shader)
-#ifdef BF_PLATFORM_WINDOWS
-				: dxVertexBuffer(shader.dxShader)
-#endif
+			VertexBuffer::VertexBuffer()
 			{
 			}
 
@@ -30,11 +27,11 @@ namespace BF
 #endif
 			}
 
-			void VertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
+			void VertexBuffer::SetLayout(const Shader& shader, const VertexBufferLayout& vertexBufferLayout)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer.SetLayout(vertexBufferLayout);
+					dxVertexBuffer.SetLayout(shader.dxShader, vertexBufferLayout);
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
@@ -85,17 +82,6 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unbind();
 #endif
-			}
-
-			VertexBuffer& VertexBuffer::operator=(const VertexBuffer& vertexBuffer)
-			{
-#ifdef BF_PLATFORM_WINDOWS
-				//this->dxVertexBuffer = vertexBuffer.dxVertexBuffer;
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-				this->glVertexBuffer = vertexBuffer.glVertexBuffer;
-#endif	
-				return *this;
 			}
 		}
 	}

@@ -11,6 +11,7 @@ namespace BF
 		namespace API
 		{
 			enum class PrimitiveType;
+			enum class BufferClearType;
 		}
 	}
 
@@ -32,7 +33,7 @@ namespace BF
 
 						virtual void Initialize();
 						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
-						void Clear(const Graphics::Color& color);
+						void Clear(Graphics::API::BufferClearType bufferClearType, const Graphics::Color& color);
 						void Render(GLsizei count);
 						virtual void SwapBuffers();
 						virtual void CleanUp();

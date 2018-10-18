@@ -15,7 +15,7 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class BF_API ShaderType { SingleLight3D, _3D, _3DMipAF, Light, SpriteRenderer, TextureCube, Terrain, P, PUV, PUVN, PN, PUVNTB};
+			enum class BF_API ShaderType { SingleLight3D, _3D, _3DMipAF, Light, SpriteRenderer, TextureCube, Terrain, P, PUV, PUVN, PN, PUVNTB, ShadowMapShader };
 
 			class BF_API Shader
 			{
@@ -29,6 +29,9 @@ namespace BF
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 					Platform::API::OpenGL::GLShader glShader;
 #endif
+					static int globalID;
+					int id;
+
 				public:
 					Shader();
 					~Shader();
@@ -39,6 +42,8 @@ namespace BF
 
 					void Bind() const;
 					void Unbind() const;
+
+					inline int GetID() const { return id; }
 			};
 		}
 	}

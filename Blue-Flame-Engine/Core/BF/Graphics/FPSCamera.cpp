@@ -12,7 +12,7 @@ namespace BF
 		using namespace BF::Math;
 
 		FPSCamera::FPSCamera() : 
-			movmentSpeed(0.5f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
+			movmentSpeed(0.25f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
 		{
 		}
 

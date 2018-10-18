@@ -25,17 +25,15 @@ namespace BF
 					Platform::API::OpenGL::GLVertexBuffer glVertexBuffer;
 #endif	
 				public:
-					VertexBuffer(const Shader& shader);
+					VertexBuffer();
 					~VertexBuffer();
 
 					void Create(void* data, unsigned int size);
-					void SetLayout(const VertexBufferLayout& vertexBufferLayout);
+					void SetLayout(const Shader& shader, const VertexBufferLayout& vertexBufferLayout);
 					void* Map() const;
 					void Unmap() const;
 					void Bind() const;
 					void Unbind() const;
-
-					VertexBuffer& operator=(const VertexBuffer& vertexBuffer);
 			};
 		}
 	}

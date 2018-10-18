@@ -23,7 +23,8 @@ namespace BF
 				{
 					private:
 						const Graphics::API::Texture2D* texture2D;
-						GLuint buffer;
+						GLuint frameBuffer;
+						GLuint renderBuffer;
 
 					public:
 						GLFramebuffer();

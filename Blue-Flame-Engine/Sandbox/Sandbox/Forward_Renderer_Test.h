@@ -17,17 +17,24 @@ namespace Forward_Renderer_Test
 			int lightIndex = 0;
 
 			//BF::Graphics::API::Shader PUVNTB;
-			BF::Graphics::API::Shader PN;
+			BF::Graphics::API::Shader PN1;
+			//BF::Graphics::API::Shader PN2;
+			//BF::Graphics::API::Shader PN3;
 
 			BF::Graphics::Transform* transform;
 
 			BF::Graphics::LightBuffer lights;
 
-			BF::Graphics::Materials::MeshMaterial* crateMaterial;
-			BF::Graphics::Materials::MeshMaterial* planeMaterial;
+			BF::Graphics::API::Texture2D diffuseMap;
+			BF::Graphics::API::Texture2D normalMap;
+			BF::Graphics::API::Texture2D specularMap;
 
-			BF::Graphics::API::Framebuffer shadowMapFramebuffer;
-			BF::Graphics::API::Texture2D shadowMap;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial1;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial2;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial3;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial4;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial5;
+			BF::Graphics::Materials::MeshMaterial* planeMaterial;
 
 			BF::Math::Vector3f lightPosition;
 
