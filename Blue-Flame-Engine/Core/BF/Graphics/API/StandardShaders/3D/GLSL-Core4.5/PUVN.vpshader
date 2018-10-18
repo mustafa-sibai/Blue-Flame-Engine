@@ -135,9 +135,9 @@ vec3 CalculateInfiniteLight(PointLight light, vec3 normal, vec3 viewDir)
     float attenuation = 1.0f / (light.constant + light.linear * distance + light.quadratic * (distance * distance));    
 
 	// Combine results
-	vec4 ambient  = light.ambientColor 		   * material.ambientColor  * texture(diffuseMap, shared_data.UV) * attenuation;
-	vec4 diffuse  = light.diffuseColor  * diff * material.diffuseColor  * texture(diffuseMap, shared_data.UV) * attenuation;
-	vec4 specular = light.specularColor * spec * material.specularColor * texture(specularMap, shared_data.UV) * attenuation;
+	vec4 ambient  = light.ambientColor 		   * material.ambientColor  * /*texture(diffuseMap, shared_data.UV) **/ attenuation;
+	vec4 diffuse  = light.diffuseColor  * diff * material.diffuseColor  * /*texture(diffuseMap, shared_data.UV) **/ attenuation;
+	vec4 specular = light.specularColor * spec * material.specularColor * /*texture(specularMap, shared_data.UV) **/ attenuation;
 
 	return (ambient + diffuse + specular).rgb;
 }  

@@ -25,7 +25,7 @@ namespace BF
 		{
 			//rootGameObject = new GameObject();
 			//rootGameObject->layerManager = &layerManager;
-			spriteRenderer.Initialize();
+			//spriteRenderer.Initialize();
 			forwardRenderer.Initialize();
 		}
 
@@ -74,7 +74,7 @@ namespace BF
 				RenderNode(gameNodes[i]);
 			}*/
 
-			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
+			//spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
 			forwardRenderer.Render();
 		}
 

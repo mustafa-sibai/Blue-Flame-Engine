@@ -19,35 +19,43 @@ namespace BF
 
 				GLFramebuffer::~GLFramebuffer()
 				{
-					GLCall(glDeleteFramebuffers(1, &buffer));
+					GLCall(glDeleteFramebuffers(1, &frameBuffer));
 				}
 
 				void GLFramebuffer::Create(Texture2D& texture2D, FramebufferFormat format)
 				{
 					this->texture2D = &texture2D;
 
-					GLCall(glGenFramebuffers(1, &buffer));
-					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, buffer));
+					GLCall(glGenFramebuffers(1, &frameBuffer));
+					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer));
 
 					GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GetBufferFormat(format), GL_TEXTURE_2D, texture2D.glTexture2D.textureID, 0));
-				
-					if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-					{
-						BF_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!", "");
-					}
 
-					if (format != FramebufferFormat::Color)
+					if(format == FramebufferFormat::Color)
+					{
+						GLCall(glGenRenderbuffers(1, &renderBuffer));
+						GLCall(glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer));
+						GLCall(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, texture2D.GetTextureData()->width, texture2D.GetTextureData()->height));
+						GLCall(glBindRenderbuffer(GL_RENDERBUFFER, 0));
+
+						GLCall(glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer));
+					}
+					else
 					{
 						GLCall(glDrawBuffer(GL_NONE));
 						GLCall(glReadBuffer(GL_NONE));
 					}
+
+					if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+						BF_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!", "");
+
 					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 				}
 
 				void GLFramebuffer::Bind() const
 				{
-					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, buffer));
 					glViewport(0, 0, texture2D->textureData->width, texture2D->textureData->height);
+					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer));
 				}
 
 				void GLFramebuffer::Unbind() const

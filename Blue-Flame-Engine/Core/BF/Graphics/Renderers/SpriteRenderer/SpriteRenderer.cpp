@@ -26,7 +26,7 @@ namespace BF
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
 			SpriteRenderer::SpriteRenderer() :
-				vertexBuffer(shader), indexCount(0), submitSprite(true), newDrawCall(false)/*, nullCount(0)*/
+				indexCount(0), submitSprite(true), newDrawCall(false)/*, nullCount(0)*/
 			{
 			}
 
@@ -46,31 +46,31 @@ namespace BF
 				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color));
 				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color) + sizeof(Vector2f));
 
-				unsigned int* indecies = new unsigned int[INDICES_SIZE];
+				unsigned int* indices = new unsigned int[INDICES_SIZE];
 				int index = 0;
 
 				for (unsigned int i = 0; i < INDICES_SIZE; i += SPRITE_INDICES)
 				{
-					indecies[i + 0] = index + 0;
-					indecies[i + 1] = index + 1;
-					indecies[i + 2] = index + 2;
+					indices[i + 0] = index + 0;
+					indices[i + 1] = index + 1;
+					indices[i + 2] = index + 2;
 
-					indecies[i + 3] = index + 2;
-					indecies[i + 4] = index + 3;
-					indecies[i + 5] = index + 0;
+					indices[i + 3] = index + 2;
+					indices[i + 4] = index + 3;
+					indices[i + 5] = index + 0;
 
 					index += SPRITE_VERTICES;
 				}
 
 				vertexBuffer.Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
-				vertexBuffer.SetLayout(vertexBufferLayout);
-				indexBuffer.Create(indecies, INDICES_SIZE);
+				indexBuffer.Create(indices, INDICES_SIZE);
+				vertexBuffer.SetLayout(shader, vertexBufferLayout);
 
 				Engine::GetContext().EnableDepthBuffer(false);
 				Engine::GetContext().EnableBlending(true);
 				Engine::GetContext().EnableScissor(true);
 
-				delete[] indecies;
+				delete[] indices;
 			}
 
 			/*void SpriteRenderer::Submit(Renderable& renderable)

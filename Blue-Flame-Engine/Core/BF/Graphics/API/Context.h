@@ -21,6 +21,7 @@ namespace BF
 		namespace API
 		{
 			enum class PrimitiveType { PointList, LineList, LineStrip, TriangleList, TriangeStrip };
+			enum class BufferClearType { ColorAndDepth, Color, Depth };
 
 			enum class BF_API RenderAPI
 			{
@@ -53,7 +54,7 @@ namespace BF
 
 					void Initialize();
 					void SetPrimitiveType(PrimitiveType primitiveType);
-					void Clear(const Color& color);
+					void Clear(BufferClearType bufferClearType, const Color& color);
 					void Draw(unsigned int vertexCount);
 					void SwapBuffers();
 					

@@ -18,7 +18,6 @@ namespace BF
 			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI) :
 				winWindow(winWindow), context(renderAPI), frameRateTarget(0.0f), frameTimeTarget(0.0f)
 			{
-				LimitFrameRate(60.0f);
 			}
 
 			WINEngineEntryPoint::~WINEngineEntryPoint()

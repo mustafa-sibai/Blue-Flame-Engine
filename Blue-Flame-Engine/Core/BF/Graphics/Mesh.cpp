@@ -7,8 +7,60 @@ namespace BF
 		using namespace std;
 		using namespace BF::Math;
 		using namespace BF::Graphics::API;
+		using namespace BF::Graphics::Materials;
 
-		Mesh::Mesh(void* vertices, vector<unsigned int>& indices, VertexStructVersion vertexStructVersion) :
+		Mesh::Mesh(PresetMeshes presetMeshes) :
+			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(nullptr), indices(nullptr), vertexStructVersion(Mesh::VertexStructVersion::PN)
+		{
+			Component::type = Component::Type::Mesh;
+
+			if (presetMeshes == PresetMeshes::Plane)
+			{
+				vertices = new vector<Mesh::PUVVertexData>(4);
+				indices = new std::vector<unsigned int>(6);
+
+				(*indices)[0] = 0;
+				(*indices)[1] = 1;
+				(*indices)[2] = 2;
+
+				(*indices)[3] = 2;
+				(*indices)[4] = 3;
+				(*indices)[5] = 0;
+
+				Vector3f position(-1.0f, -1.0f, 0.0f);
+				Vector3f size(2.0f, 2.0f, 1.0f);
+
+/*
+				//Top Left
+				(*(vector<Mesh::PUVVertexData>*)vertices)[0] = Mesh::PUVVertexData(position, Vector2f(0.0f, 0.0f));
+
+				//Top Right
+				(*(vector<Mesh::PUVVertexData>*)vertices)[1] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z), Vector2f(1.0f, 0.0f));
+
+				//Bottom Right
+				(*(vector<Mesh::PUVVertexData>*)vertices)[2] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z + size.z), Vector2f(1.0f, 1.0f));
+
+				//Bottom Left
+				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y, position.z + size.z), Vector2f(0.0f, 1.0f));
+
+*/
+
+
+				//Top Left
+				(*(vector<Mesh::PUVVertexData>*)vertices)[0] = Mesh::PUVVertexData(position, Vector2f(0.0f, 0.0f));
+
+				//Top Right
+				(*(vector<Mesh::PUVVertexData>*)vertices)[1] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z), Vector2f(1.0f, 0.0f));
+
+				//Bottom Right
+				(*(vector<Mesh::PUVVertexData>*)vertices)[2] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y + size.y, position.z), Vector2f(1.0f, 1.0f));
+
+				//Bottom Left
+				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y + size.y, position.z), Vector2f(0.0f, 1.0f));
+			}
+		}
+
+		Mesh::Mesh(void* vertices, vector<unsigned int>* indices, VertexStructVersion vertexStructVersion) :
 			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)
 		{
 			Component::type = Component::Type::Mesh;
@@ -18,9 +70,11 @@ namespace BF
 		{
 		}
 
-		void Mesh::SetBuffers()
+		void Mesh::SetBuffers(MeshMaterial* material)
 		{
-			vertexBuffer = new VertexBuffer(*material->shader);
+			this->material = material;
+
+			vertexBuffer = new VertexBuffer();
 			indexBuffer = new IndexBuffer();
 
 			unsigned int vertexStructSize = 0;
@@ -31,6 +85,8 @@ namespace BF
 				{
 					vertexStructSize = sizeof(Mesh::PVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+
+					vertexBuffer->Create(&(*(vector<Mesh::PVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PVertexData>*)vertices)->size() * vertexStructSize);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUV:
@@ -38,6 +94,8 @@ namespace BF
 					vertexStructSize = sizeof(Mesh::PUVVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
+
+					vertexBuffer->Create(&(*(vector<Mesh::PUVVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVVertexData>*)vertices)->size() * vertexStructSize);
 					break;
 				}
 				case Mesh::VertexStructVersion::PN:
@@ -45,6 +103,8 @@ namespace BF
 					vertexStructSize = sizeof(Mesh::PNVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f));
+
+					vertexBuffer->Create(&(*(vector<Mesh::PNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PNVertexData>*)vertices)->size() * vertexStructSize);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUVN:
@@ -53,6 +113,8 @@ namespace BF
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
+
+					vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUVNTB:
@@ -63,21 +125,21 @@ namespace BF
 					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
 					vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f));
 					vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f) + sizeof(Vector3f));
+
+					vertexBuffer->Create(&(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNTBVertexData>*)vertices)->size() * vertexStructSize);
 					break;
 				}
 				default:
 					break;
 			}
 
-			vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize);
-			GetVertexBuffer()->SetLayout(vertexBufferLayout);
-
-			indexBuffer->Create(&indices[0], (unsigned int)indices.size());
+			indexBuffer->Create(&(*indices)[0], (unsigned int)indices->size());
+			vertexBuffer->SetLayout(*material->shader, vertexBufferLayout);
 		}
 
 		void Mesh::Bind() const
 		{
-			material->Bind();
+			//material->Bind();
 			vertexBuffer->Bind();
 			indexBuffer->Bind();
 		}
@@ -86,7 +148,7 @@ namespace BF
 		{
 			indexBuffer->Unbind();
 			vertexBuffer->Unbind();
-			material->Unbind();
+			//material->Unbind();
 		}
 
 		unsigned int Mesh::GetVerticesCount() const

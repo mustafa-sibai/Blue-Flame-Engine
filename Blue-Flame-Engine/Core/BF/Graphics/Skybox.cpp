@@ -9,7 +9,7 @@ namespace BF
 		using namespace BF::Graphics::API;
 
 		Skybox::Skybox() :
-			vertexBuffer(shader), textureCube(shader)
+			textureCube(shader)
 		{
 		}
 
@@ -40,7 +40,7 @@ namespace BF
 			indexBuffer.Create(&indices[0], (unsigned int)indices.size() * sizeof(unsigned int));
 
 			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(float) * 3, 0);
-			vertexBuffer.SetLayout(vertexBufferLayout);
+			vertexBuffer.SetLayout(shader, vertexBufferLayout);
 
 			shader.LoadStandardShader(ShaderType::TextureCube);
 			textureCube.Load(filenames, Texture::Wrap::ClampToEdge, Texture::Filter::Bilinear);

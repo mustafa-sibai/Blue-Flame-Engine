@@ -64,13 +64,13 @@ namespace BF
 #endif
 			}
 
-			void Context::Clear(const Color& color)
+			void Context::Clear(BufferClearType bufferClearType, const Color& color)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (renderAPI == RenderAPI::DirectX)
 					dxContext.Clear(color);
 				else if (renderAPI == RenderAPI::OpenGL)
-					winGLContext.Clear(color);
+					winGLContext.Clear(bufferClearType, color);
 #elif defined(BF_PLATFORM_LINUX)
 				if (renderAPI == RenderAPI::OpenGL)
 					lxGLContext.Clear(color);

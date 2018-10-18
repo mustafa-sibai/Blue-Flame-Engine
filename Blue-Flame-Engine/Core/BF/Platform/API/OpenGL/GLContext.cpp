@@ -11,6 +11,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
+				using namespace BF::Graphics;
 				using namespace BF::Graphics::API;
 
 				GLContext::GLContext() :
@@ -60,10 +61,30 @@ namespace BF
 					}
 				}
 
-				void GLContext::Clear(const Graphics::Color& color)
+				void GLContext::Clear(BufferClearType bufferClearType, const Color& color)
 				{
-					GLCall(glClearColor(color.r, color.g, color.b, color.a));
-					GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+					switch (bufferClearType)
+					{
+						case BufferClearType::ColorAndDepth:
+						{
+							GLCall(glClearColor(color.r, color.g, color.b, color.a));
+							GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+							break;
+						}
+						case BufferClearType::Color:
+						{
+							GLCall(glClearColor(color.r, color.g, color.b, color.a));
+							GLCall(glClear(GL_COLOR_BUFFER_BIT));
+							break;
+						}
+						case BufferClearType::Depth:
+						{
+							GLCall(glClear(GL_DEPTH_BUFFER_BIT));
+							break;
+						}
+						default:
+							break;
+					}
 				}
 
 				void GLContext::Render(GLsizei count)

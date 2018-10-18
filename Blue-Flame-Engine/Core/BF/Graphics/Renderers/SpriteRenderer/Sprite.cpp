@@ -27,13 +27,13 @@ namespace BF
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Color& color) :
-				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
+				Renderable(Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 			{
 			}
 
 			Sprite::Sprite(const Texture2D* texture2D, const Rectangle& rectangle, unsigned int zLayer, const Rectangle& scissorRectangle, const Color& color) :
-				Renderable(Math::Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
+				Renderable(Vector2f((float)rectangle.x, (float)rectangle.y), rectangle, zLayer, color, RenderableType::Sprite),
 				texture2D(texture2D), scissorRectangle(scissorRectangle)
 			{
 			}
@@ -42,7 +42,7 @@ namespace BF
 			{
 			}
 
-			void Sprite::SetTexture(const Graphics::API::Texture2D* texture2D)
+			void Sprite::SetTexture(const Texture2D* texture2D)
 			{
 				this->texture2D = texture2D;
 			}

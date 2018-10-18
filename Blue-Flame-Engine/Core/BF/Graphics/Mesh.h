@@ -22,20 +22,22 @@ namespace BF
 				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
 				VertexStructVersion vertexStructVersion;
 
+				enum class PresetMeshes { Plane };
 				BF::Graphics::Materials::MeshMaterial* material;
 
 			private:
 				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 				BF::Graphics::API::VertexBuffer* vertexBuffer;
 				BF::Graphics::API::IndexBuffer* indexBuffer;
-				std::vector<unsigned int>& indices;
+				std::vector<unsigned int>* indices;
 				void* vertices;
 
 			public:
-				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion);
+				Mesh(PresetMeshes presetMeshes);
+				Mesh(void* vertices, std::vector<unsigned int>* indices, VertexStructVersion vertexStructVersion);
 				~Mesh();
 
-				void SetBuffers();
+				void SetBuffers(BF::Graphics::Materials::MeshMaterial* material);
 
 				void Bind() const;
 				void Unbind() const;
@@ -45,7 +47,7 @@ namespace BF
 			public:
 				inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
 				inline void* GetVertices() const { return vertices; }
-				inline std::vector<unsigned int>& GetIndices() const { return indices; }
+				inline std::vector<unsigned int>* GetIndices() const { return indices; }
 		};
 	}
 }
