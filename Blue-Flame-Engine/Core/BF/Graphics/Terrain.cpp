@@ -104,7 +104,7 @@ namespace BF
 			vertexBuffer.Create(vertices, (unsigned int)VERTICES_SIZE * sizeof(Mesh::PUVNVertexData));
 			indexBuffer.Create(indecies, INDICES_SIZE);
 
-			vertexBuffer.SetLayout(shader, vertexBufferLayout);
+			vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 
 			delete[] indecies;
 		}

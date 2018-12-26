@@ -184,7 +184,7 @@ namespace BF
 						window->clientHeight = HIWORD(lParam);
 
 						Engine::GetContext().SetViewport(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
-						Engine::GetContext().SetScissor(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
+						//Engine::GetContext().SetScissor(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
 						break;
 					}
 

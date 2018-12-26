@@ -17,13 +17,14 @@ namespace BF
 						GLuint VAO;
 						GLuint VBO;
 						unsigned int size;
+						const Graphics::API::VertexBufferLayout* vertexBufferLayout;
 
 					public:
 						GLVertexBuffer();
 						~GLVertexBuffer();
 
 						void Create(const void* data, unsigned int size);
-						void SetLayout(const Graphics::API::VertexBufferLayout& vertexBufferLayout);
+						void SetLayout(const Graphics::API::VertexBufferLayout* vertexBufferLayout);
 						void* Map() const;
 						void Unmap() const;
 						void Bind() const;

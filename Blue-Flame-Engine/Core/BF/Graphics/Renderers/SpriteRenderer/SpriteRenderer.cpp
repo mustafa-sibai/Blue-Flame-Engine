@@ -64,7 +64,7 @@ namespace BF
 
 				vertexBuffer.Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
 				indexBuffer.Create(indices, INDICES_SIZE);
-				vertexBuffer.SetLayout(shader, vertexBufferLayout);
+				vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 
 				Engine::GetContext().EnableDepthBuffer(false);
 				Engine::GetContext().EnableBlending(true);

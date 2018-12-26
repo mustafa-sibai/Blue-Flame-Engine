@@ -10,22 +10,22 @@ namespace BF
 			namespace OpenGL
 			{
 				GLConstantBuffer::GLConstantBuffer() :
-					buffer(0)
+					buffer(0), bindingIndex(0)
 				{
 				}
 
 				GLConstantBuffer::~GLConstantBuffer()
 				{
-					GLCall(glDeleteBuffers(1, &buffer));
+					//GLCall(glDeleteBuffers(1, &buffer));
 				}
 
 				void GLConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
 				{
-					GLCall(glGenBuffers(1, &buffer));
-					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
-					GLCall(glBufferData(GL_UNIFORM_BUFFER, size, 0, GL_DYNAMIC_DRAW));
+					this->bindingIndex = bindingIndex;
 
-					GLCall(glBindBufferRange(GL_UNIFORM_BUFFER, bindingIndex, buffer, 0, size));
+					GLCall(glCreateBuffers(1, &buffer));
+					GLCall(glBindBufferBase(GL_UNIFORM_BUFFER, bindingIndex, buffer));
+					GLCall(glBufferData(GL_UNIFORM_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 

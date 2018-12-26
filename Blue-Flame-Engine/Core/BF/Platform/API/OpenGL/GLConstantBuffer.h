@@ -14,6 +14,7 @@ namespace BF
 				{
 					private:
 						GLuint buffer;
+						unsigned int bindingIndex;
 
 					public:
 						GLConstantBuffer();

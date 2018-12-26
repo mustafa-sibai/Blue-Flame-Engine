@@ -44,7 +44,7 @@ namespace BF
 #endif
 
 			private:
-				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+				//BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 				BF::Graphics::Renderers::ForwardRenderer forwardRenderer;
 				std::vector<BF::ECS::GameObject*> gameObjects;
 

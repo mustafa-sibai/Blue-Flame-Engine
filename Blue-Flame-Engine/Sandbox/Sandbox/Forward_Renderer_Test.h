@@ -7,14 +7,14 @@ namespace Forward_Renderer_Test
 	{
 		private:
 			//BF::Graphics::API::Shader P, PUV, PN, PUVN, PUVNTB;//, shader, lightShader;
-			BF::Graphics::API::ConstantBuffer constantBuffer;
+			//BF::Graphics::API::ConstantBuffer constantBuffer;
 			//BF::Graphics::Model crateModel;
 			BF::Application::Scene* scene;
 			BF::Graphics::FPSCamera fpsCamera;
 
-			bool directionalLight;
-			float lightAngle;
-			int lightIndex = 0;
+			//bool directionalLight;
+			//float lightAngle;
+			//int lightIndex = 0;
 
 			//BF::Graphics::API::Shader PUVNTB;
 			BF::Graphics::API::Shader PN1;
@@ -23,22 +23,22 @@ namespace Forward_Renderer_Test
 
 			BF::Graphics::Transform* transform;
 
-			BF::Graphics::LightBuffer lights;
+			//BF::Graphics::LightBuffer lights;
 
-			BF::Graphics::API::Texture2D diffuseMap;
+			/*BF::Graphics::API::Texture2D diffuseMap;
 			BF::Graphics::API::Texture2D normalMap;
-			BF::Graphics::API::Texture2D specularMap;
+			BF::Graphics::API::Texture2D specularMap;*/
 
-			BF::Graphics::Materials::MeshMaterial* crateMaterial1;
+			/*BF::Graphics::Materials::MeshMaterial* crateMaterial1;
 			BF::Graphics::Materials::MeshMaterial* crateMaterial2;
 			BF::Graphics::Materials::MeshMaterial* crateMaterial3;
 			BF::Graphics::Materials::MeshMaterial* crateMaterial4;
-			BF::Graphics::Materials::MeshMaterial* crateMaterial5;
+			BF::Graphics::Materials::MeshMaterial* crateMaterial5;*/
 			BF::Graphics::Materials::MeshMaterial* planeMaterial;
 
-			BF::Math::Vector3f lightPosition;
+			//BF::Math::Vector3f lightPosition;
 
-			float angle = 0;
+			//float angle = 0;
 
 		public:
 			Forward_Renderer_Test();

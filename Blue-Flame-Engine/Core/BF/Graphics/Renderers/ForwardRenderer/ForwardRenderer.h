@@ -28,12 +28,12 @@ namespace BF
 
 
 
-					BF::Graphics::Mesh* postProcessingQuad;
+					/*BF::Graphics::Mesh* postProcessingQuad;
 					BF::Graphics::Materials::MeshMaterial* screenPlaneMaterial;
 
 					BF::Graphics::API::Framebuffer postProcessingFramebuffer;
 					BF::Graphics::API::Texture2D postProcessingTexture;
-					BF::Graphics::API::Shader postProcessingShader;
+					BF::Graphics::API::Shader postProcessingShader;*/
 
 				public:
 					ForwardRenderer(BF::Graphics::Camera& camera);

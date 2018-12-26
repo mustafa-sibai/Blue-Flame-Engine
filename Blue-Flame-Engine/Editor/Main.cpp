@@ -1,6 +1,6 @@
 #include <iostream>
 #include <BF/BlueFlame.h>
-#include "EditorScene.h"
+//#include "EditorScene.h"
 
 #include <BF/IO/BFALoader.h>
 #include "IO/FBXLoader.h"
@@ -144,10 +144,10 @@ int main()
 
 	
 	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
+	fbxloader.Load("../Sandbox/Assets/Models/Test/Plane.fbx", FBXLoader::ImportSettings::ImportP);
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Test/Plane");
 	
 	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------

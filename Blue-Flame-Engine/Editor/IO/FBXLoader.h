@@ -15,8 +15,11 @@ namespace Editor
 	{
 		class FBXLoader
 		{
+			public:
+				enum class ImportSettings { ImportP, ImportPN, ImportPUV, ImportPUVN, ImportPUVNTB };
+
 			private:
-				std::vector<BF::Math::Vector3> controlPoints;
+				std::vector<BF::Math::Vector3f> controlPoints;
 				std::vector<void*> vertices;
 				std::vector<unsigned int> indices;
 				//std::vector<Graphics::Material>* materials;
@@ -26,18 +29,18 @@ namespace Editor
 			public:
 				FBXLoader();
 				~FBXLoader();
-				void Load(const char* filename);
+				void Load(const char* filename, ImportSettings importSettings);
 
 				const std::vector<BF::Graphics::Mesh>& GetMeshs() const { return meshes; }
 
 			private:
 				FbxAMatrix GetNodeTransform(FbxNode *pNode);
 				void ReadControlPoints(FbxMesh* mesh);
-				void ProcessMesh(FbxMesh* mesh);
-				BF::Math::Vector3 ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasNormals);
-				BF::Math::Vector3 ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasTangent);
-				BF::Math::Vector3 ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasBinormal);
-				BF::Math::Vector2 ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer, bool& hasUV);
+				void ProcessMesh(FbxMesh* mesh, ImportSettings importSettings);
+				BF::Math::Vector3f ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasNormals);
+				BF::Math::Vector3f ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasTangent);
+				BF::Math::Vector3f ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasBinormal);
+				BF::Math::Vector2f ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer, bool& hasUV);
 				//void LoadUVInformation(FbxMesh* pMesh);
 
 				//void ProcessMaterials(FbxNode* inNode);

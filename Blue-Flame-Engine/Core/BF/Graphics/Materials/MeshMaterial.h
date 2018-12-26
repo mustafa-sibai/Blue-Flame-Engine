@@ -28,6 +28,9 @@ namespace BF
 						Color specularColor;
 
 						float shininess = 0.0f;
+						float shininess1 = 0.0f;
+						float shininess2 = 0.0f;
+						float shininess3 = 0.0f;
 					};
 
 					ColorBuffer colorBuffer;

@@ -102,7 +102,7 @@ namespace BF
 				{
 					component->gameObject = gameObject;
 					gameObject->components.emplace_back(component);
-					spriteRenderer.renderables.emplace_back((Renderable*)component);
+					//spriteRenderer.renderables.emplace_back((Renderable*)component);
 					component->added = true;
 				}
 				else if (component->type == BF::ECS::Component::Type::Mesh)
@@ -127,14 +127,14 @@ namespace BF
 			{
 				if (gameObject->components[i]->type == Component::Type::Renderable)
 				{
-					for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+					/*for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
 					{
 						if (((Component*)*it)->GetID() == gameObject->components[i]->GetID())
 						{
 							spriteRenderer.renderables.erase(it);
 							break;
 						}
-					}
+					}*/
 				}
 			}
 
@@ -154,14 +154,14 @@ namespace BF
 		{
 			if (component->type == Component::Type::Renderable)
 			{
-				for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+				/*for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
 				{
 					if (((Component*)*it)->GetID() == component->GetID())
 					{
 						spriteRenderer.renderables.erase(it);
 						break;
 					}
-				}
+				}*/
 			}
 
 			for (std::vector<Component*>::iterator it = gameObject->components.begin(); it != gameObject->components.end(); ++it)

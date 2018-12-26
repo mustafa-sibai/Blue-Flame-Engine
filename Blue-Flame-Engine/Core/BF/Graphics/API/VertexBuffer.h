@@ -29,7 +29,7 @@ namespace BF
 					~VertexBuffer();
 
 					void Create(void* data, unsigned int size);
-					void SetLayout(const Shader& shader, const VertexBufferLayout& vertexBufferLayout);
+					void SetLayout(const Shader& shader, const VertexBufferLayout* vertexBufferLayout);
 					void* Map() const;
 					void Unmap() const;
 					void Bind() const;

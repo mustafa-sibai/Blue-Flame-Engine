@@ -27,11 +27,13 @@ namespace BF
 #endif
 			}
 
-			void VertexBuffer::SetLayout(const Shader& shader, const VertexBufferLayout& vertexBufferLayout)
+			void VertexBuffer::SetLayout(const Shader& shader, const VertexBufferLayout* vertexBufferLayout)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer.SetLayout(shader.dxShader, vertexBufferLayout);
+				{
+					//dxVertexBuffer.SetLayout(shader.dxShader, vertexBufferLayout);
+				}
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)

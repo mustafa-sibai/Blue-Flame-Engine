@@ -7,7 +7,7 @@ namespace Editor
 	{
 		private:
 			BF::Graphics::Renderers::SpriteRenderer* spriteRenderer;
-			BF::Math::Vector2 linePosition;
+			BF::Math::Vector2f linePosition;
 			BF::Math::Rectangle rectangle;
 
 			std::vector<BF::Graphics::Renderers::LineShape> horizontalLines;

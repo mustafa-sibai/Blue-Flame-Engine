@@ -84,7 +84,7 @@ namespace BF
 
 				fread(&bfxFormat.indexBufferSize, sizeof(unsigned int), 1, file);
 				vector<unsigned int>* indices = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
-				fread(&(*indices)[0], bfxFormat.indexBufferSize, 1, file);
+				fread(&(*(vector<unsigned int>*)indices)[0], bfxFormat.indexBufferSize, 1, file);
 
 				GameObject* gameObject = scene.AddGameObject(new GameObject("Mesh " + std::to_string(i)));
 				scene.AddComponentToGameObject(gameObject, new Mesh(vertices, indices, (Mesh::VertexStructVersion)bfxFormat.meshType));

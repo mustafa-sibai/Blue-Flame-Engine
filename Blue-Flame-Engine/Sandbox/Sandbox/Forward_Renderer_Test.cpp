@@ -13,8 +13,8 @@ namespace Forward_Renderer_Test
 	using namespace BF::Math;
 	using namespace BF::System;
 
-	Forward_Renderer_Test::Forward_Renderer_Test() :
-		directionalLight(false)
+	Forward_Renderer_Test::Forward_Renderer_Test()/* :
+		directionalLight(false)*/
 	{
 	}
 
@@ -39,15 +39,15 @@ namespace Forward_Renderer_Test
 		//fpsCamera.Initialize(Matrix4::Orthographic(-40, 40, -40, 40, 0.01f, 5000));
 		//fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
 
-		constantBuffer.Create(sizeof(LightBuffer), 1);
+		//constantBuffer.Create(sizeof(LightBuffer), 1);
 	}
 
 	void Forward_Renderer_Test::Load()
 	{
 		App::Load();
 
-		lights.posDir.w = 1.0f;
-		PN1.LoadStandardShader(ShaderType::PUVN);
+		//lights.posDir.w = 1.0f;
+		PN1.LoadStandardShader(ShaderType::P);
 		//PN2.LoadStandardShader(ShaderType::PN);
 		//PN3.LoadStandardShader(ShaderType::PN);
 
@@ -188,25 +188,53 @@ namespace Forward_Renderer_Test
 
 		i++;*/
 
-		BF::IO::BFXLoader::Load("Assets/Models/Plane.bfx", *scene);
-		planeMaterial = new BF::Graphics::Materials::MeshMaterial();
+		//BF::IO::BFXLoader::Load("Assets/Models/Plane.bfx", *scene);
+
+		/*planeMaterial = new BF::Graphics::Materials::MeshMaterial();
 
 		planeMaterial->Initialize();
 		planeMaterial->shader = &PN1;
 
 		planeMaterial->colorBuffer.ambientColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
 		planeMaterial->colorBuffer.diffuseColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		planeMaterial->colorBuffer.specularColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		planeMaterial->colorBuffer.shininess = 256;
+		planeMaterial->colorBuffer.specularColor = Color(1.0f, 0.0f, 0.0f, 1.0f);*/
+		//planeMaterial->colorBuffer.shininess = 256;
+		//Mesh* m = new Mesh(BF::Graphics::Mesh::PresetMeshes::Plane);
 
-		Transform* planeTransform = (Transform*)scene->GetGameObjects()[i]->GetComponents()[0];
-		planeTransform->position = Vector3f(0.0f, 0.0f, 0.0f);
-		planeTransform->rotation = Vector3f(0, 0, 0);
-		planeTransform->scale = Vector3f(10.0f);
 
-		((Mesh*)scene->GetGameObjects()[i]->GetComponents()[1])->SetBuffers(planeMaterial);
+		planeMaterial = new BF::Graphics::Materials::MeshMaterial();
+		for (size_t j = 0; j < 1; j++)
+		{
+			for (size_t k = 0; k < 10; k++)
+			{
+				//BF::IO::BFXLoader::Load("Assets/Models/Test/Plane.bfx", *scene);
 
-		lightPosition = Vector3f(8.0f, 10.0f, -1.0f);
+				GameObject* gameObject = scene->AddGameObject(new GameObject("Mesh " + std::to_string(i)));
+				scene->AddComponentToGameObject(gameObject, new Mesh(BF::Graphics::Mesh::PresetMeshes::Plane));
+
+				
+
+				Transform* planeTransform = (Transform*)scene->GetGameObjects()[k + j * 10]->GetComponents()[0];
+				planeTransform->position = Vector3f(25 * k, 25 * j, 0.0f);
+				planeTransform->rotation = Vector3f(0, 0, 0);
+				planeTransform->scale = Vector3f(10.0f);
+				//planeTransform->angle = 90 + k * 10;
+
+				//BF::Graphics::Materials::MeshMaterial* planeMaterialz = new BF::Graphics::Materials::MeshMaterial();
+				planeMaterial->Initialize();
+				planeMaterial->shader = &PN1;
+
+				planeMaterial->colorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+				planeMaterial->colorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+				planeMaterial->colorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+
+				((Mesh*)scene->GetGameObjects()[k + j * 10]->GetComponents()[1])->SetBuffers(planeMaterial);
+			}
+		}
+		
+
+
+		//lightPosition = Vector3f(50.0f, 10.0f, -1.0f);
 		//fpsCamera.SetViewMatrix(Math::Matrix4::LookAt(Vector3f(8.0f, 10.0f, -1.0f), Vector3f(0, 0, 0), Vector3f::Up()));
 	}
 
@@ -220,16 +248,16 @@ namespace Forward_Renderer_Test
 
 	void Forward_Renderer_Test::Render()
 	{
-		lights.posDir = Vector4f(lightPosition.x, lightPosition.y, lightPosition.z, 0.0f);
+		/*lights.posDir = Vector4f(lightPosition.x, lightPosition.y, lightPosition.z, 0.0f);
 		lights.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		lights.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-		 	
+ 	
 		lights.constant = 1.0f;
-		lights.linear = 0.07f;
-		lights.quadratic = 0.017f;
+		lights.linear = 0.007f;
+		lights.quadratic = 0.0002f;
 
-		constantBuffer.Update(&lights, sizeof(LightBuffer));
+		constantBuffer.Update(&lights, sizeof(LightBuffer));*/
 
 		App::Render();
 	}

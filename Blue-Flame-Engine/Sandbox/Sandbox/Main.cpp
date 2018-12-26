@@ -10,7 +10,7 @@
 //#include "PhysicsScene.h"
 //#include "TestApp.h"
 //#include "TerrainTestApp.h"
-#include "ECSTestApp.h"
+//#include "ECSTestApp.h"
 #include "Forward_Renderer_Test.h"
 
 int main()

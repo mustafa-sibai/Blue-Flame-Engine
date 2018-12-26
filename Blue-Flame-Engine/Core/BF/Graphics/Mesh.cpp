@@ -10,13 +10,13 @@ namespace BF
 		using namespace BF::Graphics::Materials;
 
 		Mesh::Mesh(PresetMeshes presetMeshes) :
-			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(nullptr), indices(nullptr), vertexStructVersion(Mesh::VertexStructVersion::PN)
+			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(nullptr), indices(nullptr), vertexStructVersion(Mesh::VertexStructVersion::P)
 		{
 			Component::type = Component::Type::Mesh;
 
 			if (presetMeshes == PresetMeshes::Plane)
 			{
-				vertices = new vector<Mesh::PUVVertexData>(4);
+				vertices = new vector<Mesh::PVertexData>(4);
 				indices = new std::vector<unsigned int>(6);
 
 				(*indices)[0] = 0;
@@ -27,26 +27,23 @@ namespace BF
 				(*indices)[4] = 3;
 				(*indices)[5] = 0;
 
-				Vector3f position(-1.0f, -1.0f, 0.0f);
-				Vector3f size(2.0f, 2.0f, 1.0f);
+				Vector3f position(0.0f, 0.0f, 0.0f);
+				Vector3f size(1.0f, 1.0f, 1.0f);
 
-/*
 				//Top Left
-				(*(vector<Mesh::PUVVertexData>*)vertices)[0] = Mesh::PUVVertexData(position, Vector2f(0.0f, 0.0f));
+				(*(vector<Mesh::PVertexData>*)vertices)[0] = Mesh::PVertexData(position);
 
 				//Top Right
-				(*(vector<Mesh::PUVVertexData>*)vertices)[1] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z), Vector2f(1.0f, 0.0f));
+				(*(vector<Mesh::PVertexData>*)vertices)[1] = Mesh::PVertexData(Vector3f(position.x + size.x, position.y, position.z));
 
 				//Bottom Right
-				(*(vector<Mesh::PUVVertexData>*)vertices)[2] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z + size.z), Vector2f(1.0f, 1.0f));
+				(*(vector<Mesh::PVertexData>*)vertices)[2] = Mesh::PVertexData(Vector3f(position.x + size.x, position.y, position.z + size.z));
 
 				//Bottom Left
-				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y, position.z + size.z), Vector2f(0.0f, 1.0f));
-
-*/
+				(*(vector<Mesh::PVertexData>*)vertices)[3] = Mesh::PVertexData(Vector3f(position.x, position.y, position.z + size.z));
 
 
-				//Top Left
+				/*//Top Left
 				(*(vector<Mesh::PUVVertexData>*)vertices)[0] = Mesh::PUVVertexData(position, Vector2f(0.0f, 0.0f));
 
 				//Top Right
@@ -56,7 +53,7 @@ namespace BF
 				(*(vector<Mesh::PUVVertexData>*)vertices)[2] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y + size.y, position.z), Vector2f(1.0f, 1.0f));
 
 				//Bottom Left
-				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y + size.y, position.z), Vector2f(0.0f, 1.0f));
+				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y + size.y, position.z), Vector2f(0.0f, 1.0f));*/
 			}
 		}
 
@@ -134,7 +131,7 @@ namespace BF
 			}
 
 			indexBuffer->Create(&(*indices)[0], (unsigned int)indices->size());
-			vertexBuffer->SetLayout(*material->shader, vertexBufferLayout);
+			vertexBuffer->SetLayout(*material->shader, &vertexBufferLayout);
 		}
 
 		void Mesh::Bind() const

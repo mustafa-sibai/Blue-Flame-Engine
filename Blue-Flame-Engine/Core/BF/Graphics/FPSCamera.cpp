@@ -12,7 +12,7 @@ namespace BF
 		using namespace BF::Math;
 
 		FPSCamera::FPSCamera() : 
-			movmentSpeed(0.25f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
+			movmentSpeed(1.25f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
 		{
 		}
 
@@ -29,6 +29,8 @@ namespace BF
 			windowCenter = Vector2f(floor((float)Engine::GetWindow().GetClientWidth() / 2.0f), floor((float)Engine::GetWindow().GetClientHeight() / 2.0f));
 			BF::Input::Mouse::ShowMouseCursor(false);
 			BF::Input::Mouse::SetPosition(windowCenter);
+
+			position = Vector3f(200, 50, -300);
 		}
 
 		void FPSCamera::Update()
@@ -56,7 +58,7 @@ namespace BF
 				}
 			}
 
-			if (lockMouseToCenter)
+			/*if (lockMouseToCenter)
 			{
 				BF::Input::Mouse::SetPosition(windowCenter);
 				yaw += (Mouse::GetPosition().x - windowCenter.x) * sensitivity;
@@ -66,7 +68,7 @@ namespace BF
 					pitch = 89.0f;
 				if (pitch < -89.0f)
 					pitch = -89.0f;
-			}
+			}*/
 
 			cameraFront.x = sin(ToRadians(yaw)) * cos(ToRadians(pitch));
 			cameraFront.y = sin(ToRadians(pitch));
@@ -74,7 +76,7 @@ namespace BF
 			cameraFront = cameraFront.Normalize();
 
 			systemBuffer.viewMatrix = Matrix4::LookAt(position, position + cameraFront, cameraUp);
-			systemBuffer.cameraPosition = Vector4f(position.x, position.y, position.z, 1.0f);
+//			systemBuffer.cameraPosition = Vector4f(position.x, position.y, position.z, 1.0f);
 			Camera::Update();
 		}
 	}

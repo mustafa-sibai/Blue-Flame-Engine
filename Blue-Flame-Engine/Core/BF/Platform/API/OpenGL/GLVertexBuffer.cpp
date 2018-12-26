@@ -12,7 +12,7 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				GLVertexBuffer::GLVertexBuffer() :
-					VBO(0), VAO(0)
+					VBO(0), VAO(0), vertexBufferLayout(nullptr)
 				{
 				}
 
@@ -31,7 +31,7 @@ namespace BF
 
 					GLCall(glGenBuffers(1, &VBO));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW));
+					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
 
@@ -55,23 +55,28 @@ namespace BF
 				void GLVertexBuffer::Bind() const
 				{
 					GLCall(glBindVertexArray(VAO));
+					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
+						GLCall(glEnableVertexAttribArray(vertexBufferLayout->GetBufferElement()[i].index));
 				}
 
 				void GLVertexBuffer::Unbind() const
 				{
+					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
+						GLCall(glDisableVertexAttribArray(vertexBufferLayout->GetBufferElement()[i].index));
 					GLCall(glBindVertexArray(0));
 				}
 
-				void GLVertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
+				void GLVertexBuffer::SetLayout(const VertexBufferLayout* vertexBufferLayout)
 				{
+					this->vertexBufferLayout = vertexBufferLayout;
+
 					GLCall(glBindVertexArray(VAO));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
 
-					for (size_t i = 0; i < vertexBufferLayout.GetBufferElement().size(); i++)
+					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
 					{
-						GLCall(glEnableVertexAttribArray(vertexBufferLayout.GetBufferElement()[i].index));
-						GLCall(glVertexAttribPointer(vertexBufferLayout.GetBufferElement()[i].index, GetComponentCount(vertexBufferLayout.GetBufferElement()[i].dataType),
-							GetGLDataType(vertexBufferLayout.GetBufferElement()[i].dataType), GL_FALSE, vertexBufferLayout.GetBufferElement()[i].stride, (GLvoid*)vertexBufferLayout.GetBufferElement()[i].offset));
+						GLCall(glVertexAttribPointer(vertexBufferLayout->GetBufferElement()[i].index, GetComponentCount(vertexBufferLayout->GetBufferElement()[i].dataType),
+							GetGLDataType(vertexBufferLayout->GetBufferElement()[i].dataType), GL_FALSE, vertexBufferLayout->GetBufferElement()[i].stride, (GLvoid*)vertexBufferLayout->GetBufferElement()[i].offset));
 					}
 
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));

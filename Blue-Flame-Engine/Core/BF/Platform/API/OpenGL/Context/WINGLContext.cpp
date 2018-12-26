@@ -70,7 +70,7 @@ namespace BF
 					GLCall(glGetIntegerv(GL_MAX_TEXTURE_SIZE, &r));
 					BF_LOG_INFO(r, "");
 
-					SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
+					//SetViewport(Math::Rectangle(0, 0, (int)Engine::GetWindow().GetClientWidth(), (int)Engine::GetWindow().GetClientHeight()));
 					//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				}
 

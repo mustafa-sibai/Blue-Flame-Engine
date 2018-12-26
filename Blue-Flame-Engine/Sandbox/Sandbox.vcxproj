@@ -563,7 +563,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sandbox\ECSTestApp.cpp" />
     <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp" />
     <ClCompile Include="Sandbox\Main.cpp" />
   </ItemGroup>
@@ -688,7 +687,6 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sandbox\ECSTestApp.h" />
     <ClInclude Include="Sandbox\Forward_Renderer_Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
