@@ -31,16 +31,16 @@ namespace BF
 				Vector3f size(1.0f, 1.0f, 1.0f);
 
 				//Top Left
-				(*(vector<Mesh::PVertexData>*)vertices)[0] = Mesh::PVertexData(position);
+				(*(vector<Mesh::PVertexData>*)vertices)[0] = Mesh::PVertexData(0, position);
 
 				//Top Right
-				(*(vector<Mesh::PVertexData>*)vertices)[1] = Mesh::PVertexData(Vector3f(position.x + size.x, position.y, position.z));
+				(*(vector<Mesh::PVertexData>*)vertices)[1] = Mesh::PVertexData(0, Vector3f(position.x + size.x, position.y, position.z));
 
 				//Bottom Right
-				(*(vector<Mesh::PVertexData>*)vertices)[2] = Mesh::PVertexData(Vector3f(position.x + size.x, position.y, position.z + size.z));
+				(*(vector<Mesh::PVertexData>*)vertices)[2] = Mesh::PVertexData(0, Vector3f(position.x + size.x, position.y, position.z + size.z));
 
 				//Bottom Left
-				(*(vector<Mesh::PVertexData>*)vertices)[3] = Mesh::PVertexData(Vector3f(position.x, position.y, position.z + size.z));
+				(*(vector<Mesh::PVertexData>*)vertices)[3] = Mesh::PVertexData(0, Vector3f(position.x, position.y, position.z + size.z));
 
 
 				/*//Top Left
@@ -81,9 +81,10 @@ namespace BF
 				case Mesh::VertexStructVersion::P:
 				{
 					vertexStructSize = sizeof(Mesh::PVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
+					vertexBufferLayout.Push(0, "MATERIALINDEX", VertexBufferLayout::DataType::Float, vertexStructSize, 0);
+					vertexBufferLayout.Push(1, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(int));
 
-					vertexBuffer->Create(&(*(vector<Mesh::PVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PVertexData>*)vertices)->size() * vertexStructSize);
+					vertexBuffer->Create((unsigned int)((vector<Mesh::PVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PVertexData>*)vertices)[0]);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUV:
@@ -92,7 +93,7 @@ namespace BF
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 
-					vertexBuffer->Create(&(*(vector<Mesh::PUVVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVVertexData>*)vertices)->size() * vertexStructSize);
+					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVVertexData>*)vertices)[0]);
 					break;
 				}
 				case Mesh::VertexStructVersion::PN:
@@ -101,7 +102,7 @@ namespace BF
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f));
 
-					vertexBuffer->Create(&(*(vector<Mesh::PNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PNVertexData>*)vertices)->size() * vertexStructSize);
+					vertexBuffer->Create((unsigned int)((vector<Mesh::PNVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PNVertexData>*)vertices)[0]);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUVN:
@@ -111,7 +112,7 @@ namespace BF
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
 
-					vertexBuffer->Create(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize);
+					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVNVertexData>*)vertices)[0]);
 					break;
 				}
 				case Mesh::VertexStructVersion::PUVNTB:
@@ -123,7 +124,7 @@ namespace BF
 					vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f));
 					vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f) + sizeof(Vector3f));
 
-					vertexBuffer->Create(&(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0], (unsigned int)((vector<Mesh::PUVNTBVertexData>*)vertices)->size() * vertexStructSize);
+					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVNTBVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0]);
 					break;
 				}
 				default:

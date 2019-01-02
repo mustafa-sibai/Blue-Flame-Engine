@@ -14,27 +14,29 @@ namespace BF
 				class BF_API GLVertexBuffer
 				{
 					private:
-						GLuint VAO;
-						GLuint VBO;
+						GLuint vao;
+						GLuint vbo;
 						unsigned int size;
-						const Graphics::API::VertexBufferLayout* vertexBufferLayout;
+						const BF::Graphics::API::VertexBufferLayout* vertexBufferLayout;
 
 					public:
 						GLVertexBuffer();
 						~GLVertexBuffer();
 
-						void Create(const void* data, unsigned int size);
-						void SetLayout(const Graphics::API::VertexBufferLayout* vertexBufferLayout);
+						void Create(unsigned int size, const void* data);
+						void SetLayout(const BF::Graphics::API::VertexBufferLayout* vertexBufferLayout);
+						
 						void* Map() const;
 						void Unmap() const;
+						
 						void Bind() const;
 						void Unbind() const;
 
-						inline const GLuint& GetBuffer() const { return VBO; }
+						inline const GLuint& GetBuffer() const { return vbo; }
 
 					private:
-						GLenum GetGLDataType(Graphics::API::VertexBufferLayout::DataType dataType);
-						unsigned int GetComponentCount(Graphics::API::VertexBufferLayout::DataType dataType);
+						GLenum GetGLDataType(BF::Graphics::API::VertexBufferLayout::DataType dataType);
+						unsigned int GetComponentCount(BF::Graphics::API::VertexBufferLayout::DataType dataType);
 				};
 			}
 		}

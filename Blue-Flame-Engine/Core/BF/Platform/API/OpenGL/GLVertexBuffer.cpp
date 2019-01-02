@@ -12,32 +12,48 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				GLVertexBuffer::GLVertexBuffer() :
-					VBO(0), VAO(0), vertexBufferLayout(nullptr)
+					vbo(0), vao(0), vertexBufferLayout(nullptr)
 				{
 				}
 
 				GLVertexBuffer::~GLVertexBuffer()
 				{
-					GLCall(glDeleteBuffers(1, &VBO));
-					GLCall(glDeleteVertexArrays(1, &VAO));
+					GLCall(glDeleteBuffers(1, &vbo));
+					GLCall(glDeleteVertexArrays(1, &vao));
 				}
 
-				void GLVertexBuffer::Create(const void* data, unsigned int size)
+				void GLVertexBuffer::Create(unsigned int size, const void* data)
 				{
 					this->size = size;
 
-					GLCall(glGenVertexArrays(1, &VAO));
-					GLCall(glBindVertexArray(0));
+					GLCall(glGenVertexArrays(1, &vao));
 
-					GLCall(glGenBuffers(1, &VBO));
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+					GLCall(glGenBuffers(1, &vbo));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
 					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
 
+				void GLVertexBuffer::SetLayout(const VertexBufferLayout* vertexBufferLayout)
+				{
+					this->vertexBufferLayout = vertexBufferLayout;
+
+					GLCall(glBindVertexArray(vao));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
+
+					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
+					{
+						GLCall(glVertexAttribPointer(vertexBufferLayout->GetBufferElement()[i].index, GetComponentCount(vertexBufferLayout->GetBufferElement()[i].dataType),
+							GetGLDataType(vertexBufferLayout->GetBufferElement()[i].dataType), GL_FALSE, vertexBufferLayout->GetBufferElement()[i].stride, (GLvoid*)vertexBufferLayout->GetBufferElement()[i].offset));
+					}
+
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+					GLCall(glBindVertexArray(0));
+				}
+
 				void* GLVertexBuffer::Map() const
 				{
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
 
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
 					GLCall(return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
@@ -54,7 +70,7 @@ namespace BF
 
 				void GLVertexBuffer::Bind() const
 				{
-					GLCall(glBindVertexArray(VAO));
+					GLCall(glBindVertexArray(vao));
 					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
 						GLCall(glEnableVertexAttribArray(vertexBufferLayout->GetBufferElement()[i].index));
 				}
@@ -66,81 +82,20 @@ namespace BF
 					GLCall(glBindVertexArray(0));
 				}
 
-				void GLVertexBuffer::SetLayout(const VertexBufferLayout* vertexBufferLayout)
-				{
-					this->vertexBufferLayout = vertexBufferLayout;
-
-					GLCall(glBindVertexArray(VAO));
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-
-					for (size_t i = 0; i < vertexBufferLayout->GetBufferElement().size(); i++)
-					{
-						GLCall(glVertexAttribPointer(vertexBufferLayout->GetBufferElement()[i].index, GetComponentCount(vertexBufferLayout->GetBufferElement()[i].dataType),
-							GetGLDataType(vertexBufferLayout->GetBufferElement()[i].dataType), GL_FALSE, vertexBufferLayout->GetBufferElement()[i].stride, (GLvoid*)vertexBufferLayout->GetBufferElement()[i].offset));
-					}
-
-					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
-					GLCall(glBindVertexArray(0));
-				}
-
 				GLenum GLVertexBuffer::GetGLDataType(VertexBufferLayout::DataType dataType)
 				{
-					switch (dataType)
-					{
-						case VertexBufferLayout::DataType::Float:
-						{
-							return GL_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float2:
-						{
-							return GL_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float3:
-						{
-							return GL_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float4:
-						{
-							return GL_FLOAT;
-							break;
-						}
-						default:
-							return -1;
-							break;
-					}
+					if (dataType == VertexBufferLayout::DataType::Float ||
+						dataType == VertexBufferLayout::DataType::Float2 ||
+						dataType == VertexBufferLayout::DataType::Float3 ||
+						dataType == VertexBufferLayout::DataType::Float4)
+						return GL_FLOAT;
+					else if (dataType == VertexBufferLayout::DataType::Int)
+						return GL_INT;
 				}
 
 				unsigned int GLVertexBuffer::GetComponentCount(VertexBufferLayout::DataType dataType)
 				{
-					switch (dataType)
-					{
-						case VertexBufferLayout::DataType::Float:
-						{
-							return 1;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float2:
-						{
-							return 2;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float3:
-						{
-							return 3;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float4:
-						{
-							return 4;
-							break;
-						}
-						default:
-							return -1;
-							break;
-					}
+					return (unsigned int)dataType;
 				}
 			}
 		}

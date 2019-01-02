@@ -62,7 +62,7 @@ namespace BF
 					index += SPRITE_VERTICES;
 				}
 
-				vertexBuffer.Create(nullptr, VERTICES_SIZE * sizeof(SpriteBuffer));
+				vertexBuffer.Create(VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
 				indexBuffer.Create(indices, INDICES_SIZE);
 				vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 

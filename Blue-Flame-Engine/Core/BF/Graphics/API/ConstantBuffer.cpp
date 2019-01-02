@@ -15,7 +15,7 @@ namespace BF
 			{
 			}
 
-			void ConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
+			void ConstantBuffer::Create(unsigned int bindingIndex, unsigned int size, const void* data)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -23,11 +23,11 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstantBuffer.Create(size, bindingIndex);
+					glConstantBuffer.Create(bindingIndex, size, data);
 #endif
 			}
 
-			void ConstantBuffer::Update(void* data, unsigned int size)
+			void ConstantBuffer::Update(unsigned int offset, unsigned int size, void* data)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -35,7 +35,7 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glConstantBuffer.Update(data, size);
+					glConstantBuffer.Update(offset, size, data);
 #endif
 			}
 		}

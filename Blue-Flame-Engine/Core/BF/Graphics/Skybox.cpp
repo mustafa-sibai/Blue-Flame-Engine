@@ -36,7 +36,7 @@ namespace BF
 
 		void Skybox::Load(const vector<string>& filenames)
 		{
-			vertexBuffer.Create(&vertcies[0], (unsigned int)vertcies.size() * sizeof(float));
+			vertexBuffer.Create((unsigned int)vertcies.size() * sizeof(float), &vertcies[0]);
 			indexBuffer.Create(&indices[0], (unsigned int)indices.size() * sizeof(unsigned int));
 
 			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(float) * 3, 0);

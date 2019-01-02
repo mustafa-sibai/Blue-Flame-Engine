@@ -16,10 +16,10 @@ namespace BF
 
 				GLConstantBuffer::~GLConstantBuffer()
 				{
-					//GLCall(glDeleteBuffers(1, &buffer));
+					GLCall(glDeleteBuffers(1, &buffer));
 				}
 
-				void GLConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
+				void GLConstantBuffer::Create(unsigned int bindingIndex, unsigned int size, const void* data)
 				{
 					this->bindingIndex = bindingIndex;
 
@@ -29,10 +29,10 @@ namespace BF
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 
-				void GLConstantBuffer::Update(const void* data, unsigned int size)
+				void GLConstantBuffer::Update(unsigned int offset, unsigned int size, const void* data)
 				{
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
-					GLCall(glBufferSubData(GL_UNIFORM_BUFFER, 0, size, data));
+					GLCall(glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 			}

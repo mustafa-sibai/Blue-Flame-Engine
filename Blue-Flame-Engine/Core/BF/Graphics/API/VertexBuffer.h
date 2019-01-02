@@ -19,19 +19,21 @@ namespace BF
 			{
 				private:
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXVertexBuffer dxVertexBuffer;
+					BF::Platform::API::DirectX::DXVertexBuffer dxVertexBuffer;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-					Platform::API::OpenGL::GLVertexBuffer glVertexBuffer;
+					BF::Platform::API::OpenGL::GLVertexBuffer glVertexBuffer;
 #endif	
 				public:
 					VertexBuffer();
 					~VertexBuffer();
 
-					void Create(void* data, unsigned int size);
+					void Create(unsigned int size, void* data);
 					void SetLayout(const Shader& shader, const VertexBufferLayout* vertexBufferLayout);
+					
 					void* Map() const;
 					void Unmap() const;
+					
 					void Bind() const;
 					void Unbind() const;
 			};

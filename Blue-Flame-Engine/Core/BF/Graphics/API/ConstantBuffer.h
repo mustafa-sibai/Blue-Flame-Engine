@@ -18,17 +18,17 @@ namespace BF
 			{
 				private:
 #ifdef BF_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXConstantBuffer dxConstantBuffer;
+					BF::Platform::API::DirectX::DXConstantBuffer dxConstantBuffer;
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-					Platform::API::OpenGL::GLConstantBuffer glConstantBuffer;
+					BF::Platform::API::OpenGL::GLConstantBuffer glConstantBuffer;
 #endif
 				public:
 					ConstantBuffer();
 					~ConstantBuffer();
 
-					void Create(unsigned int size, unsigned int bindingIndex);
-					void Update(void* data, unsigned int size);
+					void Create(unsigned int bindingIndex, unsigned int size, const void* data);
+					void Update(unsigned int offset, unsigned int size, void* data);
 			};
 		}
 	}

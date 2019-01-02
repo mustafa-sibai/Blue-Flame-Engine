@@ -11,14 +11,13 @@ namespace BF
 		{
 			class BF_API MeshMaterial
 			{
+				friend class MaterialManager;
+
 				private:
+					int index;
 					BF::Graphics::API::Texture2D diffuseMap;
 					BF::Graphics::API::Texture2D specularMap;
 					BF::Graphics::API::Texture2D normalMap;
-
-					bool diffuseMapActive;
-					bool specularMapActive;
-					bool normalMapActive;
 
 				public:
 					struct ColorBuffer
@@ -28,9 +27,10 @@ namespace BF
 						Color specularColor;
 
 						float shininess = 0.0f;
-						float shininess1 = 0.0f;
-						float shininess2 = 0.0f;
-						float shininess3 = 0.0f;
+
+						int diffuseMapActive = 0;
+						int specularMapActive = 0;
+						int normalMapActive = 0;
 					};
 
 					ColorBuffer colorBuffer;

@@ -16,12 +16,19 @@ namespace BF
 		void App::Initialize()
 		{
 			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
+
 		}
 
 		void App::Load()
 		{
 			//styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 			//BF::Application::SceneManager::GetScenes()[0]->Load();
+
+		}
+
+		void App::PostLoad()
+		{
+
 		}
 
 		void App::Update()
@@ -43,11 +50,12 @@ namespace BF
 			//BF::Application::SceneManager::GetScenes()[0]->Render();
 		}
 
-		void App::SetMainScene(Scene& scene)
+		void App::RunScene(Scene& scene)
 		{
 			mainScene = &scene;
 			mainScene->Initialize();
 			mainScene->Load();
+			mainScene->PostLoad();
 		}
 	}
 }

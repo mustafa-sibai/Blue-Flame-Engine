@@ -25,7 +25,7 @@ namespace Forward_Renderer_Test
 	void Forward_Renderer_Test::Initialize()
 	{
 		scene = new Scene(fpsCamera);
-		SetMainScene(*scene);
+		
 
 		App::Initialize();
 
@@ -33,7 +33,7 @@ namespace Forward_Renderer_Test
 
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		BF::Engine::GetContext().EnableVsync(false);
-		BF::Engine::LimitFrameRate(60.0f);
+		//BF::Engine::LimitFrameRate(60.0f);
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 		//fpsCamera.Initialize(Matrix4::Orthographic(-40, 40, -40, 40, 0.01f, 5000));
@@ -202,10 +202,10 @@ namespace Forward_Renderer_Test
 		//Mesh* m = new Mesh(BF::Graphics::Mesh::PresetMeshes::Plane);
 
 
-		planeMaterial = new BF::Graphics::Materials::MeshMaterial();
+		
 		for (size_t j = 0; j < 1; j++)
 		{
-			for (size_t k = 0; k < 10; k++)
+			for (size_t k = 0; k < 25; k++)
 			{
 				//BF::IO::BFXLoader::Load("Assets/Models/Test/Plane.bfx", *scene);
 
@@ -214,21 +214,31 @@ namespace Forward_Renderer_Test
 
 				
 
-				Transform* planeTransform = (Transform*)scene->GetGameObjects()[k + j * 10]->GetComponents()[0];
+				Transform* planeTransform = (Transform*)scene->GetGameObjects()[k + j * 25]->GetComponents()[0];
 				planeTransform->position = Vector3f(25 * k, 25 * j, 0.0f);
 				planeTransform->rotation = Vector3f(0, 0, 0);
 				planeTransform->scale = Vector3f(10.0f);
 				//planeTransform->angle = 90 + k * 10;
 
 				//BF::Graphics::Materials::MeshMaterial* planeMaterialz = new BF::Graphics::Materials::MeshMaterial();
+				planeMaterial = new BF::Graphics::Materials::MeshMaterial();
 				planeMaterial->Initialize();
 				planeMaterial->shader = &PN1;
 
-				planeMaterial->colorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-				planeMaterial->colorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-				planeMaterial->colorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+				if (k <= 0)
+				{
+					planeMaterial->colorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+					planeMaterial->colorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+					planeMaterial->colorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+				}
+				else
+				{
+					planeMaterial->colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+					planeMaterial->colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+					planeMaterial->colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+				}
 
-				((Mesh*)scene->GetGameObjects()[k + j * 10]->GetComponents()[1])->SetBuffers(planeMaterial);
+				((Mesh*)scene->GetGameObjects()[k + j * 25]->GetComponents()[1])->SetBuffers(planeMaterial);
 			}
 		}
 		
@@ -236,6 +246,12 @@ namespace Forward_Renderer_Test
 
 		//lightPosition = Vector3f(50.0f, 10.0f, -1.0f);
 		//fpsCamera.SetViewMatrix(Math::Matrix4::LookAt(Vector3f(8.0f, 10.0f, -1.0f), Vector3f(0, 0, 0), Vector3f::Up()));
+	}
+
+	void Forward_Renderer_Test::PostLoad()
+	{
+		App::PostLoad();
+		App::RunScene(*scene);
 	}
 
 	void Forward_Renderer_Test::Update()

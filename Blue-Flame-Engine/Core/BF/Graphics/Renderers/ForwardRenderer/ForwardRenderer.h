@@ -2,6 +2,7 @@
 #include <vector>
 #include "BF/Graphics/Camera.h"
 #include "BF/Graphics/API/Framebuffer.h"
+#include "BF/Graphics/Materials/MaterialManager.h"
 #include "BF/Graphics/Mesh.h"
 #include "BF/Common.h"
 
@@ -23,10 +24,7 @@ namespace BF
 				private:
 					BF::Graphics::Camera& camera;
 					std::vector<BF::Graphics::Mesh*> meshes;
-					BF::Graphics::API::ConstantBuffer materialConstantBuffer;
-
-
-
+					BF::Graphics::Materials::MaterialManager materialManager;
 
 					/*BF::Graphics::Mesh* postProcessingQuad;
 					BF::Graphics::Materials::MeshMaterial* screenPlaneMaterial;
@@ -40,6 +38,7 @@ namespace BF
 					~ForwardRenderer();
 
 					void Initialize();
+					void PostLoad();
 					void Render();
 			};
 		}

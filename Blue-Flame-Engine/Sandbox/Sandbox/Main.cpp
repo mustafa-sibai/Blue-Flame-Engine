@@ -21,19 +21,21 @@ int main()
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
 
-	//new3DScene::new3DScene scene;
-	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test scene;
-	//_3DScene_AF_Test::_3DScene_AF_Test scene;
-	//_3DScenee::_3DScene scene;
-	//_2DScene::_2DScene scene;
-	//PhysicsScene::PhysicsScene scene;
-	//TestApp::TestApp testApp;
-	//TerrainTestApp testApp;
-	//InputTests scene;
-	//ECSTestApp::ECSTestApp scene;
-	Forward_Renderer_Test::Forward_Renderer_Test scene;
+	//new3DScene::new3DScene app;
+	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test app;
+	//_3DScene_AF_Test::_3DScene_AF_Test app;
+	//_3DScenee::_3DScene app;
+	//_2DScene::_2DScene app;
+	//PhysicsScene::PhysicsScene app;
+	//TestApp::TestApp app;
+	//TerrainTestApp app;
+	//InputTests app;
+	//ECSTestApp::ECSTestApp app;
+	int a = sizeof(GLboolean);
 
-	engine.Run(scene);
+	Forward_Renderer_Test::Forward_Renderer_Test app;
+
+	engine.Run(app);
 #elif defined (BF_CLIENT)
 	BF::Network::Client client;
 

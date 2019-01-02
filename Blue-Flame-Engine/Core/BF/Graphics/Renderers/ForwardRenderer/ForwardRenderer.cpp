@@ -28,7 +28,7 @@ namespace BF
 			void ForwardRenderer::Initialize()
 			{
 				camera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
-				materialConstantBuffer.Create(sizeof(MeshMaterial::ColorBuffer), 1);
+				materialManager.Initialize();
 				//BF::Engine::GetContext().EnableDepthBuffer(true);
 				/*postProcessingTexture.Create(Texture::TextureData(Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight(), nullptr), Texture::Format::R8G8B8A8);
 				postProcessingFramebuffer.Create(postProcessingTexture, FramebufferFormat::Color);
@@ -40,6 +40,14 @@ namespace BF
 				screenPlaneMaterial->Initialize();
 				screenPlaneMaterial->shader = &postProcessingShader;
 				postProcessingQuad->SetBuffers(screenPlaneMaterial);*/
+			}
+
+			void ForwardRenderer::PostLoad()
+			{
+				for (size_t i = 0; i < 2; i++)
+				{
+					materialManager.SetMaterial(*meshes[i]->material);
+				}
 			}
 
 			void ForwardRenderer::Render()
@@ -56,10 +64,10 @@ namespace BF
 				for (size_t i = 0; i < meshes.size(); i++)
 				{
 					Transform* transform = (Transform*)meshes[i]->gameObject->GetComponents()[0];
-					//transform->rotation = Vector3f(1, 0, 0);
-					//transform->angle++;
+					transform->rotation = Vector3f(1, 0, 0);
+					transform->angle++;
 					camera.SetModelMatrix(Matrix4::Translate(transform->position) * Matrix4::Rotate(transform->angle, transform->rotation) * Matrix4::Scale(transform->scale));
-					materialConstantBuffer.Update(&meshes[i]->material->colorBuffer, sizeof(MeshMaterial::ColorBuffer));
+					//materialConstantBuffer.Update(0, &meshes[i]->material->colorBuffer);
 
 
 					meshes[i]->material->Bind();

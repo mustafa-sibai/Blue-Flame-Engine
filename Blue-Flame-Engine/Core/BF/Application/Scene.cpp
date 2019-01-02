@@ -33,6 +33,11 @@ namespace BF
 		{
 		}
 
+		void Scene::PostLoad()
+		{
+			forwardRenderer.PostLoad();
+		}
+
 		/*void Scene::FixedUpdate()
 		{
 		}*/

@@ -101,7 +101,7 @@ namespace BF
 				}
 			}
 
-			vertexBuffer.Create(vertices, (unsigned int)VERTICES_SIZE * sizeof(Mesh::PUVNVertexData));
+			vertexBuffer.Create((unsigned int)VERTICES_SIZE * sizeof(Mesh::PUVNVertexData), vertices);
 			indexBuffer.Create(indecies, INDICES_SIZE);
 
 			vertexBuffer.SetLayout(shader, &vertexBufferLayout);

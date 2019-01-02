@@ -36,6 +36,7 @@ namespace BF
 							context.Initialize();
 							app.Initialize();
 							app.Load();
+							app.PostLoad();
 
 							if(Engine::state != Engine::State::Exit)
 								Engine::state = Engine::State::Render;

@@ -47,6 +47,7 @@ namespace Forward_Renderer_Test
 		public:
 			void Initialize() override;
 			void Load() override;
+			void PostLoad() override;
 			void Update() override;
 			void Render() override;
 	};

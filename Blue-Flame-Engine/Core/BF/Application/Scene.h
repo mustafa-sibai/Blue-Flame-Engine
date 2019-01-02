@@ -76,6 +76,7 @@ namespace BF
 			public:
 				void Initialize(/*BF::Application::Layers::LayerManager& layerManager*/);
 				void Load();
+				void PostLoad();
 				//void FixedUpdate();
 				void Update();
 				void Render();

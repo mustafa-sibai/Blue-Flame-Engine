@@ -1,6 +1,9 @@
 vertexShader = R"(
 #version 450 core
-layout(location = 0) in vec3 inPosition;
+layout(location = 0) in int inMaterialIndex;
+layout(location = 1) in vec3 inPosition;
+
+out int psMaterialIndex;
 
 layout (std140, binding = 0) uniform Camera
 {
@@ -14,35 +17,40 @@ void main()
 {
 	vec4 worldSpace = camera.modelMatrix * vec4(inPosition.xyz, 1.0f);
 	gl_Position = camera.projectionMatrix * camera.viewMatrix * worldSpace;
+	psMaterialIndex = inMaterialIndex;
 }
 )";
 
 pixelShader = R"(
 #version 450 core
 
-/*struct Material
-{
-	vec4 ambientColor;
-	vec4 diffuseColor;
-	vec4 specularColor;
-
-	float shininess;
-};*/
-
-layout (std140, binding = 1) uniform Material
-{
-	vec4 ambientColor;
-	vec4 diffuseColor;
-	vec4 specularColor;
-
-	float shininess;
-} material;
-
+in flat int psMaterialIndex;
 out vec4 color;
+
+struct Material
+{
+	vec4 ambientColor;
+	vec4 diffuseColor;
+	vec4 specularColor;
+
+	float shininess;
+
+	bool diffuseMapActive;
+	bool specularMapActive;
+	bool normalMapActive;
+};
+
+layout (std140, binding = 1) uniform MaterialUniform
+{
+	Material material[256];
+};
 
 void main() 
 {
-	color = material.ambientColor * material.diffuseColor * material.specularColor;
+	/*color = vec4(material[0].shininess, material[0].diffuseMapActive, 
+										material[0].specularMapActive, 
+										material[0].normalMapActive);*/
+	color = material[psMaterialIndex].ambientColor;
 	//color = vec4(1.0, 0, 0, 1.0);
 }
 )";

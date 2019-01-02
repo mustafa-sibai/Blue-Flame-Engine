@@ -15,7 +15,7 @@ namespace BF
 			{
 			}
 
-			void VertexBuffer::Create(void* data, unsigned int size)
+			void VertexBuffer::Create(unsigned int size, void* data)
 			{
 #ifdef BF_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -23,7 +23,7 @@ namespace BF
 #endif
 #if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer.Create(data, size);
+					glVertexBuffer.Create(size, data);
 #endif
 			}
 

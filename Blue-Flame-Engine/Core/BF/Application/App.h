@@ -59,10 +59,11 @@ namespace BF
 
 			virtual void Initialize();
 			virtual void Load();
+			virtual void PostLoad();
 			virtual void Update();
 			virtual void Render();
 
-			void SetMainScene(Scene& scene);
+			void RunScene(Scene& scene);
 
 			//inline SceneManager& GetSceneManager() { return sceneManager; }
 			//inline BF::Application::Layers::LayerManager& GetLayerManager() { return layerManager; }

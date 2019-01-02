@@ -132,6 +132,7 @@
     <ClCompile Include="BF\ECS\Component.cpp" />
     <ClCompile Include="BF\Math\Ray.cpp" />
     <ClCompile Include="BF\Graphics\API\Framebuffer.cpp" />
+    <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -233,6 +234,7 @@
     <ClInclude Include="BF\Math\Ray.h" />
     <ClInclude Include="BF\Graphics\Transform.h" />
     <ClInclude Include="BF\Graphics\API\Framebuffer.h" />
+    <ClInclude Include="BF\Graphics\Materials\MaterialManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

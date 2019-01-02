@@ -1,12 +1,13 @@
 struct BF_API PVertexData
 {
+	int materialIndex;
 	BF::Math::Vector3f position;
 
 	PVertexData() :
-		position(0.0f) { }
+		materialIndex(0), position(0.0f) { }
 
-	PVertexData(BF::Math::Vector3f position) :
-		position(position)
+	PVertexData(int materialIndex, BF::Math::Vector3f position) :
+		materialIndex(materialIndex), position(position)
 	{
 	}
 };
