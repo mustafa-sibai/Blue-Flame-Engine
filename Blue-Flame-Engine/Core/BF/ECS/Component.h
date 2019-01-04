@@ -22,7 +22,7 @@ namespace BF
 				bool added;
 
 			public:
-				enum class Type { Null, Renderable, GUI, Mesh, Audio };
+				enum class Type { Null, Renderable, GUI, Mesh, Audio, Script };
 				Type type;
 
 				GameObject* gameObject;

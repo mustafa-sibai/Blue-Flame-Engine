@@ -21,6 +21,12 @@
     <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\ECS_Script_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sandbox\ScriptTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
@@ -44,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sandbox\Forward_Renderer_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\ECS_Script_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\ScriptTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

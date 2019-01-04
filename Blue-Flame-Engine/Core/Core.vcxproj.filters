@@ -261,6 +261,12 @@
     <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Scripting\ScriptExecutor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Scripting\Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -561,6 +567,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Materials\MaterialManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Scripting\Script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Scripting\ScriptExecutor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

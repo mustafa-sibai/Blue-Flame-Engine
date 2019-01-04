@@ -70,6 +70,8 @@
 
 #include <BF/Physics/PhysicsEngine.h>
 
+#include <BF/Scripting/Script.h>
+
 #include <BF/IO/BFXLoader.h>
 
 #include <BF/System/Debug.h>

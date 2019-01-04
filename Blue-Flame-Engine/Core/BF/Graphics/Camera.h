@@ -39,7 +39,7 @@ namespace BF
 				inline const BF::Math::Matrix4& GetProjectionMatrix() const { return systemBuffer.projectionMatrix; }
 				inline const BF::Math::Vector3f& GetPosition() const { return position; }
 			
-			protected:
+			public:
 				virtual void Update();
 		};
 	}

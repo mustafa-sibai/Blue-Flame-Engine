@@ -39,7 +39,6 @@ namespace BF
 				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
 				shader.LoadStandardShader(ShaderType::SpriteRenderer);
-				shader.Bind();
 
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), 0);
 				vertexBufferLayout.Push(1, "COLOR", VertexBufferLayout::DataType::Float4, sizeof(SpriteBuffer), sizeof(Vector2f));

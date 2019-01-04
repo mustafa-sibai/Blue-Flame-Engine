@@ -10,10 +10,12 @@ namespace BF
 		using namespace BF::ECS;
 		using namespace BF::Graphics;
 		using namespace BF::Graphics::Renderers;
+		using namespace BF::Scripting;
+
 		//using namespace BF::Application::Layers;
 
 		Scene::Scene(Camera& camera) :
-			forwardRenderer(camera), initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
+			/*forwardRenderer(camera),*/ initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
 		{
 		}
 
@@ -25,8 +27,8 @@ namespace BF
 		{
 			//rootGameObject = new GameObject();
 			//rootGameObject->layerManager = &layerManager;
-			//spriteRenderer.Initialize();
-			forwardRenderer.Initialize();
+			spriteRenderer.Initialize();
+			//forwardRenderer.Initialize();
 		}
 
 		void Scene::Load()
@@ -35,7 +37,8 @@ namespace BF
 
 		void Scene::PostLoad()
 		{
-			forwardRenderer.PostLoad();
+			//forwardRenderer.PostLoad();
+			scriptExecutor.Start();
 		}
 
 		/*void Scene::FixedUpdate()
@@ -44,6 +47,7 @@ namespace BF
 
 		void Scene::Update()
 		{
+			scriptExecutor.Update();
 		}
 
 		void Scene::Render()
@@ -79,8 +83,8 @@ namespace BF
 				RenderNode(gameNodes[i]);
 			}*/
 
-			//spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
-			forwardRenderer.Render();
+			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
+			//forwardRenderer.Render();
 		}
 
 		GameObject* Scene::AddGameObject(GameObject* gameObject)
@@ -103,19 +107,35 @@ namespace BF
 		{
 			if (!component->added)
 			{
-				if (component->type == BF::ECS::Component::Type::Renderable)
+				switch (component->type)
 				{
-					component->gameObject = gameObject;
-					gameObject->components.emplace_back(component);
-					//spriteRenderer.renderables.emplace_back((Renderable*)component);
-					component->added = true;
-				}
-				else if (component->type == BF::ECS::Component::Type::Mesh)
-				{
-					component->gameObject = gameObject;
-					gameObject->components.emplace_back(component);
-					forwardRenderer.meshes.emplace_back((Mesh*)component);
-					component->added = true;
+					case Component::Type::Renderable:
+					{
+						component->gameObject = gameObject;
+						gameObject->components.emplace_back(component);
+						spriteRenderer.renderables.emplace_back((Renderable*)component);
+						component->added = true;
+						break;
+					}
+					case Component::Type::Mesh:
+					{
+						component->gameObject = gameObject;
+						gameObject->components.emplace_back(component);
+						//forwardRenderer.meshes.emplace_back((Mesh*)component);
+						component->added = true;
+						break;
+					}
+					case Component::Type::Script:
+					{
+						component->gameObject = gameObject;
+						gameObject->components.emplace_back(component);
+						scriptExecutor.scripts.emplace_back((Script*)component);
+						component->added = true;
+						break;
+					}
+
+					default:
+						break;
 				}
 			}
 			else
@@ -132,14 +152,14 @@ namespace BF
 			{
 				if (gameObject->components[i]->type == Component::Type::Renderable)
 				{
-					/*for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+					for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
 					{
 						if (((Component*)*it)->GetID() == gameObject->components[i]->GetID())
 						{
 							spriteRenderer.renderables.erase(it);
 							break;
 						}
-					}*/
+					}
 				}
 			}
 
@@ -159,14 +179,14 @@ namespace BF
 		{
 			if (component->type == Component::Type::Renderable)
 			{
-				/*for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+				for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
 				{
 					if (((Component*)*it)->GetID() == component->GetID())
 					{
 						spriteRenderer.renderables.erase(it);
 						break;
 					}
-				}*/
+				}
 			}
 
 			for (std::vector<Component*>::iterator it = gameObject->components.begin(); it != gameObject->components.end(); ++it)

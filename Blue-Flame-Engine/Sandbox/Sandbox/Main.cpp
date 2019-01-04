@@ -12,6 +12,7 @@
 //#include "TerrainTestApp.h"
 //#include "ECSTestApp.h"
 #include "Forward_Renderer_Test.h"
+#include "ECS_Script_Test.h"
 
 int main()
 {
@@ -31,9 +32,10 @@ int main()
 	//TerrainTestApp app;
 	//InputTests app;
 	//ECSTestApp::ECSTestApp app;
-	int a = sizeof(GLboolean);
 
-	Forward_Renderer_Test::Forward_Renderer_Test app;
+	//Forward_Renderer_Test::Forward_Renderer_Test app;
+
+	ECS_Script_Test::ECS_Script_Test app;
 
 	engine.Run(app);
 #elif defined (BF_CLIENT)

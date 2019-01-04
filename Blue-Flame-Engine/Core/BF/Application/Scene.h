@@ -1,5 +1,4 @@
 #pragma once
-
 #ifdef BF_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
 #elif defined(BF_PLATFORM_LINUX)
@@ -21,6 +20,7 @@
 #include "BF/Graphics/API/Context.h"
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Graphics/Renderers/ForwardRenderer/ForwardRenderer.h"
+#include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -44,8 +44,9 @@ namespace BF
 #endif
 
 			private:
-				//BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
-				BF::Graphics::Renderers::ForwardRenderer forwardRenderer;
+				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
+				//BF::Graphics::Renderers::ForwardRenderer forwardRenderer;
+				BF::Scripting::ScriptExecutor scriptExecutor;
 				std::vector<BF::ECS::GameObject*> gameObjects;
 
 			public:

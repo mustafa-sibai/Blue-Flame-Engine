@@ -120,6 +120,7 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
+    <ClCompile Include="BF\Scripting\Script.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="BF\Math\Ray.cpp" />
     <ClCompile Include="BF\Graphics\API\Framebuffer.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp" />
+    <ClCompile Include="BF\Scripting\ScriptExecutor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -235,6 +237,8 @@
     <ClInclude Include="BF\Graphics\Transform.h" />
     <ClInclude Include="BF\Graphics\API\Framebuffer.h" />
     <ClInclude Include="BF\Graphics\Materials\MaterialManager.h" />
+    <ClInclude Include="BF\Scripting\Script.h" />
+    <ClInclude Include="BF\Scripting\ScriptExecutor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
