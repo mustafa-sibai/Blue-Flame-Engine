@@ -36,14 +36,14 @@ namespace BF
 					~Text();
 
 					void SetFont(const BF::Graphics::Fonts::Font* font);
-					void SetText(const std::string& text);
+					//void SetText(const std::string& text);
 					void SetTextAlignment(TextAlignment textAlignment);
 
-					void SetPosition(const BF::Math::Vector2f& position) override;
-					void SetRectangle(const BF::Math::Rectangle& rectangle) override;
+					//void SetPosition(const BF::Math::Vector2f& position) override;
+					//void SetRectangle(const BF::Math::Rectangle& rectangle) override;
 
-				private:
-					BF::Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
+				//private:
+					//BF::Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
 			};
 		}
 	}

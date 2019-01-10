@@ -20,11 +20,11 @@ namespace BF
 
 		void Rigidbody2D::Update()
 		{
-			renderable.SetPosition(renderable.GetPosition() + veclotiy);
+			//renderable.SetPosition(renderable.GetPosition() + veclotiy);
 			veclotiy += direction * speed;
 		}
 
-		BF::Math::Rectangle Rigidbody2D::CheckNextFrameCollision()
+		/*BF::Math::Rectangle Rigidbody2D::CheckNextFrameCollision()
 		{
 			BF::Math::Rectangle rectangle = renderable.GetRectangle();
 
@@ -32,6 +32,6 @@ namespace BF
 			rectangle.y += (int)veclotiy.y;
 
 			return rectangle;
-		}
+		}*/
 	}
 }

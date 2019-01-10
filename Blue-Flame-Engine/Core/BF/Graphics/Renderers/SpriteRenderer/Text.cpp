@@ -18,9 +18,10 @@ namespace BF
 			}*/
 
 			Text::Text(const Font* font, const string& text, const Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color) :
-				Renderable(Vector2f((float)scissorRectangle.x, (float)scissorRectangle.y), Rectangle((int)scissorRectangle.x, (int)scissorRectangle.y, 0, 0), zLayer, color, RenderableType::Text), alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
+				Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), zLayer, color, RenderableType::Text),
+				alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 			{
-				SetText(text);
+				//SetText(text);
 			}
 
 			Text::~Text()
@@ -30,10 +31,10 @@ namespace BF
 			void Text::SetTextAlignment(TextAlignment textAlignment)
 			{
 				alignment = textAlignment;
-				SetPosition(position);
+				//SetPosition(position);
 			}
 
-			void Text::SetPosition(const Vector2f& position)
+			/*void Text::SetPosition(const Vector2f& position)
 			{
 				Renderable::SetPosition(position);
 				scissorRectangle.x = (int)position.x;
@@ -60,14 +61,14 @@ namespace BF
 					if (font->fontAtlas->characters[0][unicode].scissorRectangle.height + (font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y) > rectangle.height)
 						rectangle.height = font->fontAtlas->characters[0][unicode].scissorRectangle.height + (int)(font->fontAtlas->fontMaxYBearing - font->fontAtlas->characters[0][unicode].bearing.y);
 				}
-			}
+			}*/
 
-			void Text::SetRectangle(const Rectangle& rectangle)
+			/*void Text::SetRectangle(const Rectangle& rectangle)
 			{
 				SetPosition(Vector2f((float)rectangle.x, (float)rectangle.y));
-			}
+			}*/
 
-			Math::Vector2i Text::GetTextAlignmentOffset(TextAlignment textAlignment)
+			/*Math::Vector2i Text::GetTextAlignmentOffset(TextAlignment textAlignment)
 			{
 				switch (textAlignment)
 				{
@@ -134,15 +135,15 @@ namespace BF
 						break;
 					}
 				}
-			}
+			}*/
 
 			void Text::SetFont(const Font* font)
 			{
 				this->font = font;
-				SetText(text);
+				//SetText(text);
 			}
 
-			void Text::SetText(const string& text)
+			/*void Text::SetText(const string& text)
 			{
 				BF_IS_NULL(font);
 
@@ -172,7 +173,7 @@ namespace BF
 				}
 
 				SetTextAlignment(alignment);
-			}
+			}*/
 		}
 	}
 }

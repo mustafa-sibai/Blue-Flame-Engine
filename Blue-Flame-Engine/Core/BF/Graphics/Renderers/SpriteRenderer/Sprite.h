@@ -27,10 +27,10 @@ namespace BF
 
 				public:
 					//Sprite();
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& position, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, unsigned int zLayer, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2i& size, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
 					~Sprite();
 
 					void SetTexture(const BF::Graphics::API::Texture2D* texture2D);

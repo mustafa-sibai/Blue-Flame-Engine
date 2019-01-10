@@ -24,7 +24,7 @@ namespace BF
 				~Rigidbody2D();
 
 				void Update();
-				BF::Math::Rectangle CheckNextFrameCollision();
+				//BF::Math::Rectangle CheckNextFrameCollision();
 		};
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include "BF/ECS/GameObject.h"
 #include "BF/ECS/Component.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
@@ -15,9 +16,6 @@ namespace BF
 				friend class SpriteRenderer;
 
 				protected:
-					BF::Math::Vector2f position;
-					BF::Math::Rectangle rectangle;
-
 					enum class RenderableType { Null, Line, RegularPolygon, Sprite, Text };
 					RenderableType renderableType;
 
@@ -26,7 +24,7 @@ namespace BF
 					{
 						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
 						{
-							if (renderableA->rectangle.y <= renderableB->rectangle.y)
+							if (renderableA->gameObject->GetTransform()->position.y <= renderableB->gameObject->GetTransform()->position.y)
 							{
 								if (renderableA->zLayer < renderableB->zLayer)
 								{
@@ -34,7 +32,7 @@ namespace BF
 								}
 							}
 
-							if (renderableA->rectangle.y < renderableB->rectangle.y)
+							if (renderableA->gameObject->GetTransform()->position.y < renderableB->gameObject->GetTransform()->position.y)
 							{
 								if (renderableA->zLayer == renderableB->zLayer)
 								{
@@ -42,7 +40,7 @@ namespace BF
 								}
 							}
 
-							if (renderableA->rectangle.y >= renderableB->rectangle.y)
+							if (renderableA->gameObject->GetTransform()->position.y >= renderableB->gameObject->GetTransform()->position.y)
 							{
 								if (renderableA->zLayer < renderableB->zLayer)
 								{
@@ -55,19 +53,19 @@ namespace BF
 					};
 
 				public:
-					Color color;
+					BF::Math::Vector2i size;
 					unsigned int zLayer;
+					Color color;
 
 				public:
 					//Renderable();
-					Renderable(const BF::Math::Vector2f& position, const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color, RenderableType renderableType);
+					Renderable(const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color, RenderableType renderableType);
 					~Renderable();
 
-					virtual void SetPosition(const BF::Math::Vector2f& position);
-					virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
+					//virtual void SetPosition(const BF::Math::Vector2f& position);
+					//virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
 
-					inline const BF::Math::Vector2f& GetPosition() const { return position; }
-					inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
+					//inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
 			};
 		}
 	}

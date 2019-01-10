@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
+#include "BF/ECS/GameObject.h"
+
 //#include "BF/Application/Layers/LayerManager.h"
 
 #define MAX_SPRITES		60000
@@ -228,29 +230,32 @@ namespace BF
 
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
 			{
+				Vector3f& position = regularPolygon->gameObject->GetTransform()->position;
+				Vector3f& scale = regularPolygon->gameObject->GetTransform()->scale;
+
 				//Top Left
-				spriteBuffer->position = Vector2f((float)regularPolygon->GetRectangle().x, (float)regularPolygon->GetRectangle().y);
+				spriteBuffer->position = Vector2f(position.x, position.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f((float)(regularPolygon->GetRectangle().x + regularPolygon->GetRectangle().width), (float)regularPolygon->GetRectangle().y);
+				spriteBuffer->position = Vector2f(position.x + (regularPolygon->size.x * scale.x), position.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f((float)(regularPolygon->GetRectangle().x + regularPolygon->GetRectangle().width), (float)(regularPolygon->GetRectangle().y + regularPolygon->GetRectangle().height));
+				spriteBuffer->position = Vector2f(position.x + (regularPolygon->size.x * scale.x), position.y + (regularPolygon->size.y * scale.y));
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f((float)regularPolygon->GetRectangle().x, (float)(regularPolygon->GetRectangle().y + regularPolygon->GetRectangle().height));
+				spriteBuffer->position = Vector2f(position.x, position.y + (regularPolygon->size.y * scale.y));
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
@@ -284,29 +289,32 @@ namespace BF
 				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 				CalculateUV(sprite->texture2D, sprite->scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
+				Vector3f& position = sprite->gameObject->GetTransform()->position;
+				Vector3f& scale = sprite->gameObject->GetTransform()->scale;
+
 				//Top Left
-				spriteBuffer->position = sprite->position;
+				spriteBuffer->position = Vector2f(position.x, position.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topLeftUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(sprite->position.x + sprite->rectangle.width, sprite->position.y);
+				spriteBuffer->position = Vector2f(position.x + (sprite->size.x * scale.x), position.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(sprite->position.x + sprite->rectangle.width, sprite->position.y + sprite->rectangle.height);
+				spriteBuffer->position = Vector2f(position.x + (sprite->size.x * scale.x), position.y + (sprite->size.y * scale.y));
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(sprite->position.x, sprite->position.y + sprite->rectangle.height);
+				spriteBuffer->position = Vector2f(position.x, position.y + (sprite->size.y * scale.y));
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomLeftUV;
 				spriteBuffer->renderingType = 1;

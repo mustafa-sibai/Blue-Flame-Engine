@@ -18,7 +18,7 @@ namespace BF
 
 		void PhysicsEngine::Update()
 		{
-			for (size_t i = 0; i < rigidbodies.size(); i++)
+			/*for (size_t i = 0; i < rigidbodies.size(); i++)
 			{
 				if (rigidbodies[i]->useGravity)
 					rigidbodies[i]->Update();
@@ -54,7 +54,7 @@ namespace BF
 						BF_LOG_INFO("COLLIIISIONONNN !!", "");
 					}
 				}
-			}
+			}*/
 		}
 	}
 }

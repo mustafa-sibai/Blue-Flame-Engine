@@ -37,7 +37,9 @@ namespace ECS_Script_Test
 		camera.Initialize(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), -((int)Engine::GetWindow().GetClientHeight() / 2), (int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f));
 		
 		GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject("RegularPolygon A"));
-		RegularPolygon* rp = (RegularPolygon*)scene->AddComponentToGameObject(RegularPolygonGameObject, new RegularPolygon(Math::Rectangle(-50, -50, 100, 100), 2, Color::Blues::DarkBlue()));
+		RegularPolygonGameObject->GetTransform()->position = Vector3f(-50, -50, 0);
+		RegularPolygonGameObject->GetTransform()->scale = Vector3f(0.5f, 0.5f, 0);
+		RegularPolygon* rp = (RegularPolygon*)scene->AddComponentToGameObject(RegularPolygonGameObject, new RegularPolygon(Vector2i(100, 100), 2, Color::Blues::DarkBlue()));
 	
 		GameObject* scriptTest = scene->AddGameObject(new GameObject("Script Test"));
 		Script* script = (Script*)scene->AddComponentToGameObject(scriptTest, new ScriptTest());

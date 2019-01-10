@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "BF/ECS/Component.h"
+#include "BF/Graphics/Transform.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -32,6 +33,7 @@ namespace BF
 				virtual ~GameObject();
 
 				inline int GetID() const { return id; }
+				inline BF::Graphics::Transform* GetTransform() const { return (BF::Graphics::Transform*)components[0]; }
 				inline const std::vector<Component*>& GetComponents() const{ return components; }
 		};
 	}

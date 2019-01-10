@@ -9,9 +9,9 @@ namespace BF
 	{
 		struct BF_API Transform : public BF::ECS::Component
 		{
-			BF::Math::Vector3f position;
-			BF::Math::Vector3f rotation;
-			BF::Math::Vector3f scale;
+			BF::Math::Vector3f position = BF::Math::Vector3f();
+			BF::Math::Vector3f rotation = BF::Math::Vector3f();
+			BF::Math::Vector3f scale = BF::Math::Vector3f(1.0f);
 			float angle = 0.0f;
 		};
 	}

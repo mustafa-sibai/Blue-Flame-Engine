@@ -12,7 +12,7 @@ namespace BF
 			{
 				public:
 					//RegularPolygon();
-					RegularPolygon(const BF::Math::Rectangle& rectangle, unsigned int zLayer, const Color& color);
+					RegularPolygon(const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color);
 					~RegularPolygon();
 			};
 		}
