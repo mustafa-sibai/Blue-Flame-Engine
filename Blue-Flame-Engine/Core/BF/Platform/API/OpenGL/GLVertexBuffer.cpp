@@ -95,7 +95,36 @@ namespace BF
 
 				unsigned int GLVertexBuffer::GetComponentCount(VertexBufferLayout::DataType dataType)
 				{
-					return (unsigned int)dataType;
+					switch (dataType)
+					{
+					case VertexBufferLayout::DataType::Int:
+					{
+						return 1;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float:
+					{
+						return 1;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float2:
+					{
+						return 2;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float3:
+					{
+						return 3;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float4:
+					{
+						return 4;
+						break;
+					}
+					default:
+						break;
+					}
 				}
 			}
 		}

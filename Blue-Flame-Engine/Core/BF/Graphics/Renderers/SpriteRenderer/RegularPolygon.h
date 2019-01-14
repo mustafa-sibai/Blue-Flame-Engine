@@ -10,10 +10,20 @@ namespace BF
 		{
 			class BF_API RegularPolygon : public Renderable
 			{
-				public:
-					//RegularPolygon();
-					RegularPolygon(const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color);
-					~RegularPolygon();
+			public:
+				RegularPolygon(const BF::Math::Vector2i& size);
+				/*
+				@pivot:
+				Center = 0, 0
+				Top left = +1, -1
+				Top right = -1, -1
+				Bottom left = +1, +1
+				Bottom left = -1, +1
+				*/
+				RegularPolygon(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot);
+				RegularPolygon(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, unsigned int zLayer);
+				RegularPolygon(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, unsigned int zLayer, const Color& color);
+				~RegularPolygon();
 			};
 		}
 	}

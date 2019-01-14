@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -28,6 +29,7 @@ namespace BF
 
 		Resource* ResourceManager::GetResource(const string& name)
 		{
+			BF_LOG_WARNING(name + " already loaded in memory. ResourceManager will retrieve file from memory", "");
 			return resources.at(name);
 		}
 	}

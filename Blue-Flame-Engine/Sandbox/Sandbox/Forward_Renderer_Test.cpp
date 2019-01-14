@@ -209,15 +209,15 @@ namespace Forward_Renderer_Test
 			{
 				//BF::IO::BFXLoader::Load("Assets/Models/Test/Plane.bfx", *scene);
 
-				GameObject* gameObject = scene->AddGameObject(new GameObject("Mesh " + std::to_string(i)));
-				scene->AddComponentToGameObject(gameObject, new Mesh(BF::Graphics::Mesh::PresetMeshes::Plane));
+				//GameObject* gameObject = scene->AddGameObject(new GameObject("Mesh " + std::to_string(i)));
+				//scene->AddComponentToGameObject(gameObject, new Mesh(BF::Graphics::Mesh::PresetMeshes::Plane));
 
 				
 
 				Transform* planeTransform = (Transform*)scene->GetGameObjects()[k + j * 25]->GetComponents()[0];
-				planeTransform->position = Vector3f(25 * k, 25 * j, 0.0f);
-				planeTransform->rotation = Vector3f(0, 0, 0);
-				planeTransform->scale = Vector3f(10.0f);
+				planeTransform->SetPosition(Vector3f(25 * k, 25 * j, 0.0f));
+				planeTransform->SetRotation(0, Vector3f(0, 0, 0));
+				planeTransform->SetScale(Vector3f(10.0f));
 				//planeTransform->angle = 90 + k * 10;
 
 				//BF::Graphics::Materials::MeshMaterial* planeMaterialz = new BF::Graphics::Materials::MeshMaterial();

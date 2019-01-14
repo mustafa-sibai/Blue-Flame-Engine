@@ -64,9 +64,9 @@ namespace BF
 				for (size_t i = 0; i < meshes.size(); i++)
 				{
 					Transform* transform = (Transform*)meshes[i]->gameObject->GetComponents()[0];
-					transform->rotation = Vector3f(1, 0, 0);
-					transform->angle++;
-					camera.SetModelMatrix(Matrix4::Translate(transform->position) * Matrix4::Rotate(transform->angle, transform->rotation) * Matrix4::Scale(transform->scale));
+					//transform->rotation = Vector3f(1, 0, 0);
+					//transform->angle++;
+					camera.SetModelMatrix(transform->GetWorldTransformation());
 					//materialConstantBuffer.Update(0, &meshes[i]->material->colorBuffer);
 
 

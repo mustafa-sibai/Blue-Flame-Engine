@@ -565,6 +565,7 @@
   <ItemGroup>
     <ClCompile Include="Sandbox\ECS_Script_Test.cpp" />
     <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp" />
+    <ClCompile Include="Sandbox\Hello_Triangle.cpp" />
     <ClCompile Include="Sandbox\Main.cpp" />
     <ClCompile Include="Sandbox\ScriptTest.cpp" />
   </ItemGroup>
@@ -691,6 +692,7 @@
   <ItemGroup>
     <ClInclude Include="Sandbox\ECS_Script_Test.h" />
     <ClInclude Include="Sandbox\Forward_Renderer_Test.h" />
+    <ClInclude Include="Sandbox\Hello_Triangle.h" />
     <ClInclude Include="Sandbox\ScriptTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,57 +15,52 @@ namespace BF
 			{
 				friend class SpriteRenderer;
 
-				protected:
-					enum class RenderableType { Null, Line, RegularPolygon, Sprite, Text };
-					RenderableType renderableType;
+			protected:
+				enum class RenderableType { Null, Line, RegularPolygon, Sprite, Text };
+				RenderableType renderableType;
 
-				private:
-					struct BackToFront
+			private:
+				struct BackToFront
+				{
+					bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
 					{
-						bool operator() (const Renderable* renderableA, const Renderable* renderableB) const
+						if (renderableA->gameObject->GetTransform()->GetPosition().y <= renderableB->gameObject->GetTransform()->GetPosition().y)
 						{
-							if (renderableA->gameObject->GetTransform()->position.y <= renderableB->gameObject->GetTransform()->position.y)
+							if (renderableA->zLayer < renderableB->zLayer)
 							{
-								if (renderableA->zLayer < renderableB->zLayer)
-								{
-									return true;
-								}
+								return true;
 							}
-
-							if (renderableA->gameObject->GetTransform()->position.y < renderableB->gameObject->GetTransform()->position.y)
-							{
-								if (renderableA->zLayer == renderableB->zLayer)
-								{
-									return true;
-								}
-							}
-
-							if (renderableA->gameObject->GetTransform()->position.y >= renderableB->gameObject->GetTransform()->position.y)
-							{
-								if (renderableA->zLayer < renderableB->zLayer)
-								{
-									return true;
-								}
-							}
-
-							return false;
 						}
-					};
 
-				public:
-					BF::Math::Vector2i size;
-					unsigned int zLayer;
-					Color color;
+						if (renderableA->gameObject->GetTransform()->GetPosition().y < renderableB->gameObject->GetTransform()->GetPosition().y)
+						{
+							if (renderableA->zLayer == renderableB->zLayer)
+							{
+								return true;
+							}
+						}
 
-				public:
-					//Renderable();
-					Renderable(const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color, RenderableType renderableType);
-					~Renderable();
+						if (renderableA->gameObject->GetTransform()->GetPosition().y >= renderableB->gameObject->GetTransform()->GetPosition().y)
+						{
+							if (renderableA->zLayer < renderableB->zLayer)
+							{
+								return true;
+							}
+						}
 
-					//virtual void SetPosition(const BF::Math::Vector2f& position);
-					//virtual void SetRectangle(const BF::Math::Rectangle& rectangle);
+						return false;
+					}
+				};
 
-					//inline const BF::Math::Rectangle& GetRectangle() const { return rectangle; }
+			public:
+				BF::Math::Vector2i size;
+				BF::Math::Vector2f pivot;
+				unsigned int zLayer;
+				Color color;
+
+			public:
+				Renderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, unsigned int zLayer, const Color& color, RenderableType renderableType);
+				~Renderable();
 			};
 		}
 	}

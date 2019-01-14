@@ -15,6 +15,7 @@ namespace BF
 		class BF_API Component
 		{
 			friend class BF::Application::Scene;
+			friend class BF::ECS::GameObject;
 
 			private:
 				static int globalID;
@@ -22,7 +23,7 @@ namespace BF
 				bool added;
 
 			public:
-				enum class Type { Null, Renderable, GUI, Mesh, Audio, Script };
+				enum class Type { Null, Transform, Renderable, GUI, Mesh, Audio, Script };
 				Type type;
 
 				GameObject* gameObject;

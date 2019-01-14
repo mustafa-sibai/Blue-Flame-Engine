@@ -29,6 +29,29 @@ namespace BF
 			memset(elements, 0, sizeof(float) * BF_MATRIX_SIZE);
 		}
 
+		Matrix4::Matrix4(const Vector4f& column1, const Vector4f& column2, const Vector4f& column3, const Vector4f& column4)
+		{
+			elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = column1.x;
+			elements[1 + 0 * BF_MATRIX_COLUMN_SIZE] = column1.y;
+			elements[2 + 0 * BF_MATRIX_COLUMN_SIZE] = column1.z;
+			elements[3 + 0 * BF_MATRIX_COLUMN_SIZE] = column1.w;
+
+			elements[0 + 1 * BF_MATRIX_COLUMN_SIZE] = column2.x;
+			elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = column2.y;
+			elements[2 + 1 * BF_MATRIX_COLUMN_SIZE] = column2.z;
+			elements[3 + 1 * BF_MATRIX_COLUMN_SIZE] = column2.w;
+
+			elements[0 + 2 * BF_MATRIX_COLUMN_SIZE] = column3.x;
+			elements[1 + 2 * BF_MATRIX_COLUMN_SIZE] = column3.y;
+			elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = column3.z;
+			elements[3 + 2 * BF_MATRIX_COLUMN_SIZE] = column3.w;
+
+			elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = column4.x;
+			elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = column4.y;
+			elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = column4.z;
+			elements[3 + 3 * BF_MATRIX_COLUMN_SIZE] = column4.w;
+		}
+
 		Matrix4::~Matrix4()
 		{
 		}
@@ -111,8 +134,8 @@ namespace BF
 			Matrix4 orthographicMatrix = Identity();
 
 			orthographicMatrix.elements[0 + 0 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (right - left);
-			orthographicMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = -2.0f / (top - bottom);
-			orthographicMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (farZ - nearZ);
+			orthographicMatrix.elements[1 + 1 * BF_MATRIX_COLUMN_SIZE] = 2.0f / (top - bottom);
+			orthographicMatrix.elements[2 + 2 * BF_MATRIX_COLUMN_SIZE] = -2.0f / (farZ - nearZ);
 			orthographicMatrix.elements[0 + 3 * BF_MATRIX_COLUMN_SIZE] = -((right + left) / (right - left));
 			orthographicMatrix.elements[1 + 3 * BF_MATRIX_COLUMN_SIZE] = -((top + bottom) / (top - bottom));
 			orthographicMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = -((farZ + nearZ) / (farZ - nearZ));
@@ -145,6 +168,146 @@ namespace BF
 			viewMatrix.elements[2 + 3 * BF_MATRIX_COLUMN_SIZE] = -forward.Dot(eye);
 
 			return viewMatrix;
+		}
+
+		inline const Matrix4& Matrix4::Inverse()
+		{
+			float temp[16];
+
+			temp[0] =	elements[5]  * elements[10] * elements[15] -
+						elements[5]  * elements[11] * elements[14] -
+						elements[9]  * elements[6]  * elements[15] +
+						elements[9]  * elements[7]  * elements[14] +
+						elements[13] * elements[6]  * elements[11] -
+						elements[13] * elements[7]  * elements[10];
+
+			temp[4] =  -elements[4]  * elements[10] * elements[15] +
+						elements[4]  * elements[11] * elements[14] +
+						elements[8]  * elements[6]  * elements[15] -
+						elements[8]  * elements[7]  * elements[14] -
+						elements[12] * elements[6]  * elements[11] +
+						elements[12] * elements[7]  * elements[10];
+
+			temp[8] =  elements[4]	 * elements[9]  * elements[15] -
+						elements[4]  * elements[11] * elements[13] -
+						elements[8]  * elements[5]  * elements[15] +
+						elements[8]  * elements[7]  * elements[13] +
+						elements[12] * elements[5]  * elements[11] -
+						elements[12] * elements[7]  * elements[9];
+
+			temp[12] = -elements[4]  * elements[9]  * elements[14] +
+						elements[4]  * elements[10] * elements[13] +
+						elements[8]  * elements[5]  * elements[14] -
+						elements[8]  * elements[6]  * elements[13] -
+						elements[12] * elements[5]  * elements[10] +
+						elements[12] * elements[6]  * elements[9];
+
+			temp[1] =  -elements[1]  * elements[10] * elements[15] +
+						elements[1]  * elements[11] * elements[14] +
+						elements[9]  * elements[2]  * elements[15] -
+						elements[9]  * elements[3]  * elements[14] -
+						elements[13] * elements[2]  * elements[11] +
+						elements[13] * elements[3]  * elements[10];
+
+			temp[5] =   elements[0]  * elements[10] * elements[15] -
+						elements[0]  * elements[11] * elements[14] -
+						elements[8]  * elements[2]  * elements[15] +
+						elements[8]  * elements[3]  * elements[14] +
+						elements[12] * elements[2]  * elements[11] -
+						elements[12] * elements[3]  * elements[10];
+
+			temp[9] =  -elements[0]  * elements[9]  * elements[15] +
+						elements[0]  * elements[11] * elements[13] +
+						elements[8]  * elements[1]  * elements[15] -
+						elements[8]  * elements[3]  * elements[13] -
+						elements[12] * elements[1]  * elements[11] +
+						elements[12] * elements[3]  * elements[9];
+
+			temp[13] =  elements[0]  * elements[9]  * elements[14] -
+						elements[0]  * elements[10] * elements[13] -
+						elements[8]  * elements[1]  * elements[14] +
+						elements[8]  * elements[2]  * elements[13] +
+						elements[12] * elements[1]  * elements[10] -
+						elements[12] * elements[2]  * elements[9];
+
+			temp[2] =   elements[1]  * elements[6]  * elements[15] -
+						elements[1]  * elements[7]  * elements[14] -
+						elements[5]  * elements[2]  * elements[15] +
+						elements[5]  * elements[3]  * elements[14] +
+						elements[13] * elements[2]  * elements[7]  -
+						elements[13] * elements[3]  * elements[6];
+
+			temp[6] =  -elements[0]  * elements[6]  * elements[15] +
+						elements[0]  * elements[7]  * elements[14] +
+						elements[4]  * elements[2]  * elements[15] -
+						elements[4]  * elements[3]  * elements[14] -
+						elements[12] * elements[2]  * elements[7]  +
+						elements[12] * elements[3]  * elements[6];
+
+			temp[10] =  elements[0]  * elements[5]  * elements[15] -
+						elements[0]  * elements[7]  * elements[13] -
+						elements[4]  * elements[1]  * elements[15] +
+						elements[4]  * elements[3]  * elements[13] +
+						elements[12] * elements[1]  * elements[7]  -
+						elements[12] * elements[3]  * elements[5];
+
+			temp[14] = -elements[0]  * elements[5]  * elements[14] +
+						elements[0]  * elements[6]  * elements[13] +
+						elements[4]  * elements[1]  * elements[14] -
+						elements[4]  * elements[2]  * elements[13] -
+						elements[12] * elements[1]  * elements[6]  +
+						elements[12] * elements[2]  * elements[5];
+
+			temp[3] =  -elements[1]  * elements[6]  * elements[11] +
+						elements[1]  * elements[7]  * elements[10] +
+						elements[5]  * elements[2]  * elements[11] -
+						elements[5]  * elements[3]  * elements[10] -
+						elements[9]  * elements[2]  * elements[7]  +
+						elements[9]  * elements[3]  * elements[6];
+
+			temp[7] =   elements[0]  * elements[6]  * elements[11] -
+						elements[0]  * elements[7]  * elements[10] -
+						elements[4]  * elements[2]  * elements[11] +
+						elements[4]  * elements[3]  * elements[10] +
+						elements[8]  * elements[2]  * elements[7]  -
+						elements[8]  * elements[3]  * elements[6];
+
+			temp[11] = -elements[0]  * elements[5]  * elements[11] +
+						elements[0]  * elements[7]  * elements[9]  +
+						elements[4]  * elements[1]  * elements[11] -
+						elements[4]  * elements[3]  * elements[9]  -
+						elements[8]  * elements[1]  * elements[7]  +
+						elements[8]  * elements[3]  * elements[5];
+												    
+			temp[15] =  elements[0]  * elements[5]  * elements[10] -
+						elements[0]  * elements[6]  * elements[9]  -
+						elements[4]  * elements[1]  * elements[10] +
+						elements[4]  * elements[2]  * elements[9]  +
+						elements[8]  * elements[1]  * elements[6]  -
+						elements[8]  * elements[2]  * elements[5];
+
+			float determinant = elements[0] * temp[0] + elements[1] * temp[4] + elements[2] * temp[8] + elements[3] * temp[12];
+			determinant = 1.0f / determinant;
+
+			for (int i = 0; i < BF_MATRIX_SIZE; i++)
+				elements[i] = temp[i] * determinant;
+
+			return *this;
+		}
+
+		inline const Vector3f& Matrix4::GetTranslationVector() const
+		{
+			return Vector3f(elements[0 + 3 * BF_MATRIX_COLUMN_SIZE], elements[1 + 3 * BF_MATRIX_COLUMN_SIZE], elements[2 + 3 * BF_MATRIX_COLUMN_SIZE]);
+		}
+
+		inline const Vector3f& Matrix4::GetRotationVector() const
+		{
+			return Vector3f();
+		}
+
+		inline const Vector3f& Matrix4::GetScaleVector() const
+		{
+			return Vector3f(elements[0 + 0 * BF_MATRIX_COLUMN_SIZE], elements[1 + 1 * BF_MATRIX_COLUMN_SIZE], elements[2 + 2 * BF_MATRIX_COLUMN_SIZE]);
 		}
 
 		Matrix4 Matrix4::Multiply(const Matrix4& matrixA, const Matrix4& matrixB)

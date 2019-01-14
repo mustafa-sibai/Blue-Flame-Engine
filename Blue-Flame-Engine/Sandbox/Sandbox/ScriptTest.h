@@ -3,6 +3,9 @@
 
 class ScriptTest : public BF::Scripting::Script
 {
+private:
+	float xPosition;
+
 public:
 	ScriptTest();
 	~ScriptTest();

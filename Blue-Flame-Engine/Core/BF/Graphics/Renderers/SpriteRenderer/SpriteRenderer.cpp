@@ -4,13 +4,11 @@
 #include "BF/System/Debug.h"
 #include "BF/ECS/GameObject.h"
 
-//#include "BF/Application/Layers/LayerManager.h"
-
-#define MAX_SPRITES		60000
-#define SPRITE_VERTICES 4
-#define	SPRITE_INDICES	6
-#define VERTICES_SIZE	MAX_SPRITES * SPRITE_VERTICES
-#define INDICES_SIZE	MAX_SPRITES * SPRITE_INDICES
+#define BF_MAX_SPRITES     60000
+#define BF_SPRITE_VERTICES 4
+#define	BF_SPRITE_INDICES  6
+#define BF_VERTICES_SIZE BF_MAX_SPRITES * BF_SPRITE_VERTICES
+#define BF_INDICES_SIZE	 BF_MAX_SPRITES * BF_SPRITE_INDICES
 
 namespace BF
 {
@@ -47,10 +45,25 @@ namespace BF
 				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color));
 				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color) + sizeof(Vector2f));
 
-				unsigned int* indices = new unsigned int[INDICES_SIZE];
+				unsigned int* indices = new unsigned int[BF_INDICES_SIZE];
 				int index = 0;
 
-				for (unsigned int i = 0; i < INDICES_SIZE; i += SPRITE_INDICES)
+				/*
+				Winding order is clock-wise.
+				0 -> 1 -> 2 ---> 2 -> 3 -> 0
+
+					0      1
+					 ______
+					|\     |
+					| \    |
+					|  \   |
+					|   \  |
+					|    \ |
+					|_____\|
+					3      2
+				*/
+
+				for (unsigned int i = 0; i < BF_INDICES_SIZE; i += BF_SPRITE_INDICES)
 				{
 					indices[i + 0] = index + 0;
 					indices[i + 1] = index + 1;
@@ -60,11 +73,11 @@ namespace BF
 					indices[i + 4] = index + 3;
 					indices[i + 5] = index + 0;
 
-					index += SPRITE_VERTICES;
+					index += BF_SPRITE_VERTICES;
 				}
 
-				vertexBuffer.Create(VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
-				indexBuffer.Create(indices, INDICES_SIZE);
+				vertexBuffer.Create(BF_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
+				indexBuffer.Create(indices, BF_INDICES_SIZE);
 				vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 
 				Engine::GetContext().EnableDepthBuffer(false);
@@ -129,7 +142,7 @@ namespace BF
 
 						if (sortingOrder == SortingOrder::BackToFront)
 							sort(renderables.begin(), renderables.end(), Renderable::BackToFront());
-						
+
 						MapBuffer();
 						vertexBuffer.Unmap();
 					}
@@ -225,43 +238,47 @@ namespace BF
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
-				indexCount += SPRITE_INDICES;
+				indexCount += BF_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
 			{
-				Vector3f& position = regularPolygon->gameObject->GetTransform()->position;
-				Vector3f& scale = regularPolygon->gameObject->GetTransform()->scale;
+				Vector3f position = regularPolygon->gameObject->GetTransform()->GetWorldPosition();
+				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetWorldScale();
+
+				Vector2i halfScaledSize = Vector2i((regularPolygon->size.x * scale.x) / 2, (regularPolygon->size.y * scale.y) / 2);
+				Vector2f pivot = Vector2f(halfScaledSize.x * regularPolygon->pivot.x, halfScaledSize.y * regularPolygon->pivot.y);
 
 				//Top Left
-				spriteBuffer->position = Vector2f(position.x, position.y);
+				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(position.x + (regularPolygon->size.x * scale.x), position.y);
+				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(position.x + (regularPolygon->size.x * scale.x), position.y + (regularPolygon->size.y * scale.y));
+				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(position.x, position.y + (regularPolygon->size.y * scale.y));
+				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
 				spriteBuffer->color = regularPolygon->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
-				indexCount += SPRITE_INDICES;
+
+				indexCount += BF_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
@@ -289,38 +306,41 @@ namespace BF
 				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 				CalculateUV(sprite->texture2D, sprite->scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
 
-				Vector3f& position = sprite->gameObject->GetTransform()->position;
-				Vector3f& scale = sprite->gameObject->GetTransform()->scale;
+				Vector3f position = sprite->gameObject->GetTransform()->GetPosition();
+				Vector3f scale = sprite->gameObject->GetTransform()->GetScale();
+
+				Vector2i halfScaledSize = Vector2i((sprite->size.x * scale.x) / 2, (sprite->size.y * scale.y) / 2);
+				Vector2f pivot = Vector2f(halfScaledSize.x * sprite->pivot.x, halfScaledSize.y * sprite->pivot.y);
 
 				//Top Left
-				spriteBuffer->position = Vector2f(position.x, position.y);
+				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topLeftUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(position.x + (sprite->size.x * scale.x), position.y);
+				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(position.x + (sprite->size.x * scale.x), position.y + (sprite->size.y * scale.y));
+				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(position.x, position.y + (sprite->size.y * scale.y));
+				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomLeftUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
-				indexCount += SPRITE_INDICES;
+				indexCount += BF_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapTextBuffer(const Text* text)
@@ -380,7 +400,7 @@ namespace BF
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
-					indexCount += SPRITE_INDICES;
+					indexCount += BF_SPRITE_INDICES;
 				}
 			}
 
@@ -392,28 +412,28 @@ namespace BF
 					{
 						switch (renderables[i]->renderableType)
 						{
-							case Renderable::RenderableType::Line:
-							{
-								MapLineBuffer((LineShape*)renderables[i]);
-								break;
-							}
-							case Renderable::RenderableType::RegularPolygon:
-							{
-								MapPolygonBuffer((RegularPolygon*)renderables[i]);
-								break;
-							}
-							case Renderable::RenderableType::Sprite:
-							{
-								MapSpriteBuffer((Sprite*)renderables[i]);
-								break;
-							}
-							case Renderable::RenderableType::Text:
-							{
-								MapTextBuffer((Text*)renderables[i]);
-								break;
-							}
-							default:
-								break;
+						case Renderable::RenderableType::Line:
+						{
+							MapLineBuffer((LineShape*)renderables[i]);
+							break;
+						}
+						case Renderable::RenderableType::RegularPolygon:
+						{
+							MapPolygonBuffer((RegularPolygon*)renderables[i]);
+							break;
+						}
+						case Renderable::RenderableType::Sprite:
+						{
+							MapSpriteBuffer((Sprite*)renderables[i]);
+							break;
+						}
+						case Renderable::RenderableType::Text:
+						{
+							MapTextBuffer((Text*)renderables[i]);
+							break;
+						}
+						default:
+							break;
 						}
 					}
 
@@ -521,16 +541,16 @@ namespace BF
 			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2f* topLeft, Vector2f* topRight, Vector2f* bottomRight, Vector2f* bottomLeft)
 			{
 				*topLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
-									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
+					1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
 				*topRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
+					1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
 				*bottomRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+					1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
 				*bottomLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
-										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+					1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

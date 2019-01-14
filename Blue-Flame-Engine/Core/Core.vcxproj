@@ -87,6 +87,7 @@
     <ClCompile Include="BF\Graphics\Terrain.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Graphics\TileMap.cpp" />
+    <ClCompile Include="BF\Graphics\Transform.cpp" />
     <ClCompile Include="BF\Input\Controller.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />

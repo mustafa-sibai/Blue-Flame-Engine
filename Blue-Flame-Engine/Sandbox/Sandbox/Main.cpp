@@ -13,6 +13,7 @@
 //#include "ECSTestApp.h"
 #include "Forward_Renderer_Test.h"
 #include "ECS_Script_Test.h"
+#include "Hello_Triangle.h"
 
 int main()
 {
@@ -31,11 +32,9 @@ int main()
 	//TestApp::TestApp app;
 	//TerrainTestApp app;
 	//InputTests app;
-	//ECSTestApp::ECSTestApp app;
-
-	//Forward_Renderer_Test::Forward_Renderer_Test app;
-
 	ECS_Script_Test::ECS_Script_Test app;
+	//Hello_Triangle::Hello_Triangle app;
+	//Forward_Renderer_Test::Forward_Renderer_Test app;
 
 	engine.Run(app);
 #elif defined (BF_CLIENT)

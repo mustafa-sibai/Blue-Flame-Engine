@@ -260,6 +260,52 @@ namespace BF
 					andGLContext.SetViewport(rectangle);
 #endif
 			}
+
+			void Context::SetWindingOrder(WindingOrder windingOrder)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+				}
+				else if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.SetWindingOrder(windingOrder);
+#elif defined(BF_PLATFORM_LINUX)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif defined(BF_PLATFORM_WEB)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif defined(BF_PLATFORM_ANDROID)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#endif
+			}
+
+			void Context::CullFace(CullingType cullingType)
+			{
+#ifdef BF_PLATFORM_WINDOWS
+				if (renderAPI == RenderAPI::DirectX)
+				{
+				}
+				else if (renderAPI == RenderAPI::OpenGL)
+					winGLContext.CullFace(cullingType);
+#elif defined(BF_PLATFORM_LINUX)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif defined(BF_PLATFORM_WEB)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#elif defined(BF_PLATFORM_ANDROID)
+				if (renderAPI == RenderAPI::OpenGL)
+				{
+				}
+#endif
+			}
 		}
 	}
 }

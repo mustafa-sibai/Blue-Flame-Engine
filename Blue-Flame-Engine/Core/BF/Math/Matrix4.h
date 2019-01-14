@@ -17,6 +17,7 @@ namespace BF
 
 			public:
 				Matrix4();
+				Matrix4(const Vector4f& column1, const Vector4f& column2, const Vector4f& column3, const Vector4f& column4);
 				~Matrix4();
 
 				static Matrix4 Identity();
@@ -26,6 +27,13 @@ namespace BF
 				static Matrix4 Perspective(float fieldOfView, float aspectRatio, float nearZ, float farZ);
 				static Matrix4 Orthographic(float left, float right, float top, float bottom, float nearZ, float farZ);
 				static Matrix4 LookAt(const Vector3f& eye, const Vector3f& target, const Vector3f& up);
+
+				inline const Matrix4& Inverse();
+
+				inline const Vector3f& GetTranslationVector() const;
+				inline const Vector3f& GetRotationVector() const;
+				inline const Vector3f& GetScaleVector() const;
+
 				friend const Matrix4 operator*(const Matrix4& matrixA, const Matrix4& matrixB) { return Multiply(matrixB, matrixA); }
 
 			private:

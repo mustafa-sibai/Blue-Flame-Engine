@@ -52,37 +52,6 @@ namespace BF
 
 		void Scene::Render()
 		{
-			/*for (size_t i = 0; i < gameNodes.size(); i++)
-			{
-				switch (gameNodes[i]->nodeType)
-				{
-					case GameNode::NodeType::Sprite:
-					{
-						spriteRenderer.Render(*(RegularPolygon*)gameNodes[i]);
-						break;
-					}
-					case GameNode::NodeType::GUI:
-					{
-						widgetManager.AddWidget((Widget*)gameNodes[i]);
-						break;
-					}
-					case GameNode::NodeType::Mesh:
-					{
-						break;
-					}
-					case GameNode::NodeType::Audio:
-					{
-						break;
-					}
-					default:
-					{
-						break;
-					}
-				}
-
-				RenderNode(gameNodes[i]);
-			}*/
-
 			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
 			//forwardRenderer.Render();
 		}
@@ -91,59 +60,29 @@ namespace BF
 		{
 			if (!gameObject->added)
 			{
-				gameObject->components.emplace_back(new Transform());
-				gameObject->components[0]->gameObject = gameObject;
 				gameObjects.emplace_back(gameObject);
 				gameObject->added = true;
 			}
 			else
 				//Do copy here
 				BF_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
-								" has already been added to the scene. This GameObject will not be added again.", "");
+					" has already been added to the scene. This GameObject will not be added again.", "");
 			return gameObject;
 		}
 
-		Component* Scene::AddComponentToGameObject(GameObject* gameObject, Component* component)
+		GameObject* Scene::AddGameObject(GameObject* gameObject, GameObject* parent)
 		{
-			if (!component->added)
+			if (!gameObject->added)
 			{
-				switch (component->type)
-				{
-					case Component::Type::Renderable:
-					{
-						component->gameObject = gameObject;
-						gameObject->components.emplace_back(component);
-						spriteRenderer.renderables.emplace_back((Renderable*)component);
-						component->added = true;
-						break;
-					}
-					case Component::Type::Mesh:
-					{
-						component->gameObject = gameObject;
-						gameObject->components.emplace_back(component);
-						//forwardRenderer.meshes.emplace_back((Mesh*)component);
-						component->added = true;
-						break;
-					}
-					case Component::Type::Script:
-					{
-						component->gameObject = gameObject;
-						gameObject->components.emplace_back(component);
-						scriptExecutor.scripts.emplace_back((Script*)component);
-						component->added = true;
-						break;
-					}
-
-					default:
-						break;
-				}
+				gameObject->parent = parent;
+				parent->gameObjects.emplace_back(gameObject);
+				gameObject->added = true;
 			}
 			else
 				//Do copy here
-				BF_LOG_WARNING("This Component of id: \"" + std::to_string(component->id) + "\" has already been added to GameObject \"" + 
-								gameObject->Name + "\" of id \"" + std::to_string(gameObject->id) + "\". This Component will not be added again.", "");
-
-			return component;
+				BF_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
+					" has already been added to the scene. This GameObject will not be added again.", "");
+			return gameObject;
 		}
 
 		void Scene::RemoveGameObject(GameObject* gameObject)
@@ -152,7 +91,7 @@ namespace BF
 			{
 				if (gameObject->components[i]->type == Component::Type::Renderable)
 				{
-					for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+					for (vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
 					{
 						if (((Component*)*it)->GetID() == gameObject->components[i]->GetID())
 						{
@@ -163,7 +102,7 @@ namespace BF
 				}
 			}
 
-			for (std::vector<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
+			for (vector<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
 			{
 				if (((Component*)*it)->GetID() == gameObject->GetID())
 				{
@@ -174,50 +113,6 @@ namespace BF
 
 			delete gameObject;
 		}
-
-		void Scene::RemoveComponentFromGameObject(GameObject* gameObject, Component* component)
-		{
-			if (component->type == Component::Type::Renderable)
-			{
-				for (std::vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
-				{
-					if (((Component*)*it)->GetID() == component->GetID())
-					{
-						spriteRenderer.renderables.erase(it);
-						break;
-					}
-				}
-			}
-
-			for (std::vector<Component*>::iterator it = gameObject->components.begin(); it != gameObject->components.end(); ++it)
-			{
-				if (((Component*)*it)->GetID() == component->GetID())
-				{
-					gameObject->components.erase(it);
-					break;
-				}
-			}
-
-			delete component;
-		}
-
-		/*GameNode* Scene::Instantiate(const string& name, GameNode* gameNode)
-		{
-			gameNode->name = name;
-
-			if (gameNode->nodeType == GameNode::NodeType::GUI)
-				layerManager.GetLayer(1).AddGameNode(*gameNode);
-			else
-				layerManager.GetLayer(0).AddGameNode(*gameNode);
-
-			return gameNode;
-		}*/
-
-		/*GameNode* Scene::Instantiate(const string& name, GameNode* gameNode, GameNode* parent)
-		{
-			parent->gameNodes.emplace_back(gameNode);
-			return gameNode;
-		}*/
 
 		/*void Scene::Destroy(GameNode* gameNode)
 		{
@@ -263,38 +158,5 @@ namespace BF
 
 
 		}*/
-
-		/*void Scene::RenderNode(GameNode* node)
-		{*/
-		/*for (size_t i = 0; i < node->gameNodes.size(); i++)
-		{
-			RenderNode(node->gameNodes[i]);
-
-			switch (gameNodes[i]->nodeType)
-			{
-				case GameNode::NodeType::Sprite:
-				{
-					spriteRenderer.Render(*(RegularPolygon*)(node->gameNodes[i]));
-					break;
-				}
-				case GameNode::NodeType::GUI:
-				{
-					break;
-				}
-				case GameNode::NodeType::Mesh:
-				{
-					break;
-				}
-				case GameNode::NodeType::Audio:
-				{
-					break;
-				}
-				default:
-				{
-					break;
-				}
-			}
-		}*/
-		//}
 	}
 }

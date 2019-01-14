@@ -2,6 +2,7 @@
 #include "BF/IO/ImageLoader.h"
 #include "BF/IO/ResourceManager.h"
 
+
 namespace BF
 {
 	namespace Graphics

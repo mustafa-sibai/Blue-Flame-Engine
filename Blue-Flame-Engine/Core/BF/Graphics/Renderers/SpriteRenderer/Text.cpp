@@ -18,7 +18,7 @@ namespace BF
 			}*/
 
 			Text::Text(const Font* font, const string& text, const Rectangle& scissorRectangle, TextAlignment alignment, unsigned int zLayer, const Color& color) :
-				Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), zLayer, color, RenderableType::Text),
+				Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zLayer, color, RenderableType::Text),
 				alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 			{
 				//SetText(text);

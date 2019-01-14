@@ -14,6 +14,7 @@ namespace BF
 	{
 		class BF_API ScriptExecutor
 		{
+			friend class BF::ECS::GameObject;
 			friend class BF::Application::Scene;
 
 			private:

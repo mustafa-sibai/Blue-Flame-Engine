@@ -17,24 +17,38 @@ namespace BF
 		class BF_API GameObject
 		{
 			friend class BF::Application::Scene;
+			friend class BF::Graphics::Transform;
 
-			private:
-				static int globalID;
-				int id;
-				bool added;
-				std::vector<Component*> components;
+		private:
+			static int globalID;
+			int id;
+			bool added;
+			BF::Application::Scene& scene;
+			GameObject* parent;
+			std::vector<GameObject*> gameObjects;
+			std::vector<Component*> components;
 
-			public:
-				bool Active;
-				std::string Name;
+		public:
+			bool Active;
+			std::string Name;
 
-			public:
-				GameObject(const std::string& name);
-				virtual ~GameObject();
+		public:
+			GameObject(BF::Application::Scene& scene, const std::string& name);
+			virtual ~GameObject();
 
-				inline int GetID() const { return id; }
-				inline BF::Graphics::Transform* GetTransform() const { return (BF::Graphics::Transform*)components[0]; }
-				inline const std::vector<Component*>& GetComponents() const{ return components; }
+			Component* AddComponent(Component* component);
+			void RemoveComponent(Component* component);
+
+		private:
+			void SetParent(GameObject* parent);
+
+		public:
+			inline int GetID() const { return id; }
+
+			inline const GameObject* GetParent() const { return parent; }
+
+			inline BF::Graphics::Transform* GetTransform() const { return (BF::Graphics::Transform*)components[0]; }
+			inline const std::vector<Component*>& GetComponents() const { return components; }
 		};
 	}
 }

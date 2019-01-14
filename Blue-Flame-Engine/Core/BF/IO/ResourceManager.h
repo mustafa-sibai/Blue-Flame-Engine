@@ -9,16 +9,16 @@ namespace BF
 	{
 		class BF_API ResourceManager
 		{
-			private:
-				static std::unordered_map<std::string, Resource*> resources;
+		private:
+			static std::unordered_map<std::string, Resource*> resources;
 
-			public:
-				ResourceManager();
-				~ResourceManager();
+		public:
+			ResourceManager();
+			~ResourceManager();
 
-				static void Add(const std::string& name, Resource* resource);
-				static bool Exist(const std::string& name);
-				static Resource* GetResource(const std::string& name);
+			static void Add(const std::string& name, Resource* resource);
+			static bool Exist(const std::string& name);
+			static Resource* GetResource(const std::string& name);
 		};
 	}
 }

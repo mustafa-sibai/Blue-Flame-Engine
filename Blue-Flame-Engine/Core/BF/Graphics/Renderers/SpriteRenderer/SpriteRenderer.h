@@ -23,6 +23,7 @@ namespace BF
 			class BF_API SpriteRenderer
 			{
 				friend class BF::Application::Scene;
+				friend class BF::ECS::GameObject;
 
 				public:
 					//enum class SubmitType { StaticSubmit, DynamicSubmit };

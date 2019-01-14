@@ -31,33 +31,33 @@ namespace BF
 				{
 					switch (primitiveType)
 					{
-						case PrimitiveType::PointList:
-						{
-							GL_PRIMITIVE_TYPE = GL_POINTS;
-							break;
-						}
-						case PrimitiveType::LineList:
-						{
-							GL_PRIMITIVE_TYPE = GL_LINES;
-							break;
-						}
-						case PrimitiveType::LineStrip:
-						{
-							GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
-							break;
-						}
-						case PrimitiveType::TriangleList:
-						{
-							GL_PRIMITIVE_TYPE = GL_TRIANGLES;
-							break;
-						}
-						case PrimitiveType::TriangeStrip:
-						{
-							GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
-							break;
-						}
-						default:
-							break;
+					case PrimitiveType::PointList:
+					{
+						GL_PRIMITIVE_TYPE = GL_POINTS;
+						break;
+					}
+					case PrimitiveType::LineList:
+					{
+						GL_PRIMITIVE_TYPE = GL_LINES;
+						break;
+					}
+					case PrimitiveType::LineStrip:
+					{
+						GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
+						break;
+					}
+					case PrimitiveType::TriangleList:
+					{
+						GL_PRIMITIVE_TYPE = GL_TRIANGLES;
+						break;
+					}
+					case PrimitiveType::TriangeStrip:
+					{
+						GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
+						break;
+					}
+					default:
+						break;
 					}
 				}
 
@@ -65,25 +65,25 @@ namespace BF
 				{
 					switch (bufferClearType)
 					{
-						case BufferClearType::ColorAndDepth:
-						{
-							GLCall(glClearColor(color.r, color.g, color.b, color.a));
-							GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
-							break;
-						}
-						case BufferClearType::Color:
-						{
-							GLCall(glClearColor(color.r, color.g, color.b, color.a));
-							GLCall(glClear(GL_COLOR_BUFFER_BIT));
-							break;
-						}
-						case BufferClearType::Depth:
-						{
-							GLCall(glClear(GL_DEPTH_BUFFER_BIT));
-							break;
-						}
-						default:
-							break;
+					case BufferClearType::ColorAndDepth:
+					{
+						GLCall(glClearColor(color.r, color.g, color.b, color.a));
+						GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
+						break;
+					}
+					case BufferClearType::Color:
+					{
+						GLCall(glClearColor(color.r, color.g, color.b, color.a));
+						GLCall(glClear(GL_COLOR_BUFFER_BIT));
+						break;
+					}
+					case BufferClearType::Depth:
+					{
+						GLCall(glClear(GL_DEPTH_BUFFER_BIT));
+						break;
+					}
+					default:
+						break;
 					}
 				}
 
@@ -158,6 +158,57 @@ namespace BF
 				{
 					if (initialized)
 						GLCall(glViewport(rectangle.x, rectangle.y, rectangle.width, rectangle.height));
+				}
+
+				void GLContext::SetWindingOrder(WindingOrder windingOrder)
+				{
+					switch (windingOrder)
+					{
+					case WindingOrder::Clockwise:
+					{
+						GLCall(glFrontFace(GL_CW));
+						break;
+					}
+					case WindingOrder::CounterClockwise:
+					{
+						GLCall(glFrontFace(GL_CCW));
+						break;
+					}
+					default:
+						break;
+					}
+				}
+
+				void GLContext::CullFace(CullingType cullingType)
+				{
+					switch (cullingType)
+					{
+					case CullingType::None:
+					{
+						glDisable(GL_CULL_FACE);
+						break;
+					}
+					case CullingType::Front:
+					{
+						GLCall(glEnable(GL_CULL_FACE));
+						GLCall(glCullFace(GL_FRONT));
+						break;
+					}
+					case CullingType::Back:
+					{
+						GLCall(glEnable(GL_CULL_FACE));
+						GLCall(glCullFace(GL_BACK));
+						break;
+					}
+					case CullingType::FrontAndBack:
+					{
+						GLCall(glEnable(GL_CULL_FACE));
+						GLCall(glCullFace(GL_FRONT_AND_BACK));
+						break;
+					}
+					default:
+						break;
+					}
 				}
 			}
 		}

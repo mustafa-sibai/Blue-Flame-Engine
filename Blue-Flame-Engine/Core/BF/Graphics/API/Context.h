@@ -22,6 +22,8 @@ namespace BF
 		{
 			enum class PrimitiveType { PointList, LineList, LineStrip, TriangleList, TriangeStrip };
 			enum class BufferClearType { ColorAndDepth, Color, Depth };
+			enum class WindingOrder { Clockwise, CounterClockwise };
+			enum class CullingType { None, Front, Back, FrontAndBack };
 
 			enum class BF_API RenderAPI
 			{
@@ -66,6 +68,9 @@ namespace BF
 
 					void SetScissor(const Math::Rectangle& rectangle);
 					void SetViewport(const Math::Rectangle& rectangle);
+
+					void SetWindingOrder(WindingOrder windingOrder);
+					void CullFace(CullingType cullingType);
 
 #ifdef BF_PLATFORM_WINDOWS
 					inline const Platform::API::DirectX::DXContext& GetDXContext() const { return dxContext; }

@@ -12,7 +12,7 @@ namespace BF
 			class BF_API VertexBufferLayout
 			{
 				public:
-					enum class DataType { Int = 1, Float = 1, Float2, Float3, Float4 };
+					enum class DataType { Int, Float, Float2, Float3, Float4 };
 
 					struct BF_API VertexBufferElement
 					{

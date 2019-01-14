@@ -32,6 +32,7 @@ namespace BF
 		class BF_API Scene
 		{
 			friend class BF::Engine;
+			friend class BF::ECS::GameObject;
 
 #ifdef BF_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;
@@ -51,10 +52,9 @@ namespace BF
 
 			public:
 				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
-				BF::ECS::Component* AddComponentToGameObject(BF::ECS::GameObject* gameObject, BF::ECS::Component* component);
+				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject, BF::ECS::GameObject* parent);
 
 				void RemoveGameObject(BF::ECS::GameObject* gameObject);
-				void RemoveComponentFromGameObject(BF::ECS::GameObject* gameObject, BF::ECS::Component* component);
 /*
 #if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
 				BF::Graphics::GUI::WidgetManager widgetManager;
