@@ -1,12 +1,13 @@
 #pragma once
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
 #include "BF/Graphics/Fonts/Font.h"
 #include "BF/Graphics/Color.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/LineShape.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/RegularPolygon.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/Text.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/RegularPolygon.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Sprite.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/LineShape.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Text.h"
+#include "BF/Graphics/Renderers/Renderer.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -20,10 +21,9 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API SpriteRenderer
+			class BFE_API SpriteRenderer : public Renderer
 			{
-				friend class BF::Application::Scene;
-				friend class BF::ECS::GameObject;
+				friend class BF::Graphics::Renderers::RenderPipeline;
 
 				public:
 					//enum class SubmitType { StaticSubmit, DynamicSubmit };
@@ -54,11 +54,13 @@ namespace BF
 					SpriteRenderer();
 					~SpriteRenderer();
 
-					void Initialize();
+					void Initialize() override;
 
 					//void Submit(Renderable& renderable);
 					//void Remove(Renderable& renderable);
-					void Render(SortingOrder sortingOrder);
+
+					void SetSortingOrder(SortingOrder sortingOrder);
+					void Render() override;
 
 					//void Begin(SubmitType submitType, SortingOrder sortingOrder);
 					//void Render(const Renderable& renderable);
@@ -67,6 +69,7 @@ namespace BF
 
 					void SetScissor(const BF::Math::Rectangle& rectangle);
 
+					inline SortingOrder GetSortingOrder() const { return sortingOrder; }
 					inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
 
 					//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);

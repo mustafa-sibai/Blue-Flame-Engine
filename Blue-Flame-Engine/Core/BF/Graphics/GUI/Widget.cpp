@@ -45,7 +45,7 @@ namespace BF
 
 			void Widget::SetPosition(const Vector2f& position)
 			{
-				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetPosition(position);
 
 				if (widgetData.hasText)
@@ -54,7 +54,7 @@ namespace BF
 
 			void Widget::SetZLayer(int zLayer)
 			{
-				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].zLayer = zLayer;
 			}
 
@@ -64,7 +64,7 @@ namespace BF
 				temp.width = Max(widgetData.minWidth, rectangle.width);
 				temp.height = Max(widgetData.minHeight, rectangle.height);
 
-				for (size_t i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetRectangle(temp);
 
 				if (widgetData.hasText)

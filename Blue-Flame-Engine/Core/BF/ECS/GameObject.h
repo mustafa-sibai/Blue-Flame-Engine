@@ -9,12 +9,13 @@ namespace BF
 {
 	namespace Application
 	{
+		class App;
 		class Scene;
 	}
 
 	namespace ECS
 	{
-		class BF_API GameObject
+		class BFE_API GameObject
 		{
 			friend class BF::Application::Scene;
 			friend class BF::Graphics::Transform;

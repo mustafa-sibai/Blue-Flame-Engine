@@ -9,7 +9,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API ImageLoader
+		class BFE_API ImageLoader
 		{
 			private:
 				static bool initialised;

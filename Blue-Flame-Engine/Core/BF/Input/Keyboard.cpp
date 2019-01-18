@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace Input
 	{
-		Keyboard::Key Keyboard::keys[BF_MAX_KEYS];
+		Keyboard::Key Keyboard::keys[BFE_MAX_KEYS];
 
 		Keyboard::Keyboard()
 		{
@@ -31,7 +31,7 @@ namespace BF
 
 		void Keyboard::Update()
 		{
-			for (size_t i = 0; i < BF_MAX_KEYS; i++)
+			for (size_t i = 0; i < BFE_MAX_KEYS; i++)
 			{
 				if (keys[i].state == Key::State::Pressed)
 					keys[i].state = Key::State::HeldDown;

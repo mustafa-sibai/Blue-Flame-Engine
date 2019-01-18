@@ -17,7 +17,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API WidgetManager
+			class BFE_API WidgetManager
 			{
 				//friend class BF::Application::Scene;
 

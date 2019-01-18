@@ -1,13 +1,13 @@
 #pragma once
 #include "BF/Math/Vector2.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Renderable.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Physics
 	{
-		class BF_API Rigidbody2D
+		class BFE_API Rigidbody2D
 		{
 			public:
 				BF::Graphics::Renderers::Renderable& renderable;

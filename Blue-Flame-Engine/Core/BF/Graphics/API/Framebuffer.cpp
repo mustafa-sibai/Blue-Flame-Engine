@@ -17,12 +17,12 @@ namespace BF
 
 			void Framebuffer::Create(Texture2D& texture2D, FramebufferFormat format)
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 				{
 				}
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glFramebuffer.Create(texture2D, format);
 #endif
@@ -30,12 +30,12 @@ namespace BF
 
 			void Framebuffer::Bind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 				{
 				}
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glFramebuffer.Bind();
 #endif
@@ -43,12 +43,12 @@ namespace BF
 
 			void Framebuffer::Unbind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 				{
 				}
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glFramebuffer.Unbind();
 #endif

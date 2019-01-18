@@ -17,11 +17,11 @@ namespace BF
 
 			void IndexBuffer::Create(const unsigned int* indices, unsigned int count)
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxIndexBuffer.Create(indices, count);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glIndexBuffer.Create(indices, count);
 #endif	
@@ -29,11 +29,11 @@ namespace BF
 
 			void IndexBuffer::Bind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxIndexBuffer.Bind();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glIndexBuffer.Bind();
 #endif	
@@ -41,7 +41,7 @@ namespace BF
 
 			void IndexBuffer::Unbind() const
 			{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glIndexBuffer.Unbind();
 #endif	
@@ -49,11 +49,11 @@ namespace BF
 
 			unsigned int IndexBuffer::GetIndicesCount() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					return dxIndexBuffer.GetIndicesCount();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					return glIndexBuffer.GetIndicesCount();
 #endif

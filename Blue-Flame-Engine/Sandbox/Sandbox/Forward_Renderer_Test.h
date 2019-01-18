@@ -10,7 +10,6 @@ namespace Forward_Renderer_Test
 			//BF::Graphics::API::ConstantBuffer constantBuffer;
 			//BF::Graphics::Model crateModel;
 			BF::Application::Scene* scene;
-			BF::Graphics::FPSCamera fpsCamera;
 
 			//bool directionalLight;
 			//float lightAngle;

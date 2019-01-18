@@ -14,7 +14,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Mesh : public BF::ECS::Component
+		class BFE_API Mesh : public BF::ECS::Component
 		{
 			public:
 				#include "VertexData.inl"

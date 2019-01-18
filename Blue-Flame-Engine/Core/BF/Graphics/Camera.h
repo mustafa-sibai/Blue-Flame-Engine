@@ -1,13 +1,16 @@
 #pragma once
+#include "BF/ECS/Component.h"
 #include "BF/Math/Math.h"
 #include "BF/Graphics/API/ConstantBuffer.h"
+#include "BF/Graphics/API/Context.h"
+#include "BF/Graphics/Color.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Camera
+		class BFE_API Camera : public BF::ECS::Component
 		{
 			private:
 				struct SystemBuffer
@@ -25,10 +28,10 @@ namespace BF
 				BF::Math::Vector3f position, direction;
 
 			public:
-				Camera();
+				Camera(const BF::Math::Matrix4& projectionMatrix);
 				virtual ~Camera();
 
-				virtual void Initialize(const BF::Math::Matrix4& projectionMatrix);
+				virtual void Initialize();
 
 				void SetModelMatrix(const BF::Math::Matrix4& modelMatrix);
 				void SetViewMatrix(const BF::Math::Matrix4& viewMatrix);
@@ -41,6 +44,9 @@ namespace BF
 			
 			public:
 				virtual void Update();
+
+				void Clear(BF::Graphics::API::BufferClearType bufferClearType, const BF::Graphics::Color& color);
+				void SwapBuffers();
 		};
 	}
 }

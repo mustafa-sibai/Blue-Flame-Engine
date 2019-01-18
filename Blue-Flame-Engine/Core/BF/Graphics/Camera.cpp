@@ -6,27 +6,39 @@ namespace BF
 	namespace Graphics
 	{
 		using namespace BF::Math;
+		using namespace BF::Graphics;
+		using namespace BF::Graphics::API;
 
-		Camera::Camera()
+		Camera::Camera(const Matrix4& projectionMatrix) :
+			Component(Component::Type::Camera)
 		{
+			systemBuffer.modelMatrix = Matrix4::Identity();
+			systemBuffer.viewMatrix = Matrix4::Identity();
+			systemBuffer.projectionMatrix = projectionMatrix;
 		}
 
 		Camera::~Camera()
 		{
 		}
 
-		void Camera::Initialize(const Matrix4& projectionMatrix)
+		void Camera::Initialize()
 		{
-			systemBuffer.modelMatrix = Matrix4::Identity();
-			systemBuffer.viewMatrix = Matrix4::Identity();
-			systemBuffer.projectionMatrix = projectionMatrix;
-
 			constantBuffer.Create(0, sizeof(SystemBuffer), nullptr);
 		}
 
 		void Camera::Update()
 		{
 			constantBuffer.Update(0, sizeof(SystemBuffer), &systemBuffer);
+		}
+
+		void Camera::Clear(BufferClearType bufferClearType, const Color& color)
+		{
+			BF::Engine::GetContext().Clear(bufferClearType, color);
+		}
+
+		void Camera::SwapBuffers()
+		{
+			BF::Engine::GetContext().SwapBuffers();
 		}
 
 		void Camera::SetModelMatrix(const Matrix4& modelMatrix)

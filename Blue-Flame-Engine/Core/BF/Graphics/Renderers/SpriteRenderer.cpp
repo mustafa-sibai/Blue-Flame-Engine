@@ -4,11 +4,11 @@
 #include "BF/System/Debug.h"
 #include "BF/ECS/GameObject.h"
 
-#define BF_MAX_SPRITES     60000
-#define BF_SPRITE_VERTICES 4
-#define	BF_SPRITE_INDICES  6
-#define BF_VERTICES_SIZE BF_MAX_SPRITES * BF_SPRITE_VERTICES
-#define BF_INDICES_SIZE	 BF_MAX_SPRITES * BF_SPRITE_INDICES
+#define BFE_MAX_SPRITES     60000
+#define BFE_SPRITE_VERTICES 4
+#define	BFE_SPRITE_INDICES  6
+#define BFE_VERTICES_SIZE BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
+#define BFE_INDICES_SIZE	 BFE_MAX_SPRITES * BFE_SPRITE_INDICES
 
 namespace BF
 {
@@ -25,7 +25,8 @@ namespace BF
 
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
-			SpriteRenderer::SpriteRenderer() :
+			SpriteRenderer::SpriteRenderer() : 
+				Renderer(RendererType::SpriteRenderer),
 				indexCount(0), submitSprite(true), newDrawCall(false)/*, nullCount(0)*/
 			{
 			}
@@ -45,7 +46,7 @@ namespace BF
 				vertexBufferLayout.Push(2, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color));
 				vertexBufferLayout.Push(3, "RENDERINGTYPE", VertexBufferLayout::DataType::Float, sizeof(SpriteBuffer), sizeof(Vector2f) + sizeof(Color) + sizeof(Vector2f));
 
-				unsigned int* indices = new unsigned int[BF_INDICES_SIZE];
+				unsigned int* indices = new unsigned int[BFE_INDICES_SIZE];
 				int index = 0;
 
 				/*
@@ -63,7 +64,7 @@ namespace BF
 					3      2
 				*/
 
-				for (unsigned int i = 0; i < BF_INDICES_SIZE; i += BF_SPRITE_INDICES)
+				for (unsigned int i = 0; i < BFE_INDICES_SIZE; i += BFE_SPRITE_INDICES)
 				{
 					indices[i + 0] = index + 0;
 					indices[i + 1] = index + 1;
@@ -73,11 +74,11 @@ namespace BF
 					indices[i + 4] = index + 3;
 					indices[i + 5] = index + 0;
 
-					index += BF_SPRITE_VERTICES;
+					index += BFE_SPRITE_VERTICES;
 				}
 
-				vertexBuffer.Create(BF_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
-				indexBuffer.Create(indices, BF_INDICES_SIZE);
+				vertexBuffer.Create(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
+				indexBuffer.Create(indices, BFE_INDICES_SIZE);
 				vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 
 				Engine::GetContext().EnableDepthBuffer(false);
@@ -85,6 +86,11 @@ namespace BF
 				Engine::GetContext().EnableScissor(true);
 
 				delete[] indices;
+			}
+
+			void SpriteRenderer::SetSortingOrder(SortingOrder sortingOrder)
+			{
+				this->sortingOrder = sortingOrder;
 			}
 
 			/*void SpriteRenderer::Submit(Renderable& renderable)
@@ -119,10 +125,8 @@ namespace BF
 				//nullCount++;
 			}*/
 
-			void SpriteRenderer::Render(SortingOrder sortingOrder)
+			void SpriteRenderer::Render()
 			{
-				this->sortingOrder = sortingOrder;
-
 				shader.Bind();
 				spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 
@@ -238,7 +242,7 @@ namespace BF
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
-				indexCount += BF_SPRITE_INDICES;
+				indexCount += BFE_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
@@ -278,7 +282,7 @@ namespace BF
 				spriteBuffer++;
 
 
-				indexCount += BF_SPRITE_INDICES;
+				indexCount += BFE_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
@@ -340,14 +344,14 @@ namespace BF
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
-				indexCount += BF_SPRITE_INDICES;
+				indexCount += BFE_SPRITE_INDICES;
 			}
 
 			void SpriteRenderer::MapTextBuffer(const Text* text)
 			{
 				/*if (currentBoundTexture != nullptr)
 				{
-					BF_IS_NULL(text.font);
+					BFE_IS_NULL(text.font);
 
 					if (text.font->fontAtlas->texture != currentBoundTexture)
 					{
@@ -400,7 +404,7 @@ namespace BF
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
-					indexCount += BF_SPRITE_INDICES;
+					indexCount += BFE_SPRITE_INDICES;
 				}
 			}
 
@@ -534,7 +538,7 @@ namespace BF
 
 			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
 			{
-				Render(sortingOrder);
+				Render();
 				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 

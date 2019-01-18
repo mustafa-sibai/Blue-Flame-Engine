@@ -19,7 +19,7 @@ namespace BF
 
 			void MaterialManager::Initialize()
 			{
-				constantBuffer.Create(1, sizeof(MeshMaterial::ColorBuffer) * BF_MATERIAL_ARRAY_COUNT, nullptr);
+				constantBuffer.Create(1, sizeof(MeshMaterial::ColorBuffer) * BFE_MATERIAL_ARRAY_COUNT, nullptr);
 				materials[0].index = 0;
 				materials[0].shader = new Shader();
 				materials[0].shader->LoadStandardShader(ShaderType::P);

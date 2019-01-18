@@ -1,4 +1,4 @@
-struct BF_API PVertexData
+struct BFE_API PVertexData
 {
 	int materialIndex;
 	BF::Math::Vector3f position;
@@ -12,7 +12,7 @@ struct BF_API PVertexData
 	}
 };
 
-struct BF_API PUVVertexData
+struct BFE_API PUVVertexData
 {
 	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;
@@ -26,7 +26,7 @@ struct BF_API PUVVertexData
 	}
 };
 
-struct BF_API PNVertexData
+struct BFE_API PNVertexData
 {
 	BF::Math::Vector3f position;
 	BF::Math::Vector3f normal;
@@ -40,7 +40,7 @@ struct BF_API PNVertexData
 	}
 };
 
-struct BF_API PUVNVertexData
+struct BFE_API PUVNVertexData
 {
 	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;
@@ -55,7 +55,7 @@ struct BF_API PUVNVertexData
 	}
 };
 
-struct BF_API PUVNTBVertexData
+struct BFE_API PUVNTBVertexData
 {
 	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;

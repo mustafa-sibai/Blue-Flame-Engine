@@ -12,7 +12,7 @@ namespace BF
 	{
 		namespace Fonts
 		{
-			struct BF_API FontAtlas : public BF::IO::Resource
+			struct BFE_API FontAtlas : public BF::IO::Resource
 			{
 				std::string fontName;
 

@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Application
 	{
-		class BF_API Window
+		class BFE_API Window
 		{
 			protected:
 				WindowStyle style;

@@ -1,9 +1,13 @@
 #include "App.h"
+#include "BF/Graphics/Renderers/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/PostProcessing.h"
 
 namespace BF
 {
 	namespace Application
 	{
+		using namespace BF::Graphics::Renderers;
+
 		App::App() :
 			initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
 		{
@@ -16,7 +20,7 @@ namespace BF
 		void App::Initialize()
 		{
 			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
-
+			renderPipeline.Initialize();
 		}
 
 		void App::Load()
@@ -28,13 +32,15 @@ namespace BF
 
 		void App::PostLoad()
 		{
-
+			renderPipeline.PostLoad();
 		}
 
 		void App::Update()
 		{
 			if (mainScene != nullptr)
 				mainScene->Update();
+
+			renderPipeline.Update();
 
 			//layerManager.Update();
 			//sceneManager.GetCurrentScene().Update();
@@ -45,6 +51,8 @@ namespace BF
 		{
 			if(mainScene != nullptr)
 				mainScene->Render();
+
+			renderPipeline.Render();
 
 			//sceneManager.GetCurrentScene().Render();
 			//BF::Application::SceneManager::GetScenes()[0]->Render();

@@ -11,7 +11,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXTexture2D : public Graphics::API::Texture
+				class BFE_API DXTexture2D : public Graphics::API::Texture
 				{
 					private:
 						ID3D11Texture2D* textureID;

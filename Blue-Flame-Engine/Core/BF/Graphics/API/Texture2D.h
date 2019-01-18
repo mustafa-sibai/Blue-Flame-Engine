@@ -1,8 +1,8 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXTexture2D.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLTexture2D.h"
 #endif
 
@@ -27,15 +27,15 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API Texture2D : public Texture
+			class BFE_API Texture2D : public Texture
 			{
 				friend class BF::Platform::API::OpenGL::GLFramebuffer;
 
 				private:
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXTexture2D dxTexture2D;
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 					Platform::API::OpenGL::GLTexture2D glTexture2D;
 #endif
 				public:

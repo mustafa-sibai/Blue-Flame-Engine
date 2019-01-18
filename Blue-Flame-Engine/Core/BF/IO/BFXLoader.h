@@ -11,7 +11,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API BFXLoader
+		class BFE_API BFXLoader
 		{
 			public:
 				static void Load(const std::string& filename, BF::Application::Scene& scene);

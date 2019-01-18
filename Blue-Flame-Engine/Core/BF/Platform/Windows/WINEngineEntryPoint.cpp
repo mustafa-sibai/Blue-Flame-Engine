@@ -74,7 +74,7 @@ namespace BF
 
 							if (app.frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
 							{
-								BF_LOG_INFO("Frames: " + to_string(FPS) + " LastFrameTime: " + to_string(deltaTime), "");
+								BFE_LOG_INFO("Frames: " + to_string(FPS) + " LastFrameTime: " + to_string(deltaTime), "");
 								app.frameRateTimer.Reset();
 								FPS = 0;
 							}

@@ -11,7 +11,7 @@ namespace BF
 	{
 		namespace Windows
 		{
-			class BF_API WINWindow : public Application::Window
+			class BFE_API WINWindow : public Application::Window
 			{
 				private:
 					HWND hWnd;

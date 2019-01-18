@@ -16,7 +16,7 @@ namespace BF
 	{
 		namespace Fonts
 		{
-			class BF_API FontAtlasFactory
+			class BFE_API FontAtlasFactory
 			{
 				private:
 					static FT_Library library;

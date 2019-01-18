@@ -10,7 +10,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXConstantBuffer
+				class BFE_API DXConstantBuffer
 				{
 					private:
 						ID3D11Buffer* buffer;

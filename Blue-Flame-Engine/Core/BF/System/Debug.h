@@ -2,15 +2,15 @@
 #include <iostream>
 #include <string>
 
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_WEB) || defined(BF_PLATFORM_LINUX)
+#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_WEB) || defined(BFE_PLATFORM_LINUX)
 #include <stdio.h>
 #endif
 
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
 
-#ifdef BF_PLATFORM_ANDROID
+#ifdef BFE_PLATFORM_ANDROID
 #include <strings.h>
 #include <android/log.h>
 #endif

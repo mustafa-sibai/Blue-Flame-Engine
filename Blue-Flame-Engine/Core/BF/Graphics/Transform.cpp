@@ -8,9 +8,9 @@ namespace BF
 		using namespace BF::Math;
 
 		Transform::Transform() : 
+			Component(Component::Type::Transform),
 			transformation(Matrix4::Identity()), worldTransformation(Matrix4::Identity()), position(0), rotation(0), scale(1), angle(0)
 		{
-			Component::type = Component::Type::Transform;
 		}
 
 		Transform::~Transform()

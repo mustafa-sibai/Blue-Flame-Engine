@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API FPSCamera : public Camera
+		class BFE_API FPSCamera : public Camera
 		{
 			private:
 				float movmentSpeed, sensitivity, yaw, pitch;
@@ -17,10 +17,10 @@ namespace BF
 				BF::Math::Vector2f windowCenter;
 
 			public:
-				FPSCamera();
+				FPSCamera(const BF::Math::Matrix4& projectionMatrix);
 				~FPSCamera();
 
-				void Initialize(const BF::Math::Matrix4& projectionMatrix) override;
+				void Initialize() override;
 				void Update() override;
 		};
 	}

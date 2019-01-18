@@ -12,7 +12,7 @@ namespace BF
 	{
 		class GameObject;
 
-		class BF_API Component
+		class BFE_API Component
 		{
 			friend class BF::Application::Scene;
 			friend class BF::ECS::GameObject;
@@ -23,13 +23,13 @@ namespace BF
 				bool added;
 
 			public:
-				enum class Type { Null, Transform, Renderable, GUI, Mesh, Audio, Script };
+				enum class Type { Null, Transform, Camera, Renderable, GUI, Mesh, Audio, Script };
 				Type type;
 
 				GameObject* gameObject;
 
 			public:
-				Component();
+				Component(Type type);
 				virtual ~Component();
 
 				inline int GetID() const { return id; }

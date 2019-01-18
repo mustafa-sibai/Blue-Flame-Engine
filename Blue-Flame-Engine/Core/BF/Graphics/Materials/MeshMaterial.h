@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace Materials
 		{
-			class BF_API MeshMaterial
+			class BFE_API MeshMaterial
 			{
 				friend class MaterialManager;
 

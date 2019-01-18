@@ -8,7 +8,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API Button : public Widget
+			class BFE_API Button : public Widget
 			{
 				public:
 					Button();

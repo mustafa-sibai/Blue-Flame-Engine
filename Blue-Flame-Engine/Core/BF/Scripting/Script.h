@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Scripting
 	{
-		class BF_API Script : public BF::ECS::Component
+		class BFE_API Script : public BF::ECS::Component
 		{
 			public:
 				Script();

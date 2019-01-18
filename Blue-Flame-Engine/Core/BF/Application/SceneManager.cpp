@@ -27,7 +27,7 @@ namespace BF
 		{
 			if (index > scenes.size() - 1)
 			{
-				BF_LOG_ERROR("Could not load scene number " + to_string(index) + ". The current number of scenes added to the list is " + to_string(scenes.size() - 1), "");
+				BFE_LOG_ERROR("Could not load scene number " + to_string(index) + ". The current number of scenes added to the list is " + to_string(scenes.size() - 1), "");
 				return nullptr;
 			}
 

@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace System
 	{
-		class BF_API Timer
+		class BFE_API Timer
 		{
 			private:
 				std::chrono::time_point<std::chrono::steady_clock> start;

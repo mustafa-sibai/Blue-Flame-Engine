@@ -21,7 +21,7 @@ namespace BF
 
 			if (!file)
 			{
-				BF_LOG_ERROR("Error: Could not find/open BFX filename: " + filename + "\n", "");
+				BFE_LOG_ERROR("Error: Could not find/open BFX filename: " + filename + "\n", "");
 				fclose(file);
 				return;
 			}
@@ -30,7 +30,7 @@ namespace BF
 			fileHeader[8] = '\0';
 			if (strcmp(fileHeader, "BFX FILE") != 0)
 			{
-				BF_LOG_ERROR("Error: Wrong file format: " + filename + "\n", "");
+				BFE_LOG_ERROR("Error: Wrong file format: " + filename + "\n", "");
 				fclose(file);
 				return;
 			}

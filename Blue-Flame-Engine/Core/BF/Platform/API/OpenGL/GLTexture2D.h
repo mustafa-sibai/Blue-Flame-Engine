@@ -12,7 +12,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLTexture2D
+				class BFE_API GLTexture2D
 				{
 					friend class GLFramebuffer;
 

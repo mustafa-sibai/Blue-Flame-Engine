@@ -19,7 +19,7 @@ namespace BF
 					data += line + "\n";
 			}
 			else
-				BF_LOG_FATAL("Could not read text file " + filename + "\n", "");
+				BFE_LOG_FATAL("Could not read text file " + filename + "\n", "");
 
 			return data;
 		}
@@ -39,7 +39,7 @@ namespace BF
 				stream.close();
 			}
 			else
-				BF_LOG_FATAL("Could not read binary file " + filename + "\n", "");
+				BFE_LOG_FATAL("Could not read binary file " + filename + "\n", "");
 
 			return data;
 		}

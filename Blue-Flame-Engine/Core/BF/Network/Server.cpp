@@ -18,10 +18,10 @@ namespace BF
 
 		void Server::Initialize()
 		{
-			BF_LOG_INFO("Initializing Winsock 2", "");
+			BFE_LOG_INFO("Initializing Winsock 2", "");
 			iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 			if (iResult != 0) 
-				BF_LOG_ERROR("WSAStartup failed with error: " + std::to_string(iResult), "");
+				BFE_LOG_ERROR("WSAStartup failed with error: " + std::to_string(iResult), "");
 
 			ZeroMemory(&hints, sizeof(hints));
 			hints.ai_family = AF_INET;
@@ -33,7 +33,7 @@ namespace BF
 			iResult = getaddrinfo(NULL, SERVER_PORT, &hints, &result);
 			if (iResult != 0) 
 			{
-				BF_LOG_ERROR("getaddrinfo failed with error: " + std::to_string(iResult), "");
+				BFE_LOG_ERROR("getaddrinfo failed with error: " + std::to_string(iResult), "");
 				WSACleanup();
 			}
 
@@ -41,17 +41,17 @@ namespace BF
 			listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
 			if (listenSocket == INVALID_SOCKET) 
 			{
-				BF_LOG_ERROR("socket failed with error: " + std::to_string(WSAGetLastError()), "");
+				BFE_LOG_ERROR("socket failed with error: " + std::to_string(WSAGetLastError()), "");
 				freeaddrinfo(result);
 				WSACleanup();
 			}
 
-			BF_LOG_INFO("Binding listening socket", "");
+			BFE_LOG_INFO("Binding listening socket", "");
 			// Setup the TCP listening socket
 			iResult = bind(listenSocket, result->ai_addr, (int)result->ai_addrlen);
 			if (iResult == SOCKET_ERROR) 
 			{
-				BF_LOG_ERROR("bind failed with error: " + std::to_string(WSAGetLastError()), "");
+				BFE_LOG_ERROR("bind failed with error: " + std::to_string(WSAGetLastError()), "");
 				freeaddrinfo(result);
 				closesocket(listenSocket);
 				WSACleanup();
@@ -62,11 +62,11 @@ namespace BF
 
 		void Server::Listen()
 		{
-			BF_LOG_INFO("listening...", "");
+			BFE_LOG_INFO("listening...", "");
 			iResult = listen(listenSocket, SOMAXCONN);
 			if (iResult == SOCKET_ERROR) 
 			{
-				BF_LOG_ERROR("listen failed with error: " + std::to_string(WSAGetLastError()), "");
+				BFE_LOG_ERROR("listen failed with error: " + std::to_string(WSAGetLastError()), "");
 				closesocket(listenSocket);
 				WSACleanup();
 			}
@@ -74,16 +74,16 @@ namespace BF
 
 		void Server::Accept()
 		{
-			BF_LOG_INFO("Waiting for client to connect...", "");
+			BFE_LOG_INFO("Waiting for client to connect...", "");
 			clientSocket = accept(listenSocket, NULL, NULL);
 			if (clientSocket == INVALID_SOCKET)
 			{
-				BF_LOG_ERROR("accept failed with error: " + std::to_string(WSAGetLastError()), "");
+				BFE_LOG_ERROR("accept failed with error: " + std::to_string(WSAGetLastError()), "");
 				closesocket(listenSocket);
 				WSACleanup();
 			}
 
-			BF_LOG_INFO("Client connected !", "");
+			BFE_LOG_INFO("Client connected !", "");
 		}
 
 		void Server::Run()
@@ -96,7 +96,7 @@ namespace BF
 			iResult = shutdown(clientSocket, SD_SEND);
 			if (iResult == SOCKET_ERROR) 
 			{
-				BF_LOG_ERROR("shutdown failed with error: " + std::to_string(WSAGetLastError()), "");
+				BFE_LOG_ERROR("shutdown failed with error: " + std::to_string(WSAGetLastError()), "");
 				closesocket(clientSocket);
 				WSACleanup();
 			}

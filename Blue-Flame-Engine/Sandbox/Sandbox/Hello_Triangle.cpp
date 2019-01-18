@@ -24,7 +24,7 @@ namespace Hello_Triangle
 
 	void Hello_Triangle::Initialize()
 	{
-		scene = new Scene(camera);
+		scene = new Scene(*this);
 
 		App::Initialize();
 
@@ -38,7 +38,7 @@ namespace Hello_Triangle
 
 		//camera.Initialize(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), ((int)Engine::GetWindow().GetClientHeight() / 2), -(int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f));
 
-		camera.Initialize(Matrix4::Orthographic(-5, 5, 5, -5, -1.0f, 1.0f));
+		//camera.Initialize(Matrix4::Orthographic(-5, 5, 5, -5, -1.0f, 1.0f));
 
 		shader.LoadFromFile("C:/engine/Blue-Flame-Engine/Sandbox/Assets/Shaders/GLSL/Simple/VertexShader.glsl", "C:/engine/Blue-Flame-Engine/Sandbox/Assets/Shaders/GLSL/Simple/PixelShader.glsl");
 
@@ -69,7 +69,7 @@ namespace Hello_Triangle
 
 	void Hello_Triangle::Update()
 	{
-		camera.Update();
+		//camera.Update();
 		App::Update();
 	}
 
@@ -78,7 +78,7 @@ namespace Hello_Triangle
 		BF::Engine::GetContext().Clear(BufferClearType::ColorAndDepth, Color(0.5, 0.0f, 0.0f, 1.0f));
 
 		position.y += 0.0001f;
-		camera.SetModelMatrix(Matrix4::Translate(position));
+		//camera.SetModelMatrix(Matrix4::Translate(position));
 
 		shader.Bind();
 		vb.Bind();

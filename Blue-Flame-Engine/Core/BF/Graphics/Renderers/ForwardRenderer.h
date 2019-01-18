@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Graphics/Camera.h"
+#include "BF/Graphics/Renderers/Renderer.h"
 #include "BF/Graphics/API/Framebuffer.h"
 #include "BF/Graphics/Materials/MaterialManager.h"
 #include "BF/Graphics/Mesh.h"
@@ -17,12 +18,12 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API ForwardRenderer
+			class BFE_API ForwardRenderer : public Renderer
 			{
-				friend class BF::Application::Scene;
+				friend class BF::Graphics::Renderers::RenderPipeline;
 
 				private:
-					BF::Graphics::Camera& camera;
+					BF::Graphics::Camera* camera;
 					std::vector<BF::Graphics::Mesh*> meshes;
 					BF::Graphics::Materials::MaterialManager materialManager;
 
@@ -34,12 +35,12 @@ namespace BF
 					BF::Graphics::API::Shader postProcessingShader;*/
 
 				public:
-					ForwardRenderer(BF::Graphics::Camera& camera);
+					ForwardRenderer(BF::Graphics::Camera* camera);
 					~ForwardRenderer();
 
-					void Initialize();
-					void PostLoad();
-					void Render();
+					void Initialize() override;
+					void PostLoad() override;
+					void Render() override;
 			};
 		}
 	}

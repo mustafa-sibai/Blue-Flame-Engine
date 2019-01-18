@@ -10,10 +10,9 @@ namespace BF
 		using namespace BF::Graphics::Materials;
 
 		Mesh::Mesh(PresetMeshes presetMeshes) :
+			Component(Component::Type::Mesh),
 			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(nullptr), indices(nullptr), vertexStructVersion(Mesh::VertexStructVersion::P)
 		{
-			Component::type = Component::Type::Mesh;
-
 			if (presetMeshes == PresetMeshes::Plane)
 			{
 				vertices = new vector<Mesh::PVertexData>(4);
@@ -58,9 +57,9 @@ namespace BF
 		}
 
 		Mesh::Mesh(void* vertices, vector<unsigned int>* indices, VertexStructVersion vertexStructVersion) :
+			Component(Component::Type::Mesh),
 			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)
 		{
-			Component::type = Component::Type::Mesh;
 		}
 
 		Mesh::~Mesh()

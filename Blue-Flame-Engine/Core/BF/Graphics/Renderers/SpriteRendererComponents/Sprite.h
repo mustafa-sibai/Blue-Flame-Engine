@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Renderable.h"
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Common.h"
 
@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			struct BF_API SpriteBuffer
+			struct BFE_API SpriteBuffer
 			{
 				BF::Math::Vector2f position;
 				Color color;
@@ -17,7 +17,7 @@ namespace BF
 				float renderingType;
 			};
 
-			class BF_API Sprite : public Renderable
+			class BFE_API Sprite : public Renderable
 			{
 				friend class SpriteRenderer;
 

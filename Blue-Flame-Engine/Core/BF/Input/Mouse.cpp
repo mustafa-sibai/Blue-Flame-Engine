@@ -9,7 +9,7 @@ namespace BF
 
 		Vector2f Mouse::position(0.0f);
 		bool Mouse::insideWindowClient = false;
-		Mouse::Button Mouse::buttons[BF_MAX_MOUSE_BUTTONS];
+		Mouse::Button Mouse::buttons[BFE_MAX_MOUSE_BUTTONS];
 
 		Mouse::Mouse()
 		{
@@ -36,20 +36,20 @@ namespace BF
 
 		void Mouse::SetPosition(Vector2f position)
 		{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 			POINT point;
 			point.x = (LONG)position.x;
 			point.y = (LONG)position.y;
 
 			ClientToScreen(Engine::GetWindow().GetHWND(), &point);
 			SetCursorPos(point.x, point.y);
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 #endif
 		}
 
 		void Mouse::Update()
 		{
-			for (size_t i = 0; i < BF_MAX_MOUSE_BUTTONS; i++)
+			for (size_t i = 0; i < BFE_MAX_MOUSE_BUTTONS; i++)
 			{
 				if (buttons[i].state == Button::State::Pressed)
 					buttons[i].state = Button::State::HeldDown;
@@ -61,9 +61,9 @@ namespace BF
 
 		void Mouse::ShowMouseCursor(bool value)
 		{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 			ShowCursor(value);
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 #endif
 		}
 	}

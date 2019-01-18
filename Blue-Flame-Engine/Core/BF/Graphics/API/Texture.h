@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API Texture
+			class BFE_API Texture
 			{
 			public:
 				struct TextureData : public BF::IO::Resource

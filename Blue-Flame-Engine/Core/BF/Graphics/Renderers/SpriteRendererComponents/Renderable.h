@@ -11,7 +11,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API Renderable : public BF::ECS::Component
+			class BFE_API Renderable : public BF::ECS::Component
 			{
 				friend class SpriteRenderer;
 

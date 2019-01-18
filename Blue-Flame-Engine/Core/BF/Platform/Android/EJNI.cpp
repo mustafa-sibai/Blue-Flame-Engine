@@ -13,40 +13,40 @@ namespace BF
 
 			void EJNI::NativeOnCreate(int(*main)())
 			{
-				BF_LOG_INFO("EJNI::NativeOnCreate");
+				BFE_LOG_INFO("EJNI::NativeOnCreate");
 				EJNI::t = std::thread(main);
 			}
 
 			void EJNI::NativeOnStart()
 			{
-				BF_LOG_INFO("EJNI::NativeOnStart");
+				BFE_LOG_INFO("EJNI::NativeOnStart");
 			}
 
 			void EJNI::NativeOnResume()
 			{
-				BF_LOG_INFO("EJNI::NativeOnResume");
+				BFE_LOG_INFO("EJNI::NativeOnResume");
 			}
 
 			void EJNI::NativeOnPause()
 			{
-				BF_LOG_INFO("EJNI::NativeOnPause");
+				BFE_LOG_INFO("EJNI::NativeOnPause");
 				EJNI::t.join();
 			}
 
 			void EJNI::NativeOnStop()
 			{
-				BF_LOG_INFO("EJNI::NativeOnStop");
+				BFE_LOG_INFO("EJNI::NativeOnStop");
 			}
 
 			void EJNI::NativeSetSurface(ANativeWindow* window)
 			{
 				while (&Engine::GetWindow() == NULL)
-					BF_LOG_INFO("Waiting for engine thread to start...");
+					BFE_LOG_INFO("Waiting for engine thread to start...");
 
 				m.lock();
 				Engine::GetWindow().Initialize(window);
 				Engine::andEngineEntryPoint->state = ANDEngineEntryPoint::State::Initialize;
-				BF_LOG_INFO("EJNI::NativeSetSurface");
+				BFE_LOG_INFO("EJNI::NativeSetSurface");
 				m.unlock();
 			}
 		}

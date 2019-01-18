@@ -78,13 +78,13 @@
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.cpp" />
-    <ClCompile Include="BF\Graphics\Skybox.cpp" />
-    <ClCompile Include="BF\Graphics\Terrain.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SkyboxRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\TerrainGenerator.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Graphics\TileMap.cpp" />
     <ClCompile Include="BF\Graphics\Transform.cpp" />
@@ -123,9 +123,9 @@
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\Scripting\Script.cpp" />
     <ClCompile Include="BF\System\Timer.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer\Text.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.cpp" />
     <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
     <ClCompile Include="BF\IO\Resource.cpp" />
@@ -136,6 +136,9 @@
     <ClCompile Include="BF\Graphics\API\Framebuffer.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp" />
     <ClCompile Include="BF\Scripting\ScriptExecutor.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\RenderPipeline.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\Renderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -170,13 +173,13 @@
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\PredefinedColors.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\LineShape.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\RegularPolygon.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Renderable.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Sprite.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\SpriteRenderer.h" />
-    <ClInclude Include="BF\Graphics\Skybox.h" />
-    <ClInclude Include="BF\Graphics\Terrain.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SkyboxRenderer.h" />
+    <ClInclude Include="BF\Graphics\TerrainGenerator.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
@@ -223,9 +226,9 @@
     <ClInclude Include="BF\Platform\Windows\WINEngineEntryPoint.h" />
     <ClInclude Include="BF\Platform\Windows\WINWindow.h" />
     <ClInclude Include="BF\System\Timer.h" />
-    <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer\ForwardRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer.h" />
     <ClInclude Include="BF\Graphics\Fonts\Font.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer\Text.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h" />
     <ClInclude Include="BF\Physics\PhysicsEngine.h" />
     <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
@@ -240,6 +243,9 @@
     <ClInclude Include="BF\Graphics\Materials\MaterialManager.h" />
     <ClInclude Include="BF\Scripting\Script.h" />
     <ClInclude Include="BF\Scripting\ScriptExecutor.h" />
+    <ClInclude Include="BF\Graphics\Renderers\RenderPipeline.h" />
+    <ClInclude Include="BF\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\PostProcessing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -251,7 +257,7 @@
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUV.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVN.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PUVNTB.vpshader" />
-    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\ShadowMapShader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PostProcessing.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\SingleLight3DShader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\HLSL5.0\Shader.vpshader" />
@@ -580,7 +586,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BF_PLATFORM_WINDOWS;BF_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;BFE_PLATFORM_WINDOWS;BFE_CORE_DLL;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>

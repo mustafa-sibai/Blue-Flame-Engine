@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API BFMLoader
+		class BFE_API BFMLoader
 		{
 			public:
 				static BF::Graphics::TileMapData* Load(const std::string& filename);

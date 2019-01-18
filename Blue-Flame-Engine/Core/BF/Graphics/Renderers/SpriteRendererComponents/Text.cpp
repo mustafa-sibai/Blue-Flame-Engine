@@ -145,7 +145,7 @@ namespace BF
 
 			/*void Text::SetText(const string& text)
 			{
-				BF_IS_NULL(font);
+				BFE_IS_NULL(font);
 
 				Text::text = text;
 				Vector2f pos = position;

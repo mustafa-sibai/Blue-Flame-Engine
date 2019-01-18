@@ -8,7 +8,7 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API RenderTarget
+			class BFE_API RenderTarget
 			{
 				private:
 					Framebuffer framebuffer;

@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Network
 	{
-		class BF_API Client
+		class BFE_API Client
 		{
 		private:
 			WSADATA wsaData;

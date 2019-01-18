@@ -23,7 +23,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLContext
+				class BFE_API GLContext
 				{
 				protected:
 					GLuint GL_PRIMITIVE_TYPE;

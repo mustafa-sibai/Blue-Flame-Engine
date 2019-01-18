@@ -14,7 +14,7 @@ namespace BF
 	{
 		namespace Web
 		{
-			class BF_API WEBEngineEntryPoint
+			class BFE_API WEBEngineEntryPoint
 			{
 				private:
 					WEBWindow webWindow;

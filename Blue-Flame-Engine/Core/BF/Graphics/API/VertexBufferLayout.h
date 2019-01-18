@@ -9,12 +9,12 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API VertexBufferLayout
+			class BFE_API VertexBufferLayout
 			{
 				public:
 					enum class DataType { Int, Float, Float2, Float3, Float4 };
 
-					struct BF_API VertexBufferElement
+					struct BFE_API VertexBufferElement
 					{
 						int index = 0;
 						std::string name = "";

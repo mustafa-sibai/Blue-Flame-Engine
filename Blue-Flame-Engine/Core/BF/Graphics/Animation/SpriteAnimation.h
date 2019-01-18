@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Math/Math.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
@@ -34,7 +34,7 @@ namespace BF
 				std::vector<Sequence> sequences;
 			};
 
-			class BF_API SpriteAnimation
+			class BFE_API SpriteAnimation
 			{
 				private:
 					SpriteAnimationData* data;

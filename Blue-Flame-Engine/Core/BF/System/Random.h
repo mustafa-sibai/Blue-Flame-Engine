@@ -5,7 +5,7 @@ namespace BF
 {
 	namespace System
 	{
-		class BF_API Random
+		class BFE_API Random
 		{
 			public:
 				Random();

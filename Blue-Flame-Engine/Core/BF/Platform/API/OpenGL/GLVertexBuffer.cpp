@@ -55,9 +55,9 @@ namespace BF
 				{
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 					GLCall(return glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 					GLCall(return glMapBufferRange(GL_ARRAY_BUFFER, 0, size, GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT));
 #endif
 				}

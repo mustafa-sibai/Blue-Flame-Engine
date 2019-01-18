@@ -12,7 +12,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXVertexBuffer
+				class BFE_API DXVertexBuffer
 				{
 					private:
 						ID3D11Buffer* buffer;

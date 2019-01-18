@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Math
 	{
-		class BF_API Rectangle
+		class BFE_API Rectangle
 		{
 			public:
 				int x, y, width, height;

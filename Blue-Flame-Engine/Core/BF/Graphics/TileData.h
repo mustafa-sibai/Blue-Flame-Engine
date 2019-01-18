@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		struct BF_API TileData
+		struct BFE_API TileData
 		{
 			int textureID;
 			BF::Math::Rectangle rectangle;

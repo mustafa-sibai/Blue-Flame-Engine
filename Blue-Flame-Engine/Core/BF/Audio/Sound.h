@@ -9,7 +9,7 @@ namespace BF
 {
 	namespace Audio
 	{
-		class BF_API Sound
+		class BFE_API Sound
 		{
 			private:
 				uint32_t dataSize;

@@ -47,7 +47,7 @@ namespace BF
 					}
 
 					if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-						BF_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!", "");
+						BFE_LOG_ERROR("ERRRRRRROOOOOORRRRR !!!!", "");
 
 					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 				}

@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Color
+		class BFE_API Color
 		{
 			public:
 				float r, g, b, a;
@@ -18,10 +18,10 @@ namespace BF
 
 				Color Normalize() const;
 
-				friend BF_API Color operator+(const Color& left, const Color& right);
-				friend BF_API Color operator-(const Color& left, const Color& right);
-				friend BF_API Color operator*(const Color& left, const Color& right);
-				friend BF_API Color operator/(const Color& left, const Color& right);
+				friend BFE_API Color operator+(const Color& left, const Color& right);
+				friend BFE_API Color operator-(const Color& left, const Color& right);
+				friend BFE_API Color operator*(const Color& left, const Color& right);
+				friend BFE_API Color operator/(const Color& left, const Color& right);
 
 				Color& operator+=(const Color& right);
 				Color& operator-=(const Color& right);
@@ -38,7 +38,7 @@ namespace BF
 
 				#include"PredefinedColors.h"
 
-				friend BF_API std::ostream& operator<<(std::ostream& os, const Color& color);
+				friend BFE_API std::ostream& operator<<(std::ostream& os, const Color& color);
 		};
 	}
 }

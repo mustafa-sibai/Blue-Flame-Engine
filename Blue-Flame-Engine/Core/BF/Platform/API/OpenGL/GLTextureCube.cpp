@@ -97,7 +97,7 @@ namespace BF
 						case Texture::Wrap::MirroredReapeat: return GL_MIRRORED_REPEAT;
 						case Texture::Wrap::ClampToEdge: return GL_CLAMP_TO_EDGE;
 						
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 						case Texture::Wrap::ClampToBorder: return GL_CLAMP_TO_BORDER;
 #endif
 

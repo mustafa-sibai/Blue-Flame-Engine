@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "BF/Application/Scene.h"
+#include "BF/Application/App.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -32,40 +33,26 @@ namespace BF
 		{
 			if (!component->added)
 			{
-				switch (component->type)
-				{
-				case Component::Type::Renderable:
-				{
-					component->gameObject = this;
-					components.emplace_back(component);
-					scene.spriteRenderer.renderables.emplace_back((Renderable*)component);
-					component->added = true;
-					break;
-				}
-				case Component::Type::Mesh:
+				if (component->type == Component::Type::Camera || 
+					component->type == Component::Type::Renderable ||
+					component->type == Component::Type::Mesh)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
-					//forwardRenderer.meshes.emplace_back((Mesh*)component);
+					scene.app.renderPipeline.AddRenderable(component);
 					component->added = true;
-					break;
 				}
-				case Component::Type::Script:
+				else if (component->type == Component::Type::Script)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
 					scene.scriptExecutor.scripts.emplace_back((Script*)component);
 					component->added = true;
-					break;
-				}
-
-				default:
-					break;
 				}
 			}
 			else
 				//Do copy here
-				BF_LOG_WARNING("This Component of id: \"" + std::to_string(component->id) + "\" has already been added to GameObject \"" +
+				BFE_LOG_WARNING("This Component of id: \"" + std::to_string(component->id) + "\" has already been added to GameObject \"" +
 					Name + "\" of id \"" + std::to_string(id) + "\". This Component will not be added again.", "");
 
 			return component;
@@ -73,7 +60,7 @@ namespace BF
 
 		void GameObject::RemoveComponent(Component* component)
 		{
-			if (component->type == Component::Type::Renderable)
+			/*if (component->type == Component::Type::Renderable)
 			{
 				for (std::vector<Renderable*>::iterator it = scene.spriteRenderer.renderables.begin(); it != scene.spriteRenderer.renderables.end(); ++it)
 				{
@@ -94,13 +81,12 @@ namespace BF
 				}
 			}
 
-			delete component;
+			delete component;*/
 		}
 
 		void GameObject::SetParent(GameObject* parent)
 		{
 			this->parent = parent;
-
 		}
 	}
 }

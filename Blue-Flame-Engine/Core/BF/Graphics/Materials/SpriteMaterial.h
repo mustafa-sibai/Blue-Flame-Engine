@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace Materials
 		{
-			class BF_API SpriteMaterial
+			class BFE_API SpriteMaterial
 			{
 				private:
 					struct ColorBuffer

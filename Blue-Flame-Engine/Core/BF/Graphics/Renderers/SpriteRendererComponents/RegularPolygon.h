@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Renderable.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -8,7 +8,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API RegularPolygon : public Renderable
+			class BFE_API RegularPolygon : public Renderable
 			{
 			public:
 				RegularPolygon(const BF::Math::Vector2i& size);

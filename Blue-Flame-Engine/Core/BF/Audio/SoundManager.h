@@ -8,7 +8,7 @@ namespace BF
 {
 	namespace Audio
 	{
-		class BF_API SoundManager
+		class BFE_API SoundManager
 		{
 			public:
 				SoundManager();

@@ -1,5 +1,5 @@
 #pragma once
-#include "BF/Graphics/Renderers/SpriteRenderer/Renderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Renderable.h"
 #include "BF/Graphics/Fonts/Font.h"
 #include "BF/Common.h"
 
@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BF_API Text : public Renderable
+			class BFE_API Text : public Renderable
 			{
 				friend class SpriteRenderer;
 

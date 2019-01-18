@@ -19,7 +19,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXContext
+				class BFE_API DXContext
 				{
 					private:
 						ID3D11Device* device;

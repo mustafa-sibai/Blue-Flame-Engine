@@ -13,7 +13,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLTextureCube
+				class BFE_API GLTextureCube
 				{
 					private:
 						GLuint textureID;

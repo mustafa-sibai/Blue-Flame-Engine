@@ -1,8 +1,8 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXIndexBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLIndexBuffer.h"
 #endif
 
@@ -14,13 +14,13 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API IndexBuffer
+			class BFE_API IndexBuffer
 			{
 				private:
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 					Platform::API::DirectX::DXIndexBuffer dxIndexBuffer;
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 					Platform::API::OpenGL::GLIndexBuffer glIndexBuffer;
 #endif	
 				public:

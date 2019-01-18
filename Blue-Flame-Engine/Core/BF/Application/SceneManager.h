@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Application
 	{
-		class BF_API SceneManager
+		class BFE_API SceneManager
 		{
 			private:
 				BF::Application::Layers::LayerManager& layerManager;

@@ -24,7 +24,7 @@ namespace Forward_Renderer_Test
 
 	void Forward_Renderer_Test::Initialize()
 	{
-		scene = new Scene(fpsCamera);
+		scene = new Scene(*this);
 		
 
 		App::Initialize();
@@ -259,7 +259,7 @@ namespace Forward_Renderer_Test
 		App::Update();
 		//transform->angle += 0.1f * BF::Engine::GetDeltaTime();
 		//transform->position -= Vector3f(0.0f, 0.0f, 0.1f);
-		fpsCamera.Update();
+		//fpsCamera.Update();
 	}
 
 	void Forward_Renderer_Test::Render()

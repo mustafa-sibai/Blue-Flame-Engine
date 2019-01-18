@@ -14,7 +14,7 @@ namespace BF
 
 		namespace Fonts
 		{
-			class BF_API Font
+			class BFE_API Font
 			{
 				friend class BF::Graphics::Renderers::Text;
 				friend class BF::Graphics::Renderers::SpriteRenderer;

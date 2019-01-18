@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Math/Math.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/Sprite.h"
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
@@ -9,7 +9,7 @@ namespace BF
 {
 	namespace AI
 	{
-		class BF_API Waypoint
+		class BFE_API Waypoint
 		{
 		public:
 			class Node

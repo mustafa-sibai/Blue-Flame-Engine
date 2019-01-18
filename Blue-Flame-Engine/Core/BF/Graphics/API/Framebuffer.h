@@ -1,8 +1,8 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	//#include "BF/Platform/API/DirectX/DXFramebuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLFramebuffer.h"
 #endif
 
@@ -16,12 +16,12 @@ namespace BF
 		{
 			enum class FramebufferFormat { Color, Depth, Stencil };
 
-			class BF_API Framebuffer
+			class BFE_API Framebuffer
 			{
 				private:
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 					Platform::API::OpenGL::GLFramebuffer glFramebuffer;
 #endif
 

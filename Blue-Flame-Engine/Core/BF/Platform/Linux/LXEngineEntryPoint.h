@@ -14,7 +14,7 @@ namespace BF
 	{
 		namespace Linux
 		{
-			class BF_API LXEngineEntryPoint
+			class BFE_API LXEngineEntryPoint
 			{
 				private:
 					LXWindow lxWindow;

@@ -1,17 +1,17 @@
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#pragma warning (disable:4251)
 #endif
 
-#if !defined (BF_PLATFORM_WINDOWS) && !defined (BF_PLATFORM_LINUX) && !defined (BF_PLATFORM_WEB) && !defined (BF_PLATFORM_ANDROID)
-	#error Platform is not defined. Please define one of the following platforms. BF_PLATFORM_WINDOWS or BF_PLATFORM_LINUX or BF_PLATFORM_ANDROID or BF_PLATFORM_WEB
+#if !defined (BFE_PLATFORM_WINDOWS) && !defined (BFE_PLATFORM_LINUX) && !defined (BFE_PLATFORM_WEB) && !defined (BFE_PLATFORM_ANDROID)
+	#error Platform is not defined. Please define one of the following platforms. BFE_PLATFORM_WINDOWS or BFE_PLATFORM_LINUX or BFE_PLATFORM_ANDROID or BFE_PLATFORM_WEB
 #endif
 
-#ifdef BF_PLATFORM_WINDOWS
-	#ifdef BF_CORE_DLL
-		#define BF_API __declspec(dllexport)
+#ifdef BFE_PLATFORM_WINDOWS
+	#ifdef BFE_CORE_DLL
+		#define BFE_API __declspec(dllexport)
 	#else
-		#define BF_API __declspec(dllimport)
+		#define BFE_API __declspec(dllimport)
 	#endif
 #else
-	#define BF_API
+	#define BFE_API
 #endif

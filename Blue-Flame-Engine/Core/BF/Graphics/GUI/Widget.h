@@ -3,7 +3,7 @@
 #include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
 #include "BF/Common.h"
 
-#define BF_WIDGET_DATA_SPRITES_LENGTH 8
+#define BFE_WIDGET_DATA_SPRITES_LENGTH 8
 
 namespace BF
 {
@@ -27,7 +27,7 @@ namespace BF
 				int minWidth = 0, minHeight = 0;
 			};
 
-			class BF_API Widget : public BF::Application::Component
+			class BFE_API Widget : public BF::Application::Component
 			{
 				friend class WidgetManager;
 

@@ -16,7 +16,7 @@ namespace BF
 			ZeroMemory(&state, sizeof(XINPUT_STATE));
 			ZeroMemory(&Vibration, sizeof(XINPUT_VIBRATION));
 
-			for (unsigned int i = 0; i < BF_MAX_CONTROLLER_BUTTONS; i++)
+			for (unsigned int i = 0; i < BFE_MAX_CONTROLLER_BUTTONS; i++)
 				buttons[i] = false;
 		}
 

@@ -25,9 +25,7 @@ namespace ECS_Script_Test
 
 	void ECS_Script_Test::Initialize()
 	{
-		scene = new Scene(camera);
-
-		App::Initialize();
+		scene = new Scene(*this);
 
 		BF::Input::Mouse::ShowMouseCursor(true);
 
@@ -36,11 +34,12 @@ namespace ECS_Script_Test
 		BF::Engine::GetContext().CullFace(CullingType::Back);
 		//BF::Engine::LimitFrameRate(60.0f);
 
-		camera.Initialize(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), ((int)Engine::GetWindow().GetClientHeight() / 2), -(int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f));
-
 		/*GameObject* parent = scene->AddGameObject(new GameObject(*scene, "parent"));
 		parent->GetTransform()->SetPosition(Vector3f(100, 100, 100));
 		parent->GetTransform()->SetScale(Vector3f(0.5, 0.5, 0.5));*/
+
+		GameObject* CameraGameObject = scene->AddGameObject(new GameObject(*scene, "Camera"));
+		Camera* camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), ((int)Engine::GetWindow().GetClientHeight() / 2), -(int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f)));
 
 		GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject(*scene, "RegularPolygon A"));
 		RegularPolygonGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
@@ -55,6 +54,8 @@ namespace ECS_Script_Test
 		sprite->AddComponent(new Sprite(t, Vector2f(0, 0)));
 		sprite->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		sprite->GetTransform()->SetScale(Vector3f(1, 1, 1));
+
+		App::Initialize();
 	}
 
 	void ECS_Script_Test::Load()
@@ -70,14 +71,11 @@ namespace ECS_Script_Test
 
 	void ECS_Script_Test::Update()
 	{
-		camera.Update();
 		App::Update();
 	}
 
 	void ECS_Script_Test::Render()
 	{
-		BF::Engine::GetContext().Clear(BufferClearType::ColorAndDepth, Color(0.5, 0.0f, 0.0f, 1.0f));
 		App::Render();
-		BF::Engine::GetContext().SwapBuffers();
 	}
 }

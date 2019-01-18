@@ -1,4 +1,4 @@
-#include "Terrain.h"
+#include "TerrainGenerator.h"
 #include "BF/Engine.h"
 #include "BF/Graphics/Mesh.h"
 #include "BF/Math/Math.h"
@@ -24,15 +24,15 @@ namespace BF
 		using namespace BF::Math;
 		using namespace BF::Graphics::API;
 
-		Terrain::Terrain()
+		TerrainGenerator::TerrainGenerator()
 		{
 		}
 
-		Terrain::~Terrain()
+		TerrainGenerator::~TerrainGenerator()
 		{
 		}
 
-		void Terrain::Initialize()
+		void TerrainGenerator::Initialize()
 		{
 			glEnable(GL_CULL_FACE);
 			glFrontFace(GL_CW);
@@ -45,7 +45,7 @@ namespace BF
 			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f) + sizeof(Vector2f));
 		}
 
-		void Terrain::Load(const std::string& filename)
+		void TerrainGenerator::Load(const std::string& filename)
 		{
 			textureData = BF::IO::ImageLoader::Load(filename);
 
@@ -109,7 +109,7 @@ namespace BF
 			delete[] indecies;
 		}
 
-		void Terrain::Render()
+		/*void Terrain::Render()
 		{
 			shader.Bind();
 			vertexBuffer.Bind();
@@ -118,6 +118,6 @@ namespace BF
 			indexBuffer.Unbind();
 			vertexBuffer.Unbind();
 			shader.Unbind();
-		}
+		}*/
 	}
 }

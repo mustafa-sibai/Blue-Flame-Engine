@@ -6,8 +6,8 @@ namespace BF
 	{
 		int Component::globalID = 0;
 
-		Component::Component() :
-			id(0), type(Type::Null), added(false)
+		Component::Component(Type type) :
+			id(0), type(type), added(false)
 		{
 			Component::globalID++;
 			id = globalID;

@@ -10,7 +10,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLIndexBuffer
+				class BFE_API GLIndexBuffer
 				{
 					private:
 						GLuint buffer;

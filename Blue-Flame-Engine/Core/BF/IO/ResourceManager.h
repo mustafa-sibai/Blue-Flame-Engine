@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API ResourceManager
+		class BFE_API ResourceManager
 		{
 		private:
 			static std::unordered_map<std::string, Resource*> resources;

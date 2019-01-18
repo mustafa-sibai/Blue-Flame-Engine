@@ -14,7 +14,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API StyleSheet
+			class BFE_API StyleSheet
 			{
 				private:
 					std::unordered_map<std::string, BF::Application::GameObject*> widgets;

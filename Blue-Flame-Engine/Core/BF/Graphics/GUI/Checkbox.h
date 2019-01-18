@@ -8,7 +8,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API Checkbox : public Widget
+			class BFE_API Checkbox : public Widget
 			{
 				private:
 					bool checked;

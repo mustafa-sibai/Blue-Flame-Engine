@@ -29,7 +29,7 @@ namespace BF
 
 		Resource* ResourceManager::GetResource(const string& name)
 		{
-			BF_LOG_WARNING(name + " already loaded in memory. ResourceManager will retrieve file from memory", "");
+			BFE_LOG_WARNING(name + " already loaded in memory. ResourceManager will retrieve file from memory", "");
 			return resources.at(name);
 		}
 	}

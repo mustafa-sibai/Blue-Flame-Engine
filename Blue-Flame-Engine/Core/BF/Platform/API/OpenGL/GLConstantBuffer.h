@@ -10,7 +10,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLConstantBuffer
+				class BFE_API GLConstantBuffer
 				{
 					private:
 						GLuint buffer;

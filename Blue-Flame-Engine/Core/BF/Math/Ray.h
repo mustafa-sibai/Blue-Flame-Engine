@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Math
 	{
-		class BF_API Ray
+		class BFE_API Ray
 		{
 			public:
 				Vector3f origin;

@@ -32,9 +32,9 @@ namespace BF
 				tinyxml2::XMLDocument xmlDocument;
 				xmlDocument.LoadFile(filename.c_str());
 
-				tinyxml2::XMLElement* root = BF_IS_NULL(xmlDocument.FirstChildElement("GUIStyle"));
+				tinyxml2::XMLElement* root = BFE_IS_NULL(xmlDocument.FirstChildElement("GUIStyle"));
 
-				const char* texturefilename = BF_IS_NULL(root->FirstChildElement("StyleSheet")->Attribute("Path"));
+				const char* texturefilename = BFE_IS_NULL(root->FirstChildElement("StyleSheet")->Attribute("Path"));
 				texture->Load(texturefilename);
 
 				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button", "Checkbox", "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2", "TabWindow", "TabWindow/Tab" };
@@ -48,20 +48,20 @@ namespace BF
 
 			Math::Rectangle StyleSheet::ReadWidgetData(tinyxml2::XMLElement* widgetNode, const string& state, const string& type)
 			{
-				const char* x = BF_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("X"));
-				const char* y = BF_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Y"));
-				const char* width = BF_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Width"));
-				const char* height = BF_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Height"));
+				const char* x = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("X"));
+				const char* y = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Y"));
+				const char* width = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Width"));
+				const char* height = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Height"));
 
 				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
 			Math::Rectangle StyleSheet::ReadWidgetDimensions(tinyxml2::XMLElement* widgetNode)
 			{
-				const char* x = BF_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinWidth"));
-				const char* y = BF_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinHeight"));
-				const char* char_width = BF_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Width"));
-				const char* char_height = BF_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Height"));
+				const char* x = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinWidth"));
+				const char* y = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinHeight"));
+				const char* char_width = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Width"));
+				const char* char_height = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Height"));
 
 				unsigned int width = 0;
 				unsigned int height = 0;
@@ -83,19 +83,19 @@ namespace BF
 			{
 				if (HasText(widgetNode))
 				{
-					const char* fontfilename = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Path"));
-					const char* size = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Size"));
+					const char* fontfilename = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Path"));
+					const char* size = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Size"));
 
 					Font* font = new Font();
 					font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
 
-					const char* text = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("String")->Attribute("Value"));
-					const char* alignment = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Alignment")->Attribute("Value"));
+					const char* text = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("String")->Attribute("Value"));
+					const char* alignment = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Alignment")->Attribute("Value"));
 
-					const char* r = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("R"));
-					const char* g = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("G"));
-					const char* b = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("B"));
-					const char* a = BF_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("A"));
+					const char* r = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("R"));
+					const char* g = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("G"));
+					const char* b = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("B"));
+					const char* a = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("A"));
 
 					Text::TextAlignment textAlignment;
 

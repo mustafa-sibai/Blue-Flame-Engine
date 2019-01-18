@@ -70,8 +70,8 @@ namespace _2DScene
 
 		font.Load("Assets/Fonts/arial.ttf", 120, BF::Graphics::Fonts::FontAtlasFactory::Language::English);
 		//text = Text(&font, "Blue Flame Engine !", Vector2(10, 10), 0, Color(0.0f, 0.0f, 1.0f, 1.0f));
-		BF_LOG_INFO(text.GetPosition());
-		BF_LOG_INFO(text.GetRectangle());
+		BFE_LOG_INFO(text.GetPosition());
+		BFE_LOG_INFO(text.GetRectangle());
 		node = Waypoint::Node(Vector2f(100.0f, 100.0f));
 		node2 = Waypoint::Node(Vector2f(300.0f, 100.0f));
 
@@ -90,12 +90,12 @@ namespace _2DScene
 		//font2.Load("Assets/Fonts/arial.ttf", 20, BF::Graphics::Fonts::FontAtlasFactory::Language::English);
 
 		/*Math::Vector2 v1 = font.MeasureString("Blue Flame Engine !");
-		BF_LOG_INFO("%f, %f", v1.x, v1.y);
+		BFE_LOG_INFO("%f, %f", v1.x, v1.y);
 
 		Math::Vector2 v = font2.MeasureString("Blue Flame Engine 22!");
-		BF_LOG_INFO("%f, %f", v.x, v.y);*/
+		BFE_LOG_INFO("%f, %f", v.x, v.y);*/
 
-		//BF_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
+		//BFE_LOG_WARNING("w: %i, h: %i", fontAtlas->texture->GetTextureData().width, fontAtlas->texture->GetTextureData().height);
 		//fontSprite = Sprite(fontAtlas->texture, BF::Math::Vector3(350.0f, 350.0f, 0.0f), Vector4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		tileMap.Load("Assets/Maps/TileMap.bfm");
@@ -118,32 +118,32 @@ namespace _2DScene
 	{
 		//Scene::FixedUpdate();
 
-		//BF_WARNING("TICKS");
+		//BFE_WARNING("TICKS");
 		//spriteAnimation.Update();
 	}*/
 
 	void DoButtonWork()
 	{
-		BF_LOG_INFO("lol xD");
+		BFE_LOG_INFO("lol xD");
 	}
 
 	void _2DScene::Update()
 	{
 		//This is temporary.
-		//BF_LOG_INFO("w: %i h: %i", Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
+		//BFE_LOG_INFO("w: %i h: %i", Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
 
 		camera.SetProjectionMatrix(Matrix4::Orthographic(0.0f, Engine::GetWindow().GetClientWidth(), 0.0f, Engine::GetWindow().GetClientHeight(), -1.0f, 1.0f));
 		Scene::Update();
 		camera.Update();
 
 		if (button.IsPressed())
-			BF_LOG_INFO("PRESSED");
+			BFE_LOG_INFO("PRESSED");
 
 		if (button2.IsPressed())
-			BF_LOG_INFO("PRESSED2");
+			BFE_LOG_INFO("PRESSED2");
 
 		if (button3.IsPressed())
-			BF_LOG_INFO("PRESSED3");
+			BFE_LOG_INFO("PRESSED3");
 
 		//waypoint.Update();
 
@@ -153,12 +153,12 @@ namespace _2DScene
 			waypoint.GoTo(node2);*/
 
 		/*if (checkbox.IsChecked())
-			BF_LOG_ERROR("CHECKED !!");
+			BFE_LOG_ERROR("CHECKED !!");
 		else
-			BF_LOG_WARNING("NOT CHECKED !! ");*/
+			BFE_LOG_WARNING("NOT CHECKED !! ");*/
 
-		//BF_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToWindow().x, BF::Input::Mouse::GetPositionRelativeToWindow().y );
-		//BF_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToScreen().x, BF::Input::Mouse::GetPositionRelativeToScreen().y);
+		//BFE_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToWindow().x, BF::Input::Mouse::GetPositionRelativeToWindow().y );
+		//BFE_LOG_INFO("%f %f", BF::Input::Mouse::GetPositionRelativeToScreen().x, BF::Input::Mouse::GetPositionRelativeToScreen().y);
 	}
 
 	void _2DScene::Render()

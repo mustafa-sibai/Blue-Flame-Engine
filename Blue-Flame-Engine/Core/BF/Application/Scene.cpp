@@ -9,13 +9,12 @@ namespace BF
 		using namespace std;
 		using namespace BF::ECS;
 		using namespace BF::Graphics;
-		using namespace BF::Graphics::Renderers;
 		using namespace BF::Scripting;
 
 		//using namespace BF::Application::Layers;
 
-		Scene::Scene(Camera& camera) :
-			/*forwardRenderer(camera),*/ initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
+		Scene::Scene(BF::Application::App& app) :
+			app(app), initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
 		{
 		}
 
@@ -27,8 +26,6 @@ namespace BF
 		{
 			//rootGameObject = new GameObject();
 			//rootGameObject->layerManager = &layerManager;
-			spriteRenderer.Initialize();
-			//forwardRenderer.Initialize();
 		}
 
 		void Scene::Load()
@@ -37,7 +34,6 @@ namespace BF
 
 		void Scene::PostLoad()
 		{
-			//forwardRenderer.PostLoad();
 			scriptExecutor.Start();
 		}
 
@@ -52,8 +48,6 @@ namespace BF
 
 		void Scene::Render()
 		{
-			spriteRenderer.Render(SpriteRenderer::SortingOrder::BackToFront);
-			//forwardRenderer.Render();
 		}
 
 		GameObject* Scene::AddGameObject(GameObject* gameObject)
@@ -65,7 +59,7 @@ namespace BF
 			}
 			else
 				//Do copy here
-				BF_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
+				BFE_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
 					" has already been added to the scene. This GameObject will not be added again.", "");
 			return gameObject;
 		}
@@ -80,14 +74,14 @@ namespace BF
 			}
 			else
 				//Do copy here
-				BF_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
+				BFE_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
 					" has already been added to the scene. This GameObject will not be added again.", "");
 			return gameObject;
 		}
 
 		void Scene::RemoveGameObject(GameObject* gameObject)
 		{
-			for (size_t i = 0; i < gameObject->components.size(); i++)
+			/*for (size_t i = 0; i < gameObject->components.size(); i++)
 			{
 				if (gameObject->components[i]->type == Component::Type::Renderable)
 				{
@@ -111,7 +105,7 @@ namespace BF
 				}
 			}
 
-			delete gameObject;
+			delete gameObject;*/
 		}
 
 		/*void Scene::Destroy(GameNode* gameNode)

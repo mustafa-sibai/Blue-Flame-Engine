@@ -1,8 +1,8 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXConstantBuffer.h"
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/API/OpenGL/GLConstantBuffer.h"
 #endif
 
@@ -14,13 +14,13 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API ConstantBuffer
+			class BFE_API ConstantBuffer
 			{
 				private:
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 					BF::Platform::API::DirectX::DXConstantBuffer dxConstantBuffer;
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 					BF::Platform::API::OpenGL::GLConstantBuffer glConstantBuffer;
 #endif
 				public:

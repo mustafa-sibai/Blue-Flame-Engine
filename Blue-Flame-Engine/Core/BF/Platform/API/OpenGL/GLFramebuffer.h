@@ -19,7 +19,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLFramebuffer
+				class BFE_API GLFramebuffer
 				{
 					private:
 						const Graphics::API::Texture2D* texture2D;

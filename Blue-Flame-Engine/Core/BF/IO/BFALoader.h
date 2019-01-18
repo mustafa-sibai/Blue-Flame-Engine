@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API BFALoader
+		class BFE_API BFALoader
 		{
 			public:
 				static BF::Graphics::Animation::SpriteAnimationData* Load(const std::string& filename);

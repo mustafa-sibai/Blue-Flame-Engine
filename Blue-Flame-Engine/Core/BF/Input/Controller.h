@@ -5,13 +5,13 @@
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
-#define BF_MAX_CONTROLLER_BUTTONS 25
+#define BFE_MAX_CONTROLLER_BUTTONS 25
 
 namespace BF
 {
 	namespace Input
 	{
-		class BF_API Controller
+		class BFE_API Controller
 		{
 			friend class Controllers;
 
@@ -19,7 +19,7 @@ namespace BF
 				XINPUT_STATE state;
 				XINPUT_VIBRATION Vibration;
 
-				bool buttons[BF_MAX_CONTROLLER_BUTTONS];
+				bool buttons[BFE_MAX_CONTROLLER_BUTTONS];
 				int ID;
 
 				float leftTrigger;
@@ -50,7 +50,7 @@ namespace BF
 				bool IsDeviceConnected(int portNumber);
 		};
 
-		class BF_API Controllers
+		class BFE_API Controllers
 		{
 			friend class BF::Platform::Windows::WINWindow;
 

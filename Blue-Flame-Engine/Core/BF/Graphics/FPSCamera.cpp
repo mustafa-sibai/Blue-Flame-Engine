@@ -11,7 +11,8 @@ namespace BF
 		using namespace BF::Input;
 		using namespace BF::Math;
 
-		FPSCamera::FPSCamera() : 
+		FPSCamera::FPSCamera(const Matrix4& projectionMatrix) :
+			Camera(projectionMatrix),
 			movmentSpeed(1.25f), sensitivity(0.05f), yaw(0.0f), pitch(0.0f), lockMouseToCenter(false)
 		{
 		}
@@ -20,9 +21,9 @@ namespace BF
 		{
 		}
 
-		void FPSCamera::Initialize(const Matrix4& projectionMatrix)
+		void FPSCamera::Initialize()
 		{
-			Camera::Initialize(projectionMatrix);
+			Camera::Initialize();
 
 			cameraFront = Vector3f::Forward();
 			cameraUp = Vector3f::Up();

@@ -1,28 +1,28 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
 	#include "BF/Platform/Windows/WINWindow.h"
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXWindow.h"
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 	#include "BF/Platform/Web/WEBWindow.h"
 #endif
 
 #include "BF/Math/Vector2.h"
 #include "BF/Common.h"
 
-#define BF_MAX_MOUSE_BUTTONS 10
+#define BFE_MAX_MOUSE_BUTTONS 10
 
 namespace BF
 {
 	namespace Input
 	{
-		class BF_API Mouse
+		class BFE_API Mouse
 		{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;
 			friend class BF::Platform::Windows::WINWindow;
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 			friend class BF::Platform::Web::WEBWindow;
 #endif
 
@@ -31,11 +31,11 @@ namespace BF
 				{
 					friend class BF::Input::Mouse;
 
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 					friend class BF::Platform::Windows::WINWindow;
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 					friend class BF::Platform::Linux::LXWindow;
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 					friend class BF::Platform::Web::WEBWindow;
 #endif
 					enum class Code { Left, Right, Middle, X1, X2 };
@@ -48,7 +48,7 @@ namespace BF
 			private:
 				static BF::Math::Vector2f position;
 				static bool insideWindowClient;
-				static Button buttons[BF_MAX_MOUSE_BUTTONS];
+				static Button buttons[BFE_MAX_MOUSE_BUTTONS];
 
 			public:
 				Mouse();

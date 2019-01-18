@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API Panel : public Widget
+			class BFE_API Panel : public Widget
 			{
 			private:
 				enum class State { Normal, Resized, Moved };

@@ -1,11 +1,11 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
@@ -13,13 +13,11 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/ECS/GameObject.h"
-/*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+/*#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 	#include "BF/Graphics/GUI/WidgetManager.h"
 #endif*/
 #include "BF/Graphics/Camera.h"
 #include "BF/Graphics/API/Context.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
-#include "BF/Graphics/Renderers/ForwardRenderer/ForwardRenderer.h"
 #include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Common.h"
 
@@ -29,24 +27,23 @@ namespace BF
 	{
 		class SceneManager;
 
-		class BF_API Scene
+		class BFE_API Scene
 		{
 			friend class BF::Engine;
 			friend class BF::ECS::GameObject;
 
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 			friend class BF::Platform::Linux::LXEngineEntryPoint;
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 			friend class BF::Platform::Web::WEBEngineEntryPoint;
-#elif defined(BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 
 			private:
-				BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
-				//BF::Graphics::Renderers::ForwardRenderer forwardRenderer;
+				BF::Application::App& app;
 				BF::Scripting::ScriptExecutor scriptExecutor;
 				std::vector<BF::ECS::GameObject*> gameObjects;
 
@@ -56,7 +53,7 @@ namespace BF
 
 				void RemoveGameObject(BF::ECS::GameObject* gameObject);
 /*
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				BF::Graphics::GUI::WidgetManager widgetManager;
 #endif*/
 		private:
@@ -67,10 +64,10 @@ namespace BF
 				//GameObject* rootGameObject;
 
 			public:
-				Scene(BF::Graphics::Camera& camera);
+				Scene(BF::Application::App& app);
 				~Scene();
 
-/*#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
+/*#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 				inline BF::Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
 #endif*/
 

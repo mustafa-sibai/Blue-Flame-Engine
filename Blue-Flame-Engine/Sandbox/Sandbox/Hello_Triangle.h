@@ -7,7 +7,6 @@ namespace Hello_Triangle
 	{
 		private:
 			BF::Application::Scene* scene;
-			BF::Graphics::Camera camera;
 
 			BF::Math::Vector3f vertices[3];
 			unsigned int indices[3];

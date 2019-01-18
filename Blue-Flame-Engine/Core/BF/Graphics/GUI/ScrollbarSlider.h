@@ -11,7 +11,7 @@ namespace BF
 		{
 			class Scrollbar;
 
-			class BF_API ScrollbarSlider : public Widget
+			class BFE_API ScrollbarSlider : public Widget
 			{
 				friend class Panel;
 				friend class Scrollbar;

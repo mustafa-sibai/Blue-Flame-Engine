@@ -17,7 +17,7 @@
 
 int main()
 {
-#ifdef BF_NO_NET
+#ifdef BFE_NO_NET
 	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
@@ -37,14 +37,14 @@ int main()
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
 
 	engine.Run(app);
-#elif defined (BF_CLIENT)
+#elif defined (BFE_CLIENT)
 	BF::Network::Client client;
 
 	client.Initialize();
 	client.Connect();
 
 	system("PAUSE");
-#elif defined (BF_SERVER)
+#elif defined (BFE_SERVER)
 	BF::Network::Server server;
 
 	server.Initialize();

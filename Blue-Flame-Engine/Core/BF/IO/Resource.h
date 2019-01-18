@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace IO
 	{
-		struct BF_API Resource
+		struct BFE_API Resource
 		{
 			enum class Type { Audio, Texture, XML, Font, Shader, Model };
 

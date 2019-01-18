@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Network
 	{
-		class BF_API Server
+		class BFE_API Server
 		{
 			private:
 				SOCKET listenSocket, clientSocket;

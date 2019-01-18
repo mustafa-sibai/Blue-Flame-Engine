@@ -14,7 +14,7 @@ namespace BF
 	{
 		namespace Windows
 		{
-			class BF_API WINEngineEntryPoint
+			class BFE_API WINEngineEntryPoint
 			{
 				private:
 					WINWindow winWindow;

@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API TextureAtlas : public BF::Graphics::API::Texture
+		class BFE_API TextureAtlas : public BF::Graphics::API::Texture
 		{
 			private:
 				unsigned int bufferSize;

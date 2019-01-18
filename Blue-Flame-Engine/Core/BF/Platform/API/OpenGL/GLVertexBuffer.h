@@ -11,7 +11,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLVertexBuffer
+				class BFE_API GLVertexBuffer
 				{
 				private:
 					GLuint vao;

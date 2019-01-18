@@ -7,7 +7,6 @@ namespace ECS_Script_Test
 	{
 		private:
 			BF::Application::Scene* scene;
-			BF::Graphics::Camera camera;
 
 		public:
 			ECS_Script_Test();

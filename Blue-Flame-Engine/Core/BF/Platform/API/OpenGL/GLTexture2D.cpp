@@ -40,7 +40,7 @@ namespace BF
 					GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GetGLTextureWrap(wrap)));
 
 					//TODO: We should not check for max AF vaule everytime we create a new texture. This should be set in some kind of static settings class that should be run once after context creation.
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 					if (filter == Texture::Filter::AnisotropicX2 || filter == Texture::Filter::AnisotropicX4 ||
 						filter == Texture::Filter::AnisotropicX8 || filter == Texture::Filter::AnisotropicX16)
 					{
@@ -49,7 +49,7 @@ namespace BF
 						else
 						{
 							filter = Texture::Filter::Trilinear;
-							BF_LOG_WARNING("Anisotropic filtering is not supported on this hardware. The engine will fall back to Trilinear filtering.", "");
+							BFE_LOG_WARNING("Anisotropic filtering is not supported on this hardware. The engine will fall back to Trilinear filtering.", "");
 						}
 					}
 #endif
@@ -80,7 +80,7 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(2.0f, AFLevel)));
 #endif
 							break;
@@ -90,7 +90,7 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(4.0f, AFLevel)));
 #endif
 							break;
@@ -100,7 +100,7 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(8.0f, AFLevel)));
 #endif
 							break;
@@ -110,7 +110,7 @@ namespace BF
 							GLCall(glGenerateMipmap(GL_TEXTURE_2D));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 							GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR));
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 							GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, Math::Min(16.0f, AFLevel)));
 							//GLCall(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_LOD_BIAS, -10.4f));
 #endif
@@ -180,7 +180,7 @@ namespace BF
 						case Texture::Wrap::MirroredReapeat: return GL_MIRRORED_REPEAT;
 						case Texture::Wrap::ClampToEdge: return GL_CLAMP_TO_EDGE;
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 					case Texture::Wrap::ClampToBorder: return GL_CLAMP_TO_BORDER;
 #endif
 						default: return GL_REPEAT;

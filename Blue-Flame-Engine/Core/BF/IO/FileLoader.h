@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API FileLoader
+		class BFE_API FileLoader
 		{
 			public:
 				static std::string LoadTextFile(const std::string& filename);
