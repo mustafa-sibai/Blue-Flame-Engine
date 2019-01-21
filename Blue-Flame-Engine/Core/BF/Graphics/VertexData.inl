@@ -12,62 +12,66 @@ struct BFE_API PVertexData
 	}
 };
 
-struct BFE_API PUVVertexData
+struct BFE_API PUVVertexData : PVertexData
 {
-	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;
 
 	PUVVertexData() :
-		position(0.0f), texcoord(0.0f) { }
+		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		texcoord(0.0f) { }
 
-	PUVVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord) :
-		position(position), texcoord(texcoord)
+	PUVVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord) :
+		PVertexData(materialIndex, position),
+		texcoord(texcoord)
 	{
 	}
 };
 
-struct BFE_API PNVertexData
+struct BFE_API PNVertexData : PVertexData
 {
-	BF::Math::Vector3f position;
 	BF::Math::Vector3f normal;
 
 	PNVertexData() :
-		position(0.0f), normal(0.0f) { }
+		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		normal(0.0f) { }
 
-	PNVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector3f& normal) :
-		position(position), normal(normal)
+	PNVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector3f& normal) :
+		PVertexData(materialIndex, position), 
+		normal(normal)
 	{
 	}
 };
 
-struct BFE_API PUVNVertexData
+struct BFE_API PUVNVertexData : PVertexData
 {
-	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;
 	BF::Math::Vector3f normal;
 
 	PUVNVertexData() :
-		position(0.0f), texcoord(0.0f), normal(0.0f) { }
+		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		texcoord(0.0f), normal(0.0f) { }
 
-	PUVNVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal) :
-		position(position), texcoord(texcoord), normal(normal)
+	PUVNVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal) :
+		PVertexData(materialIndex, position), 
+		texcoord(texcoord), normal(normal)
 	{
 	}
 };
 
-struct BFE_API PUVNTBVertexData
+struct BFE_API PUVNTBVertexData : PVertexData
 {
-	BF::Math::Vector3f position;
 	BF::Math::Vector2f texcoord;
 	BF::Math::Vector3f normal;
 	BF::Math::Vector3f tangent;
 	BF::Math::Vector3f binormal;
 
 	PUVNTBVertexData() :
-		position(0.0f), texcoord(0.0f), normal(0.0f), tangent(0.0f), binormal(0.0f) { }
+		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		texcoord(0.0f), normal(0.0f), tangent(0.0f), binormal(0.0f) { }
 
-	PUVNTBVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal, const BF::Math::Vector3f& tangent, const BF::Math::Vector3f& binormal) :
-		position(position), texcoord(texcoord), normal(normal), tangent(tangent), binormal(binormal)
+	PUVNTBVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal, const BF::Math::Vector3f& tangent, const BF::Math::Vector3f& binormal) :
+		PVertexData(materialIndex, position),
+		texcoord(texcoord), normal(normal), tangent(tangent), binormal(binormal)
 	{
 	}
 };
