@@ -1,10 +1,9 @@
 #pragma once
-#include <vector>
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
-#include "BF/Graphics/API/Texture2D.h"
 #include "BF/Graphics/Materials/MeshMaterial.h"
+#include "BF/Graphics/MeshData.h"
 #include "BF/Graphics/Color.h"
 #include "BF/ECS/Component.h"
 #include "BF/Math/Math.h"
@@ -16,38 +15,30 @@ namespace BF
 	{
 		class BFE_API Mesh : public BF::ECS::Component
 		{
-			public:
-				#include "VertexData.inl"
+		public:
+			enum class PresetMeshes { Plane };
+			BF::Graphics::Materials::MeshMaterial* material;
+			MeshData* meshData;
 
-				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
-				VertexStructVersion vertexStructVersion;
+		private:
+			BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
+			BF::Graphics::API::VertexBuffer* vertexBuffer;
+			BF::Graphics::API::IndexBuffer* indexBuffer;
 
-				enum class PresetMeshes { Plane };
-				BF::Graphics::Materials::MeshMaterial* material;
+		public:
+			Mesh(PresetMeshes presetMeshes);
+			Mesh(MeshData* meshData);
+			~Mesh();
 
-			private:
-				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
-				BF::Graphics::API::VertexBuffer* vertexBuffer;
-				BF::Graphics::API::IndexBuffer* indexBuffer;
-				std::vector<unsigned int>* indices;
-				void* vertices;
+			void SetBuffers(BF::Graphics::Materials::MeshMaterial* material);
 
-			public:
-				Mesh(PresetMeshes presetMeshes);
-				Mesh(void* vertices, std::vector<unsigned int>* indices, VertexStructVersion vertexStructVersion);
-				~Mesh();
+			void Bind() const;
+			void Unbind() const;
 
-				void SetBuffers(BF::Graphics::Materials::MeshMaterial* material);
+			//unsigned int GetVerticesCount() const;
 
-				void Bind() const;
-				void Unbind() const;
-
-				unsigned int GetVerticesCount() const;
-
-			public:
-				inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
-				inline void* GetVertices() const { return vertices; }
-				inline std::vector<unsigned int>* GetIndices() const { return indices; }
+		public:
+			inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
 		};
 	}
 }

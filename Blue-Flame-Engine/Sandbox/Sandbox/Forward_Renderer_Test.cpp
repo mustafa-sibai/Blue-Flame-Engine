@@ -1,4 +1,5 @@
 #include "Forward_Renderer_Test.h"
+#include "BF/IO/ResourceManager.h"
 
 namespace Forward_Renderer_Test
 {
@@ -24,10 +25,11 @@ namespace Forward_Renderer_Test
 
 	void Forward_Renderer_Test::Initialize()
 	{
-		scene = new Scene(*this);
-		
-
 		App::Initialize();
+
+		scene = new Scene(*this);
+		GameObject* cameraGameObject = scene->AddGameObject(new GameObject(*scene, "Camera"));
+		FPSCamera* fpsCamera = (FPSCamera*)cameraGameObject->AddComponent(new FPSCamera(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f)));
 
 		BF::Input::Mouse::ShowMouseCursor(true);
 
@@ -36,10 +38,12 @@ namespace Forward_Renderer_Test
 		//BF::Engine::LimitFrameRate(60.0f);
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
 
-		//fpsCamera.Initialize(Matrix4::Orthographic(-40, 40, -40, 40, 0.01f, 5000));
-		//fpsCamera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
-
 		//constantBuffer.Create(sizeof(LightBuffer), 1);
+
+		/*Mesh* mesh = BF::IO::ResourceManager::Load<BF::Graphics::Mesh>("");
+		TextureData* myTexture = BF::IO::ResourceManager::Load<TextureData>("texture2DName.png");
+		Texture2D* texture = new Texture2D();
+		texture->Create(myTexture, BF::Graphics::API::Texture::Format::R8G8B8A8);*/
 	}
 
 	void Forward_Renderer_Test::Load()
@@ -203,7 +207,7 @@ namespace Forward_Renderer_Test
 
 
 		
-		for (size_t j = 0; j < 1; j++)
+		/*for (size_t j = 0; j < 1; j++)
 		{
 			for (size_t k = 0; k < 25; k++)
 			{
@@ -240,7 +244,7 @@ namespace Forward_Renderer_Test
 
 				((Mesh*)scene->GetGameObjects()[k + j * 25]->GetComponents()[1])->SetBuffers(planeMaterial);
 			}
-		}
+		}*/
 		
 
 

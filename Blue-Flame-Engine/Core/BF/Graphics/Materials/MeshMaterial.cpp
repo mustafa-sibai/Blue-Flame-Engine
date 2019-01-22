@@ -8,8 +8,7 @@ namespace BF
 		{
 			using namespace BF::Graphics::API;
 
-			MeshMaterial::MeshMaterial() :
-				index(0)
+			MeshMaterial::MeshMaterial()
 			{
 			}
 

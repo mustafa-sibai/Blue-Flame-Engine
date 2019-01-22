@@ -16,24 +16,24 @@ namespace BF
 				{
 					friend class GLFramebuffer;
 
-					private:
-						GLuint textureID;
-						float AFLevel;
+				private:
+					GLuint textureID;
+					float AFLevel;
 
-					public:
-						GLTexture2D();
-						~GLTexture2D();
+				public:
+					GLTexture2D();
+					~GLTexture2D();
 
-						void Create(const Graphics::API::Texture::TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
-						void Bind() const;
-						void Bind(const GLShader& glShader, const std::string& samplerName, unsigned int index) const;
-						void Unbind() const;
-						void Unbind(const std::string& samplerName, unsigned int index) const;
+					void Create(const BF::Graphics::API::TextureData& textureData, BF::Graphics::API::Texture::Format format, BF::Graphics::API::Texture::Wrap wrap, BF::Graphics::API::Texture::Filter filter);
+					void Bind() const;
+					void Bind(const GLShader& glShader, const std::string& samplerName, unsigned int index) const;
+					void Unbind() const;
+					void Unbind(const std::string& samplerName, unsigned int index) const;
 
-					private:
-						int GetGLTextureFormat(Graphics::API::Texture::Format format) const;
-						int GetGLTextureInternalFormat(Graphics::API::Texture::Format format) const;
-						int GetGLTextureWrap(Graphics::API::Texture::Wrap wrap) const;
+				private:
+					int GetGLTextureFormat(BF::Graphics::API::Texture::Format format) const;
+					int GetGLTextureInternalFormat(BF::Graphics::API::Texture::Format format) const;
+					int GetGLTextureWrap(BF::Graphics::API::Texture::Wrap wrap) const;
 				};
 			}
 		}

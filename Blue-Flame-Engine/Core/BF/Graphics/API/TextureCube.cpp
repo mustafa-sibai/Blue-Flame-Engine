@@ -23,11 +23,11 @@ namespace BF
 
 			void TextureCube::Load(const vector<string>& filenames)
 			{
-				for (size_t i = 0; i < filenames.size(); i++)
+				/*for (size_t i = 0; i < filenames.size(); i++)
 				{
 					Texture::Load(filenames[i]);
 					textureCubes.emplace_back(textureData);
-				}
+				}*/
 
 #ifdef BFE_PLATFORM_WINDOWS
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
@@ -41,11 +41,11 @@ namespace BF
 
 			void TextureCube::Load(const vector<string>& filenames, Wrap textureWrap, Filter textureFilter)
 			{
-				for (size_t i = 0; i < filenames.size(); i++)
+				/*for (size_t i = 0; i < filenames.size(); i++)
 				{
 					Texture::Load(filenames[i]);
 					textureCubes.emplace_back(textureData);
-				}
+				}*/
 
 #ifdef BFE_PLATFORM_WINDOWS
 				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)

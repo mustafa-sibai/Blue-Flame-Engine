@@ -12,20 +12,20 @@ namespace BF
 	{
 		class BFE_API TerrainGenerator
 		{
-			private:
-				BF::Graphics::API::Shader shader;
-				BF::Graphics::API::VertexBuffer vertexBuffer;
-				BF::Graphics::API::IndexBuffer indexBuffer;
-				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
+		private:
+			BF::Graphics::API::Shader shader;
+			BF::Graphics::API::VertexBuffer vertexBuffer;
+			BF::Graphics::API::IndexBuffer indexBuffer;
+			BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
-				BF::Graphics::API::Texture::TextureData* textureData;
+			BF::Graphics::API::TextureData* textureData;
 
-			public:
-				TerrainGenerator();
-				~TerrainGenerator();
+		public:
+			TerrainGenerator();
+			~TerrainGenerator();
 
-				void Initialize();
-				void Load(const std::string& filename);
+			void Initialize();
+			void Load(const std::string& filename);
 		};
 	}
 }

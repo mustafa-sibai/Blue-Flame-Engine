@@ -192,21 +192,21 @@ namespace Editor
 					{
 						case Mesh::VertexStructVersion::P:
 						{
-							Mesh::PVertexData* vertex = new Mesh::PVertexData(controlPoints[ctrlPointIndex]);
+							Mesh::PVertexData* vertex = new Mesh::PVertexData(0, controlPoints[ctrlPointIndex]);
 							vertices.push_back((void*)vertex);
 							break;
 						}
 						case Mesh::VertexStructVersion::PUV:
 						{
 							Vector2f UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
-							Mesh::PUVVertexData* vertex = new Mesh::PUVVertexData(controlPoints[ctrlPointIndex], UV);
+							Mesh::PUVVertexData* vertex = new Mesh::PUVVertexData(0, controlPoints[ctrlPointIndex], UV);
 							vertices.push_back((void*)vertex);
 							break;
 						}
 						case Mesh::VertexStructVersion::PN:
 						{
 							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PNVertexData* vertex = new Mesh::PNVertexData(controlPoints[ctrlPointIndex], normal);
+							Mesh::PNVertexData* vertex = new Mesh::PNVertexData(0, controlPoints[ctrlPointIndex], normal);
 							vertices.push_back((void*)vertex);
 							break;
 						}
@@ -214,7 +214,7 @@ namespace Editor
 						{
 							Vector2f UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
 							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PUVNVertexData* vertex = new Mesh::PUVNVertexData(controlPoints[ctrlPointIndex], UV, normal);
+							Mesh::PUVNVertexData* vertex = new Mesh::PUVNVertexData(0, controlPoints[ctrlPointIndex], UV, normal);
 							vertices.push_back((void*)vertex);
 							break;
 						}
@@ -224,7 +224,7 @@ namespace Editor
 							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
 							Vector3f tangent = ReadTangent(mesh, ctrlPointIndex, vertexCounter, unused);
 							Vector3f binormal = ReadBinormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PUVNTBVertexData* vertex = new Mesh::PUVNTBVertexData(controlPoints[ctrlPointIndex], UV, normal, tangent, binormal);
+							Mesh::PUVNTBVertexData* vertex = new Mesh::PUVNTBVertexData(0, controlPoints[ctrlPointIndex], UV, normal, tangent, binormal);
 							vertices.push_back((void*)vertex);
 							break;
 						}

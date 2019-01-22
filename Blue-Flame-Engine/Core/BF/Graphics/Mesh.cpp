@@ -11,54 +11,16 @@ namespace BF
 
 		Mesh::Mesh(PresetMeshes presetMeshes) :
 			Component(Component::Type::Mesh),
-			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(nullptr), indices(nullptr), vertexStructVersion(Mesh::VertexStructVersion::P)
+			vertexBuffer(nullptr), indexBuffer(nullptr), meshData(nullptr)
 		{
 			if (presetMeshes == PresetMeshes::Plane)
 			{
-				vertices = new vector<Mesh::PVertexData>(4);
-				indices = new std::vector<unsigned int>(6);
-
-				(*indices)[0] = 0;
-				(*indices)[1] = 1;
-				(*indices)[2] = 2;
-
-				(*indices)[3] = 2;
-				(*indices)[4] = 3;
-				(*indices)[5] = 0;
-
-				Vector3f position(0.0f, 0.0f, 0.0f);
-				Vector3f size(1.0f, 1.0f, 1.0f);
-
-				//Top Left
-				(*(vector<Mesh::PVertexData>*)vertices)[0] = Mesh::PVertexData(0, position);
-
-				//Top Right
-				(*(vector<Mesh::PVertexData>*)vertices)[1] = Mesh::PVertexData(0, Vector3f(position.x + size.x, position.y, position.z));
-
-				//Bottom Right
-				(*(vector<Mesh::PVertexData>*)vertices)[2] = Mesh::PVertexData(0, Vector3f(position.x + size.x, position.y, position.z + size.z));
-
-				//Bottom Left
-				(*(vector<Mesh::PVertexData>*)vertices)[3] = Mesh::PVertexData(0, Vector3f(position.x, position.y, position.z + size.z));
-
-
-				/*//Top Left
-				(*(vector<Mesh::PUVVertexData>*)vertices)[0] = Mesh::PUVVertexData(position, Vector2f(0.0f, 0.0f));
-
-				//Top Right
-				(*(vector<Mesh::PUVVertexData>*)vertices)[1] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y, position.z), Vector2f(1.0f, 0.0f));
-
-				//Bottom Right
-				(*(vector<Mesh::PUVVertexData>*)vertices)[2] = Mesh::PUVVertexData(Vector3f(position.x + size.x, position.y + size.y, position.z), Vector2f(1.0f, 1.0f));
-
-				//Bottom Left
-				(*(vector<Mesh::PUVVertexData>*)vertices)[3] = Mesh::PUVVertexData(Vector3f(position.x, position.y + size.y, position.z), Vector2f(0.0f, 1.0f));*/
 			}
 		}
 
-		Mesh::Mesh(void* vertices, vector<unsigned int>* indices, VertexStructVersion vertexStructVersion) :
+		Mesh::Mesh(MeshData* meshData) :
 			Component(Component::Type::Mesh),
-			vertexBuffer(nullptr), indexBuffer(nullptr), vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)
+			vertexBuffer(nullptr), indexBuffer(nullptr), meshData(meshData)
 		{
 		}
 
@@ -75,62 +37,62 @@ namespace BF
 
 			unsigned int vertexStructSize = 0;
 
-			switch (vertexStructVersion)
+			switch (meshData->vertexStructVersion)
 			{
-				case Mesh::VertexStructVersion::P:
+				case MeshData::VertexStructVersion::P:
 				{
-					vertexStructSize = sizeof(Mesh::PVertexData);
+					vertexStructSize = sizeof(MeshData::PVertexData);
 					vertexBufferLayout.Push(0, "MATERIALINDEX", VertexBufferLayout::DataType::Float, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(int));
 
-					vertexBuffer->Create((unsigned int)((vector<Mesh::PVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PVertexData>*)vertices)[0]);
+					vertexBuffer->Create((unsigned int)((vector<MeshData::PVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PVertexData>*)meshData->vertices)[0]);
 					break;
 				}
-				case Mesh::VertexStructVersion::PUV:
+				case MeshData::VertexStructVersion::PUV:
 				{
-					vertexStructSize = sizeof(Mesh::PUVVertexData);
+					vertexStructSize = sizeof(MeshData::PUVVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 
-					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVVertexData>*)vertices)[0]);
+					vertexBuffer->Create((unsigned int)((vector<MeshData::PUVVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVVertexData>*)meshData->vertices)[0]);
 					break;
 				}
-				case Mesh::VertexStructVersion::PN:
+				case MeshData::VertexStructVersion::PN:
 				{
-					vertexStructSize = sizeof(Mesh::PNVertexData);
+					vertexStructSize = sizeof(MeshData::PNVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f));
 
-					vertexBuffer->Create((unsigned int)((vector<Mesh::PNVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PNVertexData>*)vertices)[0]);
+					vertexBuffer->Create((unsigned int)((vector<MeshData::PNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PNVertexData>*)meshData->vertices)[0]);
 					break;
 				}
-				case Mesh::VertexStructVersion::PUVN:
+				case MeshData::VertexStructVersion::PUVN:
 				{
-					vertexStructSize = sizeof(Mesh::PUVNVertexData);
+					vertexStructSize = sizeof(MeshData::PUVNVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
 
-					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVNVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVNVertexData>*)vertices)[0]);
+					vertexBuffer->Create((unsigned int)((vector<MeshData::PUVNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNVertexData>*)meshData->vertices)[0]);
 					break;
 				}
-				case Mesh::VertexStructVersion::PUVNTB:
+				case MeshData::VertexStructVersion::PUVNTB:
 				{
-					vertexStructSize = sizeof(Mesh::PUVNTBVertexData);
+					vertexStructSize = sizeof(MeshData::PUVNTBVertexData);
 					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
 					vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f));
 					vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f) + sizeof(Vector3f));
 
-					vertexBuffer->Create((unsigned int)((vector<Mesh::PUVNTBVertexData>*)vertices)->size() * vertexStructSize, &(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0]);
+					vertexBuffer->Create((unsigned int)((vector<MeshData::PUVNTBVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNTBVertexData>*)meshData->vertices)[0]);
 					break;
 				}
 				default:
 					break;
 			}
 
-			indexBuffer->Create(&(*indices)[0], (unsigned int)indices->size());
+			indexBuffer->Create(&(*meshData->indices)[0], (unsigned int)meshData->indices->size());
 			vertexBuffer->SetLayout(*material->shader, &vertexBufferLayout);
 		}
 
@@ -146,43 +108,6 @@ namespace BF
 			indexBuffer->Unbind();
 			vertexBuffer->Unbind();
 			//material->Unbind();
-		}
-
-		unsigned int Mesh::GetVerticesCount() const
-		{
-			switch (vertexStructVersion)
-			{
-				case Mesh::VertexStructVersion::P:
-				{
-					return (unsigned int)((vector<Mesh::PVertexData*>*)vertices)->size();
-					break;
-				}
-				case Mesh::VertexStructVersion::PUV:
-				{
-					return (unsigned int)((vector<Mesh::PUVVertexData*>*)vertices)->size();
-					break;
-				}
-				case Mesh::VertexStructVersion::PN:
-				{
-					return (unsigned int)((vector<Mesh::PNVertexData*>*)vertices)->size();
-					break;
-				}
-				case Mesh::VertexStructVersion::PUVN:
-				{
-					return (unsigned int)((vector<Mesh::PUVNVertexData*>*)vertices)->size();
-					break;
-				}
-				case Mesh::VertexStructVersion::PUVNTB:
-				{
-					return (unsigned int)((vector<Mesh::PUVNTBVertexData*>*)vertices)->size();
-					break;
-				}
-				default:
-				{
-					return 0;
-					break;
-				}
-			}
 		}
 	}
 }

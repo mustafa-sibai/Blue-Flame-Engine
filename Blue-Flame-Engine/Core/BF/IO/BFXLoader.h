@@ -2,9 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
-#include "BF/Graphics/Mesh.h"
+#include "BF/Graphics/MeshData.h"
 #include "BF/IO/FileFormats/BFXFormat.h"
-#include "BF/Application/Scene.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -13,8 +12,8 @@ namespace BF
 	{
 		class BFE_API BFXLoader
 		{
-			public:
-				static void Load(const std::string& filename, BF::Application::Scene& scene);
+		public:
+			static BF::Graphics::MeshData* Load(const std::string& filename);
 		};
 	}
 }

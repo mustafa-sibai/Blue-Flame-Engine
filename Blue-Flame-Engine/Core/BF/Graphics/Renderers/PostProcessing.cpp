@@ -22,7 +22,7 @@ namespace BF
 			void PostProcessing::Initialize()
 			{
 				//BF::Engine::GetContext().EnableDepthBuffer(true);
-				postProcessingTexture.Create(Texture::TextureData(Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight(), nullptr), Texture::Format::R8G8B8A8);
+				postProcessingTexture.Create(new TextureData(Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight(), nullptr), Texture::Format::R8G8B8A8);
 				postProcessingFramebuffer.Create(postProcessingTexture, FramebufferFormat::Color);
 				postProcessingShader.LoadStandardShader(ShaderType::PostProcessing);
 
@@ -46,7 +46,7 @@ namespace BF
 				postProcessingShader.Bind();
 				postProcessingQuad->Bind();
 				postProcessingTexture.Bind(postProcessingShader, "screenTexture", 0);
-				Engine::GetContext().Draw((unsigned int)postProcessingQuad->GetIndices()->size());
+				Engine::GetContext().Draw((unsigned int)postProcessingQuad->meshData->indices->size());
 				postProcessingTexture.Unbind();
 				postProcessingQuad->Unbind();
 				postProcessingShader.Unbind();

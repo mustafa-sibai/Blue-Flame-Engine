@@ -28,7 +28,7 @@ namespace BF
 			void SpriteAnimation::Load(const string& filename)
 			{
 				data = BFALoader::Load(filename);
-				texture.Load(data->textureName);
+				//texture.Load(data->textureName);
 
 				//sprite = Sprite(&texture, Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
 				timer.Reset();

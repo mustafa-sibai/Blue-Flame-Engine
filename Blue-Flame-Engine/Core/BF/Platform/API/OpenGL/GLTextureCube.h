@@ -15,20 +15,20 @@ namespace BF
 			{
 				class BFE_API GLTextureCube
 				{
-					private:
-						GLuint textureID;
+				private:
+					GLuint textureID;
 
-					public:
-						GLTextureCube();
-						~GLTextureCube();
+				public:
+					GLTextureCube();
+					~GLTextureCube();
 
-						void Create(std::vector<Graphics::API::Texture::TextureData*>& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
-						void Bind() const;
-						void Unbind() const;
+					void Create(std::vector<BF::Graphics::API::TextureData*>& textureData, BF::Graphics::API::Texture::Format format, BF::Graphics::API::Texture::Wrap wrap, BF::Graphics::API::Texture::Filter filter);
+					void Bind() const;
+					void Unbind() const;
 
-					private:
-						int GetGLTextureFormat(Graphics::API::Texture::Format format) const;
-						int GetGLTextureWrap(Graphics::API::Texture::Wrap wrap) const;
+				private:
+					int GetGLTextureFormat(BF::Graphics::API::Texture::Format format) const;
+					int GetGLTextureWrap(BF::Graphics::API::Texture::Wrap wrap) const;
 				};
 			}
 		}

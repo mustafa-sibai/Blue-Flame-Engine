@@ -50,7 +50,7 @@ namespace BF
 
 					meshes[i]->material->Bind();
 					meshes[i]->Bind();
-					Engine::GetContext().Draw((unsigned int)meshes[i]->GetIndices()->size());
+					Engine::GetContext().Draw((unsigned int)meshes[i]->meshData->indices->size());
 					meshes[i]->Unbind();
 					meshes[i]->material->Unbind();
 				}

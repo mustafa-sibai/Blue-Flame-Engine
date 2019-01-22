@@ -8,6 +8,8 @@ namespace BF
 		{
 			using namespace BF::Graphics::API;
 
+			MeshMaterial MaterialManager::materials[BFE_MATERIAL_ARRAY_COUNT];
+
 			MaterialManager::MaterialManager() :
 				latestIndex(1)
 			{

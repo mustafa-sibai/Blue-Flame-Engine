@@ -1,6 +1,6 @@
 #pragma once
 #include <stdint.h>
-#include "BF/IO/Resource.h"
+#include "BF/Graphics/API/TextureData.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -12,24 +12,6 @@ namespace BF
 			class BFE_API Texture
 			{
 			public:
-				struct TextureData : public BF::IO::Resource
-				{
-					int width;
-					int height;
-					uint8_t* buffer;
-					void* freeImage_bitmap;
-
-					TextureData() :
-						width(0), height(0), buffer(nullptr), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
-					{
-					}
-
-					TextureData(int width, int height, uint8_t* buffer) :
-						width(width), height(height), buffer(buffer), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
-					{
-					}
-				};
-
 				enum class Format { R8 = 8, R8G8 = 16, R8G8B8 = 24, R8G8B8A8 = 32, Depth };
 				enum class Wrap { Repeat, MirroredReapeat, ClampToEdge, ClampToBorder };
 				enum class Filter { Point, Bilinear, Trilinear, AnisotropicX2, AnisotropicX4, AnisotropicX8, AnisotropicX16 };
@@ -90,7 +72,7 @@ namespace BF
 				Texture();
 				virtual ~Texture();
 
-				void Load(const std::string& filename);
+				//void Load(const std::string& filename);
 
 			public:
 				inline TextureData* GetTextureData() const { return textureData; }

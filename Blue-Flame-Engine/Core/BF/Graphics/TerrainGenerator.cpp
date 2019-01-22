@@ -40,16 +40,16 @@ namespace BF
 
 			shader.LoadStandardShader(ShaderType::Terrain);
 
-			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), 0);
-			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f));
-			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(Mesh::PUVNVertexData), sizeof(Vector3f) + sizeof(Vector2f));
+			vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, sizeof(MeshData::PUVNVertexData), 0);
+			vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, sizeof(MeshData::PUVNVertexData), sizeof(Vector3f));
+			vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, sizeof(MeshData::PUVNVertexData), sizeof(Vector3f) + sizeof(Vector2f));
 		}
 
 		void TerrainGenerator::Load(const std::string& filename)
 		{
 			textureData = BF::IO::ImageLoader::Load(filename);
 
-			Mesh::PUVNVertexData* vertices = new Mesh::PUVNVertexData[VERTICES_SIZE];
+			MeshData::PUVNVertexData* vertices = new MeshData::PUVNVertexData[VERTICES_SIZE];
 
 			Vector3f startingPosition;
 			Vector2f size = Vector2f(2.0f, 2.0f);
@@ -70,7 +70,7 @@ namespace BF
 
 					float normalizedData = Normalize(v, 0, 256);
 
-					vertices[x + (z * ROW_VERTICES)] = Mesh::PUVNVertexData(Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), -startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
+					vertices[x + (z * ROW_VERTICES)] = MeshData::PUVNVertexData(0, Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), -startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{
@@ -101,7 +101,7 @@ namespace BF
 				}
 			}
 
-			vertexBuffer.Create((unsigned int)VERTICES_SIZE * sizeof(Mesh::PUVNVertexData), vertices);
+			vertexBuffer.Create((unsigned int)VERTICES_SIZE * sizeof(MeshData::PUVNVertexData), vertices);
 			indexBuffer.Create(indecies, INDICES_SIZE);
 
 			vertexBuffer.SetLayout(shader, &vertexBufferLayout);

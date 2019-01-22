@@ -1,6 +1,5 @@
 #include "BF/System/Debug.h"
 #include "ImageLoader.h"
-#include "BF/Graphics/API/Texture.h"
 
 namespace BF
 {
@@ -11,7 +10,7 @@ namespace BF
 
 		bool ImageLoader::initialised = false;
 
-		Texture::TextureData* ImageLoader::Load(const string& filename)
+		TextureData* ImageLoader::Load(const string& filename)
 		{
 			if (!initialised)
 			{
@@ -43,7 +42,7 @@ namespace BF
 			FIBITMAP* bitmap = nullptr;
 			bitmap = FreeImage_ConvertTo32Bits(dib);
 
-			Texture::TextureData* textureData = new Texture::TextureData();
+			TextureData* textureData = new TextureData();
 			textureData->freeImage_bitmap = bitmap;
 			textureData->buffer = FreeImage_GetBits(bitmap);
 			textureData->width = FreeImage_GetWidth(bitmap);
@@ -59,7 +58,7 @@ namespace BF
 			return textureData;
 		}
 
-		void ImageLoader::Unload(Texture::TextureData* textureData)
+		void ImageLoader::Unload(TextureData* textureData)
 		{
 			FreeImage_Unload(reinterpret_cast<FIBITMAP*>(textureData->freeImage_bitmap));
 		}

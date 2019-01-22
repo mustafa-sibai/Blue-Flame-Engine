@@ -6,7 +6,7 @@ namespace BF
 {
 	namespace Math
 	{
-		template<typename T>
+		template<class T>
 		class Vector2
 		{
 			public:

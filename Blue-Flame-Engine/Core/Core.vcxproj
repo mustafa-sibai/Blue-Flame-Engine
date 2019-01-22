@@ -139,6 +139,7 @@
     <ClCompile Include="BF\Graphics\Renderers\RenderPipeline.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\Renderer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp" />
+    <ClCompile Include="BF\Graphics\Materials\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\FPSCamera.h" />
+    <ClInclude Include="BF\Graphics\MeshData.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
@@ -246,6 +248,8 @@
     <ClInclude Include="BF\Graphics\Renderers\RenderPipeline.h" />
     <ClInclude Include="BF\Graphics\Renderers\Renderer.h" />
     <ClInclude Include="BF\Graphics\Renderers\PostProcessing.h" />
+    <ClInclude Include="BF\Graphics\API\TextureData.h" />
+    <ClInclude Include="BF\Graphics\Materials\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

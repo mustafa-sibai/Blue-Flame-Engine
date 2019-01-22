@@ -1,6 +1,7 @@
 #pragma once
 #include "BF/Graphics/Color.h"
 #include "BF/Graphics/API/Texture2D.h"
+#include "BF/Graphics/Materials/Material.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -9,12 +10,9 @@ namespace BF
 	{
 		namespace Materials
 		{
-			class BFE_API MeshMaterial
+			class BFE_API MeshMaterial : public Material
 			{
-				friend class MaterialManager;
-
 				private:
-					int index;
 					BF::Graphics::API::Texture2D diffuseMap;
 					BF::Graphics::API::Texture2D specularMap;
 					BF::Graphics::API::Texture2D normalMap;

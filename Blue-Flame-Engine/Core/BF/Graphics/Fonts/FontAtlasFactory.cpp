@@ -143,7 +143,7 @@ namespace BF
 				}
 
 				Texture2D* texture = new Texture2D();
-				texture->Create(*textureAtlas.GetTextureData(), Texture2D::Format::R8);
+				texture->Create(textureAtlas.GetTextureData(), Texture2D::Format::R8);
 				FT_Done_Face(face);
 				//FT_Done_FreeType(library);
 				return new FontAtlas(fontName, charPixelSize, maxYBearing, texture, characters);

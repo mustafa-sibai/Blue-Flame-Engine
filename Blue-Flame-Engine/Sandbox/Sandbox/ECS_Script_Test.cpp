@@ -1,5 +1,6 @@
 #include "ECS_Script_Test.h"
 #include "ScriptTest.h"
+#include "BF/IO/ResourceManager.h"
 
 namespace ECS_Script_Test
 {
@@ -47,11 +48,11 @@ namespace ECS_Script_Test
 		RegularPolygon* rp = (RegularPolygon*)RegularPolygonGameObject->AddComponent(new RegularPolygon(Vector2i(100, 200), Vector2f(0, 0), 2, Color::Blues::DarkBlue()));
 		Script* script = (Script*)RegularPolygonGameObject->AddComponent(new ScriptTest());
 
-		Texture2D* t = new Texture2D();
-		t->Load("C:/engine/Blue-Flame-Engine/Sandbox/Assets/Textures/tilea5.png");
+		Texture2D* texture = new Texture2D();
+		texture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/tilea5.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
 
 		GameObject* sprite = scene->AddGameObject(new GameObject(*scene, "sprite"));
-		sprite->AddComponent(new Sprite(t, Vector2f(0, 0)));
+		sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
 		sprite->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		sprite->GetTransform()->SetScale(Vector3f(1, 1, 1));
 

@@ -17,7 +17,7 @@ namespace BF
 			{
 			}
 
-			void Texture2D::Load(const string& filename)
+			/*void Texture2D::Load(const string& filename)
 			{
 				Texture::Load(filename);
 
@@ -43,43 +43,44 @@ namespace BF
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glTexture2D.Create(*textureData, Format::R8G8B8A8, wrap, filter);
 #endif
-			}
+			}*/
 
-			void Texture2D::Create(TextureData textureData, Format format)
+			void Texture2D::Create(TextureData* textureData, Format format)
 			{
-				//Todo: This is dirty. Create like a copy constructor or something and this should be managed by the resource manager.
+				this->textureData = textureData;
+				/*//Todo: This is dirty. Create like a copy constructor or something and this should be managed by the resource manager.
 				this->textureData = new TextureData(textureData.width, textureData.height, textureData.buffer);
 				this->textureData->id = textureData.id;
 				this->textureData->filePath = textureData.filePath;
 				this->textureData->freeImage_bitmap = textureData.freeImage_bitmap;
-				this->textureData->type = textureData.type;
+				this->textureData->type = textureData.type;*/
 
 #ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
+					dxTexture2D.Create(*textureData, format, Wrap::Repeat, Filter::Point);
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, format, Wrap::Repeat, Filter::Point);
+					glTexture2D.Create(*textureData, format, Wrap::Repeat, Filter::Point);
 #endif
 			}
 
-			void Texture2D::Create(TextureData textureData, Format format, Wrap wrap, Filter filter)
+			void Texture2D::Create(TextureData* textureData, Format format, Wrap wrap, Filter filter)
 			{
-				//Todo: This is dirty. Create like a copy constructor or something and this should be managed by the resource manager.
+				/*//Todo: This is dirty. Create like a copy constructor or something and this should be managed by the resource manager.
 				this->textureData = new TextureData(textureData.width, textureData.height, textureData.buffer);
 				this->textureData->id = textureData.id;
 				this->textureData->filePath = textureData.filePath;
 				this->textureData->freeImage_bitmap = textureData.freeImage_bitmap;
-				this->textureData->type = textureData.type;
+				this->textureData->type = textureData.type;*/
 
 #ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxTexture2D.Create(textureData, format, wrap, filter);
+					dxTexture2D.Create(*textureData, format, wrap, filter);
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glTexture2D.Create(textureData, format, wrap, filter);
+					glTexture2D.Create(*textureData, format, wrap, filter);
 #endif
 			}
 
