@@ -1,5 +1,6 @@
  #include "Engine.h"
 #include "BF/System/Debug.h"
+#include "BF/Version.h"
 
 namespace BF
 {

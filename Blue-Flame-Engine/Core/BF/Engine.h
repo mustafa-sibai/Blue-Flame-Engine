@@ -11,10 +11,6 @@
 
 #include "BF/Common.h"
 
-#define BFE_ENGINE_MAJOR_VERSION 0
-#define BFE_ENGINE_MINOR_VERSION 190118
-#define BFE_ENGINE_PATCH_VERSION 0
-
 namespace BF
 {
 #if defined (BFE_PLATFORM_ANDROID) || defined (BFE_PLATFORM_LINUX)

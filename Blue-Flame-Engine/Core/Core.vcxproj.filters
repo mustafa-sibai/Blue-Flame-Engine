@@ -608,6 +608,9 @@
     <ClInclude Include="BF\Graphics\Materials\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />

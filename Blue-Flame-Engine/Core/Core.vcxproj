@@ -250,6 +250,7 @@
     <ClInclude Include="BF\Graphics\Renderers\PostProcessing.h" />
     <ClInclude Include="BF\Graphics\API\TextureData.h" />
     <ClInclude Include="BF\Graphics\Materials\Material.h" />
+    <ClInclude Include="BF\Version.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />
@@ -528,7 +529,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|Win32'">
@@ -555,7 +557,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|Win32'">
@@ -582,7 +585,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -614,7 +618,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
@@ -644,7 +649,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
@@ -674,7 +680,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -710,7 +717,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|Win32'">
@@ -744,7 +752,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|Win32'">
@@ -778,7 +787,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -817,7 +827,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
 xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
@@ -854,7 +865,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Server\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
@@ -891,7 +903,8 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <Command>xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\*.dll" "$(SolutionDir)Output\Sandbox-Client\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"</Command>
+      <Command>xcopy /Y "$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release\*.dll" "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\"
+"$(SolutionDir)Tools\EngineBuildVersionIncrementer\EngineBuildVersionIncrementer.exe" "$(SolutionDir)Core\BF\Version.h" "0"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
