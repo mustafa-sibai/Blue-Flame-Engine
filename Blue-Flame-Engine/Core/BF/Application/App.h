@@ -15,6 +15,7 @@
 //#include "BF/Graphics/GUI/StyleSheet.h"
 //#include "BF/Application/SceneManager.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
+#include "BF/Graphics/CameraManager.h"
 #include "BF/Application/Scene.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/System/Timer.h"
@@ -45,7 +46,10 @@ namespace BF
 
 			Scene* mainScene;
 
+			BF::Graphics::CameraManager cameraManager;
 			BF::Graphics::Renderers::RenderPipeline renderPipeline;
+			BF::Scripting::ScriptExecutor scriptExecutor;
+
 			BF::System::Timer frameTimer;
 			BF::System::Timer fixedUpdateTimer;
 			BF::System::Timer frameRateTimer;

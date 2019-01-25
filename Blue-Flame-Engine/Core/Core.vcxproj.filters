@@ -111,9 +111,6 @@
     <ClCompile Include="BF\System\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\FPSCamera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -282,6 +279,9 @@
     <ClCompile Include="BF\Graphics\Materials\Material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Graphics\CameraManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -408,9 +408,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\TileMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\FPSCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Light.h">
@@ -609,6 +606,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\CameraManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

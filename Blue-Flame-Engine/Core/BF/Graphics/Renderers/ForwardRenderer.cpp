@@ -3,6 +3,7 @@
 #include "BF/Math/Vector3.h"
 #include "BF/Math/Matrix4.h"
 #include "BF/ECS/GameObject.h"
+#include "BF/Graphics/CameraManager.h"
 #include "BF/Graphics/Transform.h"
 
 namespace BF
@@ -15,9 +16,9 @@ namespace BF
 			using namespace BF::Graphics::API;
 			using namespace BF::Math;
 
-			ForwardRenderer::ForwardRenderer(Camera* camera) :
+			ForwardRenderer::ForwardRenderer(CameraManager& cameraManager) :
 				Renderer(RendererType::ForwardRenderer),
-				camera(camera)
+				cameraManager(cameraManager)
 			{
 			}
 
@@ -27,13 +28,12 @@ namespace BF
 
 			void ForwardRenderer::Initialize()
 			{
-				//camera.Initialize(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f));
 				materialManager.Initialize();
 			}
 
 			void ForwardRenderer::PostLoad()
 			{
-				for (size_t i = 0; i < 2; i++)
+				for (size_t i = 0; i < meshes.size(); i++)
 				{
 					materialManager.SetMaterial(*meshes[i]->material);
 				}
@@ -45,8 +45,7 @@ namespace BF
 				{
 					Transform* transform = (Transform*)meshes[i]->gameObject->GetComponents()[0];
 
-					if(camera != nullptr)
-						camera->SetModelMatrix(transform->GetWorldTransformation());
+					cameraManager.SetModelMatrix(transform->GetWorldTransformation());
 
 					meshes[i]->material->Bind();
 					meshes[i]->Bind();

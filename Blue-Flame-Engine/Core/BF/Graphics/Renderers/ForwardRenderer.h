@@ -23,7 +23,7 @@ namespace BF
 				friend class BF::Graphics::Renderers::RenderPipeline;
 
 				private:
-					BF::Graphics::Camera* camera;
+					BF::Graphics::CameraManager& cameraManager;
 					std::vector<BF::Graphics::Mesh*> meshes;
 					BF::Graphics::Materials::MaterialManager materialManager;
 
@@ -35,7 +35,7 @@ namespace BF
 					BF::Graphics::API::Shader postProcessingShader;*/
 
 				public:
-					ForwardRenderer(BF::Graphics::Camera* camera);
+					ForwardRenderer(BF::Graphics::CameraManager& cameraManager);
 					~ForwardRenderer();
 
 					void Initialize() override;

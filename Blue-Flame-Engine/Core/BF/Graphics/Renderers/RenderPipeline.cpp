@@ -13,11 +13,11 @@ namespace BF
 			using namespace BF::ECS;
 			using namespace BF::Graphics::API;
 
-			RenderPipeline::RenderPipeline() :
-				camera(nullptr), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
+			RenderPipeline::RenderPipeline(CameraManager& cameraManager) :
+				cameraManager(cameraManager), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
 			{
 				//skyboxRenderer = new SkyboxRenderer();
-				//forwardRenderer = new ForwardRenderer(camera);
+				forwardRenderer = new ForwardRenderer(cameraManager);
 				spriteRenderer = new SpriteRenderer();
 				//spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFront);
 				//postProcessing = new PostProcessing();
@@ -29,7 +29,6 @@ namespace BF
 
 			void RenderPipeline::Initialize()
 			{
-				if (camera != nullptr)			camera->Initialize();
 				if (spriteRenderer != nullptr)	spriteRenderer->Initialize();
 				if (forwardRenderer != nullptr) forwardRenderer->Initialize();
 				if (postProcessing != nullptr)	postProcessing->Initialize();
@@ -48,7 +47,6 @@ namespace BF
 
 			void RenderPipeline::Update()
 			{
-				if (camera != nullptr)			camera->Update();
 				if (spriteRenderer != nullptr)	spriteRenderer->Update();
 				if (forwardRenderer != nullptr) forwardRenderer->Update();
 				if (postProcessing != nullptr)	postProcessing->Update();
@@ -56,25 +54,19 @@ namespace BF
 
 			void RenderPipeline::Render()
 			{
-				camera->Clear(BufferClearType::ColorAndDepth, Color(0.5, 0.0f, 0.0f, 1.0f));
+				cameraManager.GetMainCamera().Clear();
 				if (postProcessing != nullptr)	postProcessing->Bind();
 				if (spriteRenderer != nullptr)	spriteRenderer->Render();
 				if (forwardRenderer != nullptr) forwardRenderer->Render();
 				if (postProcessing != nullptr)	postProcessing->Unbind();
 				if (postProcessing != nullptr)	postProcessing->Render();
-				camera->SwapBuffers();
+				cameraManager.GetMainCamera().SwapBuffers();
 			}
 
 			void RenderPipeline::AddRenderable(Component* component)
 			{
 				switch (component->type)
 				{
-				case Component::Type::Camera:
-				{
-					if (camera == nullptr)
-						camera = (Camera*)component;
-					break;
-				}
 				case Component::Type::Renderable:
 				{
 					if (spriteRenderer != nullptr)

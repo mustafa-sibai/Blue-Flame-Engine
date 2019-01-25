@@ -30,6 +30,9 @@
     <ClCompile Include="Sandbox\Hello_Triangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\FPSCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
@@ -62,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sandbox\Hello_Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\FPSCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

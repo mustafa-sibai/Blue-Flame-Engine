@@ -13,9 +13,6 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/ECS/GameObject.h"
-/*#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-	#include "BF/Graphics/GUI/WidgetManager.h"
-#endif*/
 #include "BF/Graphics/Camera.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/Scripting/ScriptExecutor.h"
@@ -42,50 +39,20 @@ namespace BF
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 
-			private:
-				BF::Application::App& app;
-				BF::Scripting::ScriptExecutor scriptExecutor;
-				std::vector<BF::ECS::GameObject*> gameObjects;
-
-			public:
-				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
-				BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject, BF::ECS::GameObject* parent);
-
-				void RemoveGameObject(BF::ECS::GameObject* gameObject);
-/*
-#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-				BF::Graphics::GUI::WidgetManager widgetManager;
-#endif*/
 		private:
-				bool initialized;
-				bool loaded;
-				int fixedUpdateTicks;
+			BF::Application::App& app;
+			std::vector<BF::ECS::GameObject*> gameObjects;
 
-				//GameObject* rootGameObject;
+		public:
+			Scene(BF::Application::App& app);
+			~Scene();
 
-			public:
-				Scene(BF::Application::App& app);
-				~Scene();
+			BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
+			BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject, BF::ECS::GameObject* parent);
 
-/*#if defined(BFE_PLATFORM_WINDOWS) || defined(BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-				inline BF::Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
-#endif*/
+			void RemoveGameObject(BF::ECS::GameObject* gameObject);
 
-			public:
-				void Initialize(/*BF::Application::Layers::LayerManager& layerManager*/);
-				void Load();
-				void PostLoad();
-				//void FixedUpdate();
-				void Update();
-				void Render();
-
-				//GameNode* Instantiate(const std::string& name, GameNode* gameNode, GameNode* parent);
-
-				inline const std::vector<BF::ECS::GameObject*>& GetGameObjects() const { return gameObjects; }
-				//inline GameObject& GetRootGameNode() { return *rootGameObject; }
-
-			private:
-				//void RenderNode(GameObject* gameObject);
+			inline const std::vector<BF::ECS::GameObject*>& GetGameObjects() const { return gameObjects; }
 		};
 	}
 }

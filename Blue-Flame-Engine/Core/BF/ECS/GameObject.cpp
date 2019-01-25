@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "BF/Application/Scene.h"
 #include "BF/Application/App.h"
+//#include "BF/Graphics/Camera.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -15,8 +16,8 @@ namespace BF
 
 		int GameObject::globalID = 0;
 
-		GameObject::GameObject(Scene& scene, const std::string& name) :
-			scene(scene), Active(true), Name(name), id(0), added(false), parent(nullptr)
+		GameObject::GameObject(const std::string& name) :
+			scene(nullptr), Active(true), Name(name), id(0), added(false), parent(nullptr)
 		{
 			GameObject::globalID++;
 			id = globalID;
@@ -33,20 +34,28 @@ namespace BF
 		{
 			if (!component->added)
 			{
-				if (component->type == Component::Type::Camera || 
-					component->type == Component::Type::Renderable ||
-					component->type == Component::Type::Mesh)
+				if (component->type == Component::Type::Camera)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
-					scene.app.renderPipeline.AddRenderable(component);
+					Camera* camera = (Camera*)component;
+					camera->cameraManager = &scene->app.cameraManager;
+					scene->app.cameraManager.AddCamera((Camera*)component);
+					component->added = true;
+				}
+				else if (component->type == Component::Type::Renderable ||
+						 component->type == Component::Type::Mesh)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.renderPipeline.AddRenderable(component);
 					component->added = true;
 				}
 				else if (component->type == Component::Type::Script)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
-					scene.scriptExecutor.scripts.emplace_back((Script*)component);
+					scene->app.scriptExecutor.scripts.emplace_back((Script*)component);
 					component->added = true;
 				}
 			}

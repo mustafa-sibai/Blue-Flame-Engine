@@ -39,10 +39,13 @@ namespace ECS_Script_Test
 		parent->GetTransform()->SetPosition(Vector3f(100, 100, 100));
 		parent->GetTransform()->SetScale(Vector3f(0.5, 0.5, 0.5));*/
 
-		GameObject* CameraGameObject = scene->AddGameObject(new GameObject(*scene, "Camera"));
+		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 		Camera* camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), ((int)Engine::GetWindow().GetClientHeight() / 2), -(int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f)));
 
-		GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject(*scene, "RegularPolygon A"));
+		camera->SetClearType(BufferClearType::ColorAndDepth);
+		camera->SetClearColor(Color(0.5, 0.0f, 0.0f, 1.0f));
+
+		GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject("RegularPolygon A"));
 		RegularPolygonGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		RegularPolygonGameObject->GetTransform()->SetScale(Vector3f(1, 1, 1));
 		RegularPolygon* rp = (RegularPolygon*)RegularPolygonGameObject->AddComponent(new RegularPolygon(Vector2i(100, 200), Vector2f(0, 0), 2, Color::Blues::DarkBlue()));
@@ -51,7 +54,7 @@ namespace ECS_Script_Test
 		Texture2D* texture = new Texture2D();
 		texture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/tilea5.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
 
-		GameObject* sprite = scene->AddGameObject(new GameObject(*scene, "sprite"));
+		GameObject* sprite = scene->AddGameObject(new GameObject("sprite"));
 		sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
 		sprite->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		sprite->GetTransform()->SetScale(Vector3f(1, 1, 1));

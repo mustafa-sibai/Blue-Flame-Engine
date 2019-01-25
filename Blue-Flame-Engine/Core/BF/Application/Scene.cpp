@@ -11,42 +11,12 @@ namespace BF
 		using namespace BF::Graphics;
 		using namespace BF::Scripting;
 
-		//using namespace BF::Application::Layers;
-
 		Scene::Scene(BF::Application::App& app) :
-			app(app), initialized(false), loaded(false), fixedUpdateTicks(0)//, rootGameObject(nullptr)
+			app(app)
 		{
 		}
 
 		Scene::~Scene()
-		{
-		}
-
-		void Scene::Initialize(/*BF::Application::Layers::LayerManager& layerManager*/)
-		{
-			//rootGameObject = new GameObject();
-			//rootGameObject->layerManager = &layerManager;
-		}
-
-		void Scene::Load()
-		{
-		}
-
-		void Scene::PostLoad()
-		{
-			scriptExecutor.Start();
-		}
-
-		/*void Scene::FixedUpdate()
-		{
-		}*/
-
-		void Scene::Update()
-		{
-			scriptExecutor.Update();
-		}
-
-		void Scene::Render()
 		{
 		}
 
@@ -56,6 +26,7 @@ namespace BF
 			{
 				gameObjects.emplace_back(gameObject);
 				gameObject->added = true;
+				gameObject->scene = this;
 			}
 			else
 				//Do copy here

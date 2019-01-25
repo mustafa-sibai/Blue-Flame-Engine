@@ -73,7 +73,6 @@
     <ClCompile Include="BF\Graphics\Camera.cpp" />
     <ClCompile Include="BF\Graphics\Color.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
-    <ClCompile Include="BF\Graphics\FPSCamera.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
@@ -140,6 +139,7 @@
     <ClCompile Include="BF\Graphics\Renderers\Renderer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp" />
     <ClCompile Include="BF\Graphics\Materials\Material.cpp" />
+    <ClCompile Include="BF\Graphics\CameraManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -168,7 +168,6 @@
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
-    <ClInclude Include="BF\Graphics\FPSCamera.h" />
     <ClInclude Include="BF\Graphics\MeshData.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
@@ -251,6 +250,7 @@
     <ClInclude Include="BF\Graphics\API\TextureData.h" />
     <ClInclude Include="BF\Graphics\Materials\Material.h" />
     <ClInclude Include="BF\Version.h" />
+    <ClInclude Include="BF\Graphics\CameraManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

@@ -1,4 +1,5 @@
 #include "Mesh.h"
+#include "Materials/MaterialManager.h"
 
 namespace BF
 {
@@ -11,7 +12,7 @@ namespace BF
 
 		Mesh::Mesh(PresetMeshes presetMeshes) :
 			Component(Component::Type::Mesh),
-			vertexBuffer(nullptr), indexBuffer(nullptr), meshData(nullptr)
+			meshData(nullptr), vertexBuffer(nullptr), indexBuffer(nullptr)
 		{
 			if (presetMeshes == PresetMeshes::Plane)
 			{
@@ -20,8 +21,9 @@ namespace BF
 
 		Mesh::Mesh(MeshData* meshData) :
 			Component(Component::Type::Mesh),
-			vertexBuffer(nullptr), indexBuffer(nullptr), meshData(meshData)
+			meshData(meshData), vertexBuffer(nullptr), indexBuffer(nullptr)
 		{
+			SetBuffers(&MaterialManager::GetDefaultMaterial());
 		}
 
 		Mesh::~Mesh()

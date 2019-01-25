@@ -50,7 +50,7 @@
 
 #include <BF/Graphics/Animation/SpriteAnimation.h>
 
-#include <BF/Graphics/FPSCamera.h>
+#include <BF/Graphics/Camera.h>
 #include <BF/Graphics/TileMap.h>
 #include <BF/Graphics/TerrainGenerator.h>
 

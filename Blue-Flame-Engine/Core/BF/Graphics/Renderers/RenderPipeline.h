@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/ECS/Component.h"
-#include "BF/Graphics/Camera.h"
+#include "BF/Graphics/CameraManager.h"
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "BF/Graphics/Renderers/ForwardRenderer.h"
 #include "BF/Graphics/Renderers/SkyboxRenderer.h"
@@ -18,14 +18,14 @@ namespace BF
 			class BFE_API RenderPipeline
 			{
 			private:
-				Camera*			 camera;
+				CameraManager& cameraManager;
 				SpriteRenderer*  spriteRenderer;
 				ForwardRenderer* forwardRenderer;
 				SkyboxRenderer*  skyboxRenderer;
 				PostProcessing*  postProcessing;
 
 			public:
-				RenderPipeline();
+				RenderPipeline(CameraManager& cameraManager);
 				~RenderPipeline();
 
 				void Initialize();

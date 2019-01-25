@@ -24,7 +24,7 @@ namespace BF
 			static int globalID;
 			int id;
 			bool added;
-			BF::Application::Scene& scene;
+			BF::Application::Scene* scene;
 			GameObject* parent;
 			std::vector<GameObject*> gameObjects;
 			std::vector<Component*> components;
@@ -34,7 +34,7 @@ namespace BF
 			std::string Name;
 
 		public:
-			GameObject(BF::Application::Scene& scene, const std::string& name);
+			GameObject(const std::string& name);
 			virtual ~GameObject();
 
 			Component* AddComponent(Component* component);
