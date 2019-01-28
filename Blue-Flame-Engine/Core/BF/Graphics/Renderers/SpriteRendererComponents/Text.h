@@ -9,9 +9,11 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BFE_API Text : public Renderable
+			namespace SpriteRendererComponents
 			{
-				friend class SpriteRenderer;
+				class BFE_API Text : public Renderable<Text>
+				{
+					friend class SpriteRenderer;
 
 				public:
 					enum class TextAlignment
@@ -44,7 +46,8 @@ namespace BF
 
 				//private:
 					//BF::Math::Vector2i GetTextAlignmentOffset(TextAlignment textAlignment);
-			};
+				};
+			}
 		}
 	}
 }

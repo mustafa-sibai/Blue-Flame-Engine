@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "BF/ECS/Component.h"
+#include "BF/ECS/IComponent.h"
 #include "BF/Graphics/Transform.h"
 #include "BF/Common.h"
 
@@ -27,7 +27,7 @@ namespace BF
 			BF::Application::Scene* scene;
 			GameObject* parent;
 			std::vector<GameObject*> gameObjects;
-			std::vector<Component*> components;
+			std::vector<IComponent*> components;
 
 		public:
 			bool Active;
@@ -37,8 +37,11 @@ namespace BF
 			GameObject(const std::string& name);
 			virtual ~GameObject();
 
-			Component* AddComponent(Component* component);
-			void RemoveComponent(Component* component);
+			IComponent* AddComponent(IComponent* component);
+			void RemoveComponent(IComponent* component);
+
+			template <typename T>
+			T* GetComponent();
 
 		private:
 			void SetParent(GameObject* parent);
@@ -49,7 +52,9 @@ namespace BF
 			inline const GameObject* GetParent() const { return parent; }
 
 			inline BF::Graphics::Transform* GetTransform() const { return (BF::Graphics::Transform*)components[0]; }
-			inline const std::vector<Component*>& GetComponents() const { return components; }
+			inline const std::vector<IComponent*>& GetComponents() const { return components; }
 		};
+
+#include "GameObject.inl"
 	}
 }

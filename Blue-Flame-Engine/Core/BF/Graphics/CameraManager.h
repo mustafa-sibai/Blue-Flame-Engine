@@ -10,6 +10,8 @@ namespace BF
 	{
 		class CameraManager
 		{
+			friend class BF::ECS::GameObject;
+
 		private:
 			Camera* mainCamera;
 			std::vector<Camera*> cameras;

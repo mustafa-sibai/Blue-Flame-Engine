@@ -17,11 +17,13 @@ namespace BF
 		namespace Renderers
 		{
 			using namespace std;
+			using namespace BF::ECS;
 			using namespace BF::Math;
 			using namespace BF::Application;
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Fonts;
 			using namespace BF::Graphics::Renderers;
+			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
@@ -145,7 +147,7 @@ namespace BF
 						removeList.clear();*/
 
 						if (sortingOrder == SortingOrder::BackToFront)
-							sort(renderables.begin(), renderables.end(), Renderable::BackToFront());
+							sort(renderables.begin(), renderables.end(), IRenderable::BackToFront());
 
 						MapBuffer();
 						vertexBuffer.Unmap();
@@ -414,30 +416,19 @@ namespace BF
 				{
 					for (size_t i = 0; i < renderables.size(); i++)
 					{
-						switch (renderables[i]->renderableType)
+						for (size_t j = 0; j < renderables[i]->types.size(); j++)
 						{
-						case Renderable::RenderableType::Line:
-						{
-							MapLineBuffer((LineShape*)renderables[i]);
-							break;
-						}
-						case Renderable::RenderableType::RegularPolygon:
-						{
-							MapPolygonBuffer((RegularPolygon*)renderables[i]);
-							break;
-						}
-						case Renderable::RenderableType::Sprite:
-						{
-							MapSpriteBuffer((Sprite*)renderables[i]);
-							break;
-						}
-						case Renderable::RenderableType::Text:
-						{
-							MapTextBuffer((Text*)renderables[i]);
-							break;
-						}
-						default:
-							break;
+							if (IComponent::CompareTypes<LineShape>(renderables[i]->types[j]))
+								MapLineBuffer((LineShape*)renderables[i]);
+
+							else if (IComponent::CompareTypes<RegularPolygon>(renderables[i]->types[j]))
+								MapPolygonBuffer((RegularPolygon*)renderables[i]);
+
+							else if (IComponent::CompareTypes<Sprite>(renderables[i]->types[j]))
+								MapSpriteBuffer((Sprite*)renderables[i]);
+
+							else if (IComponent::CompareTypes<Text>(renderables[i]->types[j]))
+								MapTextBuffer((Text*)renderables[i]);
 						}
 					}
 

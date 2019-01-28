@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "BF/Engine.h"
 #include "BF/Graphics/CameraManager.h"
+
 namespace BF
 {
 	namespace Graphics
@@ -9,8 +10,7 @@ namespace BF
 		using namespace BF::Graphics;
 		using namespace BF::Graphics::API;
 
-		Camera::Camera(const Matrix4& projectionMatrix) :
-			Component(Component::Type::Camera)
+		Camera::Camera(const Matrix4& projectionMatrix)
 		{
 			systemBuffer.modelMatrix = Matrix4::Identity();
 			systemBuffer.viewMatrix = Matrix4::Identity();

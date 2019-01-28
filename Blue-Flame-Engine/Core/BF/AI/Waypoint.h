@@ -28,7 +28,7 @@ namespace BF
 			};
 
 		private:
-			Graphics::Renderers::Sprite& sprite;
+			Graphics::Renderers::SpriteRendererComponents::Sprite& sprite;
 			std::vector<Node>& waypoints;
 
 			Node* previousNode;
@@ -40,7 +40,7 @@ namespace BF
 			bool reachedFinalWaypoint;
 
 		public:
-			Waypoint(Graphics::Renderers::Sprite& sprite, std::vector<Node>& waypoint);
+			Waypoint(Graphics::Renderers::SpriteRendererComponents::Sprite& sprite, std::vector<Node>& waypoint);
 			~Waypoint();
 
 			void GoTo(Node& node);

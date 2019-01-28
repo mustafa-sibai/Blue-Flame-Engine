@@ -11,6 +11,7 @@ namespace ECS_Script_Test
 	using namespace BF::Graphics::API;
 	using namespace BF::Graphics::Renderers;
 	using namespace BF::Graphics::Materials;
+	using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 	using namespace BF::ECS;
 	using namespace BF::Math;
 	using namespace BF::System;
@@ -49,7 +50,9 @@ namespace ECS_Script_Test
 		RegularPolygonGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		RegularPolygonGameObject->GetTransform()->SetScale(Vector3f(1, 1, 1));
 		RegularPolygon* rp = (RegularPolygon*)RegularPolygonGameObject->AddComponent(new RegularPolygon(Vector2i(100, 200), Vector2f(0, 0), 2, Color::Blues::DarkBlue()));
-		Script* script = (Script*)RegularPolygonGameObject->AddComponent(new ScriptTest());
+		ScriptTest* script = (ScriptTest*)RegularPolygonGameObject->AddComponent(new ScriptTest());
+
+		ScriptTest* script2 = RegularPolygonGameObject->GetComponent<ScriptTest>();
 
 		Texture2D* texture = new Texture2D();
 		texture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/tilea5.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);

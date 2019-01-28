@@ -34,8 +34,8 @@ namespace BF
 				void Update();
 				void Render();
 
-				void AddRenderable(BF::ECS::Component* component);
-				void RemoveRenderable(BF::ECS::Component* component);
+				void AddRenderable(BF::ECS::IComponent* component);
+				void RemoveRenderable(BF::ECS::IComponent* component);
 			};
 		}
 	}

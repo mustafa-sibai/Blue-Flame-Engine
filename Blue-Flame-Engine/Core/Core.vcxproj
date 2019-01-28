@@ -53,11 +53,11 @@
   <ItemGroup>
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
-    <ClCompile Include="BF\ECS\GameObject.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
     <ClCompile Include="BF\Application\Window.cpp" />
     <ClCompile Include="BF\Audio\Sound.cpp" />
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
+    <ClCompile Include="BF\ECS\GameObject.cpp" />
     <ClCompile Include="BF\Engine.cpp" />
     <ClCompile Include="BF\Graphics\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="BF\Graphics\API\ConstantBuffer.cpp" />
@@ -77,12 +77,13 @@
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SkyboxRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\IRenderable.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SkyboxRenderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.cpp" />
     <ClCompile Include="BF\Graphics\TerrainGenerator.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Graphics\TileMap.cpp" />
@@ -120,17 +121,22 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLVertexBuffer.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
-    <ClCompile Include="BF\Scripting\Script.cpp" />
+    <ClCompile Include="BF\Scripting\IScript.cpp" />
+    <None Include="BF\Scripting\Script.inl">
+      <FileType>Document</FileType>
+    </None>
+    <None Include="BF\ECS\Component.inl" />
+    <None Include="BF\ECS\GameObject.inl" />
+    <None Include="BF\ECS\IComponent.inl" />
+    <None Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.inl" />
     <ClCompile Include="BF\System\Timer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.cpp" />
     <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
-    <ClCompile Include="BF\ECS\Component.cpp" />
     <ClCompile Include="BF\Math\Ray.cpp" />
     <ClCompile Include="BF\Graphics\API\Framebuffer.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp" />
@@ -140,6 +146,7 @@
     <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp" />
     <ClCompile Include="BF\Graphics\Materials\Material.cpp" />
     <ClCompile Include="BF\Graphics\CameraManager.cpp" />
+    <ClCompile Include="BF\ECS\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Application\App.h" />
@@ -151,6 +158,8 @@
     <ClInclude Include="BF\Audio\SoundManager.h" />
     <ClInclude Include="BF\BlueFlame.h" />
     <ClInclude Include="BF\Common.h" />
+    <ClInclude Include="BF\ECS\Component.h" />
+    <ClInclude Include="BF\ECS\GameObject.h" />
     <ClInclude Include="BF\Engine.h" />
     <ClInclude Include="BF\Graphics\Animation\SpriteAnimation.h" />
     <ClInclude Include="BF\Graphics\API\ConstantBuffer.h" />
@@ -174,18 +183,22 @@
     <ClInclude Include="BF\Graphics\Materials\SpriteMaterial.h" />
     <ClInclude Include="BF\Graphics\Mesh.h" />
     <ClInclude Include="BF\Graphics\PredefinedColors.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SkyboxRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\IRenderable.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.h" />
     <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SkyboxRenderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h" />
     <ClInclude Include="BF\Graphics\TerrainGenerator.h" />
     <ClInclude Include="BF\Graphics\TextureAtlas.h" />
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
-    <ClInclude Include="BF\Graphics\VertexData.inl" />
+    <None Include="BF\Graphics\VertexData.inl">
+      <FileType>Document</FileType>
+    </None>
     <ClInclude Include="BF\Input\Controller.h" />
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
@@ -229,15 +242,12 @@
     <ClInclude Include="BF\System\Timer.h" />
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer.h" />
     <ClInclude Include="BF\Graphics\Fonts\Font.h" />
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h" />
     <ClInclude Include="BF\Physics\PhysicsEngine.h" />
     <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
     <ClInclude Include="BF\IO\ResourceManager.h" />
-    <ClInclude Include="BF\ECS\GameObject.h" />
     <ClInclude Include="BF\System\Debug.h" />
     <ClInclude Include="BF\System\Random.h" />
-    <ClInclude Include="BF\ECS\Component.h" />
     <ClInclude Include="BF\Math\Ray.h" />
     <ClInclude Include="BF\Graphics\Transform.h" />
     <ClInclude Include="BF\Graphics\API\Framebuffer.h" />
@@ -251,6 +261,8 @@
     <ClInclude Include="BF\Graphics\Materials\Material.h" />
     <ClInclude Include="BF\Version.h" />
     <ClInclude Include="BF\Graphics\CameraManager.h" />
+    <ClInclude Include="BF\ECS\IComponent.h" />
+    <ClInclude Include="BF\Scripting\IScript.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3DMipAF\GLSL-Core4.5\Shader.vpshader" />

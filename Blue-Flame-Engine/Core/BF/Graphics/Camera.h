@@ -9,7 +9,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BFE_API Camera : public BF::ECS::Component
+		class BFE_API Camera : public BF::ECS::Component<Camera>
 		{
 			friend class CameraManager;
 			friend class BF::ECS::GameObject;

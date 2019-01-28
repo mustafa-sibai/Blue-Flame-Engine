@@ -1,7 +1,6 @@
 #include "GameObject.h"
 #include "BF/Application/Scene.h"
 #include "BF/Application/App.h"
-//#include "BF/Graphics/Camera.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -12,6 +11,7 @@ namespace BF
 		using namespace BF::Application;
 		using namespace BF::Graphics;
 		using namespace BF::Graphics::Renderers;
+		using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 		using namespace BF::Scripting;
 
 		int GameObject::globalID = 0;
@@ -30,33 +30,36 @@ namespace BF
 		{
 		}
 
-		Component* GameObject::AddComponent(Component* component)
+		IComponent* GameObject::AddComponent(IComponent* component)
 		{
 			if (!component->added)
 			{
-				if (component->type == Component::Type::Camera)
+				for (size_t i = 0; i < component->types.size(); i++)
 				{
-					component->gameObject = this;
-					components.emplace_back(component);
-					Camera* camera = (Camera*)component;
-					camera->cameraManager = &scene->app.cameraManager;
-					scene->app.cameraManager.AddCamera((Camera*)component);
-					component->added = true;
-				}
-				else if (component->type == Component::Type::Renderable ||
-						 component->type == Component::Type::Mesh)
-				{
-					component->gameObject = this;
-					components.emplace_back(component);
-					scene->app.renderPipeline.AddRenderable(component);
-					component->added = true;
-				}
-				else if (component->type == Component::Type::Script)
-				{
-					component->gameObject = this;
-					components.emplace_back(component);
-					scene->app.scriptExecutor.scripts.emplace_back((Script*)component);
-					component->added = true;
+					if (component->types[i] == IComponent::TypeOf<Camera>())
+					{
+						component->gameObject = this;
+						components.emplace_back(component);
+						Camera* camera = (Camera*)component;
+						camera->cameraManager = &scene->app.cameraManager;
+						scene->app.cameraManager.AddCamera((Camera*)component);
+						component->added = true;
+					}
+					else if (component->types[i] == IComponent::TypeOf<IRenderable>() ||
+						component->types[i] == IComponent::TypeOf<Mesh>())
+					{
+						component->gameObject = this;
+						components.emplace_back(component);
+						scene->app.renderPipeline.AddRenderable(component);
+						component->added = true;
+					}
+					else if (component->types[i] == IComponent::TypeOf<IScript>())
+					{
+						component->gameObject = this;
+						components.emplace_back(component);
+						scene->app.scriptExecutor.scripts.emplace_back((IScript*)component);
+						component->added = true;
+					}
 				}
 			}
 			else
@@ -67,7 +70,7 @@ namespace BF
 			return component;
 		}
 
-		void GameObject::RemoveComponent(Component* component)
+		void GameObject::RemoveComponent(IComponent* component)
 		{
 			/*if (component->type == Component::Type::Renderable)
 			{

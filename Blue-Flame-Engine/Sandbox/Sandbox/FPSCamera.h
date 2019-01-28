@@ -1,7 +1,7 @@
 #pragma once
 #include <BF/BlueFlame.h>
 
-class FPSCamera : public BF::Scripting::Script
+class FPSCamera : public BF::Scripting::Script<FPSCamera>
 {
 private:
 	float movmentSpeed, sensitivity, yaw, pitch;

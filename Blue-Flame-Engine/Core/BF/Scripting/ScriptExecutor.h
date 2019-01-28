@@ -18,7 +18,7 @@ namespace BF
 			friend class BF::Application::Scene;
 
 			private:
-				std::vector<Script*> scripts;
+				std::vector<IScript*> scripts;
 
 			public:
 				ScriptExecutor();

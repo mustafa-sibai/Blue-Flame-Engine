@@ -13,7 +13,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BFE_API Mesh : public BF::ECS::Component
+		class BFE_API Mesh : public BF::ECS::Component<Mesh>
 		{
 		public:
 			enum class PresetMeshes { Plane };

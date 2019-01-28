@@ -1,6 +1,4 @@
 #include "App.h"
-#include "BF/Graphics/Renderers/SpriteRenderer.h"
-#include "BF/Graphics/Renderers/PostProcessing.h"
 
 namespace BF
 {

@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace AI
 	{
-		Waypoint::Waypoint(Graphics::Renderers::Sprite& sprite, std::vector<Node>& waypoints) :
+		Waypoint::Waypoint(Graphics::Renderers::SpriteRendererComponents::Sprite& sprite, std::vector<Node>& waypoints) :
 			sprite(sprite), waypoints(waypoints), currentIndex(0), reachedFinalWaypoint(false), length(0)
 		{
 		}

@@ -7,7 +7,7 @@ namespace BF
 	{
 		using namespace BF::Math;
 
-		Rigidbody2D::Rigidbody2D(BF::Graphics::Renderers::Renderable& renderable) :
+		Rigidbody2D::Rigidbody2D(BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable) :
 			useGravity(false), speed(1.5f), renderable(renderable)
 		{
 			//if (useGravity)

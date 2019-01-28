@@ -9,46 +9,49 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			struct BFE_API SpriteBuffer
+			namespace SpriteRendererComponents
 			{
-				BF::Math::Vector2f position;
-				Color color;
-				BF::Math::Vector2f UV;
-				float renderingType;
-			};
+				struct BFE_API SpriteBuffer
+				{
+					BF::Math::Vector2f position;
+					Color color;
+					BF::Math::Vector2f UV;
+					float renderingType;
+				};
 
-			class BFE_API Sprite : public Renderable
-			{
-				friend class SpriteRenderer;
+				class BFE_API Sprite : public Renderable<Sprite>
+				{
+					friend class SpriteRenderer;
 
-			private:
-				const BF::Graphics::API::Texture2D* texture2D;
-				BF::Math::Rectangle scissorRectangle;
+				private:
+					const BF::Graphics::API::Texture2D* texture2D;
+					BF::Math::Rectangle scissorRectangle;
 
-			public:
-				Sprite(const BF::Graphics::API::Texture2D* texture2D);
-				/*
-				@pivot:
-				Center = 0, 0
-				Top left = +1, -1
-				Top right = -1, -1
-				Bottom left = +1, +1
-				Bottom left = -1, +1
-				*/
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot);
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer);
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer, const Color& color);
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color);
-				Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
-				~Sprite();
+				public:
+					Sprite(const BF::Graphics::API::Texture2D* texture2D);
+					/*
+					@pivot:
+					Center = 0, 0
+					Top left = +1, -1
+					Top right = -1, -1
+					Bottom left = +1, +1
+					Bottom left = -1, +1
+					*/
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, unsigned int zLayer, const Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, unsigned int zLayer, const BF::Math::Rectangle& scissorRectangle, const Color& color);
+					~Sprite();
 
-				void SetTexture(const BF::Graphics::API::Texture2D* texture2D);
-				void SetScissorRectangle(const BF::Math::Rectangle& scissorRectangle);
+					void SetTexture(const BF::Graphics::API::Texture2D* texture2D);
+					void SetScissorRectangle(const BF::Math::Rectangle& scissorRectangle);
 
-				inline const BF::Graphics::API::Texture2D* GetTexture() const { return texture2D; }
-				inline const BF::Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
-			};
+					inline const BF::Graphics::API::Texture2D* GetTexture() const { return texture2D; }
+					inline const BF::Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
+				};
+			}
 		}
 	}
 }

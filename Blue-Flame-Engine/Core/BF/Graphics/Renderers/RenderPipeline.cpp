@@ -1,5 +1,5 @@
 #include "RenderPipeline.h"
-#include "BF/ECS/Component.h"
+#include "BF/ECS/IComponent.h"
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
 
@@ -12,6 +12,7 @@ namespace BF
 			using namespace std;
 			using namespace BF::ECS;
 			using namespace BF::Graphics::API;
+			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
 			RenderPipeline::RenderPipeline(CameraManager& cameraManager) :
 				cameraManager(cameraManager), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
@@ -63,28 +64,21 @@ namespace BF
 				cameraManager.GetMainCamera().SwapBuffers();
 			}
 
-			void RenderPipeline::AddRenderable(Component* component)
+			void RenderPipeline::AddRenderable(IComponent* component)
 			{
-				switch (component->type)
-				{
-				case Component::Type::Renderable:
+				if (component->IsSameType<IRenderable>())
 				{
 					if (spriteRenderer != nullptr)
-						spriteRenderer->renderables.emplace_back((Renderable*)component);
-					break;
+						spriteRenderer->renderables.emplace_back((IRenderable*)component);
 				}
-				case Component::Type::Mesh:
+				else if (component->IsSameType<Mesh>())
 				{
 					if (forwardRenderer != nullptr)
 						forwardRenderer->meshes.emplace_back((Mesh*)component);
-					break;
-				}
-				default:
-					break;
 				}
 			}
 
-			void RenderPipeline::RemoveRenderable(BF::ECS::Component * component)
+			void RenderPipeline::RemoveRenderable(BF::ECS::IComponent * component)
 			{
 			}
 		}

@@ -10,7 +10,7 @@ namespace BF
 		class BFE_API Rigidbody2D
 		{
 			public:
-				BF::Graphics::Renderers::Renderable& renderable;
+				BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable;
 
 				bool useGravity;
 				float speed;
@@ -20,7 +20,7 @@ namespace BF
 				bool correctCollisionPosition = false;
 
 			public:
-				Rigidbody2D(BF::Graphics::Renderers::Renderable& renderable);
+				Rigidbody2D(BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable);
 				~Rigidbody2D();
 
 				void Update();

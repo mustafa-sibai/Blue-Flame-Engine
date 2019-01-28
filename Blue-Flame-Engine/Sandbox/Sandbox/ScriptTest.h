@@ -1,7 +1,7 @@
 #pragma once
 #include <BF/BlueFlame.h>
 
-class ScriptTest : public BF::Scripting::Script
+class ScriptTest : public BF::Scripting::Script<ScriptTest>
 {
 private:
 	float xPosition;

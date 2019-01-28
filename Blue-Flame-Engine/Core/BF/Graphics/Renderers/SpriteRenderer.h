@@ -37,10 +37,10 @@ namespace BF
 					BF::Graphics::API::IndexBuffer indexBuffer;
 					BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
-					SpriteBuffer* spriteBuffer;
+					BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* spriteBuffer;
 					unsigned int indexCount;
 
-					std::vector<Renderable*> renderables;
+					std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
 					//std::vector<Renderable*> removeList;
 					//int nullCount;
 
@@ -75,10 +75,10 @@ namespace BF
 					//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
 
 				private:
-					void MapLineBuffer(const LineShape* lineShape);
-					void MapPolygonBuffer(const RegularPolygon* regularPolygon);
-					void MapSpriteBuffer(const Sprite* sprite);
-					void MapTextBuffer(const Text* text);
+					void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
+					void MapPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
+					void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
+					void MapTextBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
 					void MapBuffer();
 					void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
 			};

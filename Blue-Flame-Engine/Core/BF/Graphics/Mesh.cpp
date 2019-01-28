@@ -11,7 +11,6 @@ namespace BF
 		using namespace BF::Graphics::Materials;
 
 		Mesh::Mesh(PresetMeshes presetMeshes) :
-			Component(Component::Type::Mesh),
 			meshData(nullptr), vertexBuffer(nullptr), indexBuffer(nullptr)
 		{
 			if (presetMeshes == PresetMeshes::Plane)
@@ -20,7 +19,6 @@ namespace BF
 		}
 
 		Mesh::Mesh(MeshData* meshData) :
-			Component(Component::Type::Mesh),
 			meshData(meshData), vertexBuffer(nullptr), indexBuffer(nullptr)
 		{
 			SetBuffers(&MaterialManager::GetDefaultMaterial());

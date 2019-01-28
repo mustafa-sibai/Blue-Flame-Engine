@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BFE_API Transform : public BF::ECS::Component
+		class BFE_API Transform : public BF::ECS::Component<Transform>
 		{
 		private:
 			BF::Math::Matrix4 worldTransformation;

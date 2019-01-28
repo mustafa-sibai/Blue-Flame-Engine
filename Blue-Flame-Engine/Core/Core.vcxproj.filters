@@ -219,12 +219,6 @@
     <ClCompile Include="BF\Math\Ray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\ECS\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\ECS\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\API\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -232,9 +226,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Scripting\ScriptExecutor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Scripting\Script.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\Transform.cpp">
@@ -247,24 +238,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer.cpp">
@@ -280,6 +253,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\CameraManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\ECS\IComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Scripting\IScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\ECS\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\IRenderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Scripting\Script.inl">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -536,19 +539,10 @@
     <ClInclude Include="BF\Math\Ray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\ECS\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\ECS\GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\API\Framebuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\VertexData.inl">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Materials\MaterialManager.h">
@@ -567,24 +561,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Renderers\PostProcessing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer.h">
@@ -609,6 +585,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\CameraManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\ECS\IComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Scripting\IScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\ECS\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\ECS\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\IRenderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\LineShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\RegularPolygon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -648,5 +657,20 @@
     </None>
     <None Include="BF\Graphics\API\StandardShaders\Terrain\GLSL-Core4.5\PUVN.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-Core4.5\PostProcessing.vpshader" />
+    <None Include="BF\Graphics\VertexData.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\ECS\IComponent.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\ECS\Component.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\Graphics\Renderers\SpriteRendererComponents\Renderable.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\ECS\GameObject.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

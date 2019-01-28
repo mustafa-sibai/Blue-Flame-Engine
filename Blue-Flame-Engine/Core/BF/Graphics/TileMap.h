@@ -20,7 +20,7 @@ namespace BF
 			private:
 				//BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 				std::vector<API::Texture2D*> textures;
-				std::vector<Renderers::Sprite> sprites;
+				std::vector<Renderers::SpriteRendererComponents::Sprite> sprites;
 
 				TileMapData* tileMapData;
 

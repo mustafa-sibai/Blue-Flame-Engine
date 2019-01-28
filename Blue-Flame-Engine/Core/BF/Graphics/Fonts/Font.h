@@ -8,15 +8,19 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class Text;
 			class SpriteRenderer;
+
+			namespace SpriteRendererComponents
+			{
+				class Text;
+			}
 		}
 
 		namespace Fonts
 		{
 			class BFE_API Font
-			{
-				friend class BF::Graphics::Renderers::Text;
+			{;
+				friend class BF::Graphics::Renderers::SpriteRendererComponents::Text;
 				friend class BF::Graphics::Renderers::SpriteRenderer;
 
 				private:

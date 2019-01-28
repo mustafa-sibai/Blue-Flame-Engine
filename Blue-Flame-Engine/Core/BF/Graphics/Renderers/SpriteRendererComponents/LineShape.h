@@ -8,9 +8,11 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BFE_API LineShape : public Renderable
+			namespace SpriteRendererComponents
 			{
-				friend class SpriteRenderer;
+				class BFE_API LineShape : public Renderable<LineShape>
+				{
+					friend class SpriteRenderer;
 
 				private:
 					BF::Math::Vector2f startPoint;
@@ -21,7 +23,8 @@ namespace BF
 					//LineShape();
 					LineShape(const BF::Math::Vector2f& startPoint, const BF::Math::Vector2f& endPoint, float thickness, unsigned int zLayer, const Color& color);
 					~LineShape();
-			};
+				};
+			}
 		}
 	}
 }

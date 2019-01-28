@@ -1,4 +1,5 @@
 #pragma once
+#include "IScript.h"
 #include "BF/ECS/Component.h"
 #include "BF/Common.h"
 
@@ -6,14 +7,14 @@ namespace BF
 {
 	namespace Scripting
 	{
-		class BFE_API Script : public BF::ECS::Component
+		template <class T>
+		class Script : public IScript
 		{
-			public:
-				Script();
-				~Script();
-
-				virtual void Start();
-				virtual void Update();
+		public:
+			Script();
+			virtual ~Script();
 		};
+
+#include "Script.inl"
 	}
 }
