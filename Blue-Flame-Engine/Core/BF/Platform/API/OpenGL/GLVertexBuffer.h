@@ -11,29 +11,32 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLVertexBuffer
+				class BFE_API GLVertexBuffer
 				{
-					private:
-						GLuint VAO;
-						GLuint VBO;
-						unsigned int size;
+				private:
+					GLuint vao;
+					GLuint vbo;
+					unsigned int size;
+					const BF::Graphics::API::VertexBufferLayout* vertexBufferLayout;
 
-					public:
-						GLVertexBuffer();
-						~GLVertexBuffer();
+				public:
+					GLVertexBuffer();
+					~GLVertexBuffer();
 
-						void Create(const void* data, unsigned int size);
-						void SetLayout(const Graphics::API::VertexBufferLayout& vertexBufferLayout);
-						void* Map() const;
-						void Unmap() const;
-						void Bind() const;
-						void Unbind() const;
+					void Create(unsigned int size, const void* data);
+					void SetLayout(const BF::Graphics::API::VertexBufferLayout* vertexBufferLayout);
 
-						inline const GLuint& GetBuffer() const { return VBO; }
+					void* Map() const;
+					void Unmap() const;
 
-					private:
-						GLenum GetGLDataType(Graphics::API::VertexBufferLayout::DataType dataType);
-						unsigned int GetComponentCount(Graphics::API::VertexBufferLayout::DataType dataType);
+					void Bind() const;
+					void Unbind() const;
+
+					inline const GLuint& GetBuffer() const { return vbo; }
+
+				private:
+					GLenum GetGLDataType(BF::Graphics::API::VertexBufferLayout::DataType dataType);
+					unsigned int GetComponentCount(BF::Graphics::API::VertexBufferLayout::DataType dataType);
 				};
 			}
 		}

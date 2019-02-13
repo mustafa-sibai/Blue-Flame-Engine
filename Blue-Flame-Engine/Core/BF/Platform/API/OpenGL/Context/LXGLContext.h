@@ -11,7 +11,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API LXGLContext : public GLContext
+				class BFE_API LXGLContext : public GLContext
 				{
 					private:
 						GLXContext context;

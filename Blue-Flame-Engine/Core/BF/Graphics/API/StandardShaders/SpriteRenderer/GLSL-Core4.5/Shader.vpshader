@@ -5,33 +5,34 @@ layout(location = 1) in vec4 inColor;
 layout(location = 2) in vec2 inUV;
 layout(location = 3) in float inRenderingType;
 
-out vec4 fragmentColor;
-out vec2 UV;
-out float renderingType;
+out vec4 psColor;
+out vec2 psUV;
+out float psRenderingType;
 
-layout (std140, binding = 0) uniform shader_data
+layout (std140, binding = 0) uniform Camera
 {
-	mat4 buffer_modelMatrix;
-	mat4 buffer_viewMatrix;
-	mat4 buffer_projectionMatrix;
-	vec4 cameraPos;
-};
+	mat4 modelMatrix;
+	mat4 viewMatrix;
+	mat4 projectionMatrix;
+	vec4 position;
+} camera;
 
 void main()
 {
-	gl_Position = buffer_projectionMatrix /** buffer_viewMatrix * buffer_modelMatrix **/ * vec4(inPosition.xy, 0.0f, 1.0f);
-	fragmentColor = inColor;
-	UV = inUV;
-	renderingType = inRenderingType;
+	gl_Position = camera.projectionMatrix * camera.viewMatrix * vec4(inPosition.xy, 0.0f, 1.0f);
+
+	psColor = inColor;
+	psUV = inUV;
+	psRenderingType = inRenderingType;
 }
 )";
 
 pixelShader = R"(
 #version 450 core
 
-in vec4 fragmentColor;
-in vec2 UV;
-in float renderingType;
+in vec4 psColor;
+in vec2 psUV;
+in float psRenderingType;
 
 out vec4 color;
 
@@ -39,13 +40,13 @@ uniform sampler2D textures;
 
 void main() 
 {
-	int rt = int(renderingType);
+	int rt = int(psRenderingType);
 
 	if(rt == 0)
-		color = fragmentColor;
+		color = psColor;
 	else if(rt == 1)
-		color = fragmentColor * texture(textures, UV);
+		color = psColor * texture(textures, psUV);
 	else if(rt == 2)
-		color = fragmentColor * texture(textures, UV).r;
+		color = psColor * texture(textures, psUV).r;
 }
 )";

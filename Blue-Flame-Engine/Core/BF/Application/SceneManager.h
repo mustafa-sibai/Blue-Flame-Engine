@@ -7,16 +7,24 @@ namespace BF
 {
 	namespace Application
 	{
-		class BF_API SceneManager
+		class BFE_API SceneManager
 		{
 			private:
-				static std::vector<Scene*> scenes;
+				BF::Application::Layers::LayerManager& layerManager;
+
+				std::vector<Scene*> scenes;
+				Scene* currentScene;
 
 			public:
-				static void AddNewScene(Scene* scene);
+				SceneManager(BF::Application::Layers::LayerManager& layerManager);
+				~SceneManager();
 
-				static inline const std::vector<Scene*>& GetScenes() { return scenes; }
-				static inline Scene& GetScene(int index) { return *scenes[index]; }
+				void AddScene();
+				Scene* LoadScene(int index);
+
+				inline std::vector<Scene*>& GetScenes() { return scenes; }
+				inline Scene& GetScene(int index) { return *scenes[index]; }
+				inline Scene& GetCurrentScene() { return *currentScene; }
 		};
 	}
 }

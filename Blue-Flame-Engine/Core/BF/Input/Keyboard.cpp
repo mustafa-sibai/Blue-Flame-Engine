@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace Input
 	{
-		Keyboard::Key Keyboard::keys[BF_MAX_KEYS];
+		Keyboard::Key Keyboard::keys[BFE_MAX_KEYS];
 
 		Keyboard::Keyboard()
 		{
@@ -16,36 +16,29 @@ namespace BF
 
 		bool Keyboard::IsKeyPressed(Key::Code keyCode)
 		{
-			if (keys[(unsigned char)keyCode].state == Key::State::Pressed)
-			{
-				keys[(unsigned char)keyCode].state = Key::State::Down;
-				return true;
-			}
-
-			return false;
+			return keys[(unsigned char)keyCode].state == Key::State::Pressed;
 		}
 
-		bool Keyboard::IsKeyDown(Key::Code keyCode)
+		bool Keyboard::IsKeyHeldDown(Key::Code keyCode)
 		{
-			if (keys[(unsigned char)keyCode].state == Key::State::Pressed ||
-				keys[(unsigned char)keyCode].state == Key::State::Down)
-			{
-				keys[(unsigned char)keyCode].state = Key::State::Down;
-				return true;
-			}
-
-			return false;
+			return keys[(unsigned char)keyCode].state == Key::State::HeldDown;
 		}
 
 		bool Keyboard::IsKeyUp(Key::Code keyCode)
 		{
-			if (keys[(unsigned char)keyCode].state == Key::State::Up)
-			{
-				keys[(unsigned char)keyCode].state = Key::State::Null;
-				return true;
-			}
+			return keys[(unsigned char)keyCode].state == Key::State::Up;
+		}
 
-			return false;
+		void Keyboard::Update()
+		{
+			for (size_t i = 0; i < BFE_MAX_KEYS; i++)
+			{
+				if (keys[i].state == Key::State::Pressed)
+					keys[i].state = Key::State::HeldDown;
+
+				if (keys[i].state == Key::State::Up)
+					keys[i].state = Key::State::NotPressed;
+			}
 		}
 	}
 }

@@ -84,11 +84,11 @@ namespace BF
 				{
 					switch (format)
 					{
-						case Texture2D::Format::R8: return DXGI_FORMAT_R8_UNORM;
-						case Texture2D::Format::R8G8: return DXGI_FORMAT_R8G8_UNORM;
-						case Texture2D::Format::R8G8B8: return DXGI_FORMAT_B8G8R8X8_UNORM;
-						case Texture2D::Format::R8G8B8A8: return DXGI_FORMAT_R8G8B8A8_UNORM;
-						default: return DXGI_FORMAT_R8G8B8A8_UNORM;
+					case Texture2D::Format::R8: return DXGI_FORMAT_R8_UNORM;
+					case Texture2D::Format::R8G8: return DXGI_FORMAT_R8G8_UNORM;
+					case Texture2D::Format::R8G8B8: return DXGI_FORMAT_B8G8R8X8_UNORM;
+					case Texture2D::Format::R8G8B8A8: return DXGI_FORMAT_R8G8B8A8_UNORM;
+					default: return DXGI_FORMAT_R8G8B8A8_UNORM;
 					}
 				}
 
@@ -96,11 +96,11 @@ namespace BF
 				{
 					switch (wrap)
 					{
-						case Texture2D::Wrap::Repeat: return D3D11_TEXTURE_ADDRESS_WRAP;
-						case Texture2D::Wrap::MirroredReapeat: return D3D11_TEXTURE_ADDRESS_MIRROR;
-						case Texture2D::Wrap::ClampToEdge: return D3D11_TEXTURE_ADDRESS_CLAMP;
-						case Texture2D::Wrap::ClampToBorder: return D3D11_TEXTURE_ADDRESS_BORDER;
-						default: return D3D11_TEXTURE_ADDRESS_WRAP;
+					case Texture2D::Wrap::Repeat: return D3D11_TEXTURE_ADDRESS_WRAP;
+					case Texture2D::Wrap::MirroredReapeat: return D3D11_TEXTURE_ADDRESS_MIRROR;
+					case Texture2D::Wrap::ClampToEdge: return D3D11_TEXTURE_ADDRESS_CLAMP;
+					case Texture2D::Wrap::ClampToBorder: return D3D11_TEXTURE_ADDRESS_BORDER;
+					default: return D3D11_TEXTURE_ADDRESS_WRAP;
 					}
 				}
 

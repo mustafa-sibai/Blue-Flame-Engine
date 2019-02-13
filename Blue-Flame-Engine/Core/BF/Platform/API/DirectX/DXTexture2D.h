@@ -11,24 +11,24 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXTexture2D : public Graphics::API::Texture
+				class BFE_API DXTexture2D : public BF::Graphics::API::Texture
 				{
-					private:
-						ID3D11Texture2D* textureID;
-						ID3D11ShaderResourceView* resourceView;
-						ID3D11SamplerState* samplerState;
+				private:
+					ID3D11Texture2D* textureID;
+					ID3D11ShaderResourceView* resourceView;
+					ID3D11SamplerState* samplerState;
 
-					public:
-						DXTexture2D();
-						~DXTexture2D();
+				public:
+					DXTexture2D();
+					~DXTexture2D();
 
-						void Create(const TextureData& textureData, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
-						void Bind(unsigned int index) const;
+					void Create(const BF::Graphics::API::TextureData& textureData, BF::Graphics::API::Texture::Format format, BF::Graphics::API::Texture::Wrap wrap, BF::Graphics::API::Texture::Filter filter);
+					void Bind(unsigned int index) const;
 
-					private:
-						DXGI_FORMAT GetDXTextureFormat(Graphics::API::Texture::Format format) const;
-						D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(Graphics::API::Texture::Wrap wrap) const;
-						D3D11_FILTER GetDXTextureFilter(Graphics::API::Texture::Filter filter) const;
+				private:
+					DXGI_FORMAT GetDXTextureFormat(Graphics::API::Texture::Format format) const;
+					D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(Graphics::API::Texture::Wrap wrap) const;
+					D3D11_FILTER GetDXTextureFilter(Graphics::API::Texture::Filter filter) const;
 				};
 			}
 		}

@@ -1,7 +1,6 @@
 #pragma once
 #include "BF/Graphics/GUI/Widget.h"
 #include "BF/Graphics/GUI/ScrollbarSlider.h"
-#include "BF/Application/Scene.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -12,7 +11,7 @@ namespace BF
 		{
 			class Panel;
 
-			class BF_API Scrollbar : public Widget
+			class BFE_API Scrollbar : public Widget
 			{
 				friend class Panel;
 				friend class ScrollbarSlider;
@@ -29,7 +28,7 @@ namespace BF
 
 			protected:
 				void Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer) override;
-				void Load(const StyleSheet& StyleSheet, const std::string& widgetName) override;
+				void Load(const StyleSheet& styleSheet, const std::string& widgetName) override;
 				void Update() override;
 				void Render() override;
 

@@ -6,29 +6,39 @@ namespace BF
 {
 	namespace Graphics
 	{
-		struct BF_API Color
+		class BFE_API Color
 		{
-			float r, g, b, a;
+			public:
+				float r, g, b, a;
 
-			Color();
-			Color(float value);
-			Color(float r, float g, float b, float a);
-			~Color();
+				Color();
+				Color(float value);
+				Color(float r, float g, float b, float a);
+				~Color();
 
-			friend BF_API Color operator+(const Color& left, const Color& right);
-			friend BF_API Color operator-(const Color& left, const Color& right);
-			friend BF_API Color operator*(const Color& left, const Color& right);
-			friend BF_API Color operator/(const Color& left, const Color& right);
+				Color Normalize() const;
 
-			Color& operator+=(const Color& right);
-			Color& operator-=(const Color& right);
-			Color& operator*=(const Color& right);
-			Color& operator/=(const Color& right);
+				friend BFE_API Color operator+(const Color& left, const Color& right);
+				friend BFE_API Color operator-(const Color& left, const Color& right);
+				friend BFE_API Color operator*(const Color& left, const Color& right);
+				friend BFE_API Color operator/(const Color& left, const Color& right);
 
-			bool operator==(const Color& right);
-			bool operator!=(const Color& right);
+				Color& operator+=(const Color& right);
+				Color& operator-=(const Color& right);
+				Color& operator*=(const Color& right);
+				Color& operator/=(const Color& right);
 
-			friend BF_API std::ostream& operator<<(std::ostream& os, const Color& color);
+				bool operator>(const Color& right);
+				bool operator>=(const Color& right);
+				bool operator<(const Color& right);
+				bool operator<=(const Color& right);
+
+				bool operator==(const Color& right);
+				bool operator!=(const Color& right);
+
+				#include"PredefinedColors.h"
+
+				friend BFE_API std::ostream& operator<<(std::ostream& os, const Color& color);
 		};
 	}
 }

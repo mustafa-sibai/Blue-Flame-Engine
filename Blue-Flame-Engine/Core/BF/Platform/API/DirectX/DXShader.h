@@ -11,7 +11,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXShader
+				class BFE_API DXShader
 				{
 					private:
 						ID3D11VertexShader* VS;

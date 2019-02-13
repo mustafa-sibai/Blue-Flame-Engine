@@ -2,7 +2,7 @@
 #include <vector>
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Graphics/TileData.h"
-#include "BF/Graphics/Renderers/SpriteRenderer/SpriteRenderer.h"
+#include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -15,12 +15,12 @@ namespace BF
 			std::vector<TileData> tilesData;
 		};
 
-		class BF_API TileMap
+		class BFE_API TileMap
 		{
 			private:
-				Renderers::SpriteRenderer spriteRenderer;
+				//BF::Graphics::Renderers::SpriteRenderer spriteRenderer;
 				std::vector<API::Texture2D*> textures;
-				std::vector<Renderers::Sprite> sprites;
+				std::vector<Renderers::SpriteRendererComponents::Sprite> sprites;
 
 				TileMapData* tileMapData;
 

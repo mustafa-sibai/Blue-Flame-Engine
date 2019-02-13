@@ -13,7 +13,7 @@ namespace new3DScene
 	new3DScene::new3DScene() :
 		/*cubeModel(shader),*/ crateModel(PUVNTB)/*, planeModel(PUVN)*/,
 		/*lightModel{ Model(lightShader), Model(lightShader), Model(lightShader), Model(lightShader) },*/
-		/*floorMaterial(PUVN),*/ crateMaterial(PUVNTB), directionalLight(false)
+		/*floorMaterial(PUVN),*/ directionalLight(false)
 	{
 	}
 
@@ -224,7 +224,7 @@ namespace new3DScene
 		//BF::Engine::GetContext().EnableBlending(true);
 		//BF::Engine::GetContext().EnableDepthMask(false);
 
-		lights.posDir = Vector4(2.5f, 0.0f, 0.0f, 1.0f);
+		lights.posDir = Vector4f(2.5f, 0.0f, 0.0f, 1.0f);
 		lights.ambientColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		lights.diffuseColor = Color(0.0f, 1.0f, 0.0f, 1.0f);
 		lights.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -251,14 +251,14 @@ namespace new3DScene
 		//fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -2.5f, 0.0f)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
 		//planeModel.Render();
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(0.0f, 0.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3f(0, 1, 0)) * Matrix4::Scale(Vector3f(1.0f)));
 
 		crateMaterial.colorBuffer.ambientColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		crateMaterial.colorBuffer.diffuseColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		crateMaterial.colorBuffer.specularColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
 		crateMaterial.colorBuffer.shininess = 8.0f;
 		materialConstantBuffer.Update(&crateMaterial, sizeof(crateMaterial.colorBuffer));
-		crateMaterial.Bind();
+		crateMaterial.Bind(PUVNTB);
 
 		crateModel.Render();
 

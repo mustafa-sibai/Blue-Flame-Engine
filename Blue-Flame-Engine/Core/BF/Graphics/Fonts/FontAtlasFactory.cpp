@@ -1,5 +1,5 @@
 ﻿#include "FontAtlasFactory.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 #include "BF/IO/ResourceManager.h"
 
 namespace BF
@@ -20,11 +20,11 @@ namespace BF
 				unsigned int bufferSize;
 				uint8_t* buffer;
 
-				Vector2 bearing;
-				Vector2 advance;
+				Vector2i bearing;
+				Vector2i advance;
 
 				Glyph() = default;
-				Glyph(unsigned int unicode, unsigned int width, unsigned int height, Vector2 bearing, Vector2 advance, uint8_t* data) :
+				Glyph(int unicode, int width, int height, const Vector2i& bearing, const Vector2i& advance, uint8_t* data) :
 					unicode(unicode), width(width), height(height), bearing(bearing), advance(advance)
 				{
 					bufferSize = width * height;
@@ -39,10 +39,10 @@ namespace BF
 
 			bool FontAtlasFactory::freeTypeInitialized = false;
 
-			unsigned int FontAtlasFactory::startUnicode = 0;
-			unsigned int FontAtlasFactory::endUnicode = 0;
+			int FontAtlasFactory::startUnicode = 0;
+			int FontAtlasFactory::endUnicode = 0;
 			
-			FontAtlas* FontAtlasFactory::GetFontAtlas(const string& filename, unsigned int charPixelSize, Language language, const Shader& shader)
+			FontAtlas* FontAtlasFactory::GetFontAtlas(const string& filename, int charPixelSize, Language language)
 			{
 				if (ResourceManager::Exist(filename + to_string(charPixelSize)))
 				{
@@ -52,7 +52,7 @@ namespace BF
 				{
 					LoadFont(filename);
 
-					ResourceManager::Add(filename + to_string(charPixelSize), Create(face->family_name, charPixelSize, language, shader));
+					ResourceManager::Add(filename + to_string(charPixelSize), Create(face->family_name, charPixelSize, language));
 					return (FontAtlas*)ResourceManager::GetResource(filename + to_string(charPixelSize));
 				}
 			}
@@ -63,28 +63,28 @@ namespace BF
 				{
 					error = FT_Init_FreeType(&library);
 					if (error != FT_Err_Ok)
-						BF_LOG_ERROR("Could not initialize FreeType !");
+						BFE_LOG_ERROR("Could not initialize FreeType !", "");
 					else
 						freeTypeInitialized = true;
 				}
 
 				error = FT_New_Face(library, filename.c_str(), 0, &face);
 				if (error == FT_Err_Unknown_File_Format)
-					BF_LOG_ERROR("FreeType: Unknown file format !");
+					BFE_LOG_ERROR("FreeType: Unknown file format !", "");
 				else if (error)
-					BF_LOG_ERROR("FreeType: file not found !");
+					BFE_LOG_ERROR("FreeType: file not found !", "");
 
 				//cout << "family_name: " << face->family_name << " style_name: " << face->style_name << endl;
 				//cout << "face_index: " << face->face_index << " num_faces: " << face->num_faces << " num_glyphs: " << face->num_glyphs << endl;
 			}
 
-			FontAtlas* FontAtlasFactory::Create(const string& fontName, unsigned int charPixelSize, Language language, const Shader& shader)
+			FontAtlas* FontAtlasFactory::Create(const string& fontName, int charPixelSize, Language language)
 			{
 				vector<Character>* characters = new vector<Character>();
 
 				error = FT_Set_Pixel_Sizes(face, 0, charPixelSize);
 				if (error != FT_Err_Ok)
-					BF_LOG_ERROR("FreeType: could not set pixel size !");
+					BFE_LOG_ERROR("FreeType: could not set pixel size !", "");
 
 				if (language == Language::English)
 				{
@@ -95,36 +95,36 @@ namespace BF
 				const unsigned int totalGlyphs = endUnicode - startUnicode;
 
 				vector<Glyph> glyph(totalGlyphs);
-				unsigned int totalGlyphsWidth = 0;
+				int totalGlyphsWidth = 0;
 
-				float maxYBearing = 0.0f;
+				int maxYBearing = 0;
 
-				for (unsigned int i = 0; i < totalGlyphs; i++)
+				for (size_t i = 0; i < totalGlyphs; i++)
 				{
-					unsigned int unicode = startUnicode + i;
+					int unicode = startUnicode + i;
 					PrepareGlyph(unicode);
 
 					if (face->glyph->bitmap.width == 0)
 						face->glyph->bitmap.width = face->glyph->advance.x >> 6;
 
 					if (face->glyph->metrics.horiBearingY > maxYBearing)
-						maxYBearing = (float)(face->glyph->metrics.horiBearingY >> 6);
+						maxYBearing = face->glyph->metrics.horiBearingY >> 6;
 
 					glyph[i] = Glyph(unicode,
 						face->glyph->bitmap.width, face->glyph->bitmap.rows,
-						Vector2((float)face->glyph->bitmap_left, (float)face->glyph->bitmap_top),
-						Vector2((float)(face->glyph->advance.x >> 6), (float)(face->glyph->advance.y >> 6)), face->glyph->bitmap.buffer);
+						Vector2i(face->glyph->bitmap_left, face->glyph->bitmap_top),
+						Vector2i(face->glyph->advance.x >> 6, face->glyph->advance.y >> 6), face->glyph->bitmap.buffer);
 
-					totalGlyphsWidth += (unsigned int)face->glyph->bitmap.width;
+					totalGlyphsWidth += (int)face->glyph->bitmap.width;
 				}
 
-				unsigned int altalWidth, atlasHeight;
+				int altalWidth, atlasHeight;
 				CalculateTextureAtelsSize(totalGlyphs, totalGlyphsWidth, charPixelSize, altalWidth, atlasHeight);
 
 				TextureAtlas textureAtlas;
 				textureAtlas.Create(altalWidth, atlasHeight, Texture::Format::R8);
 
-				for (unsigned int x = 0, y = 0, index = 0; index < totalGlyphs; )
+				for (int x = 0, y = 0, index = 0; index < totalGlyphs; )
 				{
 					if (x + glyph[index].width >= altalWidth)
 					{
@@ -136,20 +136,20 @@ namespace BF
 						Rectangle scissorRectangle = Rectangle(x, charPixelSize * y, glyph[index].width, glyph[index].height);
 						textureAtlas.AddTexture(scissorRectangle, glyph[index].buffer);
 
-						characters->push_back(Character(Vector2(), scissorRectangle, glyph[index].bearing, glyph[index].advance));
-						x += (unsigned int)glyph[index].width;
+						characters->push_back(Character(Vector2f(), scissorRectangle, glyph[index].bearing, glyph[index].advance));
+						x += (int)glyph[index].width;
 						index++;
 					}
 				}
 
-				Texture2D* texture = new Texture2D(shader);
-				texture->Create(*textureAtlas.GetTextureData(), Texture2D::Format::R8);
+				Texture2D* texture = new Texture2D();
+				texture->Create(textureAtlas.GetTextureData(), Texture2D::Format::R8);
 				FT_Done_Face(face);
 				//FT_Done_FreeType(library);
 				return new FontAtlas(fontName, charPixelSize, maxYBearing, texture, characters);
 			}
 
-			void FontAtlasFactory::PrepareGlyph(unsigned int unicode)
+			void FontAtlasFactory::PrepareGlyph(int unicode)
 			{
 				FT_UInt glyph_index = FT_Get_Char_Index(face, unicode);
 
@@ -163,17 +163,17 @@ namespace BF
 					cout << "ERROR !!" << endl;
 			}
 
-			void FontAtlasFactory::CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int totalGlyphsWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height)
+			void FontAtlasFactory::CalculateTextureAtelsSize(int totalGlyphs, int totalGlyphsWidth, int glyphHeight, int& width, int& height)
 			{
 				float square = (float)ceil(sqrt(totalGlyphs));
 				float glyphWidth = ceil((float)totalGlyphsWidth / totalGlyphs);
-				width = (unsigned int)pow(2, ceil(log(square * glyphWidth) / log(2)));
+				width = (int)pow(2, ceil(log(square * glyphWidth) / log(2)));
 				float columns = floor(width / (float)glyphWidth);
 				float rows = ceil(totalGlyphs / columns);
-				height = (unsigned int)pow(2, ceil(log(rows * glyphHeight) / log(2)));
+				height = (int)pow(2, ceil(log(rows * glyphHeight) / log(2)));
 
-				unsigned int temp = Max((int)height, (int)width);
-				height = Min((int)height, (int)width);
+				int temp = Max(height, width);
+				height = Min(height, width);
 				width = temp;
 			}
 		}

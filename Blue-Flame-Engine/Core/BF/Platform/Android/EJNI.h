@@ -11,7 +11,7 @@ namespace BF
 	{
 		namespace Android
 		{
-			class BF_API EJNI
+			class BFE_API EJNI
 			{
 			public:
 				static std::thread t;

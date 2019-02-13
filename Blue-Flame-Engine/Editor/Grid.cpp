@@ -32,14 +32,14 @@ namespace Editor
 
 		for (int x = 0; x < rectangle.width + 1; x++)
 		{
-			linePosition = Vector2(rectangle.x + (tileWidth * x), rectangle.y);
-			horizontalLines.push_back(LineShape(linePosition, Vector2(linePosition.x, linePosition.y + (rectangle.height * tileHeight)), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
+			linePosition = Vector2f(rectangle.x + (tileWidth * x), rectangle.y);
+			horizontalLines.push_back(LineShape(linePosition, Vector2f(linePosition.x, linePosition.y + (rectangle.height * tileHeight)), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
 		}
 
 		for (int y = 0; y < rectangle.height + 1; y++)
 		{
-			linePosition = Vector2(rectangle.x, rectangle.y + (tileHeight * y));
-			verticalLines.push_back(LineShape(linePosition, Vector2(linePosition.x + (rectangle.width * tileWidth), linePosition.y), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
+			linePosition = Vector2f(rectangle.x, rectangle.y + (tileHeight * y));
+			verticalLines.push_back(LineShape(linePosition, Vector2f(linePosition.x + (rectangle.width * tileWidth), linePosition.y), 1, 0, Color(0.0f, 0.0f, 0.0f, 1.0f)));
 		}
 	}
 

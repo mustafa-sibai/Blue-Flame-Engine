@@ -23,7 +23,7 @@ namespace BF
 
 			void LXEngineEntryPoint::Run(Scene& mainScene)
 			{
-				BF_LOG_INFO("Engine Run");
+				BFE_LOG_INFO("Engine Run");
 				while (Engine::state != Engine::State::Exit)
 				{
 					switch (Engine::state)
@@ -80,7 +80,7 @@ namespace BF
 
 								if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
 								{
-									BF_LOG_INFO("Frames: %d, LastFrameTime: %f", FPS, deltaTime);
+									BFE_LOG_INFO("Frames: %d, LastFrameTime: %f", FPS, deltaTime);
 									SceneManager::GetScene(i).frameRateTimer.Reset();
 									FPS = 0;
 								}

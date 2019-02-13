@@ -1,10 +1,11 @@
 #pragma once
-#include <vector>
 #include "BF/Graphics/API/VertexBuffer.h"
 #include "BF/Graphics/API/IndexBuffer.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
-#include "BF/Graphics/API/Texture2D.h"
+#include "BF/Graphics/Materials/MeshMaterial.h"
+#include "BF/Graphics/MeshData.h"
 #include "BF/Graphics/Color.h"
+#include "BF/ECS/Component.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
@@ -12,42 +13,40 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API Mesh
+		class BFE_API Mesh
 		{
-			public:
-				#include "VertexData.h"
+		public:
+			enum class PresetMeshes { Plane };
+			BF::Graphics::Materials::MeshMaterial material;
+			MeshData* meshData;
 
-				enum class VertexStructVersion { P, PUV, PN, PUVN, PUVNTB };
-				VertexStructVersion vertexStructVersion;
+		private:
+			BF::Graphics::Materials::MaterialManager* materialManager;
+			BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
+			BF::Graphics::API::VertexBuffer* vertexBuffer;
+			BF::Graphics::API::IndexBuffer* indexBuffer;
 
-			private:
-				API::VertexBuffer* vertexBuffer;
-				API::IndexBuffer* indexBuffer;
-				//std::vector<API::Texture2D*>* textures;
-				void* vertices;
-				//std::vector<Material>* materials;
-				std::vector<unsigned int>& indices;
-				std::string textureFilename;
+		public:
+			Mesh(PresetMeshes presetMeshes);
+			Mesh(MeshData* meshData);
+			~Mesh();
 
-			public:
-				Mesh(void* vertices, std::vector<unsigned int>& indices, VertexStructVersion vertexStructVersion/*, std::vector<Material>* materials*/);
-				~Mesh();
+			void Initialize(BF::Graphics::Materials::MaterialManager* materialManager);
 
-				void SetBuffers(const API::Shader& shader, unsigned int bufferSize);
-				void SetTexturefilename(std::string textureFilename);
+			void SetMeshData(MeshData* meshData);
 
-				void Bind() const;
-				void Unbind() const;
+			void AddMaterial(BF::Graphics::Materials::MeshMaterial& material);
 
-			private:
-				unsigned int getVerticesCount() const;
+			void Bind() const;
+			void Unbind() const;
 
-			public:
-				inline API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
-				inline void* GetVertices() const { return vertices; }
-				inline unsigned int GetVerticesCount() const { return getVerticesCount(); }
-				inline std::vector<unsigned int>& GetIndices() const { return indices; }
+			//unsigned int GetVerticesCount() const;
 
+		private:
+			void CreateMaterialFromMaterialData();
+
+		public:
+			inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }
 		};
 	}
 }

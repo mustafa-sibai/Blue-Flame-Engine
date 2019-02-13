@@ -1,4 +1,8 @@
 #include "StyleSheet.h"
+#include "BF/Engine.h"
+#include "BF/System/Debug.h"
+
+#define WIDGET_ARRAY_LENGTH 10
 
 namespace BF
 {
@@ -9,14 +13,14 @@ namespace BF
 			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers;
-			using namespace BF::Graphics::Fonts;
+			//using namespace BF::Graphics::Fonts;
 			using namespace BF::Math;
 
-			StyleSheet::StyleSheet(const API::Shader& shader) :
-				styleSheetNode("GUIStyle")
+			using namespace BF::Application;
+
+			StyleSheet::StyleSheet()
 			{
-				texture = new Texture2D(shader);
-				font = new Font(shader);
+				texture = new Texture2D();
 			}
 
 			StyleSheet::~StyleSheet()
@@ -28,137 +32,173 @@ namespace BF
 				tinyxml2::XMLDocument xmlDocument;
 				xmlDocument.LoadFile(filename.c_str());
 
-				string texturefilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("StyleSheet")->Attribute("Path");
+				tinyxml2::XMLElement* root = BFE_IS_NULL(xmlDocument.FirstChildElement("GUIStyle"));
+
+				const char* texturefilename = BFE_IS_NULL(root->FirstChildElement("StyleSheet")->Attribute("Path"));
 				texture->Load(texturefilename);
 
-				string fontfilename = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Path");
-				const char* size = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement("DefaultFont")->Attribute("Size");
-				font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
+				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button", "Checkbox", "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2", "TabWindow", "TabWindow/Tab" };
 
-				LoadWidget(xmlDocument, "Label");
-				LoadWidget(xmlDocument, "Button");
-				LoadWidget(xmlDocument, "Checkbox");
-				LoadWidget(xmlDocument, "Panel");
-				LoadWidget(xmlDocument, "Scrollbar");
-				LoadWidget(xmlDocument, "ScrollbarSlider");
-			}
-
-			Math::Rectangle StyleSheet::ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName, const string& state, const string& type)
-			{
-				const char* x = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("X");
-				const char* y = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Y");
-				const char* width = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Width");
-				const char* height = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Height");
-
-				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
-			}
-
-			Math::Rectangle StyleSheet::ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName, const string& type)
-			{
-				const char* x = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("MinWidth");
-				const char* y = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("MinHeight");
-				const char* width = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Width");
-				const char* height = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Height");
-
-				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
-			}
-
-			void StyleSheet::TextAlignment(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData)
-			{
-				if (HasText(xmlDocument, widgetName))
+				for (size_t i = 0; i < WIDGET_ARRAY_LENGTH; i++)
 				{
-					widgetData.text = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("String");
-					std::string alignment = xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(type.c_str())->Attribute("Alignment");
-
-					if (alignment == "TopLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopLeft;
-					else if (alignment == "TopCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopCenter;
-					else if (alignment == "TopRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::TopRight;
-
-					else if (alignment == "MiddleLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleLeft;
-					else if (alignment == "MiddleCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleCenter;
-					else if (alignment == "MiddleRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::MiddleRight;
-
-					else if (alignment == "BottomLeft")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomLeft;
-					else if (alignment == "BottomCenter")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomCenter;
-					else if (alignment == "BottomRight")
-						widgetData.textAlignment = WidgetData::TextAlignment::BottomRight;
+					tinyxml2::XMLElement* widgetNode = GetXMLNode(root, widgetNames[i]);
+					LoadWidget(widgetNode, widgetNames[i]);
 				}
 			}
 
-			bool StyleSheet::DoesStateExist(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName, const string& state)
+			Math::Rectangle StyleSheet::ReadWidgetData(tinyxml2::XMLElement* widgetNode, const string& state, const string& type)
 			{
-				return xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str()) == NULL ? false : true;
+				const char* x = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("X"));
+				const char* y = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Y"));
+				const char* width = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Width"));
+				const char* height = BFE_IS_NULL(widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str())->Attribute("Height"));
+
+				return Rectangle(atoi(x), atoi(y), atoi(width), atoi(height));
 			}
 
-			bool StyleSheet::DoesTypeExist(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName, const string& state, const string& type)
+			Math::Rectangle StyleSheet::ReadWidgetDimensions(tinyxml2::XMLElement* widgetNode)
 			{
-				return xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement(state.c_str())->FirstChildElement(type.c_str()) == NULL ? false : true;
+				const char* x = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinWidth"));
+				const char* y = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("MinHeight"));
+				const char* char_width = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Width"));
+				const char* char_height = BFE_IS_NULL(widgetNode->FirstChildElement("Dimensions")->Attribute("Height"));
+
+				unsigned int width = 0;
+				unsigned int height = 0;
+
+				if (strcmp(char_width, "ScreenWidth") == 0)
+					width = BF::Engine::GetWindow().GetClientWidth();
+				else
+					width = atoi(char_width);
+
+				if (strcmp(char_height, "ScreenHeight") == 0)
+					height = BF::Engine::GetWindow().GetClientHeight();
+				else
+					height = atoi(char_height);
+
+				return Rectangle(atoi(x), atoi(y), width, height);
 			}
 
-			bool StyleSheet::HasText(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName)
+			/*void StyleSheet::SetText(tinyxml2::XMLElement* widgetNode, WidgetData& widgetData)
 			{
-				return xmlDocument.FirstChildElement(styleSheetNode.c_str())->FirstChildElement(widgetName.c_str())->FirstChildElement("Text") == NULL ? false : true;
+				if (HasText(widgetNode))
+				{
+					const char* fontfilename = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Path"));
+					const char* size = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Font")->Attribute("Size"));
+
+					Font* font = new Font();
+					font->Load(fontfilename, atoi(size), FontAtlasFactory::Language::English);
+
+					const char* text = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("String")->Attribute("Value"));
+					const char* alignment = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Alignment")->Attribute("Value"));
+
+					const char* r = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("R"));
+					const char* g = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("G"));
+					const char* b = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("B"));
+					const char* a = BFE_IS_NULL(widgetNode->FirstChildElement("Text")->FirstChildElement("Color")->Attribute("A"));
+
+					Text::TextAlignment textAlignment;
+
+					if (strcmp(alignment, "TopLeft") == 0)
+						textAlignment = Text::TextAlignment::TopLeft;
+					else if (strcmp(alignment, "TopCenter") == 0)
+						textAlignment = Text::TextAlignment::TopCenter;
+					else if (strcmp(alignment, "TopRight") == 0)
+						textAlignment = Text::TextAlignment::TopRight;
+
+					else if (strcmp(alignment, "MiddleLeft") == 0)
+						textAlignment = Text::TextAlignment::MiddleLeft;
+					else if (strcmp(alignment, "MiddleCenter") == 0)
+						textAlignment = Text::TextAlignment::MiddleCenter;
+					else if (strcmp(alignment, "MiddleRight") == 0)
+						textAlignment = Text::TextAlignment::MiddleRight;
+
+					else if (strcmp(alignment, "BottomLeft") == 0)
+						textAlignment = Text::TextAlignment::BottomLeft;
+					else if (strcmp(alignment, "BottomCenter") == 0)
+						textAlignment = Text::TextAlignment::BottomCenter;
+					else if (strcmp(alignment, "BottomRight") == 0)
+						textAlignment = Text::TextAlignment::BottomRight;
+
+					widgetData.text = Text(font, text, widgetData.sprites[0].GetRectangle(), textAlignment, 0, Color(stof(r), stof(g), stof(b), stof(a)));
+					widgetData.hasText = true;
+				}
+			}*/
+
+			bool StyleSheet::DoesStateExist(tinyxml2::XMLElement* widgetNode, const string& state)
+			{
+				return widgetNode->FirstChildElement(state.c_str()) == NULL ? false : true;
 			}
 
-			void StyleSheet::LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const string& widgetName)
+			bool StyleSheet::DoesTypeExist(tinyxml2::XMLElement* widgetNode, const string& state, const string& type)
 			{
-				WidgetData widgetData;
+				return widgetNode->FirstChildElement(state.c_str())->FirstChildElement(type.c_str()) == NULL ? false : true;
+			}
+
+			bool StyleSheet::HasText(tinyxml2::XMLElement* widgetNode)
+			{
+				return widgetNode->FirstChildElement("Text") == NULL ? false : true;
+			}
+
+			void StyleSheet::LoadWidget(tinyxml2::XMLElement* widgetNode, const std::string& widgetName)
+			{
+				GameObject* gameObject = new GameObject();
+				Widget* widget = new Widget();
+				gameObject->AddComponent(widget);
+
 				Rectangle rectangle, scissorRectangle;
 
-				widgetData.font = font;
+				rectangle = ReadWidgetDimensions(widgetNode);
 
-				rectangle = ReadWidgetDimensions(xmlDocument, widgetName, "Dimensions");
+				widget->minWidth = rectangle.x;
+				widget->minHeight = rectangle.y;
 
-				TextAlignment(xmlDocument, widgetName, "Text", widgetData);
+				string stateNames[] = { "FirstState", "SecondState" };
 
-				widgetData.minWidth = rectangle.x;
-				widgetData.minHeight = rectangle.y;
-
-				if (DoesStateExist(xmlDocument, widgetName, "FirstState"))
+				for (size_t i = 0; i < 2; i++)
 				{
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Normal");
-					widgetData.sprites[0] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Hovered");
-					widgetData.sprites[1] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Pressed");
-					widgetData.sprites[2] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					if (DoesTypeExist(xmlDocument, widgetName, "FirstState", "Disabled"))
+					if (DoesStateExist(widgetNode, stateNames[i]))
 					{
-						scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "FirstState", "Disabled");
-						widgetData.sprites[3] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+						widget->states.emplace_back(State());
+
+						int index = widget->states.size() - 1;
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Normal");
+						widget->states[index].normal = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Hovered");
+						widget->states[index].hovered = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Pressed");
+						widget->states[index].pressed = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+
+						if (DoesTypeExist(widgetNode, stateNames[i], "Disabled"))
+						{
+							scissorRectangle = ReadWidgetData(widgetNode, stateNames[i], "Disabled");
+							widget->states[index].disabled = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
+						}
 					}
 				}
 
-				if (DoesStateExist(xmlDocument, widgetName, "SecondState"))
+				/*SetText(widgetNode, widgetData);*/
+				widgets.insert({ widgetName, gameObject });
+			}
+
+			tinyxml2::XMLElement* StyleSheet::GetXMLNode(tinyxml2::XMLElement* root, const std::string& widgetName)
+			{
+				std::string delim = "/";
+				unsigned int start = 0;
+				size_t end = widgetName.find(delim);
+
+				while (end != std::string::npos)
 				{
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "SecondState", "Normal");
-					widgetData.sprites[4] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "SecondState", "Hovered");
-					widgetData.sprites[5] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "SecondState", "Pressed");
-					widgetData.sprites[6] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-
-					if (DoesTypeExist(xmlDocument, widgetName, "SecondState", "Disabled"))
-					{
-						scissorRectangle = ReadWidgetData(xmlDocument, widgetName, "SecondState", "Disabled");
-						widgetData.sprites[7] = Sprite(texture, Rectangle(0, 0, rectangle.width, rectangle.height), 0, scissorRectangle, Color(1.0f));
-					}
+					root = root->FirstChildElement(widgetName.substr(start, end - start).c_str());
+					start = end + delim.length();
+					end = widgetName.find(delim, start);
 				}
 
-				widgetsData.insert({ widgetName, widgetData });
+				root = root->FirstChildElement(widgetName.substr(start, end - start).c_str());
+				return root;
 			}
 		}
 	}

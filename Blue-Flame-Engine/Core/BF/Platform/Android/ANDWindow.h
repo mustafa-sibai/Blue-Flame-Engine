@@ -11,7 +11,7 @@ namespace BF
 	{
 		namespace Android
 		{
-			class BF_API ANDWindow : public Application::Window
+			class BFE_API ANDWindow : public Application::Window
 			{
 				friend class BF::Platform::API::OpenGL::ANDGLContext;
 

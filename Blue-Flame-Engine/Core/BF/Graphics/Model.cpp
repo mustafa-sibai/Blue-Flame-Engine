@@ -1,17 +1,17 @@
 #include "Model.h"
-#include "BF/Engine.h"
+#include "Materials/MaterialManager.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
 		using namespace std;
-		using namespace BF::IO;
-		using namespace BF::Graphics::API;
 		using namespace BF::Math;
+		using namespace BF::Graphics::API;
+		using namespace BF::Graphics::Materials;
 
-		Model::Model(const Shader& shader) :
-			shader(shader)
+		Model::Model(std::vector<Mesh>& meshes) :
+			meshes(meshes), materialManager(nullptr)
 		{
 		}
 
@@ -19,71 +19,21 @@ namespace BF
 		{
 		}
 
-		void Model::Load(const string& filename)
+		void Model::Initialize(MaterialManager* materialManager)
 		{
-			model = BFXLoader::Load(filename);
-
-			unsigned int vertexStructSize = 0;
-
-			switch ((*model)[0].vertexStructVersion)
+			this->materialManager = materialManager;
+			for (size_t i = 0; i < meshes.size(); i++)
 			{
-				case Mesh::VertexStructVersion::P:
-				{
-					vertexStructSize = sizeof(Mesh::PVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
-					break;
-				}
-				case Mesh::VertexStructVersion::PUV:
-				{
-					vertexStructSize = sizeof(Mesh::PUVVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
-					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3));
-					break;
-				}
-				case Mesh::VertexStructVersion::PN:
-				{
-					vertexStructSize = sizeof(Mesh::PNVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
-					vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3));
-					break;
-				}
-				case Mesh::VertexStructVersion::PUVN:
-				{
-					vertexStructSize = sizeof(Mesh::PUVNVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
-					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3));
-					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3) + sizeof(Vector2));
-					break;
-				}
-				case Mesh::VertexStructVersion::PUVNTB:
-				{
-					vertexStructSize = sizeof(Mesh::PUVNTBVertexData);
-					vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
-					vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3));
-					vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3) + sizeof(Vector2));
-					vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3) + sizeof(Vector2) + sizeof(Vector3));
-					vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3) + sizeof(Vector2) + sizeof(Vector3) + sizeof(Vector3));
-					break;
-				}
-				default:
-					break;
-			}
-
-			for (size_t i = 0; i < model->size(); i++)
-			{
-				(*model)[i].SetBuffers(shader, vertexStructSize);
-				(*model)[i].GetVertexBuffer()->SetLayout(vertexBufferLayout);
+				meshes[i].Initialize(materialManager);
 			}
 		}
 
-		void Model::Render()
+		void Model::Bind() const
 		{
-			for (size_t i = 0; i < model->size(); i++)
-			{
-				(*model)[i].Bind();
-				Engine::GetContext().Draw((unsigned int)(*model)[i].GetIndices().size());
-				(*model)[i].Unbind();
-			}
+		}
+
+		void Model::Unbind() const
+		{
 		}
 	}
 }

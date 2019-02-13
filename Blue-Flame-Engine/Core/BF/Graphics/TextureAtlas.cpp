@@ -5,6 +5,8 @@ namespace BF
 {
 	namespace Graphics
 	{
+		using namespace BF::Graphics::API;
+
 		TextureAtlas::TextureAtlas() : 
 			bufferSize(0)
 		{

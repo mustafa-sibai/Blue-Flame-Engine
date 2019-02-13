@@ -23,6 +23,11 @@ namespace BF
 		{
 		}
 
+		Color Color::Normalize() const
+		{
+			return Color(r / 255, g / 255, b / 255, a / 255);
+		}
+
 		Color operator+(const Color& left, const Color& right)
 		{
 			return Color(left.r + right.r, left.g + right.g, left.b + right.b, left.a + right.a);
@@ -45,48 +50,68 @@ namespace BF
 
 		Color& Color::operator+=(const Color& right)
 		{
-			this->r += right.r;
-			this->g += right.g;
-			this->b += right.b;
-			this->a += right.a;
+			r += right.r;
+			g += right.g;
+			b += right.b;
+			a += right.a;
 			return *this;
 		}
 
 		Color& Color::operator-=(const Color& right)
 		{
-			this->r -= right.r;
-			this->g -= right.g;
-			this->b -= right.b;
-			this->a -= right.a;
+			r -= right.r;
+			g -= right.g;
+			b -= right.b;
+			a -= right.a;
 			return *this;
 		}
 
 		Color& Color::operator*=(const Color& right)
 		{
-			this->r *= right.r;
-			this->g *= right.g;
-			this->b *= right.b;
-			this->a *= right.a;
+			r *= right.r;
+			g *= right.g;
+			b *= right.b;
+			a *= right.a;
 			return *this;
 		}
 
 		Color& Color::operator/=(const Color& right)
 		{
-			this->r /= right.r;
-			this->g /= right.g;
-			this->b /= right.b;
-			this->a /= right.a;
+			r /= right.r;
+			g /= right.g;
+			b /= right.b;
+			a /= right.a;
 			return *this;
+		}
+
+		bool Color::operator>(const Color& right)
+		{
+			return r > right.r && g > right.g && b > right.b && a > right.a;
+		}
+
+		bool Color::operator>=(const Color& right)
+		{
+			return r >= right.r && g >= right.g && b >= right.b && a >= right.a;
+		}
+
+		bool Color::operator<(const Color& right)
+		{
+			return r < right.r && g < right.g && b < right.b && a < right.a;
+		}
+
+		bool Color::operator<=(const Color& right)
+		{
+			return r <= right.r && g <= right.g && b <= right.b && a <= right.a;
 		}
 
 		bool Color::operator==(const Color &right)
 		{
-			return r == right.r && g == right.g && b == right.b && a == right.a ? true : false;
+			return r == right.r && g == right.g && b == right.b && a == right.a;
 		}
 
 		bool Color::operator!=(const Color &right)
 		{
-			return r != right.r || g != right.g || b != right.b || a != right.a ? true : false;
+			return !(*this == right);
 		}
 
 		std::ostream& operator<<(std::ostream& os, const Color& color)

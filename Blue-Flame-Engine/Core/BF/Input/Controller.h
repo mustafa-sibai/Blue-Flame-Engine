@@ -1,4 +1,3 @@
-#ifdef BF_PLATFORM_WINDOWS
 #pragma once
 #include "BF/Platform/Windows/WINWindow.h"
 #include <Xinput.h>
@@ -6,13 +5,13 @@
 #include "BF/System/Timer.h"
 #include "BF/Common.h"
 
-#define BF_MAX_CONTROLLER_BUTTONS 25
+#define BFE_MAX_CONTROLLER_BUTTONS 25
 
 namespace BF
 {
 	namespace Input
 	{
-		class BF_API Controller
+		class BFE_API Controller
 		{
 			friend class Controllers;
 
@@ -20,14 +19,14 @@ namespace BF
 				XINPUT_STATE state;
 				XINPUT_VIBRATION Vibration;
 
-				bool buttons[BF_MAX_CONTROLLER_BUTTONS];
+				bool buttons[BFE_MAX_CONTROLLER_BUTTONS];
 				int ID;
 
 				float leftTrigger;
 				float rightTrigger;
 
-				Math::Vector2 leftStick;
-				Math::Vector2 rightStick;
+				BF::Math::Vector2f leftStick;
+				BF::Math::Vector2f rightStick;
 
 			public:
 				enum class Button { A, B, X, Y, Left, Right, Up, Down, LeftShoulder, RightShoulder, Start, Back };
@@ -38,29 +37,26 @@ namespace BF
 
 				bool IsButtonPressed(Button button) const;
 
-				Math::Vector2 CalculateStickPosition(Math::Vector2 stickPosition, Math::Vector2 stickDeadZone);
+				BF::Math::Vector2f CalculateStickPosition(const BF::Math::Vector2f& stickPosition, const BF::Math::Vector2f& stickDeadZone);
 
 				inline float GetLeftTrigger() const { return leftTrigger; }
 				inline float GetRightTrigger() const { return rightTrigger; }
 
-				inline const Math::Vector2& GetLeftStike() const { return leftStick; }
-				inline const Math::Vector2& GetRightStike() const { return rightStick; }
+				inline const BF::Math::Vector2f& GetLeftStike() const { return leftStick; }
+				inline const BF::Math::Vector2f& GetRightStike() const { return rightStick; }
 
 			private:
 				void Update();
 				bool IsDeviceConnected(int portNumber);
 		};
 
-		class BF_API Controllers
+		class BFE_API Controllers
 		{
 			friend class BF::Platform::Windows::WINWindow;
 
 			private:
 				static Controller controller[XUSER_MAX_COUNT];
-				static System::Timer timer;
-
-			private:
-				static void Update();
+				static BF::System::Timer timer;
 
 			public:
 				inline static const Controller& Primary() { return controller[0]; }
@@ -69,9 +65,9 @@ namespace BF
 				inline static const Controller& Quaternary() { return controller[3]; }
 
 			private:
+				static void Update();
 				static void FindNewDevices();
 				static int* GetOtherControllersIndecies(int controllerIndex);
 		};
 	}
 }
-#endif

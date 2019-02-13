@@ -1,6 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Client-Debug|ARM">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|ARM64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x86">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x86">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
@@ -33,6 +65,38 @@
       <Configuration>Release</Configuration>
       <Platform>x86</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x86">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x86">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AndroidTestScene.cpp" />
@@ -59,7 +123,31 @@
     <PlatformToolset>Clang_3_8</PlatformToolset>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_3_8</PlatformToolset>
@@ -71,7 +159,31 @@
     <PlatformToolset>Clang_3_8</PlatformToolset>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_3_8</PlatformToolset>
@@ -83,7 +195,31 @@
     <PlatformToolset>Clang_3_8</PlatformToolset>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_3_8</PlatformToolset>
@@ -95,7 +231,31 @@
     <PlatformToolset>Clang_3_8</PlatformToolset>
     <AndroidAPILevel>android-23</AndroidAPILevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_3_8</PlatformToolset>
+    <AndroidAPILevel>android-23</AndroidAPILevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_3_8</PlatformToolset>
@@ -112,7 +272,31 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -124,7 +308,31 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -136,7 +344,31 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -148,13 +380,75 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
+    <OutDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -192,7 +486,83 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86_64\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -230,7 +600,83 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\x86\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -268,6 +714,44 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\arm64-v8a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -287,7 +771,83 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PreprocessorDefinitions>BF_PLATFORM_ANDROID;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CppLanguageStandard>c++1y</CppLanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <PostBuildEvent>
+      <Command>xcopy /Y "$(SolutionDir)Output\SandboxCPP\Android\$(Platform)\Binary\$(Configuration)\*.so" "$(SolutionDir)Sandbox_Android\app\src\main\jniLibs\armeabi-v7a\"</Command>
+    </PostBuildEvent>
+    <Link>
+      <LibraryDependencies>Core;EGL;GLESv3;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Output\Core\Android\$(Platform)\Binary\$(Configuration)\;$(LibraryPath);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>

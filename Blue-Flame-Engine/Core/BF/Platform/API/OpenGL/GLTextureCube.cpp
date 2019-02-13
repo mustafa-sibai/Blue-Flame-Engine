@@ -20,7 +20,7 @@ namespace BF
 				{
 				}
 
-				void GLTextureCube::Create(vector<Texture::TextureData*>& textureData, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
+				void GLTextureCube::Create(vector<TextureData*>& textureData, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
 				{
 					GLCall(glGenTextures(1, &textureID));
 					GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, textureID));
@@ -34,34 +34,34 @@ namespace BF
 
 					switch (filter)
 					{
-						case Texture::Filter::Point:
-						{
-							GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-							GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+					case Texture::Filter::Point:
+					{
+						GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+						GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 
-							break;
-						}
-						case Texture::Filter::Bilinear:
-						{
-							GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-							GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-
-							break;
-						}
-						case Texture::Filter::Trilinear:
-							break;
-						case Texture::Filter::AnisotropicX2:
-							break;
-						case Texture::Filter::AnisotropicX4:
-							break;
-						case Texture::Filter::AnisotropicX8:
-							break;
-						case Texture::Filter::AnisotropicX16:
-							break;
-						default:
-							break;
+						break;
 					}
-					
+					case Texture::Filter::Bilinear:
+					{
+						GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+						GLCall(glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+
+						break;
+					}
+					case Texture::Filter::Trilinear:
+						break;
+					case Texture::Filter::AnisotropicX2:
+						break;
+					case Texture::Filter::AnisotropicX4:
+						break;
+					case Texture::Filter::AnisotropicX8:
+						break;
+					case Texture::Filter::AnisotropicX16:
+						break;
+					default:
+						break;
+					}
+
 					GLCall(glBindTexture(GL_TEXTURE_CUBE_MAP, 0));
 				}
 
@@ -81,11 +81,11 @@ namespace BF
 				{
 					switch (format)
 					{
-						case Texture::Format::R8: return GL_RED;
-						case Texture::Format::R8G8: return GL_RG;
-						case Texture::Format::R8G8B8: return GL_RGB;
-						case Texture::Format::R8G8B8A8: return GL_RGBA;
-						default: return GL_RGBA;
+					case Texture::Format::R8: return GL_RED;
+					case Texture::Format::R8G8: return GL_RG;
+					case Texture::Format::R8G8B8: return GL_RGB;
+					case Texture::Format::R8G8B8A8: return GL_RGBA;
+					default: return GL_RGBA;
 					}
 				}
 
@@ -93,15 +93,15 @@ namespace BF
 				{
 					switch (wrap)
 					{
-						case Texture::Wrap::Repeat: return GL_REPEAT;
-						case Texture::Wrap::MirroredReapeat: return GL_MIRRORED_REPEAT;
-						case Texture::Wrap::ClampToEdge: return GL_CLAMP_TO_EDGE;
-						
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
-						case Texture::Wrap::ClampToBorder: return GL_CLAMP_TO_BORDER;
+					case Texture::Wrap::Repeat: return GL_REPEAT;
+					case Texture::Wrap::MirroredReapeat: return GL_MIRRORED_REPEAT;
+					case Texture::Wrap::ClampToEdge: return GL_CLAMP_TO_EDGE;
+
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
+					case Texture::Wrap::ClampToBorder: return GL_CLAMP_TO_BORDER;
 #endif
 
-						default: return GL_REPEAT;
+					default: return GL_REPEAT;
 					}
 				}
 			}

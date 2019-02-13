@@ -10,7 +10,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API WINGLContext : public GLContext
+				class BFE_API WINGLContext : public GLContext
 				{
 					private:
 						HDC hDC;

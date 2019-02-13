@@ -1,4 +1,5 @@
 #include "BFMLoader.h"
+#include <vector>
 #include "BF/IO/FileFormats/BFMFormat.h"
 
 namespace BF

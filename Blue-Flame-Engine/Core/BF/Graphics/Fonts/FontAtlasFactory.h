@@ -16,7 +16,7 @@ namespace BF
 	{
 		namespace Fonts
 		{
-			class BF_API FontAtlasFactory
+			class BFE_API FontAtlasFactory
 			{
 				private:
 					static FT_Library library;
@@ -25,8 +25,8 @@ namespace BF
 
 					static bool freeTypeInitialized;
 
-					static unsigned int startUnicode;
-					static unsigned int endUnicode;
+					static int startUnicode;
+					static int endUnicode;
 
 				public:
 					enum class Language
@@ -39,13 +39,13 @@ namespace BF
 					~FontAtlasFactory() = delete;
 
 				public:
-					static FontAtlas* GetFontAtlas(const std::string& filename, unsigned int charPixelSize, Language language, const API::Shader& shader);
+					static FontAtlas* GetFontAtlas(const std::string& filename, int charPixelSize, Language language);
 
 				public:
 					static void LoadFont(const std::string& filename);
-					static FontAtlas* Create(const std::string& fontName, unsigned int charPixelSize, Language language, const API::Shader& shader);
-					static void PrepareGlyph(unsigned int unicode);
-					static void CalculateTextureAtelsSize(unsigned int totalGlyphs, unsigned int glyphWidth, unsigned int glyphHeight, unsigned int& width, unsigned int& height);
+					static FontAtlas* Create(const std::string& fontName, int charPixelSize, Language language);
+					static void PrepareGlyph(int unicode);
+					static void CalculateTextureAtelsSize(int totalGlyphs, int glyphWidth, int glyphHeight, int& width, int& height);
 			};
 		}
 	}

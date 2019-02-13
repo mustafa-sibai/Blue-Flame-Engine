@@ -10,7 +10,7 @@ namespace _3DScene_AF_Test
 	using namespace BF::System;
 
 	_3DScene_AF_Test::_3DScene_AF_Test() :
-		cubeModel(shader), planeModel(shader), lightModel(lightShader), material(shader)
+		cubeModel(shader), planeModel(shader), lightModel(lightShader)
 	{
 	}
 
@@ -130,12 +130,12 @@ namespace _3DScene_AF_Test
 		{
 			for (int x = 0; x < 10; x++)
 			{
-				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(20.0f * x, -2.5f, 20.0f * z)) * Matrix4::Rotate(0.0f, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(10.0f)));
+				fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(20.0f * x, -2.5f, 20.0f * z)) * Matrix4::Rotate(0.0f, Vector3f(0, 1, 0)) * Matrix4::Scale(Vector3f(10.0f)));
 				planeModel.Render();
 			}
 		}
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3(0, 1, 0)) * Matrix4::Scale(Vector3(1.0f, 1.0f, 1.0f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(0.0f, -1.0f, 5.0f)) * Matrix4::Rotate(angle, Vector3f(0, 1, 0)) * Matrix4::Scale(Vector3f(1.0f, 1.0f, 1.0f)));
 
 		//material.colorBuffer.ambientColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
 		//material.colorBuffer.diffuseColor = Color(1.0f, 0.5f, 0.31f, 1.0f);
@@ -146,7 +146,7 @@ namespace _3DScene_AF_Test
 		material.colorBuffer.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		material.colorBuffer.shininess = 32.0f;
 		materialConstantBuffer.Update(&material, sizeof(material.colorBuffer));
-		material.Bind();
+		material.Bind(shader);
 
 		cubeModel.Render();
 
@@ -154,14 +154,14 @@ namespace _3DScene_AF_Test
 
 		lightShader.Bind();
 
-		light.posDir = Vector4(2.0f, 2.0f, 0.0f, 1.0f);
+		light.posDir = Vector4f(2.0f, 2.0f, 0.0f, 1.0f);
 
 		light.ambientColor	= Color(1.0f, 1.0f, 1.0f, 1.0f);
 		light.diffuseColor	= Color(0.5f, 0.5f, 0.5f, 1.0f);
 		light.specularColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
 		constantBuffer.Update(&light, sizeof(LightBuffer));
 
-		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3(light.posDir.x, light.posDir.y, light.posDir.z)) * Matrix4::Scale(Vector3(0.1f)));
+		fpsCamera.SetModelMatrix(Matrix4::Translate(Vector3f(light.posDir.x, light.posDir.y, light.posDir.z)) * Matrix4::Scale(Vector3f(0.1f)));
 		lightModel.Render();
 
 		lightShader.Unbind();

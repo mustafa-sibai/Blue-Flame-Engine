@@ -7,10 +7,7 @@ namespace BF
 	{
 		namespace API
 		{
-			VertexBuffer::VertexBuffer(const Shader& shader)
-#ifdef BF_PLATFORM_WINDOWS
-				: dxVertexBuffer(shader.dxShader)
-#endif
+			VertexBuffer::VertexBuffer()
 			{
 			}
 
@@ -18,25 +15,27 @@ namespace BF
 			{
 			}
 
-			void VertexBuffer::Create(void* data, unsigned int size)
+			void VertexBuffer::Create(unsigned int size, void* data)
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Create(data, size);
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer.Create(data, size);
+					glVertexBuffer.Create(size, data);
 #endif
 			}
 
-			void VertexBuffer::SetLayout(const VertexBufferLayout& vertexBufferLayout)
+			void VertexBuffer::SetLayout(const Shader& shader, const VertexBufferLayout* vertexBufferLayout)
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer.SetLayout(vertexBufferLayout);
+				{
+					//dxVertexBuffer.SetLayout(shader.dxShader, vertexBufferLayout);
+				}
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.SetLayout(vertexBufferLayout);
 #endif
@@ -44,11 +43,11 @@ namespace BF
 
 			void* VertexBuffer::Map() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					return dxVertexBuffer.Map();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					return glVertexBuffer.Map();
 #endif
@@ -57,11 +56,11 @@ namespace BF
 
 			void VertexBuffer::Unmap() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Unmap();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unmap();
 #endif
@@ -69,11 +68,11 @@ namespace BF
 
 			void VertexBuffer::Bind() const
 			{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)
 					dxVertexBuffer.Bind();
 #endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Bind();
 #endif
@@ -81,21 +80,10 @@ namespace BF
 
 			void VertexBuffer::Unbind() const
 			{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unbind();
 #endif
-			}
-
-			VertexBuffer& VertexBuffer::operator=(const VertexBuffer& vertexBuffer)
-			{
-#ifdef BF_PLATFORM_WINDOWS
-				//this->dxVertexBuffer = vertexBuffer.dxVertexBuffer;
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-				this->glVertexBuffer = vertexBuffer.glVertexBuffer;
-#endif	
-				return *this;
 			}
 		}
 	}

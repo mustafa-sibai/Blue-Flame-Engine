@@ -16,7 +16,7 @@ namespace BF
 	{
 		namespace Linux
 		{
-			class BF_API LXWindow : public Application::Window
+			class BFE_API LXWindow : public Application::Window
 			{
 				private:
 					Display* display;

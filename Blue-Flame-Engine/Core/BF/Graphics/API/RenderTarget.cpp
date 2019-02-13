@@ -6,8 +6,7 @@ namespace BF
 	{
 		namespace API
 		{
-			RenderTarget::RenderTarget(const Shader& shader) : 
-				texture2D(shader)
+			RenderTarget::RenderTarget()
 			{
 			}
 
@@ -17,19 +16,18 @@ namespace BF
 
 			void RenderTarget::Create(unsigned int width, unsigned int height, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter)
 			{
-				texture2D.Create(Texture::TextureData(width, height, nullptr), format, wrap, filter);
-
-				glFramebuffer.Create(texture2D);
+				texture2D.Create(new TextureData(width, height, nullptr), format, wrap, filter);
+				framebuffer.Create(texture2D, FramebufferFormat::Color);
 			}
 
-			void RenderTarget::Bind()
+			void RenderTarget::Bind() const
 			{
-				glFramebuffer.Bind();
+				framebuffer.Bind();
 			}
 
-			void RenderTarget::Unbind()
+			void RenderTarget::Unbind() const
 			{
-				glFramebuffer.Unbind();
+				framebuffer.Unbind();
 			}
 		}
 	}

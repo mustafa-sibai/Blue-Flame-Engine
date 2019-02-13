@@ -8,7 +8,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				const char* GetGLError(GLenum error)
+				std::string GetGLError(GLenum error)
 				{
 					switch (error)
 					{
@@ -17,7 +17,7 @@ namespace BF
 						case GL_INVALID_OPERATION: return "Invalid operation";
 						case GL_OUT_OF_MEMORY:     return "Out of memory";
 
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 						case GL_STACK_OVERFLOW:    return "Stack overflow";
 						case GL_STACK_UNDERFLOW:   return "Stack underflow";
 #endif

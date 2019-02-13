@@ -1,6 +1,8 @@
 #include "WINEngineEntryPoint.h"
-#include "BF/Application/SceneManager.h"
-#include "BF/System/Log.h"
+#include "BF/Application/App.h"
+#include "BF/Input/Keyboard.h"
+#include "BF/Input/Mouse.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -8,22 +10,22 @@ namespace BF
 	{
 		namespace Windows
 		{
+			using namespace std;
 			using namespace BF::Graphics::API;
 			using namespace BF::Application;
+			using namespace BF::Input;
 
 			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI) :
 				winWindow(winWindow), context(renderAPI), frameRateTarget(0.0f), frameTimeTarget(0.0f)
 			{
-				LimitFrameRate(60.0f);
 			}
 
 			WINEngineEntryPoint::~WINEngineEntryPoint()
 			{
 			}
 
-			void WINEngineEntryPoint::Run(Scene& mainScene)
+			void WINEngineEntryPoint::Run(Application::App& app)
 			{
-				BF_LOG_INFO("Engine Run");
 				while (Engine::state != Engine::State::Exit)
 				{
 					switch (Engine::state)
@@ -32,59 +34,49 @@ namespace BF
 						{
 							winWindow.Initialize();
 							context.Initialize();
-							SceneManager::AddNewScene(&mainScene);
-							SceneManager::GetScene(0).Run();
-							Engine::state = Engine::State::Render;
+							app.Initialize();
+							app.Load();
+							app.PostLoad();
+
+							if(Engine::state != Engine::State::Exit)
+								Engine::state = Engine::State::Render;
+
 							break;
 						}
 
 						case Engine::State::Render:
 						{
-							for (int i = 0; i < SceneManager::GetScenes().size(); i++)
+							winWindow.Update();
+
+							if (frameTimeTarget != 0.0f)
 							{
-								if (SceneManager::GetScene(i).IsRunning())
+								if (app.frameTimer.GetElapsedTimeInMilliseconds() >= frameTimeTarget)
 								{
-									if (!SceneManager::GetScene(i).initialized)
-									{
-										SceneManager::GetScene(i).Initialize();
-										SceneManager::GetScene(i).initialized = true;
-									}
-
-									if (!SceneManager::GetScene(i).loaded)
-									{
-										SceneManager::GetScene(i).Load();
-										SceneManager::GetScene(i).loaded = true;
-									}
-
-									winWindow.Update();
-
-									if (frameTimeTarget != 0.0f)
-									{
-										if (SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds() >= frameTimeTarget)
-										{
-											deltaTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
-											SceneManager::GetScene(i).frameTimer.Reset();
-											SceneManager::GetScene(i).Update();
-											SceneManager::GetScene(i).Render();
-											FPS++;
-										}
-									}
-									else
-									{
-										deltaTime = SceneManager::GetScene(i).frameTimer.GetElapsedTimeInMilliseconds();
-										SceneManager::GetScene(i).frameTimer.Reset();
-										SceneManager::GetScene(i).Update();
-										SceneManager::GetScene(i).Render();
-										FPS++;
-									}
-
-									if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
-									{
-										BF_LOG_INFO("Frames: %d, LastFrameTime: %f", FPS, deltaTime);
-										SceneManager::GetScene(i).frameRateTimer.Reset();
-										FPS = 0;
-									}
+									deltaTime = app.frameTimer.GetElapsedTimeInMilliseconds();
+									app.frameTimer.Reset();
+									app.Update();
+									app.Render();
+									Mouse::Update();
+									Keyboard::Update();
+									FPS++;
 								}
+							}
+							else
+							{
+								deltaTime = app.frameTimer.GetElapsedTimeInMilliseconds();
+								app.frameTimer.Reset();
+								app.Update();
+								app.Render();
+								Mouse::Update();
+								Keyboard::Update();
+								FPS++;
+							}
+
+							if (app.frameRateTimer.GetElapsedTimeInMilliseconds() >= 1000.0f)
+							{
+								BFE_LOG_INFO("Frames: " + to_string(FPS) + " LastFrameTime: " + to_string(deltaTime), "");
+								app.frameRateTimer.Reset();
+								FPS = 0;
 							}
 							break;
 						}

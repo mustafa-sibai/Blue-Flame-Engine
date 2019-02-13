@@ -36,7 +36,7 @@ namespace PhysicsScene
 		//box = RegularPolygon(Math::Rectangle(128, 20, 256, 352), 1, Color(1.0f, 1.0f, 1.0f, 1.0f));
 
 		Math::Rectangle r = box.GetRectangle().IntersectRectangle(floor.GetRectangle());
-		BF_LOG_INFO("%i %i %i %i", r.x, r.y, r.width, r.height);
+		BF_LOG_INFO(r);
 
 		boxRigidbody2D.useGravity = true;
 		floorRigidbody2D.useGravity = false;

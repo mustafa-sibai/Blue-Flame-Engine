@@ -1,50 +1,49 @@
 #include "Camera.h"
 #include "BF/Engine.h"
+#include "BF/Graphics/CameraManager.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
 		using namespace BF::Math;
+		using namespace BF::Graphics;
+		using namespace BF::Graphics::API;
 
-		Camera::Camera()
+		Camera::Camera(const Matrix4& projectionMatrix)
 		{
+			modelMatrix = Matrix4::Identity();
+			viewMatrix = Matrix4::Identity();
+			this->projectionMatrix = projectionMatrix;
 		}
 
 		Camera::~Camera()
 		{
 		}
 
-		void Camera::Initialize(const Math::Matrix4& projectionMatrix)
+		void Camera::SetAsMainCamera()
 		{
-			systemBuffer.modelMatrix = Matrix4::Identity();
-			systemBuffer.viewMatrix = Matrix4::Identity();
-			systemBuffer.projectionMatrix = projectionMatrix;
-
-			constantBuffer.Create(sizeof(SystemBuffer), 0);
+			cameraManager->SetMainCamera(this);
 		}
 
-		void Camera::Update()
+		void Camera::SetClearType(BufferClearType bufferClearType)
 		{
-			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
+			this->bufferClearType = bufferClearType;
 		}
 
-		void Camera::SetModelMatrix(const Math::Matrix4& modelMatrix)
+		void Camera::SetClearColor(const Color& clearColor)
 		{
-			systemBuffer.modelMatrix = modelMatrix;
-			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
+			this->clearColor = clearColor;
 		}
 
-		void Camera::SetViewMatrix(const Math::Matrix4& viewMatrix)
+		void Camera::Clear()
 		{
-			systemBuffer.viewMatrix = viewMatrix;
-			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
+			BF::Engine::GetContext().Clear(bufferClearType, clearColor);
 		}
 
-		void Camera::SetProjectionMatrix(const Math::Matrix4& projectionMatrix)
+		void Camera::SwapBuffers()
 		{
-			systemBuffer.projectionMatrix = projectionMatrix;
-			constantBuffer.Update(&systemBuffer, sizeof(SystemBuffer));
+			BF::Engine::GetContext().SwapBuffers();
 		}
 	}
 }

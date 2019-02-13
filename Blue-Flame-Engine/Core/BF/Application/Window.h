@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Application
 	{
-		class BF_API Window
+		class BFE_API Window
 		{
 			protected:
 				WindowStyle style;
@@ -18,7 +18,7 @@ namespace BF
 
 			public:
 				Window(const std::string& title, const Math::Rectangle& rectangle, WindowStyle style);
-				~Window();
+				virtual ~Window();
 
 				inline const Math::Rectangle& GetRectangle() const { return rectangle; }
 

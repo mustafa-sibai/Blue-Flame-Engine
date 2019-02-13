@@ -8,9 +8,12 @@ namespace BF
 		namespace Animation
 		{
 			using namespace std;
+			using namespace BF::IO;
+			using namespace BF::Graphics::Renderers;
+			using namespace BF::Math;
 
-			SpriteAnimation::SpriteAnimation(Renderers::SpriteRenderer& spriteRenderer, API::Shader& shader) :
-				spriteRenderer(spriteRenderer), shader(shader), texture(shader)
+			SpriteAnimation::SpriteAnimation(SpriteRenderer& spriteRenderer) :
+				spriteRenderer(spriteRenderer)
 			{
 			}
 
@@ -24,10 +27,10 @@ namespace BF
 
 			void SpriteAnimation::Load(const string& filename)
 			{
-				data = IO::BFALoader::Load(filename);
-				texture.Load(data->textureName);
+				data = BFALoader::Load(filename);
+				//texture.Load(data->textureName);
 
-				sprite = Renderers::Sprite(&texture, Math::Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
+				//sprite = Sprite(&texture, Rectangle(0, 350, 32 * 10, 48 * 10), 0, data->sequences[0].keyFrames[0].scissorRectangle, Color(1.0f));
 				timer.Reset();
 			}
 
@@ -39,14 +42,14 @@ namespace BF
 					if (keyFrameIndex >= data->sequences[0].keyFrames.size())
 						keyFrameIndex = 0;
 
-					sprite.SetScissorRectangle(data->sequences[0].keyFrames[keyFrameIndex].scissorRectangle);
+					//sprite.SetScissorRectangle(data->sequences[0].keyFrames[keyFrameIndex].scissorRectangle);
 					timer.Reset();
 				}
 			}
 
 			void SpriteAnimation::Render()
 			{
-				spriteRenderer.Render(sprite);
+				//spriteRenderer.Render(sprite);
 			}
 		}
 	}

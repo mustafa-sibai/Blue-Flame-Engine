@@ -18,43 +18,43 @@ extern "C"
 {
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeOnCreate(JNIEnv* env, jobject thiz)
 	{
-		BF_LOG_INFO("NativeOnCreate");
+		BFE_LOG_INFO("NativeOnCreate");
 		EJNI::NativeOnCreate(main);
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeOnStart(JNIEnv* env, jobject thiz)
 	{
-		BF_LOG_INFO("NativeOnStart");
+		BFE_LOG_INFO("NativeOnStart");
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeOnResume(JNIEnv* env, jobject thiz)
 	{
-		BF_LOG_INFO("NativeOnResume");
+		BFE_LOG_INFO("NativeOnResume");
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeOnPause(JNIEnv* env, jobject thiz)
 	{
-		BF_LOG_INFO("NativeOnPause");
+		BFE_LOG_INFO("NativeOnPause");
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeOnStop(JNIEnv* env, jobject thiz)
 	{
-		BF_LOG_INFO("NativeOnStop");
+		BFE_LOG_INFO("NativeOnStop");
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeSurfaceCreated(JNIEnv* env, jobject thiz, jobject surface)
 	{
-		BF_LOG_INFO("NativeSurfaceCreated");
+		BFE_LOG_INFO("NativeSurfaceCreated");
 		EJNI::NativeSetSurface(ANativeWindow_fromSurface(env, surface));
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeSurfaceChanged(JNIEnv* env, jobject thiz, jobject surface)
 	{
-		BF_LOG_INFO("NativeSurfaceChanged");
+		BFE_LOG_INFO("NativeSurfaceChanged");
 	}
 
 	JNIEXPORT void JNICALL Java_com_Sandbox_Sandbox_NativeSurfaceDestroyed(JNIEnv* env, jobject thiz, jobject surface)
 	{
-		BF_LOG_INFO("NativeSurfaceDestroyed");
+		BFE_LOG_INFO("NativeSurfaceDestroyed");
 	}
 }

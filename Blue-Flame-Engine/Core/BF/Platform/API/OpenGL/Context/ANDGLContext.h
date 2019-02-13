@@ -12,7 +12,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API ANDGLContext
+				class BFE_API ANDGLContext
 				{
 					//private:
 						//std::thread renderThread;

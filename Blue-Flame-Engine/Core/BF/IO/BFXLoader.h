@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
-#include "BF/Graphics/Mesh.h"
+#include "BF/Graphics/MeshData.h"
 #include "BF/IO/FileFormats/BFXFormat.h"
 #include "BF/Common.h"
 
@@ -10,10 +10,10 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API BFXLoader
+		class BFE_API BFXLoader
 		{
-			public:
-				static std::vector<Graphics::Mesh>* Load(const std::string& filename);
+		public:
+			static BF::Graphics::MeshData* Load(const std::string& filename);
 		};
 	}
 }

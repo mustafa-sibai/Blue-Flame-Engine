@@ -1,5 +1,4 @@
 #include "Rigidbody2D.h"
-#include "BF/System/Log.h"
 #include "BF/Engine.h"
 
 namespace BF
@@ -8,11 +7,11 @@ namespace BF
 	{
 		using namespace BF::Math;
 
-		Rigidbody2D::Rigidbody2D(BF::Graphics::Renderers::Renderable& renderable) :
+		Rigidbody2D::Rigidbody2D(BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable) :
 			useGravity(false), speed(1.5f), renderable(renderable)
 		{
 			//if (useGravity)
-			direction = Vector2(0.5f, 1.0f);
+			direction = Vector2f(0.5f, 1.0f);
 		}
 
 		Rigidbody2D::~Rigidbody2D()
@@ -21,18 +20,18 @@ namespace BF
 
 		void Rigidbody2D::Update()
 		{
-			renderable.SetPosition(renderable.GetPosition() + veclotiy);
+			//renderable.SetPosition(renderable.GetPosition() + veclotiy);
 			veclotiy += direction * speed;
 		}
 
-		BF::Math::Rectangle Rigidbody2D::CheckNextFrameCollision()
+		/*BF::Math::Rectangle Rigidbody2D::CheckNextFrameCollision()
 		{
 			BF::Math::Rectangle rectangle = renderable.GetRectangle();
 
-			rectangle.x += veclotiy.x;
-			rectangle.y += veclotiy.y;
+			rectangle.x += (int)veclotiy.x;
+			rectangle.y += (int)veclotiy.y;
 
 			return rectangle;
-		}
+		}*/
 	}
 }

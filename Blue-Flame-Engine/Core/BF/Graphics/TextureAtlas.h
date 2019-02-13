@@ -7,7 +7,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BF_API TextureAtlas : public API::Texture
+		class BFE_API TextureAtlas : public BF::Graphics::API::Texture
 		{
 			private:
 				unsigned int bufferSize;
@@ -17,7 +17,7 @@ namespace BF
 				~TextureAtlas();
 
 				void Create(unsigned int width, unsigned int height, Format format);
-				void AddTexture(const Math::Rectangle& rectangle, uint8_t* data);
+				void AddTexture(const BF::Math::Rectangle& rectangle, uint8_t* data);
 		};
 	}
 }

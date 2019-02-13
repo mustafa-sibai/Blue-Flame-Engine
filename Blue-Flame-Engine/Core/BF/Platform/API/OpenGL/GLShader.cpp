@@ -39,7 +39,7 @@ namespace BF
 					{
 						vector<char> shaderErrorMessage(errorLength + 1);
 						GLCall(glGetShaderInfoLog(shaderID, errorLength, NULL, &shaderErrorMessage[0]));
-						BF_LOG_ERROR("Compile Error: %s", &shaderErrorMessage[0]);
+						BFE_LOG_ERROR("Compile Error: ", &shaderErrorMessage[0]);
 					}
 
 					return shaderID;
@@ -59,7 +59,7 @@ namespace BF
 					{
 						vector<char> ProgramErrorMessage(errorLength + 1);
 						GLCall(glGetProgramInfoLog(programID, errorLength, NULL, &ProgramErrorMessage[0]));
-						BF_LOG_ERROR("Link Error: %s", &ProgramErrorMessage[0]);
+						BFE_LOG_ERROR("Link Error: ", &ProgramErrorMessage[0]);
 					}
 
 					GLCall(glDetachShader(programID, compiledVertexShader));
@@ -76,102 +76,119 @@ namespace BF
 					{
 					case ShaderType::SingleLight3D:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/SingleLight3DShader.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/SingleLight3DShader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::P:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/P.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::PUV:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/PUV.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::PN:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/PN.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::PUVN:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/PUVN.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::PUVNTB:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/PUVNTB.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::_3D:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/P.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 #include "BF/Graphics/API/StandardShaders/3D/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::_3DMipAF:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/3DMipAF/GLSL-Core4.5/Shader.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/3DMipAF/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::Light:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/Light/GLSL-Core4.5/Shader.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/Light/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::SpriteRenderer:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/SpriteRenderer/GLSL-Core4.5/Shader.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/SpriteRenderer/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
 						}
 						case ShaderType::TextureCube:
 						{
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX)
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
 	#include "BF/Graphics/API/StandardShaders/TextureCube/GLSL-Core4.5/Shader.vpshader"
-#elif defined(BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 	#include "BF/Graphics/API/StandardShaders/TextureCube/GLSL-ES3.0/Shader.vpshader"
 #endif
 							break;
+						}
+						case ShaderType::Terrain:
+						{
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/Terrain/GLSL-Core4.5/PUVN.vpshader"
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
+	
+#endif
+							break;
+						}
+						case ShaderType::PostProcessing:
+						{
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX)
+	#include "BF/Graphics/API/StandardShaders/3D/GLSL-Core4.5/PostProcessing.vpshader"
+#elif defined(BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
+	
+#endif
 						}
 						default:
 						{

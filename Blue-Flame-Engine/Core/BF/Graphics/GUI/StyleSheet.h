@@ -2,7 +2,8 @@
 #include <string>
 #include <unordered_map>
 #include "DependencyHeaders/TinyXML-2/tinyxml2.h"
-#include "BF/Graphics/GUI/Widget.h"
+#include "BF/Graphics/GUI2/Widget.h"
+//#include "BF/Application/GameObject.h"
 #include "BF/Graphics/Renderers/SpriteRenderer/Sprite.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
@@ -13,31 +14,30 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BF_API StyleSheet
+			class BFE_API StyleSheet
 			{
 				private:
-					std::string styleSheetNode;
-					std::unordered_map<std::string, WidgetData> widgetsData;
-					API::Texture2D* texture;
-					Fonts::Font* font;
+					std::unordered_map<std::string, BF::Application::GameObject*> widgets;
+					BF::Graphics::API::Texture2D* texture;
 
 				public:
-					StyleSheet(const API::Shader& shader);
+					StyleSheet();
 					~StyleSheet();
 
 					void Load(const std::string& filename);
 
-					inline const WidgetData& GetWidget(const std::string& name) const { return widgetsData.at(name); }
+					inline const BF::Application::GameObject& GetWidget(const std::string& name) const { return *widgets.at(name); }
 
 				private:
-					Math::Rectangle ReadWidgetData(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state, const std::string& type);
-					Math::Rectangle ReadWidgetDimensions(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type);
-					void TextAlignment(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& type, WidgetData& widgetData);
-					bool DoesStateExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state);
-					bool DoesTypeExist(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName, const std::string& state, const std::string& type);
-					bool HasText(const tinyxml2::XMLDocument& xmlDocument, const std::string& name);
+					BF::Math::Rectangle ReadWidgetData(tinyxml2::XMLElement* widgetNode, const std::string& state, const std::string& type);
+					BF::Math::Rectangle ReadWidgetDimensions(tinyxml2::XMLElement* widgetNode);
+					//void SetText(tinyxml2::XMLElement* widgetNode, WidgetData& widgetData);
+					bool DoesStateExist(tinyxml2::XMLElement* widgetNode, const std::string& state);
+					bool DoesTypeExist(tinyxml2::XMLElement* widgetNode, const std::string& state, const std::string& type);
+					bool HasText(tinyxml2::XMLElement* widgetNode);
 
-					void LoadWidget(const tinyxml2::XMLDocument& xmlDocument, const std::string& widgetName);
+					void LoadWidget(tinyxml2::XMLElement* widgetNode, const std::string& widgetName);
+					tinyxml2::XMLElement* GetXMLNode(tinyxml2::XMLElement* root, const std::string& widgetName);
 			};
 		}
 	}

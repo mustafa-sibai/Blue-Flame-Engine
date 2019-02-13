@@ -1,6 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Client-Debug|ARM">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x86">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x86">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
@@ -25,6 +49,30 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x86">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x86">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{11347710-3af5-4dbb-a2d1-3706ca048a4a}</ProjectGuid>
@@ -40,19 +88,55 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -71,6 +155,22 @@
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -81,6 +181,22 @@
     </AdditionalSourcesToCopyMapping>
     <LibraryPath>
     </LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
@@ -93,6 +209,22 @@
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -103,6 +235,22 @@
     </AdditionalSourcesToCopyMapping>
     <LibraryPath>
     </LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
@@ -115,6 +263,22 @@
     <LibraryPath>
     </LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -125,6 +289,22 @@
     </AdditionalSourcesToCopyMapping>
     <LibraryPath>
     </LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
+    <OutDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Sandbox\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core/;$(IncludePath)</IncludePath>
+    <SourcePath />
+    <AdditionalSourcesToCopyMapping />
+    <LibraryPath />
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="..\Sandbox\Sandbox\Main.cpp" />
@@ -173,7 +353,51 @@
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
     <ClCompile>
       <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -195,7 +419,51 @@
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -217,7 +485,51 @@
       <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>
+      </LibraryDependencies>
+      <AdditionalDependencies>$(RemoteRootDir)/Output/Core/Linux/x64/Binary/$(Configuration)/Core.so.1.0;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
     <ClCompile>
       <AdditionalIncludeDirectories>../Core_Linux/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_NO_GLU;%(PreprocessorDefinitions)</PreprocessorDefinitions>

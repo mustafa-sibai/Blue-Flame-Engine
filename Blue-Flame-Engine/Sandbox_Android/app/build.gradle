@@ -4,10 +4,10 @@ model {
     android {
         compileSdkVersion = 23
         buildToolsVersion = "25.0.2"
-		//buildToolsVersion = "23.0.3"
+		//buildToolsVersion = "25.0.3"
         
 		defaultConfig.with {
-            applicationId = "com.Sandbox.Sandbox"
+            applicationId = "com.Sandbox_Android"
             minSdkVersion.apiLevel = 16
             targetSdkVersion.apiLevel = 23
         }

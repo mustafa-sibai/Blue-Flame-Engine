@@ -2,8 +2,8 @@
 #include "BF/Application/SceneManager.h"
 #include "BF/System/Log.h"
 
-#define BF_FRAME_RATE_TARGET 60.0f
-#define BF_FRAME_TIME_TARGET 1000.0f / BF_FRAME_RATE_TARGET
+#define BFE_FRAME_RATE_TARGET 60.0f
+#define BFE_FRAME_TIME_TARGET 1000.0f / BFE_FRAME_RATE_TARGET
 
 namespace BF
 {
@@ -85,15 +85,15 @@ namespace BF
 								FPS++;
 								totalTime += elapsedFrameTime;
 
-								if (totalTime >= BF_FRAME_TIME_TARGET)
+								if (totalTime >= BFE_FRAME_TIME_TARGET)
 								{
-									extra += totalTime - BF_FRAME_TIME_TARGET;
+									extra += totalTime - BFE_FRAME_TIME_TARGET;
 									timesToRunFixedUpdate++;
 
-									if (extra >= BF_FRAME_TIME_TARGET)
+									if (extra >= BFE_FRAME_TIME_TARGET)
 									{
 										timesToRunFixedUpdate++;
-										extra -= BF_FRAME_TIME_TARGET;
+										extra -= BFE_FRAME_TIME_TARGET;
 									}
 
 									totalTime = 0;
@@ -101,7 +101,7 @@ namespace BF
 
 								if (SceneManager::GetScene(i).frameRateTimer.GetElapsedTimeInSeconds() >= 1.0f)
 								{
-									//BF_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
+									//BFE_LOG_INFO("Frames: %d FUPS: %d FrameTime: %f", FPS, FUPS, elapsedFrameTime);
 									SceneManager::GetScene(i).frameRateTimer.Reset();
 									FPS = 0;
 									FUPS = 0;

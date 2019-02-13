@@ -14,7 +14,7 @@ namespace BF
 	{
 		namespace Android
 		{
-			class BF_API ANDEngineEntryPoint
+			class BFE_API ANDEngineEntryPoint
 			{
 				private:
 					ANDWindow andWindow;

@@ -13,10 +13,10 @@ namespace Editor
 		{
 			private:
 				BF::IO::FileFormats::BFXFormat bfxFormat;
-				const std::vector<BF::Graphics::Mesh>& mesh;
+				const std::vector<BF::Graphics::MeshData>& meshesData;
 
 			public:
-				BFXWriter(const std::vector<BF::Graphics::Mesh>& mesh);
+				BFXWriter(const std::vector<BF::Graphics::MeshData>& meshesData);
 				~BFXWriter();
 
 				void WriteToFile(const std::string& filename);

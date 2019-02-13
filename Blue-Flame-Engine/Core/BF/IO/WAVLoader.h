@@ -8,7 +8,7 @@ namespace BF
 {
 	namespace IO
 	{
-		class BF_API WAVLoader
+		class BFE_API WAVLoader
 		{
 			private:
 				struct WAVHeader;

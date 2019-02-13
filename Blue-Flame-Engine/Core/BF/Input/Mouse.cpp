@@ -7,43 +7,63 @@ namespace BF
 	{
 		using namespace BF::Math;
 
-		Vector2 Mouse::position(0.0f);
+		Vector2f Mouse::position(0.0f);
 		bool Mouse::insideWindowClient = false;
-		bool Mouse::buttons[BF_MAX_MOUSE_BUTTONS];
+		Mouse::Button Mouse::buttons[BFE_MAX_MOUSE_BUTTONS];
 
 		Mouse::Mouse()
 		{
-			for (unsigned int i = 0; i < BF_MAX_MOUSE_BUTTONS; i++)
-				buttons[i] = false;
 		}
 
 		Mouse::~Mouse()
 		{
 		}
 
-		bool Mouse::IsButtonPressed(Button button)
+		bool Mouse::IsButtonPressed(Button::Code buttonCode)
 		{
-			return buttons[(unsigned char)button];
+			return buttons[(unsigned char)buttonCode].state == Button::State::Pressed;
 		}
 
-		void Mouse::SetPosition(Vector2 position)
+		bool Mouse::IsButtonHeldDown(Button::Code buttonCode)
 		{
-#ifdef BF_PLATFORM_WINDOWS
+			return buttons[(unsigned char)buttonCode].state == Button::State::HeldDown;
+		}
+
+		bool Mouse::IsButtonUp(Button::Code buttonCode)
+		{
+			return buttons[(unsigned char)buttonCode].state == Button::State::Up;
+		}
+
+		void Mouse::SetPosition(Vector2f position)
+		{
+#ifdef BFE_PLATFORM_WINDOWS
 			POINT point;
 			point.x = (LONG)position.x;
 			point.y = (LONG)position.y;
 
 			ClientToScreen(Engine::GetWindow().GetHWND(), &point);
 			SetCursorPos(point.x, point.y);
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 #endif
+		}
+
+		void Mouse::Update()
+		{
+			for (size_t i = 0; i < BFE_MAX_MOUSE_BUTTONS; i++)
+			{
+				if (buttons[i].state == Button::State::Pressed)
+					buttons[i].state = Button::State::HeldDown;
+
+				if (buttons[i].state == Button::State::Up)
+					buttons[i].state = Button::State::NotPressed;
+			}
 		}
 
 		void Mouse::ShowMouseCursor(bool value)
 		{
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 			ShowCursor(value);
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 #endif
 		}
 	}

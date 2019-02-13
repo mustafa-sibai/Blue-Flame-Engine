@@ -5,7 +5,7 @@
 
 A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 
-<b>**Note:- For the most recent build of the engine, please check out the unstable branch of the repository.</b>
+<b>**Note:- For the most recent build of the engine, please check out the DayToDay branch of the repository.</b>
 
 <b>Features:-</b>
 <ul>
@@ -39,7 +39,7 @@ A 3D/2D game engine that supports both DirectX 11, OpenGL 4.5 and OpenGL ES 3.0
 
 <br>
 
-<b>Platform state as of 15/12/2017:-</b>
+<b>Platform state as of 14/02/2019:-</b>
 <ul>
 <li>Windows - OpenGL 4.5:- working</li>
 <li>Windows - DirectX 11:- broken</li>

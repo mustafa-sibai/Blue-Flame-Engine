@@ -4,7 +4,7 @@ namespace BF
 {
 	namespace AI
 	{
-		Waypoint::Waypoint(Graphics::Renderers::Sprite& sprite, std::vector<Node>& waypoints) :
+		Waypoint::Waypoint(Graphics::Renderers::SpriteRendererComponents::Sprite& sprite, std::vector<Node>& waypoints) :
 			sprite(sprite), waypoints(waypoints), currentIndex(0), reachedFinalWaypoint(false), length(0)
 		{
 		}
@@ -23,7 +23,7 @@ namespace BF
 			//if (previousNode != &node && previousNode != nullptr)
 				//previousNode->arrived = false;
 
-			if (!node.arrived)
+			/*if (!node.arrived)
 			{
 				direction = node.position - sprite.GetPosition();
 				length = direction.Magnitude();
@@ -39,12 +39,12 @@ namespace BF
 					previousNode = &node;
 					sprite.SetPosition(node.position);
 				}
-			}
+			}*/
 		}
 
 		void Waypoint::Update()
 		{
-			direction = waypoints[currentIndex].position - sprite.GetPosition();
+			/*direction = waypoints[currentIndex].position - sprite.GetPosition();
 			length = direction.Magnitude();
 
 			if (length > 1.0f)
@@ -64,7 +64,7 @@ namespace BF
 				else
 				{
 					sprite.SetPosition(waypoints[currentIndex].position);
-				}
+				}*/
 
 
 				/*if (!loop &&      
@@ -76,7 +76,7 @@ namespace BF
 
 				if (loop && currentIndex == waypoints.size() - 1)
 					currentIndex = 0;*/
-			}
+			//}
 		}
 
 	}

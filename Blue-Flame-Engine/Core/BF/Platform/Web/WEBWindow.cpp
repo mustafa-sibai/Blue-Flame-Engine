@@ -39,21 +39,21 @@ namespace BF
 				};
 
 				if ((display = eglGetDisplay(EGL_DEFAULT_DISPLAY)) == EGL_NO_DISPLAY)
-					BF_LOG_ERROR("eglGetDisplay() returned error %d", eglGetError());
+					BFE_LOG_ERROR("eglGetDisplay() returned error %d", eglGetError());
 
 				if (!eglInitialize(display, &eglMajVers, &eglMinVers))
-					BF_LOG_ERROR("eglInitialize() returned error %d", eglGetError());
+					BFE_LOG_ERROR("eglInitialize() returned error %d", eglGetError());
 
 				if (!eglChooseConfig(display, attribs, &config, 1, &numConfigs))
-					BF_LOG_ERROR("eglChooseConfig() returned error %d", eglGetError());
+					BFE_LOG_ERROR("eglChooseConfig() returned error %d", eglGetError());
 
 				if (!eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format))
-					BF_LOG_ERROR("eglGetConfigAttrib() returned error %d", eglGetError());
+					BFE_LOG_ERROR("eglGetConfigAttrib() returned error %d", eglGetError());
 
 				if (!(surface = eglCreateWindowSurface(display, config, nativeWindow, NULL)))
-					BF_LOG_ERROR("eglCreateWindowSurface() returned error %d", eglGetError());
+					BFE_LOG_ERROR("eglCreateWindowSurface() returned error %d", eglGetError());
 
-				BF_LOG_INFO("EGL version: %d.%d", eglMajVers, eglMinVers);
+				BFE_LOG_INFO("EGL version: %d.%d", eglMajVers, eglMinVers);
 
 				emscripten_set_mousemove_callback(nullptr, nullptr, true, MouseCallback);
 				emscripten_set_click_callback(nullptr, nullptr, true, MouseCallback);
@@ -130,7 +130,7 @@ namespace BF
 					Keyboard::keys[*e->key] = false;
 				}*/
 
-				BF_LOG_INFO("%i-- event number: %i", e->keyCode, eventType);
+				BFE_LOG_INFO("%i-- event number: %i", e->keyCode, eventType);
 
 				/*if (eventType == EMSCRIPTEN_EVENT_KEYPRESS)
 				{

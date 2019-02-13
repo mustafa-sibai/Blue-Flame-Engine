@@ -20,7 +20,7 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLShader
+				class BFE_API GLShader
 				{
 					private:
 						GLuint programID;

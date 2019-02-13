@@ -1,12 +1,18 @@
 #include "Scene.h"
-#include "BF/System/Log.h"
+#include "BF/Graphics/Transform.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
 	namespace Application
 	{
-		Scene::Scene() :
-			run(false), initialized(false), loaded(false), fixedUpdateTicks(0)
+		using namespace std;
+		using namespace BF::ECS;
+		using namespace BF::Graphics;
+		using namespace BF::Scripting;
+
+		Scene::Scene(BF::Application::App& app) :
+			app(app)
 		{
 		}
 
@@ -14,36 +20,108 @@ namespace BF
 		{
 		}
 
-		void Scene::Initialize()
+		GameObject* Scene::AddGameObject(GameObject* gameObject)
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Initialize();
-#endif
+			if (!gameObject->added)
+			{
+				gameObjects.emplace_back(gameObject);
+				gameObject->added = true;
+				gameObject->scene = this;
+			}
+			else
+				//Do copy here
+				BFE_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
+					" has already been added to the scene. This GameObject will not be added again.", "");
+			return gameObject;
 		}
 
-		void Scene::Load()
+		GameObject* Scene::AddGameObject(GameObject* gameObject, GameObject* parent)
 		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Load();
-#endif
+			if (!gameObject->added)
+			{
+				gameObject->parent = parent;
+				parent->gameObjects.emplace_back(gameObject);
+				gameObject->added = true;
+			}
+			else
+				//Do copy here
+				BFE_LOG_WARNING("This GameObject \"" + gameObject->Name + "\" of id: \"" + std::to_string(gameObject->id) +
+					" has already been added to the scene. This GameObject will not be added again.", "");
+			return gameObject;
 		}
 
-		/*void Scene::FixedUpdate()
+		void Scene::RemoveGameObject(GameObject* gameObject)
 		{
+			/*for (size_t i = 0; i < gameObject->components.size(); i++)
+			{
+				if (gameObject->components[i]->type == Component::Type::Renderable)
+				{
+					for (vector<Renderable*>::iterator it = spriteRenderer.renderables.begin(); it != spriteRenderer.renderables.end(); ++it)
+					{
+						if (((Component*)*it)->GetID() == gameObject->components[i]->GetID())
+						{
+							spriteRenderer.renderables.erase(it);
+							break;
+						}
+					}
+				}
+			}
+
+			for (vector<GameObject*>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
+			{
+				if (((Component*)*it)->GetID() == gameObject->GetID())
+				{
+					gameObjects.erase(it);
+					break;
+				}
+			}
+
+			delete gameObject;*/
+		}
+
+		/*void Scene::Destroy(GameNode* gameNode)
+		{
+			switch (gameNode->nodeType)
+			{*/
+			/*case GameNode::NodeType::Line:
+			{
+				break;
+			}
+			case GameNode::NodeType::RegularPolygon:
+			{
+				//spriteRenderer.Remove(*(RegularPolygon*)gameNode);
+				break;
+			}
+			case GameNode::NodeType::Sprite:
+			{
+				break;
+			}
+			case GameNode::NodeType::Text:
+			{
+				break;
+			}
+			case GameNode::NodeType::GUI:
+			{
+				widgetManager.RemoveWidget((Widget*)gameNode);
+				gameNodes.erase(gameNode->name);
+				delete (Widget*)gameNode;
+				break;
+			}
+			case GameNode::NodeType::Mesh:
+			{
+				break;
+			}
+			case GameNode::NodeType::Audio:
+			{
+				break;
+			}
+			default:
+			{
+				break;
+			}*/
+			/*}
+
+
 		}*/
-
-		void Scene::Update()
-		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Update();
-#endif
-		}
-
-		void Scene::Render()
-		{
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-			widgetManager.Render();
-#endif
-		}
 	}
 }

@@ -1,12 +1,13 @@
 #pragma once
 #include <BF/BlueFlame.h>
+#include <BF/Graphics/Light.h>
 #include <iostream>
 #include <chrono>
 #include <vector>
 
 namespace _3DScene
 {
-	class _3DScene : public BF::Application::Scene
+	class _3DScene : public BF::Application::App
 	{
 		private:
 			BF::Graphics::API::Shader shader, lightShader;
@@ -23,9 +24,9 @@ namespace _3DScene
 			float lightAngle;
 			int lightIndex = 0;
 
-			BF::Graphics::Lights lights;
-			BF::Graphics::Material floorMaterial;
-			BF::Graphics::Material crateMaterial;
+			BF::Graphics::LightBuffer light;
+			BF::Graphics::Materials::MeshMaterial floorMaterial;
+			BF::Graphics::Materials::MeshMaterial crateMaterial;
 
 			BF::Graphics::Skybox skybox;
 			float angle = 0;
@@ -34,7 +35,6 @@ namespace _3DScene
 			_3DScene();
 			~_3DScene();
 
-		private:
 			void Initialize() override;
 			void Load() override;
 			void Update() override;

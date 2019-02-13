@@ -1,6 +1,5 @@
 #include "Scrollbar.h"
 #include "BF/Graphics/GUI/Panel.h"
-#include "BF/System/Log.h"
 
 namespace BF
 {
@@ -23,10 +22,10 @@ namespace BF
 				slider.Initialize(spriteRenderer, zLayer);
 			}
 
-			void Scrollbar::Load(const StyleSheet& StyleSheet, const std::string& widgetName)
+			void Scrollbar::Load(const StyleSheet& styleSheet, const std::string& widgetName)
 			{
-				Widget::Load(StyleSheet, "Scrollbar");
-				slider.Load(StyleSheet, "");
+				Widget::Load(styleSheet, "Scrollbar");
+				slider.Load(styleSheet, "");
 			}
 
 			void Scrollbar::Update()

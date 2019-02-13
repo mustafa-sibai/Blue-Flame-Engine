@@ -38,7 +38,7 @@ namespace BF
 					Engine::GetContext().GetDXContext().GetContext()->VSSetConstantBuffers(0, 1, &buffer);
 				}
 
-				void DXConstantBuffer::Update(void* data)
+				void DXConstantBuffer::Update(const void* data)
 				{
 					//TODO: Slow should use map instead.
 					Engine::GetContext().GetDXContext().GetContext()->UpdateSubresource(buffer, 0, 0, data, 0, 0);

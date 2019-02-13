@@ -1,72 +1,58 @@
 #pragma once
-
-#ifdef BF_PLATFORM_WINDOWS
+#ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/Windows/WINEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_LINUX)
+#elif defined(BFE_PLATFORM_LINUX)
 	#include "BF/Platform/Linux/LXEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_WEB)
+#elif defined(BFE_PLATFORM_WEB)
 	#include "BF/Platform/Web/WEBEngineEntryPoint.h"
-#elif defined(BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_ANDROID)
 	#include "BF/Platform/Android/ANDEngineEntryPoint.h"
 #endif
 
+#include <vector>
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
+#include "BF/ECS/GameObject.h"
+#include "BF/Graphics/Camera.h"
 #include "BF/Graphics/API/Context.h"
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-	#include "BF/Graphics/GUI/WidgetManager.h"
-#endif
-#include "BF/System/Timer.h"
+#include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Application
 	{
-		class BF_API Scene
+		class SceneManager;
+
+		class BFE_API Scene
 		{
 			friend class BF::Engine;
+			friend class BF::ECS::GameObject;
 
-#ifdef BF_PLATFORM_WINDOWS
-				friend class BF::Platform::Windows::WINEngineEntryPoint;
-#elif defined(BF_PLATFORM_LINUX)
+#ifdef BFE_PLATFORM_WINDOWS
+			friend class BF::Platform::Windows::WINEngineEntryPoint;
+#elif defined(BFE_PLATFORM_LINUX)
 			friend class BF::Platform::Linux::LXEngineEntryPoint;
-#elif defined(BF_PLATFORM_WEB)
-				friend class BF::Platform::Web::WEBEngineEntryPoint;
-#elif defined(BF_PLATFORM_ANDROID)
+#elif defined(BFE_PLATFORM_WEB)
+			friend class BF::Platform::Web::WEBEngineEntryPoint;
+#elif defined(BFE_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
 
-			private:
-				System::Timer frameTimer;
-				System::Timer fixedUpdateTimer;
-				System::Timer frameRateTimer;
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				Graphics::GUI::WidgetManager widgetManager;
-#endif
-				bool run;
-				bool initialized;
-				bool loaded;
-				int fixedUpdateTicks;
+		private:
+			BF::Application::App& app;
+			std::vector<BF::ECS::GameObject*> gameObjects;
 
-			public:
-				Scene();
-				~Scene();
+		public:
+			Scene(BF::Application::App& app);
+			~Scene();
 
-				inline void Run() { run = true; }
-				inline void Stop() { run = false; }
+			BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject);
+			BF::ECS::GameObject* AddGameObject(BF::ECS::GameObject* gameObject, BF::ECS::GameObject* parent);
 
-				inline bool IsRunning() const { return run; }
-#if defined(BF_PLATFORM_WINDOWS) || defined(BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB)
-				inline Graphics::GUI::WidgetManager& GetWidgetManager() { return widgetManager; }
-#endif
+			void RemoveGameObject(BF::ECS::GameObject* gameObject);
 
-			protected:
-				virtual void Initialize();
-				virtual void Load();
-				//virtual void FixedUpdate();
-				virtual void Update();
-				virtual void Render();
+			inline const std::vector<BF::ECS::GameObject*>& GetGameObjects() const { return gameObjects; }
 		};
 	}
 }

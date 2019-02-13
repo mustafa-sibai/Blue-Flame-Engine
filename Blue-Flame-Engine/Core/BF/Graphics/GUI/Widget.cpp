@@ -1,7 +1,6 @@
 #include "Widget.h"
 #include "BF/Graphics/GUI/StyleSheet.h"
 #include "BF/Input/Mouse.h"
-#include "BF/System/Log.h"
 #include "BF/Math/Math.h"
 
 namespace BF
@@ -13,26 +12,28 @@ namespace BF
 			using namespace std;
 			using namespace BF::Math;
 			using namespace BF::Input;
+			using namespace BF::Application;
 			using namespace BF::Graphics::Renderers;
 
 			Widget::Widget() :
 				currentSprite(nullptr), OnClickCallBack(nullptr), callBackPointer(nullptr), currentState(0), mouseNotPressedOnWidget(false), hovered(false), pressed(false), pressedAndReleased(false)
 			{
+				Component::type = Component::Type::GUI;
 			}
 
 			Widget::~Widget()
 			{
 			}
 
-			void Widget::Initialize(Renderers::SpriteRenderer& spriteRenderer, int zLayer)
+			void Widget::Initialize(SpriteRenderer& spriteRenderer, int zLayer)
 			{
 				this->spriteRenderer = &spriteRenderer;
 				SetZLayer(zLayer);
 			}
 
-			void Widget::Load(const StyleSheet& StyleSheet, const string& widgetName)
+			void Widget::Load(const StyleSheet& styleSheet, const string& widgetName)
 			{
-				widgetData = StyleSheet.GetWidget(widgetName);
+				widgetData = styleSheet.GetWidget(widgetName);
 				currentSprite = &widgetData.sprites[0];
 			}
 
@@ -42,80 +43,40 @@ namespace BF
 				this->callBackPointer = callBackPointers;
 			}
 
-			void Widget::SetPosition(const Vector2& position)
+			void Widget::SetPosition(const Vector2f& position)
 			{
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetPosition(position);
+
+				if (widgetData.hasText)
+					widgetData.text.SetPosition(position);
 			}
 
 			void Widget::SetZLayer(int zLayer)
 			{
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].zLayer = zLayer;
 			}
 
-			void Widget::SetTextAlignment(WidgetData::TextAlignment textAlignment)
-			{
-				switch (textAlignment)
-				{
-				case WidgetData::TextAlignment::TopLeft:
-				{
-					widgetData.textPosition = GetPosition();
-					break;
-				}
-				case WidgetData::TextAlignment::TopCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::TopRight:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleLeft:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::MiddleRight:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomLeft:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomCenter:
-				{
-					break;
-				}
-				case WidgetData::TextAlignment::BottomRight:
-				{
-					break;
-				}
-				default:
-					break;
-				}
-			}
-
-			void Widget::SetRectangle(const Math::Rectangle& rectangle)
+			void Widget::SetRectangle(const Rectangle& rectangle)
 			{
 				Math::Rectangle temp = rectangle;
 				temp.width = Max(widgetData.minWidth, rectangle.width);
 				temp.height = Max(widgetData.minHeight, rectangle.height);
 
-				for (unsigned int i = 0; i < BF_WIDGET_DATA_SPRITES_LENGTH; i++)
+				for (size_t i = 0; i < BFE_WIDGET_DATA_SPRITES_LENGTH; i++)
 					widgetData.sprites[i].SetRectangle(temp);
+
+				if (widgetData.hasText)
+					widgetData.text.SetRectangle(rectangle);
 			}
 
 			bool Widget::IsMouseOnWidget()
 			{
 				//if (Mouse::IsInsideWindowClient())
 				{
-					if (Mouse::GetPosition().x >= currentSprite->GetRectangle().x && Mouse::GetPosition().x <= currentSprite->GetRectangle().x + currentSprite->GetRectangle().width &&
-						Mouse::GetPosition().y >= currentSprite->GetRectangle().y && Mouse::GetPosition().y <= currentSprite->GetRectangle().y + currentSprite->GetRectangle().height)
+					if (Mouse::GetPosition().x >= currentSprite->GetRectangle().x + 1 && Mouse::GetPosition().x <= currentSprite->GetRectangle().x + currentSprite->GetRectangle().width - 1 &&
+						Mouse::GetPosition().y >= currentSprite->GetRectangle().y + 1 && Mouse::GetPosition().y <= currentSprite->GetRectangle().y + currentSprite->GetRectangle().height - 1)
 						return true;
 				}
 
@@ -124,7 +85,7 @@ namespace BF
 
 			void Widget::FireAction()
 			{
-				if (hovered && pressed && !Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (hovered && pressed && !Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					pressed = false;
 					currentSprite = &widgetData.sprites[currentState + 0];
@@ -152,10 +113,10 @@ namespace BF
 				else
 					currentSprite = &widgetData.sprites[currentState + 0];
 
-				if (!hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!hovered && Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 					mouseNotPressedOnWidget = true;
 
-				if (!mouseNotPressedOnWidget && hovered && Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!mouseNotPressedOnWidget && hovered && Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					currentSprite = &widgetData.sprites[currentState + 2];
 					pressed = true;
@@ -163,7 +124,7 @@ namespace BF
 
 				FireAction();
 
-				if (!Mouse::IsButtonPressed(Mouse::Button::Left))
+				if (!Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 				{
 					mouseNotPressedOnWidget = false;
 					pressed = false;
@@ -172,13 +133,10 @@ namespace BF
 
 			void Widget::Render()
 			{
-				spriteRenderer->Render(*currentSprite);
+				/*spriteRenderer->Render(*currentSprite);
 
-				if (widgetData.renderText)
-				{
-					//spriteRenderer->RenderText(*widgetData.font, "", )
-				}
-				
+				if (widgetData.hasText)
+					spriteRenderer->Render(widgetData.text);*/
 			}
 
 			void Widget::SwitchState()

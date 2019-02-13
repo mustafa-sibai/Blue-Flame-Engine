@@ -2,41 +2,61 @@ vertexShader = R"(
 #version 450 core
 layout(location = 0) in vec3 inPosition;
 
-layout (std140, binding = 0) uniform camera_data
+layout (std140, binding = 0) uniform PerFrameBuffer
 {
-	mat4 buffer_modelMatrix;
-	mat4 buffer_viewMatrix;
-	mat4 buffer_projectionMatrix;
-	vec4 cameraPos;
-};
+	mat4 viewMatrix;
+	mat4 projectionMatrix;
+	vec4 position;
+} perFrameBuffer;
+
+layout (std140, binding = 2) uniform PerObjectBuffer
+{
+	mat4 modelMatrix;
+	int materialIndex;
+} perObjectBuffer;
 
 void main()
 {
-	vec4 worldSpace = buffer_modelMatrix * vec4(inPosition.xyz, 1.0f);
-	gl_Position = buffer_projectionMatrix * buffer_viewMatrix * worldSpace;
+	vec4 worldSpace = perObjectBuffer.modelMatrix * vec4(inPosition.xyz, 1.0f);
+	gl_Position = perFrameBuffer.projectionMatrix * perFrameBuffer.viewMatrix * worldSpace;
 }
 )";
 
 pixelShader = R"(
 #version 450 core
 
+out vec4 color;
+
 struct Material
 {
 	vec4 ambientColor;
 	vec4 diffuseColor;
 	vec4 specularColor;
+
 	float shininess;
+
+	bool diffuseMapActive;
+	bool specularMapActive;
+	bool normalMapActive;
 };
 
-layout (std140, binding = 2) uniform MaterialUniform
+layout (std140, binding = 1) uniform PerNeedBuffer
 {
-	Material material;
-};
+	Material material[256];
+} perNeedBuffer;
 
-out vec4 color;
+layout (std140, binding = 2) uniform PerObjectBuffer
+{
+	mat4 modelMatrix;
+	int materialIndex;
+} perObjectBuffer;
 
 void main() 
 {
-	color = material.ambientColor * material.diffuseColor * material.specularColor;
+	/*color = vec4(material[0].shininess, material[0].diffuseMapActive, 
+										material[0].specularMapActive, 
+										material[0].normalMapActive);*/
+	color = perNeedBuffer.material[perObjectBuffer.materialIndex].ambientColor;
+	//color = vec4(0.0, 1.0, 0.0, 1.0);
 }
 )";

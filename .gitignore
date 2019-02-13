@@ -5,6 +5,10 @@
 *.db
 *.vs
 *.recipe
+Blue-Flame-Engine/Dependency
+Blue-Flame-Engine/Output
+Blue-Flame-Engine/Core/DependencyHeaders
+Blue-Flame-Engine/Editor/DependencyHeaders
 Blue-Flame-Engine/Sandbox_Android/.gradle
 Blue-Flame-Engine/Sandbox_Android/app/build
 Blue-Flame-Engine/Sandbox_Android/app/src/main/jniLibs

@@ -6,6 +6,8 @@ namespace BF
 	{
 		namespace API
 		{
+			using namespace std;
+
 			VertexBufferLayout::VertexBufferLayout() :
 				vertexBufferElements(0)
 			{
@@ -15,7 +17,7 @@ namespace BF
 			{
 			}
 
-			void VertexBufferLayout::Push(int index, const std::string& name, DataType dataType, unsigned int stride, unsigned int offset)
+			void VertexBufferLayout::Push(int index, const string& name, DataType dataType, unsigned int stride, unsigned int offset)
 			{
 				VertexBufferElement vertexBufferElement;
 				vertexBufferElement.index = index;
@@ -23,7 +25,7 @@ namespace BF
 				vertexBufferElement.dataType = dataType;
 				vertexBufferElement.stride = stride;
 				vertexBufferElement.offset = offset;
-				vertexBufferElements.push_back(vertexBufferElement);
+				vertexBufferElements.emplace_back(vertexBufferElement);
 			}
 		}
 	}

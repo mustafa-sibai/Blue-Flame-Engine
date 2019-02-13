@@ -1,5 +1,5 @@
 #include "BFXLoader.h"
-#include "BF/System/Log.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -9,12 +9,9 @@ namespace BF
 		using namespace BF::Graphics;
 		using namespace BF::IO::FileFormats;
 
-		static std::vector<Graphics::Mesh>* model;
-
-		vector<Mesh>* BFXLoader::Load(const string& filename)
+		MeshData* BFXLoader::Load(const string& filename)
 		{
 			char fileHeader[9];
-			model = new vector<Mesh>();
 			BFXFormat bfxFormat;
 
 			FILE* file;
@@ -22,7 +19,7 @@ namespace BF
 
 			if (!file)
 			{
-				BF_LOG_ERROR("Error: Could not find/open BFX filename: %s\n", filename.c_str());
+				BFE_LOG_ERROR("Error: Could not find/open BFX filename: " + filename + "\n", "");
 				fclose(file);
 				return nullptr;
 			}
@@ -31,7 +28,7 @@ namespace BF
 			fileHeader[8] = '\0';
 			if (strcmp(fileHeader, "BFX FILE") != 0)
 			{
-				BF_LOG_ERROR("Error: Wrong file format: %s\n", filename.c_str());
+				BFE_LOG_ERROR("Error: Wrong file format: " + filename + "\n", "");
 				fclose(file);
 				return nullptr;
 			}
@@ -40,58 +37,64 @@ namespace BF
 			fread(&bfxFormat.minorFileVersion, sizeof(uint8_t), 1, file);
 			fread(&bfxFormat.meshCount, sizeof(unsigned int), 1, file);
 
+			void* vertices = nullptr;
+			vector<unsigned int>* indices = nullptr;
+
 			for (size_t i = 0; i < bfxFormat.meshCount; i++)
 			{
 				fread(&bfxFormat.meshType, sizeof(int), 1, file);
 				fread(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-				void* vertices = nullptr;
-
-				switch ((Mesh::VertexStructVersion)bfxFormat.meshType)
+				switch ((MeshData::VertexStructVersion)bfxFormat.meshType)
 				{
-					case Mesh::VertexStructVersion::P:
-					{
-						vertices = new vector<Mesh::PVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PVertexData));
-						fread(&(*(vector<Mesh::PVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
-						break;
-					}
-					case Mesh::VertexStructVersion::PUV:
-					{
-						vertices = new vector<Mesh::PUVVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVVertexData));
-						fread(&(*(vector<Mesh::PUVVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
-						break;
-					}
-					case Mesh::VertexStructVersion::PN:
-					{
-						vertices = new vector<Mesh::PNVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PNVertexData));
-						fread(&(*(vector<Mesh::PNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
-						break;
-					}
-					case Mesh::VertexStructVersion::PUVN:
-					{
-						vertices = new vector<Mesh::PUVNVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVNVertexData));
-						fread(&(*(vector<Mesh::PUVNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
-						break;
-					}
-					case Mesh::VertexStructVersion::PUVNTB:
-					{
-						vertices = new vector<Mesh::PUVNTBVertexData>(bfxFormat.vertexBufferSize / sizeof(Mesh::PUVNTBVertexData));
-						fread(&(*(vector<Mesh::PUVNTBVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
-						break;
-					}
-					default:
-						break;
+				case MeshData::VertexStructVersion::P:
+				{
+					vertices = new vector<MeshData::PVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshData::PVertexData));
+					fread(&(*(vector<MeshData::PVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+					break;
+				}
+				case MeshData::VertexStructVersion::PUV:
+				{
+					vertices = new vector<MeshData::PUVVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshData::PUVVertexData));
+					fread(&(*(vector<MeshData::PUVVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+					break;
+				}
+				case MeshData::VertexStructVersion::PN:
+				{
+					vertices = new vector<MeshData::PNVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshData::PNVertexData));
+					fread(&(*(vector<MeshData::PNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+					break;
+				}
+				case MeshData::VertexStructVersion::PUVN:
+				{
+					vertices = new vector<MeshData::PUVNVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshData::PUVNVertexData));
+					fread(&(*(vector<MeshData::PUVNVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+					break;
+				}
+				case MeshData::VertexStructVersion::PUVNTB:
+				{
+					vertices = new vector<MeshData::PUVNTBVertexData>(bfxFormat.vertexBufferSize / sizeof(MeshData::PUVNTBVertexData));
+					fread(&(*(vector<MeshData::PUVNTBVertexData>*)vertices)[0], bfxFormat.vertexBufferSize, 1, file);
+					break;
+				}
+				default:
+					break;
 				}
 
 				fread(&bfxFormat.indexBufferSize, sizeof(unsigned int), 1, file);
-				vector<unsigned int>* indices = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
-				fread(&(*indices)[0], bfxFormat.indexBufferSize, 1, file);
-
-				model->push_back(Mesh(vertices, *indices, (Mesh::VertexStructVersion)bfxFormat.meshType));
+				indices = new vector<unsigned int>(bfxFormat.indexBufferSize / sizeof(unsigned int));
+				fread(&(*(vector<unsigned int>*)indices)[0], bfxFormat.indexBufferSize, 1, file);
 			}
 
 			fclose(file);
-			return model;
+
+			/*if (indices->size() > 0)
+				return new MeshData(vertices, indices, (MeshData::VertexStructVersion)bfxFormat.meshType);
+			else
+			{
+				BFE_LOG_ERROR("Error: failed to create mesh: " + filename + "\n", "");
+				return nullptr;
+			}*/
 		}
 	}
 }

@@ -1,6 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Client-Debug|ARM">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x64">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Debug|x86">
+      <Configuration>Client-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|ARM">
+      <Configuration>Client-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x64">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Client-Release|x86">
+      <Configuration>Client-Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
       <Platform>ARM</Platform>
@@ -24,6 +48,30 @@
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|ARM">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x64">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Debug|x86">
+      <Configuration>Server-Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|ARM">
+      <Configuration>Server-Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x64">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Server-Release|x86">
+      <Configuration>Server-Release</Configuration>
+      <Platform>x86</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +308,23 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
@@ -268,7 +332,23 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
@@ -276,7 +356,23 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
   </PropertyGroup>
@@ -292,7 +388,35 @@
     <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
     <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
     <TargetName>Core</TargetName>
     <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -306,7 +430,35 @@
     <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
     <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
     <TargetName>Core</TargetName>
     <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
@@ -320,6 +472,20 @@
     <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
     <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <TargetName>Core</TargetName>
     <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
@@ -327,7 +493,43 @@
     <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
     <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
+    <TargetName>Core</TargetName>
+    <OutDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Binary\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Output\Core\Linux\$(Platform)\Intermediate\$(Configuration)\</IntDir>
+    <IncludePath>../Core_Linux/;$(IncludePath)</IncludePath>
+    <AdditionalSourcesToCopyMapping>../Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a:=./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;../Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a:=./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;../Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a:=./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;../Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a:=./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|ARM'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -349,7 +551,51 @@
       <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -371,6 +617,28 @@
       <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -382,7 +650,51 @@
       <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Debug|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Release|x86'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-fPIC %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>X11;  GL;</LibraryDependencies>
+      <AdditionalDependencies>./projects/Dependency/libs/GLEW/Linux/x64/Release/libGLEW.a;./projects/Dependency/libs/FreeImage/Linux/x64/Release/libfreeimage.a;./projects/Dependency/libs/FreeType/Linux/x64/Release/libfreetype.a;./projects/Dependency/libs/TinyXML-2/Linux/x64/Release/libtinyxml2.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Client-Release|x86'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BF_PLATFORM_LINUX;GLEW_STATIC;GLEW_NO_GLU;FREEIMAGE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>

@@ -6,16 +6,16 @@ namespace BF
 {
 	namespace IO
 	{
-		struct BF_API Resource
+		struct BFE_API Resource
 		{
-			enum class Type { Audio, Texture, XML, Font, Shader, Model };
+			enum class Type { Audio, Texture, XML, Font, Shader, Mesh };
 
 			std::string id;
 			std::string filePath;
 			Type type;
 
 			Resource(Type type);
-			~Resource();
+			virtual ~Resource();
 		};
 	}
 }

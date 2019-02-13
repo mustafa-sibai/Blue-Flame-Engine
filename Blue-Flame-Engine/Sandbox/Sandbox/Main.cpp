@@ -1,83 +1,58 @@
 #include <BF/BlueFlame.h>
-//#include <BF/Engine.h>
-//#include <BF/Application/Window.h>
-//#include <BF/Application/SceneManager.h>
-//#include <BF/Platform/API/Vulkan/VKContext.h>
 
-#include "_2DScene.h"
+//#include "_2DScene.h"
 //#include "_3DScene.h"
-#include "new3DScene.h"
-#include "_3DScene_AF_Test.h"
-#include "_3D_Scene_Single_Light_Test.h"
-#include "InputTests.h"
-#include "GUIScene.h"
-#include "PhysicsScene.h"
-//#include <windows.h>
-//#include <string>
-//#include <iostream>
-
-//using namespace std;
-
-//#include <BF/Network/Server.h>
-//#include <BF/Network/Client.h>
+//#include "new3DScene.h"
+//#include "_3DScene_AF_Test.h"
+//#include "_3D_Scene_Single_Light_Test.h"
+//#include "InputTests.h"
+//#include "GUIScene.h"
+//#include "PhysicsScene.h"
+//#include "TestApp.h"
+//#include "TerrainTestApp.h"
+//#include "ECSTestApp.h"
+#include "Forward_Renderer_Test.h"
+#include "ECS_Script_Test.h"
+#include "Hello_Triangle.h"
 
 int main()
 {
-	/*BF::Network::Server server;
-
-	server.Initialize();
-	server.Listen();
-	server.Accept();*/
-
-	
-	/*BF::Network::Client client;
-
-	client.Initialize();
-	client.Connect();
-
-	system("PAUSE");*/
-
-	//BF::Platform::API::Vulkan::VKContext vKContext;
-
-	//BF_LOG_INFO("MAIN FUNCTION");
-
+#ifdef BFE_NO_NET
 	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
 
-	
-	//new3DScene::new3DScene scene;
-	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test scene;
-	//_3DScene_AF_Test::_3DScene_AF_Test scene;
-	//_3DScene::_3DScene scene;
-	//_2DScene::_2DScene scene;
-	//PhysicsScene::PhysicsScene scene;
-	//GUIScene::GUIScene scene;
-	InputTests scene;
+	//new3DScene::new3DScene app;
+	//_3D_Scene_Single_Light_Test::_3D_Scene_Single_Light_Test app;
+	//_3DScene_AF_Test::_3DScene_AF_Test app;
+	//_3DScenee::_3DScene app;
+	//_2DScene::_2DScene app;
+	//PhysicsScene::PhysicsScene app;
+	//TestApp::TestApp app;
+	//TerrainTestApp app;
+	//InputTests app;
+	//ECS_Script_Test::ECS_Script_Test app;
+	Hello_Triangle::Hello_Triangle app;
+	//Forward_Renderer_Test::Forward_Renderer_Test app;
 
-	engine.Run(scene);
-	BF::Math::Vector3 v;
-	BF::Math::Vector3 v1(10.0f, 20.0f, 30.0f);
+	engine.Run(app);
+#elif defined (BFE_CLIENT)
+	BF::Network::Client client;
 
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
-	BF_LOG_WARNING("%f %f %f %f", v1.x, v1.y, v1.z);
+	client.Initialize();
+	client.Connect();
 
-	v = v1;
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
+	system("PAUSE");
+#elif defined (BFE_SERVER)
+	BF::Network::Server server;
 
-	v.x = 100.0f;
-	v.y = 200.0f;
-	v.z = 400.0f;
+	server.Initialize();
+	server.Listen();
+	server.Accept();
 
-	BF_LOG_WARNING("%f %f %f %f", v.x, v.y, v.z);
-
-
-
-	BF::Math::Vector2 vv1(-7, -4);
-	BF::Math::Vector2 vv2(17, 6.5);
-
-	BF_LOG_INFO("%f", vv1.Distance(vv2));
+	system("PAUSE");
+#endif
 
 	/*
 		TCHAR  buffer[MAX_PATH];

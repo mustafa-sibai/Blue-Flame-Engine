@@ -33,7 +33,7 @@ namespace Editor
 		SetRectangle(rectangle);
 
 		texture.Load("../Sandbox/Assets/Textures/tilea5.png");
-		tilesheet = Sprite(&texture, Math::Vector2((float)rectangle.x, (float)rectangle.y), 0, Color(1.0f));
+		tilesheet = Sprite(&texture, Math::Vector2f((float)rectangle.x, (float)rectangle.y), 0, Color(1.0f));
 
 		SetContentRectangle(Math::Rectangle(rectangle.x, rectangle.y, texture.GetTextureData()->width, texture.GetTextureData()->height));
 	}
@@ -45,11 +45,11 @@ namespace Editor
 
 		if (grid.IsMouseInGrid())
 		{
-			Vector2 indexedOffset = Vector2(floor(grid.GetRectangle().x / (float)grid.tileWidth), floor(grid.GetRectangle().y / (float)grid.tileHeight));
-			Vector2 offset = Vector2(grid.GetRectangle().x - (indexedOffset.x * grid.tileWidth), grid.GetRectangle().y - (indexedOffset.y * grid.tileHeight));
+			Vector2f indexedOffset = Vector2f(floor(grid.GetRectangle().x / (float)grid.tileWidth), floor(grid.GetRectangle().y / (float)grid.tileHeight));
+			Vector2f offset = Vector2f(grid.GetRectangle().x - (indexedOffset.x * grid.tileWidth), grid.GetRectangle().y - (indexedOffset.y * grid.tileHeight));
 
-			Vector2 indexedPosition = Vector2((int)((Mouse::GetPosition().x - offset.x) / grid.tileWidth), (int)((Mouse::GetPosition().y - offset.y) / grid.tileHeight));
-			Vector2 position = Vector2((indexedPosition.x * grid.tileWidth) + offset.x, indexedPosition.y * (grid.tileHeight) + offset.y);
+			Vector2f indexedPosition = Vector2f((int)((Mouse::GetPosition().x - offset.x) / grid.tileWidth), (int)((Mouse::GetPosition().y - offset.y) / grid.tileHeight));
+			Vector2f position = Vector2f((indexedPosition.x * grid.tileWidth) + offset.x, indexedPosition.y * (grid.tileHeight) + offset.y);
 			highlighter = RegularPolygon(Math::Rectangle(position.x, position.y, 64, 64), 0, Color(0.2f, 0.2f, 0.75f, 0.75f));
 
 			if (Mouse::IsButtonPressed(Mouse::Button::Left))

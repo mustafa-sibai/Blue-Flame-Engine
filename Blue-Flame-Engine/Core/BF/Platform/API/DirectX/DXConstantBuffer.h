@@ -10,7 +10,7 @@ namespace BF
 		{
 			namespace DirectX
 			{
-				class BF_API DXConstantBuffer
+				class BFE_API DXConstantBuffer
 				{
 					private:
 						ID3D11Buffer* buffer;
@@ -20,7 +20,7 @@ namespace BF
 						~DXConstantBuffer();
 
 						void Create(unsigned int size);
-						void Update(void* data);
+						void Update(const void* data);
 				};
 			}
 		}

@@ -11,6 +11,9 @@ namespace BF
 		namespace API
 		{
 			enum class PrimitiveType;
+			enum class BufferClearType;
+			enum class WindingOrder;
+			enum class CullingType;
 		}
 	}
 
@@ -20,31 +23,34 @@ namespace BF
 		{
 			namespace OpenGL
 			{
-				class BF_API GLContext
+				class BFE_API GLContext
 				{
-					protected:
-						GLuint GL_PRIMITIVE_TYPE;
-						bool initialized;
+				protected:
+					GLuint GL_PRIMITIVE_TYPE;
+					bool initialized;
 
-					public:
-						GLContext();
-						~GLContext();
+				public:
+					GLContext();
+					~GLContext();
 
-						virtual void Initialize();
-						void SetPrimitiveType(Graphics::API::PrimitiveType primitiveType);
-						void Clear(const Graphics::Color& color);
-						void Render(GLsizei count);
-						virtual void SwapBuffers();
-						virtual void CleanUp();
+					virtual void Initialize();
+					void SetPrimitiveType(BF::Graphics::API::PrimitiveType primitiveType);
+					void Clear(BF::Graphics::API::BufferClearType bufferClearType, const BF::Graphics::Color& color);
+					void Render(GLsizei count);
+					virtual void SwapBuffers();
+					virtual void CleanUp();
 
-						void EnableDepthBuffer(bool state);
-						void EnableDepthMask(bool state);
-						void EnableBlending(bool state);
-						virtual void EnableVsync(bool state);
-						void EnableScissor(bool state);
+					void EnableDepthBuffer(bool state);
+					void EnableDepthMask(bool state);
+					void EnableBlending(bool state);
+					virtual void EnableVsync(bool state);
+					void EnableScissor(bool state);
 
-						void SetScissor(const Math::Rectangle& rectangle);
-						void SetViewport(const Math::Rectangle& rectangle);
+					void SetScissor(const BF::Math::Rectangle& rectangle);
+					void SetViewport(const BF::Math::Rectangle& rectangle);
+
+					void SetWindingOrder(BF::Graphics::API::WindingOrder windingOrder);
+					void CullFace(BF::Graphics::API::CullingType cullingType);
 				};
 			}
 		}

@@ -5,7 +5,7 @@ namespace BF
 {
 	namespace Application
 	{
-		enum class BF_API WindowStyle
+		enum class BFE_API WindowStyle
 		{
 			Fullscreen,
 			Windowed,

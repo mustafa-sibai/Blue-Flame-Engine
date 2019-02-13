@@ -8,23 +8,26 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class Text;
 			class SpriteRenderer;
+
+			namespace SpriteRendererComponents
+			{
+				class Text;
+			}
 		}
 
 		namespace Fonts
 		{
-			class BF_API Font
-			{
-				friend class BF::Graphics::Renderers::Text;
+			class BFE_API Font
+			{;
+				friend class BF::Graphics::Renderers::SpriteRendererComponents::Text;
 				friend class BF::Graphics::Renderers::SpriteRenderer;
 
 				private:
-					const API::Shader& shader;
 					FontAtlas* fontAtlas;
 
 				public:
-					Font(const API::Shader& shader);
+					Font();
 					~Font();
 
 					void Load(const std::string& filename, unsigned int charPixelSize, FontAtlasFactory::Language language);

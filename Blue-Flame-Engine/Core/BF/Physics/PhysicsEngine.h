@@ -7,13 +7,13 @@ namespace BF
 {
 	namespace Physics
 	{
-		class BF_API PhysicsEngine
+		class BFE_API PhysicsEngine
 		{
 			private:
-				static std::vector<BF::Physics::Rigidbody2D*> rigidbodies;
+				static std::vector<Rigidbody2D*> rigidbodies;
 
 			public:
-				static void Add(BF::Physics::Rigidbody2D* rigidbody2D);
+				static void Add(Rigidbody2D* rigidbody2D);
 				static void Update();
 		};
 	}

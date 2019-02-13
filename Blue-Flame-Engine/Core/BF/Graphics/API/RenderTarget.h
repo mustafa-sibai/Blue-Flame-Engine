@@ -1,12 +1,5 @@
 #pragma once
-#ifdef BF_PLATFORM_WINDOWS
-	//#include "BF/Platform/API/DirectX/DXFramebuffer.h"
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-	#include "BF/Platform/API/OpenGL/GLFramebuffer.h"
-#endif
-
-#include "BF/Graphics/API/Texture2D.h"
+#include "BF/Graphics/API/Framebuffer.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -15,25 +8,20 @@ namespace BF
 	{
 		namespace API
 		{
-			class BF_API RenderTarget
+			class BFE_API RenderTarget
 			{
 				private:
-#ifdef BF_PLATFORM_WINDOWS
-					//Platform::API::DirectX::DXFramebuffer dxFramebuffer;
-#endif
-#if defined (BF_PLATFORM_WINDOWS) || defined (BF_PLATFORM_LINUX) || defined (BF_PLATFORM_WEB) || defined (BF_PLATFORM_ANDROID)
-					Platform::API::OpenGL::GLFramebuffer glFramebuffer;
-#endif
+					Framebuffer framebuffer;
 					Texture2D texture2D;
 
 				public:
-					RenderTarget(const Shader& shader);
+					RenderTarget();
 					~RenderTarget();
 
-					void Create(unsigned int width, unsigned int height, Graphics::API::Texture::Format format, Graphics::API::Texture::Wrap wrap, Graphics::API::Texture::Filter filter);
+					void Create(unsigned int width, unsigned int height, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter);
 
-					void Bind();
-					void Unbind();
+					void Bind() const;
+					void Unbind() const;
 
 					inline const Texture2D& GetTexture2D() const { return texture2D; }
 			};

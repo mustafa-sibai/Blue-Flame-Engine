@@ -27,7 +27,7 @@ namespace Editor
 			return transform;
 		}
 
-		void FBXLoader::Load(const char* filename)
+		void FBXLoader::Load(const char* filename, ImportSettings importSettings)
 		{
 			//materials = new std::vector<Graphics::Material>();
 
@@ -91,7 +91,7 @@ namespace Editor
 						//LoadUVInformation(mesh);
 
 						ReadControlPoints(mesh);
-						ProcessMesh(mesh);
+						ProcessMesh(mesh, importSettings);
 						//AssociateMaterialToMesh(mesh);
 					}
 				}
@@ -113,15 +113,15 @@ namespace Editor
 			FbxVector4* pControlPoints = mesh->GetControlPoints();
 
 			for (int i = 0; i < controlPointsCount; i++)
-				controlPoints.push_back(Vector3((float)pControlPoints[i].mData[0] * 0.01f, (float)pControlPoints[i].mData[1] * 0.01f, (float)pControlPoints[i].mData[2] * 0.01f));
+				controlPoints.push_back(Vector3f((float)pControlPoints[i].mData[0] * 0.01f, (float)pControlPoints[i].mData[1] * 0.01f, (float)pControlPoints[i].mData[2] * 0.01f));
 		}
 
-		void FBXLoader::ProcessMesh(FbxMesh* mesh)
+		void FBXLoader::ProcessMesh(FbxMesh* mesh, ImportSettings importSettings)
 		{
 			int vertexCounter = 0;
 			int ctrlPointIndex;
 			triCount = mesh->GetPolygonCount();
-			Mesh::VertexStructVersion vertexStructVersion = Mesh::VertexStructVersion::P;
+			MeshData::VertexStructVersion vertexStructVersion = MeshData::VertexStructVersion::P;
 
 			bool hasUV = false;
 			bool hasNormals = false;
@@ -130,26 +130,55 @@ namespace Editor
 
 			ctrlPointIndex = mesh->GetPolygonVertex(0, 0);
 
-			ReadNormal(mesh, ctrlPointIndex, vertexCounter, hasNormals);
-			ReadTangent(mesh, ctrlPointIndex, vertexCounter, hasTangent);
-			ReadBinormal(mesh, ctrlPointIndex, vertexCounter, hasBinormal);
-			ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(0, 0), 0, hasUV);
+			switch (importSettings)
+			{
+				case ImportSettings::ImportP:
+				{
+					break;
+				}
+				case ImportSettings::ImportPN:
+				{
+					ReadNormal(mesh, ctrlPointIndex, vertexCounter, hasNormals);
+					break;
+				}
+				case ImportSettings::ImportPUV:
+				{
+					ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(0, 0), 0, hasUV);
+					break;
+				}
+				case ImportSettings::ImportPUVN:
+				{
+					ReadNormal(mesh, ctrlPointIndex, vertexCounter, hasNormals);
+					ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(0, 0), 0, hasUV);
+					break;
+				}
+				case ImportSettings::ImportPUVNTB:
+				{
+					ReadNormal(mesh, ctrlPointIndex, vertexCounter, hasNormals);
+					ReadTangent(mesh, ctrlPointIndex, vertexCounter, hasTangent);
+					ReadBinormal(mesh, ctrlPointIndex, vertexCounter, hasBinormal);
+					ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(0, 0), 0, hasUV);
+					break;
+				}
 
+				default:
+					break;
+			}
 
 			if (!hasUV && !hasNormals && !(hasTangent || hasBinormal))
-				vertexStructVersion = Mesh::VertexStructVersion::P;
+				vertexStructVersion = MeshData::VertexStructVersion::P;
 
 			if(hasUV)
-				vertexStructVersion = Mesh::VertexStructVersion::PUV;
+				vertexStructVersion = MeshData::VertexStructVersion::PUV;
 
 			if (hasNormals)
-				vertexStructVersion = Mesh::VertexStructVersion::PN;
+				vertexStructVersion = MeshData::VertexStructVersion::PN;
 
 			if (hasUV && hasNormals)
-				vertexStructVersion = Mesh::VertexStructVersion::PUVN;
+				vertexStructVersion = MeshData::VertexStructVersion::PUVN;
 
 			if (hasUV && hasNormals && (hasTangent || hasBinormal))
-				vertexStructVersion = Mesh::VertexStructVersion::PUVNTB;
+				vertexStructVersion = MeshData::VertexStructVersion::PUVNTB;
 
 			bool unused = false;
 
@@ -161,41 +190,41 @@ namespace Editor
 
 					switch (vertexStructVersion)
 					{
-						case Mesh::VertexStructVersion::P:
+						case MeshData::VertexStructVersion::P:
 						{
-							Mesh::PVertexData* vertex = new Mesh::PVertexData(controlPoints[ctrlPointIndex]);
+							MeshData::PVertexData* vertex = new MeshData::PVertexData(0, controlPoints[ctrlPointIndex]);
 							vertices.push_back((void*)vertex);
 							break;
 						}
-						case Mesh::VertexStructVersion::PUV:
+						case MeshData::VertexStructVersion::PUV:
 						{
-							Vector2 UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
-							Mesh::PUVVertexData* vertex = new Mesh::PUVVertexData(controlPoints[ctrlPointIndex], UV);
+							Vector2f UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
+							MeshData::PUVVertexData* vertex = new MeshData::PUVVertexData(0, controlPoints[ctrlPointIndex], UV);
 							vertices.push_back((void*)vertex);
 							break;
 						}
-						case Mesh::VertexStructVersion::PN:
+						case MeshData::VertexStructVersion::PN:
 						{
-							Vector3 normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PNVertexData* vertex = new Mesh::PNVertexData(controlPoints[ctrlPointIndex], normal);
+							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
+							MeshData::PNVertexData* vertex = new MeshData::PNVertexData(0, controlPoints[ctrlPointIndex], normal);
 							vertices.push_back((void*)vertex);
 							break;
 						}
-						case Mesh::VertexStructVersion::PUVN:
+						case MeshData::VertexStructVersion::PUVN:
 						{
-							Vector2 UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
-							Vector3 normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PUVNVertexData* vertex = new Mesh::PUVNVertexData(controlPoints[ctrlPointIndex], UV, normal);
+							Vector2f UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
+							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
+							MeshData::PUVNVertexData* vertex = new MeshData::PUVNVertexData(0, controlPoints[ctrlPointIndex], UV, normal);
 							vertices.push_back((void*)vertex);
 							break;
 						}
-						case Mesh::VertexStructVersion::PUVNTB:
+						case MeshData::VertexStructVersion::PUVNTB:
 						{
-							Vector2 UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
-							Vector3 normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Vector3 tangent = ReadTangent(mesh, ctrlPointIndex, vertexCounter, unused);
-							Vector3 binormal = ReadBinormal(mesh, ctrlPointIndex, vertexCounter, unused);
-							Mesh::PUVNTBVertexData* vertex = new Mesh::PUVNTBVertexData(controlPoints[ctrlPointIndex], UV, normal, tangent, binormal);
+							Vector2f UV = ReadUV(mesh, ctrlPointIndex, mesh->GetTextureUVIndex(i, j), 0, unused);
+							Vector3f normal = ReadNormal(mesh, ctrlPointIndex, vertexCounter, unused);
+							Vector3f tangent = ReadTangent(mesh, ctrlPointIndex, vertexCounter, unused);
+							Vector3f binormal = ReadBinormal(mesh, ctrlPointIndex, vertexCounter, unused);
+							MeshData::PUVNTBVertexData* vertex = new MeshData::PUVNTBVertexData(0, controlPoints[ctrlPointIndex], UV, normal, tangent, binormal);
 							vertices.push_back((void*)vertex);
 							break;
 						}
@@ -231,8 +260,6 @@ namespace Editor
 				}
 			}
 
-
-
 			/*
 			for (unsigned int i = 0; i < vertices->size(); ++i)
 				std::cout << "v: " << vertices[0][i].position << " n: " << vertices[0][i].normal << std::endl;
@@ -242,10 +269,12 @@ namespace Editor
 
 			//--------------------------------------------------------------------Vector3 n = ((Mesh::PUVNVertexData*)vertices[0])->position;
 
-			meshes.push_back(Mesh(&vertices, indices, vertexStructVersion/*, materials*/));
+			//Mesh::PUVVertexData* vertex = new Mesh::PUVVertexData(controlPoints[ctrlPointIndex], UV);
+
+			meshesData.push_back(MeshData(&vertices, &indices, vertexStructVersion/*, materials*/));
 		}
 
-		Vector3 FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasNormals)
+		Vector3f FBXLoader::ReadNormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasNormals)
 		{
 			if (inMesh->GetElementNormalCount() < 1)
 			{
@@ -253,7 +282,7 @@ namespace Editor
 				std::cout << "Invalid Normal Number" << std::endl;
 			}
 
-			Vector3 outNormal;
+			Vector3f outNormal;
 			FbxGeometryElementNormal* vertexNormal = inMesh->GetElementNormal(0);
 
 			switch (vertexNormal->GetMappingMode())
@@ -330,16 +359,16 @@ namespace Editor
 			return outNormal;
 		}
 
-		Vector3 FBXLoader::ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasTangent)
+		Vector3f FBXLoader::ReadTangent(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasTangent)
 		{
 			if (inMesh->GetElementTangentCount() < 1)
 			{
 				//std::cout << "Invalid Tangent Number" << std::endl;
 				hasTangent = false;
-				return Vector3();
+				return Vector3f();
 			}
 
-			Vector3 outTangent;
+			Vector3f outTangent;
 			FbxGeometryElementTangent* vertexTangent = inMesh->GetElementTangent(0);
 
 			switch (vertexTangent->GetMappingMode())
@@ -415,16 +444,16 @@ namespace Editor
 			return outTangent;
 		}
 
-		Vector3 FBXLoader::ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasBinormal)
+		Vector3f FBXLoader::ReadBinormal(FbxMesh* inMesh, int inCtrlPointIndex, int inVertexCounter, bool& hasBinormal)
 		{
 			if (inMesh->GetElementBinormalCount() < 1)
 			{
 				//std::cout << "Invalid Binormal Number" << std::endl;
 				hasBinormal = false;
-				return Vector3();
+				return Vector3f();
 			}
 
-			Vector3 outBinormal;
+			Vector3f outBinormal;
 			FbxGeometryElementBinormal* vertexBinormal = inMesh->GetElementBinormal(0);
 
 			switch (vertexBinormal->GetMappingMode())
@@ -500,17 +529,17 @@ namespace Editor
 			return outBinormal;
 		}
 
-		Vector2 FBXLoader::ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer, bool& hasUV)
+		Vector2f FBXLoader::ReadUV(FbxMesh* inMesh, int inCtrlPointIndex, int inTextureUVIndex, int inUVLayer, bool& hasUV)
 		{
 			if (inUVLayer >= 2 || inMesh->GetElementUVCount() <= inUVLayer)
 			{
 				hasUV = false;
-				return Vector2();
+				return Vector2f();
 				//throw std::exception("Invalid UV Layer Number");
 			}
 
 			FbxGeometryElementUV* vertexUV = inMesh->GetElementUV(inUVLayer);
-			Vector2 outUV;
+			Vector2f outUV;
 
 			switch (vertexUV->GetMappingMode())
 			{

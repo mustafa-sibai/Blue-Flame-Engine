@@ -1,6 +1,6 @@
 #include <iostream>
 #include <BF/BlueFlame.h>
-#include "EditorScene.h"
+//#include "EditorScene.h"
 
 #include <BF/IO/BFALoader.h>
 #include "IO/FBXLoader.h"
@@ -142,16 +142,20 @@ int main()
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
 	bfxWriter.WriteToFile("../Sandbox/Assets/Models/halfTexturedCube");*/
 
-	
-	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx");
+	/*FBXLoader fbxloader;
+	fbxloader.Load("../Sandbox/Assets/Models/Plane/PUVNTBPlane.fbx", FBXLoader::ImportSettings::ImportPUVN);
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane/PUVNPlane");*/
 	
+	FBXLoader fbxloader;
+	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx", FBXLoader::ImportSettings::ImportPUVNTB);
+
+	BFXWriter bfxWriter(fbxloader.GetMeshsData());
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+
 	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------
-	
 
 	/*BF::Graphics::Animation::SpriteAnimationData spriteAnimationData;
 	BF::Graphics::Animation::Sequence sequence;

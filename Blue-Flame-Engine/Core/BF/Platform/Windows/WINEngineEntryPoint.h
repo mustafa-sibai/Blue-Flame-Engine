@@ -7,14 +7,14 @@ namespace BF
 {
 	namespace Application
 	{
-		class Scene;
+		class App;
 	}
 
 	namespace Platform
 	{
 		namespace Windows
 		{
-			class BF_API WINEngineEntryPoint
+			class BFE_API WINEngineEntryPoint
 			{
 				private:
 					WINWindow winWindow;
@@ -28,7 +28,7 @@ namespace BF
 					WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI);
 					~WINEngineEntryPoint();
 
-					void Run(Application::Scene& mainScene);
+					void Run(Application::App& app);
 					void LimitFrameRate(double limit);
 
 					inline double GetDeltaTime() const { return deltaTime; }

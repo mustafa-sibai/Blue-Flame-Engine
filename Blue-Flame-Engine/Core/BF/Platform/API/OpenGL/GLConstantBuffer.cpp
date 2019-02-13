@@ -10,7 +10,7 @@ namespace BF
 			namespace OpenGL
 			{
 				GLConstantBuffer::GLConstantBuffer() :
-					buffer(0)
+					buffer(0), bindingIndex(0)
 				{
 				}
 
@@ -19,20 +19,20 @@ namespace BF
 					GLCall(glDeleteBuffers(1, &buffer));
 				}
 
-				void GLConstantBuffer::Create(unsigned int size, unsigned int bindingIndex)
+				void GLConstantBuffer::Create(unsigned int bindingIndex, unsigned int size, const void* data)
 				{
-					GLCall(glGenBuffers(1, &buffer));
-					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
-					GLCall(glBufferData(GL_UNIFORM_BUFFER, size, 0, GL_DYNAMIC_DRAW));
+					this->bindingIndex = bindingIndex;
 
-					GLCall(glBindBufferRange(GL_UNIFORM_BUFFER, bindingIndex, buffer, 0, size));
+					GLCall(glCreateBuffers(1, &buffer));
+					GLCall(glBindBufferBase(GL_UNIFORM_BUFFER, bindingIndex, buffer));
+					GLCall(glBufferData(GL_UNIFORM_BUFFER, size, nullptr, GL_DYNAMIC_DRAW));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 
-				void GLConstantBuffer::Update(const void* data, unsigned int size)
+				void GLConstantBuffer::Update(unsigned int offset, unsigned int size, const void* data)
 				{
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, buffer));
-					GLCall(glBufferSubData(GL_UNIFORM_BUFFER, 0, size, data));
+					GLCall(glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data));
 					GLCall(glBindBuffer(GL_UNIFORM_BUFFER, 0));
 				}
 			}

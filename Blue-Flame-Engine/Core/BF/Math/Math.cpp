@@ -1,4 +1,7 @@
 #include "Math.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <limits>
 
 namespace BF
 {
@@ -11,12 +14,22 @@ namespace BF
 
 		float Normalize(float value, float min, float max)
 		{
-			return (value - max) / (max - min);
+			return (value - min) / (max - min);
 		}
 
 		float Lerp(float value1, float value2, float time)
 		{
 			return value1 + (value2 - value1) * time;
+		}
+
+		float Infinity()
+		{
+			return std::numeric_limits<float>::infinity();
+		}
+
+		float PI()
+		{
+			return 3.14159265358979323846f;
 		}
 
 		int Min(int a, int b)

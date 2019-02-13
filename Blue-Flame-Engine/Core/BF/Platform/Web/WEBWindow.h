@@ -12,7 +12,7 @@ namespace BF
 	{
 		namespace Web
 		{
-			class BF_API WEBWindow : public Application::Window
+			class BFE_API WEBWindow : public Application::Window
 			{
 				friend class BF::Platform::API::OpenGL::WEBGLContext;
 
