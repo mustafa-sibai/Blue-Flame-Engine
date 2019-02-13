@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "BF/Application/Scene.h"
 #include "BF/Application/App.h"
+#include "BF/Graphics/Model.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -46,7 +47,7 @@ namespace BF
 						component->added = true;
 					}
 					else if (component->types[i] == IComponent::TypeOf<IRenderable>() ||
-						component->types[i] == IComponent::TypeOf<Mesh>())
+						component->types[i] == IComponent::TypeOf<Model>())
 					{
 						component->gameObject = this;
 						components.emplace_back(component);

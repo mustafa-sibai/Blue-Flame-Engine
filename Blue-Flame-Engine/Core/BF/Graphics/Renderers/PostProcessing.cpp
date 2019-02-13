@@ -29,9 +29,8 @@ namespace BF
 				postProcessingQuad = new Mesh(Mesh::PresetMeshes::Plane);
 				screenPlaneMaterial = new MeshMaterial();
 
-				screenPlaneMaterial->Initialize();
 				screenPlaneMaterial->shader = &postProcessingShader;
-				postProcessingQuad->SetBuffers(screenPlaneMaterial);
+				//postProcessingQuad->SetBuffers(screenPlaneMaterial);
 			}
 
 			void PostProcessing::PostLoad()

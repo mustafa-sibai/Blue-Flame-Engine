@@ -27,7 +27,7 @@ namespace BF
 #endif
 			}
 
-			void ConstantBuffer::Update(unsigned int offset, unsigned int size, void* data)
+			void ConstantBuffer::Update(unsigned int offset, unsigned int size, const void* data)
 			{
 #ifdef BFE_PLATFORM_WINDOWS
 				if (Context::GetRenderAPI() == RenderAPI::DirectX)

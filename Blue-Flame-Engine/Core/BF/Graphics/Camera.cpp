@@ -12,9 +12,9 @@ namespace BF
 
 		Camera::Camera(const Matrix4& projectionMatrix)
 		{
-			systemBuffer.modelMatrix = Matrix4::Identity();
-			systemBuffer.viewMatrix = Matrix4::Identity();
-			systemBuffer.projectionMatrix = projectionMatrix;
+			modelMatrix = Matrix4::Identity();
+			viewMatrix = Matrix4::Identity();
+			this->projectionMatrix = projectionMatrix;
 		}
 
 		Camera::~Camera()

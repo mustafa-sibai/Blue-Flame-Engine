@@ -7,7 +7,7 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 
 		App::App() :
-			renderPipeline(cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
+			cameraManager(constantBufferManager), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
 		{
 		}
 
@@ -18,8 +18,7 @@ namespace BF
 		void App::Initialize()
 		{
 			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
-
-			cameraManager.Initialize();
+			constantBufferManager.Initialize();
 			renderPipeline.Initialize();
 		}
 

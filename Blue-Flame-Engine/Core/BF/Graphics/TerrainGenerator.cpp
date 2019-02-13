@@ -70,7 +70,7 @@ namespace BF
 
 					float normalizedData = Normalize(v, 0, 256);
 
-					vertices[x + (z * ROW_VERTICES)] = MeshData::PUVNVertexData(0, Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), -startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
+					vertices[x + (z * ROW_VERTICES)] = MeshData::PUVNVertexData(Vector3f(startingPosition.x, startingPosition.y + (normalizedData * TERRAIN_SCALE), -startingPosition.z), Vector2f(), Vector3f(0.0f, 1.0f, 0.0f));
 
 					if (x < TERRAIN_WIDTH && z < TERRAIN_HEIGHT)
 					{

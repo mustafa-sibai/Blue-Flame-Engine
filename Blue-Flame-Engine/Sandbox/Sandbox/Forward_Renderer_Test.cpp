@@ -13,6 +13,7 @@ namespace Forward_Renderer_Test
 	using namespace BF::ECS;
 	using namespace BF::Math;
 	using namespace BF::System;
+	using namespace BF::IO;
 
 	Forward_Renderer_Test::Forward_Renderer_Test()/* :
 		directionalLight(false)*/
@@ -33,19 +34,24 @@ namespace Forward_Renderer_Test
 		BF::Engine::GetContext().EnableVsync(false);
 		//BF::Engine::LimitFrameRate(60.0f);
 		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
+		BF::Engine::GetContext().SetWindingOrder(WindingOrder::Clockwise);
+		BF::Engine::GetContext().CullFace(CullingType::Back);
 
 		App::Initialize();
 
 		GameObject* cameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 		Camera* camera = (Camera*)cameraGameObject->AddComponent(new Camera(Matrix4::Perspective(45.0f, BF::Engine::GetWindow().GetAspectRatio(), 0.1f, 1500.0f)));
+		camera->gameObject->GetTransform()->SetPosition(Vector3f(0, 3, -10));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.5, 0.0f, 0.0f, 1.0f));
 
 		GameObject* planeGameObject = scene->AddGameObject(new GameObject("Plane"));
 
-		MeshData* meshData = BF::IO::ResourceManager::Load<BF::Graphics::MeshData>("../Sandbox/Assets/Models/Plane/PPlane.bfx");
+		/*MeshData* meshData = ResourceManager::Load<MeshData>("../Sandbox/Assets/Models/Plane/PPlane.bfx");
 		Mesh* planeMesh = (Mesh*)planeGameObject->AddComponent(new Mesh(meshData));
+		planeMesh->gameObject->GetTransform()->SetPosition(Vector3f(0, -1, 5));
+		planeMesh->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));*/
 
 		//constantBuffer.Create(sizeof(LightBuffer), 1);
 

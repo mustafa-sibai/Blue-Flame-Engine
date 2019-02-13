@@ -28,7 +28,7 @@ namespace BF
 					~ConstantBuffer();
 
 					void Create(unsigned int bindingIndex, unsigned int size, const void* data);
-					void Update(unsigned int offset, unsigned int size, void* data);
+					void Update(unsigned int offset, unsigned int size, const void* data);
 			};
 		}
 	}

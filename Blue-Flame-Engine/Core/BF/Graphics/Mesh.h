@@ -13,14 +13,15 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class BFE_API Mesh : public BF::ECS::Component<Mesh>
+		class BFE_API Mesh
 		{
 		public:
 			enum class PresetMeshes { Plane };
-			BF::Graphics::Materials::MeshMaterial* material;
+			BF::Graphics::Materials::MeshMaterial material;
 			MeshData* meshData;
 
 		private:
+			BF::Graphics::Materials::MaterialManager* materialManager;
 			BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 			BF::Graphics::API::VertexBuffer* vertexBuffer;
 			BF::Graphics::API::IndexBuffer* indexBuffer;
@@ -30,12 +31,19 @@ namespace BF
 			Mesh(MeshData* meshData);
 			~Mesh();
 
-			void SetBuffers(BF::Graphics::Materials::MeshMaterial* material);
+			void Initialize(BF::Graphics::Materials::MaterialManager* materialManager);
+
+			void SetMeshData(MeshData* meshData);
+
+			void AddMaterial(BF::Graphics::Materials::MeshMaterial& material);
 
 			void Bind() const;
 			void Unbind() const;
 
 			//unsigned int GetVerticesCount() const;
+
+		private:
+			void CreateMaterialFromMaterialData();
 
 		public:
 			inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }

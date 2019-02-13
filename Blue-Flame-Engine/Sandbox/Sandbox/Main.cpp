@@ -32,8 +32,8 @@ int main()
 	//TestApp::TestApp app;
 	//TerrainTestApp app;
 	//InputTests app;
-	ECS_Script_Test::ECS_Script_Test app;
-	//Hello_Triangle::Hello_Triangle app;
+	//ECS_Script_Test::ECS_Script_Test app;
+	Hello_Triangle::Hello_Triangle app;
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
 
 	engine.Run(app);

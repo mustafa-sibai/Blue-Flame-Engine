@@ -20,7 +20,7 @@ namespace BF
 						~DXConstantBuffer();
 
 						void Create(unsigned int size);
-						void Update(void* data);
+						void Update(const void* data);
 				};
 			}
 		}

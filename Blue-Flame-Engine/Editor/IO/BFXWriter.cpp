@@ -7,8 +7,8 @@ namespace Editor
 		using namespace std;
 		using namespace BF::Graphics;
 
-		BFXWriter::BFXWriter(const vector<Mesh>& mesh) :
-			mesh(mesh)
+		BFXWriter::BFXWriter(const vector<MeshData>& meshesData) :
+			meshesData(meshesData)
 		{
 		}
 
@@ -21,7 +21,7 @@ namespace Editor
 			bfxFormat.fileHeader = "BFX FILE";
 			bfxFormat.majorFileVersion = 0;
 			bfxFormat.minorFileVersion = 3;
-			bfxFormat.meshCount = (unsigned int)mesh.size();
+			bfxFormat.meshCount = (unsigned int)meshesData.size();
 
 			FILE* file;
 			file = fopen((filename + ".bfx").c_str(), "wb");
@@ -38,72 +38,70 @@ namespace Editor
 			fwrite(&bfxFormat.minorFileVersion, sizeof(uint8_t), 1, file);
 			fwrite(&bfxFormat.meshCount, sizeof(unsigned int), 1, file);
 
-			for (size_t i = 0; i < mesh.size(); i++)
+			for (size_t i = 0; i < meshesData.size(); i++)
 			{
-				bfxFormat.meshType = (int)mesh[i].vertexStructVersion;
+				bfxFormat.meshType = (int)meshesData[i].vertexStructVersion;
 				fwrite(&bfxFormat.meshType, sizeof(int), 1, file);
 
-				switch (mesh[i].vertexStructVersion)
+				switch (meshesData[i].vertexStructVersion)
 				{
-					case Mesh::VertexStructVersion::P:
+					case MeshData::VertexStructVersion::P:
 					{
-						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(Mesh::PVertexData) * mesh[i].GetVerticesCount());
+						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(MeshData::PVertexData) * meshesData[i].GetVerticesCount());
 						fwrite(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-						for (size_t j = 0; j < mesh[i].GetVerticesCount(); j++)
+						for (size_t j = 0; j < meshesData[i].GetVerticesCount(); j++)
 						{
-							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<Mesh::PVertexData*>*)mesh[i].GetVertices())[j];
-							fwrite(bfxFormat.vertexBuffer, sizeof(Mesh::PVertexData), 1, file);
+							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<MeshData::PVertexData*>*)meshesData[i].vertices)[j];
+							fwrite(bfxFormat.vertexBuffer, sizeof(MeshData::PVertexData), 1, file);
 						}
 						break;
 					}
-					case Mesh::VertexStructVersion::PUV:
+					case MeshData::VertexStructVersion::PUV:
 					{
-						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(Mesh::PUVVertexData) * mesh[i].GetVerticesCount());
+						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(MeshData::PUVVertexData) * meshesData[i].GetVerticesCount());
 						fwrite(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-						for (size_t j = 0; j < mesh[i].GetVerticesCount(); j++)
+						for (size_t j = 0; j < meshesData[i].GetVerticesCount(); j++)
 						{
-							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<Mesh::PUVVertexData*>*)mesh[i].GetVertices())[j];
-							fwrite(bfxFormat.vertexBuffer, sizeof(Mesh::PUVVertexData), 1, file);
+							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<MeshData::PUVVertexData*>*)meshesData[i].vertices)[j];
+							fwrite(bfxFormat.vertexBuffer, sizeof(MeshData::PUVVertexData), 1, file);
 						}
 						break;
 					}
-					case Mesh::VertexStructVersion::PN:
+					case MeshData::VertexStructVersion::PN:
 					{
-						int x = mesh[i].GetVerticesCount();
-
-						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(Mesh::PNVertexData) * mesh[i].GetVerticesCount());
+						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(MeshData::PNVertexData) * meshesData[i].GetVerticesCount());
 						fwrite(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-						for (size_t j = 0; j < mesh[i].GetVerticesCount(); j++)
+						for (size_t j = 0; j < meshesData[i].GetVerticesCount(); j++)
 						{
-							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<Mesh::PNVertexData*>*)mesh[i].GetVertices())[j];
-							fwrite(bfxFormat.vertexBuffer, sizeof(Mesh::PNVertexData), 1, file);
+							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<MeshData::PNVertexData*>*)meshesData[i].vertices)[j];
+							fwrite(bfxFormat.vertexBuffer, sizeof(MeshData::PNVertexData), 1, file);
 						}
 						break;
 					}
-					case Mesh::VertexStructVersion::PUVN:
+					case MeshData::VertexStructVersion::PUVN:
 					{
-						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(Mesh::PUVNVertexData) * mesh[i].GetVerticesCount());
+						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(MeshData::PUVNVertexData) * meshesData[i].GetVerticesCount());
 						fwrite(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-						for (size_t j = 0; j < mesh[i].GetVerticesCount(); j++)
+						for (size_t j = 0; j < meshesData[i].GetVerticesCount(); j++)
 						{
-							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<Mesh::PUVNVertexData*>*)mesh[i].GetVertices())[j];
-							fwrite(bfxFormat.vertexBuffer, sizeof(Mesh::PUVNVertexData), 1, file);
+							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<MeshData::PUVNVertexData*>*)meshesData[i].vertices)[j];
+							fwrite(bfxFormat.vertexBuffer, sizeof(MeshData::PUVNVertexData), 1, file);
 						}
 						break;
 					}
-					case Mesh::VertexStructVersion::PUVNTB:
+					case MeshData::VertexStructVersion::PUVNTB:
 					{
-						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(Mesh::PUVNTBVertexData) * mesh[i].GetVerticesCount());
+						bfxFormat.vertexBufferSize = (unsigned int)(sizeof(MeshData::PUVNTBVertexData) * meshesData[i].GetVerticesCount());
 						fwrite(&bfxFormat.vertexBufferSize, sizeof(unsigned int), 1, file);
 
-						for (size_t j = 0; j < mesh[i].GetVerticesCount(); j++)
+						for (size_t j = 0; j < meshesData[i].GetVerticesCount(); j++)
 						{
-							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<Mesh::PUVNTBVertexData*>*)mesh[i].GetVertices())[j];
-							fwrite(bfxFormat.vertexBuffer, sizeof(Mesh::PUVNTBVertexData), 1, file);
+							bfxFormat.vertexBuffer = (uint8_t*)(*(vector<MeshData::PUVNTBVertexData*>*)meshesData[i].vertices)[j];
+							fwrite(bfxFormat.vertexBuffer, sizeof(MeshData::PUVNTBVertexData), 1, file);
 						}
 						break;
 					}
@@ -112,10 +110,10 @@ namespace Editor
 						break;
 				}
 
-				bfxFormat.indexBufferSize = (unsigned int)(sizeof(unsigned int) * mesh[i].GetIndices()->size());
+				bfxFormat.indexBufferSize = (unsigned int)(sizeof(unsigned int) * meshesData[i].indices->size());
 				fwrite(&bfxFormat.indexBufferSize, sizeof(unsigned int), 1, file);
 
-				bfxFormat.indexBuffer = (uint8_t*)&(*mesh[i].GetIndices())[0];
+				bfxFormat.indexBuffer = (uint8_t*)&(*meshesData[i].indices)[0];
 				fwrite(bfxFormat.indexBuffer, bfxFormat.indexBufferSize, 1, file);
 			}
 

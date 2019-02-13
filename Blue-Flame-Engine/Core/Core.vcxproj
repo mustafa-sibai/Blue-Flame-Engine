@@ -77,6 +77,7 @@
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Mesh.cpp" />
+    <ClCompile Include="BF\Graphics\Model.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SkyboxRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\IRenderable.cpp" />
@@ -122,6 +123,7 @@
     <ClCompile Include="BF\Platform\Windows\WINEngineEntryPoint.cpp" />
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\Scripting\IScript.cpp" />
+    <ClCompile Include="BF\Graphics\ConstantBufferManager.cpp" />
     <None Include="BF\Scripting\Script.inl">
       <FileType>Document</FileType>
     </None>
@@ -177,6 +179,7 @@
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
+    <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\MeshData.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterial.h" />
@@ -196,6 +199,9 @@
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
+    <ClInclude Include="BF\Graphics\Materials\MaterialData.h" />
+    <ClInclude Include="BF\Graphics\Materials\MeshMaterialColorBuffer.h" />
+    <ClInclude Include="BF\Graphics\ConstantBufferManager.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

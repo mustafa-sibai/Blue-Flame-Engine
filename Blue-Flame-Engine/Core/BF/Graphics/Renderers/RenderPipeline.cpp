@@ -1,8 +1,8 @@
 #include "RenderPipeline.h"
 #include "BF/ECS/IComponent.h"
+#include "BF/Graphics/Model.h"
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
-
 namespace BF
 {
 	namespace Graphics
@@ -14,11 +14,11 @@ namespace BF
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
-			RenderPipeline::RenderPipeline(CameraManager& cameraManager) :
-				cameraManager(cameraManager), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
+			RenderPipeline::RenderPipeline(ConstantBufferManager& constantBufferManager, CameraManager& cameraManager) :
+				constantBufferManager(constantBufferManager), cameraManager(cameraManager), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
 			{
 				//skyboxRenderer = new SkyboxRenderer();
-				forwardRenderer = new ForwardRenderer(cameraManager);
+				forwardRenderer = new ForwardRenderer(constantBufferManager, cameraManager);
 				spriteRenderer = new SpriteRenderer();
 				//spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFront);
 				//postProcessing = new PostProcessing();
@@ -71,10 +71,14 @@ namespace BF
 					if (spriteRenderer != nullptr)
 						spriteRenderer->renderables.emplace_back((IRenderable*)component);
 				}
-				else if (component->IsSameType<Mesh>())
+				else if (component->IsSameType<Model>())
 				{
 					if (forwardRenderer != nullptr)
-						forwardRenderer->meshes.emplace_back((Mesh*)component);
+					{
+						Model* model = (Model*)component;
+						model->Initialize(&forwardRenderer->materialManager);
+						forwardRenderer->models.emplace_back(model);
+					}
 				}
 			}
 

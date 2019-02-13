@@ -1,13 +1,12 @@
 struct BFE_API PVertexData
 {
-	int materialIndex;
 	BF::Math::Vector3f position;
 
 	PVertexData() :
-		materialIndex(0), position(0.0f) { }
+		position(0.0f) { }
 
-	PVertexData(int materialIndex, BF::Math::Vector3f position) :
-		materialIndex(materialIndex), position(position)
+	PVertexData(const BF::Math::Vector3f& position) :
+		position(position)
 	{
 	}
 };
@@ -17,11 +16,11 @@ struct BFE_API PUVVertexData : PVertexData
 	BF::Math::Vector2f texcoord;
 
 	PUVVertexData() :
-		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		PVertexData(BF::Math::Vector3f(0.0f)),
 		texcoord(0.0f) { }
 
-	PUVVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord) :
-		PVertexData(materialIndex, position),
+	PUVVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord) :
+		PVertexData(position),
 		texcoord(texcoord)
 	{
 	}
@@ -32,11 +31,11 @@ struct BFE_API PNVertexData : PVertexData
 	BF::Math::Vector3f normal;
 
 	PNVertexData() :
-		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		PVertexData(BF::Math::Vector3f(0.0f)),
 		normal(0.0f) { }
 
-	PNVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector3f& normal) :
-		PVertexData(materialIndex, position), 
+	PNVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector3f& normal) :
+		PVertexData(position), 
 		normal(normal)
 	{
 	}
@@ -48,11 +47,11 @@ struct BFE_API PUVNVertexData : PVertexData
 	BF::Math::Vector3f normal;
 
 	PUVNVertexData() :
-		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		PVertexData(BF::Math::Vector3f(0.0f)),
 		texcoord(0.0f), normal(0.0f) { }
 
-	PUVNVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal) :
-		PVertexData(materialIndex, position), 
+	PUVNVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal) :
+		PVertexData(position), 
 		texcoord(texcoord), normal(normal)
 	{
 	}
@@ -66,11 +65,11 @@ struct BFE_API PUVNTBVertexData : PVertexData
 	BF::Math::Vector3f binormal;
 
 	PUVNTBVertexData() :
-		PVertexData(0, BF::Math::Vector3f(0.0f)),
+		PVertexData(BF::Math::Vector3f(0.0f)),
 		texcoord(0.0f), normal(0.0f), tangent(0.0f), binormal(0.0f) { }
 
-	PUVNTBVertexData(int materialIndex, const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal, const BF::Math::Vector3f& tangent, const BF::Math::Vector3f& binormal) :
-		PVertexData(materialIndex, position),
+	PUVNTBVertexData(const BF::Math::Vector3f& position, const BF::Math::Vector2f& texcoord, const BF::Math::Vector3f& normal, const BF::Math::Vector3f& tangent, const BF::Math::Vector3f& binormal) :
+		PVertexData(position),
 		texcoord(texcoord), normal(normal), tangent(tangent), binormal(binormal)
 	{
 	}

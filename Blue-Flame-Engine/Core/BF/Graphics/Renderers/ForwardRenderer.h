@@ -4,7 +4,7 @@
 #include "BF/Graphics/Renderers/Renderer.h"
 #include "BF/Graphics/API/Framebuffer.h"
 #include "BF/Graphics/Materials/MaterialManager.h"
-#include "BF/Graphics/Mesh.h"
+#include "BF/Graphics/Model.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -23,8 +23,9 @@ namespace BF
 				friend class BF::Graphics::Renderers::RenderPipeline;
 
 				private:
+					BF::Graphics::ConstantBufferManager& constantBufferManager;
 					BF::Graphics::CameraManager& cameraManager;
-					std::vector<BF::Graphics::Mesh*> meshes;
+					std::vector<BF::Graphics::Model*> models;
 					BF::Graphics::Materials::MaterialManager materialManager;
 
 					/*BF::Graphics::Mesh* postProcessingQuad;
@@ -35,7 +36,7 @@ namespace BF
 					BF::Graphics::API::Shader postProcessingShader;*/
 
 				public:
-					ForwardRenderer(BF::Graphics::CameraManager& cameraManager);
+					ForwardRenderer(BF::Graphics::ConstantBufferManager& constantBufferManager, BF::Graphics::CameraManager& cameraManager);
 					~ForwardRenderer();
 
 					void Initialize() override;

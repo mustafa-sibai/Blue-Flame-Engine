@@ -2,44 +2,38 @@
 #include "BF/Graphics/Color.h"
 #include "BF/Graphics/API/Texture2D.h"
 #include "BF/Graphics/Materials/Material.h"
+#include "BF/Graphics/ConstantBufferManager.h"
+#include "BF/Graphics/Materials/MeshMaterialColorBuffer.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Graphics
 	{
+		class Mesh;
+
 		namespace Materials
 		{
 			class BFE_API MeshMaterial : public Material
 			{
+				friend class MaterialManager;
+				friend class ConstantBufferManager;
+
 				private:
+					std::vector<BF::Graphics::Mesh*> meshesUsingCurrentMaterial;
 					BF::Graphics::API::Texture2D diffuseMap;
 					BF::Graphics::API::Texture2D specularMap;
 					BF::Graphics::API::Texture2D normalMap;
 
 				public:
-					struct ColorBuffer
-					{
-						Color ambientColor;
-						Color diffuseColor;
-						Color specularColor;
-
-						float shininess = 0.0f;
-
-						int diffuseMapActive = 0;
-						int specularMapActive = 0;
-						int normalMapActive = 0;
-					};
-
-					ColorBuffer colorBuffer;
+					MeshMaterialColorBuffer colorBuffer;
 					BF::Graphics::API::Shader* shader;
 
 				public:
 					MeshMaterial();
 					~MeshMaterial();
 
-					void Initialize();
-					void Bind();
+					void Bind(ConstantBufferManager& constantBufferManager);
 					void Unbind();
 
 					void SetDiffuseMap(const BF::Graphics::API::Texture2D& diffuseMap);

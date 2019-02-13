@@ -142,15 +142,20 @@ int main()
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
 	bfxWriter.WriteToFile("../Sandbox/Assets/Models/halfTexturedCube");*/
 
-	FBXLoader fbxloader;
+	/*FBXLoader fbxloader;
 	fbxloader.Load("../Sandbox/Assets/Models/Plane/PUVNTBPlane.fbx", FBXLoader::ImportSettings::ImportPUVN);
 
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane/PUVNPlane");
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane/PUVNPlane");*/
 	
+	FBXLoader fbxloader;
+	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx", FBXLoader::ImportSettings::ImportPUVNTB);
+
+	BFXWriter bfxWriter(fbxloader.GetMeshsData());
+	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+
 	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------
-	
 
 	/*BF::Graphics::Animation::SpriteAnimationData spriteAnimationData;
 	BF::Graphics::Animation::Sequence sequence;

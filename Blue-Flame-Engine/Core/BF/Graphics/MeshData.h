@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Math/Math.h"
+#include "BF/Graphics/Materials/MaterialData.h"
 #include "BF/IO/Resource.h"
 #include "BF/Common.h"
 
@@ -17,10 +18,11 @@ namespace BF
 
 			void* vertices;
 			std::vector<unsigned int>* indices;
+			BF::Graphics::Materials::MaterialData materialData;
 
-			MeshData(void* vertices, std::vector<unsigned int>* indices, VertexStructVersion vertexStructVersion) :
+			MeshData(void* vertices, std::vector<unsigned int>* indices, const BF::Graphics::Materials::MaterialData& materialData, VertexStructVersion vertexStructVersion) :
 				Resource(BF::IO::Resource::Type::Mesh),
-				vertices(vertices), indices(indices), vertexStructVersion(vertexStructVersion)
+				vertices(vertices), indices(indices), materialData(materialData), vertexStructVersion(vertexStructVersion)
 			{
 			}
 
@@ -30,27 +32,27 @@ namespace BF
 				{
 				case MeshData::VertexStructVersion::P:
 				{
-					return (unsigned int)((std::vector<PVertexData*>*)vertices)->size();
+					return (unsigned int)((std::vector<PVertexData>*)vertices)->size();
 					break;
 				}
 				case MeshData::VertexStructVersion::PUV:
 				{
-					return (unsigned int)((std::vector<PUVVertexData*>*)vertices)->size();
+					return (unsigned int)((std::vector<PUVVertexData>*)vertices)->size();
 					break;
 				}
 				case MeshData::VertexStructVersion::PN:
 				{
-					return (unsigned int)((std::vector<PNVertexData*>*)vertices)->size();
+					return (unsigned int)((std::vector<PNVertexData>*)vertices)->size();
 					break;
 				}
 				case MeshData::VertexStructVersion::PUVN:
 				{
-					return (unsigned int)((std::vector<PUVNVertexData*>*)vertices)->size();
+					return (unsigned int)((std::vector<PUVNVertexData>*)vertices)->size();
 					break;
 				}
 				case MeshData::VertexStructVersion::PUVNTB:
 				{
-					return (unsigned int)((std::vector<PUVNTBVertexData*>*)vertices)->size();
+					return (unsigned int)((std::vector<PUVNTBVertexData>*)vertices)->size();
 					break;
 				}
 				default:

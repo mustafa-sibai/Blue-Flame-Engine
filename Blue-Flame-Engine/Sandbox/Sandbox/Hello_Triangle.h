@@ -8,15 +8,9 @@ namespace Hello_Triangle
 		private:
 			BF::Application::Scene* scene;
 
-			BF::Math::Vector3f vertices[3];
-			unsigned int indices[3];
+			BF::Graphics::Model* planeModel;
 
 			BF::Math::Vector3f position;
-			BF::Graphics::API::Shader shader;
-
-			BF::Graphics::API::VertexBuffer vb;
-			BF::Graphics::API::VertexBufferLayout vbl;
-			BF::Graphics::API::IndexBuffer ib;
 
 		public:
 			Hello_Triangle();

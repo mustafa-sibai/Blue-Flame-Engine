@@ -24,14 +24,14 @@ namespace Editor
 				std::vector<unsigned int> indices;
 				//std::vector<Graphics::Material>* materials;
 				unsigned int triCount;
-				std::vector<BF::Graphics::Mesh> meshes;
+				std::vector<BF::Graphics::MeshData> meshesData;
 
 			public:
 				FBXLoader();
 				~FBXLoader();
 				void Load(const char* filename, ImportSettings importSettings);
 
-				const std::vector<BF::Graphics::Mesh>& GetMeshs() const { return meshes; }
+				const std::vector<BF::Graphics::MeshData>& GetMeshsData() const { return meshesData; }
 
 			private:
 				FbxAMatrix GetNodeTransform(FbxNode *pNode);

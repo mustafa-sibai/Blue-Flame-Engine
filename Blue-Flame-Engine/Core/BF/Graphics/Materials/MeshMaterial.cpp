@@ -1,4 +1,6 @@
-#include "BF/Graphics/Materials/MeshMaterial.h"
+#include "MeshMaterial.h"
+#include "BF/Graphics/Mesh.h"
+#include "BF/Graphics/ConstantBufferManager.h"
 
 namespace BF
 {
@@ -6,6 +8,7 @@ namespace BF
 	{
 		namespace Materials
 		{
+			using namespace BF::Graphics;
 			using namespace BF::Graphics::API;
 
 			MeshMaterial::MeshMaterial()
@@ -16,13 +19,11 @@ namespace BF
 			{
 			}
 
-			void MeshMaterial::Initialize()
-			{
-			}
-
-			void MeshMaterial::Bind()
+			void MeshMaterial::Bind(ConstantBufferManager& constantBufferManager)
 			{
 				shader->Bind();
+
+				constantBufferManager.UpdateMaterialIndex(index);
 
 				if (colorBuffer.diffuseMapActive)
 					diffuseMap.Bind(*shader, "diffuseMap", 1);

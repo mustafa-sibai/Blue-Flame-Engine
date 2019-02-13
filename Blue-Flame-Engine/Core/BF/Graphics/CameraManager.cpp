@@ -1,4 +1,5 @@
 #include "CameraManager.h"
+#include "BF/ECS/GameObject.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -8,8 +9,8 @@ namespace BF
 		using namespace BF::Math;
 		using namespace BF::Graphics;
 
-		CameraManager::CameraManager() :
-			mainCamera(nullptr)
+		CameraManager::CameraManager(BF::Graphics::ConstantBufferManager& constantBufferManager) :
+			constantBufferManager(constantBufferManager), mainCamera(nullptr)
 		{
 		}
 
@@ -17,15 +18,16 @@ namespace BF
 		{
 		}
 
-		void CameraManager::Initialize()
-		{
-			constantBuffer.Create(0, sizeof(Camera::SystemBuffer), nullptr);
-		}
-
 		void CameraManager::Update()
 		{
-			if(mainCamera != nullptr)
-				constantBuffer.Update(0, sizeof(Camera::SystemBuffer), &mainCamera->systemBuffer);
+			if (mainCamera != nullptr)
+			{
+				Vector3f position = mainCamera->gameObject->GetTransform()->GetWorldPosition();
+				mainCamera->viewMatrix = Matrix4::LookAt(position, position + Vector3f::Forward(), Vector3f::Up());
+
+				constantBufferManager.UpdateCameraView(mainCamera->viewMatrix);
+				constantBufferManager.UpdateCameraProjection(mainCamera->projectionMatrix);
+			}
 		}
 
 		void CameraManager::SetMainCamera(Camera* camera)
@@ -50,20 +52,20 @@ namespace BF
 
 		void CameraManager::SetModelMatrix(const Matrix4& modelMatrix)
 		{
-			mainCamera->systemBuffer.modelMatrix = modelMatrix;
-			constantBuffer.Update(0, sizeof(Camera::SystemBuffer), &mainCamera->systemBuffer);
+			mainCamera->modelMatrix = modelMatrix;
+			constantBufferManager.UpdateCameraModel(mainCamera->modelMatrix);
 		}
 
 		void CameraManager::SetViewMatrix(const Matrix4& viewMatrix)
 		{
-			mainCamera->systemBuffer.viewMatrix = viewMatrix;
-			constantBuffer.Update(0, sizeof(Camera::SystemBuffer), &mainCamera->systemBuffer);
+			mainCamera->viewMatrix = viewMatrix;
+			constantBufferManager.UpdateCameraView(mainCamera->viewMatrix);
 		}
 
 		void CameraManager::SetProjectionMatrix(const Matrix4& projectionMatrix)
 		{
-			mainCamera->systemBuffer.projectionMatrix = projectionMatrix;
-			constantBuffer.Update(0, sizeof(Camera::SystemBuffer), &mainCamera->systemBuffer);
+			mainCamera->projectionMatrix = projectionMatrix;
+			constantBufferManager.UpdateCameraProjection(mainCamera->projectionMatrix);
 		}
 
 		void CameraManager::AddCamera(Camera* camera)

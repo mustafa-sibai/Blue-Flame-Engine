@@ -47,6 +47,7 @@ namespace BF
 			Scene* mainScene;
 
 			BF::Graphics::CameraManager cameraManager;
+			BF::Graphics::ConstantBufferManager constantBufferManager;
 			BF::Graphics::Renderers::RenderPipeline renderPipeline;
 			BF::Scripting::ScriptExecutor scriptExecutor;
 

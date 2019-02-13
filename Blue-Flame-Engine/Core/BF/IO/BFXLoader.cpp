@@ -88,13 +88,13 @@ namespace BF
 
 			fclose(file);
 
-			if (indices->size() > 0)
+			/*if (indices->size() > 0)
 				return new MeshData(vertices, indices, (MeshData::VertexStructVersion)bfxFormat.meshType);
 			else
 			{
 				BFE_LOG_ERROR("Error: failed to create mesh: " + filename + "\n", "");
 				return nullptr;
-			}
+			}*/
 		}
 	}
 }
