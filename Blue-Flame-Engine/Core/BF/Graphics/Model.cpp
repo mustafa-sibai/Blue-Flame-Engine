@@ -10,8 +10,8 @@ namespace BF
 		using namespace BF::Graphics::API;
 		using namespace BF::Graphics::Materials;
 
-		Model::Model(std::vector<Mesh>& meshes) :
-			meshes(meshes), materialManager(nullptr)
+		Model::Model() :
+			materialManager(nullptr)
 		{
 		}
 
@@ -22,10 +22,27 @@ namespace BF
 		void Model::Initialize(MaterialManager* materialManager)
 		{
 			this->materialManager = materialManager;
+
+			for (size_t i = 0; i < materials.size(); i++)
+			{
+				materialManager->AddMaterial(materials[i]);
+			}
+
 			for (size_t i = 0; i < meshes.size(); i++)
 			{
+				meshes[i].material = materials[meshes[i].meshData->materialIndexInModel];
 				meshes[i].Initialize(materialManager);
 			}
+		}
+
+		void Model::AddMesh(Mesh& mesh)
+		{
+			meshes.emplace_back(mesh);
+		}
+
+		void Model::AddMaterial(MeshMaterial& meshMaterial)
+		{
+			materials.emplace_back(meshMaterial);
 		}
 
 		void Model::Bind() const

@@ -46,10 +46,32 @@ namespace Hello_Triangle
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		//------------------------------------ Mesh A ------------------------------------------
-		MeshMaterialColorBuffer meshAMaterialColorBuffer;
-		std::string meshATextures[3];
 
+		//-------------------------------------------------------- 3D Model --------------------------------------------------------
+		Model* model = new Model();
+
+		//------------------------------------ Materials ------------------------------------------
+		BF::Graphics::API::Shader* shader = new Shader();
+		shader->LoadStandardShader(BF::Graphics::API::ShaderType::P);
+
+		MeshMaterialColorBuffer meshAMaterialColorBuffer;
+		meshAMaterialColorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+		meshAMaterialColorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+		meshAMaterialColorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
+		meshAMaterialColorBuffer.shininess = 256;
+
+		model->AddMaterial(MeshMaterial(shader, meshAMaterialColorBuffer));
+
+		MeshMaterialColorBuffer meshBMaterialColorBuffer;
+		meshBMaterialColorBuffer.ambientColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
+		meshBMaterialColorBuffer.diffuseColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
+		meshBMaterialColorBuffer.specularColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
+		meshBMaterialColorBuffer.shininess = 256;
+
+		model->AddMaterial(MeshMaterial(shader, meshBMaterialColorBuffer));
+		//------------------------------------ Materials ------------------------------------------
+
+		//------------------------------------ Mesh A ------------------------------------------
 		std::vector<BF::Graphics::MeshData::PVertexData>* meshAVertices = new std::vector<BF::Graphics::MeshData::PVertexData>();
 		std::vector<unsigned int>* meshAIndices = new std::vector<unsigned int>();
 
@@ -61,24 +83,10 @@ namespace Hello_Triangle
 		meshAIndices->emplace_back(1);
 		meshAIndices->emplace_back(2);
 
-		meshAMaterialColorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		meshAMaterialColorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		meshAMaterialColorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		meshAMaterialColorBuffer.shininess = 256;
-
-		meshATextures[0] = "";
-		meshATextures[1] = "";
-		meshATextures[2] = "";
-
-		MaterialData meshAMaterialData(meshAMaterialColorBuffer, meshATextures);
-		MeshData* meshAData = new MeshData(meshAVertices, meshAIndices, meshAMaterialData, BF::Graphics::MeshData::VertexStructVersion::P);
+		MeshData* meshAData = new MeshData(meshAVertices, meshAIndices, 0, BF::Graphics::MeshData::VertexStructVersion::P);
 		//------------------------------------ Mesh A ------------------------------------------
 
-
 		//------------------------------------ Mesh B ------------------------------------------
-		MeshMaterialColorBuffer meshBMaterialColorBuffer;
-		std::string meshBTextures[3];
-
 		std::vector <BF::Graphics::MeshData::PVertexData>* meshBVertices = new std::vector<BF::Graphics::MeshData::PVertexData>();
 		std::vector<unsigned int>* meshBIndices = new std::vector<unsigned int>();
 
@@ -90,22 +98,13 @@ namespace Hello_Triangle
 		meshBIndices->emplace_back(1);
 		meshBIndices->emplace_back(2);
 
-		meshBMaterialColorBuffer.ambientColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		meshBMaterialColorBuffer.diffuseColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		meshBMaterialColorBuffer.specularColor = Color(1.0f, 0.0f, 0.0f, 1.0f);
-		meshBMaterialColorBuffer.shininess = 256;
-
-		meshBTextures[0] = "";
-		meshBTextures[1] = "";
-		meshBTextures[2] = "";
-
-		MaterialData meshBMaterialData(meshBMaterialColorBuffer, meshBTextures);
-		MeshData* meshBData = new MeshData(meshBVertices, meshBIndices, meshBMaterialData, BF::Graphics::MeshData::VertexStructVersion::P);
+		MeshData* meshBData = new MeshData(meshBVertices, meshBIndices, 1, BF::Graphics::MeshData::VertexStructVersion::P);
 		//------------------------------------ Mesh B ------------------------------------------
 
-		std::vector<Mesh> meshes;
-		meshes.emplace_back(Mesh(meshAData));
-		meshes.emplace_back(Mesh(meshBData));
+		model->AddMesh(Mesh(meshAData));
+		model->AddMesh(Mesh(meshBData));
+
+		//-------------------------------------------------------- 3D Model --------------------------------------------------------
 
 		/*MeshMaterial* blueMaterial = new MeshMaterial();
 		blueMaterial->colorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
@@ -116,7 +115,7 @@ namespace Hello_Triangle
 		blueMaterial->shader->LoadStandardShader(BF::Graphics::API::ShaderType::P);*/
 
 		GameObject* planeGameObject = scene->AddGameObject(new GameObject("Plane"));
-		planeModel = (Model*)planeGameObject->AddComponent(new Model(meshes));
+		planeModel = (Model*)planeGameObject->AddComponent(model);
 		planeModel->gameObject->GetTransform()->SetPosition(Vector3f(0, -1, 5));
 		planeModel->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));
 		//planeMesh->AddMaterial(*blueMaterial);

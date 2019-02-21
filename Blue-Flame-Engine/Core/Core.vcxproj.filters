@@ -623,9 +623,6 @@
     <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\Materials\MaterialData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\Materials\MeshMaterialColorBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

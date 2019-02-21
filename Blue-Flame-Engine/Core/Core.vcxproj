@@ -199,7 +199,6 @@
     <ClInclude Include="BF\Graphics\Tile.h" />
     <ClInclude Include="BF\Graphics\TileData.h" />
     <ClInclude Include="BF\Graphics\TileMap.h" />
-    <ClInclude Include="BF\Graphics\Materials\MaterialData.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterialColorBuffer.h" />
     <ClInclude Include="BF\Graphics\ConstantBufferManager.h" />
     <None Include="BF\Graphics\VertexData.inl">

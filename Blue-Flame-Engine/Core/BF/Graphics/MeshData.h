@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Math/Math.h"
-#include "BF/Graphics/Materials/MaterialData.h"
+#include "BF/Graphics/Materials/MeshMaterial.h"
 #include "BF/IO/Resource.h"
 #include "BF/Common.h"
 
@@ -18,11 +18,11 @@ namespace BF
 
 			void* vertices;
 			std::vector<unsigned int>* indices;
-			BF::Graphics::Materials::MaterialData materialData;
+			int materialIndexInModel;
 
-			MeshData(void* vertices, std::vector<unsigned int>* indices, const BF::Graphics::Materials::MaterialData& materialData, VertexStructVersion vertexStructVersion) :
+			MeshData(void* vertices, std::vector<unsigned int>* indices, int materialIndexInModel, VertexStructVersion vertexStructVersion) :
 				Resource(BF::IO::Resource::Type::Mesh),
-				vertices(vertices), indices(indices), materialData(materialData), vertexStructVersion(vertexStructVersion)
+				vertices(vertices), indices(indices), materialIndexInModel(materialIndexInModel), vertexStructVersion(vertexStructVersion)
 			{
 			}
 

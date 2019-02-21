@@ -96,14 +96,6 @@ namespace BF
 			}
 
 			indexBuffer->Create(&(*meshData->indices)[0], (unsigned int)meshData->indices->size());
-
-			CreateMaterialFromMaterialData();
-		}
-
-		void Mesh::AddMaterial(BF::Graphics::Materials::MeshMaterial& material)
-		{
-			this->material = material;
-			materialManager->AddMaterial(material);
 		}
 
 		void Mesh::Bind() const
@@ -118,23 +110,6 @@ namespace BF
 			indexBuffer->Unbind();
 			vertexBuffer->Unbind();
 			//material->Unbind();
-		}
-
-		void Mesh::CreateMaterialFromMaterialData()
-		{
-			material.colorBuffer.ambientColor = meshData->materialData.meshMaterialColorBuffer.ambientColor;
-			material.colorBuffer.diffuseColor = meshData->materialData.meshMaterialColorBuffer.diffuseColor;
-			material.colorBuffer.specularColor = meshData->materialData.meshMaterialColorBuffer.specularColor;
-			material.colorBuffer.shininess = meshData->materialData.meshMaterialColorBuffer.shininess;
-
-			material.colorBuffer.diffuseMapActive = meshData->materialData.meshMaterialColorBuffer.diffuseMapActive;
-			material.colorBuffer.specularMapActive = meshData->materialData.meshMaterialColorBuffer.specularMapActive;
-			material.colorBuffer.specularMapActive = meshData->materialData.meshMaterialColorBuffer.specularMapActive;
-
-			material.shader = new Shader();
-			material.shader->LoadStandardShader(BF::Graphics::API::ShaderType::P);
-
-			materialManager->AddMaterial(material);
 		}
 	}
 }

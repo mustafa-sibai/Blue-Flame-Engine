@@ -33,11 +33,11 @@ namespace BF
 			inline const BF::Math::Matrix4& GetWorldTransformation() const { return worldTransformation; }
 			inline const BF::Math::Matrix4& GetTransformation() const { return transformation; }
 
-			inline const BF::Math::Vector3f& GetWorldPosition() const { return worldTransformation.GetTranslationVector(); }
-			inline const BF::Math::Vector3f& GetWorldScale() const { return worldTransformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f GetWorldPosition() const { return worldTransformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f GetWorldScale() const { return worldTransformation.GetScaleVector(); }
 
-			inline const BF::Math::Vector3f& GetPosition() const { return transformation.GetTranslationVector(); }
-			inline const BF::Math::Vector3f& GetScale() const { return transformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f GetPosition() const { return transformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f GetScale() const { return transformation.GetScaleVector(); }
 		};
 	}
 }

@@ -11,7 +11,13 @@ namespace BF
 			using namespace BF::Graphics;
 			using namespace BF::Graphics::API;
 
-			MeshMaterial::MeshMaterial()
+			MeshMaterial::MeshMaterial() :
+				shader(nullptr)
+			{
+			}
+
+			MeshMaterial::MeshMaterial(Shader* shader, MeshMaterialColorBuffer& colorBuffer) :
+				shader(shader), colorBuffer(colorBuffer)
 			{
 			}
 

@@ -31,6 +31,7 @@ namespace BF
 
 				public:
 					MeshMaterial();
+					MeshMaterial(BF::Graphics::API::Shader* shader, MeshMaterialColorBuffer& colorBuffer);
 					~MeshMaterial();
 
 					void Bind(ConstantBufferManager& constantBufferManager);

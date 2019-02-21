@@ -295,17 +295,17 @@ namespace BF
 			return *this;
 		}
 
-		inline const Vector3f& Matrix4::GetTranslationVector() const
+		inline const Vector3f Matrix4::GetTranslationVector() const
 		{
 			return Vector3f(elements[0 + 3 * BFE_MATRIX_COLUMN_SIZE], elements[1 + 3 * BFE_MATRIX_COLUMN_SIZE], elements[2 + 3 * BFE_MATRIX_COLUMN_SIZE]);
 		}
 
-		inline const Vector3f& Matrix4::GetRotationVector() const
+		inline const Vector3f Matrix4::GetRotationVector() const
 		{
 			return Vector3f();
 		}
 
-		inline const Vector3f& Matrix4::GetScaleVector() const
+		inline const Vector3f Matrix4::GetScaleVector() const
 		{
 			return Vector3f(elements[0 + 0 * BFE_MATRIX_COLUMN_SIZE], elements[1 + 1 * BFE_MATRIX_COLUMN_SIZE], elements[2 + 2 * BFE_MATRIX_COLUMN_SIZE]);
 		}

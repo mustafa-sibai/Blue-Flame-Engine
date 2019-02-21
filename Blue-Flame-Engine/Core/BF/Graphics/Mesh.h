@@ -35,15 +35,10 @@ namespace BF
 
 			void SetMeshData(MeshData* meshData);
 
-			void AddMaterial(BF::Graphics::Materials::MeshMaterial& material);
-
 			void Bind() const;
 			void Unbind() const;
 
 			//unsigned int GetVerticesCount() const;
-
-		private:
-			void CreateMaterialFromMaterialData();
 
 		public:
 			inline BF::Graphics::API::VertexBuffer* GetVertexBuffer() const { return vertexBuffer; }

@@ -24,12 +24,16 @@ namespace BF
 		private:
 			BF::Graphics::Materials::MaterialManager* materialManager;
 			std::vector<Mesh> meshes;
+			std::vector<BF::Graphics::Materials::MeshMaterial> materials;
 
 		public:
-			Model(std::vector<Mesh>& meshes);
+			Model();
 			~Model();
 
 			void Initialize(BF::Graphics::Materials::MaterialManager* materialManager);
+
+			void AddMesh(Mesh& mesh);
+			void AddMaterial(BF::Graphics::Materials::MeshMaterial& meshMaterial);
 
 			void Bind() const;
 			void Unbind() const;
