@@ -4,8 +4,11 @@ namespace BF
 {
 	namespace Application
 	{
-		Window::Window(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style) :
-			title(title), rectangle(rectangle), style(style), clientWidth(0), clientHeight(0), borderWidth(0), borderHeight(0), borderThickness(0)
+		using namespace std;
+		using namespace BF::Math;
+
+		Window::Window(const string& title, const Vector2i& position, const Vector2i& clientSize, WindowStyle style) :
+			title(title), position(position), clientSize(clientSize), style(style), borderThickness(0)
 		{
 		}
 

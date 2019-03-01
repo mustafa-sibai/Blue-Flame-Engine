@@ -148,6 +148,8 @@ namespace BF
 
 						if (sortingOrder == SortingOrder::BackToFront)
 							sort(renderables.begin(), renderables.end(), IRenderable::BackToFront());
+						else if (sortingOrder == SortingOrder::BackToFrontRightToLeft)
+							sort(renderables.begin(), renderables.end(), IRenderable::BackToFrontRightToLeft());
 
 						MapBuffer();
 						vertexBuffer.Unmap();
@@ -283,7 +285,6 @@ namespace BF
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
-
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
@@ -315,32 +316,61 @@ namespace BF
 				Vector3f position = sprite->gameObject->GetTransform()->GetPosition();
 				Vector3f scale = sprite->gameObject->GetTransform()->GetScale();
 
-				Vector2i halfScaledSize = Vector2i((sprite->size.x * scale.x) / 2, (sprite->size.y * scale.y) / 2);
-				Vector2f pivot = Vector2f(halfScaledSize.x * sprite->pivot.x, halfScaledSize.y * sprite->pivot.y);
+				Vector2i scaledSprite = Vector2i(sprite->size.x * scale.x, sprite->size.y * scale.y);
+
+				/*
+				x = left position
+				y = top position
+				width = right position
+				hgiht = bottom position
+
+				   x, y      width, y
+					 ----------
+					 |        |
+					 | sprite |
+					 |        |
+					 ---------- width, height 
+				  x, height
+
+				  if we have an odd number of pixels, the extra pixels will always be at the bottom right. 
+				  Meaning more of the image will be on the bottom right side rather than top left side.
+
+				  --------------------
+				  |      Screen      |
+				  |    -----------   |
+				  |    |---------|   |
+				  |    |--image--|   |
+				  |    -----------   |
+				  --------------------
+
+				  as you can see, the image is close to the top left center of the screen.
+				*/
+				BF::Math::Rectangle rectangle(0, 0, scaledSprite.x, scaledSprite.y);
+				rectangle.SetPivotPoint(sprite->pivot);
 
 				//Top Left
-				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(position.x + rectangle.x, position.y + rectangle.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topLeftUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(position.x + rectangle.width, position.y + rectangle.y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(position.x + rectangle.width, position.y + rectangle.height);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(position.x + rectangle.x, position.y + rectangle.height);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomLeftUV;
 				spriteBuffer->renderingType = 1;

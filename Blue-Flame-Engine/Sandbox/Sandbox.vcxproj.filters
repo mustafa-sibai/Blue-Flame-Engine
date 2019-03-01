@@ -33,6 +33,9 @@
     <ClCompile Include="Sandbox\FPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Sandbox\IsoMapTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\SpriteRenderer\VertexShader.glsl" />
@@ -68,6 +71,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sandbox\FPSCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sandbox\IsoMapTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

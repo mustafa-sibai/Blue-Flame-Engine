@@ -18,21 +18,14 @@ namespace BF
 					friend class SpriteRenderer;
 
 				private:
+					//Left right - back front
 					struct BackToFront
 					{
 						bool operator() (const IRenderable* renderableA, const IRenderable* renderableB) const
 						{
 							if (renderableA->gameObject->GetTransform()->GetPosition().y <= renderableB->gameObject->GetTransform()->GetPosition().y)
 							{
-								if (renderableA->zLayer < renderableB->zLayer)
-								{
-									return true;
-								}
-							}
-
-							if (renderableA->gameObject->GetTransform()->GetPosition().y < renderableB->gameObject->GetTransform()->GetPosition().y)
-							{
-								if (renderableA->zLayer == renderableB->zLayer)
+								if (renderableA->zSortingOrder < renderableB->zSortingOrder)
 								{
 									return true;
 								}
@@ -40,11 +33,58 @@ namespace BF
 
 							if (renderableA->gameObject->GetTransform()->GetPosition().y >= renderableB->gameObject->GetTransform()->GetPosition().y)
 							{
-								if (renderableA->zLayer < renderableB->zLayer)
+								if (renderableA->zSortingOrder < renderableB->zSortingOrder)
 								{
 									return true;
 								}
 							}
+
+							/*if (renderableA->gameObject->GetTransform()->GetPosition().y < renderableB->gameObject->GetTransform()->GetPosition().y)
+							{
+								if (renderableA->zLayer == renderableB->zLayer)
+								{
+									return false;
+								}
+							}*/
+
+
+
+							return false;
+						}
+					};
+
+					struct BackToFrontRightToLeft
+					{
+						bool operator() (const IRenderable* renderableA, const IRenderable* renderableB) const
+						{
+							if (renderableA->xySortingOrder > renderableB->xySortingOrder)
+							{
+								if (renderableA->zSortingOrder == renderableB->zSortingOrder)
+								{
+									return true;
+								}
+							}
+							
+
+
+
+							/*if (renderableA->gameObject->GetTransform()->GetPosition().y >= renderableB->gameObject->GetTransform()->GetPosition().y)
+							{
+								if (renderableA->zLayer < renderableB->zLayer)
+								{
+									return true;
+								}
+							}*/
+
+							/*if (renderableA->gameObject->GetTransform()->GetPosition().y < renderableB->gameObject->GetTransform()->GetPosition().y)
+							{
+								if (renderableA->zLayer == renderableB->zLayer)
+								{
+									return false;
+								}
+							}*/
+
+
 
 							return false;
 						}
@@ -53,11 +93,12 @@ namespace BF
 				public:
 					BF::Math::Vector2i size;
 					BF::Math::Vector2f pivot;
-					unsigned int zLayer;
+					int xySortingOrder;
+					int zSortingOrder;
 					Color color;
 
 				public:
-					IRenderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, unsigned int zLayer, const Color& color);
+					IRenderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, const Color& color);
 					virtual ~IRenderable();
 				};
 			}

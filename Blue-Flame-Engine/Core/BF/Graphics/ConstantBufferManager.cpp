@@ -26,7 +26,7 @@ namespace BF
 			perObjectConstantBuffer.Create(2, sizeof(PerObjectBuffer), nullptr);
 		}
 
-		//TODO: For whatever reason updating the constant buffer allocates a lot of memory. investigate this out !!
+		//TODO: For whatever reason updating the constant buffer allocates a lot of memory on AMD drivers. investigate this out !!
 		void ConstantBufferManager::UpdateMaterial(MeshMaterial& material)
 		{
 			perNeedConstantBuffer.Update(material.index * sizeof(MeshMaterialColorBuffer), sizeof(MeshMaterialColorBuffer), &material.colorBuffer);

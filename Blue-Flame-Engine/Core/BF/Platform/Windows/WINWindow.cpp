@@ -12,12 +12,13 @@ namespace BF
 	{
 		namespace Windows
 		{
+			using namespace std;
 			using namespace BF::Input;
 			using namespace BF::Application;
 			using namespace BF::Math;
 
-			WINWindow::WINWindow(const std::string& title, const Math::Rectangle& rectangle, BF::Application::WindowStyle style) :
-				Window(title, rectangle, style)
+			WINWindow::WINWindow(const string& title, const Vector2i& position, const Vector2i& clientSize, WindowStyle style) :
+				Window(title, position, clientSize, style)
 			{
 			}
 
@@ -41,7 +42,7 @@ namespace BF
 				wc.lpszClassName = L"Blue Flame Engine Window Class";
 
 				if (!RegisterClassEx(&wc))
-					std::cout << "failed to register window class" << std::endl;
+					BFE_LOG_FATAL("Failed to register window class", "");
 
 				if (style == WindowStyle::Windowed)
 					currentWindowStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
@@ -54,25 +55,32 @@ namespace BF
 				MultiByteToWideChar(CP_ACP, 0, title.c_str(), -1, wchTitle, 256);
 
 				borderThickness = GetSystemMetrics(SM_CXSIZEFRAME);
+				RECT clientRect = { 0, 0, clientSize.x, clientSize.y };
 
-				hWnd = CreateWindowEx(0,
-					L"Blue Flame Engine Window Class",
-					wchTitle,
-					currentWindowStyle,
-					rectangle.x,
-					rectangle.y,
-					rectangle.width,
-					rectangle.height,
-					0,
-					0,
-					hInstance,
-					this);
+				if (AdjustWindowRect(&clientRect, currentWindowStyle, false))
+				{
+					size = clientSize;
+					size = Vector2i(clientRect.right - clientRect.left, clientRect.bottom - clientRect.top);
+					borderSize = Vector2i(size.x - clientSize.x, size.y - clientSize.y);
 
-				if (!hWnd)
-					std::cout << "failed to create window" << std::endl;
+					hWnd = CreateWindowEx(0,
+						wc.lpszClassName,
+						wchTitle,
+						currentWindowStyle,
+						position.x,
+						position.y,
+						size.x,
+						size.y,
+						0,
+						0,
+						hInstance,
+						this);
 
-				SetClientSize();
-				ShowWindow(hWnd, SW_SHOW);
+					if (!hWnd)
+						BFE_LOG_FATAL("Failed to create window", "");
+
+					ShowWindow(hWnd, SW_SHOW);
+				}
 			}
 
 			void WINWindow::Update()
@@ -87,12 +95,12 @@ namespace BF
 				{
 					if (ScreenToClient(hWnd, &mousePosition))
 					{
-						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= (int)clientWidth && mousePosition.y <= (int)clientHeight)
+						if (mousePosition.x >= 0 && mousePosition.y >= 0 && mousePosition.x <= clientSize.x && mousePosition.y <= clientSize.y)
 							Mouse::insideWindowClient = true;
 						else
 							Mouse::insideWindowClient = false;
 
-						Mouse::position = Vector2f(Clamp((float)mousePosition.x, 0.0f, (float)clientWidth), Clamp((float)mousePosition.y, 0.0f, (float)clientHeight));
+						Mouse::position = Vector2f(Clamp((float)mousePosition.x, 0.0f, (float)clientSize.x), Clamp((float)mousePosition.y, 0.0f, (float)clientSize.y));
 					}
 				}
 
@@ -136,18 +144,6 @@ namespace BF
 				return result;
 			}
 
-			void WINWindow::SetClientSize()
-			{
-				RECT clientRect;
-				GetClientRect(hWnd, &clientRect);
-
-				clientWidth = (unsigned short)clientRect.right;
-				clientHeight = (unsigned short)clientRect.bottom;
-
-				borderWidth = rectangle.width - clientWidth;
-				borderHeight = rectangle.height - clientHeight;
-			}
-
 			LRESULT CALLBACK WINWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				WINWindow *window = nullptr;
@@ -168,143 +164,122 @@ namespace BF
 
 				switch (message)
 				{
-					case WM_DESTROY:
+				case WM_DESTROY:
+				{
+					Engine::state = Engine::State::Exit;
+					PostQuitMessage(0);
+					break;
+				}
+				case WM_SIZE:
+				{
+					window->size.x = LOWORD(lParam) + window->borderSize.x;
+					window->size.y = HIWORD(lParam) + window->borderSize.y;
+
+					window->clientSize.x = LOWORD(lParam);
+					window->clientSize.y = HIWORD(lParam);
+
+					Engine::GetContext().SetViewport(BF::Math::Rectangle(0, 0, window->clientSize.x, window->clientSize.y));
+					Engine::GetContext().SetScissor(BF::Math::Rectangle(0, 0, window->clientSize.x, window->clientSize.y));
+					break;
+				}
+				case WM_KEYDOWN:
+				{
+					if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::NotPressed)
+						Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Pressed;
+					break;
+				}
+				case WM_KEYUP:
+				{
+					if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::HeldDown ||
+						Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Pressed)
+						Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
+					break;
+				}
+				case WM_LBUTTONDOWN:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::NotPressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Pressed;
+					break;
+				}
+				case WM_LBUTTONUP:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::Pressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
+
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::HeldDown)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
+					break;
+				}
+				case WM_MBUTTONDOWN:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::NotPressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Pressed;
+					break;
+				}
+				case WM_MBUTTONUP:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::Pressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
+
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::HeldDown)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
+					break;
+				}
+				case WM_RBUTTONDOWN:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::NotPressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Pressed;
+					break;
+				}
+				case WM_RBUTTONUP:
+				{
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::Pressed)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
+
+					if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::HeldDown)
+						Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
+					break;
+				}
+				case WM_XBUTTONDOWN:
+				{
+					int buttonID = GET_XBUTTON_WPARAM(wParam);
+
+					if (buttonID == 1)
 					{
-						Engine::state = Engine::State::Exit;
-						PostQuitMessage(0);
-						break;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::NotPressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Pressed;
 					}
-
-					case WM_SIZE:
+					else if (buttonID == 2)
 					{
-						window->rectangle.width = LOWORD(lParam) + window->borderWidth;
-						window->rectangle.height = HIWORD(lParam) + window->borderHeight;
-
-						window->clientWidth = LOWORD(lParam);
-						window->clientHeight = HIWORD(lParam);
-
-						Engine::GetContext().SetViewport(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
-						Engine::GetContext().SetScissor(Math::Rectangle(0, 0, (int)window->clientWidth, (int)window->clientHeight));
-						break;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::NotPressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Pressed;
 					}
+					break;
+				}
+				case WM_XBUTTONUP:
+				{
+					int buttonID = GET_XBUTTON_WPARAM(wParam);
 
-					case WM_KEYDOWN:
+					if (buttonID == 1)
 					{
-						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::NotPressed)
-							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Pressed;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::Pressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
 
-						break;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::HeldDown)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
 					}
-
-					case WM_KEYUP:
+					else if (buttonID == 2)
 					{
-						if (Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::HeldDown ||
-							Keyboard::keys[(unsigned char)wParam].state == Keyboard::Key::State::Pressed)
-							Keyboard::keys[(unsigned char)wParam].state = Keyboard::Key::State::Up;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::Pressed)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
 
-						break;
+						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::HeldDown)
+							Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
 					}
-
-					case WM_LBUTTONDOWN:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::NotPressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Pressed;
-
-						break;
-					}
-
-					case WM_LBUTTONUP:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::Pressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
-
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state == Mouse::Button::State::HeldDown)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Left].state = Mouse::Button::State::Up;
-
-						break;
-					}
-
-					case WM_MBUTTONDOWN:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::NotPressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Pressed;
-
-						break;
-					}
-
-					case WM_MBUTTONUP:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::Pressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
-
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state == Mouse::Button::State::HeldDown)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Middle].state = Mouse::Button::State::Up;
-
-						break;
-					}
-
-					case WM_RBUTTONDOWN:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::NotPressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Pressed;
-
-						break;
-					}
-
-					case WM_RBUTTONUP:
-					{
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::Pressed)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
-
-						if (Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state == Mouse::Button::State::HeldDown)
-							Mouse::buttons[(unsigned char)Mouse::Button::Code::Right].state = Mouse::Button::State::Up;
-
-						break;
-					}
-
-					case WM_XBUTTONDOWN:
-					{
-						int buttonID = GET_XBUTTON_WPARAM(wParam);
-
-						if (buttonID == 1)
-						{
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::NotPressed)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Pressed;
-						}
-						else if (buttonID == 2)
-						{
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::NotPressed)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Pressed;
-						}
-						break;
-					}
-
-					case WM_XBUTTONUP:
-					{
-						int buttonID = GET_XBUTTON_WPARAM(wParam);
-
-						if (buttonID == 1)
-						{
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::Pressed)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
-
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state == Mouse::Button::State::HeldDown)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X1].state = Mouse::Button::State::Up;
-						}
-						else if (buttonID == 2)
-						{
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::Pressed)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
-
-							if (Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state == Mouse::Button::State::HeldDown)
-								Mouse::buttons[(unsigned char)Mouse::Button::Code::X2].state = Mouse::Button::State::Up;
-						}
-
-						break;
-					}
-
-					default:
-						break;
+					break;
+				}
+				default:
+					break;
 				}
 				return DefWindowProc(hWnd, message, wParam, lParam);
 			}

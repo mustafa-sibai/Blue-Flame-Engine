@@ -32,7 +32,7 @@ namespace BF
 	Engine::Engine(const Window& window, RenderAPI renderAPI)
 	{
 #ifdef BFE_PLATFORM_WINDOWS
-		Engine::winEngineEntryPoint = new WINEngineEntryPoint(WINWindow(window.GetTitle(), window.GetRectangle(), window.GetStyle()), renderAPI);
+		Engine::winEngineEntryPoint = new WINEngineEntryPoint(WINWindow(window.GetTitle(), window.GetPosition(), window.GetClientSize(), window.GetStyle()), renderAPI);
 #elif defined (BFE_PLATFORM_LINUX)
 		Engine::lxEngineEntryPoint = new LXEngineEntryPoint(LXWindow(window.GetTitle(), window.GetRectangle(), window.GetStyle()), renderAPI);
 #elif defined (BFE_PLATFORM_WEB)

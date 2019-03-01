@@ -34,6 +34,10 @@ namespace BF
 			void SetClearType(BF::Graphics::API::BufferClearType bufferClearType);
 			void SetClearColor(const BF::Graphics::Color& clearColor);
 
+			void SetModelMatrix(const BF::Math::Matrix4& modelMatrix);
+			void SetViewMatrix(const BF::Math::Matrix4& viewMatrix);
+			void SetProjectionMatrix(const BF::Math::Matrix4& projectionMatrix);
+
 			void Clear();
 			void SwapBuffers();
 

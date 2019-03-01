@@ -67,6 +67,7 @@ namespace BF
 
 			void Texture2D::Create(TextureData* textureData, Format format, Wrap wrap, Filter filter)
 			{
+				this->textureData = textureData;
 				/*//Todo: This is dirty. Create like a copy constructor or something and this should be managed by the resource manager.
 				this->textureData = new TextureData(textureData.width, textureData.height, textureData.buffer);
 				this->textureData->id = textureData.id;

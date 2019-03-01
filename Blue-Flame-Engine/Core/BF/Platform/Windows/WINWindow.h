@@ -11,33 +11,29 @@ namespace BF
 	{
 		namespace Windows
 		{
-			class BFE_API WINWindow : public Application::Window
+			class BFE_API WINWindow : public BF::Application::Window
 			{
-				private:
-					HWND hWnd;
-					MSG msg;
-					DWORD currentWindowStyle;
-					POINT mousePosition;
+			private:
+				HWND hWnd;
+				MSG msg;
+				DWORD currentWindowStyle;
+				POINT mousePosition;
 
-				public:
-					WINWindow(const std::string& title, const Math::Rectangle& rectangle, Application::WindowStyle style);
-					~WINWindow();
+			public:
+				WINWindow(const std::string& title, const BF::Math::Vector2i& position, const BF::Math::Vector2i& clientSize, BF::Application::WindowStyle style);
+				~WINWindow();
 
-					void Initialize();
-					void Update();
-					bool IsOpen();
-					void Move();
-					void SetWindowTitle(const std::string& title);
-					PIXELFORMATDESCRIPTOR GetPixelFormat() const;
+				void Initialize();
+				void Update();
+				bool IsOpen();
+				void Move();
+				void SetWindowTitle(const std::string& title);
+				PIXELFORMATDESCRIPTOR GetPixelFormat() const;
 
-				private:
-					void SetClientSize();
+				inline const HWND& GetHWND() const { return hWnd; }
 
-				public:
-					inline const HWND& GetHWND() const { return hWnd; }
-
-				private:
-					static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+			private:
+				static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 			};
 		}
 	}

@@ -11,6 +11,7 @@ namespace BF
 		class CameraManager
 		{
 			friend class BF::ECS::GameObject;
+			friend class BF::Graphics::Camera;
 
 		private:
 			BF::Graphics::ConstantBufferManager& constantBufferManager;
@@ -24,10 +25,6 @@ namespace BF
 			void Update();
 
 			void SetMainCamera(BF::Graphics::Camera* camera);
-
-			void SetModelMatrix(const BF::Math::Matrix4& modelMatrix);
-			void SetViewMatrix(const BF::Math::Matrix4& viewMatrix);
-			void SetProjectionMatrix(const BF::Math::Matrix4& projectionMatrix);
 
 			void AddCamera(BF::Graphics::Camera* camera);
 			void RemoveCamera();

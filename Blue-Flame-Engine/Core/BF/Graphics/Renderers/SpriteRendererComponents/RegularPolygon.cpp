@@ -11,7 +11,7 @@ namespace BF
 				using namespace BF::Math;
 
 				RegularPolygon::RegularPolygon(const Vector2i& size) :
-					Renderable(size, Vector2f(0), 0, Color::Whites::White())
+					Renderable(size, Vector2f(0.5f), 0, Color::Whites::White())
 				{
 				}
 

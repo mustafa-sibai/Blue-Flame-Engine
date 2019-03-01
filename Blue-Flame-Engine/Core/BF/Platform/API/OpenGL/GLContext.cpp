@@ -150,8 +150,8 @@ namespace BF
 
 				void GLContext::SetScissor(const Math::Rectangle& rectangle)
 				{
-					int height = Engine::GetWindow().GetClientHeight() - rectangle.height - rectangle.y;
-					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientHeight() - height - rectangle.y);
+					int height = Engine::GetWindow().GetClientSize().y - rectangle.height - rectangle.y;
+					glScissor(rectangle.x, height, rectangle.width, Engine::GetWindow().GetClientSize().y - height - rectangle.y);
 				}
 
 				void GLContext::SetViewport(const Math::Rectangle& rectangle)

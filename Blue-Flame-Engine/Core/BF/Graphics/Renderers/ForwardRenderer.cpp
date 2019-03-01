@@ -46,7 +46,7 @@ namespace BF
 				{
 					Transform* transform = (Transform*)models[i]->gameObject->GetComponents()[0];
 
-					cameraManager.SetModelMatrix(transform->GetWorldTransformation());
+					cameraManager.GetMainCamera().SetModelMatrix(transform->GetWorldTransformation());
 
 					for (size_t j = 0; j < models[i]->meshes.size(); j++)
 					{

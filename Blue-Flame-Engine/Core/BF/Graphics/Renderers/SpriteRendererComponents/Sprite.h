@@ -31,11 +31,11 @@ namespace BF
 					Sprite(const BF::Graphics::API::Texture2D* texture2D);
 					/*
 					@pivot:
-					Center = 0, 0
-					Top left = +1, -1
-					Top right = -1, -1
-					Bottom left = +1, +1
-					Bottom left = -1, +1
+					Top left = 0, 0
+					Top right = 1, 0
+					Center = 0.5f, 0.5f
+					Bottom right = 1, 1
+					Bottom left = 0, 1
 					*/
 					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot);
 					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, unsigned int zLayer);

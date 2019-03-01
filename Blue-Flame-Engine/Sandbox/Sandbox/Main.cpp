@@ -14,11 +14,12 @@
 #include "Forward_Renderer_Test.h"
 #include "ECS_Script_Test.h"
 #include "Hello_Triangle.h"
+#include "IsoMapTest.h"
 
 int main()
 {
 #ifdef BFE_NO_NET
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Rectangle(500, 500, 1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
@@ -33,7 +34,8 @@ int main()
 	//TerrainTestApp app;
 	//InputTests app;
 	//ECS_Script_Test::ECS_Script_Test app;
-	Hello_Triangle::Hello_Triangle app;
+	//Hello_Triangle::Hello_Triangle app;
+	IsoMapTest::IsoMapTest app;
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
 
 	engine.Run(app);

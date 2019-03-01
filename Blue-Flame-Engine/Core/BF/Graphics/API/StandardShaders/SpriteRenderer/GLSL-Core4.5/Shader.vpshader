@@ -9,17 +9,16 @@ out vec4 psColor;
 out vec2 psUV;
 out float psRenderingType;
 
-layout (std140, binding = 0) uniform Camera
+layout (std140, binding = 0) uniform PerFrameBuffer
 {
-	mat4 modelMatrix;
 	mat4 viewMatrix;
 	mat4 projectionMatrix;
 	vec4 position;
-} camera;
+} perFrameBuffer;
 
 void main()
 {
-	gl_Position = camera.projectionMatrix * camera.viewMatrix * vec4(inPosition.xy, 0.0f, 1.0f);
+	gl_Position = perFrameBuffer.projectionMatrix * perFrameBuffer.viewMatrix * vec4(inPosition.xy, 0.0f, 1.0f);
 
 	psColor = inColor;
 	psUV = inUV;

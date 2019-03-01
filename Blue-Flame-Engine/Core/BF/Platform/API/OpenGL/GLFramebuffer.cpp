@@ -61,7 +61,7 @@ namespace BF
 				void GLFramebuffer::Unbind() const
 				{
 					GLCall(glBindFramebuffer(GL_FRAMEBUFFER, 0));
-					glViewport(0, 0, Engine::GetWindow().GetClientWidth(), Engine::GetWindow().GetClientHeight());
+					glViewport(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y);
 				}
 
 				int GLFramebuffer::GetBufferFormat(FramebufferFormat format)

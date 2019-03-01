@@ -106,19 +106,10 @@ namespace Hello_Triangle
 
 		//-------------------------------------------------------- 3D Model --------------------------------------------------------
 
-		/*MeshMaterial* blueMaterial = new MeshMaterial();
-		blueMaterial->colorBuffer.ambientColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		blueMaterial->colorBuffer.diffuseColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		blueMaterial->colorBuffer.specularColor = Color(0.0f, 0.0f, 1.0f, 1.0f);
-		blueMaterial->colorBuffer.shininess = 256;
-		blueMaterial->shader = new BF::Graphics::API::Shader();
-		blueMaterial->shader->LoadStandardShader(BF::Graphics::API::ShaderType::P);*/
-
 		GameObject* planeGameObject = scene->AddGameObject(new GameObject("Plane"));
 		planeModel = (Model*)planeGameObject->AddComponent(model);
 		planeModel->gameObject->GetTransform()->SetPosition(Vector3f(0, -1, 5));
 		planeModel->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));
-		//planeMesh->AddMaterial(*blueMaterial);
 	}
 
 	void Hello_Triangle::Load()

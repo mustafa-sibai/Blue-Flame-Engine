@@ -213,8 +213,8 @@ namespace BF
 					ZeroMemory(&texd, sizeof(texd));
 					ZeroMemory(&depthBuffer, sizeof(depthBuffer));
 
-					texd.Width = Engine::GetWindow().GetClientWidth();
-					texd.Height = Engine::GetWindow().GetClientHeight();
+					texd.Width = Engine::GetWindow().GetClientSize().x;
+					texd.Height = Engine::GetWindow().GetClientSize().y;
 					texd.ArraySize = 1;
 					texd.MipLevels = 1;
 					texd.SampleDesc.Count = 4;
@@ -239,8 +239,8 @@ namespace BF
 
 					viewPort.TopLeftX = 0;
 					viewPort.TopLeftY = 0;
-					viewPort.Width = (float)Engine::GetWindow().GetClientWidth();
-					viewPort.Height = (float)Engine::GetWindow().GetClientHeight();
+					viewPort.Width = (float)Engine::GetWindow().GetClientSize().x;
+					viewPort.Height = (float)Engine::GetWindow().GetClientSize().y;
 					viewPort.MinDepth = 0.0f;
 					viewPort.MaxDepth = 1.0f;
 					context->RSSetViewports(1, &viewPort);

@@ -71,6 +71,7 @@
 
 #include <BF/Scripting/Script.h>
 
+#include "BF/IO/ResourceManager.h"
 #include <BF/IO/BFXLoader.h>
 
 #include <BF/System/Debug.h>

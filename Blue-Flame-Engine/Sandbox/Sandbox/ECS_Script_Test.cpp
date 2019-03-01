@@ -41,7 +41,7 @@ namespace ECS_Script_Test
 		parent->GetTransform()->SetScale(Vector3f(0.5, 0.5, 0.5));*/
 
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
-		Camera* camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(-((int)Engine::GetWindow().GetClientWidth() / 2), (int)(Engine::GetWindow().GetClientWidth() / 2), ((int)Engine::GetWindow().GetClientHeight() / 2), -(int)(Engine::GetWindow().GetClientHeight() / 2), -1.0f, 1.0f)));
+		Camera* camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(-(Engine::GetWindow().GetClientSize().x / 2), Engine::GetWindow().GetClientSize().x / 2, Engine::GetWindow().GetClientSize().y / 2, -(Engine::GetWindow().GetClientSize().y / 2), -1.0f, 1.0f)));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.5, 0.0f, 0.0f, 1.0f));

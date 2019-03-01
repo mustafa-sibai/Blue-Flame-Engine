@@ -36,6 +36,24 @@ namespace BF
 			this->clearColor = clearColor;
 		}
 
+		void Camera::SetModelMatrix(const Matrix4& modelMatrix)
+		{
+			this->modelMatrix = modelMatrix;
+			cameraManager->constantBufferManager.UpdateCameraModel(modelMatrix);
+		}
+
+		void Camera::SetViewMatrix(const Matrix4& viewMatrix)
+		{
+			this->viewMatrix = viewMatrix;
+			//cameraManager->constantBufferManager.UpdateCameraView(viewMatrix);
+		}
+
+		void Camera::SetProjectionMatrix(const Matrix4& projectionMatrix)
+		{
+			this->projectionMatrix = projectionMatrix;
+			//cameraManager->constantBufferManager.UpdateCameraProjection(projectionMatrix);
+		}
+
 		void Camera::Clear()
 		{
 			BF::Engine::GetContext().Clear(bufferClearType, clearColor);

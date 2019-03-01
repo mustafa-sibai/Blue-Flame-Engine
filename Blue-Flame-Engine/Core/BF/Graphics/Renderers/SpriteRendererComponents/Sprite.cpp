@@ -12,7 +12,7 @@ namespace BF
 				using namespace Graphics::API;
 
 				Sprite::Sprite(const Texture2D* texture2D) :
-					Renderable(Vector2i(texture2D->GetTextureData()->width, texture2D->GetTextureData()->height), Vector2f(0), 0, Color::Whites::White()),
+					Renderable(Vector2i(texture2D->GetTextureData()->width, texture2D->GetTextureData()->height), Vector2f(0.5f), 0, Color::Whites::White()),
 					texture2D(texture2D), scissorRectangle(0, 0, texture2D->GetTextureData()->width, texture2D->GetTextureData()->height)
 				{
 				}

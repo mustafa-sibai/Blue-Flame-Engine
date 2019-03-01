@@ -20,7 +20,7 @@ namespace BF
 				//skyboxRenderer = new SkyboxRenderer();
 				forwardRenderer = new ForwardRenderer(constantBufferManager, cameraManager);
 				spriteRenderer = new SpriteRenderer();
-				//spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFront);
+				spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFrontRightToLeft);
 				//postProcessing = new PostProcessing();
 			}
 

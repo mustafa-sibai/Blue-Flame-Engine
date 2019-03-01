@@ -53,6 +53,17 @@ namespace BF
 			return Vector2i(x + (width / 2), y + (height / 2));
 		}
 
+		void Rectangle::SetPivotPoint(Vector2f pivot)
+		{
+			int offsetWidth = (int)(this->width * pivot.x);
+			int offsetHeight = (int)(this->height * pivot.y);
+
+			this->x -= offsetWidth;
+			this->y = offsetHeight - this->y;
+			this->width -= offsetWidth;
+			this->height = offsetHeight - this->height;
+		}
+
 		Rectangle& Rectangle::operator+=(const Rectangle& right)
 		{
 			this->x += right.x;
