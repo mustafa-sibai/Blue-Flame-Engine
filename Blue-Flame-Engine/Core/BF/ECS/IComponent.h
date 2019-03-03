@@ -40,7 +40,7 @@ namespace BF
 			bool IsSameType();
 
 			template<typename T>
-			static bool CompareTypes(std::string type);
+			static bool CompareTypes(const std::string& type);
 
 			//inline std::string GetType() const { return IComponentType; }
 

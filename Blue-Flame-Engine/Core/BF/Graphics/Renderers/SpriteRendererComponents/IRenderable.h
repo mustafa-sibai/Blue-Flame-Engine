@@ -47,8 +47,6 @@ namespace BF
 								}
 							}*/
 
-
-
 							return false;
 						}
 					};
@@ -57,34 +55,21 @@ namespace BF
 					{
 						bool operator() (const IRenderable* renderableA, const IRenderable* renderableB) const
 						{
-							if (renderableA->xySortingOrder > renderableB->xySortingOrder)
+							if (renderableA->xySortingOrder < renderableB->xySortingOrder)
 							{
-								if (renderableA->zSortingOrder == renderableB->zSortingOrder)
+								if (renderableA->zSortingOrder <= renderableB->zSortingOrder)
 								{
 									return true;
 								}
 							}
-							
 
-
-
-							/*if (renderableA->gameObject->GetTransform()->GetPosition().y >= renderableB->gameObject->GetTransform()->GetPosition().y)
+							if (renderableA->xySortingOrder >= renderableB->xySortingOrder)
 							{
-								if (renderableA->zLayer < renderableB->zLayer)
+								if (renderableA->zSortingOrder < renderableB->zSortingOrder)
 								{
 									return true;
 								}
-							}*/
-
-							/*if (renderableA->gameObject->GetTransform()->GetPosition().y < renderableB->gameObject->GetTransform()->GetPosition().y)
-							{
-								if (renderableA->zLayer == renderableB->zLayer)
-								{
-									return false;
-								}
-							}*/
-
-
+							}
 
 							return false;
 						}

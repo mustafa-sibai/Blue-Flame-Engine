@@ -9,6 +9,7 @@ namespace IsoMapTest
 		BF::Application::Scene* scene;
 		BF::Graphics::Camera* camera;
 		BF::Math::Rectangle orthographicRectangle;
+		BF::ECS::GameObject* movingSprite;
 
 	public:
 		IsoMapTest();
@@ -19,5 +20,9 @@ namespace IsoMapTest
 		void PostLoad() override;
 		void Update() override;
 		void Render() override;
+
+	private:
+		void CreateMap();
+		void SortingTest();
 	};
 }

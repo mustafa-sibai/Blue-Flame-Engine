@@ -1,11 +1,9 @@
 template<typename T>
 inline bool IComponent::IsSameType()
 {
-	std::string type = typeid(T).name();
-
 	for (size_t i = 0; i < types.size(); i++)
 	{
-		if (types[i] == type)
+		if (types[i] == typeid(T).name())
 			return true;
 	}
 
@@ -13,11 +11,9 @@ inline bool IComponent::IsSameType()
 }
 
 template<typename T>
-inline bool IComponent::CompareTypes(std::string type)
+inline bool IComponent::CompareTypes(const std::string& type)
 {
-	std::string typeT = typeid(T).name();
-
-	if (typeT == type)
+	if (typeid(T).name() == type)
 		return true;
 	else
 		return false;

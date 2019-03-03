@@ -27,7 +27,7 @@ namespace BF
 
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
-			SpriteRenderer::SpriteRenderer() : 
+			SpriteRenderer::SpriteRenderer() :
 				Renderer(RendererType::SpriteRenderer),
 				indexCount(0), submitSprite(true), newDrawCall(false)/*, nullCount(0)*/
 			{
@@ -126,6 +126,7 @@ namespace BF
 				//renderables[renderable.index] = nullptr;
 				//nullCount++;
 			}*/
+			bool once = false;
 
 			void SpriteRenderer::Render()
 			{
@@ -145,6 +146,12 @@ namespace BF
 							nullCount++;
 						}
 						removeList.clear();*/
+
+						if (!once)
+						{
+							std::random_shuffle(renderables.begin(), renderables.end());
+							once = true;
+						}
 
 						if (sortingOrder == SortingOrder::BackToFront)
 							sort(renderables.begin(), renderables.end(), IRenderable::BackToFront());
@@ -329,10 +336,10 @@ namespace BF
 					 |        |
 					 | sprite |
 					 |        |
-					 ---------- width, height 
+					 ---------- width, height
 				  x, height
 
-				  if we have an odd number of pixels, the extra pixels will always be at the bottom right. 
+				  if we have an odd number of pixels, the extra pixels will always be at the bottom right.
 				  Meaning more of the image will be on the bottom right side rather than top left side.
 
 				  --------------------
@@ -448,14 +455,14 @@ namespace BF
 					{
 						for (size_t j = 0; j < renderables[i]->types.size(); j++)
 						{
-							if (IComponent::CompareTypes<LineShape>(renderables[i]->types[j]))
-								MapLineBuffer((LineShape*)renderables[i]);
+							if (IComponent::CompareTypes<Sprite>(renderables[i]->types[j]))
+								MapSpriteBuffer((Sprite*)renderables[i]);
 
 							else if (IComponent::CompareTypes<RegularPolygon>(renderables[i]->types[j]))
 								MapPolygonBuffer((RegularPolygon*)renderables[i]);
 
-							else if (IComponent::CompareTypes<Sprite>(renderables[i]->types[j]))
-								MapSpriteBuffer((Sprite*)renderables[i]);
+							else if (IComponent::CompareTypes<LineShape>(renderables[i]->types[j]))
+								MapLineBuffer((LineShape*)renderables[i]);
 
 							else if (IComponent::CompareTypes<Text>(renderables[i]->types[j]))
 								MapTextBuffer((Text*)renderables[i]);

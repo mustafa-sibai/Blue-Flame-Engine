@@ -65,6 +65,7 @@ namespace BF
 			else
 			{
 				BF::Graphics::API::TextureData* textureData = BF::IO::ImageLoader::Load(filename);
+				textureData->filePath = filename;
 				Add(filename, textureData);
 				return textureData;
 			}
