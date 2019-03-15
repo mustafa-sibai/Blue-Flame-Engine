@@ -46,7 +46,8 @@ namespace BF
 
 					//SubmitType submitType;
 					SortingOrder sortingOrder;
-					bool submitSprite, newDrawCall;
+					bool submitSprite;//, newDrawCall;
+					int totalDrawCalls;
 
 					static const BF::Graphics::API::Texture2D* currentBoundTexture;
 

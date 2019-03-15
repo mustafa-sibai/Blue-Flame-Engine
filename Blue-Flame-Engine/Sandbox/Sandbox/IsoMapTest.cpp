@@ -69,7 +69,7 @@ namespace IsoMapTest
 
 	Vector2f IsometricToCartesian(Vector2f position)
 	{
-		return Vector2f((2 * position.y - position.x) * 0.5f, -(2 * position.y + position.x) * 0.5f);
+		return Vector2f((2 * -position.y + position.x) * 0.5f, (2 * -position.y - position.x) * 0.5f);
 	}
 
 	void IsoMapTest::CreateMap()
@@ -111,15 +111,26 @@ namespace IsoMapTest
 			}
 		}
 	}
+	Vector2f IsoPosition;
+	Vector2f carPosition;
+	Vector2f IsoPosition2f;
 
 	void IsoMapTest::SortingTest()
 	{
+		Texture2D* roadTexture = new Texture2D();
+		roadTexture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/road.png"), Texture::Format::R8G8B8A8);
+
+		/*GameObject* movingSprite2 = scene->AddGameObject(new GameObject("main2"));
+		movingSprite2->AddComponent(new Sprite(roadTexture, Vector2f(0, 0)));
+		movingSprite2->GetTransform()->SetPosition(Vector3f(200, 200, 0));*/
 
 		Texture2D* texture = new Texture2D();
 		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/grass.png"), Texture::Format::R8G8B8A8);
 
-		Texture2D* roadTexture = new Texture2D();
-		roadTexture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/road.png"), Texture::Format::R8G8B8A8);
+		/*GameObject* movingSprite = scene->AddGameObject(new GameObject("main"));
+		movingSprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
+		movingSprite->GetTransform()->SetPosition(Vector3f(0, 0, 0));*/
+
 
 		int row = 7;
 		int column = 7;
@@ -128,6 +139,8 @@ namespace IsoMapTest
 		//mostTiles = mostTiles > height ? mostTiles : height;
 
 		float heightInPixels = 15;
+
+		//ground
 		for (size_t z = 0; z < height; z++)
 		{
 			for (size_t y = 0; y < column; y++)
@@ -155,6 +168,7 @@ namespace IsoMapTest
 
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+		//pillerA 1
 		{
 			int x = 3;
 			int y = 0;
@@ -173,11 +187,12 @@ namespace IsoMapTest
 			}
 		}
 
+		//bridgeA
 		{
 			int x = 3;
 			int z = 7;
 
-			for (size_t y = 0; y < 5; y++)
+			for (size_t y = 0; y < 6; y++)
 			{
 				GameObject* sprite = scene->AddGameObject(new GameObject("main"));
 				sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
@@ -191,11 +206,71 @@ namespace IsoMapTest
 			}
 		}
 
+		//pillerA 2
 		{
 			int x = 3;
-			int y = 4;
+			int y = 5;
 
 			for (size_t z = 0; z < 7; z++)
+			{
+				GameObject* sprite = scene->AddGameObject(new GameObject("main"));
+				sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
+
+				Vector2f carPosition((texture->GetTextureData()->width / 2) * x, (texture->GetTextureData()->height - heightInPixels) * y);
+				Vector2f isoPosition = CartesianToIsometric(carPosition - Vector2f(heightInPixels * z));
+
+				sprite->GetTransform()->SetPosition(Vector3f(isoPosition.x, isoPosition.y, 0));
+				sprite->GetComponent<Sprite>()->xySortingOrder = ((int)carPosition.x + (int)carPosition.y * mostTiles);
+				sprite->GetComponent<Sprite>()->zSortingOrder = z;
+			}
+		}
+
+
+		//pillerB 1
+		{
+			int x = 6;
+			int y = 3;
+
+			for (size_t z = 0; z < 11; z++)
+			{
+				GameObject* sprite = scene->AddGameObject(new GameObject("main"));
+				sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
+
+				Vector2f carPosition((texture->GetTextureData()->width / 2) * x, (texture->GetTextureData()->height - heightInPixels) * y);
+				Vector2f isoPosition = CartesianToIsometric(carPosition - Vector2f(heightInPixels * z));
+
+				sprite->GetTransform()->SetPosition(Vector3f(isoPosition.x, isoPosition.y, 0));
+				sprite->GetComponent<Sprite>()->xySortingOrder = ((int)carPosition.x + (int)carPosition.y * mostTiles);
+				sprite->GetComponent<Sprite>()->zSortingOrder = z;
+			}
+		}
+
+
+		//bridgeB
+		{
+			int y = 3;
+			int z = 11;
+
+			for (size_t x = 0; x < 7; x++)
+			{
+				GameObject* sprite = scene->AddGameObject(new GameObject("main"));
+				sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
+
+				Vector2f carPosition((texture->GetTextureData()->width / 2) * x, (texture->GetTextureData()->height - heightInPixels) * y);
+				Vector2f isoPosition = CartesianToIsometric(carPosition - Vector2f(heightInPixels * z));
+
+				sprite->GetTransform()->SetPosition(Vector3f(isoPosition.x, isoPosition.y, 0));
+				sprite->GetComponent<Sprite>()->xySortingOrder = ((int)carPosition.x + (int)carPosition.y * mostTiles);
+				sprite->GetComponent<Sprite>()->zSortingOrder = z;
+			}
+		}
+
+		//pillerB 2
+		{
+			int x = 0;
+			int y = 3;
+
+			for (size_t z = 0; z < 11; z++)
 			{
 				GameObject* sprite = scene->AddGameObject(new GameObject("main"));
 				sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
@@ -225,6 +300,9 @@ namespace IsoMapTest
 			movingSprite->GetComponent<Sprite>()->xySortingOrder = ((int)carPosition.x + (int)carPosition.y * mostTiles);
 			movingSprite->GetComponent<Sprite>()->zSortingOrder = z;
 		}
+
+		IsoPosition = Vector2f(movingSprite->GetTransform()->GetPosition().x, movingSprite->GetTransform()->GetPosition().y);
+		carPosition = IsometricToCartesian(Vector2f(IsoPosition.x, IsoPosition.y));
 	}
 
 	void IsoMapTest::Load()
@@ -237,8 +315,7 @@ namespace IsoMapTest
 		App::PostLoad();
 		App::RunScene(*scene);
 	}
-	Vector2f carPosition;
-	Vector2f IsoPosition2f;
+
 	void IsoMapTest::Update()
 	{
 		App::Update();
@@ -248,13 +325,10 @@ namespace IsoMapTest
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f));
 
-		/*Vector3f IsoPosition = movingSprite->GetTransform()->GetPosition();
-		carPosition = IsometricToCartesian(Vector2f(IsoPosition.x, IsoPosition.y));
+		carPosition += Vector2f(0.05f, 0);
+		IsoPosition = CartesianToIsometric(carPosition);
 
-		carPosition += Vector2f(0.1, 0);
-		IsoPosition2f = CartesianToIsometric(carPosition);
-
-		movingSprite->GetTransform()->SetPosition(Vector3f(IsoPosition2f.x, IsoPosition2f.y, 0));*/
+		movingSprite->GetTransform()->SetPosition(Vector3f((int)IsoPosition.x, (int)IsoPosition.y, 0));
 	}
 
 	void IsoMapTest::Render()
