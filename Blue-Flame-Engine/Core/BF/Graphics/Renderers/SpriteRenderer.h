@@ -8,6 +8,7 @@
 #include "BF/Graphics/Renderers/SpriteRendererComponents/LineShape.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Text.h"
 #include "BF/Graphics/Renderers/Renderer.h"
+#include "BF/Graphics/Renderers/RenderLayerManager.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -25,63 +26,61 @@ namespace BF
 			{
 				friend class BF::Graphics::Renderers::RenderPipeline;
 
-				public:
-					//enum class SubmitType { StaticSubmit, DynamicSubmit };
-					enum class SortingOrder { BackToFront, BackToFrontRightToLeft };
+			private:
+				//BF::Application::Scene& scene;
 
-				private:
-					//BF::Application::Scene& scene;
+				BF::Graphics::API::Shader shader;
+				BF::Graphics::API::VertexBuffer vertexBuffer;
+				BF::Graphics::API::IndexBuffer indexBuffer;
+				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
-					BF::Graphics::API::Shader shader;
-					BF::Graphics::API::VertexBuffer vertexBuffer;
-					BF::Graphics::API::IndexBuffer indexBuffer;
-					BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
+				BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* spriteBuffer;
+				unsigned int indexCount;
 
-					BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* spriteBuffer;
-					unsigned int indexCount;
+				//std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
+				//std::vector<Renderable*> removeList;
+				//int nullCount;
 
-					std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
-					//std::vector<Renderable*> removeList;
-					//int nullCount;
+				//SubmitType submitType;
 
-					//SubmitType submitType;
-					SortingOrder sortingOrder;
-					bool submitSprite;//, newDrawCall;
-					int totalDrawCalls;
+				bool submitSprite;//, newDrawCall;
+				int totalDrawCalls;
 
-					static const BF::Graphics::API::Texture2D* currentBoundTexture;
+				static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
-				public:
-					SpriteRenderer();
-					~SpriteRenderer();
+			public:
+				//enum class SubmitType { StaticSubmit, DynamicSubmit };
+				BF::Graphics::Renderers::RenderLayerManager renderLayerManager;
 
-					void Initialize() override;
+			public:
+				SpriteRenderer();
+				~SpriteRenderer();
 
-					//void Submit(Renderable& renderable);
-					//void Remove(Renderable& renderable);
+				void Initialize() override;
 
-					void SetSortingOrder(SortingOrder sortingOrder);
-					void Render() override;
+				//void Submit(Renderable& renderable);
+				//void Remove(Renderable& renderable);
 
-					//void Begin(SubmitType submitType, SortingOrder sortingOrder);
-					//void Render(const Renderable& renderable);
-					//void Render(Renderable&&) = delete;
-					//void End();
+				void Render() override;
 
-					void SetScissor(const BF::Math::Rectangle& rectangle);
+				//void Begin(SubmitType submitType, SortingOrder sortingOrder);
+				//void Render(const Renderable& renderable);
+				//void Render(Renderable&&) = delete;
+				//void End();
 
-					inline SortingOrder GetSortingOrder() const { return sortingOrder; }
-					inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
+				void SetScissor(const BF::Math::Rectangle& rectangle);
 
-					//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
+				inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
 
-				private:
-					void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
-					void MapPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
-					void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
-					void MapTextBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
-					void MapBuffer();
-					void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
+				//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
+
+			private:
+				void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
+				void MapPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
+				void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
+				void MapTextBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
+				void MapBuffer();
+				void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
 			};
 		}
 	}

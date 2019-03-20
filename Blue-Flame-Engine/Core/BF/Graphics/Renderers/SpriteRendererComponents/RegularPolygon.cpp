@@ -1,4 +1,5 @@
 #include "RegularPolygon.h"
+#include "BF/Graphics/Renderers/RenderLayer.h"
 
 namespace BF
 {
@@ -8,25 +9,27 @@ namespace BF
 		{
 			namespace SpriteRendererComponents
 			{
+				using namespace std;
 				using namespace BF::Math;
+				using namespace BF::Graphics::Renderers;
 
-				RegularPolygon::RegularPolygon(const Vector2i& size) :
-					Renderable(size, Vector2f(0.5f), 0, Color::Whites::White())
+				RegularPolygon::RegularPolygon(const Vector2i& size, RenderLayer& renderLayer) :
+					Renderable(size, Vector2f(0.5f), 0, renderLayer, Color::Whites::White())
 				{
 				}
 
-				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot) :
-					Renderable(size, pivot, 0, Color::Whites::White())
+				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, RenderLayer& renderLayer) :
+					Renderable(size, pivot, 0, renderLayer, Color::Whites::White())
 				{
 				}
 
-				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, unsigned int zLayer) :
-					Renderable(size, pivot, zLayer, Color::Whites::White())
+				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer) :
+					Renderable(size, pivot, zSortingOrder, renderLayer, Color::Whites::White())
 				{
 				}
 
-				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, unsigned int zLayer, const Color& color) :
-					Renderable(size, pivot, zLayer, color)
+				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
+					Renderable(size, pivot, zSortingOrder, renderLayer, color)
 				{
 				}
 

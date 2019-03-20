@@ -46,10 +46,10 @@ namespace ECS_Script_Test
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.5, 0.0f, 0.0f, 1.0f));
 
-		GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject("RegularPolygon A"));
+		/*GameObject* RegularPolygonGameObject = scene->AddGameObject(new GameObject("RegularPolygon A"));
 		RegularPolygonGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 		RegularPolygonGameObject->GetTransform()->SetScale(Vector3f(1, 1, 1));
-		RegularPolygon* rp = (RegularPolygon*)RegularPolygonGameObject->AddComponent(new RegularPolygon(Vector2i(100, 200), Vector2f(0, 0), 2, Color::Blues::DarkBlue()));
+		RegularPolygon* rp = (RegularPolygon*)RegularPolygonGameObject->AddComponent(new RegularPolygon(Vector2i(100, 200), Vector2f(0, 0), 2, RenderLayer("Default"), Color::Blues::DarkBlue()));
 		ScriptTest* script = (ScriptTest*)RegularPolygonGameObject->AddComponent(new ScriptTest());
 
 		ScriptTest* script2 = RegularPolygonGameObject->GetComponent<ScriptTest>();
@@ -60,7 +60,7 @@ namespace ECS_Script_Test
 		GameObject* sprite = scene->AddGameObject(new GameObject("sprite"));
 		sprite->AddComponent(new Sprite(texture, Vector2f(0, 0)));
 		sprite->GetTransform()->SetPosition(Vector3f(0, 0, 0));
-		sprite->GetTransform()->SetScale(Vector3f(1, 1, 1));
+		sprite->GetTransform()->SetScale(Vector3f(1, 1, 1));*/
 
 		App::Initialize();
 	}

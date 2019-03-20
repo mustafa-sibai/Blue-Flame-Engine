@@ -90,12 +90,7 @@ namespace BF
 				delete[] indices;
 			}
 
-			void SpriteRenderer::SetSortingOrder(SortingOrder sortingOrder)
-			{
-				this->sortingOrder = sortingOrder;
-			}
-
-			bool once = false;
+			//bool once = false;
 
 			void SpriteRenderer::Render()
 			{
@@ -105,16 +100,11 @@ namespace BF
 
 				if (submitSprite)
 				{
-					if (!once)
+					/*if (!once)
 					{
 						std::random_shuffle(renderables.begin(), renderables.end());
 						once = true;
-					}
-
-					if (sortingOrder == SortingOrder::BackToFront)
-						sort(renderables.begin(), renderables.end(), IRenderable::BackToFront());
-					else if (sortingOrder == SortingOrder::BackToFrontRightToLeft)
-						sort(renderables.begin(), renderables.end(), IRenderable::BackToFrontRightToLeft());
+					}*/
 
 					MapBuffer();
 					vertexBuffer.Unmap();
@@ -368,7 +358,32 @@ namespace BF
 			{
 				if (submitSprite)
 				{
-					for (size_t i = 0; i < renderables.size(); i++)
+					for (size_t i = 0; i < renderLayerManager.renderLayers.size(); i++)
+					{
+						renderLayerManager.renderLayers[i]->Sort();
+
+						for (size_t j = 0; j < renderLayerManager.renderLayers[i]->renderables.size(); j++)
+						{
+							IRenderable* iRenderable = renderLayerManager.renderLayers[i]->renderables[j];
+
+							for (size_t k = 0; k < renderLayerManager.renderLayers[i]->renderables[j]->types.size(); k++)
+							{
+								if (IComponent::CompareTypes<Sprite>(iRenderable->types[k]))
+									MapSpriteBuffer((Sprite*)iRenderable);
+
+								else if (IComponent::CompareTypes<RegularPolygon>(iRenderable->types[k]))
+									MapPolygonBuffer((RegularPolygon*)iRenderable);
+
+								else if (IComponent::CompareTypes<LineShape>(iRenderable->types[k]))
+									MapLineBuffer((LineShape*)iRenderable);
+
+								else if (IComponent::CompareTypes<Text>(iRenderable->types[k]))
+									MapTextBuffer((Text*)iRenderable);
+							}
+						}
+					}
+
+					/*for (size_t i = 0; i < renderables.size(); i++)
 					{
 						for (size_t j = 0; j < renderables[i]->types.size(); j++)
 						{
@@ -384,7 +399,7 @@ namespace BF
 							else if (IComponent::CompareTypes<Text>(renderables[i]->types[j]))
 								MapTextBuffer((Text*)renderables[i]);
 						}
-					}
+					}*/
 
 					/*for (size_t i = 0; i < layerManager->GetSize(); i++)
 					{

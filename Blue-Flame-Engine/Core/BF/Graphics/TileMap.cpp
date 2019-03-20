@@ -7,7 +7,7 @@ namespace BF
 	{
 		using namespace std;
 		using namespace BF::Graphics::API;
-		using namespace BF::Graphics::Renderers;
+		//using namespace BF::Graphics::Renderers;
 		using namespace BF::IO;
 
 		TileMap::TileMap()

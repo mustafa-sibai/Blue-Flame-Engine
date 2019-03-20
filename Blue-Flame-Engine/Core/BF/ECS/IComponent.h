@@ -15,6 +15,7 @@ namespace BF
 		namespace Renderers
 		{
 			class RenderPipeline;
+			class SpriteRenderer;
 		}
 	}
 
@@ -27,6 +28,7 @@ namespace BF
 			friend class BF::Application::Scene;
 			friend class BF::ECS::GameObject;
 			friend class BF::Graphics::Renderers::RenderPipeline;
+			friend class BF::Graphics::Renderers::SpriteRenderer;
 
 		private:
 			static int globalID;

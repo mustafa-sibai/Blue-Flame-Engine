@@ -11,11 +11,13 @@ namespace BF
 	{
 		namespace Renderers
 		{
+			class RenderLayer;
+
 			namespace SpriteRendererComponents
 			{
 				class BFE_API IRenderable : public BF::ECS::Component<IRenderable>
 				{
-					friend class SpriteRenderer;
+					friend class BF::Graphics::Renderers::RenderLayer;
 
 				private:
 					//Left right - back front
@@ -75,15 +77,18 @@ namespace BF
 						}
 					};
 
+					int renderLayerIndex;
+
 				public:
 					BF::Math::Vector2i size;
 					BF::Math::Vector2f pivot;
-					int xySortingOrder;
 					int zSortingOrder;
+					BF::Graphics::Renderers::RenderLayer& renderLayer;
+					int xySortingOrder;
 					Color color;
 
 				public:
-					IRenderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, const Color& color);
+					IRenderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
 					virtual ~IRenderable();
 				};
 			}

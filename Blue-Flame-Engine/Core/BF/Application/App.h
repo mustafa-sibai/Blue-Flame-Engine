@@ -39,7 +39,6 @@ namespace BF
 #elif defined(BFE_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
 #endif
-
 		private:
 			//SceneManager sceneManager;
 			//BF::Application::Layers::LayerManager layerManager;
@@ -48,7 +47,7 @@ namespace BF
 
 			BF::Graphics::CameraManager cameraManager;
 			BF::Graphics::ConstantBufferManager constantBufferManager;
-			BF::Graphics::Renderers::RenderPipeline renderPipeline;
+			
 			BF::Scripting::ScriptExecutor scriptExecutor;
 
 			BF::System::Timer frameTimer;
@@ -60,6 +59,9 @@ namespace BF
 			int fixedUpdateTicks;
 
 			//BF::Graphics::GUI::StyleSheet styleSheet;
+
+		public:
+			BF::Graphics::Renderers::RenderPipeline renderPipeline;
 
 		public:
 			App();

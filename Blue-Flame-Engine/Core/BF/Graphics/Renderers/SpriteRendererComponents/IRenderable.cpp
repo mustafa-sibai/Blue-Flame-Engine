@@ -1,4 +1,5 @@
 #include "IRenderable.h"
+#include "BF/Graphics/Renderers/RenderLayer.h"
 
 namespace BF
 {
@@ -8,11 +9,13 @@ namespace BF
 		{
 			namespace SpriteRendererComponents
 			{
+				using namespace std;
 				using namespace BF::Math;
 				using namespace BF::ECS;
+				using namespace BF::Graphics::Renderers;
 
-				IRenderable::IRenderable(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, const Color& color) :
-					size(size), pivot(pivot), zSortingOrder(zSortingOrder), color(color)
+				IRenderable::IRenderable(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
+					size(size), pivot(pivot), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color)
 				{
 				}
 

@@ -124,6 +124,8 @@
     <ClCompile Include="BF\Platform\Windows\WINWindow.cpp" />
     <ClCompile Include="BF\Scripting\IScript.cpp" />
     <ClCompile Include="BF\Graphics\ConstantBufferManager.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\RenderLayer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\RenderLayerManager.cpp" />
     <None Include="BF\Scripting\Script.inl">
       <FileType>Document</FileType>
     </None>
@@ -201,6 +203,8 @@
     <ClInclude Include="BF\Graphics\TileMap.h" />
     <ClInclude Include="BF\Graphics\Materials\MeshMaterialColorBuffer.h" />
     <ClInclude Include="BF\Graphics\ConstantBufferManager.h" />
+    <ClInclude Include="BF\Graphics\Renderers\RenderLayer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\RenderLayerManager.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

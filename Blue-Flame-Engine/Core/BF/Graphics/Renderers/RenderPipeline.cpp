@@ -1,8 +1,10 @@
 #include "RenderPipeline.h"
 #include "BF/ECS/IComponent.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/IRenderable.h"
 #include "BF/Graphics/Model.h"
 #include "BF/Engine.h"
 #include "BF/System/Debug.h"
+
 namespace BF
 {
 	namespace Graphics
@@ -20,7 +22,7 @@ namespace BF
 				//skyboxRenderer = new SkyboxRenderer();
 				forwardRenderer = new ForwardRenderer(constantBufferManager, cameraManager);
 				spriteRenderer = new SpriteRenderer();
-				spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFrontRightToLeft);
+				//spriteRenderer->SetSortingOrder(SpriteRenderer::SortingOrder::BackToFrontRightToLeft);
 				//postProcessing = new PostProcessing();
 			}
 
@@ -69,7 +71,12 @@ namespace BF
 				if (component->IsSameType<IRenderable>())
 				{
 					if (spriteRenderer != nullptr)
-						spriteRenderer->renderables.emplace_back((IRenderable*)component);
+					{
+						IRenderable* iRenderable = (IRenderable*)component;
+						iRenderable->renderLayer.renderables.emplace_back(iRenderable);
+
+						//spriteRenderer->renderLayerManager.GetRenderLayer(iRenderable->renderLayer.(renderables.emplace_back((IRenderable*)component);
+					}
 				}
 				else if (component->IsSameType<Model>())
 				{
