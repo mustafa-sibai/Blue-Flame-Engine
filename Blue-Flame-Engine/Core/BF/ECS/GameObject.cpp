@@ -2,6 +2,7 @@
 #include "BF/Application/Scene.h"
 #include "BF/Application/App.h"
 #include "BF/Graphics/Model.h"
+#include "BF/Graphics/GUI3/IWidget.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -11,6 +12,7 @@ namespace BF
 		using namespace std;
 		using namespace BF::Application;
 		using namespace BF::Graphics;
+		using namespace BF::Graphics::GUI;
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 		using namespace BF::Scripting;
@@ -44,6 +46,13 @@ namespace BF
 						Camera* camera = (Camera*)component;
 						camera->cameraManager = &scene->app.cameraManager;
 						scene->app.cameraManager.AddCamera((Camera*)component);
+						component->added = true;
+					}
+					else if (component->types[i] == IComponent::TypeOf<IWidget>())
+					{
+						component->gameObject = this;
+						components.emplace_back(component);
+						scene->app.guiSystem.AddWidget((IWidget*)component);
 						component->added = true;
 					}
 					else if (component->types[i] == IComponent::TypeOf<IRenderable>() ||

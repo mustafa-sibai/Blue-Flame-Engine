@@ -563,6 +563,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sandbox\GUITest.cpp" />
     <ClCompile Include="Sandbox\ECS_Script_Test.cpp" />
     <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp" />
     <ClCompile Include="Sandbox\FPSCamera.cpp" />
@@ -692,6 +693,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sandbox\GUITest.h" />
     <ClInclude Include="Sandbox\ECS_Script_Test.h" />
     <ClInclude Include="Sandbox\Forward_Renderer_Test.h" />
     <ClInclude Include="Sandbox\FPSCamera.h" />

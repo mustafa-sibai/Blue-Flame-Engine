@@ -73,6 +73,7 @@
     <ClCompile Include="BF\Graphics\Camera.cpp" />
     <ClCompile Include="BF\Graphics\Color.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
+    <ClCompile Include="BF\Graphics\GUI3\IWidget.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
     <ClCompile Include="BF\Graphics\Materials\SpriteMaterial.cpp" />
@@ -126,6 +127,13 @@
     <ClCompile Include="BF\Graphics\ConstantBufferManager.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\RenderLayer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\RenderLayerManager.cpp" />
+    <ClCompile Include="BF\Graphics\GUI3\Button.cpp" />
+    <ClCompile Include="BF\Graphics\GUI3\GUISystem.cpp" />
+    <None Include="BF\Graphics\GUI3\Widget.inl">
+      <FileType>Document</FileType>
+    </None>
+    <ClCompile Include="BF\Graphics\GUI3\StyleSheet.cpp" />
+    <ClCompile Include="BF\Graphics\GUI3\WidgetState.cpp" />
     <None Include="BF\Scripting\Script.inl">
       <FileType>Document</FileType>
     </None>
@@ -181,6 +189,7 @@
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
     <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
+    <ClInclude Include="BF\Graphics\GUI3\IWidget.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\MeshData.h" />
     <ClInclude Include="BF\Graphics\Light.h" />
@@ -205,6 +214,11 @@
     <ClInclude Include="BF\Graphics\ConstantBufferManager.h" />
     <ClInclude Include="BF\Graphics\Renderers\RenderLayer.h" />
     <ClInclude Include="BF\Graphics\Renderers\RenderLayerManager.h" />
+    <ClInclude Include="BF\Graphics\GUI3\Button.h" />
+    <ClInclude Include="BF\Graphics\GUI3\GUISystem.h" />
+    <ClInclude Include="BF\Graphics\GUI3\Widget.h" />
+    <ClInclude Include="BF\Graphics\GUI3\StyleSheet.h" />
+    <ClInclude Include="BF\Graphics\GUI3\WidgetState.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

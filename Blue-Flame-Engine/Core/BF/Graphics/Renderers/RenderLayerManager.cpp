@@ -12,6 +12,7 @@ namespace BF
 			RenderLayerManager::RenderLayerManager()
 			{
 				renderLayers.emplace_back(new RenderLayer("Default", RenderLayer::SortingOrder::BackToFront));
+				renderLayers.emplace_back(new RenderLayer("GUI", RenderLayer::SortingOrder::BackToFront));
 			}
 
 			RenderLayerManager::~RenderLayerManager()

@@ -14,6 +14,8 @@
 //#include "BF/Application/Layers/LayerManager.h"
 //#include "BF/Graphics/GUI/StyleSheet.h"
 //#include "BF/Application/SceneManager.h"
+#include "BF/Graphics/GUI3/GUISystem.h"
+#include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
 #include "BF/Graphics/CameraManager.h"
 #include "BF/Application/Scene.h"
@@ -38,7 +40,10 @@ namespace BF
 			friend class BF::Platform::Web::WEBEngineEntryPoint;
 #elif defined(BFE_PLATFORM_ANDROID)
 			friend class BF::Platform::Android::ANDEngineEntryPoint;
-#endif
+#endif		
+		public:
+			BF::Graphics::Renderers::RenderPipeline renderPipeline;
+
 		private:
 			//SceneManager sceneManager;
 			//BF::Application::Layers::LayerManager layerManager;
@@ -47,8 +52,8 @@ namespace BF
 
 			BF::Graphics::CameraManager cameraManager;
 			BF::Graphics::ConstantBufferManager constantBufferManager;
-			
 			BF::Scripting::ScriptExecutor scriptExecutor;
+			BF::Graphics::GUI::GUISystem guiSystem;
 
 			BF::System::Timer frameTimer;
 			BF::System::Timer fixedUpdateTimer;
@@ -57,11 +62,6 @@ namespace BF
 			bool initialized;
 			bool loaded;
 			int fixedUpdateTicks;
-
-			//BF::Graphics::GUI::StyleSheet styleSheet;
-
-		public:
-			BF::Graphics::Renderers::RenderPipeline renderPipeline;
 
 		public:
 			App();

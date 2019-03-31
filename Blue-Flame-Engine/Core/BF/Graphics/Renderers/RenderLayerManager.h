@@ -25,6 +25,7 @@ namespace BF
 
 				BF::Graphics::Renderers::RenderLayer* GetRenderLayer(const std::string& name);
 				inline BF::Graphics::Renderers::RenderLayer* GetDefaultRenderLayer() { return renderLayers[0]; }
+				inline BF::Graphics::Renderers::RenderLayer* GetGUIRenderLayer() { return renderLayers[1]; }
 			};
 		}
 	}

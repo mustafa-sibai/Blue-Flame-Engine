@@ -15,6 +15,7 @@
 #include "ECS_Script_Test.h"
 #include "Hello_Triangle.h"
 #include "IsoMapTest.h"
+#include "GUITest.h"
 
 int main()
 {
@@ -35,8 +36,9 @@ int main()
 	//InputTests app;
 	//ECS_Script_Test::ECS_Script_Test app;
 	//Hello_Triangle::Hello_Triangle app;
-	IsoMapTest::IsoMapTest app;
+	//IsoMapTest::IsoMapTest app;
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
+	GUITest::GUITest app;
 
 	engine.Run(app);
 #elif defined (BFE_CLIENT)

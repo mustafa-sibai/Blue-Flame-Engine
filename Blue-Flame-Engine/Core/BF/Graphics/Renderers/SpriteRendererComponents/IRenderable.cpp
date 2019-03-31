@@ -15,7 +15,7 @@ namespace BF
 				using namespace BF::Graphics::Renderers;
 
 				IRenderable::IRenderable(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
-					size(size), pivot(pivot), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color)
+					size(size), pivot(pivot), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color), xySortingOrder(0)
 				{
 				}
 

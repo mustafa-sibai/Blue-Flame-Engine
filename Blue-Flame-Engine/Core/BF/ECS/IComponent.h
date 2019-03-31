@@ -17,6 +17,11 @@ namespace BF
 			class RenderPipeline;
 			class SpriteRenderer;
 		}
+
+		namespace GUI
+		{
+			class GUISystem;
+		}
 	}
 
 	namespace ECS
@@ -29,6 +34,7 @@ namespace BF
 			friend class BF::ECS::GameObject;
 			friend class BF::Graphics::Renderers::RenderPipeline;
 			friend class BF::Graphics::Renderers::SpriteRenderer;
+			friend class BF::Graphics::GUI::GUISystem;
 
 		private:
 			static int globalID;

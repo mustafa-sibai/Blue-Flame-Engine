@@ -9,7 +9,6 @@ namespace BF
 		using namespace std;
 		using namespace BF::ECS;
 		using namespace BF::Graphics;
-		using namespace BF::Scripting;
 
 		Scene::Scene(BF::Application::App& app) :
 			app(app)

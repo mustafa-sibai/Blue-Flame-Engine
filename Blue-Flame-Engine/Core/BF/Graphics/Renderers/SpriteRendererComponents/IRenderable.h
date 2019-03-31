@@ -77,8 +77,6 @@ namespace BF
 						}
 					};
 
-					int renderLayerIndex;
-
 				public:
 					BF::Math::Vector2i size;
 					BF::Math::Vector2f pivot;

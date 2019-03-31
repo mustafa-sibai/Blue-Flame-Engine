@@ -7,7 +7,7 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 
 		App::App() :
-			cameraManager(constantBufferManager), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
+			cameraManager(constantBufferManager), guiSystem(renderPipeline), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
 		{
 		}
 
@@ -20,18 +20,20 @@ namespace BF
 			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
 			constantBufferManager.Initialize();
 			renderPipeline.Initialize();
+			guiSystem.Initialize();
 		}
 
 		void App::Load()
 		{
-			//styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 			//BF::Application::SceneManager::GetScenes()[0]->Load();
+			guiSystem.Load();
 		}
 
 		void App::PostLoad()
 		{
 			renderPipeline.PostLoad();
 			scriptExecutor.Start();
+			guiSystem.PostLoad();
 		}
 
 		void App::Update()
@@ -39,6 +41,7 @@ namespace BF
 			cameraManager.Update();
 			renderPipeline.Update();
 			scriptExecutor.Update();
+			guiSystem.Update();
 
 			//layerManager.Update();
 			//sceneManager.GetCurrentScene().Update();

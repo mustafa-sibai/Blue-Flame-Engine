@@ -13,12 +13,18 @@ namespace BF
 {
 	namespace Graphics
 	{
+		namespace GUI
+		{
+			class GUISystem;
+		}
+
 		namespace Renderers
 		{
 			class BFE_API RenderPipeline
 			{
 				friend class BF::Application::App;
 				friend class BF::ECS::GameObject;
+				friend class BF::Graphics::GUI::GUISystem;
 
 			private:
 				BF::Graphics::CameraManager& cameraManager;

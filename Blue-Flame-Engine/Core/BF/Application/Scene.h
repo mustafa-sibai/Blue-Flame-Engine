@@ -13,9 +13,6 @@
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
 #include "BF/ECS/GameObject.h"
-#include "BF/Graphics/Camera.h"
-#include "BF/Graphics/API/Context.h"
-#include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Common.h"
 
 namespace BF
