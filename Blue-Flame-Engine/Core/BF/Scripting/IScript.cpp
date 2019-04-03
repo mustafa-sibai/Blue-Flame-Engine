@@ -6,6 +6,7 @@ namespace BF
 	{
 		IScript::IScript()
 		{
+			type = IComponent::Type::Script;
 		}
 
 		IScript::~IScript()

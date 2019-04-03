@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <typeinfo>
 #include "BF/Common.h"
 
 namespace BF
@@ -42,13 +43,16 @@ namespace BF
 			bool added;
 
 		protected:
-			std::vector<std::string> types;
+			enum class Type { None, Camera, Widget, Renderable, Model, Script };
+			Type type;
+
+			std::vector<size_t> types;
 
 			template <typename T>
 			bool IsSameType();
 
 			template<typename T>
-			static bool CompareTypes(const std::string& type);
+			static bool CompareTypes(const size_t& type);
 
 			//inline std::string GetType() const { return IComponentType; }
 
@@ -60,7 +64,7 @@ namespace BF
 			virtual ~IComponent();
 
 			template <typename T>
-			static std::string TypeOf();
+			static const size_t& TypeOf();
 
 			inline int GetID() const { return id; }
 		};

@@ -12,12 +12,14 @@ namespace BF
 		namespace Renderers
 		{
 			class RenderLayer;
+			class SpriteRenderer;
 
 			namespace SpriteRendererComponents
 			{
 				class BFE_API IRenderable : public BF::ECS::Component<IRenderable>
 				{
 					friend class BF::Graphics::Renderers::RenderLayer;
+					friend class BF::Graphics::Renderers::SpriteRenderer;
 
 				private:
 					//Left right - back front
@@ -77,6 +79,10 @@ namespace BF
 						}
 					};
 
+				protected:
+					enum class Type { None, Sprite, LineShape, RegularPolygon, Text };
+					Type type;
+
 				public:
 					BF::Math::Vector2i size;
 					BF::Math::Vector2f pivot;
@@ -86,7 +92,7 @@ namespace BF
 					Color color;
 
 				public:
-					IRenderable(const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
+					IRenderable(Type type, const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
 					virtual ~IRenderable();
 				};
 			}

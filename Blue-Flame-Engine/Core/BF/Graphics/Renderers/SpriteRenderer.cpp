@@ -158,7 +158,7 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
+			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon * regularPolygon)
 			{
 				Vector3f position = regularPolygon->gameObject->GetTransform()->GetWorldPosition();
 				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetWorldScale();
@@ -197,7 +197,7 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
+			void SpriteRenderer::MapSpriteBuffer(const Sprite * sprite)
 			{
 				if (currentBoundTexture != nullptr)
 				{
@@ -293,7 +293,7 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapTextBuffer(const Text* text)
+			void SpriteRenderer::MapTextBuffer(const Text * text)
 			{
 				/*if (currentBoundTexture != nullptr)
 				{
@@ -366,20 +366,14 @@ namespace BF
 						{
 							IRenderable* iRenderable = renderLayerManager.renderLayers[i]->renderables[j];
 
-							for (size_t k = 0; k < renderLayerManager.renderLayers[i]->renderables[j]->types.size(); k++)
-							{
-								if (IComponent::CompareTypes<Sprite>(iRenderable->types[k]))
-									MapSpriteBuffer((Sprite*)iRenderable);
-
-								else if (IComponent::CompareTypes<RegularPolygon>(iRenderable->types[k]))
-									MapPolygonBuffer((RegularPolygon*)iRenderable);
-
-								else if (IComponent::CompareTypes<LineShape>(iRenderable->types[k]))
-									MapLineBuffer((LineShape*)iRenderable);
-
-								else if (IComponent::CompareTypes<Text>(iRenderable->types[k]))
-									MapTextBuffer((Text*)iRenderable);
-							}
+							if (iRenderable->type == IRenderable::Type::Sprite)
+								MapSpriteBuffer((Sprite*)iRenderable);
+							else if (iRenderable->type == IRenderable::Type::RegularPolygon)
+								MapPolygonBuffer((RegularPolygon*)iRenderable);
+							else if (iRenderable->type == IRenderable::Type::LineShape)
+								MapLineBuffer((LineShape*)iRenderable);
+							else if (iRenderable->type == IRenderable::Type::Text)
+								MapTextBuffer((Text*)iRenderable);
 						}
 					}
 
@@ -496,13 +490,13 @@ namespace BF
 				}
 			}*/
 
-			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
+			void SpriteRenderer::SetScissor(const Math::Rectangle & rectangle)
 			{
 				Render();
 				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 
-			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2f* topLeft, Vector2f* topRight, Vector2f* bottomRight, Vector2f* bottomLeft)
+			void SpriteRenderer::CalculateUV(const Texture2D * texture, const Math::Rectangle & scissorRectangle, Vector2f * topLeft, Vector2f * topRight, Vector2f * bottomRight, Vector2f * bottomLeft)
 			{
 				*topLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
 					1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));

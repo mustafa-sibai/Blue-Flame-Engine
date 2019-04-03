@@ -9,6 +9,7 @@ namespace BF
 			IWidget::IWidget() :
 				currentSprite(nullptr)
 			{
+				type = IComponent::Type::Widget;
 			}
 
 			IWidget::IWidget(IWidget& other) :

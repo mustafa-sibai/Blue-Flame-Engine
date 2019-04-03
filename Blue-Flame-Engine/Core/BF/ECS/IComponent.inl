@@ -3,7 +3,7 @@ inline bool IComponent::IsSameType()
 {
 	for (size_t i = 0; i < types.size(); i++)
 	{
-		if (types[i] == typeid(T).name())
+		if (types[i] == typeid(T).hash_code())
 			return true;
 	}
 
@@ -11,16 +11,16 @@ inline bool IComponent::IsSameType()
 }
 
 template<typename T>
-inline bool IComponent::CompareTypes(const std::string& type)
+inline bool IComponent::CompareTypes(const size_t& type)
 {
-	if (typeid(T).name() == type)
+	if (typeid(T).hash_code() == type)
 		return true;
 	else
 		return false;
 }
 
 template<typename T>
-inline std::string IComponent::TypeOf()
+inline const size_t& IComponent::TypeOf()
 {
-	return typeid(T).name();
+	return typeid(T).hash_code();
 }

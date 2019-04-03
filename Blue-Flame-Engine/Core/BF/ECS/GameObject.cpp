@@ -37,39 +37,36 @@ namespace BF
 		{
 			if (!component->added)
 			{
-				for (size_t i = 0; i < component->types.size(); i++)
+				if (component->type == IComponent::Type::Camera)
 				{
-					if (component->types[i] == IComponent::TypeOf<Camera>())
-					{
-						component->gameObject = this;
-						components.emplace_back(component);
-						Camera* camera = (Camera*)component;
-						camera->cameraManager = &scene->app.cameraManager;
-						scene->app.cameraManager.AddCamera((Camera*)component);
-						component->added = true;
-					}
-					else if (component->types[i] == IComponent::TypeOf<IWidget>())
-					{
-						component->gameObject = this;
-						components.emplace_back(component);
-						scene->app.guiSystem.AddWidget((IWidget*)component);
-						component->added = true;
-					}
-					else if (component->types[i] == IComponent::TypeOf<IRenderable>() ||
-						component->types[i] == IComponent::TypeOf<Model>())
-					{
-						component->gameObject = this;
-						components.emplace_back(component);
-						scene->app.renderPipeline.AddRenderable(component);
-						component->added = true;
-					}
-					else if (component->types[i] == IComponent::TypeOf<IScript>())
-					{
-						component->gameObject = this;
-						components.emplace_back(component);
-						scene->app.scriptExecutor.scripts.emplace_back((IScript*)component);
-						component->added = true;
-					}
+					component->gameObject = this;
+					components.emplace_back(component);
+					Camera* camera = (Camera*)component;
+					camera->cameraManager = &scene->app.cameraManager;
+					scene->app.cameraManager.AddCamera((Camera*)component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::Widget)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.guiSystem.AddWidget((IWidget*)component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::Renderable ||
+					component->type == IComponent::Type::Model)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.renderPipeline.AddRenderable(component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::Script)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.scriptExecutor.scripts.emplace_back((IScript*)component);
+					component->added = true;
 				}
 			}
 			else

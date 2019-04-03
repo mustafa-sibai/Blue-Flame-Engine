@@ -16,37 +16,32 @@ namespace BF
 				using namespace BF::Graphics::Fonts;
 				using namespace BF::Graphics::Renderers;
 
-				/*Text::Text() :
-					font(nullptr)
-				{
-				}*/
-
 				Text::Text(const Font* font, const string& text, RenderLayer& renderLayer) :
-					Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), 0, renderLayer, Color::Whites::White()),
+					Renderable(Type::Text, Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), 0, renderLayer, Color::Whites::White()),
 					alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 				{
 				}
 
 				Text::Text(const Font* font, const string& text, TextAlignment alignment, RenderLayer& renderLayer) :
-					Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), 0, renderLayer, Color::Whites::White()),
+					Renderable(Type::Text, Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), 0, renderLayer, Color::Whites::White()),
 					alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 				{
 				}
 
 				Text::Text(const Font* font, const string& text, TextAlignment alignment, int zSortingOrder, RenderLayer& renderLayer) :
-					Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, Color::Whites::White()),
+					Renderable(Type::Text, Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, Color::Whites::White()),
 					alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 				{
 				}
 
 				Text::Text(const Font* font, const string& text, TextAlignment alignment, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
-					Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, color),
+					Renderable(Type::Text, Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, color),
 					alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 				{
 				}
 
 				Text::Text(const Font* font, const string& text, const Rectangle& scissorRectangle, TextAlignment alignment, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
-					Renderable(Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, color),
+					Renderable(Type::Text, Vector2i(scissorRectangle.width, scissorRectangle.height), Vector2f(), zSortingOrder, renderLayer, color),
 					alignment(alignment), scissorRectangle(scissorRectangle), font(font), text(text)
 				{
 					//SetText(text);

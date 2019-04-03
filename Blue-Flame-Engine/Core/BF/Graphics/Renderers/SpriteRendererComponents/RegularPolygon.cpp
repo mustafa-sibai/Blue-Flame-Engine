@@ -14,22 +14,22 @@ namespace BF
 				using namespace BF::Graphics::Renderers;
 
 				RegularPolygon::RegularPolygon(const Vector2i& size, RenderLayer& renderLayer) :
-					Renderable(size, Vector2f(0.5f), 0, renderLayer, Color::Whites::White())
+					Renderable(Type::RegularPolygon, size, Vector2f(0.5f), 0, renderLayer, Color::Whites::White())
 				{
 				}
 
 				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, RenderLayer& renderLayer) :
-					Renderable(size, pivot, 0, renderLayer, Color::Whites::White())
+					Renderable(Type::RegularPolygon, size, pivot, 0, renderLayer, Color::Whites::White())
 				{
 				}
 
 				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer) :
-					Renderable(size, pivot, zSortingOrder, renderLayer, Color::Whites::White())
+					Renderable(Type::RegularPolygon, size, pivot, zSortingOrder, renderLayer, Color::Whites::White())
 				{
 				}
 
 				RegularPolygon::RegularPolygon(const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
-					Renderable(size, pivot, zSortingOrder, renderLayer, color)
+					Renderable(Type::RegularPolygon, size, pivot, zSortingOrder, renderLayer, color)
 				{
 				}
 

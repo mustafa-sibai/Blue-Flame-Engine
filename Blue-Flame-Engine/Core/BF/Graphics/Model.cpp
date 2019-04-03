@@ -13,6 +13,7 @@ namespace BF
 		Model::Model() :
 			materialManager(nullptr)
 		{
+			type = IComponent::Type::Model;
 		}
 
 		Model::~Model()

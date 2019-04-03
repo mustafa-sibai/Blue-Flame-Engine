@@ -33,7 +33,6 @@ namespace BF
 					TextAlignment alignment;
 
 				public:
-					//Text();
 					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, BF::Graphics::Renderers::RenderLayer& renderLayer);
 					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, BF::Graphics::Renderers::RenderLayer& renderLayer);
 					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer);

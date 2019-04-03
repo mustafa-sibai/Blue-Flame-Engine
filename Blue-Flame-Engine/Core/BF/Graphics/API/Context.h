@@ -20,9 +20,9 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class PrimitiveType { PointList, LineList, LineStrip, TriangleList, TriangeStrip };
-			enum class BufferClearType { ColorAndDepth, Color, Depth };
-			enum class WindingOrder { Clockwise, CounterClockwise };
+			enum class PrimitiveType { None, PointList, LineList, LineStrip, TriangleList, TriangeStrip };
+			enum class BufferClearType { None, Color, Depth, ColorAndDepth };
+			enum class WindingOrder { None, Clockwise, CounterClockwise };
 			enum class CullingType { None, Front, Back, FrontAndBack };
 
 			enum class BFE_API RenderAPI
