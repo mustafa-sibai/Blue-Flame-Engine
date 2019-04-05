@@ -65,6 +65,7 @@ namespace GUITest
 
 		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("My cool Button"));
 		Button* button = (Button*)ButtonGameObject->AddComponent(new Button());
+		//button->currentSprite->pivot = Vector2f(0, 0);
 
 		App::RunScene(*scene);
 	}
@@ -73,10 +74,18 @@ namespace GUITest
 	{
 		App::Update(deltaTime);
 
-		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
+		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5f, 0.5f));
 		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffset();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f));
+
+		BF::Math::Vector2f mousePosition = BF::Input::Mouse::GetPosition();
+
+		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
+
+		//BFE_LOG_INFO("" + newPos, "");
+		
+		//640 - 640, 360 - 360
 	}
 
 	void GUITest::Render()

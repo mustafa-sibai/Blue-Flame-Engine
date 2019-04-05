@@ -41,6 +41,8 @@ namespace BF
 			void SetViewMatrix(const BF::Math::Matrix4& viewMatrix);
 			void SetProjectionMatrix(const BF::Math::Matrix4& projectionMatrix);
 
+			static BF::Math::Vector3f ScreenToWorldPoint(const BF::Math::Vector3f& position, const BF::Math::Vector2f& pivot);
+
 			void Clear();
 			void SwapBuffers();
 

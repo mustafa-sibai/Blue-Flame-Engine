@@ -40,8 +40,8 @@ int main()
 	//Hello_Triangle::Hello_Triangle app;
 	//IsoMapTest::IsoMapTest app;
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
-	//GUITest::GUITest app;
-	SpriteAnimationTest::SpriteAnimationTest app;
+	GUITest::GUITest app;
+	//SpriteAnimationTest::SpriteAnimationTest app;
 	//CameraViewCullingTest::CameraViewCullingTest app;
 
 	engine.Run(app);

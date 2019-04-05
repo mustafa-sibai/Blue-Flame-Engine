@@ -1,6 +1,8 @@
 #include "GUISystem.h"
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "BF/Graphics/GUI3/Button.h"
+#include "BF/Input/Mouse.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -9,6 +11,7 @@ namespace BF
 		namespace GUI
 		{
 			using namespace BF::ECS;
+			using namespace BF::Math;
 
 			GUISystem::GUISystem(BF::Graphics::Renderers::RenderPipeline& renderPipeline) :
 				renderPipeline(renderPipeline), styleSheet(*renderPipeline.spriteRenderer->renderLayerManager.GetGUIRenderLayer())
@@ -38,6 +41,25 @@ namespace BF
 				{
 					if (widgets[i]->IsSameType<Button>())
 					{
+						BF::Math::Vector2f mousePosition = BF::Input::Mouse::GetPosition();
+						BF::Math::Vector3f spritePosition = widgets[i]->currentSprite->gameObject->GetTransform()->GetPosition();
+						BF::Math::Vector2i spriteSize = widgets[i]->currentSprite->size;
+
+						
+
+
+						BF::Math::Vector3f newPos = Camera::ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
+
+						BF::Math::Rectangle rect = BF::Math::Rectangle(spritePosition.x, spritePosition.y, spriteSize.x, spriteSize.y, widgets[i]->currentSprite->pivot);
+						BF::Math::Rectangle mouseRect = BF::Math::Rectangle(newPos.x, newPos.y, 1, 1);
+
+						//BFE_LOG_INFO("IN BABY !!" + mousePosition, "");
+
+						if (rect.Intersect(mouseRect))
+						{
+							BFE_LOG_INFO("IN BABY !!", "");
+						}
+		
 						//widgets[i] is a button. cast it to a button pointer ((Button*)widgets[i]) and now you can
 						//access the button class and do whatever
 						//check if button is clicked or hovered or released
