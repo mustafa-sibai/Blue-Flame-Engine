@@ -19,7 +19,7 @@ namespace BF
 		{
 		}
 
-		void CameraManager::Update()
+		void CameraManager::Update(double deltaTime)
 		{
 			if (mainCamera != nullptr)
 			{
@@ -60,6 +60,18 @@ namespace BF
 		}
 
 		void CameraManager::RemoveCamera()
+		{
+		}
+		void CameraManager::Initialize()
+		{
+		}
+		void CameraManager::Load()
+		{
+		}
+		void CameraManager::PostLoad()
+		{
+		}
+		void CameraManager::Render()
 		{
 		}
 	}

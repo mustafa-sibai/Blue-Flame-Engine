@@ -32,7 +32,22 @@ namespace BF
 			{
 			}
 
-			void GUISystem::Update()
+			void GUISystem::Update(double deltaTime)
+			{
+				for (size_t i = 0; i < widgets.size(); i++)
+				{
+					if (widgets[i]->IsSameType<Button>())
+					{
+						//widgets[i] is a button. cast it to a button pointer ((Button*)widgets[i]) and now you can
+						//access the button class and do whatever
+						//check if button is clicked or hovered or released
+						//You can get mouse stuff by doing
+						//BF::Input::Mouse:: etc......
+					}
+				}
+			}
+
+			void GUISystem::Render()
 			{
 			}
 

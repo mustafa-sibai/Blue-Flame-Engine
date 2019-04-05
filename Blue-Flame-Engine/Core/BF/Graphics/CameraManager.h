@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "BF/ECS/ISystem.h"
 #include "BF/Graphics/Camera.h"
 #include "BF/Graphics/ConstantBufferManager.h"
 #include "BF/Common.h"
@@ -8,7 +9,7 @@ namespace BF
 {
 	namespace Graphics
 	{
-		class CameraManager
+		class CameraManager : public BF::ECS::ISystem
 		{
 			friend class BF::ECS::GameObject;
 			friend class BF::Graphics::Camera;
@@ -22,7 +23,11 @@ namespace BF
 			CameraManager(BF::Graphics::ConstantBufferManager& constantBufferManager);
 			~CameraManager();
 
-			void Update();
+			void Initialize()			  override;
+			void Load()					  override;
+			void PostLoad()				  override;
+			void Update(double deltaTime) override;
+			void Render()				  override;
 
 			void SetMainCamera(BF::Graphics::Camera* camera);
 

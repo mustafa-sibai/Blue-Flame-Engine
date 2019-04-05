@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/ECS/Component.h"
+#include "BF/ECS/ISystem.h"
 #include "BF/Graphics/ConstantBufferManager.h"
 #include "BF/Graphics/CameraManager.h"
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
@@ -20,7 +21,7 @@ namespace BF
 
 		namespace Renderers
 		{
-			class BFE_API RenderPipeline
+			class BFE_API RenderPipeline : public BF::ECS::ISystem
 			{
 				friend class BF::Application::App;
 				friend class BF::ECS::GameObject;
@@ -42,11 +43,11 @@ namespace BF
 				~RenderPipeline();
 
 			private:
-				void Initialize();
-				void Load();
-				void PostLoad();
-				void Update();
-				void Render();
+				void Initialize()			  override;
+				void Load()					  override;
+				void PostLoad()				  override;
+				void Update(double deltaTime) override;
+				void Render()				  override;
 
 				void AddRenderable(BF::ECS::IComponent* component);
 				void RemoveRenderable(BF::ECS::IComponent* component);

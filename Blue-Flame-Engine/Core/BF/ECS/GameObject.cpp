@@ -13,6 +13,7 @@ namespace BF
 		using namespace BF::Application;
 		using namespace BF::Graphics;
 		using namespace BF::Graphics::GUI;
+		using namespace BF::Graphics::Animation;
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 		using namespace BF::Scripting;
@@ -43,7 +44,7 @@ namespace BF
 					components.emplace_back(component);
 					Camera* camera = (Camera*)component;
 					camera->cameraManager = &scene->app.cameraManager;
-					scene->app.cameraManager.AddCamera((Camera*)component);
+					scene->app.cameraManager.AddCamera(camera);
 					component->added = true;
 				}
 				else if (component->type == IComponent::Type::Widget)
@@ -51,6 +52,13 @@ namespace BF
 					component->gameObject = this;
 					components.emplace_back(component);
 					scene->app.guiSystem.AddWidget((IWidget*)component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::SpriteAnimator)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.animationSystem.AddSpriteAnimator((SpriteAnimator*)component);
 					component->added = true;
 				}
 				else if (component->type == IComponent::Type::Renderable ||

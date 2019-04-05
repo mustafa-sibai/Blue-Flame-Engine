@@ -7,7 +7,7 @@
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Sprite.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/LineShape.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Text.h"
-#include "BF/Graphics/Renderers/Renderer.h"
+#include "BF/Graphics/Renderers/IRenderer.h"
 #include "BF/Graphics/Renderers/RenderLayerManager.h"
 #include "BF/Common.h"
 
@@ -22,7 +22,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BFE_API SpriteRenderer : public Renderer
+			class BFE_API SpriteRenderer : public BF::Graphics::Renderers::IRenderer
 			{
 				friend class BF::Graphics::Renderers::RenderPipeline;
 
@@ -56,12 +56,14 @@ namespace BF
 				SpriteRenderer();
 				~SpriteRenderer();
 
-				void Initialize() override;
+				void Initialize()			  override;
+				void Load()					  override;
+				void PostLoad()				  override;
+				void Update(double deltaTime) override;
+				void Render()				  override;
 
 				//void Submit(Renderable& renderable);
 				//void Remove(Renderable& renderable);
-
-				void Render() override;
 
 				//void Begin(SubmitType submitType, SortingOrder sortingOrder);
 				//void Render(const Renderable& renderable);

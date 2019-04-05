@@ -51,6 +51,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BF\Graphics\Animation\AnimationSystem.cpp" />
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
     <ClCompile Include="BF\Application\Scene.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="BF\Graphics\Renderers\RenderLayerManager.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\GUISystem.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\SpriteAnimator.cpp" />
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <FileType>Document</FileType>
     </None>
@@ -154,13 +156,14 @@
     <ClCompile Include="BF\Graphics\Materials\MaterialManager.cpp" />
     <ClCompile Include="BF\Scripting\ScriptExecutor.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\RenderPipeline.cpp" />
-    <ClCompile Include="BF\Graphics\Renderers\Renderer.cpp" />
+    <ClCompile Include="BF\Graphics\Renderers\IRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\PostProcessing.cpp" />
     <ClCompile Include="BF\Graphics\Materials\Material.cpp" />
     <ClCompile Include="BF\Graphics\CameraManager.cpp" />
     <ClCompile Include="BF\ECS\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BF\Graphics\Animation\AnimationSystem.h" />
     <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
     <ClInclude Include="BF\Application\Scene.h" />
@@ -219,6 +222,8 @@
     <ClInclude Include="BF\Graphics\GUI3\Widget.h" />
     <ClInclude Include="BF\Graphics\GUI3\StyleSheet.h" />
     <ClInclude Include="BF\Graphics\GUI3\WidgetState.h" />
+    <ClInclude Include="BF\Graphics\Animation\SpriteAnimator.h" />
+    <ClInclude Include="BF\ECS\ISystem.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>
@@ -278,7 +283,7 @@
     <ClInclude Include="BF\Scripting\Script.h" />
     <ClInclude Include="BF\Scripting\ScriptExecutor.h" />
     <ClInclude Include="BF\Graphics\Renderers\RenderPipeline.h" />
-    <ClInclude Include="BF\Graphics\Renderers\Renderer.h" />
+    <ClInclude Include="BF\Graphics\Renderers\IRenderer.h" />
     <ClInclude Include="BF\Graphics\Renderers\PostProcessing.h" />
     <ClInclude Include="BF\Graphics\API\TextureData.h" />
     <ClInclude Include="BF\Graphics\Materials\Material.h" />

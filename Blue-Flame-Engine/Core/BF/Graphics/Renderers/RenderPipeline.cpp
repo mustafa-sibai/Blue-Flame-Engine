@@ -39,6 +39,9 @@ namespace BF
 
 			void RenderPipeline::Load()
 			{
+				if (spriteRenderer != nullptr)	spriteRenderer->Load();
+				if (forwardRenderer != nullptr) forwardRenderer->Load();
+				if (postProcessing != nullptr)	postProcessing->Load();
 			}
 
 			void RenderPipeline::PostLoad()
@@ -48,11 +51,11 @@ namespace BF
 				if (postProcessing != nullptr)	postProcessing->PostLoad();
 			}
 
-			void RenderPipeline::Update()
+			void RenderPipeline::Update(double deltaTime)
 			{
-				if (spriteRenderer != nullptr)	spriteRenderer->Update();
-				if (forwardRenderer != nullptr) forwardRenderer->Update();
-				if (postProcessing != nullptr)	postProcessing->Update();
+				if (spriteRenderer != nullptr)	spriteRenderer->Update(deltaTime);
+				if (forwardRenderer != nullptr) forwardRenderer->Update(deltaTime);
+				if (postProcessing != nullptr)	postProcessing->Update(deltaTime);
 			}
 
 			void RenderPipeline::Render()

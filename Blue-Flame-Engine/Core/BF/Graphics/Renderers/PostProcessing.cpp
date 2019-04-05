@@ -12,7 +12,7 @@ namespace BF
 			using namespace BF::Graphics::Materials;
 
 			PostProcessing::PostProcessing() :
-				Renderer(RendererType::PostProcessing)
+				IRenderer(RendererType::PostProcessing)
 			{
 			}
 
@@ -33,7 +33,15 @@ namespace BF
 				//postProcessingQuad->SetBuffers(screenPlaneMaterial);
 			}
 
+			void PostProcessing::Load()
+			{
+			}
+
 			void PostProcessing::PostLoad()
+			{
+			}
+
+			void PostProcessing::Update(double deltaTime)
 			{
 			}
 

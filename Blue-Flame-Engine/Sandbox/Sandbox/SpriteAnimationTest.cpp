@@ -41,9 +41,10 @@ namespace SpriteAnimationTest
 
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
-		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y);
-		orthographicRectangle.SetPivotPoint(Vector2f(0.5, 0.5f));
-		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f)));
+		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
+		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffset();
+
+		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(rect.x, rect.width, rect.y, rect.height, -1.0f, 1.0f)));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.0, 0.0f, 0.0f, 1.0f));
@@ -56,21 +57,48 @@ namespace SpriteAnimationTest
 		App::Load();
 	}
 
+	Sprite* currentSprite;
+
 	void SpriteAnimationTest::PostLoad()
 	{
 		App::PostLoad();
 
+		Texture2D* texture = new Texture2D();
+		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/player.png"), Texture::Format::R8G8B8A8);
+
+		GameObject* playerGameObject = scene->AddGameObject(new GameObject("player"));
+		currentSprite = (Sprite*)playerGameObject->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 0,
+			*defaultRenderLayer, BF::Math::Rectangle(0, 0, 32, 48), Color::Whites::White()));
+		currentSprite->gameObject->GetTransform()->SetScale(Vector3f(2, 2, 2));
+
+
 		App::RunScene(*scene);
 	}
+	float time = 0;
+	int maxIndex = 7;
+	int i = 0;
 
-	void SpriteAnimationTest::Update()
+	void SpriteAnimationTest::Update(double deltaTime)
 	{
-		App::Update();
+		App::Update(deltaTime);
 
-		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y);
-		orthographicRectangle.SetPivotPoint(Vector2f(0.5, 0.5f));
+		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
+		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffset();
 
-		camera->SetProjectionMatrix(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f));
+		camera->SetProjectionMatrix(Matrix4::Orthographic(rect.x, rect.width, rect.y, rect.height, -1.0f, 1.0f));
+
+		time += deltaTime;
+
+		if (time >= 100)
+		{
+			currentSprite->SetScissorRectangle(BF::Math::Rectangle(32 * i, 0, 32, 48));
+			i++;
+			time = 0;
+
+			if (i > 7)
+				i = 0;
+		}
+		BFE_LOG_INFO(std::to_string(time), "");
 	}
 
 	void SpriteAnimationTest::Render()

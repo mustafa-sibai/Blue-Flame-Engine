@@ -11,7 +11,7 @@ namespace BF
 			using namespace BF::Graphics::API;
 
 			SkyboxRenderer::SkyboxRenderer() :
-				Renderer(Renderer::RendererType::SkyboxRenderer),
+				IRenderer(IRenderer::RendererType::SkyboxRenderer),
 				textureCube(shader)
 			{
 			}
@@ -47,6 +47,14 @@ namespace BF
 
 				shader.LoadStandardShader(ShaderType::TextureCube);
 				textureCube.Load(filenames, Texture::Wrap::ClampToEdge, Texture::Filter::Bilinear);
+			}
+
+			void SkyboxRenderer::PostLoad()
+			{
+			}
+
+			void SkyboxRenderer::Update(double deltaTime)
+			{
 			}
 
 			void SkyboxRenderer::Render()

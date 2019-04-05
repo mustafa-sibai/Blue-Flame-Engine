@@ -25,6 +25,7 @@ namespace BF
 				static Matrix4 Scale(const Vector3f& scale);
 				static Matrix4 Rotate(float angle, const Vector3f& axis);
 				static Matrix4 Perspective(float fieldOfView, float aspectRatio, float nearZ, float farZ);
+				static Matrix4 Orthographic(const Vector2f& position, const Vector2f& size, float nearZ, float farZ);
 				static Matrix4 Orthographic(float left, float right, float top, float bottom, float nearZ, float farZ);
 				static Matrix4 LookAt(const Vector3f& eye, const Vector3f& target, const Vector3f& up);
 

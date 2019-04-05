@@ -46,8 +46,8 @@ namespace IsoMapTest
 
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
-		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y);
-		orthographicRectangle.SetPivotPoint(Vector2f(0.5, 0.5f));
+		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
+		orthographicRectangle.GetEdgeOffset();
 		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f)));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
@@ -308,12 +308,12 @@ namespace IsoMapTest
 		App::RunScene(*scene);
 	}
 
-	void IsoMapTest::Update()
+	void IsoMapTest::Update(double deltaTime)
 	{
-		App::Update();
+		App::Update(deltaTime);
 
-		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y);
-		orthographicRectangle.SetPivotPoint(Vector2f(0.5, 0.5f));
+		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
+		orthographicRectangle.GetEdgeOffset();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f));
 

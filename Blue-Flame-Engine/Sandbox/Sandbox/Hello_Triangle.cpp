@@ -123,9 +123,9 @@ namespace Hello_Triangle
 		App::RunScene(*scene);
 	}
 
-	void Hello_Triangle::Update()
+	void Hello_Triangle::Update(double deltaTime)
 	{
-		App::Update();
+		App::Update(deltaTime);
 	}
 
 	void Hello_Triangle::Render()

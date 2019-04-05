@@ -26,6 +26,22 @@ namespace BF
 			perObjectConstantBuffer.Create(2, sizeof(PerObjectBuffer), nullptr);
 		}
 
+		void ConstantBufferManager::Load()
+		{
+		}
+
+		void ConstantBufferManager::PostLoad()
+		{
+		}
+
+		void ConstantBufferManager::Update(double deltaTime)
+		{
+		}
+
+		void ConstantBufferManager::Render()
+		{
+		}
+
 		//TODO: For whatever reason updating the constant buffer allocates a lot of memory on AMD drivers. investigate this out !!
 		void ConstantBufferManager::UpdateMaterial(MeshMaterial& material)
 		{

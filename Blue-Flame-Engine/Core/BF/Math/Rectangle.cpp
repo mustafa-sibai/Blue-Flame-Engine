@@ -17,35 +17,50 @@ namespace BF
 		{
 		}
 
-		bool Rectangle::Intersect(const Rectangle& rectangle) const
+		Rectangle::Rectangle(int x, int y, int width, int height, const Vector2f& pivot) :
+			x(x), y(y), width(width), height(height), pivot(pivot)
 		{
-			if (y < rectangle.y + rectangle.height && y + height > rectangle.y && x + width > rectangle.x && x < rectangle.x + rectangle.width)
+		}
+
+		bool Rectangle::Intersect(const Rectangle& other) const
+		{
+			Rectangle thisEdge = GetEdgeOffset();
+			Rectangle otherEdge = other.GetEdgeOffset();
+
+			int x = this->x + thisEdge.x;
+			int y = this->y + thisEdge.y;
+
+			int otherX = other.x + otherEdge.x;
+			int otherY = other.y + otherEdge.y;
+
+			if (otherX < x + width && otherX + other.width > x &&
+				otherY > y - height && otherY - other.height < y)
 				return true;
 
 			return false;
 		}
 
-		Rectangle Rectangle::IntersectRectangle(const Rectangle& rectangle) const
+		Rectangle Rectangle::GetRectangleIntersectionArea(const Rectangle& rectangle) const
 		{
 			if (Intersect(rectangle))
 			{
-				int left = Max(this->x, rectangle.x);
-				int right = Min(this->x + this->width, rectangle.x + rectangle.width);
-				int top = Max(this->y, rectangle.y);
-				int bottom = Min(this->y + this->height, rectangle.y + rectangle.height);
+				int left	= Max(x,			rectangle.x);
+				int right	= Min(x + width,	rectangle.x + rectangle.width);
+				int top		= Max(y,			rectangle.y);
+				int bottom	= Min(y + height,	rectangle.y + rectangle.height);
 
-				int width = abs(left - right);
-				int height = abs(top - bottom);
+				int width	= abs(left - right);
+				int height	= abs(top - bottom);
 
-				return Rectangle(left, top, width, height);
+				return Rectangle(left, top, width, height, Vector2f(0, 0));
 			}
 
-			return Rectangle(0, 0, 0, 0);
+			return Rectangle(0, 0, 0, 0, Vector2f(0, 0));
 		}
 
 		int Rectangle::Area() const
 		{
-			return this->width * this->height;
+			return width * height;
 		}
 
 		Vector2i Rectangle::Center() const
@@ -53,101 +68,56 @@ namespace BF
 			return Vector2i(x + (width / 2), y + (height / 2));
 		}
 
-		void Rectangle::SetPivotPoint(Vector2f pivot)
+		Rectangle Rectangle::GetEdgeOffset() const
 		{
-			int offsetWidth = (int)(this->width * pivot.x);
-			int offsetHeight = (int)(this->height * pivot.y);
+			int offsetWidth = (int)(width * pivot.x);
+			int offsetHeight = (int)(height * pivot.y);
 
-			this->x -= offsetWidth;
-			this->y = offsetHeight - this->y;
-			this->width -= offsetWidth;
-			this->height = offsetHeight - this->height;
+			return Rectangle(-offsetWidth, offsetHeight, width - offsetWidth, offsetHeight - height, pivot);
 		}
 
-		Rectangle& Rectangle::operator+=(const Rectangle& right)
+		vector<Vector2i> Rectangle::GetCorners() const
 		{
-			this->x += right.x;
-			this->y += right.y;
-			this->width += right.width;
-			this->height += right.height;
-			return *this;
-		}
+			Rectangle edges = GetEdgeOffset();
 
-		Rectangle& Rectangle::operator-=(const Rectangle& right)
-		{
-			this->x -= right.x;
-			this->y -= right.y;
-			this->width -= right.width;
-			this->height -= right.height;
-			return *this;
-		}
+			vector<Vector2i> corners(4);
 
-		Rectangle& Rectangle::operator*=(const Rectangle& right)
-		{
-			this->x *= right.x;
-			this->y *= right.y;
-			this->width *= right.width;
-			this->height *= right.height;
-			return *this;
-		}
+			corners[0] = Vector2i(x + edges.x,		y + edges.y);
+			corners[1] = Vector2i(x + edges.width,	y + edges.y);
+			corners[2] = Vector2i(x + edges.width,	y + edges.height);
+			corners[3] = Vector2i(x + edges.x,		y + edges.height);
 
-		Rectangle& Rectangle::operator/=(const Rectangle& right)
-		{
-			this->x /= right.x;
-			this->y /= right.y;
-			this->width /= right.width;
-			this->height /= right.height;
-			return *this;
+			return corners;
 		}
 
 		bool Rectangle::operator>(const Rectangle& right)
 		{
-			return this->Area() > right.Area();
+			return Area() > right.Area();
 		}
 
 		bool Rectangle::operator>=(const Rectangle& right)
 		{
-			return this->Area() >= right.Area();
+			return Area() >= right.Area();
 		}
 
 		bool Rectangle::operator<(const Rectangle& right)
 		{
-			return this->Area() < right.Area();
+			return Area() < right.Area();
 		}
 
 		bool Rectangle::operator<=(const Rectangle& right)
 		{
-			return this->Area() <= right.Area();
+			return Area() <= right.Area();
 		}
 
 		bool Rectangle::operator==(const Rectangle& right)
 		{
-			return this->Area() == right.Area();
+			return Area() == right.Area();
 		}
 
 		bool Rectangle::operator!=(const Rectangle& right)
 		{
 			return !(*this == right);
-		}
-
-		Rectangle operator+(const Rectangle& left, const Rectangle& right)
-		{
-			return Rectangle(left.x + right.x, left.y + right.y, left.width + right.width, left.height + right.height);
-		}
-
-		Rectangle operator-(const Rectangle& left, const Rectangle& right)
-		{
-			return Rectangle(left.x - right.x, left.y - right.y, left.width - right.width, left.height * right.height);
-		}
-
-		Rectangle operator*(const Rectangle& left, const Rectangle& right)
-		{
-			return Rectangle(left.x * right.x, left.y * right.y, left.width * right.width, left.height * right.height);
-		}
-
-		Rectangle operator/(const Rectangle& left, const Rectangle& right)
-		{
-			return Rectangle(left.x / right.x, left.y / right.y, left.width / right.width, left.height / right.height);
 		}
 	}
 }

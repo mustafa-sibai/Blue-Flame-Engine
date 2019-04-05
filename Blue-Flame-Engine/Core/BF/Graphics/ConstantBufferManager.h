@@ -1,4 +1,5 @@
 #pragma once
+#include "BF/ECS/ISystem.h"
 #include "BF/Graphics/API/ConstantBuffer.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
@@ -12,7 +13,7 @@ namespace BF
 			class MeshMaterial;
 		}
 
-		class ConstantBufferManager
+		class ConstantBufferManager : public BF::ECS::ISystem
 		{
 			struct PerFrameBuffer
 			{
@@ -36,7 +37,11 @@ namespace BF
 			ConstantBufferManager();
 			~ConstantBufferManager();
 
-			void Initialize();
+			void Initialize()			  override;
+			void Load()					  override;
+			void PostLoad()				  override;
+			void Update(double deltaTime) override;
+			void Render()				  override;
 
 			/*
 			Updated per need bases

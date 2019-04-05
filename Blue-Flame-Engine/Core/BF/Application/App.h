@@ -14,6 +14,7 @@
 //#include "BF/Application/Layers/LayerManager.h"
 //#include "BF/Graphics/GUI/StyleSheet.h"
 //#include "BF/Application/SceneManager.h"
+#include "BF/Graphics/Animation/AnimationSystem.h"
 #include "BF/Graphics/GUI3/GUISystem.h"
 #include "BF/Scripting/ScriptExecutor.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
@@ -54,6 +55,7 @@ namespace BF
 			BF::Graphics::ConstantBufferManager constantBufferManager;
 			BF::Scripting::ScriptExecutor scriptExecutor;
 			BF::Graphics::GUI::GUISystem guiSystem;
+			BF::Graphics::Animation::AnimationSystem animationSystem;
 
 			BF::System::Timer frameTimer;
 			BF::System::Timer fixedUpdateTimer;
@@ -70,7 +72,7 @@ namespace BF
 			virtual void Initialize();
 			virtual void Load();
 			virtual void PostLoad();
-			virtual void Update();
+			virtual void Update(double deltaTime);
 			virtual void Render();
 
 			void RunScene(Scene& scene);

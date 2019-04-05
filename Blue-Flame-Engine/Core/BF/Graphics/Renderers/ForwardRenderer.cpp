@@ -18,7 +18,7 @@ namespace BF
 			using namespace BF::Math;
 
 			ForwardRenderer::ForwardRenderer(BF::Graphics::ConstantBufferManager& constantBufferManager, CameraManager& cameraManager) :
-				Renderer(RendererType::ForwardRenderer),
+				IRenderer(RendererType::ForwardRenderer),
 				materialManager(constantBufferManager), constantBufferManager(constantBufferManager), cameraManager(cameraManager)
 			{
 			}
@@ -32,12 +32,20 @@ namespace BF
 				materialManager.Initialize();
 			}
 
+			void ForwardRenderer::Load()
+			{
+			}
+
 			void ForwardRenderer::PostLoad()
 			{
 				/*for (size_t i = 0; i < meshes.size(); i++)
 				{
 					materialManager.AddMaterial(*meshes[i]->material);
 				}*/
+			}
+
+			void ForwardRenderer::Update(double deltaTime)
+			{
 			}
 
 			void ForwardRenderer::Render()

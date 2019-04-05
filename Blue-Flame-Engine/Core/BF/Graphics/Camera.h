@@ -27,6 +27,9 @@ namespace BF
 			BF::Math::Vector3f position, direction;
 
 		public:
+			BF::Math::Vector2f size;
+
+		public:
 			Camera(const BF::Math::Matrix4& projectionMatrix);
 			virtual ~Camera();
 

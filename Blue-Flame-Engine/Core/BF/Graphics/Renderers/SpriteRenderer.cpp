@@ -28,7 +28,7 @@ namespace BF
 			const BF::Graphics::API::Texture2D* SpriteRenderer::currentBoundTexture = nullptr;
 
 			SpriteRenderer::SpriteRenderer() :
-				Renderer(RendererType::SpriteRenderer),
+				IRenderer(RendererType::SpriteRenderer),
 				indexCount(0), submitSprite(true), totalDrawCalls(0)
 			{
 			}
@@ -90,7 +90,17 @@ namespace BF
 				delete[] indices;
 			}
 
-			//bool once = false;
+			void SpriteRenderer::Load()
+			{
+			}
+
+			void SpriteRenderer::PostLoad()
+			{
+			}
+
+			void SpriteRenderer::Update(double deltaTime)
+			{
+			}
 
 			void SpriteRenderer::Render()
 			{
@@ -259,32 +269,31 @@ namespace BF
 
 				  as you can see, the image is close to the top left center of the screen.
 				*/
-				BF::Math::Rectangle rectangle(0, 0, scaledSprite.x, scaledSprite.y);
-				rectangle.SetPivotPoint(sprite->pivot);
+				vector<Vector2i> corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
 
 				//Top Left
-				spriteBuffer->position = Vector2f(position.x + rectangle.x, position.y + rectangle.y);
+				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topLeftUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(position.x + rectangle.width, position.y + rectangle.y);
+				spriteBuffer->position = Vector2f(corners[1].x, corners[1].y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = topRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(position.x + rectangle.width, position.y + rectangle.height);
+				spriteBuffer->position = Vector2f(corners[2].x, corners[2].y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomRightUV;
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(position.x + rectangle.x, position.y + rectangle.height);
+				spriteBuffer->position = Vector2f(corners[3].x, corners[3].y);
 				spriteBuffer->color = sprite->color;
 				spriteBuffer->UV = bottomLeftUV;
 				spriteBuffer->renderingType = 1;

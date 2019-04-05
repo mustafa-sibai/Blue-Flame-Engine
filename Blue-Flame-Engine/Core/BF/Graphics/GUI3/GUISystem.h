@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "BF/ECS/ISystem.h"
 #include "BF/Graphics/GUI3/Widget.h"
 #include "BF/Graphics/GUI3/StyleSheet.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
@@ -11,7 +12,7 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class GUISystem
+			class GUISystem : public BF::ECS::ISystem
 			{
 			private:
 				BF::Graphics::Renderers::RenderPipeline& renderPipeline;
@@ -22,10 +23,11 @@ namespace BF
 				GUISystem(BF::Graphics::Renderers::RenderPipeline& renderPipeline);
 				~GUISystem();
 
-				void Initialize();
-				void Load();
-				void PostLoad();
-				void Update();
+				void Initialize()			  override;
+				void Load()					  override;
+				void PostLoad()				  override;
+				void Update(double deltaTime) override;
+				void Render()				  override;
 
 				void AddWidget(IWidget* iWidget);
 				void RemoveWidget(IWidget* iWidget);

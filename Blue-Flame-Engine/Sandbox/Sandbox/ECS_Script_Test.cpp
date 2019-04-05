@@ -76,9 +76,9 @@ namespace ECS_Script_Test
 		App::RunScene(*scene);
 	}
 
-	void ECS_Script_Test::Update()
+	void ECS_Script_Test::Update(double deltaTime)
 	{
-		App::Update();
+		App::Update(deltaTime);
 	}
 
 	void ECS_Script_Test::Render()

@@ -54,7 +54,7 @@ namespace BF
 								{
 									deltaTime = app.frameTimer.GetElapsedTimeInMilliseconds();
 									app.frameTimer.Reset();
-									app.Update();
+									app.Update(deltaTime);
 									app.Render();
 									Mouse::Update();
 									Keyboard::Update();
@@ -65,7 +65,7 @@ namespace BF
 							{
 								deltaTime = app.frameTimer.GetElapsedTimeInMilliseconds();
 								app.frameTimer.Reset();
-								app.Update();
+								app.Update(deltaTime);
 								app.Render();
 								Mouse::Update();
 								Keyboard::Update();

@@ -19,29 +19,42 @@ namespace BF
 		{
 			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
 			constantBufferManager.Initialize();
+			cameraManager.Initialize();
 			renderPipeline.Initialize();
+			animationSystem.Initialize();
+			scriptExecutor.Initialize();
 			guiSystem.Initialize();
 		}
 
 		void App::Load()
 		{
 			//BF::Application::SceneManager::GetScenes()[0]->Load();
+			constantBufferManager.Load();
+			cameraManager.Load();
+			renderPipeline.Load();
+			animationSystem.Load();
+			scriptExecutor.Load();
 			guiSystem.Load();
 		}
 
 		void App::PostLoad()
 		{
+			constantBufferManager.PostLoad();
+			cameraManager.PostLoad();
 			renderPipeline.PostLoad();
-			scriptExecutor.Start();
+			animationSystem.PostLoad();
+			scriptExecutor.PostLoad();
 			guiSystem.PostLoad();
 		}
 
-		void App::Update()
+		void App::Update(double deltaTime)
 		{
-			cameraManager.Update();
-			renderPipeline.Update();
-			scriptExecutor.Update();
-			guiSystem.Update();
+			constantBufferManager.Update(deltaTime);
+			cameraManager.Update(deltaTime);
+			renderPipeline.Update(deltaTime);
+			animationSystem.Update(deltaTime);
+			scriptExecutor.Update(deltaTime);
+			guiSystem.Update(deltaTime);
 
 			//layerManager.Update();
 			//sceneManager.GetCurrentScene().Update();
@@ -50,7 +63,12 @@ namespace BF
 
 		void App::Render()
 		{
+			constantBufferManager.Render();
+			cameraManager.Render();
 			renderPipeline.Render();
+			animationSystem.Render();
+			scriptExecutor.Render();
+			guiSystem.Render();
 
 			//sceneManager.GetCurrentScene().Render();
 			//BF::Application::SceneManager::GetScenes()[0]->Render();

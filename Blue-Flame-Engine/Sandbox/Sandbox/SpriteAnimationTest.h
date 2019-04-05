@@ -19,7 +19,7 @@ namespace SpriteAnimationTest
 		void Initialize() override;
 		void Load() override;
 		void PostLoad() override;
-		void Update() override;
+		void Update(double deltaTime) override;
 		void Render() override;
 	};
 }

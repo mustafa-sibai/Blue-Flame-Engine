@@ -143,6 +143,20 @@ namespace BF
 			return orthographicMatrix;
 		}
 
+		Matrix4 Matrix4::Orthographic(const Vector2f& position, const Vector2f& size, float nearZ, float farZ)
+		{
+			Matrix4 orthographicMatrix = Identity();
+
+			orthographicMatrix.elements[0 + 0 * BFE_MATRIX_COLUMN_SIZE] = 2.0f / (size.x - position.x);
+			orthographicMatrix.elements[1 + 1 * BFE_MATRIX_COLUMN_SIZE] = 2.0f / (position.y - size.y);
+			orthographicMatrix.elements[2 + 2 * BFE_MATRIX_COLUMN_SIZE] = -2.0f / (farZ - nearZ);
+			orthographicMatrix.elements[0 + 3 * BFE_MATRIX_COLUMN_SIZE] = -((size.x + position.x) / (size.x - position.x));
+			orthographicMatrix.elements[1 + 3 * BFE_MATRIX_COLUMN_SIZE] = -((position.y + size.y) / (position.y - size.y));
+			orthographicMatrix.elements[2 + 3 * BFE_MATRIX_COLUMN_SIZE] = -((farZ + nearZ) / (farZ - nearZ));
+
+			return orthographicMatrix;
+		}
+
 		Matrix4 Matrix4::LookAt(const Vector3f& eye, const Vector3f& target, const Vector3f& upVector)
 		{
 			Matrix4 viewMatrix = Matrix4::Identity();

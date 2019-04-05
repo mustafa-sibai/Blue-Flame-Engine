@@ -1,4 +1,5 @@
 #pragma once
+#include "BF/ECS/ISystem.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -7,22 +8,19 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BFE_API Renderer
+			class RenderPipeline;
+
+			class BFE_API IRenderer : public BF::ECS::ISystem
 			{
-				friend class RenderPipeline;
+				friend class BF::Graphics::Renderers::RenderPipeline;
 
 			protected:
 				enum class RendererType { None, SpriteRenderer, ForwardRenderer, PostProcessing, SkyboxRenderer };
 				RendererType rendererType;
 
 			public:
-				Renderer(RendererType rendererType);
-				~Renderer();
-
-				virtual void Initialize();
-				virtual void PostLoad();
-				virtual void Update();
-				virtual void Render();
+				IRenderer(RendererType rendererType);
+				virtual ~IRenderer();
 			};
 		}
 	}

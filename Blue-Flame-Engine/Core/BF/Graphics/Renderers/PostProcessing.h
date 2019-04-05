@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/Graphics/Camera.h"
-#include "BF/Graphics/Renderers/Renderer.h"
+#include "BF/Graphics/Renderers/IRenderer.h"
 #include "BF/Graphics/API/Framebuffer.h"
 #include "BF/Graphics/Materials/MaterialManager.h"
 #include "BF/Graphics/Mesh.h"
@@ -13,7 +13,7 @@ namespace BF
 	{
 		namespace Renderers
 		{
-			class BFE_API PostProcessing : public Renderer
+			class BFE_API PostProcessing : public BF::Graphics::Renderers::IRenderer
 			{
 
 			private:
@@ -28,9 +28,11 @@ namespace BF
 				PostProcessing();
 				~PostProcessing();
 
-				void Initialize() override;
-				void PostLoad() override;
-				void Render() override;
+				void Initialize()			  override;
+				void Load()					  override;
+				void PostLoad()				  override;
+				void Update(double deltaTime) override;
+				void Render()				  override;
 
 				void Bind();
 				void Unbind();
