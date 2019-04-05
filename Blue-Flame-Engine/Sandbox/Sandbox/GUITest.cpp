@@ -44,8 +44,9 @@ namespace GUITest
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		orthographicRectangle.GetEdgeOffset();
-		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f)));
+		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffset();
+
+		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f)));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.0, 0.0f, 0.0f, 1.0f));
@@ -73,9 +74,9 @@ namespace GUITest
 		App::Update(deltaTime);
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffset();
 
-		camera->SetProjectionMatrix(Matrix4::Orthographic(orthographicRectangle.x, orthographicRectangle.width, orthographicRectangle.y, orthographicRectangle.height, -1.0f, 1.0f));
+		camera->SetProjectionMatrix(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f));
 	}
 
 	void GUITest::Render()
