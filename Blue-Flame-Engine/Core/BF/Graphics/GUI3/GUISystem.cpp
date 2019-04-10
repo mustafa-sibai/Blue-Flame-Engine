@@ -45,21 +45,33 @@ namespace BF
 						BF::Math::Vector3f spritePosition = widgets[i]->currentSprite->gameObject->GetTransform()->GetPosition();
 						BF::Math::Vector2i spriteSize = widgets[i]->currentSprite->size;
 
-						
-
-
 						BF::Math::Vector3f newPos = Camera::ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
 						BF::Math::Rectangle rect = BF::Math::Rectangle(spritePosition.x, spritePosition.y, spriteSize.x, spriteSize.y, widgets[i]->currentSprite->pivot);
 						BF::Math::Rectangle mouseRect = BF::Math::Rectangle(newPos.x, newPos.y, 1, 1);
-
-						//BFE_LOG_INFO("IN BABY !!" + mousePosition, "");
-
+												
+						//Change button sprites
 						if (rect.Intersect(mouseRect))
 						{
-							BFE_LOG_INFO("IN BABY !!", "");
+							//Pressed
+							if (BF::Input::Mouse::IsButtonPressed(BF::Input::Mouse::Button::Code::Left))
+							{
+								//BF::System::Debug::Log("Pressed", BF::System::Debug::LogLevel::Info);
+								widgets[i]->currentSprite = &widgets[i]->states[0].pressed;
+							}
+							else
+							{
+								//Hovered
+								//BF::System::Debug::Log("Hovering", BF::System::Debug::LogLevel::Info);
+								widgets[i]->currentSprite = &widgets[i]->states[0].hovered;
+							}
 						}
-		
+						else
+						{
+							//Normal
+							//BF::System::Debug::Log("Normal", BF::System::Debug::LogLevel::Info);
+							widgets[i]->currentSprite = &widgets[i]->states[0].normal;
+						}
 						//widgets[i] is a button. cast it to a button pointer ((Button*)widgets[i]) and now you can
 						//access the button class and do whatever
 						//check if button is clicked or hovered or released
