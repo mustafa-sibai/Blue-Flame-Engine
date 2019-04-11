@@ -52,9 +52,25 @@ namespace BF
 
 						if (rect.Intersect(mouseRect))
 						{
-							BFE_LOG_INFO("IN BABY !!", "");
+							//Pressed
+							if (BF::Input::Mouse::IsButtonPressed(BF::Input::Mouse::Button::Code::Left))
+							{
+								//BF::System::Debug::Log("Pressed", BF::System::Debug::LogLevel::Info);
+								widgets[i]->currentSprite = &widgets[i]->states[0].pressed;
+							}
+							else
+							{
+								//Hovered
+								//BF::System::Debug::Log("Hovering", BF::System::Debug::LogLevel::Info);
+								widgets[i]->currentSprite = &widgets[i]->states[0].hovered;
+							}
 						}
-		
+						else
+						{
+							//Normal
+							//BF::System::Debug::Log("Normal", BF::System::Debug::LogLevel::Info);
+							widgets[i]->currentSprite = &widgets[i]->states[0].normal;
+						}
 						//widgets[i] is a button. cast it to a button pointer ((Button*)widgets[i]) and now you can
 						//access the button class and do whatever
 						//check if button is clicked or hovered or released
