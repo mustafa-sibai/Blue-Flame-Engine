@@ -224,6 +224,8 @@
     <ClInclude Include="BF\Graphics\GUI3\WidgetState.h" />
     <ClInclude Include="BF\Graphics\Animation\SpriteAnimator.h" />
     <ClInclude Include="BF\ECS\ISystem.h" />
+    <ClInclude Include="BF\Graphics\Animation\KeyFrame.h" />
+    <ClInclude Include="BF\Graphics\Animation\SpriteAnimationData.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

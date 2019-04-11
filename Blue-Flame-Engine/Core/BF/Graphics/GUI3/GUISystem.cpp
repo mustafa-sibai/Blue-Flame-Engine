@@ -45,15 +45,10 @@ namespace BF
 						BF::Math::Vector3f spritePosition = widgets[i]->currentSprite->gameObject->GetTransform()->GetPosition();
 						BF::Math::Vector2i spriteSize = widgets[i]->currentSprite->size;
 
-						
-
-
 						BF::Math::Vector3f newPos = Camera::ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
 						BF::Math::Rectangle rect = BF::Math::Rectangle(spritePosition.x, spritePosition.y, spriteSize.x, spriteSize.y, widgets[i]->currentSprite->pivot);
 						BF::Math::Rectangle mouseRect = BF::Math::Rectangle(newPos.x, newPos.y, 1, 1);
-
-						//BFE_LOG_INFO("IN BABY !!" + mousePosition, "");
 
 						if (rect.Intersect(mouseRect))
 						{

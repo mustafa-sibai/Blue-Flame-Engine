@@ -692,6 +692,12 @@
     <ClInclude Include="BF\Graphics\Renderers\IRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\SpriteAnimationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\KeyFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />

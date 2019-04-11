@@ -31,7 +31,7 @@ namespace BF
 			Bottom right = 1, 1
 			Bottom left = 0, 1
 			*/
-			Rectangle GetEdgeOffset() const;
+			Rectangle GetEdgeOffsetByPivot() const;
 
 			/*
 			@return:

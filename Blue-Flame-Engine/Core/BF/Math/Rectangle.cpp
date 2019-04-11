@@ -24,8 +24,8 @@ namespace BF
 
 		bool Rectangle::Intersect(const Rectangle& other) const
 		{
-			Rectangle thisEdge = GetEdgeOffset();
-			Rectangle otherEdge = other.GetEdgeOffset();
+			Rectangle thisEdge = GetEdgeOffsetByPivot();
+			Rectangle otherEdge = other.GetEdgeOffsetByPivot();
 
 			int x = this->x + thisEdge.x;
 			int y = this->y + thisEdge.y;
@@ -68,7 +68,7 @@ namespace BF
 			return Vector2i(x + (width / 2), y + (height / 2));
 		}
 
-		Rectangle Rectangle::GetEdgeOffset() const
+		Rectangle Rectangle::GetEdgeOffsetByPivot() const
 		{
 			int offsetWidth = (int)(width * pivot.x);
 			int offsetHeight = (int)(height * pivot.y);
@@ -78,7 +78,7 @@ namespace BF
 
 		vector<Vector2i> Rectangle::GetCorners() const
 		{
-			Rectangle edges = GetEdgeOffset();
+			Rectangle edges = GetEdgeOffsetByPivot();
 
 			vector<Vector2i> corners(4);
 

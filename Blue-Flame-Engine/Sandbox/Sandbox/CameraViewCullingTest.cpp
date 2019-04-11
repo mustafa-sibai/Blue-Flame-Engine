@@ -42,7 +42,7 @@ namespace CameraViewCullingTest
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		BF::Math::Rectangle newRect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle newRect = orthographicRectangle.GetEdgeOffsetByPivot();
 		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(Vector2f(newRect.x, newRect.y), Vector2f(newRect.width, newRect.height), -1.0f, 1.0f)));
 
 		camera->SetClearType(BufferClearType::ColorAndDepth);
@@ -74,7 +74,7 @@ namespace CameraViewCullingTest
 
 		GameObject* g2 = scene->AddGameObject(new GameObject("main2"));
 		sprite2 = (Sprite*)g2->AddComponent(new Sprite(texture2, Vector2f(0.5f, 0.5f), 5, *defaultRenderLayer));
-		sprite2->gameObject->GetTransform()->SetPosition(Vector3f(200, 0, 0));
+		sprite2->gameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 
 		GameObject* X = scene->AddGameObject(new GameObject("X"));
 		pointX = (Sprite*)X->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, *defaultRenderLayer));
@@ -96,7 +96,7 @@ namespace CameraViewCullingTest
 		App::Update(deltaTime);
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5f, 0.5f));
-		BF::Math::Rectangle newRect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle newRect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(Vector2f(newRect.x, newRect.y), Vector2f(newRect.width, newRect.height), -1.0f, 1.0f));
 	

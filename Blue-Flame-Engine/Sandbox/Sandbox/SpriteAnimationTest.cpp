@@ -42,7 +42,7 @@ namespace SpriteAnimationTest
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(rect.x, rect.width, rect.y, rect.height, -1.0f, 1.0f)));
 
@@ -83,7 +83,7 @@ namespace SpriteAnimationTest
 		App::Update(deltaTime);
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(rect.x, rect.width, rect.y, rect.height, -1.0f, 1.0f));
 

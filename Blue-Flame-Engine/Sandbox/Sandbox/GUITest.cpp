@@ -44,7 +44,7 @@ namespace GUITest
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5, 0.5f));
-		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera = (Camera*)CameraGameObject->AddComponent(new Camera(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f)));
 
@@ -65,7 +65,8 @@ namespace GUITest
 
 		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("My cool Button"));
 		Button* button = (Button*)ButtonGameObject->AddComponent(new Button());
-		//button->currentSprite->pivot = Vector2f(0, 0);
+		button->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
+		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);
 
 		App::RunScene(*scene);
 	}
@@ -75,7 +76,7 @@ namespace GUITest
 		App::Update(deltaTime);
 
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5f, 0.5f));
-		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffset();
+		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f));
 

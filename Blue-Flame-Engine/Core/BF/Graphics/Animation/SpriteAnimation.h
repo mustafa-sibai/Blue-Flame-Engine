@@ -11,28 +11,6 @@ namespace BF
 	{
 		namespace Animation
 		{
-			struct KeyFrame
-			{
-				float time;
-				BF::Math::Rectangle scissorRectangle;
-
-				KeyFrame() = default;
-				KeyFrame(float time, const BF::Math::Rectangle& scissorRectangle) :
-					time(time), scissorRectangle(scissorRectangle)
-				{
-				}
-			};
-
-			struct Sequence
-			{
-				std::vector<KeyFrame> keyFrames;
-			};
-
-			struct SpriteAnimationData
-			{
-				std::string textureName;
-				std::vector<Sequence> sequences;
-			};
 
 			class BFE_API SpriteAnimation
 			{

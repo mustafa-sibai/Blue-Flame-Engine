@@ -14,7 +14,7 @@ namespace BF
 			cameraManager(nullptr), bufferClearType(BufferClearType::ColorAndDepth)
 		{
 			type = IComponent::Type::Camera;
-
+			
 			modelMatrix = Matrix4::Identity();
 			viewMatrix = Matrix4::Identity();
 			this->projectionMatrix = projectionMatrix;
@@ -66,7 +66,7 @@ namespace BF
 
 			Vector2f convertedSize =  Vector2f(windowSize.x * pivot.x, windowSize.y * pivot.y);
 
-			return Vector3f(position.x - convertedSize.x, position.y - convertedSize.y, 0);
+			return Vector3f(position.x - convertedSize.x, -(position.y - convertedSize.y), 0);
 		}
 
 		void Camera::Clear()

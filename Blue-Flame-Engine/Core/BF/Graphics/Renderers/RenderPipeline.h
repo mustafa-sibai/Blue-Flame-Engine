@@ -26,6 +26,7 @@ namespace BF
 				friend class BF::Application::App;
 				friend class BF::ECS::GameObject;
 				friend class BF::Graphics::GUI::GUISystem;
+				friend class BF::Graphics::Animation::AnimationSystem;
 
 			private:
 				BF::Graphics::CameraManager& cameraManager;

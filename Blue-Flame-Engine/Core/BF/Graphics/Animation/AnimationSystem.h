@@ -14,9 +14,10 @@ namespace BF
 			{
 			private:
 				std::vector<BF::Graphics::Animation::SpriteAnimator*> animators;
+				BF::Graphics::Renderers::RenderPipeline& renderPipeline;
 
 			public:
-				AnimationSystem();
+				AnimationSystem(BF::Graphics::Renderers::RenderPipeline& renderPipeline);
 				~AnimationSystem();
 
 				void Initialize()			  override;

@@ -24,10 +24,12 @@ namespace BF
 			BF::Math::Matrix4 viewMatrix;
 			BF::Math::Matrix4 projectionMatrix;
 			BF::Math::Vector4f cameraPosition;
-			BF::Math::Vector3f position, direction;
+			BF::Math::Vector3f direction;
 
 		public:
-			BF::Math::Vector2f size;
+			BF::Math::Vector3f position;
+			BF::Math::Vector3f size;
+			BF::Math::Vector2f pivot;
 
 		public:
 			Camera(const BF::Math::Matrix4& projectionMatrix);
