@@ -157,10 +157,10 @@ namespace BF
 						size_t index = widget->states.size() - 1;
 						widget->states.emplace_back(WidgetState
 						(
-							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Normal"), Color(1.0f)),
-							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Hovered"), Color(1.0f)),
-							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Pressed"), Color(1.0f)),
-							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Disabled"), Color(1.0f))
+							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, &GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Normal"), Color(1.0f)),
+							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, &GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Hovered"), Color(1.0f)),
+							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, &GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Pressed"), Color(1.0f)),
+							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, &GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Disabled"), Color(1.0f))
 						));
 					}
 				}

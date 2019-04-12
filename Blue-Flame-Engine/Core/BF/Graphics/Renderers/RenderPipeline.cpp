@@ -76,7 +76,7 @@ namespace BF
 					if (spriteRenderer != nullptr)
 					{
 						IRenderable* iRenderable = (IRenderable*)component;
-						iRenderable->renderLayer.renderables.emplace_back(iRenderable);
+						iRenderable->renderLayer->renderables.emplace_back(iRenderable);
 
 						//spriteRenderer->renderLayerManager.GetRenderLayer(iRenderable->renderLayer.(renderables.emplace_back((IRenderable*)component);
 					}

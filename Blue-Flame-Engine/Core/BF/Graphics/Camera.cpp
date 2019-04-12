@@ -59,13 +59,8 @@ namespace BF
 
 		Vector3f Camera::ScreenToWorldPoint(const Vector3f& position, const Vector2f& pivot)
 		{
-			//640 - 640, 360 - 360
-			//1280, 720
-
 			Vector2i windowSize = Engine::GetWindow().GetClientSize();
-
 			Vector2f convertedSize =  Vector2f(windowSize.x * pivot.x, windowSize.y * pivot.y);
-
 			return Vector3f(position.x - convertedSize.x, -(position.y - convertedSize.y), 0);
 		}
 

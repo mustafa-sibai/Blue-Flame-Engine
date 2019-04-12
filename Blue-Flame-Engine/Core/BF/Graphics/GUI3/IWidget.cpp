@@ -6,16 +6,18 @@ namespace BF
 	{
 		namespace GUI
 		{
+			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
+
 			IWidget::IWidget() :
-				currentSprite(nullptr)
+				currentSprite(new Sprite(nullptr, nullptr))
 			{
 				type = IComponent::Type::Widget;
 			}
 
 			IWidget::IWidget(IWidget& other) :
-				currentSprite(nullptr), minSize(other.minSize), states(other.states)
+				currentSprite(new Sprite(nullptr, nullptr)), minSize(other.minSize), states(other.states)
 			{
-				currentSprite = &this->states[0].normal;
+				*currentSprite = this->states[0].normal;
 			}
 
 			IWidget::~IWidget()
@@ -35,7 +37,7 @@ namespace BF
 					states[i].disabled.gameObject = gameObject;
 				}
 
-				currentSprite = &this->states[0].normal;
+				*currentSprite = this->states[0].normal;
 			}
 
 			IWidget& IWidget::operator=(IWidget& rhs)

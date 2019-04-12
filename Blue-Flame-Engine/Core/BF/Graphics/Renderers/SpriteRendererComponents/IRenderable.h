@@ -87,12 +87,12 @@ namespace BF
 					BF::Math::Vector2i size;
 					BF::Math::Vector2f pivot;
 					int zSortingOrder;
-					BF::Graphics::Renderers::RenderLayer& renderLayer;
+					BF::Graphics::Renderers::RenderLayer* renderLayer;
 					int xySortingOrder;
 					Color color;
 
 				public:
-					IRenderable(Type type, const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
+					IRenderable(Type type, const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
 					virtual ~IRenderable();
 				};
 			}

@@ -28,7 +28,8 @@ namespace BF
 					BF::Math::Rectangle scissorRectangle;
 
 				public:
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, BF::Graphics::Renderers::RenderLayer& renderLayer);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Sprite(const Sprite& sprite);
 					/*
 					@pivot:
 					Top left = 0, 0
@@ -37,19 +38,25 @@ namespace BF
 					Bottom right = 1, 1
 					Bottom left = 0, 1
 					*/
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, BF::Graphics::Renderers::RenderLayer& renderLayer);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
 					~Sprite();
+
+					Sprite& operator=(Sprite& rhs);
 
 					void SetTexture(const BF::Graphics::API::Texture2D* texture2D);
 					void SetScissorRectangle(const BF::Math::Rectangle& scissorRectangle);
 
 					inline const BF::Graphics::API::Texture2D* GetTexture() const { return texture2D; }
 					inline const BF::Math::Rectangle& GetScissorRectangle() const { return scissorRectangle; }
+
+				private:
+					void Swap(Sprite& rhs);
+
 				};
 			}
 		}

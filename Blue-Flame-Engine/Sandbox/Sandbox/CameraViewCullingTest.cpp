@@ -70,23 +70,23 @@ namespace CameraViewCullingTest
 		texture3->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/point.png"), Texture::Format::R8G8B8A8);
 
 		GameObject* g = scene->AddGameObject(new GameObject("main"));
-		sprite = (Sprite*)g->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 6, *defaultRenderLayer));
+		sprite = (Sprite*)g->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 6, defaultRenderLayer));
 
 		GameObject* g2 = scene->AddGameObject(new GameObject("main2"));
-		sprite2 = (Sprite*)g2->AddComponent(new Sprite(texture2, Vector2f(0.5f, 0.5f), 5, *defaultRenderLayer));
+		sprite2 = (Sprite*)g2->AddComponent(new Sprite(texture2, Vector2f(0.5f, 0.5f), 5, defaultRenderLayer));
 		sprite2->gameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 
 		GameObject* X = scene->AddGameObject(new GameObject("X"));
-		pointX = (Sprite*)X->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, *defaultRenderLayer));
+		pointX = (Sprite*)X->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, defaultRenderLayer));
 
 		GameObject* Y = scene->AddGameObject(new GameObject("Y"));
-		pointY = (Sprite*)Y->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, *defaultRenderLayer));
+		pointY = (Sprite*)Y->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, defaultRenderLayer));
 
 		GameObject* W = scene->AddGameObject(new GameObject("W"));
-		pointW = (Sprite*)W->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, *defaultRenderLayer));
+		pointW = (Sprite*)W->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, defaultRenderLayer));
 
 		GameObject* H = scene->AddGameObject(new GameObject("H"));
-		pointH = (Sprite*)H->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, *defaultRenderLayer));
+		pointH = (Sprite*)H->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, defaultRenderLayer));
 
 		App::RunScene(*scene);
 	}

@@ -78,7 +78,7 @@ namespace BF
 				Texture2D* texture = new Texture2D();
 				texture->Create(ResourceManager::Load<TextureData>(spriteAnimator->spriteAnimationData->textureName), Texture::Format::R8G8B8A8);
 
-				Sprite* sprite = (Sprite*)spriteAnimator->gameObject->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 0, *renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer(), spriteAnimator->spriteAnimationData->keyFrames[0].scissorRectangle, Color::Whites::White()));
+				Sprite* sprite = (Sprite*)spriteAnimator->gameObject->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 0, renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer(), spriteAnimator->spriteAnimationData->keyFrames[0].scissorRectangle, Color::Whites::White()));
 
 				spriteAnimator->currentSprite = sprite;
 				renderPipeline.AddRenderable(spriteAnimator->currentSprite);

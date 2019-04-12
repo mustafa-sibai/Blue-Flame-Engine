@@ -33,11 +33,11 @@ namespace BF
 					TextAlignment alignment;
 
 				public:
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, BF::Graphics::Renderers::RenderLayer& renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, BF::Graphics::Renderers::RenderLayer& renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Rectangle& scissorRectangle, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer& renderLayer, const BF::Graphics::Color& color);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Rectangle& scissorRectangle, TextAlignment alignment, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
 					~Text();
 
 					void SetFont(const BF::Graphics::Fonts::Font* font);

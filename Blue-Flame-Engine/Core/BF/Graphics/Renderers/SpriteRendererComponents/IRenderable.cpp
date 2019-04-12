@@ -14,7 +14,7 @@ namespace BF
 				using namespace BF::ECS;
 				using namespace BF::Graphics::Renderers;
 
-				IRenderable::IRenderable(Type type, const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer& renderLayer, const Color& color) :
+				IRenderable::IRenderable(Type type, const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
 					type(type), size(size), pivot(pivot), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color), xySortingOrder(0)
 				{
 					IComponent::type = IComponent::Type::Renderable;
