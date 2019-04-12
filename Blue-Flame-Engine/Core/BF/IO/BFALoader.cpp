@@ -13,7 +13,7 @@ namespace BF
 
 		SpriteAnimationData* BFALoader::Load(const string& filename)
 		{
-			char fileHeader[9];
+			/*char fileHeader[9];
 			BFAFormat bfaFormat;
 			spriteAnimationData = new SpriteAnimationData();
 
@@ -58,7 +58,8 @@ namespace BF
 			}
 
 			fclose(file);
-			return spriteAnimationData;
+			return spriteAnimationData;*/
+			return nullptr;
 		}
 	}
 }

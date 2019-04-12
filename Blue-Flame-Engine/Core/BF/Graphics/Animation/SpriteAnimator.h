@@ -18,18 +18,19 @@ namespace BF
 				friend class BF::Graphics::Animation::AnimationSystem;
 
 			private:
-				SpriteAnimationData* spriteAnimationData;
+				BF::Graphics::Animation::SpriteAnimationData* spriteAnimationData;
 				BF::Graphics::Renderers::SpriteRendererComponents::Sprite* currentSprite;
 
 				bool play;
 				float timer;
 				int currentKeyFrameIndex;
+				bool renderFrame;
 
 			public:
 				bool loop;
 
 			public:
-				SpriteAnimator(SpriteAnimationData* spriteAnimationData);
+				SpriteAnimator(BF::Graphics::Animation::SpriteAnimationData* spriteAnimationData, bool loop);
 				~SpriteAnimator();
 
 				void Play();

@@ -19,6 +19,11 @@ namespace BF
 			class GUISystem;
 		}
 
+		namespace Animation
+		{
+			class AnimationSystem;
+		}
+
 		namespace Renderers
 		{
 			class BFE_API RenderPipeline : public BF::ECS::ISystem

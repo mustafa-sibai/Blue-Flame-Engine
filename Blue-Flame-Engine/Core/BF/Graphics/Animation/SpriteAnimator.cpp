@@ -6,9 +6,10 @@ namespace BF
 	{
 		namespace Animation
 		{
-			SpriteAnimator::SpriteAnimator(SpriteAnimationData* spriteAnimationData) :
-				spriteAnimationData(spriteAnimationData), play(false), loop(false), timer(0), currentKeyFrameIndex(0)
+			SpriteAnimator::SpriteAnimator(SpriteAnimationData* spriteAnimationData, bool loop) :
+				spriteAnimationData(spriteAnimationData), currentSprite(nullptr), play(false), loop(loop), timer(0), currentKeyFrameIndex(0), renderFrame(true)
 			{
+				IComponent::type = IComponent::Type::SpriteAnimator;
 			}
 
 			SpriteAnimator::~SpriteAnimator()

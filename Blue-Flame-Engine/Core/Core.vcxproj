@@ -60,7 +60,6 @@
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
     <ClCompile Include="BF\ECS\GameObject.cpp" />
     <ClCompile Include="BF\Engine.cpp" />
-    <ClCompile Include="BF\Graphics\Animation\SpriteAnimation.cpp" />
     <ClCompile Include="BF\Graphics\API\ConstantBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="BF\ECS\Component.h" />
     <ClInclude Include="BF\ECS\GameObject.h" />
     <ClInclude Include="BF\Engine.h" />
-    <ClInclude Include="BF\Graphics\Animation\SpriteAnimation.h" />
     <ClInclude Include="BF\Graphics\API\ConstantBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />

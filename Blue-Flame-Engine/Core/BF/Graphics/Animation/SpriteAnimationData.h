@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "BF/IO/Resource.h"
 #include "BF/Graphics/Animation/KeyFrame.h"
 #include "BF/Common.h"
 
@@ -14,6 +15,8 @@ namespace BF
 			{
 				std::string textureName;
 				std::vector<KeyFrame> keyFrames;
+
+				SpriteAnimationData() : BF::IO::Resource(Type::Animation) { }
 			};
 		}
 	}

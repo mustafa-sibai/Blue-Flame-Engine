@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "BF/Graphics/Animation/SpriteAnimation.h"
+#include "BF/Graphics/Animation/SpriteAnimationData.h"
 #include "BF/Common.h"
 
 namespace BF

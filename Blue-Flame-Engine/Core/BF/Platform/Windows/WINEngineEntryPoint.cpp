@@ -41,6 +41,7 @@ namespace BF
 							if(Engine::state != Engine::State::Exit)
 								Engine::state = Engine::State::Render;
 
+							app.frameTimer.Reset();
 							break;
 						}
 

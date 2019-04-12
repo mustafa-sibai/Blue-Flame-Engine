@@ -8,6 +8,7 @@ namespace SpriteAnimationTest
 	using namespace BF::Graphics;
 	using namespace BF::Graphics::GUI;
 	using namespace BF::Graphics::API;
+	using namespace BF::Graphics::Animation;
 	using namespace BF::Graphics::Renderers;
 	using namespace BF::Graphics::Materials;
 	using namespace BF::Graphics::Renderers::SpriteRendererComponents;
@@ -58,25 +59,25 @@ namespace SpriteAnimationTest
 	}
 
 	Sprite* currentSprite;
+	SpriteAnimationData data;
 
 	void SpriteAnimationTest::PostLoad()
 	{
 		App::PostLoad();
 
-		Texture2D* texture = new Texture2D();
-		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/player.png"), Texture::Format::R8G8B8A8);
-
 		GameObject* playerGameObject = scene->AddGameObject(new GameObject("player"));
-		currentSprite = (Sprite*)playerGameObject->AddComponent(new Sprite(texture, Vector2f(0.5f, 0.5f), 0,
-			*defaultRenderLayer, BF::Math::Rectangle(0, 0, 32, 48), Color::Whites::White()));
-		currentSprite->gameObject->GetTransform()->SetScale(Vector3f(2, 2, 2));
 
+		data.textureName = "../Sandbox/Assets/Textures/player.png";
+		data.filePath = "../Sandbox/Assets/Textures/player.png";
+
+		for (size_t i = 0; i < 8; i++)
+			data.keyFrames.emplace_back(KeyFrame(100 * (i + 1), BF::Math::Rectangle(32 * i, 0, 32, 48)));
+
+		SpriteAnimator * animator = (SpriteAnimator*)playerGameObject->AddComponent(new SpriteAnimator(&data, true));
+		animator->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));
 
 		App::RunScene(*scene);
 	}
-	float time = 0;
-	int maxIndex = 7;
-	int i = 0;
 
 	void SpriteAnimationTest::Update(double deltaTime)
 	{
@@ -86,19 +87,6 @@ namespace SpriteAnimationTest
 		BF::Math::Rectangle rect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(rect.x, rect.width, rect.y, rect.height, -1.0f, 1.0f));
-
-		time += deltaTime;
-
-		if (time >= 100)
-		{
-			currentSprite->SetScissorRectangle(BF::Math::Rectangle(32 * i, 0, 32, 48));
-			i++;
-			time = 0;
-
-			if (i > 7)
-				i = 0;
-		}
-		BFE_LOG_INFO(std::to_string(time), "");
 	}
 
 	void SpriteAnimationTest::Render()

@@ -7,7 +7,7 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 
 		App::App() :
-			cameraManager(constantBufferManager), guiSystem(renderPipeline), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
+			cameraManager(constantBufferManager), guiSystem(renderPipeline), animationSystem(renderPipeline), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
 		{
 		}
 
