@@ -312,6 +312,18 @@
     <ClCompile Include="BF\Graphics\Renderers\IRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\AnimationController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\AnimationNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\Transition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\Condition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -692,6 +704,24 @@
     <ClInclude Include="BF\Graphics\Animation\KeyFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\AnimationController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\AnimationNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\Transition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\DataType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\IDataType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\Condition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -749,6 +779,9 @@
     </None>
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="BF\Graphics\Animation\DataType.inl">
+      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
 </Project>

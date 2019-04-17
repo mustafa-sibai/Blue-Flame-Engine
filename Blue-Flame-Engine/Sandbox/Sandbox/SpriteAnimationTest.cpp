@@ -1,4 +1,6 @@
 #include "SpriteAnimationTest.h"
+#include "BF/Graphics/Animation/DataType.h"
+#include "BF/Graphics/Animation/Condition.h"
 
 namespace SpriteAnimationTest
 {
@@ -18,8 +20,20 @@ namespace SpriteAnimationTest
 	using namespace BF::Scripting;
 	using namespace BF::IO;
 
+
 	SpriteAnimationTest::SpriteAnimationTest()
 	{
+		IDataType* a = new AInt(20);
+		IDataType* b = new AInt(10);
+		Condition c(a, Condition::EvaluationOperator::BiggerThan, b);
+		c.Evaluate();
+
+		if (c.Evaluate())
+		{
+			BFE_LOG_INFO("YES", "");
+		}
+		else
+			BFE_LOG_INFO("NO", "");
 	}
 
 	SpriteAnimationTest::~SpriteAnimationTest()
