@@ -54,7 +54,7 @@ namespace BF
 						if (spriteRectangle.Intersect(mouseRect))
 						{
 							//Pressed
-							if (Mouse::IsButtonPressed(Mouse::Button::Code::Left))
+							if (Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 							{
 								*widgets[i]->currentSprite = widgets[i]->states[0].pressed;
 							}
