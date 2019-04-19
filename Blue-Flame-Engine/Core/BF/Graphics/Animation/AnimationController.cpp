@@ -6,7 +6,8 @@ namespace BF
 	{
 		namespace Animation
 		{
-			AnimationController::AnimationController()
+			AnimationController::AnimationController() :
+				startingAnimationNode(new StartingAnimationNode()), currentAnimationNode(startingAnimationNode)
 			{
 			}
 

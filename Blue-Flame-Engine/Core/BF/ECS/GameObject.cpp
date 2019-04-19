@@ -54,11 +54,11 @@ namespace BF
 					scene->app.guiSystem.AddWidget((IWidget*)component);
 					component->added = true;
 				}
-				else if (component->type == IComponent::Type::SpriteAnimator)
+				else if (component->type == IComponent::Type::Animator)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
-					scene->app.animationSystem.AddSpriteAnimator((SpriteAnimator*)component);
+					scene->app.animationSystem.AddAnimator((Animator*)component);
 					component->added = true;
 				}
 				else if (component->type == IComponent::Type::Renderable ||

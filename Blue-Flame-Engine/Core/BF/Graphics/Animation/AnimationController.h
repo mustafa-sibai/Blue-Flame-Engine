@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "BF/Graphics/Animation/AnimationNode.h"
+#include "BF/Graphics/Animation/StartingAnimationNode.h"
+//#include "BF/Graphics/Animation/AnimationNode.h"
 #include "BF/Graphics/Animation/DataType.h"
 #include "BF/Common.h"
 
@@ -13,8 +14,10 @@ namespace BF
 			class BFE_API AnimationController
 			{
 			public:
-				std::vector<BF::Graphics::Animation::AnimationNode> nodes;
-				std::vector<BF::Graphics::Animation::IDataType> dataTypes;
+				StartingAnimationNode* startingAnimationNode;
+				IAnimationNode* currentAnimationNode;
+
+				std::vector<IDataType*> dataTypes;
 
 				AnimationController();
 				~AnimationController();

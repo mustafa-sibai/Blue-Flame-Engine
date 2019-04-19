@@ -6,7 +6,8 @@ namespace BF
 	{
 		namespace Animation
 		{
-			Transition::Transition(BF::Graphics::Animation::AnimationNode* transitionToNode)
+			Transition::Transition(AnimationNode* animationNode, bool hasToFinishAnimation) :
+				animationNode(animationNode), hasToFinishAnimation(hasToFinishAnimation)
 			{
 			}
 

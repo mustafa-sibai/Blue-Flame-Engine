@@ -14,10 +14,11 @@ namespace BF
 			class BFE_API Transition
 			{
 			public:
+				AnimationNode* animationNode;
 				std::vector<Condition*> conditions;
-				BF::Graphics::Animation::AnimationNode* transitionToNode;
+				bool hasToFinishAnimation;
 
-				Transition(BF::Graphics::Animation::AnimationNode* transitionToNode);
+				Transition(AnimationNode* animationNode, bool hasToFinishAnimation);
 				~Transition();
 			};
 		}

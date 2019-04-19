@@ -306,9 +306,6 @@
     <ClCompile Include="BF\Graphics\Animation\AnimationSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\Animation\SpriteAnimator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Renderers\IRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -322,6 +319,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\Graphics\Animation\Condition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Animation\StartingAnimationNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -689,16 +695,10 @@
     <ClInclude Include="BF\Graphics\Animation\AnimationSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\Animation\SpriteAnimator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\ECS\ISystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Renderers\IRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Animation\SpriteAnimationData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Animation\KeyFrame.h">
@@ -720,6 +720,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Animation\Condition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\Animator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\AnimationData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\Sequence.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\StartingAnimationNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Animation\IAnimationNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

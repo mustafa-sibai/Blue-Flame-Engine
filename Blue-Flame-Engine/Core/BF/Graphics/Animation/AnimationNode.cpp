@@ -6,7 +6,9 @@ namespace BF
 	{
 		namespace Animation
 		{
-			AnimationNode::AnimationNode()
+			AnimationNode::AnimationNode() :
+				IAnimationNode(Type::NormalNode),
+				animation(nullptr)
 			{
 			}
 
