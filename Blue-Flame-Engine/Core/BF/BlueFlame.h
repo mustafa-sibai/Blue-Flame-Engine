@@ -48,8 +48,6 @@
 #include <BF/Graphics/GUI/Panel.h>*/
 #endif
 
-#include <BF/Graphics/Animation/SpriteAnimator.h>
-
 #include <BF/Graphics/Camera.h>
 #include <BF/Graphics/TileMap.h>
 #include <BF/Graphics/TerrainGenerator.h>

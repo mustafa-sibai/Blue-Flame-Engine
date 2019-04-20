@@ -51,6 +51,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BF\Graphics\Animation\Animation.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\AnimationNode.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\AnimationController.cpp" />
     <ClCompile Include="BF\Graphics\Animation\AnimationSystem.cpp" />
     <ClCompile Include="BF\Application\App.cpp" />
     <ClCompile Include="BF\AI\Waypoint.cpp" />
@@ -60,6 +63,9 @@
     <ClCompile Include="BF\Audio\SoundManager.cpp" />
     <ClCompile Include="BF\ECS\GameObject.cpp" />
     <ClCompile Include="BF\Engine.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\Animator.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\Condition.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\StartingAnimationNode.cpp" />
     <ClCompile Include="BF\Graphics\API\ConstantBuffer.cpp" />
     <ClCompile Include="BF\Graphics\API\Context.cpp" />
     <ClCompile Include="BF\Graphics\API\IndexBuffer.cpp" />
@@ -129,7 +135,8 @@
     <ClCompile Include="BF\Graphics\Renderers\RenderLayerManager.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\GUISystem.cpp" />
-    <ClCompile Include="BF\Graphics\Animation\SpriteAnimator.cpp" />
+    <ClCompile Include="BF\Graphics\Animation\Transition.cpp" />
+    <None Include="BF\Graphics\Animation\DataType.inl" />
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <FileType>Document</FileType>
     </None>
@@ -162,6 +169,9 @@
     <ClCompile Include="BF\ECS\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BF\Graphics\Animation\Animation.h" />
+    <ClInclude Include="BF\Graphics\Animation\AnimationNode.h" />
+    <ClInclude Include="BF\Graphics\Animation\AnimationController.h" />
     <ClInclude Include="BF\Graphics\Animation\AnimationSystem.h" />
     <ClInclude Include="BF\Application\App.h" />
     <ClInclude Include="BF\AI\Waypoint.h" />
@@ -175,6 +185,12 @@
     <ClInclude Include="BF\ECS\Component.h" />
     <ClInclude Include="BF\ECS\GameObject.h" />
     <ClInclude Include="BF\Engine.h" />
+    <ClInclude Include="BF\Graphics\Animation\Animator.h" />
+    <ClInclude Include="BF\Graphics\Animation\Condition.h" />
+    <ClInclude Include="BF\Graphics\Animation\IAnimationNode.h" />
+    <ClInclude Include="BF\Graphics\Animation\IDataType.h" />
+    <ClInclude Include="BF\Graphics\Animation\Sequence.h" />
+    <ClInclude Include="BF\Graphics\Animation\StartingAnimationNode.h" />
     <ClInclude Include="BF\Graphics\API\ConstantBuffer.h" />
     <ClInclude Include="BF\Graphics\API\Context.h" />
     <ClInclude Include="BF\Graphics\API\IndexBuffer.h" />
@@ -220,10 +236,11 @@
     <ClInclude Include="BF\Graphics\GUI3\Widget.h" />
     <ClInclude Include="BF\Graphics\GUI3\StyleSheet.h" />
     <ClInclude Include="BF\Graphics\GUI3\WidgetState.h" />
-    <ClInclude Include="BF\Graphics\Animation\SpriteAnimator.h" />
     <ClInclude Include="BF\ECS\ISystem.h" />
     <ClInclude Include="BF\Graphics\Animation\KeyFrame.h" />
-    <ClInclude Include="BF\Graphics\Animation\SpriteAnimationData.h" />
+    <ClInclude Include="BF\Graphics\Animation\AnimationData.h" />
+    <ClInclude Include="BF\Graphics\Animation\Transition.h" />
+    <ClInclude Include="BF\Graphics\Animation\DataType.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

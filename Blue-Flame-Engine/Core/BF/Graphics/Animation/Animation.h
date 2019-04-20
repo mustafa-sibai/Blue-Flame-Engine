@@ -1,8 +1,6 @@
 #pragma once
-#include "BF/ECS/Component.h"
-#include "BF/Graphics/Animation/SpriteAnimationData.h"
+#include "BF/Graphics/Animation/Sequence.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Sprite.h"
-
 #include "BF/Common.h"
 
 namespace BF
@@ -13,13 +11,13 @@ namespace BF
 		{
 			class AnimationSystem;
 
-			class BFE_API SpriteAnimator : public BF::ECS::Component<SpriteAnimator>
+			class BFE_API Animation
 			{
 				friend class BF::Graphics::Animation::AnimationSystem;
 
 			private:
-				BF::Graphics::Animation::SpriteAnimationData* spriteAnimationData;
-				BF::Graphics::Renderers::SpriteRendererComponents::Sprite* currentSprite;
+				Sequence* sequence;
+				BF::Graphics::API::Texture2D* texture;
 
 				bool play;
 				float timer;
@@ -27,11 +25,13 @@ namespace BF
 				bool renderFrame;
 
 			public:
+				enum class State { None, Started, Ended };
+				State state;
 				bool loop;
 
 			public:
-				SpriteAnimator(BF::Graphics::Animation::SpriteAnimationData* spriteAnimationData, bool loop);
-				~SpriteAnimator();
+				Animation(BF::Graphics::API::Texture2D* texture, Sequence* sequence, bool loop);
+				~Animation();
 
 				void Play();
 				void Pause();

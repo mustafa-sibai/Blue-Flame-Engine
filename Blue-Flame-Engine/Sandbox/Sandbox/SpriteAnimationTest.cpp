@@ -1,4 +1,9 @@
 #include "SpriteAnimationTest.h"
+#include "BF/Graphics/Animation/DataType.h"
+#include "BF/Graphics/Animation/Condition.h"
+#include "BF/Graphics/Animation/AnimationController.h"
+#include "BF/Graphics/Animation/AnimationData.h"
+#include "BF/Graphics/Animation/AnimationNode.h"
 
 namespace SpriteAnimationTest
 {
@@ -17,6 +22,7 @@ namespace SpriteAnimationTest
 	using namespace BF::System;
 	using namespace BF::Scripting;
 	using namespace BF::IO;
+
 
 	SpriteAnimationTest::SpriteAnimationTest()
 	{
@@ -58,8 +64,9 @@ namespace SpriteAnimationTest
 		App::Load();
 	}
 
-	Sprite* currentSprite;
-	SpriteAnimationData data;
+	std::vector<Sequence>* sequence = new std::vector<Sequence>();
+	std::vector<KeyFrame>* walkingLeftKeyframes = new std::vector<KeyFrame>;
+	std::vector<KeyFrame>* walkingRightKeyframes = new std::vector<KeyFrame>;
 
 	void SpriteAnimationTest::PostLoad()
 	{
@@ -67,14 +74,57 @@ namespace SpriteAnimationTest
 
 		GameObject* playerGameObject = scene->AddGameObject(new GameObject("player"));
 
-		data.textureName = "../Sandbox/Assets/Textures/player.png";
-		data.filePath = "../Sandbox/Assets/Textures/player.png";
+		AnimationController* animationController = new AnimationController();
+		animationController->dataTypes.emplace_back(new AInt(20));
+
+		//-----------------------------------------------------------------------------------------------------------------------------------
 
 		for (size_t i = 0; i < 8; i++)
-			data.keyFrames.emplace_back(KeyFrame(100 * (i + 1), BF::Math::Rectangle(32 * i, 0, 32, 48)));
+			walkingLeftKeyframes->emplace_back(KeyFrame(100 * (i + 1), BF::Math::Rectangle(32 * i, 0, 32, 48)));
+		
+		for (size_t i = 0; i < 6; i++)
+			walkingRightKeyframes->emplace_back(KeyFrame(100 * (i + 1), BF::Math::Rectangle(32 * i, 48, 32, 48)));
 
-		SpriteAnimator * animator = (SpriteAnimator*)playerGameObject->AddComponent(new SpriteAnimator(&data, true));
-		animator->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));
+		sequence->emplace_back(walkingLeftKeyframes);
+		sequence->emplace_back(walkingRightKeyframes);
+
+		AnimationData data("../Sandbox/Assets/Textures/player.png", sequence);
+		data.filePath = "../Sandbox/Assets/Textures/player.png";
+
+		Texture2D* texture = new Texture2D();
+		texture->Create(ResourceManager::Load<TextureData>(data.textureName), Texture::Format::R8G8B8A8);
+
+		BF::Graphics::Animation::Animation* walkingLeftAnimation = new BF::Graphics::Animation::Animation(texture, &(*data.sequences)[0], true);
+		BF::Graphics::Animation::Animation* walkingRightAnimation = new BF::Graphics::Animation::Animation(texture, &(*data.sequences)[1], true);
+
+		//-----------------------------------------------------------------------------------------------------------------------------------
+
+		AnimationNode* walkingLeftAnimationNode = new AnimationNode();
+		walkingLeftAnimationNode->animation = walkingLeftAnimation;
+
+		AnimationNode* walkingRightAnimationNode = new AnimationNode();
+		walkingRightAnimationNode->animation = walkingRightAnimation;
+
+		//-----------------------------------------------------------------------------------------------------------------------------------
+
+		Transition* startingNodeTransition = new Transition(walkingLeftAnimationNode, true);
+		Condition* startingCondition = new Condition(animationController->dataTypes[0], Condition::EvaluationOperator::BiggerThan, new AInt(10));
+		startingNodeTransition->conditions.emplace_back(startingCondition);
+
+		animationController->startingAnimationNode->transition = startingNodeTransition;
+
+		//-----------------------------------------------------------------------------------------------------------------------------------
+
+		Transition* walkingLeftTransition = new Transition(walkingRightAnimationNode, true);
+		Condition* walkingLeftCondition = new Condition(animationController->dataTypes[0], Condition::EvaluationOperator::BiggerThan, new AInt(10));
+		walkingLeftTransition->conditions.emplace_back(walkingLeftCondition);
+
+		walkingLeftAnimationNode->transitions.emplace_back(walkingLeftTransition);
+
+		//-----------------------------------------------------------------------------------------------------------------------------------
+
+		Animator* animator = (Animator*)playerGameObject->AddComponent(new Animator(animationController));
+		//animator->gameObject->GetTransform()->SetScale(Vector3f(3, 3, 3));
 
 		App::RunScene(*scene);
 	}

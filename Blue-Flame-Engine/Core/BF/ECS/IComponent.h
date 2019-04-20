@@ -43,7 +43,7 @@ namespace BF
 			bool added;
 
 		protected:
-			enum class Type { None, Camera, Widget, SpriteAnimator, Renderable, Model, Script };
+			enum class Type { None, Camera, Widget, Animator, Renderable, Model, Script };
 			Type type;
 
 			std::vector<size_t> types;
