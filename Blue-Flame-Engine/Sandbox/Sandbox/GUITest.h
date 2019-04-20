@@ -1,5 +1,6 @@
 #pragma once
 #include <BF/BlueFlame.h>
+#include "BF/Graphics/GUI3/Button.h"
 
 namespace GUITest
 {
@@ -12,6 +13,7 @@ namespace GUITest
 		BF::Graphics::Renderers::RenderLayer* defaultRenderLayer;
 		BF::Graphics::Renderers::RenderLayer* spriteRenderLayer;
 		BF::Graphics::Renderers::RenderLayer* guiRenderLayer;
+		BF::Graphics::GUI::Button* button;
 
 	public:
 		GUITest();

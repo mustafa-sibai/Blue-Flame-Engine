@@ -50,18 +50,26 @@ namespace BF
 
 						Rectangle spriteRectangle = Rectangle(spritePosition.x, spritePosition.y, spriteSize.x, spriteSize.y, widgets[i]->currentSprite->pivot);
 						Rectangle mouseRect = Rectangle(worldMousePosition.x, worldMousePosition.y, 1, 1);
-
+												
 						if (spriteRectangle.Intersect(mouseRect))
 						{
 							//Pressed
 							if (Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
 							{
 								*widgets[i]->currentSprite = widgets[i]->states[0].pressed;
+								((Button*)widgets[i])->state = Button::State::Pressed;
+
 							}
 							else
 							{
 								//Hovered
 								*widgets[i]->currentSprite = widgets[i]->states[0].hovered;
+								((Button*)widgets[i])->state = Button::State::Hovered;
+							}
+							if (Mouse::IsButtonUp(Mouse::Button::Code::Left))
+							{
+								((Button*)widgets[i])->state = Button::State::Released;
+								BF::System::Debug::Log("Released", BF::System::Debug::LogLevel::Info);
 							}
 						}
 						else

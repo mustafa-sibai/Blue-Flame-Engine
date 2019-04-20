@@ -11,6 +11,9 @@ namespace BF
 			class BFE_API Button : public BF::Graphics::GUI::Widget<Button>
 			{
 			public:
+				enum class State { Pressed, Hovered, Released };
+				State state;
+
 				Button();
 				~Button();
 			};

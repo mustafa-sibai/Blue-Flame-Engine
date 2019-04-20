@@ -1,5 +1,4 @@
 #include "GUITest.h"
-#include "BF/Graphics/GUI3/Button.h"
 
 namespace GUITest
 {
@@ -64,7 +63,7 @@ namespace GUITest
 		App::PostLoad();
 
 		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("My cool Button"));
-		Button* button = (Button*)ButtonGameObject->AddComponent(new Button());
+		button = (Button*)ButtonGameObject->AddComponent(new Button());
 		button->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
 		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);
 
@@ -84,9 +83,10 @@ namespace GUITest
 
 		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
-		//BFE_LOG_INFO("" + newPos, "");
-		
-		//640 - 640, 360 - 360
+		if (button->state == Button::State::Pressed)
+		{
+			BFE_LOG_INFO("YOOOO, button pressed", "");
+		}
 	}
 
 	void GUITest::Render()
