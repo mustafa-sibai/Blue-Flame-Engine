@@ -1,9 +1,4 @@
 #include "SpriteAnimationTest.h"
-#include "BF/Graphics/Animation/DataType.h"
-#include "BF/Graphics/Animation/Condition.h"
-#include "BF/Graphics/Animation/AnimationController.h"
-#include "BF/Graphics/Animation/AnimationData.h"
-#include "BF/Graphics/Animation/AnimationNode.h"
 
 namespace SpriteAnimationTest
 {

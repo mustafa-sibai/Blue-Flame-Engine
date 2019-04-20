@@ -12,7 +12,7 @@ namespace BF
 			class Widget : public IWidget
 			{
 			public:
-				Widget();
+				Widget(Type type);
 				virtual ~Widget();
 			};
 

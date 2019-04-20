@@ -9,9 +9,9 @@ namespace BF
 		using namespace BF::IO::FileFormats;
 		using namespace BF::Graphics::Animation;
 
-		static SpriteAnimationData* spriteAnimationData;
+		static AnimationData* spriteAnimationData;
 
-		SpriteAnimationData* BFALoader::Load(const string& filename)
+		AnimationData* BFALoader::Load(const string& filename)
 		{
 			/*char fileHeader[9];
 			BFAFormat bfaFormat;

@@ -142,7 +142,16 @@ namespace BF
 
 			void StyleSheet::LoadWidget(tinyxml2::XMLElement* widgetNode, const string& widgetName)
 			{
-				IWidget* widget = new IWidget();
+				IWidget* widget;
+
+				//TODO: This is bad. check Iwidget enum type. refactor later.
+				if(widgetName == "Button")
+					widget = new IWidget(IWidget::Type::Button);
+				else if (widgetName == "Checkbox")
+					widget = new IWidget(IWidget::Type::CheckBox);
+				else
+					widget = new IWidget(IWidget::Type::None);
+
 				Rectangle rectangle, scissorRectangle;
 
 				rectangle = ReadWidgetDimensions(widgetNode);

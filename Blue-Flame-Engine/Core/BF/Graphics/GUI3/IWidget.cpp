@@ -8,10 +8,10 @@ namespace BF
 		{
 			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
-			IWidget::IWidget() :
-				currentSprite(new Sprite(nullptr, nullptr))
+			IWidget::IWidget(Type type) :
+				type(type), currentSprite(new Sprite(nullptr, nullptr))
 			{
-				type = IComponent::Type::Widget;
+				IComponent::type = IComponent::Type::Widget;
 			}
 
 			IWidget::IWidget(IWidget& other) :

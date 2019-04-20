@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "BF/Graphics/Animation/StartingAnimationNode.h"
-//#include "BF/Graphics/Animation/AnimationNode.h"
 #include "BF/Graphics/Animation/DataType.h"
 #include "BF/Common.h"
 

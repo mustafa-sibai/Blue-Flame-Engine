@@ -31,6 +31,9 @@
 #include <BF/Graphics/API/IndexBuffer.h>
 #include <BF/Graphics/API/ConstantBuffer.h>
 
+#include "BF/Graphics/Animation/AnimationData.h"
+#include "BF/Graphics/Animation/AnimationNode.h"
+
 #include <BF/Graphics/Renderers/RenderPipeline.h>
 
 #include <BF/Graphics/Fonts/FontAtlas.h>

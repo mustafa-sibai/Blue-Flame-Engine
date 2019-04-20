@@ -83,9 +83,19 @@ namespace GUITest
 
 		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
+		if (button->state == Button::State::Hovered)
+		{
+			BFE_LOG_INFO("YOOOO, button Hovered", "");
+		}
+
 		if (button->state == Button::State::Pressed)
 		{
 			BFE_LOG_INFO("YOOOO, button pressed", "");
+		}
+
+		if (button->state == Button::State::Released)
+		{
+			BFE_LOG_INFO("YOOOO, button Released", "");
 		}
 	}
 

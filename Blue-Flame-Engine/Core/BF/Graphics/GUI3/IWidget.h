@@ -17,14 +17,20 @@ namespace BF
 			class BFE_API IWidget : public BF::ECS::Component<IWidget>
 			{
 				friend class BF::ECS::GameObject;
+				friend class BF::Graphics::GUI::GUISystem;
 
 			public:
+				enum class Type { None, Button, CheckBox };
+
 				std::vector<WidgetState> states;
 				BF::Graphics::Renderers::SpriteRendererComponents::Sprite* currentSprite;
 				BF::Math::Vector2i minSize;
 
+			protected:
+				Type type;
+
 			public:
-				IWidget();
+				IWidget(Type type);
 				IWidget(IWidget& iWidget);
 				~IWidget();
 

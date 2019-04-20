@@ -71,7 +71,7 @@ namespace BF
 
 			void RenderPipeline::AddRenderable(IComponent* component)
 			{
-				if (component->IsSameType<IRenderable>())
+				if (component->type == IComponent::Type::Renderable)
 				{
 					if (spriteRenderer != nullptr)
 					{
@@ -81,7 +81,7 @@ namespace BF
 						//spriteRenderer->renderLayerManager.GetRenderLayer(iRenderable->renderLayer.(renderables.emplace_back((IRenderable*)component);
 					}
 				}
-				else if (component->IsSameType<Model>())
+				else if (component->type == IComponent::Type::Model)
 				{
 					if (forwardRenderer != nullptr)
 					{

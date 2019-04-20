@@ -58,7 +58,6 @@ namespace BF
 							{
 								*widgets[i]->currentSprite = widgets[i]->states[0].pressed;
 								((Button*)widgets[i])->state = Button::State::Pressed;
-
 							}
 							else
 							{
@@ -69,13 +68,13 @@ namespace BF
 							if (Mouse::IsButtonUp(Mouse::Button::Code::Left))
 							{
 								((Button*)widgets[i])->state = Button::State::Released;
-								BF::System::Debug::Log("Released", BF::System::Debug::LogLevel::Info);
 							}
 						}
 						else
 						{
 							//Normal
 							*widgets[i]->currentSprite = widgets[i]->states[0].normal;
+							((Button*)widgets[i])->state = Button::State::None;
 						}
 					}
 				}
@@ -87,7 +86,7 @@ namespace BF
 
 			void GUISystem::AddWidget(IWidget* iWidget)
 			{
-				if (iWidget->IsSameType<Button>())
+				if (iWidget->type == IWidget::Type::Button)
 				{
 					*iWidget = styleSheet.GetWidget("Button");
 				}

@@ -6,7 +6,9 @@ namespace BF
 	{
 		namespace GUI
 		{
-			Button::Button()
+			Button::Button() :
+				Widget(Type::Button),
+				state(State::None)
 			{
 			}
 
