@@ -1,6 +1,7 @@
 #include "GUISystem.h"
 #include "BF/Graphics/Renderers/SpriteRenderer.h"
 #include "BF/Graphics/GUI3/Button.h"
+#include "BF/Graphics/GUI3/CheckBox.h"
 #include "BF/Input/Mouse.h"
 #include "BF/System/Debug.h"
 
@@ -77,6 +78,44 @@ namespace BF
 							((Button*)widgets[i])->state = Button::State::None;
 						}
 					}
+
+					if (widgets[i]->IsSameType<CheckBox>())
+					{
+						Vector2f mousePosition = Mouse::GetPosition();
+						Vector3f spritePosition = widgets[i]->currentSprite->gameObject->GetTransform()->GetPosition();
+						Vector2i spriteSize = widgets[i]->currentSprite->size;
+
+						Vector3f worldMousePosition = Camera::ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
+
+						Rectangle spriteRectangle = Rectangle(spritePosition.x, spritePosition.y, spriteSize.x, spriteSize.y, widgets[i]->currentSprite->pivot);
+						Rectangle mouseRect = Rectangle(worldMousePosition.x, worldMousePosition.y, 1, 1);
+
+						if (spriteRectangle.Intersect(mouseRect))
+						{
+							//Pressed
+							if (Mouse::IsButtonHeldDown(Mouse::Button::Code::Left))
+							{
+								*widgets[i]->currentSprite = widgets[i]->states[0].pressed;
+								((CheckBox*)widgets[i])->state = CheckBox::State::Pressed;
+							}
+							else
+							{
+								//Hovered
+								*widgets[i]->currentSprite = widgets[i]->states[0].hovered;
+								((CheckBox*)widgets[i])->state = CheckBox::State::Hovered;
+							}
+							if (Mouse::IsButtonUp(Mouse::Button::Code::Left))
+							{
+								((CheckBox*)widgets[i])->state = CheckBox::State::Released;
+							}
+						}
+						else
+						{
+							//Normal
+							*widgets[i]->currentSprite = widgets[i]->states[0].normal;
+							((CheckBox*)widgets[i])->state = CheckBox::State::None;
+						}
+					}
 				}
 			}
 
@@ -89,6 +128,10 @@ namespace BF
 				if (iWidget->type == IWidget::Type::Button)
 				{
 					*iWidget = styleSheet.GetWidget("Button");
+				}
+				if (iWidget->type == IWidget::Type::CheckBox)
+				{
+					*iWidget = styleSheet.GetWidget("Checkbox");
 				}
 
 				renderPipeline.AddRenderable((IComponent*)iWidget->currentSprite);

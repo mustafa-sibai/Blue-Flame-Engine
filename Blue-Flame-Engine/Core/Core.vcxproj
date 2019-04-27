@@ -136,6 +136,7 @@
     <ClCompile Include="BF\Graphics\GUI3\Button.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\GUISystem.cpp" />
     <ClCompile Include="BF\Graphics\Animation\Transition.cpp" />
+    <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp" />
     <None Include="BF\Graphics\Animation\DataType.inl" />
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <FileType>Document</FileType>
@@ -241,6 +242,7 @@
     <ClInclude Include="BF\Graphics\Animation\AnimationData.h" />
     <ClInclude Include="BF\Graphics\Animation\Transition.h" />
     <ClInclude Include="BF\Graphics\Animation\DataType.h" />
+    <ClInclude Include="BF\Graphics\GUI3\CheckBox.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

@@ -330,6 +330,9 @@
     <ClCompile Include="BF\Graphics\Animation\StartingAnimationNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -738,6 +741,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Animation\IAnimationNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\GUI3\CheckBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

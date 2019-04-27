@@ -61,13 +61,25 @@ namespace GUITest
 	void GUITest::PostLoad()
 	{
 		App::PostLoad();
+		CreateTestButton();
+		//CreateTestCheckBox();
+		App::RunScene(*scene);
+	}
 
-		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("My cool Button"));
+	void GUITest::CreateTestButton()
+	{
+		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("Test Button"));
 		button = (Button*)ButtonGameObject->AddComponent(new Button());
 		button->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
 		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);
+	}
 
-		App::RunScene(*scene);
+	void GUITest::CreateTestCheckBox()
+	{
+		GameObject* CheckBoxGameObject = scene->AddGameObject(new GameObject("Test CheckBox"));
+		checkBox = (CheckBox*)CheckBoxGameObject->AddComponent(new CheckBox());
+		checkBox->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
+		checkBox->currentSprite->pivot = Vector2f(0.5f, 0.5f);
 	}
 
 	void GUITest::Update(double deltaTime)
@@ -83,6 +95,11 @@ namespace GUITest
 
 		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
+		ButtonStateTest();
+	}
+
+	void GUITest::ButtonStateTest()
+	{
 		if (button->state == Button::State::Hovered)
 		{
 			BFE_LOG_INFO("YOOOO, button Hovered", "");
