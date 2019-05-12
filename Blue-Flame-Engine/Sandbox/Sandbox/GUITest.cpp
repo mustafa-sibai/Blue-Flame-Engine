@@ -61,8 +61,10 @@ namespace GUITest
 	void GUITest::PostLoad()
 	{
 		App::PostLoad();
+
 		CreateTestButton();
-		//CreateTestCheckBox();
+		CreateTestCheckBox();
+
 		App::RunScene(*scene);
 	}
 
@@ -77,9 +79,9 @@ namespace GUITest
 	void GUITest::CreateTestCheckBox()
 	{
 		GameObject* CheckBoxGameObject = scene->AddGameObject(new GameObject("Test CheckBox"));
-		checkBox = (CheckBox*)CheckBoxGameObject->AddComponent(new CheckBox());
-		checkBox->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
-		checkBox->currentSprite->pivot = Vector2f(0.5f, 0.5f);
+		checkbox = (Checkbox*)CheckBoxGameObject->AddComponent(new Checkbox());
+		checkbox->gameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
+		checkbox->currentSprite->pivot = Vector2f(0.5f, 0.5f);
 	}
 
 	void GUITest::Update(double deltaTime)
@@ -96,11 +98,12 @@ namespace GUITest
 		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
 
 		ButtonStateTest();
+		CheckboxStateTest();
 	}
 
 	void GUITest::ButtonStateTest()
 	{
-		if (button->state == Button::State::Hovered)
+		if (button->state== Button::State::Hovered)
 		{
 			BFE_LOG_INFO("YOOOO, button Hovered", "");
 		}
@@ -113,6 +116,19 @@ namespace GUITest
 		if (button->state == Button::State::Released)
 		{
 			BFE_LOG_INFO("YOOOO, button Released", "");
+		}
+	}
+
+	void GUITest::CheckboxStateTest()
+	{
+		if (checkbox->state == Checkbox::State::Checked)
+		{
+			BFE_LOG_INFO("YOOOO, checkbox Checked", "");
+		}
+
+		if (checkbox->state == Checkbox::State::Unchecked)
+		{
+			BFE_LOG_INFO("YOOOO, checkbox Unchecked", "");
 		}
 	}
 

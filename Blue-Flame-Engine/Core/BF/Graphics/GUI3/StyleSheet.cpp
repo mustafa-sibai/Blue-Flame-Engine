@@ -3,7 +3,7 @@
 #include "BF/IO/ResourceManager.h"
 #include "BF/System/Debug.h"
 
-#define WIDGET_ARRAY_LENGTH 1
+#define WIDGET_ARRAY_LENGTH 2
 
 namespace BF
 {
@@ -37,7 +37,7 @@ namespace BF
 				const char* texturefilename = BFE_IS_NULL(root->FirstChildElement("StyleSheet")->Attribute("Path"));
 				texture->Create(BF::IO::ResourceManager::Load<TextureData>(texturefilename), Texture::Format::R8G8B8A8);
 
-				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button"/*, "Checkbox", "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2", "TabWindow", "TabWindow/Tab" */ };
+				string widgetNames[WIDGET_ARRAY_LENGTH] = { "Button", "Checkbox"/*, "Panel", "Scrollbar", "ScrollbarSlider", "MenuStrip", "MenuStrip/MenuItem1", "MenuStrip/MenuItem2", "TabWindow", "TabWindow/Tab" */ };
 
 				for (size_t i = 0; i < WIDGET_ARRAY_LENGTH; i++)
 				{
@@ -148,7 +148,7 @@ namespace BF
 				if(widgetName == "Button")
 					widget = new IWidget(IWidget::Type::Button);
 				else if (widgetName == "Checkbox")
-					widget = new IWidget(IWidget::Type::CheckBox);
+					widget = new IWidget(IWidget::Type::Checkbox);
 				else
 					widget = new IWidget(IWidget::Type::None);
 

@@ -8,15 +8,15 @@ namespace BF
 	{
 		namespace GUI
 		{
-			class BFE_API Button : public BF::Graphics::GUI::Widget<Button>
+			class BFE_API Checkbox : public BF::Graphics::GUI::Widget<Checkbox>
 			{
 			public:
-				enum class State { Normal, Pressed, Hovered, Released };
+				enum class State { Unchecked, Checked };
 				State state;
 
 			public:
-				Button();
-				~Button();
+				Checkbox();
+				~Checkbox();
 			};
 		}
 	}

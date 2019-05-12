@@ -14,20 +14,27 @@ namespace BF
 	{
 		namespace GUI
 		{
+			class StyleSheet;
+
 			class BFE_API IWidget : public BF::ECS::Component<IWidget>
 			{
 				friend class BF::ECS::GameObject;
 				friend class BF::Graphics::GUI::GUISystem;
+				friend class BF::Graphics::GUI::StyleSheet;
 
 			public:
-				enum class Type { None, Button, CheckBox };
-
-				std::vector<WidgetState> states;
 				BF::Graphics::Renderers::SpriteRendererComponents::Sprite* currentSprite;
-				BF::Math::Vector2i minSize;
 
 			protected:
+				enum class InternalState { Normal, Pressed, Hovered, Released };
+				enum class Type { None, Button, Checkbox };
+
 				Type type;
+				InternalState internalState;
+				int currentState;
+
+				BF::Math::Vector2i minSize;
+				std::vector<WidgetState> states;
 
 			public:
 				IWidget(Type type);

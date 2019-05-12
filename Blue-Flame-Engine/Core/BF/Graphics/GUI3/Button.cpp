@@ -8,7 +8,7 @@ namespace BF
 		{
 			Button::Button() :
 				Widget(Type::Button),
-				state(State::None)
+				state(State::Normal)
 			{
 			}
 

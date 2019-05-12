@@ -1,7 +1,7 @@
 #pragma once
 #include <BF/BlueFlame.h>
 #include "BF/Graphics/GUI3/Button.h"
-#include "BF/Graphics/GUI3/CheckBox.h"
+#include "BF/Graphics/GUI3/Checkbox.h"
 
 namespace GUITest
 {
@@ -15,7 +15,7 @@ namespace GUITest
 		BF::Graphics::Renderers::RenderLayer* spriteRenderLayer;
 		BF::Graphics::Renderers::RenderLayer* guiRenderLayer;
 		BF::Graphics::GUI::Button* button;
-		BF::Graphics::GUI::CheckBox* checkBox;
+		BF::Graphics::GUI::Checkbox* checkbox;
 
 	public:
 		GUITest();
@@ -29,7 +29,9 @@ namespace GUITest
 
 		//Text UI creation
 		void CreateTestButton();
-		void ButtonStateTest();
 		void CreateTestCheckBox();
+
+		void ButtonStateTest();
+		void CheckboxStateTest();
 	};
 }
