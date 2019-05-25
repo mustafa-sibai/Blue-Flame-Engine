@@ -138,28 +138,28 @@ namespace BF
 				Vector2f normal = Vector2f(lineShape->endPoint.y - lineShape->startPoint.y, -(lineShape->endPoint.x - lineShape->startPoint.x)).Normalize() * lineShape->thickness;
 
 				//Top Left
-				spriteBuffer->position = lineShape->startPoint + normal;
+				spriteBuffer->position = lineShape->startPoint;
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(lineShape->endPoint.x + normal.x, lineShape->endPoint.y + normal.y);
+				spriteBuffer->position = Vector2f(lineShape->endPoint.x + normal.x, lineShape->endPoint.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(lineShape->endPoint.x - normal.x, lineShape->endPoint.y - normal.y);
+				spriteBuffer->position = Vector2f(lineShape->endPoint.x + normal.x, lineShape->endPoint.y + normal.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = lineShape->startPoint - normal;
+				spriteBuffer->position = Vector2f(lineShape->startPoint.x, lineShape->startPoint.y + normal.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
@@ -168,7 +168,7 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon * regularPolygon)
+			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
 			{
 				Vector3f position = regularPolygon->gameObject->GetTransform()->GetWorldPosition();
 				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetWorldScale();

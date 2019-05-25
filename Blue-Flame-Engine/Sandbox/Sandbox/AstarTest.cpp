@@ -1,6 +1,6 @@
-#include "GUITest.h"
+#include "AstarTest.h"
 
-namespace GUITest
+namespace AstarTest
 {
 	using namespace BF;
 	using namespace BF::AI;
@@ -17,15 +17,15 @@ namespace GUITest
 	using namespace BF::Scripting;
 	using namespace BF::IO;
 
-	GUITest::GUITest()
+	AstarTest::AstarTest()
 	{
 	}
 
-	GUITest::~GUITest()
+	AstarTest::~AstarTest()
 	{
 	}
 
-	void GUITest::Initialize()
+	void AstarTest::Initialize()
 	{
 		scene = new Scene(*this);
 
@@ -38,7 +38,6 @@ namespace GUITest
 
 		defaultRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer();
 		spriteRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(new RenderLayer("Sprites", RenderLayer::SortingOrder::BackToFrontRightToLeft));
-		guiRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(new RenderLayer("GUI", RenderLayer::SortingOrder::BackToFrontRightToLeft));
 
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
@@ -53,38 +52,43 @@ namespace GUITest
 		App::Initialize();
 	}
 
-	void GUITest::Load()
+	void AstarTest::Load()
 	{
 		App::Load();
+
+		startingNodeTexture = new Texture2D();
+		startingNodeTexture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/Astar/startingNode.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
+
+		endNodeTexture = new Texture2D();
+		endNodeTexture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/Astar/endNode.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
+
+		nodeTexture = new Texture2D();
+		nodeTexture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/Astar/node.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
 	}
 
-	void GUITest::PostLoad()
+	void AstarTest::PostLoad()
 	{
 		App::PostLoad();
 
-		CreateTestButton();
-		CreateTestCheckBox();
+		GameObject* startingNodeGameObject = scene->AddGameObject(new GameObject("Starting Node"));
+		startingNodeGameObject->AddComponent(new Sprite(startingNodeTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
+		startingNodeGameObject->GetTransform()->SetPosition(Vector3f(-500, 200, 0));
+
+		GameObject* endNodeGameObject = scene->AddGameObject(new GameObject("end Node"));
+		endNodeGameObject->AddComponent(new Sprite(endNodeTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
+		endNodeGameObject->GetTransform()->SetPosition(Vector3f(400, -250, 0));
+
+
+
+
+		GameObject* lineGameObject = scene->AddGameObject(new GameObject("Starting Node"));
+		lineGameObject->AddComponent(new LineShape(Vector2f(-500, 200), Vector2f(400, -250), defaultRenderLayer));
+		lineGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
 
 		App::RunScene(*scene);
 	}
 
-	void GUITest::CreateTestButton()
-	{
-		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("Test Button"));
-		button = (Button*)ButtonGameObject->AddComponent(new Button());
-		button->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
-		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);
-	}
-
-	void GUITest::CreateTestCheckBox()
-	{
-		GameObject* CheckBoxGameObject = scene->AddGameObject(new GameObject("Test CheckBox"));
-		checkbox = (Checkbox*)CheckBoxGameObject->AddComponent(new Checkbox());
-		checkbox->gameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
-		checkbox->currentSprite->pivot = Vector2f(0.5f, 0.5f);
-	}
-
-	void GUITest::Update(double deltaTime)
+	void AstarTest::Update(double deltaTime)
 	{
 		App::Update(deltaTime);
 
@@ -96,43 +100,9 @@ namespace GUITest
 		BF::Math::Vector2f mousePosition = BF::Input::Mouse::GetPosition();
 
 		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
-
-		ButtonStateTest();
-		CheckboxStateTest();
 	}
 
-	void GUITest::ButtonStateTest()
-	{
-		if (button->state == Button::State::Hovered)
-		{
-			BFE_LOG_INFO("YOOOO, button Hovered", "");
-		}
-
-		if (button->state == Button::State::Pressed)
-		{
-			BFE_LOG_INFO("YOOOO, button pressed", "");
-		}
-
-		if (button->state == Button::State::Released)
-		{
-			BFE_LOG_INFO("YOOOO, button Released", "");
-		}
-	}
-
-	void GUITest::CheckboxStateTest()
-	{
-		if (checkbox->state == Checkbox::State::Checked)
-		{
-			BFE_LOG_INFO("YOOOO, checkbox Checked", "");
-		}
-
-		if (checkbox->state == Checkbox::State::Unchecked)
-		{
-			BFE_LOG_INFO("YOOOO, checkbox Unchecked", "");
-		}
-	}
-
-	void GUITest::Render()
+	void AstarTest::Render()
 	{
 		App::Render();
 	}

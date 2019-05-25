@@ -336,6 +336,9 @@
     <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\AI\Astar\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -750,6 +753,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\GUI3\CheckBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\AI\Astar\Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

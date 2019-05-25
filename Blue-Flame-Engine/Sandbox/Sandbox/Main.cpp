@@ -18,6 +18,7 @@
 #include "GUITest.h"
 #include "SpriteAnimationTest.h"
 #include "CameraViewCullingTest.h"
+#include "AstarTest.h"
 
 int main()
 {
@@ -40,9 +41,10 @@ int main()
 	//Hello_Triangle::Hello_Triangle app;
 	//IsoMapTest::IsoMapTest app;
 	//Forward_Renderer_Test::Forward_Renderer_Test app;
-	GUITest::GUITest app;
+	//GUITest::GUITest app;
 	//SpriteAnimationTest::SpriteAnimationTest app;
 	//CameraViewCullingTest::CameraViewCullingTest app;
+	AstarTest::AstarTest app;
 
 	engine.Run(app);
 #elif defined (BFE_CLIENT)
