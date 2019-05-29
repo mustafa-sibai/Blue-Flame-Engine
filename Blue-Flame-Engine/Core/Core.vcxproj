@@ -51,6 +51,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BF\AI\Astar\AstarAgent.cpp" />
+    <ClCompile Include="BF\AI\Astar\AstarSystem.cpp" />
     <ClCompile Include="BF\Graphics\Animation\Animation.cpp" />
     <ClCompile Include="BF\Graphics\Animation\AnimationNode.cpp" />
     <ClCompile Include="BF\Graphics\Animation\AnimationController.cpp" />
@@ -137,7 +139,7 @@
     <ClCompile Include="BF\Graphics\GUI3\GUISystem.cpp" />
     <ClCompile Include="BF\Graphics\Animation\Transition.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp" />
-    <ClCompile Include="BF\AI\Astar\Node.cpp" />
+    <ClCompile Include="BF\AI\Astar\AstarNode.cpp" />
     <None Include="BF\Graphics\Animation\DataType.inl" />
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <FileType>Document</FileType>
@@ -171,6 +173,8 @@
     <ClCompile Include="BF\ECS\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BF\AI\Astar\AstarAgent.h" />
+    <ClInclude Include="BF\AI\Astar\AstarSystem.h" />
     <ClInclude Include="BF\Graphics\Animation\Animation.h" />
     <ClInclude Include="BF\Graphics\Animation\AnimationNode.h" />
     <ClInclude Include="BF\Graphics\Animation\AnimationController.h" />
@@ -244,7 +248,7 @@
     <ClInclude Include="BF\Graphics\Animation\Transition.h" />
     <ClInclude Include="BF\Graphics\Animation\DataType.h" />
     <ClInclude Include="BF\Graphics\GUI3\CheckBox.h" />
-    <ClInclude Include="BF\AI\Astar\Node.h" />
+    <ClInclude Include="BF\AI\Astar\AstarNode.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

@@ -336,7 +336,13 @@
     <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\AI\Astar\Node.cpp">
+    <ClCompile Include="BF\AI\Astar\AstarSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\AI\Astar\AstarAgent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\AI\Astar\AstarNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -755,7 +761,13 @@
     <ClInclude Include="BF\Graphics\GUI3\CheckBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\AI\Astar\Node.h">
+    <ClInclude Include="BF\AI\Astar\AstarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\AI\Astar\AstarAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\AI\Astar\AstarNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,4 +1,4 @@
-#include "Node.h"
+#include "AstarAgent.h"
 
 namespace BF
 {
@@ -6,11 +6,11 @@ namespace BF
 	{
 		namespace Astar
 		{
-			Node::Node()
+			AstarAgent::AstarAgent()
 			{
 			}
 
-			Node::~Node()
+			AstarAgent::~AstarAgent()
 			{
 			}
 		}

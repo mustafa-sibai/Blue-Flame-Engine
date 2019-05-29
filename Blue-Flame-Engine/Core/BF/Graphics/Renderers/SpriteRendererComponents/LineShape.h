@@ -14,7 +14,7 @@ namespace BF
 				{
 					friend class SpriteRenderer;
 
-				private:
+				public:
 					BF::Math::Vector2f startPoint;
 					BF::Math::Vector2f endPoint;
 					float thickness;

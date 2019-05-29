@@ -17,24 +17,24 @@ namespace BF
 
 		void App::Initialize()
 		{
-			//BF::Application::SceneManager::GetScenes()[0]->Initialize();
 			constantBufferManager.Initialize();
 			cameraManager.Initialize();
 			renderPipeline.Initialize();
 			animationSystem.Initialize();
 			scriptExecutor.Initialize();
 			guiSystem.Initialize();
+			astarSystem.Initialize();
 		}
 
 		void App::Load()
 		{
-			//BF::Application::SceneManager::GetScenes()[0]->Load();
 			constantBufferManager.Load();
 			cameraManager.Load();
 			renderPipeline.Load();
 			animationSystem.Load();
 			scriptExecutor.Load();
 			guiSystem.Load();
+			astarSystem.Load();
 		}
 
 		void App::PostLoad()
@@ -45,6 +45,7 @@ namespace BF
 			animationSystem.PostLoad();
 			scriptExecutor.PostLoad();
 			guiSystem.PostLoad();
+			astarSystem.PostLoad();
 		}
 
 		void App::Update(double deltaTime)
@@ -55,10 +56,7 @@ namespace BF
 			animationSystem.Update(deltaTime);
 			scriptExecutor.Update(deltaTime);
 			guiSystem.Update(deltaTime);
-
-			//layerManager.Update();
-			//sceneManager.GetCurrentScene().Update();
-			//BF::Application::SceneManager::GetScenes()[0]->Update();
+			astarSystem.Update(deltaTime);
 		}
 
 		void App::Render()
@@ -69,9 +67,7 @@ namespace BF
 			animationSystem.Render();
 			scriptExecutor.Render();
 			guiSystem.Render();
-
-			//sceneManager.GetCurrentScene().Render();
-			//BF::Application::SceneManager::GetScenes()[0]->Render();
+			astarSystem.Render();
 		}
 
 		void App::RunScene(Scene& scene)

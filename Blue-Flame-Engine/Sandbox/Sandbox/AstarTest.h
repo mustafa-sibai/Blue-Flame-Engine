@@ -1,5 +1,6 @@
 #pragma once
 #include <BF/BlueFlame.h>
+#include <BF/AI/Astar/AstarNode.h>
 
 namespace AstarTest
 {
@@ -15,6 +16,9 @@ namespace AstarTest
 		BF::Graphics::API::Texture2D* endNodeTexture;
 		BF::Graphics::API::Texture2D* nodeTexture;
 
+		std::vector<BF::ECS::GameObject*> nodes;
+		BF::Graphics::Renderers::SpriteRendererComponents::LineShape* line;
+
 	public:
 		AstarTest();
 		~AstarTest();
@@ -24,5 +28,7 @@ namespace AstarTest
 		void PostLoad() override;
 		void Update(double deltaTime) override;
 		void Render() override;
+
+		void SetupNodes();
 	};
 }

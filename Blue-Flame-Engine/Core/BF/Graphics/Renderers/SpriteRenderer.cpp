@@ -135,7 +135,8 @@ namespace BF
 
 			void SpriteRenderer::MapLineBuffer(const LineShape* lineShape)
 			{
-				Vector2f normal = Vector2f(lineShape->endPoint.y - lineShape->startPoint.y, -(lineShape->endPoint.x - lineShape->startPoint.x)).Normalize() * lineShape->thickness;
+				Vector2f normal = Vector2f(lineShape->endPoint.y - lineShape->startPoint.y, lineShape->endPoint.x - lineShape->startPoint.x).Normalize() * lineShape->thickness;
+
 
 				//Top Left
 				spriteBuffer->position = lineShape->startPoint;
@@ -145,21 +146,21 @@ namespace BF
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(lineShape->endPoint.x + normal.x, lineShape->endPoint.y);
+				spriteBuffer->position = Vector2f(lineShape->startPoint.x - normal.x, lineShape->startPoint.y + normal.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(lineShape->endPoint.x + normal.x, lineShape->endPoint.y + normal.y);
+				spriteBuffer->position = Vector2f(lineShape->endPoint.x - normal.x, lineShape->endPoint.y + normal.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(lineShape->startPoint.x, lineShape->startPoint.y + normal.y);
+				spriteBuffer->position = Vector2f(lineShape->endPoint.x,  lineShape->endPoint.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;

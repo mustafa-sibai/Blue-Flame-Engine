@@ -1,4 +1,3 @@
-#pragma once
 template<class T>
 inline Vector3<T>::Vector3() :
 	x(0), y(0), z(0)

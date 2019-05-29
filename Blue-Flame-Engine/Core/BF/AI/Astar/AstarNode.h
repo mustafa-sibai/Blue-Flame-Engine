@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "BF/ECS/Component.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -8,7 +9,7 @@ namespace BF
 	{
 		namespace Astar
 		{
-			class BFE_API Node
+			class BFE_API AstarNode : public BF::ECS::Component<AstarNode>
 			{
 			public:
 				float gValue;
@@ -16,12 +17,12 @@ namespace BF
 				float fValue;
 				bool walkable;
 				bool inClosedList;
-				std::vector<Node> neighbours;
-				Node* parent;
+				std::vector<AstarNode*> neighbours;
+				AstarNode* parent;
 
 			public:
-				Node();
-				~Node();
+				AstarNode();
+				~AstarNode();
 			};
 		}
 	}

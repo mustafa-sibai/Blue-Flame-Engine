@@ -3,6 +3,7 @@
 #include "BF/Application/App.h"
 #include "BF/Graphics/Model.h"
 #include "BF/Graphics/GUI3/IWidget.h"
+#include "BF/AI/Astar/AstarNode.h"
 #include "BF/System/Debug.h"
 
 namespace BF
@@ -17,6 +18,7 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 		using namespace BF::Scripting;
+		using namespace BF::AI::Astar;
 
 		int GameObject::globalID = 0;
 
@@ -74,6 +76,13 @@ namespace BF
 					component->gameObject = this;
 					components.emplace_back(component);
 					scene->app.scriptExecutor.scripts.emplace_back((IScript*)component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::Astar)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					scene->app.astarSystem.AddNode((AstarNode*)component);
 					component->added = true;
 				}
 			}

@@ -16,6 +16,7 @@ namespace AstarTest
 	using namespace BF::System;
 	using namespace BF::Scripting;
 	using namespace BF::IO;
+	using namespace BF::AI::Astar;
 
 	AstarTest::AstarTest()
 	{
@@ -52,6 +53,73 @@ namespace AstarTest
 		App::Initialize();
 	}
 
+	void AstarTest::SetupNodes()
+	{
+		for (size_t i = 0; i < 5; i++)
+		{
+			GameObject* gameObject = scene->AddGameObject(new GameObject("Astar node" + std::to_string(i + 1)));
+
+			nodes.emplace_back(gameObject);
+			gameObject->AddComponent(new Sprite(nodeTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
+			gameObject->AddComponent(new AstarNode());
+		}
+
+		AstarNode* topLeftNode		= nodes[0]->GetComponent<AstarNode>();
+		AstarNode* topRightNode		= nodes[1]->GetComponent<AstarNode>();
+		AstarNode* bottomRightNode	= nodes[2]->GetComponent<AstarNode>();
+		AstarNode* bottomLeftNode	= nodes[3]->GetComponent<AstarNode>();
+		AstarNode* centerNode		= nodes[4]->GetComponent<AstarNode>();
+
+		//Top Left
+		nodes[0]->Name = "Top Left Node";
+		nodes[0]->GetTransform()->SetPosition(Vector3f(-500, 200, 0));
+		topLeftNode->neighbours.emplace_back(topRightNode);
+		topLeftNode->neighbours.emplace_back(bottomLeftNode);
+		topLeftNode->neighbours.emplace_back(centerNode);
+
+		//Top Right
+		nodes[1]->Name = "Top Right Node";
+		nodes[1]->GetTransform()->SetPosition(Vector3f(500, 200, 0));
+		topRightNode->neighbours.emplace_back(topLeftNode);
+		topRightNode->neighbours.emplace_back(bottomRightNode);
+		topRightNode->neighbours.emplace_back(centerNode);
+
+		//Bottom Right
+		nodes[2]->Name = "Bottom Right Node";
+		nodes[2]->GetTransform()->SetPosition(Vector3f(500, -200, 0));
+		bottomRightNode->neighbours.emplace_back(topRightNode);
+		bottomRightNode->neighbours.emplace_back(bottomLeftNode);
+		bottomRightNode->neighbours.emplace_back(centerNode);
+
+		//Bottom Left
+		nodes[3]->Name = "Bottom Left Node";
+		nodes[3]->GetTransform()->SetPosition(Vector3f(-500, -200, 0));
+		bottomLeftNode->neighbours.emplace_back(topLeftNode);
+		bottomLeftNode->neighbours.emplace_back(bottomRightNode);
+		bottomLeftNode->neighbours.emplace_back(centerNode);
+
+		//Center
+		nodes[4]->Name = "Center Node";
+		nodes[4]->GetTransform()->SetPosition(Vector3f(0, 0, 0));
+		centerNode->neighbours.emplace_back(topLeftNode);
+		centerNode->neighbours.emplace_back(topRightNode);
+		centerNode->neighbours.emplace_back(bottomRightNode);
+		centerNode->neighbours.emplace_back(bottomLeftNode);
+
+		for (size_t i = 0; i < nodes.size(); i++)
+		{
+			AstarNode* node = nodes[i]->GetComponent<AstarNode>();
+
+			for (size_t j = 0; j < node->neighbours.size(); j++)
+			{
+				Vector3f currentNodePosition = node->gameObject->GetTransform()->GetPosition();
+				Vector3f neighbourNodePosition = node->neighbours[j]->gameObject->GetTransform()->GetPosition();
+
+				nodes[i]->AddComponent(new LineShape(Vector2f(currentNodePosition.x, currentNodePosition.y), Vector2f(neighbourNodePosition.x, neighbourNodePosition.y), 2, defaultRenderLayer));
+			}
+		}
+	}
+
 	void AstarTest::Load()
 	{
 		App::Load();
@@ -70,7 +138,9 @@ namespace AstarTest
 	{
 		App::PostLoad();
 
-		GameObject* startingNodeGameObject = scene->AddGameObject(new GameObject("Starting Node"));
+		SetupNodes();
+
+		/*GameObject* startingNodeGameObject = scene->AddGameObject(new GameObject("Starting Node"));
 		startingNodeGameObject->AddComponent(new Sprite(startingNodeTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
 		startingNodeGameObject->GetTransform()->SetPosition(Vector3f(-500, 200, 0));
 
@@ -81,12 +151,14 @@ namespace AstarTest
 
 
 
-		GameObject* lineGameObject = scene->AddGameObject(new GameObject("Starting Node"));
+		GameObject* lineGameObject = scene->AddGameObject(new GameObject("line"));
 		lineGameObject->AddComponent(new LineShape(Vector2f(-500, 200), Vector2f(400, -250), defaultRenderLayer));
-		lineGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
+		lineGameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));*/
 
 		App::RunScene(*scene);
 	}
+
+	BF::Math::Vector2f pos(640, 360);
 
 	void AstarTest::Update(double deltaTime)
 	{
@@ -99,7 +171,19 @@ namespace AstarTest
 
 		BF::Math::Vector2f mousePosition = BF::Input::Mouse::GetPosition();
 
-		BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
+		/*BF::Math::Vector3f newPos = camera->ScreenToWorldPoint(Vector3f(mousePosition.x, mousePosition.y, 0), Vector2f(0.5f, 0.5f));
+		
+		line->startPoint = Vector2f(0);
+
+		Vector3f v3 = Camera::ScreenToWorldPoint(Vector3f(BF::Input::Mouse::GetPosition().x, BF::Input::Mouse::GetPosition().y, 0), Vector2f(0.5f, 0.5f));
+		line->endPoint = Vector2f(v3.x, v3.y);
+
+		BF::Math::Vector2f diff = BF::Input::Mouse::GetPosition() - pos;
+
+		BF::Math::Vector2f n(diff.y, diff.x);
+		n = n.Normalize();
+
+		BFE_LOG_INFO("" + line->endPoint, "");*/
 	}
 
 	void AstarTest::Render()

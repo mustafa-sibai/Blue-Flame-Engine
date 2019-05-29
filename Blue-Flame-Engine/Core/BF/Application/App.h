@@ -11,12 +11,10 @@
 
 #include "BF/Engine.h"
 #include "BF/Application/Window.h"
-//#include "BF/Application/Layers/LayerManager.h"
-//#include "BF/Graphics/GUI/StyleSheet.h"
-//#include "BF/Application/SceneManager.h"
 #include "BF/Graphics/Animation/AnimationSystem.h"
 #include "BF/Graphics/GUI3/GUISystem.h"
 #include "BF/Scripting/ScriptExecutor.h"
+#include "BF/AI/Astar/AstarSystem.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
 #include "BF/Graphics/CameraManager.h"
 #include "BF/Application/Scene.h"
@@ -46,9 +44,6 @@ namespace BF
 			BF::Graphics::Renderers::RenderPipeline renderPipeline;
 
 		private:
-			//SceneManager sceneManager;
-			//BF::Application::Layers::LayerManager layerManager;
-
 			Scene* mainScene;
 
 			BF::Graphics::CameraManager cameraManager;
@@ -56,6 +51,7 @@ namespace BF
 			BF::Scripting::ScriptExecutor scriptExecutor;
 			BF::Graphics::GUI::GUISystem guiSystem;
 			BF::Graphics::Animation::AnimationSystem animationSystem;
+			BF::AI::Astar::AstarSystem astarSystem;
 
 			BF::System::Timer frameTimer;
 			BF::System::Timer fixedUpdateTimer;
@@ -76,9 +72,6 @@ namespace BF
 			virtual void Render();
 
 			void RunScene(Scene& scene);
-
-			//inline SceneManager& GetSceneManager() { return sceneManager; }
-			//inline BF::Application::Layers::LayerManager& GetLayerManager() { return layerManager; }
 		};
 	}
 }
