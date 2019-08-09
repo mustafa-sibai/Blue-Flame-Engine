@@ -8,15 +8,24 @@ namespace BF
 	{
 		namespace GUI
 		{
+			/** @file Button.h
+			* A brief file description.
+			* A more elaborated file description.
+			*/
+			/*! A test class */
+
 			class BFE_API Button : public BF::Graphics::GUI::Widget<Button>
 			{
 			public:
-				enum class State { Normal, Pressed, Hovered, Released };
-				State state;
+				/** An enum type. 
+				 *  The documentation block cannot be put after the enum! 
+				*/
+				enum class State { Normal, Pressed, Hovered, Released }; /**< enum value 1 */
+				State state; /**< enum value 2 */
 
 			public:
-				Button();
-				~Button();
+				Button(); //!< a Constructor
+				~Button(); //!< a Destructor
 			};
 		}
 	}

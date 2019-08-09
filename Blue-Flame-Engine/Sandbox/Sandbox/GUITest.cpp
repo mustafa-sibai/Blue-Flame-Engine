@@ -63,7 +63,7 @@ namespace GUITest
 		App::PostLoad();
 
 		CreateTestButton();
-		CreateTestCheckBox();
+		//CreateTestCheckBox();
 
 		App::RunScene(*scene);
 	}
