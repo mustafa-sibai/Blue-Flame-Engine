@@ -11,9 +11,9 @@ namespace BF
 		using namespace BF::Graphics::Materials;
 
 		Model::Model() :
+			Component(IComponent::Type::Model),
 			materialManager(nullptr)
 		{
-			type = IComponent::Type::Model;
 		}
 
 		Model::~Model()

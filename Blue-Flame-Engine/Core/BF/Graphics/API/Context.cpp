@@ -6,19 +6,10 @@ namespace BF
 	{
 		namespace API
 		{
-			RenderAPI Context::renderAPI = RenderAPI::Default;
+			RenderAPI Context::renderAPI = RenderAPI::OpenGL;
 
 			Context::Context(RenderAPI renderAPI)
 			{
-				if (renderAPI == RenderAPI::Default)
-				{
-#ifdef BFE_PLATFORM_WINDOWS
-					renderAPI = RenderAPI::DirectX;
-#elif defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
-					renderAPI = RenderAPI::OpenGL;
-#endif
-				}
-
 				this->renderAPI = renderAPI;
 			}
 

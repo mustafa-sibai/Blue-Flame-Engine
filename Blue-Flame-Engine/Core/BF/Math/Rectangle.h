@@ -17,6 +17,7 @@ namespace BF
 			Rectangle();
 			Rectangle(int x, int y, int width, int height);
 			Rectangle(int x, int y, int width, int height, const Vector2f& pivot);
+			~Rectangle();
 
 			bool Intersect(const Rectangle& other) const;
 			Rectangle GetRectangleIntersectionArea(const Rectangle& rectangle) const;
@@ -41,7 +42,7 @@ namespace BF
 			[2] = bottom right corner
 			[3] = bottom left corner
 			*/
-			std::vector<Vector2i> GetCorners() const;
+			std::vector<Vector2i>& GetCorners();
 
 			friend std::string operator+(const std::string& left, const Rectangle& right) { return left + "{" + std::to_string(right.x) + ", " + std::to_string(right.y) + ", " + std::to_string(right.width) + ", " + std::to_string(right.height) + "}"; }
 			friend std::string operator+(const Rectangle& left, const std::string& right) { return "{" + std::to_string(left.x) + ", " + std::to_string(left.y) + ", " + std::to_string(left.width) + ", " + std::to_string(left.height) + "}" + right; }

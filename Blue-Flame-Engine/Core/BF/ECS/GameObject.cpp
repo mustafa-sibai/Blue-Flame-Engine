@@ -82,7 +82,7 @@ namespace BF
 				{
 					component->gameObject = this;
 					components.emplace_back(component);
-					scene->app.astarSystem.AddNode((AstarNode*)component);
+					scene->app.astarSystem.AddComponent((AstarNode*)component);
 					component->added = true;
 				}
 			}

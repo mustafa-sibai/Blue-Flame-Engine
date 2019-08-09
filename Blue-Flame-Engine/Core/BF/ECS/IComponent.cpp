@@ -6,8 +6,8 @@ namespace BF
 	{
 		int IComponent::globalID = 0;
 
-		IComponent::IComponent() :
-			id(0), added(false), type(Type::None), gameObject(nullptr)
+		IComponent::IComponent(Type type) :
+			type(type), id(0), added(false), gameObject(nullptr)
 		{
 			IComponent::globalID++;
 			id = globalID;

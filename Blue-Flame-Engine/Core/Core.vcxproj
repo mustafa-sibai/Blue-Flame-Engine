@@ -51,6 +51,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="BF\AI\Astar\AstarComponent.inl">
+      <FileType>CppCode</FileType>
+    </None>
     <ClCompile Include="BF\AI\Astar\AstarAgent.cpp" />
     <ClCompile Include="BF\AI\Astar\AstarSystem.cpp" />
     <ClCompile Include="BF\Graphics\Animation\Animation.cpp" />
@@ -80,7 +83,6 @@
     <ClCompile Include="BF\Graphics\API\VertexBufferLayout.cpp" />
     <ClCompile Include="BF\Graphics\Camera.cpp" />
     <ClCompile Include="BF\Graphics\Color.cpp" />
-    <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\IWidget.cpp" />
     <ClCompile Include="BF\Graphics\Light.cpp" />
     <ClCompile Include="BF\Graphics\Materials\MeshMaterial.cpp" />
@@ -102,6 +104,7 @@
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
     <ClCompile Include="BF\IO\BFALoader.cpp" />
+    <ClCompile Include="BF\IO\BFFLoader.cpp" />
     <ClCompile Include="BF\IO\BFMLoader.cpp" />
     <ClCompile Include="BF\IO\BFXLoader.cpp" />
     <ClCompile Include="BF\IO\FileLoader.cpp" />
@@ -140,6 +143,9 @@
     <ClCompile Include="BF\Graphics\Animation\Transition.cpp" />
     <ClCompile Include="BF\Graphics\GUI3\CheckBox.cpp" />
     <ClCompile Include="BF\AI\Astar\AstarNode.cpp" />
+    <ClCompile Include="BF\AI\Astar\IAstarComponent.cpp">
+      <FileType>CppCode</FileType>
+    </ClCompile>
     <None Include="BF\Graphics\Animation\DataType.inl" />
     <None Include="BF\Graphics\GUI3\Widget.inl">
       <FileType>Document</FileType>
@@ -173,6 +179,7 @@
     <ClCompile Include="BF\ECS\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BF\AI\Astar\AstarComponent.h" />
     <ClInclude Include="BF\AI\Astar\AstarAgent.h" />
     <ClInclude Include="BF\AI\Astar\AstarSystem.h" />
     <ClInclude Include="BF\Graphics\Animation\Animation.h" />
@@ -210,8 +217,6 @@
     <ClInclude Include="BF\Graphics\Camera.h" />
     <ClInclude Include="BF\Graphics\Color.h" />
     <ClInclude Include="BF\Graphics\Fonts\Character.h" />
-    <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h" />
-    <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h" />
     <ClInclude Include="BF\Graphics\GUI3\IWidget.h" />
     <ClInclude Include="BF\Graphics\Model.h" />
     <ClInclude Include="BF\Graphics\MeshData.h" />
@@ -249,6 +254,7 @@
     <ClInclude Include="BF\Graphics\Animation\DataType.h" />
     <ClInclude Include="BF\Graphics\GUI3\CheckBox.h" />
     <ClInclude Include="BF\AI\Astar\AstarNode.h" />
+    <ClInclude Include="BF\AI\Astar\IAstarComponent.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>
@@ -256,9 +262,11 @@
     <ClInclude Include="BF\Input\Keyboard.h" />
     <ClInclude Include="BF\Input\Mouse.h" />
     <ClInclude Include="BF\IO\BFALoader.h" />
+    <ClInclude Include="BF\IO\BFFLoader.h" />
     <ClInclude Include="BF\IO\BFMLoader.h" />
     <ClInclude Include="BF\IO\BFXLoader.h" />
     <ClInclude Include="BF\IO\FileFormats\BFAFormat.h" />
+    <ClInclude Include="BF\IO\FileFormats\BFFFormat.h" />
     <ClInclude Include="BF\IO\FileFormats\BFMFormat.h" />
     <ClInclude Include="BF\IO\FileFormats\BFXFormat.h" />
     <ClInclude Include="BF\IO\FileLoader.h" />
@@ -488,7 +496,7 @@
     <OutDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Core\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Debug;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependency\libs\GLEW\Windows\x64\Debug;$(SolutionDir)Dependency\libs\OpenAL-Soft\Windows\x64\Release;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(SolutionDir)Dependency\libs\TinyXML-2\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
     <TargetName>BlueFlame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
@@ -670,7 +678,7 @@ xcopy /Y "$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32sd.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;freetype271d.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;glew32sd.lib;OpenAL32.lib;XInput.lib;FreeImageLib.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4098 /ignore:4099 %(AdditionalOptions)</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>

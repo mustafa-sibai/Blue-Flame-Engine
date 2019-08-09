@@ -216,7 +216,7 @@
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Intermediate\$(Configuration)\</IntDir>
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\libs\FBX-SDK\Windows\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Output\Core\Windows\$(Platform)\Binary\$(Configuration)\;$(SolutionDir)Dependency\libs\FBX-SDK\Windows\$(Platform)\$(Configuration)\;$(SolutionDir)Dependency\libs\FreeType\Windows\x64\Debug;$(SolutionDir)Dependency\libs\FreeImage\Windows\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
     <OutDir>$(SolutionDir)Output\Editor\Windows\$(Platform)\Binary\$(Configuration)\</OutDir>
@@ -255,12 +255,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BFE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Editor\DependencyHeaders\FBX-SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(SolutionDir)Editor\DependencyHeaders\FBX-SDK;$(SolutionDir)Editor\DependencyHeaders\FreeType;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>BlueFlame.lib;libfbxsdk-mt.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>BlueFlame.lib;libfbxsdk-mt.lib;wininet.lib;freetype.lib;d3d11.lib;opengl32.lib;FreeImageLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Server-Debug|x64'">
@@ -447,16 +447,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="IO\BFAWriter.h" />
-    <ClInclude Include="IO\BFMWriter.h" />
-    <ClInclude Include="IO\BFXWriter.h" />
-    <ClInclude Include="IO\FBXLoader.h" />
+    <ClInclude Include="EditorScene.h" />
+    <ClInclude Include="Fonts\FontAtlasFactory.h" />
+    <ClInclude Include="Fonts\Glyph.h" />
+    <ClInclude Include="IO\BFFWriter.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IO\BFAWriter.cpp" />
-    <ClCompile Include="IO\BFMWriter.cpp" />
-    <ClCompile Include="IO\BFXWriter.cpp" />
-    <ClCompile Include="IO\FBXLoader.cpp" />
+    <ClCompile Include="EditorScene.cpp" />
+    <ClCompile Include="Fonts\FontAtlasFactory.cpp" />
+    <ClCompile Include="IO\BFFWriter.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

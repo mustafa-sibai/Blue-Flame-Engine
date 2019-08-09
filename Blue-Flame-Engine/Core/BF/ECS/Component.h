@@ -11,7 +11,7 @@ namespace BF
 		class Component : public IComponent
 		{
 		public:
-			Component();
+			Component(IComponent::Type type);
 			virtual ~Component();
 		};
 

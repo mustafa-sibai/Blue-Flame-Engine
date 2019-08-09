@@ -11,10 +11,9 @@ namespace BF
 		using namespace BF::Graphics::API;
 
 		Camera::Camera(const Matrix4& projectionMatrix) :
+			Component(IComponent::Type::Camera),
 			cameraManager(nullptr), bufferClearType(BufferClearType::ColorAndDepth)
 		{
-			type = IComponent::Type::Camera;
-			
 			modelMatrix = Matrix4::Identity();
 			viewMatrix = Matrix4::Identity();
 			this->projectionMatrix = projectionMatrix;

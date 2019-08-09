@@ -7,6 +7,7 @@ namespace BF
 	{
 		namespace FileFormats
 		{
+			//Blue Flame 3D Model Format
 			struct BFXFormat
 			{
 				char* fileHeader;

@@ -9,12 +9,13 @@ namespace BF
 			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
 			IWidget::IWidget(Type type) :
+				Component(IComponent::Type::Widget),
 				type(type), internalState(InternalState::Normal), currentState(0), currentSprite(new Sprite(nullptr, nullptr))
 			{
-				IComponent::type = IComponent::Type::Widget;
 			}
 
 			IWidget::IWidget(IWidget& other) :
+				Component(IComponent::Type::Widget),
 				type(other.type), internalState(other.internalState), currentState(other.currentState), currentSprite(other.currentSprite), minSize(other.minSize), states(other.states)
 			{
 				*currentSprite = this->states[0].normal;

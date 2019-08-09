@@ -4,9 +4,9 @@ namespace BF
 {
 	namespace Scripting
 	{
-		IScript::IScript()
+		IScript::IScript() :
+			Component(IComponent::Type::Script)
 		{
-			type = IComponent::Type::Script;
 		}
 
 		IScript::~IScript()

@@ -7,8 +7,8 @@
 #define BFE_MAX_SPRITES     60000
 #define BFE_SPRITE_VERTICES 4
 #define	BFE_SPRITE_INDICES  6
-#define BFE_VERTICES_SIZE BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
-#define BFE_INDICES_SIZE	 BFE_MAX_SPRITES * BFE_SPRITE_INDICES
+#define BFE_VERTICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
+#define BFE_INDICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_INDICES
 
 namespace BF
 {
@@ -29,7 +29,7 @@ namespace BF
 
 			SpriteRenderer::SpriteRenderer() :
 				IRenderer(RendererType::SpriteRenderer),
-				indexCount(0), submitSprite(true), totalDrawCalls(0)
+				spriteBuffer(nullptr), indexCount(0), submitSprite(true), totalDrawCalls(0)
 			{
 			}
 
@@ -137,7 +137,6 @@ namespace BF
 			{
 				Vector2f normal = Vector2f(lineShape->endPoint.y - lineShape->startPoint.y, lineShape->endPoint.x - lineShape->startPoint.x).Normalize() * lineShape->thickness;
 
-
 				//Top Left
 				spriteBuffer->position = lineShape->startPoint;
 				spriteBuffer->color = lineShape->color;
@@ -160,7 +159,7 @@ namespace BF
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(lineShape->endPoint.x,  lineShape->endPoint.y);
+				spriteBuffer->position = Vector2f(lineShape->endPoint.x, lineShape->endPoint.y);
 				spriteBuffer->color = lineShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
@@ -171,44 +170,74 @@ namespace BF
 
 			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
 			{
-				Vector3f position = regularPolygon->gameObject->GetTransform()->GetWorldPosition();
-				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetWorldScale();
+				Vector3f position = regularPolygon->gameObject->GetTransform()->GetPosition();
+				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetScale();
 
-				Vector2i halfScaledSize = Vector2i((regularPolygon->size.x * scale.x) / 2, (regularPolygon->size.y * scale.y) / 2);
-				Vector2f pivot = Vector2f(halfScaledSize.x * regularPolygon->pivot.x, halfScaledSize.y * regularPolygon->pivot.y);
+				Vector2i scaledSprite = Vector2i(regularPolygon->size.x * scale.x, regularPolygon->size.y * scale.y);
+
+				/*
+				x = left position
+				y = top position
+				width = right position
+				hgiht = bottom position
+
+				   x, y      width, y
+					 ----------
+					 |        |
+					 | sprite |
+					 |        |
+					 ---------- width, height
+				  x, height
+
+				  if we have an odd number of pixels and we want to center the image in the middle of the screen
+				  the extra pixels will always be at the bottom right.
+				  Meaning more of the image will be on the bottom right side rather than top left side.
+
+				  --------------------
+				  |       Screen     |
+				  |                  |
+				  |     -----------  |
+				  |     |---------|  |
+				  |     |--image--|  |
+				  |     -----------  |
+				  --------------------
+
+				  as you can see, the image is close to the bottom right of the screen.
+				*/
+				vector<Vector2i> corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, regularPolygon->pivot).GetCorners();
 
 				//Top Left
-				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
 				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);;
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y + halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(corners[1].x, corners[1].y);
 				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);;
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(position.x + halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(corners[2].x, corners[2].y);
 				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);;
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(position.x - halfScaledSize.x + pivot.x, position.y - halfScaledSize.y + pivot.y);
+				spriteBuffer->position = Vector2f(corners[3].x, corners[3].y);
 				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);
+				spriteBuffer->UV = Vector2f(0.0f);;
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapSpriteBuffer(const Sprite * sprite)
+			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
 			{
 				if (currentBoundTexture != nullptr)
 				{
@@ -257,18 +286,20 @@ namespace BF
 					 ---------- width, height
 				  x, height
 
-				  if we have an odd number of pixels, the extra pixels will always be at the bottom right.
+				  if we have an odd number of pixels and we want to center the image in the middle of the screen
+				  the extra pixels will always be at the bottom right.
 				  Meaning more of the image will be on the bottom right side rather than top left side.
 
 				  --------------------
-				  |      Screen      |
-				  |    -----------   |
-				  |    |---------|   |
-				  |    |--image--|   |
-				  |    -----------   |
+				  |       Screen     |
+				  |                  |
+				  |     -----------  |
+				  |     |---------|  |
+				  |     |--image--|  |
+				  |     -----------  |
 				  --------------------
 
-				  as you can see, the image is close to the top left center of the screen.
+				  as you can see, the image is close to the bottom right of the screen.
 				*/
 				vector<Vector2i> corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
 
@@ -303,58 +334,135 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapTextBuffer(const Text * text)
+			void SpriteRenderer::MapTextBuffer(Text* text)
 			{
-				/*if (currentBoundTexture != nullptr)
+				if (currentBoundTexture != nullptr)
 				{
-					BFE_IS_NULL(text.font);
-
-					if (text.font->fontAtlas->texture != currentBoundTexture)
+					if (currentBoundTexture != text->font->texture)
 					{
-						if (submitType == SubmitType::StaticSubmit)
-							return;
+						vertexBuffer.Unmap();
 
-						newDrawCall = true;
+						vertexBuffer.Bind();
+						indexBuffer.Bind();
+						Engine::GetContext().Draw(indexCount);
+						indexBuffer.Unbind();
+						vertexBuffer.Unbind();
 
-						End();
-						Begin(submitType, sortingOrder);
+						indexCount = 0;
+						totalDrawCalls++;
+
+						spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 					}
-				}*/
-
-				if (currentBoundTexture != text->font->fontAtlas->texture)
-				{
-					text->font->fontAtlas->texture->Bind();
-					currentBoundTexture = text->font->fontAtlas->texture;
 				}
 
-				for (size_t i = 0; i < text->characters.size(); i++)
+				if (currentBoundTexture != text->font->texture)
 				{
-					Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
-					CalculateUV(text->font->fontAtlas->texture, text->characters[i].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+					text->font->texture->Bind();
+					currentBoundTexture = text->font->texture;
+				}
+
+				text->size = Vector2i();
+				int biggestUnderLine = 0;
+				vector<Vector2i> corners;
+				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
+				text->characterPositions.clear();
+				
+				Vector2i cursorPosition;
+				Vector3f position = text->gameObject->GetTransform()->GetPosition();
+				Vector3f scale = text->gameObject->GetTransform()->GetScale();
+
+				for (size_t i = 0; i < text->text.size(); i++)
+				{
+					int unicode = text->text[i] - 32;
+					cursorPosition.y = ((*text->font->characters)[unicode].bearing.y - text->font->fontMaxYBearing) * scale.y;
+
+					//UnderLine is a variable that stores the hight of that character that is under a line. For example, the letter "g" bottom half is under the line
+					int underLine = ((*text->font->characters)[unicode].scissorRectangle.height - (*text->font->characters)[unicode].bearing.y) * scale.y;
+					biggestUnderLine = biggestUnderLine < underLine ? biggestUnderLine = underLine : biggestUnderLine;
+
+					if (i > 0)
+						cursorPosition.x += (int)(*text->font->characters)[unicode].bearing.x * scale.x;
+
+					text->characterPositions.push_back(cursorPosition);
+
+					if (i > 0)
+						cursorPosition.x -= (*text->font->characters)[unicode].bearing.x * scale.x;
+
+					cursorPosition.x += (*text->font->characters)[unicode].advance.x * scale.x;
+
+					text->size.x += (*text->font->characters)[unicode].advance.x;
+					text->size.y = (text->font->fontMaxYBearing + biggestUnderLine);
+				}
+
+				text->size *= Vector2i(scale.x, scale.y);
+
+				//TO DO: Change the GetEdgeOffsetByPivot to account for position. Test code to make sure no other code get messed up bceause of this change
+				BF::Math::Rectangle offset = BF::Math::Rectangle(position.x, position.y, text->size.x, text->size.y, text->pivot).GetEdgeOffsetByPivot();
+				offset.x += position.x;
+				offset.y += position.y;
+
+				for (size_t i = 0; i < text->text.size(); i++)
+				{
+					int unicode = text->text[i] - 32;
+					CalculateUV(text->font->texture, (*text->font->characters)[unicode].scissorRectangle, &topLeftUV, &topRightUV, &bottomRightUV, &bottomLeftUV);
+
+					Vector2i scaledCharacter = Vector2i((*text->font->characters)[unicode].scissorRectangle.width * scale.x,
+														(*text->font->characters)[unicode].scissorRectangle.height * scale.y);
+
+					/*
+					x = left position
+					y = top position
+					width = right position
+					hgiht = bottom position
+
+					   x, y      width, y
+						 ----------
+						 |        |
+						 | sprite |
+						 |        |
+						 ---------- width, height
+					  x, height
+
+					  if we have an odd number of pixels, the extra pixels will always be at the bottom right.
+					  Meaning more of the image will be on the bottom right side rather than top left side.
+
+					  --------------------
+					  |      Screen      |
+					  |    -----------   |
+					  |    |---------|   |
+					  |    |--image--|   |
+					  |    -----------   |
+					  --------------------
+
+					  as you can see, the image is close to the top left center of the screen.
+					*/
+
+					corners = BF::Math::Rectangle(text->characterPositions[i].x, text->characterPositions[i].y,
+												  scaledCharacter.x, scaledCharacter.y, Vector2f(0)).GetCorners();
 
 					//Top Left
-					spriteBuffer->position = text->characters[i].position;
+					spriteBuffer->position = Vector2f(corners[0].x + offset.x, corners[0].y + offset.y);
 					spriteBuffer->color = text->color;
 					spriteBuffer->UV = topLeftUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Top Right
-					spriteBuffer->position = Vector2f(text->characters[i].position.x + (float)text->characters[i].scissorRectangle.width, text->characters[i].position.y);
+					spriteBuffer->position = Vector2f(corners[1].x + offset.x, corners[1].y + offset.y);
 					spriteBuffer->color = text->color;
 					spriteBuffer->UV = topRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Right
-					spriteBuffer->position = Vector2f(text->characters[i].position.x + (float)text->characters[i].scissorRectangle.width, text->characters[i].position.y + (float)text->characters[i].scissorRectangle.height);
+					spriteBuffer->position = Vector2f(corners[2].x + offset.x, corners[2].y + offset.y);
 					spriteBuffer->color = text->color;
 					spriteBuffer->UV = bottomRightUV;
 					spriteBuffer->renderingType = 2;
 					spriteBuffer++;
 
 					//Bottom Left
-					spriteBuffer->position = Vector2f((float)text->characters[i].position.x, text->characters[i].position.y + (float)text->characters[i].scissorRectangle.height);
+					spriteBuffer->position = Vector2f(corners[3].x + offset.x, corners[3].y + offset.y);
 					spriteBuffer->color = text->color;
 					spriteBuffer->UV = bottomLeftUV;
 					spriteBuffer->renderingType = 2;
@@ -386,139 +494,28 @@ namespace BF
 								MapTextBuffer((Text*)iRenderable);
 						}
 					}
-
-					/*for (size_t i = 0; i < renderables.size(); i++)
-					{
-						for (size_t j = 0; j < renderables[i]->types.size(); j++)
-						{
-							if (IComponent::CompareTypes<Sprite>(renderables[i]->types[j]))
-								MapSpriteBuffer((Sprite*)renderables[i]);
-
-							else if (IComponent::CompareTypes<RegularPolygon>(renderables[i]->types[j]))
-								MapPolygonBuffer((RegularPolygon*)renderables[i]);
-
-							else if (IComponent::CompareTypes<LineShape>(renderables[i]->types[j]))
-								MapLineBuffer((LineShape*)renderables[i]);
-
-							else if (IComponent::CompareTypes<Text>(renderables[i]->types[j]))
-								MapTextBuffer((Text*)renderables[i]);
-						}
-					}*/
-
-					/*for (size_t i = 0; i < layerManager->GetSize(); i++)
-					{
-						for (size_t j = 0; j < layerManager->GetLayer(i).GetSize(); j++)
-						{
-							switch (layerManager->GetLayer(i).GetComponent(j).type)
-							{
-								case BF::Application::Component::Type::Renderable:
-								{
-									Renderable& renderable = (Renderable&)layerManager->GetLayer(i).GetComponent(j);
-
-									switch (renderable.renderableType)
-									{
-										case Renderable::RenderableType::Line:
-										{
-											LineShape& line = (LineShape&)renderable;
-											MapLineBuffer(line);
-											break;
-										}
-										case Renderable::RenderableType::RegularPolygon:
-										{
-											RegularPolygon& regularPolygon = (RegularPolygon&)renderable;
-											MapPolygonBuffer(regularPolygon);
-											break;
-										}
-										case Renderable::RenderableType::Sprite:
-										{
-											Sprite& sprite = (Sprite&)renderable;
-											MapSpriteBuffer(sprite);
-											break;
-										}
-										case Renderable::RenderableType::Text:
-										{
-											Text& text = (Text&)renderable;
-											MapTextBuffer(text);
-											break;
-										}
-										default:
-											break;
-									}
-									break;
-								}
-
-								case BF::Application::Component::Type::GUI:
-								{
-
-									break;
-								}
-
-								default:
-									break;
-							}
-						}
-					}*/
 				}
 			}
 
-			/*void SpriteRenderer::End()
-			{
-				if (submitSprite)
-				{
-					if (!newDrawCall)
-					{
-						if (sortingOrder == SortingOrder::BackToFront)
-							sort(renderables.begin(), renderables.end(), Sprite::BackToFront());
-						else if (sortingOrder == SortingOrder::FrontToBack)
-							sort(renderables.begin(), renderables.end(), Sprite::FrontToBack());
-
-						MapBuffer();
-						vertexBuffer.Unmap();
-					}
-					else
-						vertexBuffer.Unmap();
-				}
-
-				vertexBuffer.Bind();
-				indexBuffer.Bind();
-				Engine::GetContext().Draw(indexCount);
-				indexBuffer.Unbind();
-				vertexBuffer.Unbind();
-
-				if (submitType == SubmitType::StaticSubmit)
-				{
-					submitSprite = false;
-				}
-				else if (submitType == SubmitType::DynamicSubmit)
-				{
-					indexCount = 0;
-
-					if (!newDrawCall)
-						renderables.clear();
-
-					newDrawCall = false;
-				}
-			}*/
-
-			void SpriteRenderer::SetScissor(const Math::Rectangle & rectangle)
+			void SpriteRenderer::SetScissor(const Math::Rectangle& rectangle)
 			{
 				Render();
 				BF::Engine::GetContext().SetScissor(rectangle);
 			}
 
-			void SpriteRenderer::CalculateUV(const Texture2D * texture, const Math::Rectangle & scissorRectangle, Vector2f * topLeft, Vector2f * topRight, Vector2f * bottomRight, Vector2f * bottomLeft)
+			void SpriteRenderer::CalculateUV(const Texture2D* texture, const Math::Rectangle& scissorRectangle, Vector2f* topLeft, Vector2f* topRight, Vector2f* bottomRight, Vector2f* bottomLeft)
 			{
 				*topLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
-					1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
+									1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
 				*topRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-					1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
+									 1.0f / ((float)texture->GetTextureData()->height / (float)scissorRectangle.y));
 
 				*bottomRight = Vector2f(1.0f / ((float)texture->GetTextureData()->width / ((float)scissorRectangle.x + (float)scissorRectangle.width)),
-					1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+										1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 
 				*bottomLeft = Vector2f(1.0f / ((float)texture->GetTextureData()->width / (float)scissorRectangle.x),
-					1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
+									   1.0f / ((float)texture->GetTextureData()->height / ((float)scissorRectangle.y + (float)scissorRectangle.height)));
 			}
 		}
 	}

@@ -7,6 +7,8 @@ namespace BF
 	{
 		using namespace std;
 
+		std::vector<Vector2i> corners(4);
+
 		Rectangle::Rectangle() :
 			x(0), y(0), width(0), height(0)
 		{
@@ -19,6 +21,10 @@ namespace BF
 
 		Rectangle::Rectangle(int x, int y, int width, int height, const Vector2f& pivot) :
 			x(x), y(y), width(width), height(height), pivot(pivot)
+		{
+		}
+
+		Rectangle::~Rectangle()
 		{
 		}
 
@@ -76,11 +82,9 @@ namespace BF
 			return Rectangle(-offsetWidth, offsetHeight, width - offsetWidth, offsetHeight - height, pivot);
 		}
 
-		vector<Vector2i> Rectangle::GetCorners() const
+		vector<Vector2i>& Rectangle::GetCorners()
 		{
 			Rectangle edges = GetEdgeOffsetByPivot();
-
-			vector<Vector2i> corners(4);
 
 			corners[0] = Vector2i(x + edges.x,		y + edges.y);
 			corners[1] = Vector2i(x + edges.width,	y + edges.y);

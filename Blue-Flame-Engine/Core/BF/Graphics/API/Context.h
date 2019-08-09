@@ -27,9 +27,8 @@ namespace BF
 
 			enum class BFE_API RenderAPI
 			{
-				Default,
 #ifdef BFE_PLATFORM_WINDOWS
-				DirectX, OpenGL
+				OpenGL, DirectX
 #elif defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				OpenGL
 #endif	

@@ -1,5 +1,4 @@
 #include <BF/BlueFlame.h>
-
 //#include "_2DScene.h"
 //#include "_3DScene.h"
 //#include "new3DScene.h"
@@ -19,6 +18,7 @@
 #include "SpriteAnimationTest.h"
 #include "CameraViewCullingTest.h"
 #include "AstarTest.h"
+#include "FontTest.h"
 
 int main()
 {
@@ -44,7 +44,8 @@ int main()
 	//GUITest::GUITest app;
 	//SpriteAnimationTest::SpriteAnimationTest app;
 	//CameraViewCullingTest::CameraViewCullingTest app;
-	AstarTest::AstarTest app;
+	//AstarTest::AstarTest app;
+	FontTest::FontTest app;
 
 	engine.Run(app);
 #elif defined (BFE_CLIENT)

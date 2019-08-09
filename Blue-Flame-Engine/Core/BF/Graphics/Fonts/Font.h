@@ -1,5 +1,10 @@
 #pragma once
-#include "BF/Graphics/Fonts/FontAtlasFactory.h"
+#include <string>
+#include "BF/Math/Math.h"
+#include "BF/Graphics/Fonts/Character.h"
+#include "BF/Graphics/API/Texture2D.h"
+#include "BF/IO/Resource.h"
+#include "BF/Graphics/Fonts/Character.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -18,22 +23,23 @@ namespace BF
 
 		namespace Fonts
 		{
-			class BFE_API Font
-			{;
+			class BFE_API Font : public BF::IO::Resource
+			{
 				friend class BF::Graphics::Renderers::SpriteRendererComponents::Text;
 				friend class BF::Graphics::Renderers::SpriteRenderer;
 
-				private:
-					FontAtlas* fontAtlas;
+			public:
+				std::string fontName;
 
-				public:
-					Font();
-					~Font();
+				unsigned int fontPixelSize;
+				float fontMaxYBearing;
 
-					void Load(const std::string& filename, unsigned int charPixelSize, FontAtlasFactory::Language language);
+				API::Texture2D* texture;
+				std::vector<Character>* characters;
 
-					inline const std::string& GetName() const { return fontAtlas->fontName; }
-					inline unsigned int GetPixelSize() const { return fontAtlas->fontPixelSize; }
+			public:
+				Font(const std::string& fontName, unsigned int fontPixelSize, float fontMaxYBearing, API::Texture2D* texture, std::vector<Character>* characters);
+				~Font();
 			};
 		}
 	}

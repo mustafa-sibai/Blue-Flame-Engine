@@ -174,9 +174,6 @@
     <ClCompile Include="BF\Platform\API\OpenGL\GLConstantBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Graphics\Fonts\FontAtlasFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -345,6 +342,12 @@
     <ClCompile Include="BF\AI\Astar\AstarNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\AI\Astar\IAstarComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\IO\BFFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -488,9 +491,6 @@
     <ClInclude Include="BF\Graphics\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Graphics\Fonts\FontAtlas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Graphics\Fonts\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -546,9 +546,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Platform\API\OpenGL\GLConstantBuffer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Graphics\Fonts\FontAtlasFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Fonts\Font.h">
@@ -770,6 +767,18 @@
     <ClInclude Include="BF\AI\Astar\AstarNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\AI\Astar\IAstarComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\AI\Astar\AstarComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\IO\FileFormats\BFFFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\IO\BFFLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -830,6 +839,9 @@
     </None>
     <None Include="BF\Graphics\Animation\DataType.inl">
       <Filter>Header Files</Filter>
+    </None>
+    <None Include="BF\AI\Astar\AstarComponent.inl">
+      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
 </Project>

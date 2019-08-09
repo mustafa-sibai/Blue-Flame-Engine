@@ -1,25 +1,26 @@
 #pragma once
 #include <BF/BlueFlame.h>
-#include "ScenePanel.h"
 
 namespace Editor
 {
-	class EditorScene : public BF::Application::Scene
+	class EditorApp : public BF::Application::App
 	{
 	private:
-		BF::Graphics::Camera camera;
-
-		TileSheetPanel tilesheet;
-		ScenePanel scenePanel;
+		BF::Application::Scene* scene;
+		BF::Graphics::Camera* camera;
+		BF::Graphics::Renderers::RenderLayer* defaultRenderLayer;
+		BF::Graphics::Renderers::RenderLayer* spriteRenderLayer;
+		BF::Graphics::Renderers::RenderLayer* guiRenderLayer;
+		BF::Math::Rectangle orthographicRectangle;
 
 	public:
-		EditorScene();
-		~EditorScene();
+		EditorApp();
+		~EditorApp();
 
 		void Initialize() override;
 		void Load() override;
-		//void FixedUpdate() override;
-		void Update() override;
+		void PostLoad() override;
+		void Update(double deltaTime) override;
 		void Render() override;
 	};
 }

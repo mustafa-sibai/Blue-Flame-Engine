@@ -1,7 +1,7 @@
 #pragma once
 #include "BF/ECS/ISystem.h"
-#include "BF/ECS/IComponent.h"
 #include "BF/AI/Astar/AstarNode.h"
+#include "BF/AI/Astar/AstarAgent.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -14,6 +14,7 @@ namespace BF
 			{
 			private:
 				std::vector<BF::AI::Astar::AstarNode*> nodes;
+				std::vector<BF::AI::Astar::AstarAgent*> agents;
 
 			public:
 				AstarSystem();
@@ -25,8 +26,8 @@ namespace BF
 				void Update(double deltaTime) override;
 				void Render()				  override;
 
-				void AddNode(BF::ECS::IComponent* component);
-				void RemoveNode(BF::ECS::IComponent* component);
+				void AddComponent(BF::AI::Astar::IAstarComponent* component);
+				void RemoveComponent(BF::AI::Astar::IAstarComponent* component);
 
 				void FindPath(AstarNode* startingNode, AstarNode* endingNode);
 			};

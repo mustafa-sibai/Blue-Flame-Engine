@@ -38,12 +38,19 @@ namespace BF
 			{
 			}
 
-			void AstarSystem::AddNode(BF::ECS::IComponent* component)
+			void AstarSystem::AddComponent(IAstarComponent* component)
 			{
-				nodes.emplace_back((AstarNode*)component);
+				if (component->type == IAstarComponent::Type::AstarNode)
+				{
+					nodes.emplace_back((AstarNode*)component);
+				}
+				else if (component->type == IAstarComponent::Type::AstarAgent)
+				{
+					agents.emplace_back((AstarAgent*)component);
+				}
 			}
 
-			void AstarSystem::RemoveNode(BF::ECS::IComponent* component)
+			void AstarSystem::RemoveComponent(IAstarComponent* component)
 			{
 			}
 

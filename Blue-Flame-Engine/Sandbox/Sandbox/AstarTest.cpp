@@ -118,11 +118,21 @@ namespace AstarTest
 				nodes[i]->AddComponent(new LineShape(Vector2f(currentNodePosition.x, currentNodePosition.y), Vector2f(neighbourNodePosition.x, neighbourNodePosition.y), 2, defaultRenderLayer));
 			}
 		}
+
+		astarAgent = scene->AddGameObject(new GameObject("Astar agent"));
+
+		astarAgent->AddComponent(new Sprite(astarAgentTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
+		astarAgent->AddComponent(new AstarAgent());
+
+		//astarAgent
 	}
 
 	void AstarTest::Load()
 	{
 		App::Load();
+
+		astarAgentTexture = new Texture2D();
+		astarAgentTexture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/Astar/agent.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);
 
 		startingNodeTexture = new Texture2D();
 		startingNodeTexture->Create(BF::IO::ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/Astar/startingNode.png"), BF::Graphics::API::Texture::Format::R8G8B8A8);

@@ -9,15 +9,12 @@ namespace BF
 	{
 		class BFE_API TextureAtlas : public BF::Graphics::API::Texture
 		{
-			private:
-				unsigned int bufferSize;
+		public:
+			TextureAtlas();
+			~TextureAtlas();
 
-			public:
-				TextureAtlas();
-				~TextureAtlas();
-
-				void Create(unsigned int width, unsigned int height, Format format);
-				void AddTexture(const BF::Math::Rectangle& rectangle, uint8_t* data);
+			void Create(int width, int height, Format format);
+			void AddTexture(const BF::Math::Rectangle& rectangle, uint8_t* data);
 		};
 	}
 }

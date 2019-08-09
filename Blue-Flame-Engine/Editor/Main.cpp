@@ -1,21 +1,13 @@
 #include <iostream>
 #include <BF/BlueFlame.h>
-//#include "EditorScene.h"
 
-#include <BF/IO/BFALoader.h>
-#include "IO/FBXLoader.h"
-#include "IO/BFXWriter.h"
-#include "IO/BFMWriter.h"
-#include "IO/BFAWriter.h"
-
-using namespace Editor::IO;
+#include "EditorScene.h"
 
 int main()
 {
-	//BF::Engine engine(BF::Application::Window("Blue Flame Editor", BF::Math::Rectangle(0, 0, 1920, 1080), BF::Application::WindowStyle::Windowed), BF::Graphics::API::RenderAPI::OpenGL);
-
-	//Editor::EditorScene scene;
-	//engine.Run(scene);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	Editor::EditorApp scene;
+	engine.Run(scene);
 
 	/*
 	//-------------------------------------------------------------------------------------------------
@@ -148,11 +140,11 @@ int main()
 	BFXWriter bfxWriter(fbxloader.GetMeshs());
 	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane/PUVNPlane");*/
 	
-	FBXLoader fbxloader;
-	fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx", FBXLoader::ImportSettings::ImportPUVNTB);
+	//FBXLoader fbxloader;
+	//fbxloader.Load("../Sandbox/Assets/Models/Plane.fbx", FBXLoader::ImportSettings::ImportPUVNTB);
 
-	BFXWriter bfxWriter(fbxloader.GetMeshsData());
-	bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
+	//BFXWriter bfxWriter(fbxloader.GetMeshsData());
+	//bfxWriter.WriteToFile("../Sandbox/Assets/Models/Plane");
 
 	std::system("PAUSE");
 	//-------------------------------------------------------------------------------------------------

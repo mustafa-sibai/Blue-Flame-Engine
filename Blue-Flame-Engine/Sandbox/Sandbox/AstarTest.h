@@ -1,6 +1,7 @@
 #pragma once
 #include <BF/BlueFlame.h>
 #include <BF/AI/Astar/AstarNode.h>
+#include <BF/AI/Astar/AstarAgent.h>
 
 namespace AstarTest
 {
@@ -12,12 +13,14 @@ namespace AstarTest
 		BF::Math::Rectangle orthographicRectangle;
 		BF::Graphics::Renderers::RenderLayer* defaultRenderLayer;
 		BF::Graphics::Renderers::RenderLayer* spriteRenderLayer;
+
+		BF::Graphics::API::Texture2D* astarAgentTexture;
 		BF::Graphics::API::Texture2D* startingNodeTexture;
 		BF::Graphics::API::Texture2D* endNodeTexture;
 		BF::Graphics::API::Texture2D* nodeTexture;
 
+		BF::ECS::GameObject* astarAgent;
 		std::vector<BF::ECS::GameObject*> nodes;
-		BF::Graphics::Renderers::SpriteRendererComponents::LineShape* line;
 
 	public:
 		AstarTest();

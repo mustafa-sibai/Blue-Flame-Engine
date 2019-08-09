@@ -36,7 +36,7 @@
 
 #include <BF/Graphics/Renderers/RenderPipeline.h>
 
-#include <BF/Graphics/Fonts/FontAtlas.h>
+#include <BF/Graphics/Fonts/Font.h>
 
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
 #include <BF/Graphics/Fonts/Font.h>

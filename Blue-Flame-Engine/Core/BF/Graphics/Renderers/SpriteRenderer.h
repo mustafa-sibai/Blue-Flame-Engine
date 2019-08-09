@@ -27,8 +27,6 @@ namespace BF
 				friend class BF::Graphics::Renderers::RenderPipeline;
 
 			private:
-				//BF::Application::Scene& scene;
-
 				BF::Graphics::API::Shader shader;
 				BF::Graphics::API::VertexBuffer vertexBuffer;
 				BF::Graphics::API::IndexBuffer indexBuffer;
@@ -37,19 +35,12 @@ namespace BF
 				BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* spriteBuffer;
 				unsigned int indexCount;
 
-				//std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
-				//std::vector<Renderable*> removeList;
-				//int nullCount;
-
-				//SubmitType submitType;
-
-				bool submitSprite;//, newDrawCall;
+				bool submitSprite;
 				int totalDrawCalls;
 
 				static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
 			public:
-				//enum class SubmitType { StaticSubmit, DynamicSubmit };
 				BF::Graphics::Renderers::RenderLayerManager renderLayerManager;
 
 			public:
@@ -62,25 +53,15 @@ namespace BF
 				void Update(double deltaTime) override;
 				void Render()				  override;
 
-				//void Submit(Renderable& renderable);
-				//void Remove(Renderable& renderable);
-
-				//void Begin(SubmitType submitType, SortingOrder sortingOrder);
-				//void Render(const Renderable& renderable);
-				//void Render(Renderable&&) = delete;
-				//void End();
-
 				void SetScissor(const BF::Math::Rectangle& rectangle);
 
 				inline const BF::Graphics::API::Shader& GetShader() const { return shader; }
-
-				//SpriteRenderer& operator=(const SpriteRenderer& spriteRenderer);
 
 			private:
 				void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
 				void MapPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
 				void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
-				void MapTextBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
+				void MapTextBuffer(BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
 				void MapBuffer();
 				void CalculateUV(const BF::Graphics::API::Texture2D* texture, const BF::Math::Rectangle& scissorRectangle, BF::Math::Vector2f* topLeft, BF::Math::Vector2f* topRight, BF::Math::Vector2f* bottomRight, BF::Math::Vector2f* bottomLeft);
 			};

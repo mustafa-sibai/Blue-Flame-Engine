@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "BF/ECS/Component.h"
+#include "BF/AI/Astar/AstarComponent.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -9,7 +9,7 @@ namespace BF
 	{
 		namespace Astar
 		{
-			class BFE_API AstarNode : public BF::ECS::Component<AstarNode>
+			class BFE_API AstarNode : public AstarComponent<AstarNode>
 			{
 			public:
 				float gValue;

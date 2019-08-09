@@ -7,6 +7,7 @@ namespace BF
 	{
 		namespace FileFormats
 		{
+			//Blue Flame Animation Format
 			struct BFAFormat
 			{
 				char* fileHeader;

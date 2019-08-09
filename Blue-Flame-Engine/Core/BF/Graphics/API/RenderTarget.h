@@ -18,7 +18,7 @@ namespace BF
 					RenderTarget();
 					~RenderTarget();
 
-					void Create(unsigned int width, unsigned int height, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter);
+					void Create(int width, int height, int bitsPerPixel, Texture::Format format, Texture::Wrap wrap, Texture::Filter filter);
 
 					void Bind() const;
 					void Unbind() const;

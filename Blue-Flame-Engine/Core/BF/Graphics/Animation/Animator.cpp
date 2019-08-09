@@ -7,9 +7,9 @@ namespace BF
 		namespace Animation
 		{
 			Animator::Animator(AnimationController* animationController) :
+				Component(IComponent::Type::Animator),
 				animationController(animationController), currentSprite(nullptr)
 			{
-				IComponent::type = IComponent::Type::Animator;
 			}
 
 			Animator::~Animator()

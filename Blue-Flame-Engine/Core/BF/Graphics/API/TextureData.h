@@ -12,16 +12,18 @@ namespace BF
 			{
 				int width;
 				int height;
+				int size;
+				int bitsPerPixel;
 				uint8_t* buffer;
 				void* freeImage_bitmap;
 
 				TextureData() :
-					width(0), height(0), buffer(nullptr), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
+					width(0), height(0), bitsPerPixel(0), size(0), buffer(nullptr), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
 				{
 				}
 
-				TextureData(int width, int height, uint8_t* buffer) :
-					width(width), height(height), buffer(buffer), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
+				TextureData(int width, int height, int bitsPerPixel, uint8_t* buffer) :
+					width(width), height(height), bitsPerPixel(bitsPerPixel), size(sizeof(unsigned char) * width * height * (bitsPerPixel / 8)), buffer(buffer), freeImage_bitmap(nullptr), Resource(BF::IO::Resource::Type::Texture)
 				{
 				}
 			};

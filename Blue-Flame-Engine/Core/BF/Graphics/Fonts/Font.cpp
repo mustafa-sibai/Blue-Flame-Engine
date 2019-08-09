@@ -9,17 +9,13 @@ namespace BF
 			using namespace std;
 			using namespace BF::Math;
 
-			Font::Font()
+			Font::Font(const std::string& fontName, unsigned int fontPixelSize, float fontMaxYBearing, API::Texture2D* texture, std::vector<Character>* characters) :
+				fontName(fontName), fontPixelSize(fontPixelSize), fontMaxYBearing(fontMaxYBearing), texture(texture), characters(characters), Resource(BF::IO::Resource::Type::Font)
 			{
 			}
 
 			Font::~Font()
 			{
-			}
-
-			void Font::Load(const string& filename, unsigned int charPixelSize, FontAtlasFactory::Language language)
-			{
-				fontAtlas = FontAtlasFactory::GetFontAtlas(filename, charPixelSize, language);
 			}
 		}
 	}

@@ -1,5 +1,4 @@
 #include "TextureAtlas.h"
-#include <string.h>
 
 namespace BF
 {
@@ -7,8 +6,7 @@ namespace BF
 	{
 		using namespace BF::Graphics::API;
 
-		TextureAtlas::TextureAtlas() : 
-			bufferSize(0)
+		TextureAtlas::TextureAtlas()
 		{
 		}
 
@@ -16,18 +14,20 @@ namespace BF
 		{
 		}
 
-		void TextureAtlas::Create(unsigned int width, unsigned int height, Format format)
+		void TextureAtlas::Create(int width, int height, Format format)
 		{
+			this->format = format;
+
 			if (textureData == nullptr)
 				textureData = new TextureData();
 
 			textureData->width = width;
 			textureData->height = height;
+			textureData->bitsPerPixel = (int)format;
+			textureData->size = textureData->width * textureData->height * (textureData->bitsPerPixel / 8);
 
-			bufferSize = textureData->width * textureData->height * ((unsigned int)format / 8);
-
-			textureData->buffer = new uint8_t[bufferSize];
-			memset(textureData->buffer, 0, sizeof(uint8_t) * bufferSize);
+			textureData->buffer = new uint8_t[textureData->size];
+			memset(textureData->buffer, 0, sizeof(uint8_t) * textureData->size);
 		}
 
 		void TextureAtlas::AddTexture(const Math::Rectangle& rectangle, uint8_t* data)

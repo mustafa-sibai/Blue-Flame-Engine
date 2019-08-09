@@ -6,12 +6,23 @@ namespace BF
 	{
 		namespace Astar
 		{
-			AstarAgent::AstarAgent()
+			using namespace BF::Math;
+
+			AstarAgent::AstarAgent() :
+				AstarComponent(AstarComponent::Type::AstarAgent),
+				state(State::Idle)
 			{
 			}
 
 			AstarAgent::~AstarAgent()
 			{
+			}
+
+			void AstarAgent::SetDestination(const Vector3f& startPosition, const Vector3f& goalPosition)
+			{
+				this->startPosition = startPosition;
+				this->goalPosition = goalPosition;
+				state = State::LookingForPath;
 			}
 		}
 	}

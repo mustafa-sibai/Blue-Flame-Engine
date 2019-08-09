@@ -7,6 +7,7 @@ namespace BF
 	{
 		namespace FileFormats
 		{
+			//Blue Flame Map Format
 			struct BFMFormat
 			{
 				char* fileHeader;

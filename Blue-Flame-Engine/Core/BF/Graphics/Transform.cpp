@@ -8,6 +8,7 @@ namespace BF
 		using namespace BF::Math;
 
 		Transform::Transform() :
+			Component(IComponent::Type::Transform),
 			transformation(Matrix4::Identity()), worldTransformation(Matrix4::Identity()), position(0), rotation(0), scale(1), angle(0)
 		{
 		}

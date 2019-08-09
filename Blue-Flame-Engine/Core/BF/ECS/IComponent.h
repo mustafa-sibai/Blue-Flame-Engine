@@ -43,7 +43,7 @@ namespace BF
 			bool added;
 
 		protected:
-			enum class Type { None, Camera, Widget, Animator, Renderable, Model, Script, Astar };
+			enum class Type { None, Transform, Camera, Widget, Animator, Renderable, Model, Script, Astar };
 			Type type;
 
 			std::vector<size_t> types;
@@ -60,7 +60,7 @@ namespace BF
 			GameObject* gameObject;
 
 		public:
-			IComponent();
+			IComponent(Type type);
 			virtual ~IComponent();
 
 			template <typename T>

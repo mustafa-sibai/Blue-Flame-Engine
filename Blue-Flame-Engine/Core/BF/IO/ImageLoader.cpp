@@ -42,12 +42,14 @@ namespace BF
 			FIBITMAP* bitmap = nullptr;
 			bitmap = FreeImage_ConvertTo32Bits(dib);
 
-			TextureData* textureData = new TextureData();
-			textureData->freeImage_bitmap = bitmap;
-			textureData->buffer = FreeImage_GetBits(bitmap);
-			textureData->width = FreeImage_GetWidth(bitmap);
-			textureData->height = FreeImage_GetHeight(bitmap);
-
+			TextureData* textureData		= new TextureData();
+			textureData->freeImage_bitmap	= bitmap;
+			textureData->buffer				= FreeImage_GetBits(bitmap);
+			textureData->width				= FreeImage_GetWidth(bitmap);
+			textureData->height				= FreeImage_GetHeight(bitmap);
+			textureData->bitsPerPixel		= FreeImage_GetBPP(bitmap);
+			textureData->size				= textureData->width * textureData->height * (textureData->bitsPerPixel / 8);
+			
 			if ((textureData->buffer == 0) || (textureData->width == 0) || (textureData->height == 0))
 				BFE_LOG_ERROR("file courrpted", "");
 
