@@ -177,12 +177,6 @@
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Physics\PhysicsEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BF\Physics\Rigidbody2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BF\IO\Resource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -346,6 +340,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BF\IO\BFFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\BoxCollider2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\ICollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\PhysicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -549,12 +552,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Graphics\Fonts\Font.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Physics\PhysicsEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BF\Physics\Rigidbody2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\IO\ResourceManager.h">
@@ -779,6 +776,18 @@
     <ClInclude Include="BF\IO\BFFLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\Physics\BoxCollider2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\ICollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\PhysicsEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -841,6 +850,9 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="BF\AI\Astar\AstarComponent.inl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="BF\Physics\Collider.inl">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

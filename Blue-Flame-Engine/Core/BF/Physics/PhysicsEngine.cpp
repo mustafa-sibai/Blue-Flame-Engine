@@ -1,60 +1,97 @@
 #include "PhysicsEngine.h"
 #include "BF/System/Debug.h"
+#include "BF/Scripting/Script.h"
 
 namespace BF
 {
 	namespace Physics
 	{
-		using namespace BF;
+		using namespace BF::ECS;
 		using namespace BF::Math;
-		using namespace BF::Physics;
+		using namespace BF::Graphics;
+		using namespace BF::Scripting;
 
-		std::vector<Rigidbody2D*> PhysicsEngine::rigidbodies;
-
-		void PhysicsEngine::Add(Rigidbody2D* rigidbody2D)
+		PhysicsEngine::PhysicsEngine()
 		{
-			rigidbodies.push_back(rigidbody2D);
 		}
 
-		void PhysicsEngine::Update()
+		PhysicsEngine::~PhysicsEngine()
 		{
-			/*for (size_t i = 0; i < rigidbodies.size(); i++)
+		}
+
+		void PhysicsEngine::Initialize()
+		{
+		}
+
+		void PhysicsEngine::Load()
+		{
+		}
+
+		void PhysicsEngine::PostLoad()
+		{
+		}
+
+		void PhysicsEngine::Update(double deltaTime)
+		{
+			for (size_t i = 0; i < colliders.size(); i++)
 			{
-				if (rigidbodies[i]->useGravity)
-					rigidbodies[i]->Update();
-
-				if (i + 1 < rigidbodies.size())
+				switch (((ICollider*)colliders[i])->type)
 				{
-					if (rigidbodies[i]->CheckNextFrameCollision().Intersect(rigidbodies[i + 1]->CheckNextFrameCollision()))
+				case ICollider::Type::BoxCollider2D:
+				{
+					BoxCollider2D* boxA = (BoxCollider2D*)colliders[i];
+
+					for (size_t j = 0; j < colliders.size(); j++)
 					{
-						if (rigidbodies[i]->veclotiy > 0)
+						if (colliders[i] == colliders[j])
+							continue;
+
+						BoxCollider2D* boxB = (BoxCollider2D*)colliders[j];
+
+						if (IsColliding(boxA, boxB))
 						{
-							rigidbodies[i]->veclotiy = 0;
-							rigidbodies[i]->renderable.SetPosition(rigidbodies[i + 1]->renderable.GetPosition() - (float)rigidbodies[i]->renderable.GetRectangle().height);
+							BF::Scripting::IScript* script = boxA->gameObject->GetComponent<IScript>();
+
+							if (script != nullptr)
+								script->OnTriggerEnter(*boxB);
+
+							//BFE_LOG_INFO("Collision", "");
 						}
-						else if (rigidbodies[i + 1]->veclotiy > 0)
-						{
-							if (!rigidbodies[i + 1]->correctCollisionPosition)
-							{
-								Math::Rectangle ir = rigidbodies[i]->CheckNextFrameCollision().IntersectRectangle(rigidbodies[i + 1]->CheckNextFrameCollision());
-
-								Vector2f d = rigidbodies[i + 1]->direction;
-								Vector2f v = Min((float)ir.width, (float)ir.height) * d;
-
-								Math::Rectangle r = rigidbodies[i + 1]->CheckNextFrameCollision();
-								Vector2f p((float)r.x, (float)r.y);
-
-								rigidbodies[i + 1]->renderable.SetPosition(p - v);
-								rigidbodies[i + 1]->correctCollisionPosition = true;
-							}
-
-							rigidbodies[i + 1]->veclotiy = 0;
-						}
-
-						BFE_LOG_INFO("COLLIIISIONONNN !!", "");
 					}
+					break;
 				}
-			}*/
+				default:
+					break;
+				}
+			}
+		}
+
+		void PhysicsEngine::Render()
+		{
+		}
+
+		void PhysicsEngine::AddComponent(IComponent* component)
+		{
+			colliders.emplace_back((ICollider*)component);
+		}
+
+		void PhysicsEngine::RemoveComponent(IComponent* component)
+		{
+		}
+
+		bool PhysicsEngine::IsColliding(BoxCollider2D* boxA, BoxCollider2D* boxB)
+		{
+			Vector3f boxAPosition = boxA->gameObject->GetComponent<Transform>()->GetPosition();
+			Vector3f boxBPosition = boxB->gameObject->GetComponent<Transform>()->GetPosition();
+
+			boxA->CalculateEdges((int)boxAPosition.x, (int)boxAPosition.y);
+			boxB->CalculateEdges((int)boxBPosition.x, (int)boxBPosition.y);
+
+			if (boxB->leftEdge < boxA->rightEdge && boxB->rightEdge > boxA->leftEdge &&
+				boxB->topEdge > boxA->bottomEdge && boxB->bottomEdge < boxA->topEdge)
+				return true;
+
+			return false;
 		}
 	}
 }

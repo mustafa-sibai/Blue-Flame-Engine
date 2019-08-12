@@ -56,7 +56,6 @@ namespace BF
 
 				private:
 					void Swap(Sprite& rhs);
-
 				};
 			}
 		}

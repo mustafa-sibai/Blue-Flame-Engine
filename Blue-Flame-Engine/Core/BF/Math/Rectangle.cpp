@@ -33,14 +33,8 @@ namespace BF
 			Rectangle thisEdge = GetEdgeOffsetByPivot();
 			Rectangle otherEdge = other.GetEdgeOffsetByPivot();
 
-			int x = this->x + thisEdge.x;
-			int y = this->y + thisEdge.y;
-
-			int otherX = other.x + otherEdge.x;
-			int otherY = other.y + otherEdge.y;
-
-			if (otherX < x + width && otherX + other.width > x &&
-				otherY > y - height && otherY - other.height < y)
+			if (otherEdge.x < thisEdge.x + width && otherEdge.x + other.width > x &&
+				otherEdge.y > thisEdge.y - height && otherEdge.y - other.height < y)
 				return true;
 
 			return false;
@@ -49,7 +43,7 @@ namespace BF
 		Rectangle Rectangle::GetRectangleIntersectionArea(const Rectangle& rectangle) const
 		{
 			if (Intersect(rectangle))
-			{
+			{ 
 				int left	= Max(x,			rectangle.x);
 				int right	= Min(x + width,	rectangle.x + rectangle.width);
 				int top		= Max(y,			rectangle.y);
@@ -79,17 +73,17 @@ namespace BF
 			int offsetWidth = (int)(width * pivot.x);
 			int offsetHeight = (int)(height * pivot.y);
 
-			return Rectangle(-offsetWidth, offsetHeight, width - offsetWidth, offsetHeight - height, pivot);
+			return Rectangle(x - offsetWidth, y + offsetHeight, width - offsetWidth + x, offsetHeight - height + y, pivot);
 		}
 
 		vector<Vector2i>& Rectangle::GetCorners()
 		{
 			Rectangle edges = GetEdgeOffsetByPivot();
 
-			corners[0] = Vector2i(x + edges.x,		y + edges.y);
-			corners[1] = Vector2i(x + edges.width,	y + edges.y);
-			corners[2] = Vector2i(x + edges.width,	y + edges.height);
-			corners[3] = Vector2i(x + edges.x,		y + edges.height);
+			corners[0] = Vector2i(edges.x,		edges.y);
+			corners[1] = Vector2i(edges.width,	edges.y);
+			corners[2] = Vector2i(edges.width,	edges.height);
+			corners[3] = Vector2i(edges.x,		edges.height);
 
 			return corners;
 		}

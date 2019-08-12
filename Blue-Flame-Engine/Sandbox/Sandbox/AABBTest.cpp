@@ -1,9 +1,8 @@
-#include "FontTest.h"
+#include "AABBTest.h"
+#include "BF/Physics/BoxCollider2D.h"
 #include "ScriptTest.h"
-#include "BF/IO/ResourceManager.h"
-#include "BF/IO/BFFLoader.h"
 
-namespace FontTest
+namespace AABBTest
 {
 	using namespace BF;
 	using namespace BF::AI;
@@ -18,16 +17,17 @@ namespace FontTest
 	using namespace BF::System;
 	using namespace BF::Scripting;
 	using namespace BF::IO;
+	using namespace BF::Physics;
 
-	FontTest::FontTest()
+	AABBTest::AABBTest()
 	{
 	}
 
-	FontTest::~FontTest()
+	AABBTest::~AABBTest()
 	{
 	}
 
-	void FontTest::Initialize()
+	void AABBTest::Initialize()
 	{
 		scene = new Scene(*this);
 
@@ -52,48 +52,37 @@ namespace FontTest
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.0, 0.0f, 0.0f, 1.0f));
 
-		BF::IO::BFFLoader BFFLoader;
-		BF::Graphics::Fonts::Font* font = BFFLoader.Load("../Sandbox/Assets/Fonts/Arial.bff");
-
 		Texture2D* texture = new Texture2D();
-		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/cube - Copy.png"));
+		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/g.png"));
 
-		GameObject* sprite = scene->AddGameObject(new GameObject("main"));
+		sprite = scene->AddGameObject(new GameObject("sprite"));
 		sprite->AddComponent(new Sprite(texture, Vector2f(0.0f, 0.0f), defaultRenderLayer));
+		sprite->AddComponent(new BoxCollider2D(0, 0, 32, 32, Vector2f(0, 0)));
+		sprite->AddComponent(new ScriptTest());
+
 		sprite->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));
 
-		/*Texture2D* texture2 = new Texture2D();
-		texture2->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/test3.png"));
-
-		GameObject* sprite2 = scene->AddGameObject(new GameObject("main"));
-		sprite2->AddComponent(new Sprite(texture2, Vector2f(0.5f, 0.5f), defaultRenderLayer));
-		sprite2->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));*/
-
-
-		/*GameObject* rect = scene->AddGameObject(new GameObject("main"));
-		rect->AddComponent(new RegularPolygon(Vector2i(9, 10), Vector2f(0.5f, 0.5f), defaultRenderLayer));
-		rect->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));*/
-
-		GameObject* text = scene->AddGameObject(new GameObject("main"));
-		text->AddComponent(new Text(font, "Hello world!", Vector2f(.5f, .5f), defaultRenderLayer));
-		text->GetComponent<Transform>()->SetScale(Vector3f(2, 2, 2));
-		text->GetComponent<Transform>()->SetPosition(Vector3f(-100, 50, 0));
+		GameObject* sprite2 = scene->AddGameObject(new GameObject("sprite2"));
+		sprite2->AddComponent(new Sprite(texture, Vector2f(0.0f, 0.0f), defaultRenderLayer));
+		sprite2->AddComponent(new BoxCollider2D(0, 0, 32, 32, Vector2f(0, 0)));
+		//sprite2->AddComponent(new ScriptTest());
+		sprite2->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));
 
 		App::Initialize();
 	}
 
-	void FontTest::Load()
+	void AABBTest::Load()
 	{
 		App::Load();
 	}
 
-	void FontTest::PostLoad()
+	void AABBTest::PostLoad()
 	{
 		App::PostLoad();
 		App::RunScene(*scene);
 	}
 
-	void FontTest::Update(double deltaTime)
+	void AABBTest::Update(double deltaTime)
 	{
 		App::Update(deltaTime);
 
@@ -101,9 +90,33 @@ namespace FontTest
 		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f));
+	
+		
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::W))
+		{
+			direction = Vector3f(direction.x, 1, direction.z);
+		}
+
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::S))
+		{
+			direction = Vector3f(direction.x, -1, direction.z);
+		}
+
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::D))
+		{
+			direction = Vector3f(1, direction.y, direction.z);
+		}
+
+		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::A))
+		{
+			direction = Vector3f(-1, direction.y, direction.z);
+		}
+	
+		sprite->GetComponent<Transform>()->SetPosition(sprite->GetComponent<Transform>()->GetPosition() + (direction * speed * deltaTime));
+		direction = Vector3f(0, 0, 0);
 	}
 
-	void FontTest::Render()
+	void AABBTest::Render()
 	{
 		App::Render();
 	}

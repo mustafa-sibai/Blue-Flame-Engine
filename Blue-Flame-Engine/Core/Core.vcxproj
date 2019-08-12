@@ -51,6 +51,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BF\Physics\BoxCollider2D.cpp" />
+    <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
+    <ClCompile Include="BF\Physics\ICollider.cpp" />
+    <None Include="BF\Physics\Collider.inl">
+      <FileType>Document</FileType>
+    </None>
     <None Include="BF\AI\Astar\AstarComponent.inl">
       <FileType>CppCode</FileType>
     </None>
@@ -162,8 +168,6 @@
     <ClCompile Include="BF\System\Timer.cpp" />
     <ClCompile Include="BF\Graphics\Renderers\ForwardRenderer.cpp" />
     <ClCompile Include="BF\Graphics\Fonts\Font.cpp" />
-    <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
-    <ClCompile Include="BF\Physics\Rigidbody2D.cpp" />
     <ClCompile Include="BF\IO\Resource.cpp" />
     <ClCompile Include="BF\IO\ResourceManager.cpp" />
     <ClCompile Include="BF\System\Random.cpp" />
@@ -255,6 +259,10 @@
     <ClInclude Include="BF\Graphics\GUI3\CheckBox.h" />
     <ClInclude Include="BF\AI\Astar\AstarNode.h" />
     <ClInclude Include="BF\AI\Astar\IAstarComponent.h" />
+    <ClInclude Include="BF\Physics\BoxCollider2D.h" />
+    <ClInclude Include="BF\Physics\PhysicsEngine.h" />
+    <ClInclude Include="BF\Physics\ICollider.h" />
+    <ClInclude Include="BF\Physics\Collider.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>
@@ -303,8 +311,6 @@
     <ClInclude Include="BF\System\Timer.h" />
     <ClInclude Include="BF\Graphics\Renderers\ForwardRenderer.h" />
     <ClInclude Include="BF\Graphics\Fonts\Font.h" />
-    <ClInclude Include="BF\Physics\PhysicsEngine.h" />
-    <ClInclude Include="BF\Physics\Rigidbody2D.h" />
     <ClInclude Include="BF\IO\Resource.h" />
     <ClInclude Include="BF\IO\ResourceManager.h" />
     <ClInclude Include="BF\System\Debug.h" />

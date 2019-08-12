@@ -10,6 +10,8 @@ public:
 	ScriptTest();
 	~ScriptTest();
 
+	void OnTriggerEnter(BF::Physics::ICollider& other) override;
+
 	void Start() override;
 	void Update() override;
 };

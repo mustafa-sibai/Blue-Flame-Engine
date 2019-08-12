@@ -396,10 +396,7 @@ namespace BF
 
 				text->size *= Vector2i(scale.x, scale.y);
 
-				//TO DO: Change the GetEdgeOffsetByPivot to account for position. Test code to make sure no other code get messed up bceause of this change
 				BF::Math::Rectangle offset = BF::Math::Rectangle(position.x, position.y, text->size.x, text->size.y, text->pivot).GetEdgeOffsetByPivot();
-				offset.x += position.x;
-				offset.y += position.y;
 
 				for (size_t i = 0; i < text->text.size(); i++)
 				{
@@ -438,7 +435,7 @@ namespace BF
 					*/
 
 					corners = BF::Math::Rectangle(text->characterPositions[i].x, text->characterPositions[i].y,
-												  scaledCharacter.x, scaledCharacter.y, Vector2f(0)).GetCorners();
+												  scaledCharacter.x, scaledCharacter.y, Vector2f()).GetCorners();
 
 					//Top Left
 					spriteBuffer->position = Vector2f(corners[0].x + offset.x, corners[0].y + offset.y);

@@ -25,6 +25,11 @@ namespace BF
 			Vector2i Center() const;
 
 			/*
+			Returns where all four edges of a rectangle position should be depending on the pivot point
+			x		= left
+			width	= right
+			y		= top
+			hieght	= bottom
 			@pivot:
 			Top left = 0, 0
 			Top right = 1, 0

@@ -19,6 +19,7 @@
 #include "CameraViewCullingTest.h"
 #include "AstarTest.h"
 #include "FontTest.h"
+#include "AABBTest.h"
 
 int main()
 {
@@ -45,7 +46,8 @@ int main()
 	//SpriteAnimationTest::SpriteAnimationTest app;
 	//CameraViewCullingTest::CameraViewCullingTest app;
 	//AstarTest::AstarTest app;
-	FontTest::FontTest app;
+	//FontTest::FontTest app;
+	AABBTest::AABBTest app;
 
 	engine.Run(app);
 #elif defined (BFE_CLIENT)

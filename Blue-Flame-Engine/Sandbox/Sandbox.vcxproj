@@ -563,6 +563,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Sandbox\AABBTest.cpp" />
     <ClCompile Include="Sandbox\FontTest.cpp" />
     <ClCompile Include="Sandbox\AstarTest.cpp" />
     <ClCompile Include="Sandbox\CameraViewCullingTest.cpp" />
@@ -697,6 +698,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Sandbox\AABBTest.h" />
     <ClInclude Include="Sandbox\FontTest.h" />
     <ClInclude Include="Sandbox\AstarTest.h" />
     <ClInclude Include="Sandbox\CameraViewCullingTest.h" />

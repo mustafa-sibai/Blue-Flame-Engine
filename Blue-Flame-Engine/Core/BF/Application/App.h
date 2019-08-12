@@ -17,6 +17,7 @@
 #include "BF/AI/Astar/AstarSystem.h"
 #include "BF/Graphics/Renderers/RenderPipeline.h"
 #include "BF/Graphics/CameraManager.h"
+#include "BF/Physics/PhysicsEngine.h"
 #include "BF/Application/Scene.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/System/Timer.h"
@@ -48,6 +49,7 @@ namespace BF
 
 			BF::Graphics::CameraManager cameraManager;
 			BF::Graphics::ConstantBufferManager constantBufferManager;
+			BF::Physics::PhysicsEngine physicsEngine;
 			BF::Scripting::ScriptExecutor scriptExecutor;
 			BF::Graphics::GUI::GUISystem guiSystem;
 			BF::Graphics::Animation::AnimationSystem animationSystem;

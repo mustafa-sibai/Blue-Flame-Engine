@@ -19,6 +19,7 @@ namespace BF
 		{
 			constantBufferManager.Initialize();
 			cameraManager.Initialize();
+			physicsEngine.Initialize();
 			renderPipeline.Initialize();
 			animationSystem.Initialize();
 			scriptExecutor.Initialize();
@@ -30,6 +31,7 @@ namespace BF
 		{
 			constantBufferManager.Load();
 			cameraManager.Load();
+			physicsEngine.Load();
 			renderPipeline.Load();
 			animationSystem.Load();
 			scriptExecutor.Load();
@@ -41,6 +43,7 @@ namespace BF
 		{
 			constantBufferManager.PostLoad();
 			cameraManager.PostLoad();
+			physicsEngine.PostLoad();
 			renderPipeline.PostLoad();
 			animationSystem.PostLoad();
 			scriptExecutor.PostLoad();
@@ -52,6 +55,7 @@ namespace BF
 		{
 			constantBufferManager.Update(deltaTime);
 			cameraManager.Update(deltaTime);
+			physicsEngine.Update(deltaTime);
 			renderPipeline.Update(deltaTime);
 			animationSystem.Update(deltaTime);
 			scriptExecutor.Update(deltaTime);
@@ -63,6 +67,7 @@ namespace BF
 		{
 			constantBufferManager.Render();
 			cameraManager.Render();
+			physicsEngine.Render();
 			renderPipeline.Render();
 			animationSystem.Render();
 			scriptExecutor.Render();

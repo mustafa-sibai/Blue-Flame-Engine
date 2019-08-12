@@ -3,6 +3,7 @@
 #include "BF/Application/App.h"
 #include "BF/Graphics/Model.h"
 #include "BF/Graphics/GUI3/IWidget.h"
+#include "BF/Physics/ICollider.h"
 #include "BF/AI/Astar/AstarNode.h"
 #include "BF/System/Debug.h"
 
@@ -17,6 +18,7 @@ namespace BF
 		using namespace BF::Graphics::Animation;
 		using namespace BF::Graphics::Renderers;
 		using namespace BF::Graphics::Renderers::SpriteRendererComponents;
+		using namespace BF::Physics;
 		using namespace BF::Scripting;
 		using namespace BF::AI::Astar;
 
@@ -40,7 +42,16 @@ namespace BF
 		{
 			if (!component->added)
 			{
-				if (component->type == IComponent::Type::Camera)
+				if (component->type == IComponent::Type::Physics)
+				{
+					component->gameObject = this;
+					components.emplace_back(component);
+					//ICollider* collider = (ICollider*)component;
+					//collider->cameraManager = &scene->app.cameraManager;
+					scene->app.physicsEngine.AddComponent(component);
+					component->added = true;
+				}
+				else if (component->type == IComponent::Type::Camera)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);

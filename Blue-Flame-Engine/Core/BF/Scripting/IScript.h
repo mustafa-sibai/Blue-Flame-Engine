@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/ECS/Component.h"
+#include "BF/Physics/Collider.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -11,6 +12,8 @@ namespace BF
 		public:
 			IScript();
 			virtual ~IScript();
+
+			virtual void OnTriggerEnter(BF::Physics::ICollider& other);
 
 			virtual void Start();
 			virtual void Update();
