@@ -28,7 +28,7 @@ namespace BF
 				//Platform::API::DirectX::GLTextureCube dxTexture2D;
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-				Platform::API::OpenGL::GLTextureCube glTextureCube;
+				BF::Platform::API::OpenGL::GLTextureCube glTextureCube;
 #endif
 			public:
 				TextureCube(const Shader& shader);

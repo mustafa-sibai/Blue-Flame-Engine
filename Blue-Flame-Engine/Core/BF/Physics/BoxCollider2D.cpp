@@ -41,5 +41,18 @@ namespace BF
 			topEdge				= offsetY + y + offsetHeight;
 			bottomEdge			= offsetHeight - height + y + offsetY;
 		}
+
+		BoxCollider2D BoxCollider2D::GetIntersectionArea(const BoxCollider2D& boxCollider2D) const
+		{
+			int left = Max(leftEdge, boxCollider2D.leftEdge);
+			int right = Min(rightEdge, boxCollider2D.rightEdge);
+			int top = Min(topEdge, boxCollider2D.topEdge);
+			int bottom = Max(bottomEdge, boxCollider2D.bottomEdge);
+
+			int width = abs(left - right);
+			int height = abs(top - bottom);
+
+			return BoxCollider2D(left, top, width, height, Vector2f(0, 0));
+		}
 	}
 }

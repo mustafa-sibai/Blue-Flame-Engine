@@ -1,4 +1,5 @@
 #pragma once
+#include <Dwmapi.h>
 #include "BF/System/Debug.h"
 
 namespace BF

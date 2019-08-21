@@ -1,0 +1,34 @@
+vertexShader = R"(
+#version 450 core
+layout(location = 0) in vec2 inPosition;
+layout(location = 1) in vec4 inColor;
+
+out vec4 psColor;
+
+layout (std140, binding = 0) uniform PerFrameBuffer
+{
+	mat4 viewMatrix;
+	mat4 projectionMatrix;
+	vec4 position;
+} perFrameBuffer;
+
+void main()
+{
+	gl_Position = perFrameBuffer.projectionMatrix * perFrameBuffer.viewMatrix * vec4(inPosition.xy, 0.0f, 1.0f);
+
+	psColor = inColor;
+}
+)";
+
+pixelShader = R"(
+#version 450 core
+
+in vec4 psColor;
+
+out vec4 color;
+
+void main() 
+{
+	color = psColor;
+}
+)";

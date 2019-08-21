@@ -12,19 +12,18 @@ namespace BF
 			{
 				class BFE_API DXIndexBuffer
 				{
-					private:
-						ID3D11Buffer* buffer;
+				private:
+					ID3D11Buffer* buffer;
+					unsigned int count;
 
-						unsigned int count;
+				public:
+					DXIndexBuffer();
+					~DXIndexBuffer();
 
-					public:
-						DXIndexBuffer();
-						~DXIndexBuffer();
+					void Create(const unsigned int* indices, unsigned int count);
+					void Bind() const;
 
-						void Create(const unsigned int* indices, unsigned int count);
-						void Bind() const;
-
-						inline unsigned int GetIndicesCount() const { return count; }
+					inline unsigned int GetIndicesCount() const { return count; }
 				};
 			}
 		}

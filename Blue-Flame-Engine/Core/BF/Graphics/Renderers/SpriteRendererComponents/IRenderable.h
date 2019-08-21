@@ -80,7 +80,7 @@ namespace BF
 					};
 
 				protected:
-					enum class Type { None, Sprite, LineShape, RegularPolygon, Text };
+					enum class Type { None, Sprite, LineShape, RectangleShape, RegularPolygon, Text };
 					Type type;
 
 				public:

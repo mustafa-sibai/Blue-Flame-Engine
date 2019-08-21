@@ -25,6 +25,7 @@ namespace BF
 
 		private:
 			void CalculateEdges(int offsetX, int offsetY);
+			BoxCollider2D GetIntersectionArea(const BoxCollider2D& boxCollider2D) const;
 		};
 	}
 }

@@ -12,7 +12,8 @@ namespace BF
 				using namespace std;
 				using namespace BF::Graphics::API;
 
-				GLTextureCube::GLTextureCube()
+				GLTextureCube::GLTextureCube() :
+					textureID(0)
 				{
 				}
 

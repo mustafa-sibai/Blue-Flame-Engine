@@ -8,6 +8,7 @@
 #include "BF/Graphics/Renderers/ForwardRenderer.h"
 #include "BF/Graphics/Renderers/SkyboxRenderer.h"
 #include "BF/Graphics/Renderers/PostProcessing.h"
+#include "BF/Debug/Debug.h"
 #include "BF/Common.h"
 
 namespace BF

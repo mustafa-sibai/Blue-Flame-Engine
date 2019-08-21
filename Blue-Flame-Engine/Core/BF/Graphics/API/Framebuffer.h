@@ -18,24 +18,24 @@ namespace BF
 
 			class BFE_API Framebuffer
 			{
-				private:
+			private:
 #ifdef BFE_PLATFORM_WINDOWS
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
-					Platform::API::OpenGL::GLFramebuffer glFramebuffer;
+				BF::Platform::API::OpenGL::GLFramebuffer glFramebuffer;
 #endif
 
-				public:
-					FramebufferFormat format;
+			public:
+				FramebufferFormat format;
 
-				public:
-					Framebuffer();
-					~Framebuffer();
+			public:
+				Framebuffer();
+				~Framebuffer();
 
-					void Create(Graphics::API::Texture2D& texture2D, BF::Graphics::API::FramebufferFormat format);
+				void Create(BF::Graphics::API::Texture2D& texture2D, BF::Graphics::API::FramebufferFormat format);
 
-					void Bind() const;
-					void Unbind() const;
+				void Bind() const;
+				void Unbind() const;
 			};
 		}
 	}

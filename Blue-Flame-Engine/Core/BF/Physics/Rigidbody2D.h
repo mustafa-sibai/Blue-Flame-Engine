@@ -1,30 +1,24 @@
 #pragma once
 #include "BF/Math/Vector2.h"
-#include "BF/Graphics/Renderers/SpriteRendererComponents/Renderable.h"
+#include "BF/Physics/PhysicsObject.h"
 #include "BF/Common.h"
 
 namespace BF
 {
 	namespace Physics
 	{
-		class BFE_API Rigidbody2D
+		class BFE_API Rigidbody2D : public PhysicsObject<Rigidbody2D>
 		{
-			public:
-				BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable;
+		public:
+			bool useGravity;
+			float speed;
+			BF::Math::Vector2f direction;
+			BF::Math::Vector2f veclotiy;
+			bool correctCollisionPosition = false;
 
-				bool useGravity;
-				float speed;
-				Math::Vector2f direction;
-				Math::Vector2f veclotiy;
-				//Math::Vector2 testVeclotiy;
-				bool correctCollisionPosition = false;
-
-			public:
-				Rigidbody2D(BF::Graphics::Renderers::SpriteRendererComponents::IRenderable& renderable);
-				~Rigidbody2D();
-
-				void Update();
-				//BF::Math::Rectangle CheckNextFrameCollision();
+		public:
+			Rigidbody2D();
+			virtual ~Rigidbody2D();
 		};
 	}
 }

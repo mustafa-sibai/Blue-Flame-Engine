@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "BF/ECS/GameObject.h"
+#include "BF/System/Debug.h"
 
 namespace BF
 {
@@ -17,10 +18,17 @@ namespace BF
 		{
 		}
 
+		Vector3f prevPos;
+		//Vector3f dir;
+
 		void Transform::SetPosition(const Vector3f& position)
 		{
+			prevPos = this->position;
 			this->position = position;
 			transformation = Matrix4::Translate(position) * Matrix4::Rotate(angle, rotation) * Matrix4::Scale(scale);
+
+			direction = (this->position - prevPos).Normalize();
+			//BFE_LOG_INFO("dir " + direction, "");
 
 			UpdateTransform();
 		}

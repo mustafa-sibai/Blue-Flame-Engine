@@ -12,7 +12,7 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				GLVertexBuffer::GLVertexBuffer() :
-					vbo(0), vao(0), vertexBufferLayout(nullptr)
+					vbo(0), vao(0), size(0), vertexBufferLayout(nullptr)
 				{
 				}
 
@@ -22,15 +22,18 @@ namespace BF
 					GLCall(glDeleteVertexArrays(1, &vao));
 				}
 
-				void GLVertexBuffer::Create(unsigned int size, const void* data)
+				void GLVertexBuffer::Create()
+				{
+					GLCall(glGenVertexArrays(1, &vao));
+					GLCall(glGenBuffers(1, &vbo));
+				}
+
+				void GLVertexBuffer::SetBuffer(unsigned int size, const void* data, BufferMode mode)
 				{
 					this->size = size;
 
-					GLCall(glGenVertexArrays(1, &vao));
-
-					GLCall(glGenBuffers(1, &vbo));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
-					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GetGLBufferMode(mode)));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
 
@@ -82,6 +85,28 @@ namespace BF
 					GLCall(glBindVertexArray(0));
 				}
 
+				GLenum GLVertexBuffer::GetGLBufferMode(BufferMode mode)
+				{
+					switch (mode)
+					{
+					case BufferMode::StaticDraw:
+					{
+						return GL_STATIC_DRAW;
+						break;
+					}
+					case BufferMode::DynamicDraw:
+					{
+						return GL_DYNAMIC_DRAW;
+						break;
+					}
+					default:
+					{
+						return GL_STATIC_DRAW;
+						break;
+					}
+					}
+				}
+
 				GLenum GLVertexBuffer::GetGLDataType(VertexBufferLayout::DataType dataType)
 				{
 					if (dataType == VertexBufferLayout::DataType::Float ||
@@ -123,6 +148,7 @@ namespace BF
 						break;
 					}
 					default:
+						return 0;
 						break;
 					}
 				}

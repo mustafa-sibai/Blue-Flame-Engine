@@ -21,22 +21,22 @@ namespace BF
 			{
 				class BFE_API GLFramebuffer
 				{
-					private:
-						const Graphics::API::Texture2D* texture2D;
-						GLuint frameBuffer;
-						GLuint renderBuffer;
+				private:
+					const BF::Graphics::API::Texture2D* texture2D;
+					GLuint frameBuffer;
+					GLuint renderBuffer;
 
-					public:
-						GLFramebuffer();
-						~GLFramebuffer();
+				public:
+					GLFramebuffer();
+					~GLFramebuffer();
 
-						void Create(Graphics::API::Texture2D& texture2D, BF::Graphics::API::FramebufferFormat format);
+					void Create(BF::Graphics::API::Texture2D& texture2D, BF::Graphics::API::FramebufferFormat format);
 
-						void Bind() const;
-						void Unbind() const;
+					void Bind() const;
+					void Unbind() const;
 
-					private:
-						int GetBufferFormat(BF::Graphics::API::FramebufferFormat format);
+				private:
+					int GetBufferFormat(BF::Graphics::API::FramebufferFormat format);
 				};
 			}
 		}

@@ -14,24 +14,24 @@ namespace BF
 			{
 				class BFE_API DXVertexBuffer
 				{
-					private:
-						ID3D11Buffer* buffer;
-						ID3D11InputLayout* inputLayout;
+				private:
+					ID3D11Buffer* buffer;
+					ID3D11InputLayout* inputLayout;
 
-						unsigned int offset, stride;
+					unsigned int offset, stride;
 
-					public:
-						DXVertexBuffer();
-						~DXVertexBuffer();
+				public:
+					DXVertexBuffer();
+					~DXVertexBuffer();
 
-						void Create(const void* data, unsigned int size);
-						void SetLayout(const DXShader& dxShader, const Graphics::API::VertexBufferLayout& vertexBufferLayout);
-						void* Map() const;
-						void Unmap() const;
-						void Bind() const;
+					void Create(const void* data, unsigned int size);
+					void SetLayout(const DXShader& dxShader, const BF::Graphics::API::VertexBufferLayout& vertexBufferLayout);
+					void* Map() const;
+					void Unmap() const;
+					void Bind() const;
 
-					private:
-						DXGI_FORMAT DXVertexBuffer::GetDXDataType(Graphics::API::VertexBufferLayout::DataType dataType);
+				private:
+					DXGI_FORMAT DXVertexBuffer::GetDXDataType(BF::Graphics::API::VertexBufferLayout::DataType dataType);
 				};
 			}
 		}

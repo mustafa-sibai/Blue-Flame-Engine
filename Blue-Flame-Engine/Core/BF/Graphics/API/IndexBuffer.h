@@ -1,4 +1,6 @@
 #pragma once
+#include "BF/Graphics/API/BufferMode.h"
+
 #ifdef BFE_PLATFORM_WINDOWS
 	#include "BF/Platform/API/DirectX/DXIndexBuffer.h"
 #endif
@@ -16,22 +18,26 @@ namespace BF
 		{
 			class BFE_API IndexBuffer
 			{
-				private:
+			private:
 #ifdef BFE_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXIndexBuffer dxIndexBuffer;
+				BF::Platform::API::DirectX::DXIndexBuffer dxIndexBuffer;
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-					Platform::API::OpenGL::GLIndexBuffer glIndexBuffer;
+				BF::Platform::API::OpenGL::GLIndexBuffer glIndexBuffer;
 #endif	
-				public:
-					IndexBuffer();
-					~IndexBuffer();
+			public:
+				IndexBuffer();
+				~IndexBuffer();
 
-					void Create(const unsigned int* indices, unsigned int count);
+				void Create();
+				void SetBuffer(const unsigned int* indices, unsigned int count, BF::Graphics::API::BufferMode mode);
 
-					void Bind() const;
-					void Unbind() const;
-					unsigned int GetIndicesCount() const;
+				void* Map() const;
+				void Unmap() const;
+
+				void Bind() const;
+				void Unbind() const;
+				unsigned int GetIndicesCount() const;
 			};
 		}
 	}

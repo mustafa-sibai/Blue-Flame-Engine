@@ -15,15 +15,27 @@ namespace BF
 			{
 			}
 
-			void VertexBuffer::Create(unsigned int size, void* data)
+			void VertexBuffer::Create()
 			{
 #ifdef BFE_PLATFORM_WINDOWS
-				if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					dxVertexBuffer.Create(data, size);
+				//if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					//dxVertexBuffer.Create(data, size);
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer.Create(size, data);
+					glVertexBuffer.Create();
+#endif
+			}
+
+			void VertexBuffer::SetBuffer(unsigned int size, const void* data, BufferMode mode)
+			{
+#ifdef BFE_PLATFORM_WINDOWS
+				//if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					//dxVertexBuffer.SetBuffer(data, size);
+#endif
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glVertexBuffer.SetBuffer(size, data, mode);
 #endif
 			}
 

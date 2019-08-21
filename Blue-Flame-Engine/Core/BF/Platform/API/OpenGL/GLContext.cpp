@@ -15,7 +15,7 @@ namespace BF
 				using namespace BF::Graphics::API;
 
 				GLContext::GLContext() :
-					initialized(false)
+					GL_PRIMITIVE_TYPE(GL_TRIANGLES), initialized(false)
 				{
 				}
 
@@ -31,12 +31,12 @@ namespace BF
 				{
 					switch (primitiveType)
 					{
-					case PrimitiveType::PointList:
+					case PrimitiveType::Points:
 					{
 						GL_PRIMITIVE_TYPE = GL_POINTS;
 						break;
 					}
-					case PrimitiveType::LineList:
+					case PrimitiveType::Lines:
 					{
 						GL_PRIMITIVE_TYPE = GL_LINES;
 						break;
@@ -46,12 +46,12 @@ namespace BF
 						GL_PRIMITIVE_TYPE = GL_LINE_STRIP;
 						break;
 					}
-					case PrimitiveType::TriangleList:
+					case PrimitiveType::Triangles:
 					{
 						GL_PRIMITIVE_TYPE = GL_TRIANGLES;
 						break;
 					}
-					case PrimitiveType::TriangeStrip:
+					case PrimitiveType::TriangleStrip:
 					{
 						GL_PRIMITIVE_TYPE = GL_TRIANGLE_STRIP;
 						break;

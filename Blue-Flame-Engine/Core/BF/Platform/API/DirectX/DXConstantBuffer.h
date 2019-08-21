@@ -12,15 +12,15 @@ namespace BF
 			{
 				class BFE_API DXConstantBuffer
 				{
-					private:
-						ID3D11Buffer* buffer;
+				private:
+					ID3D11Buffer* buffer;
 
-					public:
-						DXConstantBuffer();
-						~DXConstantBuffer();
+				public:
+					DXConstantBuffer();
+					~DXConstantBuffer();
 
-						void Create(unsigned int size);
-						void Update(const void* data);
+					void Create(unsigned int size);
+					void Update(const void* data);
 				};
 			}
 		}

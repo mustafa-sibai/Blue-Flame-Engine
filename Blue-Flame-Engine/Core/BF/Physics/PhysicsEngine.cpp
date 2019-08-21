@@ -1,6 +1,7 @@
 #include "PhysicsEngine.h"
 #include "BF/System/Debug.h"
 #include "BF/Scripting/Script.h"
+#include "BF/Physics/Rigidbody2D.h"
 
 namespace BF
 {
@@ -33,35 +34,79 @@ namespace BF
 
 		void PhysicsEngine::Update(double deltaTime)
 		{
-			for (size_t i = 0; i < colliders.size(); i++)
+			for (size_t i = 0; i < physicsObjects.size(); i++)
 			{
-				switch (((ICollider*)colliders[i])->type)
+				switch (physicsObjects[i]->type)
 				{
-				case ICollider::Type::BoxCollider2D:
+				case IPhysicsObject::Type::Rigidbody2D:
 				{
-					BoxCollider2D* boxA = (BoxCollider2D*)colliders[i];
+					/*BF::Graphics::Transform* transform = physicsObjects[i]->gameObject->GetComponent<Transform>();
+					Vector3f position = transform->GetPosition();
+					Rigidbody2D* rigidbody2D = (Rigidbody2D*)physicsObjects[i];
 
-					for (size_t j = 0; j < colliders.size(); j++)
+					rigidbody2D->veclotiy += rigidbody2D->direction * rigidbody2D->speed;
+
+					position += Vector3f(rigidbody2D->veclotiy.x, rigidbody2D->veclotiy.y, 0);
+					transform->SetPosition(position);*/
+
+
+
+
+
+
+
+
+
+
+
+
+					//BFE_LOG_INFO("d: " + rigidbody2D->direction + " p: " + position, "");
+					break;
+				}
+				case IPhysicsObject::Type::Collider:
+				{
+					BoxCollider2D* boxA = (BoxCollider2D*)physicsObjects[i];
+
+					for (size_t j = 0; j < physicsObjects.size(); j++)
 					{
-						if (colliders[i] == colliders[j])
+						if (physicsObjects[i] == physicsObjects[j] || physicsObjects[j]->type != IPhysicsObject::Type::Collider)
 							continue;
 
-						BoxCollider2D* boxB = (BoxCollider2D*)colliders[j];
+						BoxCollider2D* boxB = (BoxCollider2D*)physicsObjects[j];
+
+						Transform* boxATransform = boxA->gameObject->GetComponent<Transform>();
+						Transform* boxBTransform = boxB->gameObject->GetComponent<Transform>();
 
 						if (IsColliding(boxA, boxB))
 						{
-							BF::Scripting::IScript* script = boxA->gameObject->GetComponent<IScript>();
+							IScript* script = boxA->gameObject->GetComponent<IScript>();
 
 							if (script != nullptr)
 								script->OnTriggerEnter(*boxB);
 
-							//BFE_LOG_INFO("Collision", "");
+
+
+							Vector3f positionA = boxATransform->GetPosition();
+							Vector3f positionB = boxBTransform->GetPosition();
+
+
+							BoxCollider2D ir = boxA->GetIntersectionArea(*boxB);
+
+							//BFE_LOG_INFO("x " + std::to_string(ir.x) + " y " + std::to_string(ir.y) + " w " + std::to_string(ir.width) + " h " + std::to_string(ir.height), "");
+
+							Vector3f v = Min((float)ir.width, (float)ir.height) * boxATransform->GetDirection();
+							Vector3f r = boxATransform->GetPosition() - v;
+
+							Vector3f allowedDir = Vector3f(0, -1, 0);// - v;
+							boxATransform->SetPosition(r);
+							//boxATransform->SetPosition(boxATransform->GetPosition() + boxATransform->GetDirection() * 0.05f);
+							BFE_LOG_INFO(r, "");
 						}
+
+
 					}
 					break;
 				}
-				default:
-					break;
 				}
 			}
 		}
@@ -72,7 +117,7 @@ namespace BF
 
 		void PhysicsEngine::AddComponent(IComponent* component)
 		{
-			colliders.emplace_back((ICollider*)component);
+			physicsObjects.emplace_back((IPhysicsObject*)component);
 		}
 
 		void PhysicsEngine::RemoveComponent(IComponent* component)

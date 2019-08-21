@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BF/ECS/ISystem.h"
-#include "BF/Physics/ICollider.h"
+#include "BF/Physics/IPhysicsObject.h"
 #include "BF/Physics/BoxCollider2D.h"
 #include "BF/Common.h"
 
@@ -12,7 +12,7 @@ namespace BF
 		class BFE_API PhysicsEngine : public BF::ECS::ISystem
 		{
 		private:
-			std::vector<ICollider*> colliders;
+			std::vector<IPhysicsObject*> physicsObjects;
 
 		public:
 			PhysicsEngine();
@@ -28,7 +28,7 @@ namespace BF
 			void RemoveComponent(BF::ECS::IComponent* component);
 
 		private:
-			bool IsColliding(BF::Physics::BoxCollider2D* boxA, BF::Physics::BoxCollider2D* boxB);
+			bool IsColliding(BoxCollider2D* boxA, BoxCollider2D* boxB);
 		};
 	}
 }

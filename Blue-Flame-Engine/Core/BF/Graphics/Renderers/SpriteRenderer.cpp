@@ -39,7 +39,7 @@ namespace BF
 
 			void SpriteRenderer::Initialize()
 			{
-				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
+				BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::Triangles);
 
 				shader.LoadStandardShader(ShaderType::SpriteRenderer);
 
@@ -79,8 +79,12 @@ namespace BF
 					index += BFE_SPRITE_VERTICES;
 				}
 
-				vertexBuffer.Create(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr);
-				indexBuffer.Create(indices, BFE_INDICES_SIZE);
+				vertexBuffer.Create();
+				vertexBuffer.SetBuffer(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr, BufferMode::DynamicDraw);
+
+				indexBuffer.Create();
+				indexBuffer.SetBuffer(indices, BFE_INDICES_SIZE, BufferMode::StaticDraw);
+
 				vertexBuffer.SetLayout(shader, &vertexBufferLayout);
 
 				Engine::GetContext().EnableDepthBuffer(false);
@@ -168,12 +172,12 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapPolygonBuffer(const RegularPolygon* regularPolygon)
+			void SpriteRenderer::MapRectangleShapeBuffer(const RectangleShape* rectangleShape)
 			{
-				Vector3f position = regularPolygon->gameObject->GetTransform()->GetPosition();
-				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetScale();
+				Vector3f position = rectangleShape->gameObject->GetTransform()->GetPosition();
+				Vector3f scale = rectangleShape->gameObject->GetTransform()->GetScale();
 
-				Vector2i scaledSprite = Vector2i(regularPolygon->size.x * scale.x, regularPolygon->size.y * scale.y);
+				Vector2i scaledSprite = Vector2i(rectangleShape->size.x * scale.x, rectangleShape->size.y * scale.y);
 
 				/*
 				x = left position
@@ -204,37 +208,119 @@ namespace BF
 
 				  as you can see, the image is close to the bottom right of the screen.
 				*/
-				vector<Vector2i> corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, regularPolygon->pivot).GetCorners();
+				corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, rectangleShape->pivot).GetCorners();
 
 				//Top Left
 				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
-				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);;
+				spriteBuffer->color = rectangleShape->color;
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
 				spriteBuffer->position = Vector2f(corners[1].x, corners[1].y);
-				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);;
+				spriteBuffer->color = rectangleShape->color;
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
 				spriteBuffer->position = Vector2f(corners[2].x, corners[2].y);
-				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);;
+				spriteBuffer->color = rectangleShape->color;
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
 				spriteBuffer->position = Vector2f(corners[3].x, corners[3].y);
-				spriteBuffer->color = regularPolygon->color;
-				spriteBuffer->UV = Vector2f(0.0f);;
+				spriteBuffer->color = rectangleShape->color;
+				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				indexCount += BFE_SPRITE_INDICES;
+			}
+
+			void SpriteRenderer::MapRegularPolygonBuffer(const RegularPolygon* regularPolygon)
+			{
+				/*Vector3f position = regularPolygon->gameObject->GetTransform()->GetPosition();
+				Vector3f scale = regularPolygon->gameObject->GetTransform()->GetScale();
+
+				Vector2i scaledSprite = Vector2i(regularPolygon->size.x * scale.x, regularPolygon->size.y * scale.y);
+
+
+
+
+				int startingIndex = 0;
+				float angle = 0;
+				float distanceBetweenTris = 0;
+				Vector2f vertexPosition;
+
+				startingIndex = currentIndexCount;
+
+				indices.emplace_back(currentIndexCount);
+				currentIndexCount++;
+
+				for (int i = 0; i < triCount - 1; i++)
+				{
+					indices.emplace_back(currentIndexCount);
+					currentIndexCount++;
+
+					indices.emplace_back(currentIndexCount);
+
+					indices.emplace_back(startingIndex);
+
+					if (i >= triCount - 2)
+					{
+						indices.emplace_back(currentIndexCount);
+						indices.emplace_back(startingIndex + 1);
+						currentIndexCount++;
+					}
+				}
+
+				/*
+							v1
+						   /|\
+						  /	| \
+						 /	|  \
+						/	|   \
+					   /	|    \
+					  /		|     \
+					 /	    |      \
+					/		|       \
+				   /		| 90     \
+				  /		    |----     \
+			   v4/__________|v0_|______\v2
+				 \			|          /
+				  \			|         /
+				   \		|        /
+					\		|       /
+					 \		|      /
+					  \	    |     /
+					   \	|	 /
+						\	|	/
+						 \	|  /
+						  \ | /
+						   \|/
+							v3
+				*/
+				/*vertex.emplace_back(Vertex(position, color)); //center
+				angle = 90.0f;
+
+				distanceBetweenTris = (360.0f / (float)triCount);
+
+				for (int i = 0; i < triCount; i++)
+				{
+					spriteBuffer->position = Vector2f(position.x + radius * -cos(Math::ToRadians(angle)), position.y + radius * sin(Math::ToRadians(angle)));
+					spriteBuffer->color = rectangleShape->color;
+					spriteBuffer->UV = Vector2f(0.0f);;
+					spriteBuffer->renderingType = 0;
+					spriteBuffer++;
+
+					angle += distanceBetweenTris;
+				}
+
+				indexCount += BFE_SPRITE_INDICES;*/
 			}
 
 			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
@@ -301,7 +387,7 @@ namespace BF
 
 				  as you can see, the image is close to the bottom right of the screen.
 				*/
-				vector<Vector2i> corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
+				corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
 
 				//Top Left
 				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
@@ -363,7 +449,6 @@ namespace BF
 
 				text->size = Vector2i();
 				int biggestUnderLine = 0;
-				vector<Vector2i> corners;
 				Vector2f topLeftUV, topRightUV, bottomRightUV, bottomLeftUV;
 				text->characterPositions.clear();
 				
@@ -483,8 +568,10 @@ namespace BF
 
 							if (iRenderable->type == IRenderable::Type::Sprite)
 								MapSpriteBuffer((Sprite*)iRenderable);
+							else if (iRenderable->type == IRenderable::Type::RectangleShape)
+								MapRectangleShapeBuffer((RectangleShape*)iRenderable);
 							else if (iRenderable->type == IRenderable::Type::RegularPolygon)
-								MapPolygonBuffer((RegularPolygon*)iRenderable);
+								MapRegularPolygonBuffer((RegularPolygon*)iRenderable);
 							else if (iRenderable->type == IRenderable::Type::LineShape)
 								MapLineBuffer((LineShape*)iRenderable);
 							else if (iRenderable->type == IRenderable::Type::Text)

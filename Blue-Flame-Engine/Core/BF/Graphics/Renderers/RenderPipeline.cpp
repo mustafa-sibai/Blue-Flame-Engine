@@ -13,11 +13,12 @@ namespace BF
 		{
 			using namespace std;
 			using namespace BF::ECS;
+			using namespace BF::Debugging;
 			using namespace BF::Graphics::API;
 			using namespace BF::Graphics::Renderers::SpriteRendererComponents;
 
 			RenderPipeline::RenderPipeline(ConstantBufferManager& constantBufferManager, CameraManager& cameraManager) :
-				constantBufferManager(constantBufferManager), cameraManager(cameraManager), spriteRenderer(nullptr), forwardRenderer(nullptr), postProcessing(nullptr)
+				constantBufferManager(constantBufferManager), cameraManager(cameraManager), forwardRenderer(nullptr), skyboxRenderer(nullptr), postProcessing(nullptr), spriteRenderer(nullptr)
 			{
 				//skyboxRenderer = new SkyboxRenderer();
 				forwardRenderer = new ForwardRenderer(constantBufferManager, cameraManager);
@@ -35,6 +36,7 @@ namespace BF
 				if (spriteRenderer != nullptr)	spriteRenderer->Initialize();
 				if (forwardRenderer != nullptr) forwardRenderer->Initialize();
 				if (postProcessing != nullptr)	postProcessing->Initialize();
+				Debug::Initialize();
 			}
 
 			void RenderPipeline::Load()
@@ -66,6 +68,7 @@ namespace BF
 				if (forwardRenderer != nullptr) forwardRenderer->Render();
 				if (postProcessing != nullptr)	postProcessing->Unbind();
 				if (postProcessing != nullptr)	postProcessing->Render();
+				Debug::Render();
 				cameraManager.GetMainCamera().SwapBuffers();
 			}
 

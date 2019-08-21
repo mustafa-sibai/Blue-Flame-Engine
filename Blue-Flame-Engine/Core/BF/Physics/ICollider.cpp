@@ -7,7 +7,7 @@ namespace BF
 		using namespace BF::ECS;
 
 		ICollider::ICollider(Type type) :
-			Component(IComponent::Type::Physics),
+			PhysicsObject(PhysicsObject::Type::Collider),
 			type(type)
 		{
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "BF/ECS/GameObject.h"
 #include "BF/ECS/Component.h"
+#include "BF/Physics/PhysicsObject.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -9,7 +10,7 @@ namespace BF
 	{
 		class PhysicsEngine;
 
-		class BFE_API ICollider : public BF::ECS::Component<ICollider>
+		class BFE_API ICollider : public PhysicsObject<ICollider>
 		{
 			friend class BF::Physics::PhysicsEngine;
 

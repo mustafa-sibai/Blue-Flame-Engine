@@ -53,9 +53,6 @@ namespace BF
 			if ((textureData->buffer == 0) || (textureData->width == 0) || (textureData->height == 0))
 				BFE_LOG_ERROR("file courrpted", "");
 
-			if (FreeImage_GetRedMask(bitmap) == 0xff0000)
-				FreeImage_SwapRedBlue32(bitmap);
-
 			FreeImage_Unload(dib);
 			return textureData;
 		}

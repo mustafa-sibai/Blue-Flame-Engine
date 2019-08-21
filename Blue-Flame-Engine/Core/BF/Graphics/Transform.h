@@ -14,6 +14,7 @@ namespace BF
 			BF::Math::Matrix4 transformation;
 
 			BF::Math::Vector3f position;
+			BF::Math::Vector3f direction;
 			BF::Math::Vector3f rotation;
 			BF::Math::Vector3f scale;
 			float angle;
@@ -33,11 +34,12 @@ namespace BF
 			inline const BF::Math::Matrix4& GetWorldTransformation() const { return worldTransformation; }
 			inline const BF::Math::Matrix4& GetTransformation() const { return transformation; }
 
-			inline const BF::Math::Vector3f GetWorldPosition() const { return worldTransformation.GetTranslationVector(); }
-			inline const BF::Math::Vector3f GetWorldScale() const { return worldTransformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f GetWorldPosition() { return worldTransformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f GetWorldScale() { return worldTransformation.GetScaleVector(); }
 
-			inline const BF::Math::Vector3f GetPosition() const { return transformation.GetTranslationVector(); }
-			inline const BF::Math::Vector3f GetScale() const { return transformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f GetPosition() { return transformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f& GetDirection() const { return direction; }
+			inline const BF::Math::Vector3f GetScale() { return transformation.GetScaleVector(); }
 		};
 	}
 }

@@ -16,19 +16,19 @@ namespace BF
 		{
 			class BFE_API ConstantBuffer
 			{
-				private:
+			private:
 #ifdef BFE_PLATFORM_WINDOWS
-					BF::Platform::API::DirectX::DXConstantBuffer dxConstantBuffer;
+				BF::Platform::API::DirectX::DXConstantBuffer dxConstantBuffer;
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB)
-					BF::Platform::API::OpenGL::GLConstantBuffer glConstantBuffer;
+				BF::Platform::API::OpenGL::GLConstantBuffer glConstantBuffer;
 #endif
-				public:
-					ConstantBuffer();
-					~ConstantBuffer();
+			public:
+				ConstantBuffer();
+				~ConstantBuffer();
 
-					void Create(unsigned int bindingIndex, unsigned int size, const void* data);
-					void Update(unsigned int offset, unsigned int size, const void* data);
+				void Create(unsigned int bindingIndex, unsigned int size, const void* data);
+				void Update(unsigned int offset, unsigned int size, const void* data);
 			};
 		}
 	}

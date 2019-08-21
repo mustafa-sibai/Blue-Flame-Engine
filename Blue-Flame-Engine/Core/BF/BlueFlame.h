@@ -69,6 +69,8 @@
 #include <BF/Math/Math.h>
 
 #include <BF/Physics/PhysicsEngine.h>
+#include <BF/Physics/Rigidbody2D.h>
+#include <BF/Physics/BoxCollider2D.h>
 
 #include <BF/Scripting/Script.h>
 

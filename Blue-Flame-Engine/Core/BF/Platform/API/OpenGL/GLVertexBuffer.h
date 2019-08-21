@@ -1,4 +1,5 @@
 #pragma once
+#include "BF/Graphics/API/BufferMode.h"
 #include "BF/Graphics/API/VertexBufferLayout.h"
 #include "BF/Platform/API/OpenGL/GLCommon.h"
 #include "BF/Common.h"
@@ -23,7 +24,9 @@ namespace BF
 					GLVertexBuffer();
 					~GLVertexBuffer();
 
-					void Create(unsigned int size, const void* data);
+					void Create();
+					void SetBuffer(unsigned int size, const void* data, BF::Graphics::API::BufferMode mode);
+
 					void SetLayout(const BF::Graphics::API::VertexBufferLayout* vertexBufferLayout);
 
 					void* Map() const;
@@ -35,6 +38,7 @@ namespace BF
 					inline const GLuint& GetBuffer() const { return vbo; }
 
 				private:
+					GLenum GetGLBufferMode(BF::Graphics::API::BufferMode mode);
 					GLenum GetGLDataType(BF::Graphics::API::VertexBufferLayout::DataType dataType);
 					unsigned int GetComponentCount(BF::Graphics::API::VertexBufferLayout::DataType dataType);
 				};

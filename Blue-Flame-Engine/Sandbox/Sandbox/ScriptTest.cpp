@@ -12,7 +12,7 @@ ScriptTest::~ScriptTest()
 
 void ScriptTest::OnTriggerEnter(BF::Physics::ICollider& other)
 {
-	std::cout << gameObject->Name + " collided with " + other.gameObject->Name << std::endl;
+	//std::cout << gameObject->Name + " collided with " + other.gameObject->Name << std::endl;
 }
 
 void ScriptTest::Start()

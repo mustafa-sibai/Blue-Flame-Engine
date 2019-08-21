@@ -33,7 +33,7 @@ namespace Forward_Renderer_Test
 		BF::Engine::GetContext().EnableDepthBuffer(true);
 		BF::Engine::GetContext().EnableVsync(false);
 		//BF::Engine::LimitFrameRate(60.0f);
-		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::TriangleList);
+		BF::Engine::GetContext().SetPrimitiveType(PrimitiveType::Triangles);
 		BF::Engine::GetContext().SetWindingOrder(WindingOrder::Clockwise);
 		BF::Engine::GetContext().CullFace(CullingType::Back);
 

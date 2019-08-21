@@ -22,26 +22,26 @@ namespace BF
 			{
 				class BFE_API GLShader
 				{
-					private:
-						GLuint programID;
-						GLint result;
-						int errorLength;
+				private:
+					GLuint programID;
+					GLint result;
+					int errorLength;
 
-					public:
-						GLShader();
-						~GLShader();
+				public:
+					GLShader();
+					~GLShader();
 
-						void LoadStandardShader(Graphics::API::ShaderType type);
-						void LoadFromFile(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
+					void LoadStandardShader(BF::Graphics::API::ShaderType type);
+					void LoadFromFile(const std::string& vertexShaderFilePath, const std::string& pixelShaderFilePath);
 
-						void Bind() const;
-						void Unbind() const;
+					void Bind() const;
+					void Unbind() const;
 
-						inline const GLuint& GetProgramID() const { return programID; }
+					inline const GLuint& GetProgramID() const { return programID; }
 
-					private:
-						GLuint CompileShader(const std::string& shaderCode, GLenum shaderType);
-						void CreateProgram(GLuint& compiledVertexShader, GLuint& compiledPixelShader);
+				private:
+					GLuint CompileShader(const std::string& shaderCode, GLenum shaderType);
+					void CreateProgram(GLuint& compiledVertexShader, GLuint& compiledPixelShader);
 				};
 			}
 		}

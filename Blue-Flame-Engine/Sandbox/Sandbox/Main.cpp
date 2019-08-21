@@ -20,11 +20,13 @@
 #include "AstarTest.h"
 #include "FontTest.h"
 #include "AABBTest.h"
+#include "DebugTest.h"
+#include "SpriteRendererTest.h"
 
 int main()
 {
 #ifdef BFE_NO_NET
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(1280, 720), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(1920, 1200), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());
@@ -47,7 +49,9 @@ int main()
 	//CameraViewCullingTest::CameraViewCullingTest app;
 	//AstarTest::AstarTest app;
 	//FontTest::FontTest app;
-	AABBTest::AABBTest app;
+	//AABBTest::AABBTest app;
+	DebugTest::DebugTest app;
+	//SpriteRendererTest::SpriteRendererTest app;
 
 	engine.Run(app);
 #elif defined (BFE_CLIENT)

@@ -12,16 +12,16 @@ namespace BF
 			{
 				class BFE_API GLConstantBuffer
 				{
-					private:
-						GLuint buffer;
-						unsigned int bindingIndex;
+				private:
+					GLuint buffer;
+					unsigned int bindingIndex;
 
-					public:
-						GLConstantBuffer();
-						~GLConstantBuffer();
+				public:
+					GLConstantBuffer();
+					~GLConstantBuffer();
 
-						void Create(unsigned int bindingIndex, unsigned int size, const void* data);
-						void Update(unsigned int offset, unsigned int size, const void* data);
+					void Create(unsigned int bindingIndex, unsigned int size, const void* data);
+					void Update(unsigned int offset, unsigned int size, const void* data);
 				};
 			}
 		}

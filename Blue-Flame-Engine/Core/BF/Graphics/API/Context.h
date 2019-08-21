@@ -20,7 +20,7 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class PrimitiveType { None, PointList, LineList, LineStrip, TriangleList, TriangeStrip };
+			enum class PrimitiveType { None, Points, Lines, LineStrip, Triangles, TriangleStrip };
 			enum class BufferClearType { None, Color, Depth, ColorAndDepth };
 			enum class WindingOrder { None, Clockwise, CounterClockwise };
 			enum class CullingType { None, Front, Back, FrontAndBack };
@@ -36,52 +36,52 @@ namespace BF
 
 			class BFE_API Context
 			{
-				private:
-					static RenderAPI renderAPI;
+			private:
+				static RenderAPI renderAPI;
 
 #ifdef BFE_PLATFORM_WINDOWS
-					Platform::API::DirectX::DXContext dxContext;
-					Platform::API::OpenGL::WINGLContext winGLContext;
+				BF::Platform::API::DirectX::DXContext dxContext;
+				BF::Platform::API::OpenGL::WINGLContext winGLContext;
 #elif defined(BFE_PLATFORM_LINUX)
-					Platform::API::OpenGL::LXGLContext lxGLContext;
+				BF::Platform::API::OpenGL::LXGLContext lxGLContext;
 #elif defined(BFE_PLATFORM_WEB)
-					Platform::API::OpenGL::WEBGLContext webGLContext;
+				BF::Platform::API::OpenGL::WEBGLContext webGLContext;
 #elif defined(BFE_PLATFORM_ANDROID)
-					Platform::API::OpenGL::ANDGLContext andGLContext;
+				BF::Platform::API::OpenGL::ANDGLContext andGLContext;
 #endif
-				public:
-					Context(RenderAPI renderAPI);
-					~Context();
+			public:
+				Context(RenderAPI renderAPI);
+				~Context();
 
-					void Initialize();
-					void SetPrimitiveType(PrimitiveType primitiveType);
-					void Clear(BufferClearType bufferClearType, const Color& color);
-					void Draw(unsigned int vertexCount);
-					void SwapBuffers();
-					
-					void EnableDepthBuffer(bool state);
-					void EnableDepthMask(bool state);
-					void EnableBlending(bool state);
-					void EnableVsync(bool state);
-					void EnableScissor(bool state);
+				void Initialize();
+				void SetPrimitiveType(PrimitiveType primitiveType);
+				void Clear(BufferClearType bufferClearType, const Color& color);
+				void Draw(unsigned int vertexCount);
+				void SwapBuffers();
 
-					void SetScissor(const Math::Rectangle& rectangle);
-					void SetViewport(const Math::Rectangle& rectangle);
+				void EnableDepthBuffer(bool state);
+				void EnableDepthMask(bool state);
+				void EnableBlending(bool state);
+				void EnableVsync(bool state);
+				void EnableScissor(bool state);
 
-					void SetWindingOrder(WindingOrder windingOrder);
-					void CullFace(CullingType cullingType);
+				void SetScissor(const BF::Math::Rectangle& rectangle);
+				void SetViewport(const BF::Math::Rectangle& rectangle);
+
+				void SetWindingOrder(WindingOrder windingOrder);
+				void CullFace(CullingType cullingType);
 
 #ifdef BFE_PLATFORM_WINDOWS
-					inline const Platform::API::DirectX::DXContext& GetDXContext() const { return dxContext; }
-					inline const Platform::API::OpenGL::WINGLContext& GetWINGLContext() const { return winGLContext; }
+				inline const BF::Platform::API::DirectX::DXContext& GetDXContext() const { return dxContext; }
+				inline const BF::Platform::API::OpenGL::WINGLContext& GetWINGLContext() const { return winGLContext; }
 #elif defined(BFE_PLATFORM_LINUX)
-					inline const Platform::API::OpenGL::LXGLContext& GetLXGLContext() const { return lxGLContext; }
+				inline const BF::Platform::API::OpenGL::LXGLContext& GetLXGLContext() const { return lxGLContext; }
 #elif defined(BFE_PLATFORM_WEB)
-					inline const Platform::API::OpenGL::WEBGLContext& GetWEBGLContext() const { return webGLContext; }
+				inline const BF::Platform::API::OpenGL::WEBGLContext& GetWEBGLContext() const { return webGLContext; }
 #elif defined(BFE_PLATFORM_ANDROID)
-					inline Platform::API::OpenGL::ANDGLContext& GetAContext() { return ANDGLContext; }
+				inline BF::Platform::API::OpenGL::ANDGLContext& GetAContext() { return ANDGLContext; }
 #endif
-					static const inline RenderAPI GetRenderAPI() { return renderAPI; }
+				static const inline RenderAPI GetRenderAPI() { return renderAPI; }
 			};
 		}
 	}

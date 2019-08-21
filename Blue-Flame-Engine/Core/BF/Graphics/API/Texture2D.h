@@ -33,10 +33,10 @@ namespace BF
 
 			private:
 #ifdef BFE_PLATFORM_WINDOWS
-				Platform::API::DirectX::DXTexture2D dxTexture2D;
+				BF::Platform::API::DirectX::DXTexture2D dxTexture2D;
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
-				Platform::API::OpenGL::GLTexture2D glTexture2D;
+				BF::Platform::API::OpenGL::GLTexture2D glTexture2D;
 #endif
 			public:
 				Texture2D();

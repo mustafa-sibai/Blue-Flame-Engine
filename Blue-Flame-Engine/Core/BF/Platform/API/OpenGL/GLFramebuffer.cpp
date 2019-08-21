@@ -13,7 +13,8 @@ namespace BF
 			{
 				using namespace BF::Graphics::API;
 
-				GLFramebuffer::GLFramebuffer()
+				GLFramebuffer::GLFramebuffer() :
+					texture2D(nullptr), frameBuffer(0), renderBuffer(0)
 				{
 				}
 
@@ -31,7 +32,7 @@ namespace BF
 
 					GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GetBufferFormat(format), GL_TEXTURE_2D, texture2D.glTexture2D.textureID, 0));
 
-					if(format == FramebufferFormat::Color)
+					if (format == FramebufferFormat::Color)
 					{
 						GLCall(glGenRenderbuffers(1, &renderBuffer));
 						GLCall(glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer));
@@ -68,10 +69,10 @@ namespace BF
 				{
 					switch (format)
 					{
-						case FramebufferFormat::Color: return GL_COLOR_ATTACHMENT0;
-						case FramebufferFormat::Depth: return GL_DEPTH_ATTACHMENT;
-						case FramebufferFormat::Stencil: return GL_STENCIL_ATTACHMENT;
-						default: return GL_COLOR_ATTACHMENT0;
+					case FramebufferFormat::Color: return GL_COLOR_ATTACHMENT0;
+					case FramebufferFormat::Depth: return GL_DEPTH_ATTACHMENT;
+					case FramebufferFormat::Stencil: return GL_STENCIL_ATTACHMENT;
+					default: return GL_COLOR_ATTACHMENT0;
 					}
 				}
 			}

@@ -12,19 +12,19 @@ namespace BF
 			{
 				class BFE_API WINGLContext : public GLContext
 				{
-					private:
-						HDC hDC;
-						HGLRC context;
+				private:
+					HDC hDC;
+					HGLRC context;
 
-					public:
-						WINGLContext();
-						~WINGLContext();
+				public:
+					WINGLContext();
+					~WINGLContext();
 
-						void Initialize() override;
-						void SwapBuffers() override;
-						void CleanUp() override;
+					void Initialize() override;
+					void SwapBuffers() override;
+					void CleanUp() override;
 
-						void EnableVsync(bool state) override;
+					void EnableVsync(bool state) override;
 				};
 			}
 		}

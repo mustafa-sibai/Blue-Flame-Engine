@@ -87,28 +87,28 @@ namespace BF
 				{
 					switch (dataType)
 					{
-						case VertexBufferLayout::DataType::Float:
-						{
-							return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float2:
-						{
-							return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float3:
-						{
-							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
-							break;
-						}
-						case VertexBufferLayout::DataType::Float4:
-						{
-							return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
-							break;
-						}
-						default:
-							break;
+					case VertexBufferLayout::DataType::Float:
+					{
+						return DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float2:
+					{
+						return DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float3:
+					{
+						return DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT;
+						break;
+					}
+					case VertexBufferLayout::DataType::Float4:
+					{
+						return DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT;
+						break;
+					}
+					default:
+						break;
 					}
 
 					return DXGI_FORMAT();

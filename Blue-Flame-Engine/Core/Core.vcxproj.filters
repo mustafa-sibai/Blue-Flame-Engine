@@ -345,10 +345,22 @@
     <ClCompile Include="BF\Physics\BoxCollider2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\Physics\PhysicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Physics\IPhysicsObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="BF\Physics\ICollider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\Physics\PhysicsEngine.cpp">
+    <ClCompile Include="BF\Physics\Rigidbody2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Debug\Debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\Graphics\Renderers\SpriteRendererComponents\RectangleShape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -779,13 +791,31 @@
     <ClInclude Include="BF\Physics\BoxCollider2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BF\Physics\ICollider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BF\Physics\PhysicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\Physics\Collider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\IPhysicsObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\ICollider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\Rigidbody2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Physics\PhysicsObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Debug\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\API\BufferMode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\Graphics\Renderers\SpriteRendererComponents\RectangleShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -855,5 +885,11 @@
     <None Include="BF\Physics\Collider.inl">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="BF\Physics\PhysicsObject.inl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="BF\Graphics\API\StandardShaders\Debug\HLSL5.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-ES3.0\Shader.vpshader" />
+    <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-Core4.5\Shader.vpshader" />
   </ItemGroup>
 </Project>

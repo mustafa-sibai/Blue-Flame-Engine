@@ -11,28 +11,28 @@ namespace BF
 		{
 			class BFE_API VertexBufferLayout
 			{
-				public:
-					enum class DataType { Int, Float, Float2, Float3, Float4 };
+			public:
+				enum class DataType { Int, Float, Float2, Float3, Float4 };
 
-					struct BFE_API VertexBufferElement
-					{
-						int index = 0;
-						std::string name = "";
-						DataType dataType;
-						unsigned int stride = 0;
-						unsigned int offset = 0;
-					};
+				struct BFE_API VertexBufferElement
+				{
+					int index = 0;
+					std::string name = "";
+					DataType dataType;
+					unsigned int stride = 0;
+					unsigned int offset = 0;
+				};
 
-				private:
-					std::vector<VertexBufferElement> vertexBufferElements;
+			private:
+				std::vector<VertexBufferElement> vertexBufferElements;
 
-				public:
-					VertexBufferLayout();
-					~VertexBufferLayout();
+			public:
+				VertexBufferLayout();
+				~VertexBufferLayout();
 
-					void Push(int index, const std::string& name, DataType dataType, unsigned int stride, unsigned int offset);
+				void Push(int index, const std::string& name, DataType dataType, unsigned int stride, unsigned int offset);
 
-					inline const std::vector<VertexBufferElement>& GetBufferElement() const { return vertexBufferElements; }
+				inline const std::vector<VertexBufferElement>& GetBufferElement() const { return vertexBufferElements; }
 			};
 		}
 	}

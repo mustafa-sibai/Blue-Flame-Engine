@@ -1,5 +1,4 @@
 #include "AABBTest.h"
-#include "BF/Physics/BoxCollider2D.h"
 #include "ScriptTest.h"
 
 namespace AABBTest
@@ -52,21 +51,25 @@ namespace AABBTest
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.0, 0.0f, 0.0f, 1.0f));
 
-		Texture2D* texture = new Texture2D();
-		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/g.png"));
+		Texture2D* green = new Texture2D();
+		green->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/g.png"));
+
+		Texture2D* red = new Texture2D();
+		red->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/r.png"));
 
 		sprite = scene->AddGameObject(new GameObject("sprite"));
-		sprite->AddComponent(new Sprite(texture, Vector2f(0.0f, 0.0f), defaultRenderLayer));
+		sprite->AddComponent(new Sprite(red, Vector2f(0.0f, 0.0f), defaultRenderLayer));
+		r = (Rigidbody2D*)sprite->AddComponent(new Rigidbody2D());
 		sprite->AddComponent(new BoxCollider2D(0, 0, 32, 32, Vector2f(0, 0)));
 		sprite->AddComponent(new ScriptTest());
 
 		sprite->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));
 
 		GameObject* sprite2 = scene->AddGameObject(new GameObject("sprite2"));
-		sprite2->AddComponent(new Sprite(texture, Vector2f(0.0f, 0.0f), defaultRenderLayer));
+		sprite2->AddComponent(new Sprite(green, Vector2f(0.0f, 0.0f), defaultRenderLayer));
 		sprite2->AddComponent(new BoxCollider2D(0, 0, 32, 32, Vector2f(0, 0)));
 		//sprite2->AddComponent(new ScriptTest());
-		sprite2->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));
+		sprite2->GetComponent<Transform>()->SetPosition(Vector3f(100, 0, 0));
 
 		App::Initialize();
 	}
@@ -84,14 +87,11 @@ namespace AABBTest
 
 	void AABBTest::Update(double deltaTime)
 	{
-		App::Update(deltaTime);
-
 		orthographicRectangle = BF::Math::Rectangle(0, 0, Engine::GetWindow().GetClientSize().x, Engine::GetWindow().GetClientSize().y, Vector2f(0.5f, 0.5f));
 		BF::Math::Rectangle orthoRect = orthographicRectangle.GetEdgeOffsetByPivot();
 
 		camera->SetProjectionMatrix(Matrix4::Orthographic(orthoRect.x, orthoRect.width, orthoRect.y, orthoRect.height, -1.0f, 1.0f));
-	
-		
+
 		if (BF::Input::Keyboard::IsKeyHeldDown(BF::Input::Keyboard::Key::Code::W))
 		{
 			direction = Vector3f(direction.x, 1, direction.z);
@@ -114,6 +114,8 @@ namespace AABBTest
 	
 		sprite->GetComponent<Transform>()->SetPosition(sprite->GetComponent<Transform>()->GetPosition() + (direction * speed * deltaTime));
 		direction = Vector3f(0, 0, 0);
+
+		App::Update(deltaTime);
 	}
 
 	void AABBTest::Render()

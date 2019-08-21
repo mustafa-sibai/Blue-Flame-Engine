@@ -16,6 +16,7 @@ namespace AABBTest
 		BF::ECS::GameObject* sprite;
 		BF::Math::Vector3f direction;
 		float speed = 0.05f;
+		BF::Physics::Rigidbody2D* r;
 
 	public:
 		AABBTest();

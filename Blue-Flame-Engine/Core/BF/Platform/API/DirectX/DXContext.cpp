@@ -11,10 +11,11 @@ namespace BF
 		{
 			namespace DirectX
 			{
+				using namespace BF::Graphics;
 				using namespace BF::Graphics::API;
 
 				DXContext::DXContext() :
-					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), vsync(false), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED)
+					device(nullptr), context(nullptr), swapChain(nullptr), renderTarget(nullptr), rasterizerState(nullptr), zBuffer(nullptr), blendState(nullptr), D3DPrimitiveType(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED), vsync(false)
 				{
 				}
 
@@ -33,7 +34,7 @@ namespace BF
 					context->OMSetRenderTargets(1, &renderTarget, zBuffer);
 				}
 
-				void DXContext::Clear(const Graphics::Color& color)
+				void DXContext::Clear(const Color& color)
 				{
 					float colorArray[] = { color.r, color.g, color.b, color.a };
 					context->ClearRenderTargetView(renderTarget, colorArray);
@@ -44,7 +45,7 @@ namespace BF
 
 				void DXContext::SwapBuffers()
 				{
-					if(vsync)
+					if (vsync)
 						DXCall(swapChain->Present(1, 0));
 					else
 						DXCall(swapChain->Present(0, 0));
@@ -67,33 +68,33 @@ namespace BF
 				{
 					switch (primitiveType)
 					{
-						case PrimitiveType::PointList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
-							break;
-						}
-						case PrimitiveType::LineList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
-							break;
-						}
-						case PrimitiveType::LineStrip:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
-							break;
-						}
-						case PrimitiveType::TriangleList:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-							break;
-						}
-						case PrimitiveType::TriangeStrip:
-						{
-							D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
-							break;
-						}
-						default:
-							break;
+					case PrimitiveType::Points:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_POINTLIST;
+						break;
+					}
+					case PrimitiveType::Lines:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINELIST;
+						break;
+					}
+					case PrimitiveType::LineStrip:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP;
+						break;
+					}
+					case PrimitiveType::Triangles:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+						break;
+					}
+					case PrimitiveType::TriangleStrip:
+					{
+						D3DPrimitiveType = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+						break;
+					}
+					default:
+						break;
 					}
 					context->IASetPrimitiveTopology(D3DPrimitiveType);
 				}
@@ -181,7 +182,7 @@ namespace BF
 					ID3D11Texture2D* backBuffer;
 					ZeroMemory(&backBuffer, sizeof(backBuffer));
 
-					DXCall(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer));
+					DXCall(swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)& backBuffer));
 					DXCall(device->CreateRenderTargetView(backBuffer, NULL, &renderTarget));
 					backBuffer->Release();
 				}

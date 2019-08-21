@@ -27,7 +27,7 @@ namespace BF
 				{
 					VSData = FileLoader::LoadBinaryFile(vertexShaderFilePath, &VSsize);
 					PSData = FileLoader::LoadBinaryFile(pixelShaderFilePath, &PSsize);
-					
+
 					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreateVertexShader(VSData, VSsize, 0, &VS));
 					DXCall(Engine::GetContext().GetDXContext().GetDevice()->CreatePixelShader(PSData, PSsize, 0, &PS));
 				}

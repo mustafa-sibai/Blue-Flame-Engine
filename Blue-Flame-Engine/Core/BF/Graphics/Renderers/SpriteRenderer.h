@@ -4,6 +4,7 @@
 #include "BF/Graphics/Fonts/Font.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/RegularPolygon.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/RectangleShape.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Sprite.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/LineShape.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/Text.h"
@@ -38,6 +39,8 @@ namespace BF
 				bool submitSprite;
 				int totalDrawCalls;
 
+				std::vector<BF::Math::Vector2i> corners;
+
 				static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
 			public:
@@ -59,7 +62,8 @@ namespace BF
 
 			private:
 				void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
-				void MapPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
+				void MapRectangleShapeBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape* rectangleShape);
+				void MapRegularPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
 				void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
 				void MapTextBuffer(BF::Graphics::Renderers::SpriteRendererComponents::Text* text);
 				void MapBuffer();

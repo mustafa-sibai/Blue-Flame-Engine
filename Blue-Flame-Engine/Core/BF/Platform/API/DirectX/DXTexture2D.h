@@ -26,9 +26,9 @@ namespace BF
 					void Bind(unsigned int index) const;
 
 				private:
-					DXGI_FORMAT GetDXTextureFormat(Graphics::API::Texture::Format format) const;
-					D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(Graphics::API::Texture::Wrap wrap) const;
-					D3D11_FILTER GetDXTextureFilter(Graphics::API::Texture::Filter filter) const;
+					DXGI_FORMAT GetDXTextureFormat(BF::Graphics::API::Texture::Format format) const;
+					D3D11_TEXTURE_ADDRESS_MODE GetDXTextureWrap(BF::Graphics::API::Texture::Wrap wrap) const;
+					D3D11_FILTER GetDXTextureFilter(BF::Graphics::API::Texture::Filter filter) const;
 				};
 			}
 		}

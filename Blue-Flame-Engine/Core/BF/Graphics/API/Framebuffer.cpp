@@ -7,7 +7,8 @@ namespace BF
 	{
 		namespace API
 		{
-			Framebuffer::Framebuffer()
+			Framebuffer::Framebuffer() :
+				format(FramebufferFormat::Color)
 			{
 			}
 
