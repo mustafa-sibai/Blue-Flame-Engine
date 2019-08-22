@@ -11,6 +11,7 @@ namespace BF
 		using namespace BF::Math;
 		using namespace BF::Graphics;
 		using namespace BF::Scripting;
+		using namespace BF::System;
 
 		PhysicsEngine::PhysicsEngine()
 		{

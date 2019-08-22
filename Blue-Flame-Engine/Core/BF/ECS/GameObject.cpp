@@ -21,6 +21,7 @@ namespace BF
 		using namespace BF::Physics;
 		using namespace BF::Scripting;
 		using namespace BF::AI::Astar;
+		using namespace BF::System;
 
 		int GameObject::globalID = 0;
 

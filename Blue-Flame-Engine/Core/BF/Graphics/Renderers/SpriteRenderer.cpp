@@ -174,6 +174,12 @@ namespace BF
 
 			void SpriteRenderer::MapRectangleShapeBuffer(const RectangleShape* rectangleShape)
 			{
+				//110
+				//Vector2i scaledSprite(1);
+				//Vector3f position(1);
+				//Vector3f scale(1);
+
+				//69 fps
 				Vector3f position = rectangleShape->gameObject->GetTransform()->GetPosition();
 				Vector3f scale = rectangleShape->gameObject->GetTransform()->GetScale();
 

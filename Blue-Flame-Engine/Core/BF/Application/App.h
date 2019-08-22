@@ -18,6 +18,7 @@
 #include "BF/Graphics/Renderers/RenderPipeline.h"
 #include "BF/Graphics/CameraManager.h"
 #include "BF/Physics/PhysicsEngine.h"
+#include "BF/System/TransformSystem.h"
 #include "BF/Application/Scene.h"
 #include "BF/Graphics/API/Context.h"
 #include "BF/System/Timer.h"
@@ -47,12 +48,13 @@ namespace BF
 		private:
 			Scene* mainScene;
 
-			BF::Graphics::CameraManager cameraManager;
 			BF::Graphics::ConstantBufferManager constantBufferManager;
+			BF::Graphics::CameraManager cameraManager;
+			BF::System::TransformSystem transformSystem;
 			BF::Physics::PhysicsEngine physicsEngine;
+			BF::Graphics::Animation::AnimationSystem animationSystem;
 			BF::Scripting::ScriptExecutor scriptExecutor;
 			BF::Graphics::GUI::GUISystem guiSystem;
-			BF::Graphics::Animation::AnimationSystem animationSystem;
 			BF::AI::Astar::AstarSystem astarSystem;
 
 			BF::System::Timer frameTimer;

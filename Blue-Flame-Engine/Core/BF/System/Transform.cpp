@@ -4,12 +4,11 @@
 
 namespace BF
 {
-	namespace Graphics
+	namespace System
 	{
 		using namespace BF::Math;
 
 		Transform::Transform() :
-			Component(IComponent::Type::Transform),
 			transformation(Matrix4::Identity()), worldTransformation(Matrix4::Identity()), position(0), rotation(0), scale(1), angle(0)
 		{
 		}
@@ -24,8 +23,9 @@ namespace BF
 		void Transform::SetPosition(const Vector3f& position)
 		{
 			prevPos = this->position;
-			this->position = position;
+			//this->position = position;
 			transformation = Matrix4::Translate(position) * Matrix4::Rotate(angle, rotation) * Matrix4::Scale(scale);
+			this->position = transformation.GetTranslationVector();
 
 			direction = (this->position - prevPos).Normalize();
 			//BFE_LOG_INFO("dir " + direction, "");
@@ -46,6 +46,7 @@ namespace BF
 		{
 			this->scale = scale;
 			transformation = Matrix4::Translate(position) * Matrix4::Rotate(angle, rotation) * Matrix4::Scale(scale);
+			this->scale = transformation.GetScaleVector();
 
 			UpdateTransform();
 		}

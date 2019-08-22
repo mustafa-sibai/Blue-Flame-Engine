@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "BF/ECS/IComponent.h"
-#include "BF/Graphics/Transform.h"
+#include "BF/System/Transform.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -18,7 +18,7 @@ namespace BF
 		class BFE_API GameObject
 		{
 			friend class BF::Application::Scene;
-			friend class BF::Graphics::Transform;
+			friend class BF::System::Transform;
 
 		private:
 			static int globalID;
@@ -51,7 +51,7 @@ namespace BF
 
 			inline const GameObject* GetParent() const { return parent; }
 
-			inline BF::Graphics::Transform* GetTransform() const { return (BF::Graphics::Transform*)components[0]; }
+			inline BF::System::Transform* GetTransform() const { return (BF::System::Transform*)components[0]; }
 			inline const std::vector<IComponent*>& GetComponents() const { return components; }
 		};
 

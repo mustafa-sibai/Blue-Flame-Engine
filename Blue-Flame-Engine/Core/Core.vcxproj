@@ -57,6 +57,12 @@
     <ClCompile Include="BF\Physics\PhysicsEngine.cpp" />
     <ClCompile Include="BF\Physics\IPhysicsObject.cpp" />
     <ClCompile Include="BF\Debug\Debug.cpp" />
+    <ClCompile Include="BF\System\Transform.cpp" />
+    <ClCompile Include="BF\System\TransformSystem.cpp" />
+    <None Include="BF\System\TransformComponent.inl">
+      <FileType>Document</FileType>
+    </None>
+    <ClCompile Include="BF\System\ITransform.cpp" />
     <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-Core4.5\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\Debug\HLSL5.0\Shader.vpshader" />
@@ -111,7 +117,6 @@
     <ClCompile Include="BF\Graphics\TerrainGenerator.cpp" />
     <ClCompile Include="BF\Graphics\TextureAtlas.cpp" />
     <ClCompile Include="BF\Graphics\TileMap.cpp" />
-    <ClCompile Include="BF\Graphics\Transform.cpp" />
     <ClCompile Include="BF\Input\Controller.cpp" />
     <ClCompile Include="BF\Input\Keyboard.cpp" />
     <ClCompile Include="BF\Input\Mouse.cpp" />
@@ -277,6 +282,10 @@
     <ClInclude Include="BF\Physics\IPhysicsObject.h" />
     <ClInclude Include="BF\Physics\Collider.h" />
     <ClInclude Include="BF\Debug\Debug.h" />
+    <ClInclude Include="BF\System\TransformSystem.h" />
+    <ClInclude Include="BF\System\Transform.h" />
+    <ClInclude Include="BF\System\ITransform.h" />
+    <ClInclude Include="BF\System\TransformComponent.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>
@@ -332,7 +341,6 @@
     <ClInclude Include="BF\System\Debug.h" />
     <ClInclude Include="BF\System\Random.h" />
     <ClInclude Include="BF\Math\Ray.h" />
-    <ClInclude Include="BF\Graphics\Transform.h" />
     <ClInclude Include="BF\Graphics\API\Framebuffer.h" />
     <ClInclude Include="BF\Graphics\Materials\MaterialManager.h" />
     <ClInclude Include="BF\Scripting\Script.h" />

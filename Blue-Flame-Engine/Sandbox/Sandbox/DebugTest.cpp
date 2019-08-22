@@ -74,16 +74,16 @@ namespace DebugTest
 	void DebugTest::PostLoad()
 	{
 		//6,660 sprites = 62 FPS
-		for (size_t y = 0; y < 189; y++)
+		/*for (size_t y = 0; y < 189; y++)
 		{
 			for (size_t x = 0; x < 317; x++)
 			{
 				BF::Debugging::Debug::DrawRectangle(Vector2f(-950.0f + (float)x * 6.0f, 560.0f - (float)y * 6.0f), Vector2f(5.0f, 5.0f), Vector2f(0.5f, 0.5f), Color(0.2f, 0.3f, 0.5f, 1));
 			}
-		}
+		}*/
 
 		//3,250 sprite = 62 FPS
-		/*for (size_t y = 0; y < 189; y++)
+		for (size_t y = 0; y < 189; y++)
 		{
 			for (size_t x = 0; x < 317; x++)
 			{
@@ -91,7 +91,7 @@ namespace DebugTest
 				sprite->AddComponent(new RectangleShape(Vector2i(5, 5), Vector2f(0.5f, 0.5f), 0, defaultRenderLayer, Color(0.5f, 0.3f, 0.3f, 1)));
 				sprite->GetComponent<Transform>()->SetPosition(Vector3f(-950.0f + (float)x * 6.0f, 560.0f - (float)y * 6.0f, 0));
 			}
-		}*/
+		}
 
 
 		/**/

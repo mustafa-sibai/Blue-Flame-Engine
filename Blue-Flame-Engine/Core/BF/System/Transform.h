@@ -1,13 +1,13 @@
 #pragma once
-#include "BF/ECS/Component.h"
+#include "BF/System/TransformComponent.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
 namespace BF
 {
-	namespace Graphics
+	namespace System
 	{
-		class BFE_API Transform : public BF::ECS::Component<Transform>
+		class Transform : public TransformComponent<Transform>
 		{
 		private:
 			BF::Math::Matrix4 worldTransformation;
@@ -21,7 +21,7 @@ namespace BF
 
 		public:
 			Transform();
-			~Transform();
+			virtual ~Transform();
 
 			void SetPosition(const BF::Math::Vector3f& position);
 			void SetRotation(float angle, const BF::Math::Vector3f& rotation);
@@ -34,12 +34,12 @@ namespace BF
 			inline const BF::Math::Matrix4& GetWorldTransformation() const { return worldTransformation; }
 			inline const BF::Math::Matrix4& GetTransformation() const { return transformation; }
 
-			inline const BF::Math::Vector3f GetWorldPosition() { return worldTransformation.GetTranslationVector(); }
-			inline const BF::Math::Vector3f GetWorldScale() { return worldTransformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f& GetWorldPosition() { return worldTransformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f& GetWorldScale() { return worldTransformation.GetScaleVector(); }
 
-			inline const BF::Math::Vector3f GetPosition() { return transformation.GetTranslationVector(); }
+			inline const BF::Math::Vector3f& GetPosition() const { return position; }
 			inline const BF::Math::Vector3f& GetDirection() const { return direction; }
-			inline const BF::Math::Vector3f GetScale() { return transformation.GetScaleVector(); }
+			inline const BF::Math::Vector3f& GetScale() const { return scale; }
 		};
 	}
 }

@@ -4,7 +4,7 @@
 #include "BF/Math/Matrix4.h"
 #include "BF/ECS/GameObject.h"
 #include "BF/Graphics/CameraManager.h"
-#include "BF/Graphics/Transform.h"
+#include "BF/System/Transform.h"
 #include "BF/Graphics/ConstantBufferManager.h"
 
 namespace BF
@@ -15,6 +15,7 @@ namespace BF
 		{
 			using namespace BF::Graphics::Materials;
 			using namespace BF::Graphics::API;
+			using namespace BF::System;
 			using namespace BF::Math;
 
 			ForwardRenderer::ForwardRenderer(BF::Graphics::ConstantBufferManager& constantBufferManager, CameraManager& cameraManager) :
