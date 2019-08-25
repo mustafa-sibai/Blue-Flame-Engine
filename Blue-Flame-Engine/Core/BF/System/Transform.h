@@ -1,5 +1,6 @@
 #pragma once
 #include "BF/System/TransformComponent.h"
+#include "BF/System/Transformable.h"
 #include "BF/Math/Math.h"
 #include "BF/Common.h"
 
@@ -7,9 +8,9 @@ namespace BF
 {
 	namespace System
 	{
-		class Transform : public TransformComponent<Transform>
+		class BFE_API Transform : public TransformComponent<Transform>
 		{
-		private:
+		public:
 			BF::Math::Matrix4 worldTransformation;
 			BF::Math::Matrix4 transformation;
 
@@ -17,7 +18,11 @@ namespace BF
 			BF::Math::Vector3f direction;
 			BF::Math::Vector3f rotation;
 			BF::Math::Vector3f scale;
+			BF::Math::Vector3f prevPos;
 			float angle;
+			std::vector<Transformable*> transformables;
+
+			bool updatePosition;
 
 		public:
 			Transform();

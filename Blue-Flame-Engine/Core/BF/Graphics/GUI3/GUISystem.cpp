@@ -39,7 +39,7 @@ namespace BF
 
 			void GUISystem::Update(double deltaTime)
 			{
-				for (size_t i = 0; i < widgets.size(); i++)
+				/*for (size_t i = 0; i < widgets.size(); i++)
 				{
 					Vector2f mousePosition = Mouse::GetPosition();
 					Vector3f spritePosition = widgets[i]->currentSprite->gameObject->GetTransform()->GetPosition();
@@ -131,7 +131,7 @@ namespace BF
 							widgets[i]->internalState = Checkbox::InternalState::Normal;
 						}
 					}
-				}
+				}*/
 			}
 
 			void GUISystem::Render()

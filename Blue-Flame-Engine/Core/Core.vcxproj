@@ -59,6 +59,8 @@
     <ClCompile Include="BF\Debug\Debug.cpp" />
     <ClCompile Include="BF\System\Transform.cpp" />
     <ClCompile Include="BF\System\TransformSystem.cpp" />
+    <ClCompile Include="BF\System\Transformable.cpp" />
+    <ClCompile Include="BF\System\RenderableTransform.cpp" />
     <None Include="BF\System\TransformComponent.inl">
       <FileType>Document</FileType>
     </None>
@@ -286,6 +288,8 @@
     <ClInclude Include="BF\System\Transform.h" />
     <ClInclude Include="BF\System\ITransform.h" />
     <ClInclude Include="BF\System\TransformComponent.h" />
+    <ClInclude Include="BF\System\Transformable.h" />
+    <ClInclude Include="BF\System\RenderableTransform.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

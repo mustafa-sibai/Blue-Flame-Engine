@@ -38,12 +38,9 @@ namespace BF
 					Bottom right = 1, 1
 					Bottom left = 0, 1
 					*/
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, BF::Graphics::Renderers::RenderLayer* renderLayer);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
-					Sprite(const BF::Graphics::API::Texture2D* texture2D, const BF::Math::Vector2f& pivot, const BF::Math::Vector2i& size, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Sprite(const BF::Graphics::API::Texture2D* texture2D, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Math::Rectangle& scissorRectangle, const BF::Graphics::Color& color);
 					~Sprite();
 
 					Sprite& operator=(Sprite& rhs);

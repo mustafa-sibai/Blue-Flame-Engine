@@ -369,7 +369,10 @@
     <ClCompile Include="BF\System\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BF\System\TransformComponent.inl">
+    <ClCompile Include="BF\System\Transformable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BF\System\RenderableTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -836,6 +839,12 @@
     <ClInclude Include="BF\System\TransformComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BF\System\Transformable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\System\RenderableTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BF\Graphics\API\StandardShaders\3D\GLSL-ES3.0\Shader.vpshader" />
@@ -909,5 +918,8 @@
     <None Include="BF\Graphics\API\StandardShaders\Debug\HLSL5.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-ES3.0\Shader.vpshader" />
     <None Include="BF\Graphics\API\StandardShaders\Debug\GLSL-Core4.5\Shader.vpshader" />
+    <None Include="BF\System\TransformComponent.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

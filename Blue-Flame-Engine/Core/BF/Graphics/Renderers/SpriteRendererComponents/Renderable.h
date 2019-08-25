@@ -14,7 +14,7 @@ namespace BF
 				class Renderable : public IRenderable
 				{
 				public:
-					Renderable(Type type, const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Renderable(Type type, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
 					virtual ~Renderable();
 				};
 

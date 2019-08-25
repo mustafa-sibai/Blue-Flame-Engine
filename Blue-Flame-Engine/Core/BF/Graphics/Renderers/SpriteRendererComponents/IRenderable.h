@@ -3,6 +3,7 @@
 #include "BF/ECS/Component.h"
 #include "BF/Graphics/Color.h"
 #include "BF/Math/Math.h"
+#include "BF/System/RenderableTransform.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -84,16 +85,18 @@ namespace BF
 					Type type;
 
 				public:
-					BF::Math::Vector2i size;
-					BF::Math::Vector2f pivot;
+					BF::System::RenderableTransform* transfrom;
 					int zSortingOrder;
 					BF::Graphics::Renderers::RenderLayer* renderLayer;
 					int xySortingOrder;
 					Color color;
 
 				public:
-					IRenderable(Type type, const BF::Math::Vector2i& size, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					IRenderable(Type type, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
 					virtual ~IRenderable();
+
+					void SetSize(const BF::Math::Vector2i& size);
+					void SetPivot(const BF::Math::Vector2f& pivot);
 				};
 			}
 		}

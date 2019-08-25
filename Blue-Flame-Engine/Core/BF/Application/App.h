@@ -32,6 +32,7 @@ namespace BF
 		{
 			friend class BF::Engine;
 			friend class BF::ECS::GameObject;
+			friend class BF::Application::Scene;
 
 #ifdef BFE_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;

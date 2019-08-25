@@ -73,23 +73,24 @@ namespace DebugTest
 
 	void DebugTest::PostLoad()
 	{
-		//6,660 sprites = 62 FPS
-		/*for (size_t y = 0; y < 189; y++)
+		//240,000 sprites = 62 FPS
+		/*for (size_t y = 0; y < 400; y++)
 		{
-			for (size_t x = 0; x < 317; x++)
+			for (size_t x = 0; x < 600; x++)
 			{
-				BF::Debugging::Debug::DrawRectangle(Vector2f(-950.0f + (float)x * 6.0f, 560.0f - (float)y * 6.0f), Vector2f(5.0f, 5.0f), Vector2f(0.5f, 0.5f), Color(0.2f, 0.3f, 0.5f, 1));
+				BF::Debugging::Debug::DrawRectangle(Vector2f(-950.0f + (float)x * 3.0f, 520.0f - (float)y * 3.0f), Vector2f(2.0f, 2.0f), Vector2f(0.5f, 0.5f), Color(0.2f, 0.3f, 0.5f, 1));
 			}
 		}*/
 
-		//3,250 sprite = 62 FPS
-		for (size_t y = 0; y < 189; y++)
+		//240,000 sprite = 62 FPS
+		for (size_t y = 0; y < 400; y++)
 		{
-			for (size_t x = 0; x < 317; x++)
+			for (size_t x = 0; x < 600; x++)
 			{
 				GameObject* sprite = scene->AddGameObject(new GameObject("sprite"));
-				sprite->AddComponent(new RectangleShape(Vector2i(5, 5), Vector2f(0.5f, 0.5f), 0, defaultRenderLayer, Color(0.5f, 0.3f, 0.3f, 1)));
-				sprite->GetComponent<Transform>()->SetPosition(Vector3f(-950.0f + (float)x * 6.0f, 560.0f - (float)y * 6.0f, 0));
+				sprite->AddComponent(Vector2i(2, 2), Vector2f(0.5f, 0.5f), new RectangleShape(0, defaultRenderLayer, Color(0.5f, 0.3f, 0.3f, 1)));
+				transforms.emplace_back(sprite->GetComponent<Transform>());
+				sprite->GetComponent<Transform>()->SetPosition(Vector3f(-950.0f + (float)x * 3.0f, 520.0f - (float)y * 3.0f, 0));
 			}
 		}
 
@@ -130,6 +131,13 @@ namespace DebugTest
 
 		/*BF::Debugging::Debug::DrawRectangle(Vector2f(300, 250), Vector2f(100, 100), Vector2f(0.5f, 0.5f), Color(0.2f, 0.3f, 0.5f, 1));
 		BF::Debugging::Debug::DrawRectangle(Vector2f(500, 250), Vector2f(100, 100), Vector2f(0.5f, 0.5f), Color(0.6f, 0.2f, 0.2f, 1));*/
+
+
+		/*for (size_t i = 0; i < transforms.size(); i54544544444445tttttttttttttttttttttttttttttttttfff++)
+		{
+			Vector3f pos = transforms[i]->GetPosition();
+			transforms[i]->SetPosition(pos + Vector3f(1, 0, 0) * 0.1f * deltaTime);
+		}*/
 	}
 
 	void DebugTest::Render()

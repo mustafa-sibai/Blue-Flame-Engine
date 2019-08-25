@@ -17,25 +17,19 @@ namespace BF
 				using namespace BF::Graphics::Renderers;
 
 				Text::Text(const Font* font, const string& text, RenderLayer* renderLayer) :
-					Renderable(Type::Text, Vector2i(), Vector2f(0.5f), 0, renderLayer, Color::Whites::White()),
+					Renderable(Type::Text, 0, renderLayer, Color::Whites::White()),
 					font(font), text(text)
 				{
 				}
 
-				Text::Text(const Font* font, const string& text, const Vector2f& pivot, RenderLayer* renderLayer) :
-					Renderable(Type::Text, Vector2i(), pivot, 0, renderLayer, Color::Whites::White()),
+				Text::Text(const Font* font, const string& text, int zSortingOrder, RenderLayer* renderLayer) :
+					Renderable(Type::Text, zSortingOrder, renderLayer, Color::Whites::White()),
 					font(font), text(text)
 				{
 				}
 
-				Text::Text(const Font* font, const string& text, const Vector2f& pivot, int zSortingOrder, RenderLayer* renderLayer) :
-					Renderable(Type::Text, Vector2i(), pivot, zSortingOrder, renderLayer, Color::Whites::White()),
-					font(font), text(text)
-				{
-				}
-
-				Text::Text(const Font* font, const string& text, const Vector2f& pivot, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
-					Renderable(Type::Text, Vector2i(), pivot, zSortingOrder, renderLayer, color),
+				Text::Text(const Font* font, const string& text, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
+					Renderable(Type::Text, zSortingOrder, renderLayer, color),
 					font(font), text(text)
 				{
 				}

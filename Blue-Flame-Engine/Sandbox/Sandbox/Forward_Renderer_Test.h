@@ -20,7 +20,7 @@ namespace Forward_Renderer_Test
 			//BF::Graphics::API::Shader PN2;
 			//BF::Graphics::API::Shader PN3;
 
-			BF::Graphics::Transform* transform;
+			BF::System::Transform* transform;
 
 			//BF::Graphics::LightBuffer lights;
 

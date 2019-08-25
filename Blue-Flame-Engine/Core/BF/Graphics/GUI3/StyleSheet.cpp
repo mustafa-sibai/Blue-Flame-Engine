@@ -159,7 +159,7 @@ namespace BF
 
 				string stateNames[] = { "FirstState", "SecondState" };
 
-				for (size_t i = 0; i < 2; i++)
+				/*for (size_t i = 0; i < 2; i++)
 				{
 					if (DoesStateExist(widgetNode, stateNames[i]))
 					{
@@ -172,7 +172,7 @@ namespace BF
 							Sprite(texture, Vector2f(0.5f, 0.5f), Vector2i(rectangle.width, rectangle.height), 0, &GUIRenderLayer, ReadWidgetData(widgetNode, stateNames[i], "Disabled"), Color(1.0f))
 						));
 					}
-				}
+				}*/
 
 				/*SetText(widgetNode, widgetData);*/
 				widgets.insert({ widgetName, widget });

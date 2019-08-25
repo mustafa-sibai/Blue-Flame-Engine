@@ -70,18 +70,18 @@ namespace GUITest
 
 	void GUITest::CreateTestButton()
 	{
-		GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("Test Button"));
+		/*GameObject* ButtonGameObject = scene->AddGameObject(new GameObject("Test Button"));
 		button = (Button*)ButtonGameObject->AddComponent(new Button());
 		button->gameObject->GetTransform()->SetPosition(Vector3f(100, 0, 0));
-		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);
+		button->currentSprite->pivot = Vector2f(0.5f, 0.5f);*/
 	}
 
 	void GUITest::CreateTestCheckBox()
 	{
-		GameObject* CheckBoxGameObject = scene->AddGameObject(new GameObject("Test CheckBox"));
+		/*GameObject* CheckBoxGameObject = scene->AddGameObject(new GameObject("Test CheckBox"));
 		checkbox = (Checkbox*)CheckBoxGameObject->AddComponent(new Checkbox());
 		checkbox->gameObject->GetTransform()->SetPosition(Vector3f(0, 0, 0));
-		checkbox->currentSprite->pivot = Vector2f(0.5f, 0.5f);
+		checkbox->currentSprite->pivot = Vector2f(0.5f, 0.5f);*/
 	}
 
 	void GUITest::Update(double deltaTime)

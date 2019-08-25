@@ -60,7 +60,7 @@ namespace CameraViewCullingTest
 	{
 		App::PostLoad();
 
-		Texture2D* texture = new Texture2D();
+		/*Texture2D* texture = new Texture2D();
 		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/g.png"), Texture::Format::R8G8B8A8);
 
 		Texture2D* texture2 = new Texture2D();
@@ -87,7 +87,7 @@ namespace CameraViewCullingTest
 
 		GameObject* H = scene->AddGameObject(new GameObject("H"));
 		pointH = (Sprite*)H->AddComponent(new Sprite(texture3, Vector2f(0.5f, 0.5f), 10, defaultRenderLayer));
-
+		*/
 		App::RunScene(*scene);
 	}
 
@@ -110,7 +110,7 @@ namespace CameraViewCullingTest
 			sprite->gameObject->GetTransform()->SetPosition(sprite->gameObject->GetTransform()->GetPosition() + Vector3f(0, -0.2f, 0));
 	
 
-		BF::Math::Rectangle spriteRect = BF::Math::Rectangle(
+		/*BF::Math::Rectangle spriteRect = BF::Math::Rectangle(
 											sprite->gameObject->GetTransform()->GetPosition().x,
 											sprite->gameObject->GetTransform()->GetPosition().y,
 											sprite->GetTexture()->GetTextureData()->width,
@@ -132,7 +132,7 @@ namespace CameraViewCullingTest
 		if (spriteRect.Intersect(spriteRect2))
 		{
 			BFE_LOG_INFO("IN", "");
-		}
+		}*/
 	}
 
 	void CameraViewCullingTest::Render()

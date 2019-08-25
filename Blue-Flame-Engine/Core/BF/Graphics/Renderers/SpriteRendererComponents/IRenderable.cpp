@@ -14,14 +14,26 @@ namespace BF
 				using namespace BF::ECS;
 				using namespace BF::Graphics::Renderers;
 
-				IRenderable::IRenderable(Type type, const Vector2i& size, const Vector2f& pivot, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
+				IRenderable::IRenderable(Type type, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
 					Component(IComponent::Type::Renderable),
-					type(type), size(size), pivot(pivot), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color), xySortingOrder(0)
+					type(type), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color), xySortingOrder(0), transfrom(nullptr)
 				{
 				}
 
 				IRenderable::~IRenderable()
 				{
+				}
+
+				void IRenderable::SetSize(const Vector2i& size)
+				{
+					transfrom->size = size;
+					transfrom->update = true;
+				}
+
+				void IRenderable::SetPivot(const Vector2f& pivot)
+				{
+					transfrom->pivot = pivot;
+					transfrom->update = true;
 				}
 			}
 		}

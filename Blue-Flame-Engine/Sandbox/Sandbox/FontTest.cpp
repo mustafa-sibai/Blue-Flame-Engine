@@ -58,9 +58,9 @@ namespace FontTest
 		Texture2D* texture = new Texture2D();
 		texture->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/cube - Copy.png"));
 
-		GameObject* sprite = scene->AddGameObject(new GameObject("main"));
+	/*	GameObject* sprite = scene->AddGameObject(new GameObject("main"));
 		sprite->AddComponent(new Sprite(texture, Vector2f(0.0f, 0.0f), defaultRenderLayer));
-		sprite->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));
+		sprite->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));*/
 
 		/*Texture2D* texture2 = new Texture2D();
 		texture2->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/test3.png"));
@@ -74,10 +74,10 @@ namespace FontTest
 		rect->AddComponent(new RegularPolygon(Vector2i(9, 10), Vector2f(0.5f, 0.5f), defaultRenderLayer));
 		rect->GetComponent<Transform>()->SetPosition(Vector3f(0, 0, 0));*/
 
-		GameObject* text = scene->AddGameObject(new GameObject("main"));
+		/*GameObject* text = scene->AddGameObject(new GameObject("main"));
 		text->AddComponent(new Text(font, "Hello world!", Vector2f(.5f, .5f), defaultRenderLayer));
 		text->GetComponent<Transform>()->SetScale(Vector3f(2, 2, 2));
-		text->GetComponent<Transform>()->SetPosition(Vector3f(-100, 50, 0));
+		text->GetComponent<Transform>()->SetPosition(Vector3f(-100, 50, 0));*/
 
 		App::Initialize();
 	}

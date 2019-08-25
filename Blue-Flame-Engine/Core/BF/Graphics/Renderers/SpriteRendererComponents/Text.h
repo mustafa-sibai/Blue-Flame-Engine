@@ -26,9 +26,8 @@ namespace BF
 
 				public:
 					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, BF::Graphics::Renderers::RenderLayer* renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Vector2f& pivot, BF::Graphics::Renderers::RenderLayer* renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
-					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, const BF::Math::Vector2f& pivot, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer);
+					Text(const BF::Graphics::Fonts::Font* font, const std::string& text, int zSortingOrder, BF::Graphics::Renderers::RenderLayer* renderLayer, const BF::Graphics::Color& color);
 					~Text();
 				};
 			}

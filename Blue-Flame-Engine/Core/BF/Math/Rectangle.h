@@ -39,16 +39,6 @@ namespace BF
 			*/
 			Rectangle GetEdgeOffsetByPivot() const;
 
-			/*
-			@return:
-			returns a list of Vector2f.
-			[0] = top left corner
-			[1] = top right corner
-			[2] = bottom right corner
-			[3] = bottom left corner
-			*/
-			std::vector<Vector2i>& GetCorners();
-
 			friend std::string operator+(const std::string& left, const Rectangle& right) { return left + "{" + std::to_string(right.x) + ", " + std::to_string(right.y) + ", " + std::to_string(right.width) + ", " + std::to_string(right.height) + "}"; }
 			friend std::string operator+(const Rectangle& left, const std::string& right) { return "{" + std::to_string(left.x) + ", " + std::to_string(left.y) + ", " + std::to_string(left.width) + ", " + std::to_string(left.height) + "}" + right; }
 

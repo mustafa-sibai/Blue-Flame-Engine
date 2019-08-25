@@ -27,7 +27,7 @@ namespace BF
 
 			void AnimationSystem::PlayAnimation(Sprite* sprite, BF::Graphics::Animation::Animation* animation, double deltaTime)
 			{
-				if (animation->state == Animation::State::None)
+				/*if (animation->state == Animation::State::None)
 				{
 					sprite->SetTexture(animation->texture);
 					sprite->size = Vector2i(animation->texture->GetTextureData()->width, animation->texture->GetTextureData()->height);
@@ -64,7 +64,7 @@ namespace BF
 					}
 
 					animation->renderFrame = true;
-				}
+				}*/
 			}
 
 			void AnimationSystem::Initialize()
@@ -123,10 +123,10 @@ namespace BF
 
 			void AnimationSystem::AddAnimator(Animator* animator)
 			{
-				animators.emplace_back(animator);
+				/*animators.emplace_back(animator);
 
 				animator->currentSprite = (Sprite*)animator->gameObject->AddComponent(new Sprite(nullptr, Vector2f(0.5f, 0.5f), 0, renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer(), Rectangle(), Color::Whites::White()));;
-				renderPipeline.AddRenderable(animator->currentSprite);
+				renderPipeline.AddRenderable(animator->currentSprite);*/
 			}
 
 			void AnimationSystem::RemoveAnimator(Animator* animator)

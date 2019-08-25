@@ -1,7 +1,7 @@
 #include "Debug.h"
 #include "BF/Engine.h"
 
-#define BFE_MAX_SPRITES     60000
+#define BFE_MAX_SPRITES     300000
 #define BFE_SPRITE_VERTICES 4
 #define	BFE_SPRITE_INDICES  6
 #define BFE_VERTICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
@@ -84,7 +84,7 @@ namespace BF
 				|_____\|
 				3      2
 			*/
-			int startingIndex = 0;
+			/*int startingIndex = 0;
 
 			Vector2f normal = Vector2f(line.endPosition.y - line.startPosition.y, line.endPosition.x - line.startPosition.x).Normalize() * line.thickness;
 
@@ -130,7 +130,7 @@ namespace BF
 			//Bottom Left
 			vertexData->position = Vector2f(line.endPosition.x, line.endPosition.y);
 			vertexData->color = line.color;
-			vertexData++;
+			vertexData++;*/
 		}
 
 		void Debug::MapRectangle(Rectangle& rectangle)
@@ -149,7 +149,7 @@ namespace BF
 				|_____\|
 				3      2
 			*/
-			int startingIndex = 0;
+			/*int startingIndex = 0;
 
 			startingIndex = currentIndex;
 
@@ -204,7 +204,7 @@ namespace BF
 
 			  as you can see, the image is close to the bottom right of the screen.
 			*/
-			corners = BF::Math::Rectangle(rectangle.position.x, rectangle.position.y, rectangle.size.x, rectangle.size.y, rectangle.pivot).GetCorners();
+			/*corners = BF::Math::Rectangle(rectangle.position.x, rectangle.position.y, rectangle.size.x, rectangle.size.y, rectangle.pivot).GetCorners();
 
 			//Top Left
 			vertexData->position = Vector2f(corners[0].x, corners[0].y);
@@ -224,12 +224,12 @@ namespace BF
 			//Bottom Left
 			vertexData->position = Vector2f(corners[3].x, corners[3].y);
 			vertexData->color = rectangle.color;
-			vertexData++;
+			vertexData++;*/
 		}
 
 		void Debug::MapRegularPolygon(RegularPolygon& regularPolygon)
 		{
-			int startingIndex = 0;
+			/*int startingIndex = 0;
 			float angle = 0;
 			float distanceBetweenTris = 0;
 			Vector2f vertexPosition;
@@ -296,7 +296,7 @@ namespace BF
 						v3
 			*/
 
-			vertexData->position = regularPolygon.position;
+			/*vertexData->position = regularPolygon.position;
 			vertexData->color = regularPolygon.color;
 			vertexData++;
 
@@ -311,7 +311,7 @@ namespace BF
 				vertexData++;
 
 				angle += distanceBetweenTris;
-			}
+			}*/
 		}
 
 		void Debug::Render()

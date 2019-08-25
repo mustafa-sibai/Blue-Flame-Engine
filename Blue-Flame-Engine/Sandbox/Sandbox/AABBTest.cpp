@@ -51,7 +51,7 @@ namespace AABBTest
 		camera->SetClearType(BufferClearType::ColorAndDepth);
 		camera->SetClearColor(Color(0.0, 0.0f, 0.0f, 1.0f));
 
-		Texture2D* green = new Texture2D();
+		/*Texture2D* green = new Texture2D();
 		green->Create(ResourceManager::Load<TextureData>("../Sandbox/Assets/Textures/g.png"));
 
 		Texture2D* red = new Texture2D();
@@ -70,7 +70,7 @@ namespace AABBTest
 		sprite2->AddComponent(new BoxCollider2D(0, 0, 32, 32, Vector2f(0, 0)));
 		//sprite2->AddComponent(new ScriptTest());
 		sprite2->GetComponent<Transform>()->SetPosition(Vector3f(100, 0, 0));
-
+		*/
 		App::Initialize();
 	}
 

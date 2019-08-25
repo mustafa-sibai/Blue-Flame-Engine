@@ -62,7 +62,7 @@ namespace BF
 
 			private:
 				void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
-				void MapRectangleShapeBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape* rectangleShape);
+				void MapRectangleShapeBuffer(BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape* rectangleShape);
 				void MapRegularPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
 				void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
 				void MapTextBuffer(BF::Graphics::Renderers::SpriteRendererComponents::Text* text);

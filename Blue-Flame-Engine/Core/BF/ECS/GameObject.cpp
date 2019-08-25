@@ -6,6 +6,7 @@
 #include "BF/Physics/ICollider.h"
 #include "BF/AI/Astar/AstarNode.h"
 #include "BF/System/Debug.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/IRenderable.h"
 
 namespace BF
 {
@@ -22,6 +23,8 @@ namespace BF
 		using namespace BF::Scripting;
 		using namespace BF::AI::Astar;
 		using namespace BF::System;
+		using namespace BF::System;
+		using namespace BF::Math;
 
 		int GameObject::globalID = 0;
 
@@ -37,6 +40,18 @@ namespace BF
 
 		GameObject::~GameObject()
 		{
+		}
+
+		IRenderable* GameObject::AddComponent(Vector2i& size, Vector2f& pivot, IRenderable* iRenderable)
+		{
+			iRenderable->gameObject = this;
+			((Transform*)components[0])->transformables.emplace_back(new RenderableTransform(size, pivot));
+			iRenderable->transfrom = (RenderableTransform*)((Transform*)components[0])->transformables[((Transform*)components[0])->transformables.size() - 1];
+			components.emplace_back(iRenderable);
+			scene->app.renderPipeline.AddRenderable(iRenderable);
+			iRenderable->added = true;
+
+			return iRenderable;
 		}
 
 		IComponent* GameObject::AddComponent(IComponent* component)
@@ -75,8 +90,7 @@ namespace BF
 					scene->app.animationSystem.AddAnimator((Animator*)component);
 					component->added = true;
 				}
-				else if (component->type == IComponent::Type::Renderable ||
-					component->type == IComponent::Type::Model)
+				else if (component->type == IComponent::Type::Model)
 				{
 					component->gameObject = this;
 					components.emplace_back(component);

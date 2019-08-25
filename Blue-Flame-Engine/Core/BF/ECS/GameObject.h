@@ -13,12 +13,22 @@ namespace BF
 		class Scene;
 	}
 
+	namespace Graphics
+	{
+		namespace Renderers
+		{
+			namespace SpriteRendererComponents
+			{
+				class IRenderable;
+			}
+		}
+	}
 	namespace ECS
 	{
 		class BFE_API GameObject
 		{
 			friend class BF::Application::Scene;
-			friend class BF::System::Transform;
+			//friend class BF::System::Transform;
 
 		private:
 			static int globalID;
@@ -37,7 +47,9 @@ namespace BF
 			GameObject(const std::string& name);
 			virtual ~GameObject();
 
+			BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* AddComponent(BF::Math::Vector2i& size, BF::Math::Vector2f& pivot, BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* iRenderable);
 			IComponent* AddComponent(IComponent* component);
+
 			void RemoveComponent(IComponent* component);
 
 			template <typename T>

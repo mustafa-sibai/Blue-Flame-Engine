@@ -9,7 +9,7 @@ namespace BF
 		using namespace BF::Math;
 
 		Transform::Transform() :
-			transformation(Matrix4::Identity()), worldTransformation(Matrix4::Identity()), position(0), rotation(0), scale(1), angle(0)
+			transformation(Matrix4::Identity()), worldTransformation(Matrix4::Identity()), position(0), rotation(0), scale(1), angle(0), updatePosition(false)
 		{
 		}
 
@@ -17,20 +17,11 @@ namespace BF
 		{
 		}
 
-		Vector3f prevPos;
-		//Vector3f dir;
-
 		void Transform::SetPosition(const Vector3f& position)
 		{
-			prevPos = this->position;
-			//this->position = position;
-			transformation = Matrix4::Translate(position) * Matrix4::Rotate(angle, rotation) * Matrix4::Scale(scale);
-			this->position = transformation.GetTranslationVector();
-
-			direction = (this->position - prevPos).Normalize();
-			//BFE_LOG_INFO("dir " + direction, "");
-
-			UpdateTransform();
+			updatePosition	= true;
+			prevPos			= this->position;
+			this->position	= position;
 		}
 
 		void Transform::SetRotation(float angle, const Vector3f& rotation)
@@ -53,14 +44,14 @@ namespace BF
 
 		void Transform::UpdateTransform()
 		{
-			if (this->gameObject->parent == nullptr)
+			/*if (this->gameObject->parent == nullptr)
 			{
 				worldTransformation = transformation;
 			}
 			else
 			{
 				worldTransformation = this->gameObject->parent->GetTransform()->worldTransformation * transformation;
-			}
+			}*/
 
 			/*for (size_t i = 0; i < this->gameObject->gameObjects.size(); i++)
 			{

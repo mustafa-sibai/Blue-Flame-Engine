@@ -89,7 +89,7 @@ namespace IsoMapTest
 		int mostTiles = row > column ? row : column;
 		//mostTiles = mostTiles > height ? mostTiles : height;
 
-		float heightInPixels = 15;
+		/*float heightInPixels = 15;
 		for (size_t z = 0; z < height; z++)
 		{
 			for (size_t y = 0; y < column; y++)
@@ -113,7 +113,7 @@ namespace IsoMapTest
 						sprite->GetComponent<Sprite>()->color = Color::Reds::Red();
 				}
 			}
-		}
+		}*/
 	}
 
 
@@ -141,7 +141,7 @@ namespace IsoMapTest
 		//mostTiles = mostTiles > height ? mostTiles : height;
 
 		float heightInPixels = 15;
-
+		/*
 		//ground
 		for (size_t z = 0; z < height; z++)
 		{
@@ -294,7 +294,7 @@ namespace IsoMapTest
 		}
 
 		IsoPosition = Vector2f(movingSprite->GetTransform()->GetPosition().x, movingSprite->GetTransform()->GetPosition().y);
-		carPosition = IsometricToCartesian(Vector2f(IsoPosition.x, IsoPosition.y));
+		carPosition = IsometricToCartesian(Vector2f(IsoPosition.x, IsoPosition.y));*/
 	}
 
 	void IsoMapTest::Load()

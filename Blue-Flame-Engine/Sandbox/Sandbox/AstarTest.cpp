@@ -55,14 +55,14 @@ namespace AstarTest
 
 	void AstarTest::SetupNodes()
 	{
-		for (size_t i = 0; i < 5; i++)
+		/*for (size_t i = 0; i < 5; i++)
 		{
 			GameObject* gameObject = scene->AddGameObject(new GameObject("Astar node" + std::to_string(i + 1)));
 
 			nodes.emplace_back(gameObject);
 			gameObject->AddComponent(new Sprite(nodeTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
 			gameObject->AddComponent(new AstarNode());
-		}
+		}*/
 
 		AstarNode* topLeftNode		= nodes[0]->GetComponent<AstarNode>();
 		AstarNode* topRightNode		= nodes[1]->GetComponent<AstarNode>();
@@ -119,10 +119,10 @@ namespace AstarTest
 			}
 		}
 
-		astarAgent = scene->AddGameObject(new GameObject("Astar agent"));
+		/*astarAgent = scene->AddGameObject(new GameObject("Astar agent"));
 
 		astarAgent->AddComponent(new Sprite(astarAgentTexture, Vector2f(0.5, 0.5), defaultRenderLayer));
-		astarAgent->AddComponent(new AstarAgent());
+		astarAgent->AddComponent(new AstarAgent());*/
 
 		//astarAgent
 	}

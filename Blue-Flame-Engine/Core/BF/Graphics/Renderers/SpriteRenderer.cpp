@@ -4,7 +4,7 @@
 #include "BF/System/Debug.h"
 #include "BF/ECS/GameObject.h"
 
-#define BFE_MAX_SPRITES     60000
+#define BFE_MAX_SPRITES     300000
 #define BFE_SPRITE_VERTICES 4
 #define	BFE_SPRITE_INDICES  6
 #define BFE_VERTICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
@@ -172,19 +172,8 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapRectangleShapeBuffer(const RectangleShape* rectangleShape)
+			void SpriteRenderer::MapRectangleShapeBuffer(RectangleShape* rectangleShape)
 			{
-				//110
-				//Vector2i scaledSprite(1);
-				//Vector3f position(1);
-				//Vector3f scale(1);
-
-				//69 fps
-				Vector3f position = rectangleShape->gameObject->GetTransform()->GetPosition();
-				Vector3f scale = rectangleShape->gameObject->GetTransform()->GetScale();
-
-				Vector2i scaledSprite = Vector2i(rectangleShape->size.x * scale.x, rectangleShape->size.y * scale.y);
-
 				/*
 				x = left position
 				y = top position
@@ -214,31 +203,30 @@ namespace BF
 
 				  as you can see, the image is close to the bottom right of the screen.
 				*/
-				corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, rectangleShape->pivot).GetCorners();
 
 				//Top Left
-				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
+				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.x, rectangleShape->transfrom->corners.y);
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(corners[1].x, corners[1].y);
+				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.width, rectangleShape->transfrom->corners.y);
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(corners[2].x, corners[2].y);
+				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.width, rectangleShape->transfrom->corners.height);
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(corners[3].x, corners[3].y);
+				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.x, rectangleShape->transfrom->corners.y);
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
@@ -331,7 +319,7 @@ namespace BF
 
 			void SpriteRenderer::MapSpriteBuffer(const Sprite* sprite)
 			{
-				if (currentBoundTexture != nullptr)
+				/*if (currentBoundTexture != nullptr)
 				{
 					if (currentBoundTexture != sprite->texture2D)
 					{
@@ -393,7 +381,7 @@ namespace BF
 
 				  as you can see, the image is close to the bottom right of the screen.
 				*/
-				corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
+				/*corners = BF::Math::Rectangle(position.x, position.y, scaledSprite.x, scaledSprite.y, sprite->pivot).GetCorners();
 
 				//Top Left
 				spriteBuffer->position = Vector2f(corners[0].x, corners[0].y);
@@ -423,12 +411,12 @@ namespace BF
 				spriteBuffer->renderingType = 1;
 				spriteBuffer++;
 
-				indexCount += BFE_SPRITE_INDICES;
+				indexCount += BFE_SPRITE_INDICES;*/
 			}
 
 			void SpriteRenderer::MapTextBuffer(Text* text)
 			{
-				if (currentBoundTexture != nullptr)
+				/*if (currentBoundTexture != nullptr)
 				{
 					if (currentBoundTexture != text->font->texture)
 					{
@@ -525,7 +513,7 @@ namespace BF
 					  as you can see, the image is close to the top left center of the screen.
 					*/
 
-					corners = BF::Math::Rectangle(text->characterPositions[i].x, text->characterPositions[i].y,
+					/*corners = BF::Math::Rectangle(text->characterPositions[i].x, text->characterPositions[i].y,
 												  scaledCharacter.x, scaledCharacter.y, Vector2f()).GetCorners();
 
 					//Top Left
@@ -557,7 +545,7 @@ namespace BF
 					spriteBuffer++;
 
 					indexCount += BFE_SPRITE_INDICES;
-				}
+				}*/
 			}
 
 			void SpriteRenderer::MapBuffer()

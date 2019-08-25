@@ -14,6 +14,8 @@ namespace DebugTest
 		BF::Graphics::Renderers::RenderLayer* guiRenderLayer;
 		BF::Math::Rectangle orthographicRectangle;
 
+		std::vector<BF::System::Transform*> transforms;
+
 	public:
 		DebugTest();
 		~DebugTest();

@@ -76,18 +76,6 @@ namespace BF
 			return Rectangle(x - offsetWidth, y + offsetHeight, width - offsetWidth + x, offsetHeight - height + y, pivot);
 		}
 
-		vector<Vector2i>& Rectangle::GetCorners()
-		{
-			Rectangle edges = GetEdgeOffsetByPivot();
-
-			corners[0] = Vector2i(edges.x,		edges.y);
-			corners[1] = Vector2i(edges.width,	edges.y);
-			corners[2] = Vector2i(edges.width,	edges.height);
-			corners[3] = Vector2i(edges.x,		edges.height);
-
-			return corners;
-		}
-
 		bool Rectangle::operator>(const Rectangle& right)
 		{
 			return Area() > right.Area();

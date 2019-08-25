@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "BF/System/Transform.h"
 #include "BF/System/Debug.h"
+#include "BF/Application/App.h"
 
 namespace BF
 {
@@ -24,6 +25,7 @@ namespace BF
 			if (!gameObject->added)
 			{
 				gameObjects.emplace_back(gameObject);
+				app.transformSystem.AddTransform((BF::System::Transform*)gameObject->components[0]);
 				gameObject->added = true;
 				gameObject->scene = this;
 			}
