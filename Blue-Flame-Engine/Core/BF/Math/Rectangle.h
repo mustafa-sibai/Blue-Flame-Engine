@@ -39,6 +39,21 @@ namespace BF
 			*/
 			Rectangle GetEdgeOffsetByPivot() const;
 
+			/*
+			Returns where all four edges of a rectangle position should be depending on the pivot point at the origin
+			x		= left
+			width	= right
+			y		= top
+			hieght	= bottom
+			@pivot:
+			Top left = 0, 0
+			Top right = 1, 0
+			Center = 0.5f, 0.5f
+			Bottom right = 1, 1
+			Bottom left = 0, 1
+			*/
+			Rectangle GetEdgeOffsetByPivotAtOrigin() const;
+
 			friend std::string operator+(const std::string& left, const Rectangle& right) { return left + "{" + std::to_string(right.x) + ", " + std::to_string(right.y) + ", " + std::to_string(right.width) + ", " + std::to_string(right.height) + "}"; }
 			friend std::string operator+(const Rectangle& left, const std::string& right) { return "{" + std::to_string(left.x) + ", " + std::to_string(left.y) + ", " + std::to_string(left.width) + ", " + std::to_string(left.height) + "}" + right; }
 

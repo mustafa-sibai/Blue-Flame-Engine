@@ -45,10 +45,15 @@ namespace BF
 		IRenderable* GameObject::AddComponent(Vector2i& size, Vector2f& pivot, IRenderable* iRenderable)
 		{
 			iRenderable->gameObject = this;
-			((Transform*)components[0])->transformables.emplace_back(new RenderableTransform(size, pivot));
-			iRenderable->transfrom = (RenderableTransform*)((Transform*)components[0])->transformables[((Transform*)components[0])->transformables.size() - 1];
+
+			Transform* transform = (Transform*)components[0];
+
+			transform->transformables.emplace_back(new RenderableTransform(size, pivot));
+			iRenderable->transfrom = (RenderableTransform*)(transform)->transformables[transform->transformables.size() - 1];
+
 			components.emplace_back(iRenderable);
 			scene->app.renderPipeline.AddRenderable(iRenderable);
+
 			iRenderable->added = true;
 
 			return iRenderable;

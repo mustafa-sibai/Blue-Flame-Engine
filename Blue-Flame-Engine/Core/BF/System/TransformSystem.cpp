@@ -46,19 +46,32 @@ namespace BF
 					transforms[i]->position = transforms[i]->transformation.GetTranslationVector();
 
 					transforms[i]->direction = (transforms[i]->position - transforms[i]->prevPos).Normalize();
-					transforms[i]->worldTransformation = transforms[i]->gameObject->GetTransform()->worldTransformation * transforms[i]->transformation;
+					transforms[i]->worldTransformation = transforms[i]->worldTransformation * transforms[i]->transformation;
 					
 					for (size_t j = 0; j < transforms[i]->transformables.size(); j++)
 					{
 						if (transforms[i]->transformables[j]->type == Transformable::Type::SpriteRendererTransform)
 						{
-							if (transforms[i]->transformables[j]->update)
+							RenderableTransform* renderableTransform = (RenderableTransform*)transforms[i]->transformables[j];
+							
+							if (transforms[i]->transformables[j]->updatePivotAndSize)
 							{
-								RenderableTransform* renderableTransform = (RenderableTransform*)transforms[i]->transformables[j];
 								Vector2i scaledSprite = Vector2i(renderableTransform->size.x * transforms[i]->scale.x, renderableTransform->size.y * transforms[i]->scale.y);
-								renderableTransform->corners = BF::Math::Rectangle(transforms[i]->position.x, transforms[i]->position.y, scaledSprite.x, scaledSprite.y, renderableTransform->pivot).GetEdgeOffsetByPivot();
-								transforms[i]->transformables[j]->update = false;
+								renderableTransform->edges = BF::Math::Rectangle(transforms[i]->position.x, transforms[i]->position.y, scaledSprite.x, scaledSprite.y, renderableTransform->pivot).GetEdgeOffsetByPivotAtOrigin();
+								renderableTransform->updatePivotAndSize = false;
 							}
+
+							//Top Left
+							renderableTransform->corners[0] = Vector2f(transforms[i]->position.x + renderableTransform->edges.x, renderableTransform->edges.y + transforms[i]->position.y);
+							
+							//Top Right
+							renderableTransform->corners[1] = Vector2f(transforms[i]->position.x + renderableTransform->edges.width,	renderableTransform->edges.y + transforms[i]->position.y);
+							
+							//Bottom Right
+							renderableTransform->corners[2] = Vector2f(transforms[i]->position.x + renderableTransform->edges.width,	renderableTransform->edges.height + transforms[i]->position.y);
+							
+							//Bottom Left
+							renderableTransform->corners[3] = Vector2f(transforms[i]->position.x + renderableTransform->edges.x,		renderableTransform->edges.y + transforms[i]->position.y);
 						}
 					}
 

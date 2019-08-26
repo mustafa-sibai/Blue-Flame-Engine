@@ -12,9 +12,10 @@ namespace BF
 		class BFE_API RenderableTransform : public Transformable
 		{
 		public:
-			BF::Math::Rectangle corners;
+			BF::Math::Rectangle edges;
 			BF::Math::Vector2i size;
 			BF::Math::Vector2f pivot;
+			BF::Math::Vector2f corners[4];
 
 		public:
 			RenderableTransform(BF::Math::Vector2i& size, BF::Math::Vector2f& pivot);

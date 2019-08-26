@@ -133,7 +133,7 @@ namespace DebugTest
 		BF::Debugging::Debug::DrawRectangle(Vector2f(500, 250), Vector2f(100, 100), Vector2f(0.5f, 0.5f), Color(0.6f, 0.2f, 0.2f, 1));*/
 
 
-		/*for (size_t i = 0; i < transforms.size(); i54544544444445tttttttttttttttttttttttttttttttttfff++)
+		/*for (size_t i = 0; i < transforms.size(); i++)
 		{
 			Vector3f pos = transforms[i]->GetPosition();
 			transforms[i]->SetPosition(pos + Vector3f(1, 0, 0) * 0.1f * deltaTime);

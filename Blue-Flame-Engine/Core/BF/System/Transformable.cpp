@@ -5,7 +5,7 @@ namespace BF
 	namespace System
 	{
 		Transformable::Transformable(Type type) :
-			type(type), update(false)
+			type(type), updatePivotAndSize(false)
 		{
 		}
 

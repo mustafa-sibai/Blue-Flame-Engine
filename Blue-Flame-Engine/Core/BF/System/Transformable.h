@@ -27,7 +27,7 @@ namespace BF
 			enum class Type { SpriteRendererTransform, MeshRendererTransform, PhysicsTransform };
 			Type type;
 
-			bool update;
+			bool updatePivotAndSize;
 
 		public:
 			Transformable(Type type);

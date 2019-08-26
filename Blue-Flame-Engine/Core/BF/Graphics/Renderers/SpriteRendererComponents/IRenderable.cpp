@@ -27,13 +27,13 @@ namespace BF
 				void IRenderable::SetSize(const Vector2i& size)
 				{
 					transfrom->size = size;
-					transfrom->update = true;
+					transfrom->updatePivotAndSize = true;
 				}
 
 				void IRenderable::SetPivot(const Vector2f& pivot)
 				{
 					transfrom->pivot = pivot;
-					transfrom->update = true;
+					transfrom->updatePivotAndSize = true;
 				}
 			}
 		}

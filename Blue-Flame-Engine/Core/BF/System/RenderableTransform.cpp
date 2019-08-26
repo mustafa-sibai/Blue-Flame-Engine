@@ -10,6 +10,7 @@ namespace BF
 			Transformable(Type::SpriteRendererTransform),
 			size(size), pivot(pivot)
 		{
+			updatePivotAndSize = true;
 		}
 
 		RenderableTransform::~RenderableTransform()

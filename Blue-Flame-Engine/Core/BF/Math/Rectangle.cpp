@@ -72,8 +72,15 @@ namespace BF
 		{
 			int offsetWidth = (int)(width * pivot.x);
 			int offsetHeight = (int)(height * pivot.y);
-
+			//return Rectangle(-offsetWidth, offsetHeight, width - offsetWidth, offsetHeight - height, pivot);
 			return Rectangle(x - offsetWidth, y + offsetHeight, width - offsetWidth + x, offsetHeight - height + y, pivot);
+		}
+
+		Rectangle Rectangle::GetEdgeOffsetByPivotAtOrigin() const
+		{
+			int offsetWidth = (int)(width * pivot.x);
+			int offsetHeight = (int)(height * pivot.y);
+			return Rectangle(-offsetWidth, offsetHeight, width - offsetWidth, offsetHeight - height, pivot);
 		}
 
 		bool Rectangle::operator>(const Rectangle& right)

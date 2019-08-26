@@ -205,28 +205,28 @@ namespace BF
 				*/
 
 				//Top Left
-				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.x, rectangleShape->transfrom->corners.y);
+				spriteBuffer->position = rectangleShape->transfrom->corners[0];
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.width, rectangleShape->transfrom->corners.y);
+				spriteBuffer->position = rectangleShape->transfrom->corners[1];
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.width, rectangleShape->transfrom->corners.height);
+				spriteBuffer->position = rectangleShape->transfrom->corners[2];
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = Vector2f(rectangleShape->transfrom->corners.x, rectangleShape->transfrom->corners.y);
+				spriteBuffer->position = rectangleShape->transfrom->corners[3];
 				spriteBuffer->color = rectangleShape->color;
 				spriteBuffer->UV = Vector2f(0.0f);
 				spriteBuffer->renderingType = 0;
