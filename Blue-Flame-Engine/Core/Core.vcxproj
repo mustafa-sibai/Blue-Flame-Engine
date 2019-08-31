@@ -61,6 +61,7 @@
     <ClCompile Include="BF\System\TransformSystem.cpp" />
     <ClCompile Include="BF\System\Transformable.cpp" />
     <ClCompile Include="BF\System\RenderableTransform.cpp" />
+    <ClCompile Include="BF\System\TransformThreadWorker.cpp" />
     <None Include="BF\System\TransformComponent.inl">
       <FileType>Document</FileType>
     </None>
@@ -290,6 +291,7 @@
     <ClInclude Include="BF\System\TransformComponent.h" />
     <ClInclude Include="BF\System\Transformable.h" />
     <ClInclude Include="BF\System\RenderableTransform.h" />
+    <ClInclude Include="BF\System\TransformThreadWorker.h" />
     <None Include="BF\Graphics\VertexData.inl">
       <FileType>Document</FileType>
     </None>

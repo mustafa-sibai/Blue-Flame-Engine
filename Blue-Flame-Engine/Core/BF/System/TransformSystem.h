@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <thread>
 #include "BF/System/Transform.h"
+#include "BF/System/TransformThreadWorker.h"
 #include "BF/ECS/ISystem.h"
 #include "BF/Common.h"
 #include "BF/System/RenderableTransform.h"
@@ -25,11 +27,17 @@ namespace BF
 			friend class BF::Application::Scene;
 
 		private:
-			std::vector<Transform*> transforms;
-			std::vector<Transformable*> transformable;
+			//std::thread t;
+			BF::Application::App& app;
+			bool newTransformAdded;
+			std::vector<Transform*>* transforms;
+			std::vector<TransformThreadWorker*> transformThreadWorkers;
+			std::vector<std::thread> threads;
+			//std::vector<Transformable*> transformable;
 
 		public:
-			TransformSystem();
+			TransformSystem(BF::Application::App& app);
+			TransformSystem(TransformSystem& other);
 			~TransformSystem();
 
 		private:
@@ -41,6 +49,10 @@ namespace BF
 
 			void AddTransform(Transform* transform);
 			void RemoveTransform(Transform* transform);
+
+			 TransformSystem& operator=(TransformSystem& right);
+
+			 void UpdateThreadCount();
 		};
 	}
 }

@@ -7,7 +7,7 @@ namespace BF
 		using namespace BF::Graphics::Renderers;
 
 		App::App() :
-			cameraManager(constantBufferManager), guiSystem(renderPipeline), animationSystem(renderPipeline), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr)
+			cameraManager(constantBufferManager), guiSystem(renderPipeline), animationSystem(renderPipeline), renderPipeline(constantBufferManager, cameraManager), initialized(false), loaded(false), fixedUpdateTicks(0), mainScene(nullptr), frameState(FrameState::StartUpdating)
 		{
 		}
 
@@ -58,26 +58,38 @@ namespace BF
 		{
 			constantBufferManager.Update(deltaTime);
 			cameraManager.Update(deltaTime);
+
+
 			transformSystem.Update(deltaTime);
+
+			if(StartUpdateThread)
+
+
 			physicsEngine.Update(deltaTime);
 			renderPipeline.Update(deltaTime);
 			animationSystem.Update(deltaTime);
 			scriptExecutor.Update(deltaTime);
 			guiSystem.Update(deltaTime);
 			astarSystem.Update(deltaTime);
+
 		}
 
 		void App::Render()
 		{
-			constantBufferManager.Render();
-			cameraManager.Render();
-			transformSystem.Render();
-			physicsEngine.Render();
-			renderPipeline.Render();
-			animationSystem.Render();
-			scriptExecutor.Render();
-			guiSystem.Render();
-			astarSystem.Render();
+			if (frameState == FrameState::StartRendering)
+			{
+				constantBufferManager.Render();
+				cameraManager.Render();
+				transformSystem.Render();
+				physicsEngine.Render();
+				renderPipeline.Render();
+				animationSystem.Render();
+				scriptExecutor.Render();
+				guiSystem.Render();
+				astarSystem.Render();
+
+				frameState = FrameState::StartUpdating;
+			}
 		}
 
 		void App::RunScene(Scene& scene)

@@ -375,6 +375,9 @@
     <ClCompile Include="BF\System\RenderableTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BF\System\TransformThreadWorker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BF\Common.h">
@@ -843,6 +846,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BF\System\RenderableTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BF\System\TransformThreadWorker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

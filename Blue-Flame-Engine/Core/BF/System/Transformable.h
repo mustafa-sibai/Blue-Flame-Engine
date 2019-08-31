@@ -16,11 +16,11 @@ namespace BF
 
 	namespace System
 	{
-		class TransformSystem;
+		class TransformThreadWorker;
 
 		class BFE_API Transformable
 		{
-			friend class BF::System::TransformSystem;
+			friend class BF::System::TransformThreadWorker;
 			friend class BF::Graphics::Renderers::SpriteRendererComponents::IRenderable;
 
 		protected:

@@ -33,6 +33,7 @@ namespace BF
 			friend class BF::Engine;
 			friend class BF::ECS::GameObject;
 			friend class BF::Application::Scene;
+			friend class BF::System::TransformSystem;
 
 #ifdef BFE_PLATFORM_WINDOWS
 			friend class BF::Platform::Windows::WINEngineEntryPoint;
@@ -47,6 +48,9 @@ namespace BF
 			BF::Graphics::Renderers::RenderPipeline renderPipeline;
 
 		private:
+			enum class FrameState { None, StartUpdatingTransformThreads, WaitingToFinishUpdatingTransformThreads, StartUpdateThread, FinishedUpdating, StartRendering };
+			FrameState frameState;
+
 			Scene* mainScene;
 
 			BF::Graphics::ConstantBufferManager constantBufferManager;
