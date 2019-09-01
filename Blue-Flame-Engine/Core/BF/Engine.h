@@ -24,44 +24,44 @@ namespace BF
 	{
 	private:
 #ifdef BFE_PLATFORM_WINDOWS
-		friend class Platform::Windows::WINEngineEntryPoint;
-		friend class Platform::Windows::WINWindow;
+		friend class BF::Platform::Windows::WINEngineEntryPoint;
+		friend class BF::Platform::Windows::WINWindow;
 		static Platform::Windows::WINEngineEntryPoint* winEngineEntryPoint;
 #elif defined (BFE_PLATFORM_LINUX)
-		friend class Platform::Linux::LXEngineEntryPoint;
-		static Platform::Linux::LXEngineEntryPoint* lxEngineEntryPoint;
+		friend class BF::Platform::Linux::LXEngineEntryPoint;
+		static BF::Platform::Linux::LXEngineEntryPoint* lxEngineEntryPoint;
 #elif defined (BFE_PLATFORM_WEB)
-		friend class Platform::Web::WEBEngineEntryPoint;
-		static Platform::Web::WEBEngineEntryPoint* webEngineEntryPoint;
+		friend class BF::Platform::Web::WEBEngineEntryPoint;
+		static BF::Platform::Web::WEBEngineEntryPoint* webEngineEntryPoint;
 #elif defined (BFE_PLATFORM_ANDROID)
-		friend class Platform::Android::ANDEngineEntryPoint;
-		static Platform::Android::ANDEngineEntryPoint* andEngineEntryPoint;
+		friend class BF::Platform::Android::ANDEngineEntryPoint;
+		static BF::Platform::Android::ANDEngineEntryPoint* andEngineEntryPoint;
 #endif
 
 		enum class State { None, Initialize, Render, Exit };
 		static State state;
 
 	public:
-		Engine(const BF::Application::Window& window, Graphics::API::RenderAPI renderAPI);
+		Engine(const BF::Application::Window& window, BF::Graphics::API::RenderAPI renderAPI);
 		~Engine();
 
-		void Run(Application::App& app);
+		void Run(BF::Application::App& app);
 		static void Exit();
 
 		static void LimitFrameRate(double limit);
 
 #ifdef BFE_PLATFORM_WINDOWS
-		static inline Platform::Windows::WINWindow& GetWindow() { return winEngineEntryPoint->GetWindow(); }
-		static inline Graphics::API::Context& GetContext() { return winEngineEntryPoint->GetContext(); }
+		static inline BF::Platform::Windows::WINWindow& GetWindow() { return winEngineEntryPoint->GetWindow(); }
+		static inline BF::Graphics::API::Context& GetContext() { return winEngineEntryPoint->GetContext(); }
 #elif defined (BFE_PLATFORM_LINUX)
-		static inline Platform::Linux::LXWindow& GetWindow() { return lxEngineEntryPoint->GetWindow(); }
-		static inline Graphics::API::Context& GetContext() { return lxEngineEntryPoint->GetContext(); }
+		static inline BF::Platform::Linux::LXWindow& GetWindow() { return lxEngineEntryPoint->GetWindow(); }
+		static inline BF::Graphics::API::Context& GetContext() { return lxEngineEntryPoint->GetContext(); }
 #elif defined (BFE_PLATFORM_WEB)
-		static inline Platform::Web::WEBWindow& GetWindow() { return webEngineEntryPoint->GetWindow(); }
-		static inline Graphics::API::Context& GetContext() { return webEngineEntryPoint->GetContext(); }
+		static inline BF::Platform::Web::WEBWindow& GetWindow() { return webEngineEntryPoint->GetWindow(); }
+		static inline BF::Graphics::API::Context& GetContext() { return webEngineEntryPoint->GetContext(); }
 #elif defined (BFE_PLATFORM_ANDROID)
-		static inline Platform::Android::ANDWindow& GetWindow() { return andEngineEntryPoint->GetWindow(); }
-		static inline Graphics::API::Context& GetContext() { return andEngineEntryPoint->GetContext(); }
+		static inline BF::Platform::Android::ANDWindow& GetWindow() { return andEngineEntryPoint->GetWindow(); }
+		static inline BF::Graphics::API::Context& GetContext() { return andEngineEntryPoint->GetContext(); }
 #endif
 	};
 }

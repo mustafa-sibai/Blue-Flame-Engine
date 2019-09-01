@@ -56,7 +56,7 @@ namespace BF
 #endif
 	}
 
-	void Engine::Run(Application::App& app)
+	void Engine::Run(App& app)
 	{
 #ifdef BFE_PLATFORM_WINDOWS
 		winEngineEntryPoint->Run(app);

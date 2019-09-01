@@ -18,7 +18,8 @@ namespace BF
 			using namespace BF::Math;
 
 			WINWindow::WINWindow(const string& title, const Vector2i& position, const Vector2i& clientSize, WindowStyle style) :
-				Window(title, position, clientSize, style)
+				Window(title, position, clientSize, style),
+				hWnd(), msg(), currentWindowStyle(WS_OVERLAPPEDWINDOW^ WS_THICKFRAME), mousePosition()
 			{
 			}
 
@@ -146,7 +147,7 @@ namespace BF
 
 			LRESULT CALLBACK WINWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
-				WINWindow *window = nullptr;
+				WINWindow* window = nullptr;
 
 				if (message == WM_NCCREATE)
 				{

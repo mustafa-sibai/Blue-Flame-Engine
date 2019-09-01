@@ -15,8 +15,8 @@ namespace BF
 			using namespace BF::Application;
 			using namespace BF::Input;
 
-			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI) :
-				winWindow(winWindow), context(renderAPI), frameRateTarget(0.0f), frameTimeTarget(0.0f)
+			WINEngineEntryPoint::WINEngineEntryPoint(const WINWindow& winWindow, RenderAPI renderAPI) :
+				winWindow(winWindow), context(renderAPI), deltaTime(0.0), frameRateTarget(0.0), frameTimeTarget(0.0), FPS(0)
 			{
 			}
 
@@ -24,7 +24,7 @@ namespace BF
 			{
 			}
 
-			void WINEngineEntryPoint::Run(Application::App& app)
+			void WINEngineEntryPoint::Run(App& app)
 			{
 				while (Engine::state != Engine::State::Exit)
 				{

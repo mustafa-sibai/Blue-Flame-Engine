@@ -16,24 +16,23 @@ namespace BF
 		{
 			class BFE_API WINEngineEntryPoint
 			{
-				private:
-					WINWindow winWindow;
-					Graphics::API::Context context;
+			private:
+				WINWindow winWindow;
+				BF::Graphics::API::Context context;
 
-					double deltaTime;
-					double frameRateTarget, frameTimeTarget;
-					unsigned int FPS;
+				double deltaTime;
+				double frameRateTarget, frameTimeTarget;
+				unsigned int FPS;
 
-				public:
-					WINEngineEntryPoint(const WINWindow& winWindow, Graphics::API::RenderAPI renderAPI);
-					~WINEngineEntryPoint();
+			public:
+				WINEngineEntryPoint(const WINWindow& winWindow, BF::Graphics::API::RenderAPI renderAPI);
+				~WINEngineEntryPoint();
 
-					void Run(Application::App& app);
-					void LimitFrameRate(double limit);
+				void Run(BF::Application::App& app);
+				void LimitFrameRate(double limit);
 
-					inline double GetDeltaTime() const { return deltaTime; }
-					inline WINWindow& GetWindow() { return winWindow; }
-					inline Graphics::API::Context& GetContext() { return context; }
+				inline WINWindow& GetWindow() { return winWindow; }
+				inline BF::Graphics::API::Context& GetContext() { return context; }
 			};
 		}
 	}
