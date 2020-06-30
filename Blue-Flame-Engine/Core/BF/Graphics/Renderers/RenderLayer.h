@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "BF/Graphics/Renderers/SpriteRendererComponents/IRenderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/RectangleShape.h"
 #include "BF/Common.h"
 
 namespace BF
@@ -20,7 +21,8 @@ namespace BF
 
 			private:
 				std::string name;
-				std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
+				//std::vector<BF::Graphics::Renderers::SpriteRendererComponents::IRenderable*> renderables;
+				std::vector<BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape> rectangleShapes;
 
 			public:
 				enum class SortingOrder { BackToFront, BackToFrontRightToLeft };

@@ -33,13 +33,13 @@ namespace BF
 				BF::Graphics::API::IndexBuffer indexBuffer;
 				BF::Graphics::API::VertexBufferLayout vertexBufferLayout;
 
+				BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* ogSpriteBuffer;
 				BF::Graphics::Renderers::SpriteRendererComponents::SpriteBuffer* spriteBuffer;
+
 				unsigned int indexCount;
 
 				bool submitSprite;
 				int totalDrawCalls;
-
-				std::vector<BF::Math::Vector2i> corners;
 
 				static const BF::Graphics::API::Texture2D* currentBoundTexture;
 
@@ -62,7 +62,7 @@ namespace BF
 
 			private:
 				void MapLineBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::LineShape* lineShape);
-				void MapRectangleShapeBuffer(BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape* rectangleShape);
+				__declspec(noinline) void MapRectangleShapeBuffer(BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape& rectangleShape);
 				void MapRegularPolygonBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::RegularPolygon* regularPolygon);
 				void MapSpriteBuffer(const BF::Graphics::Renderers::SpriteRendererComponents::Sprite* sprite);
 				void MapTextBuffer(BF::Graphics::Renderers::SpriteRendererComponents::Text* text);

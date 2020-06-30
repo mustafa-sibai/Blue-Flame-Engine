@@ -16,7 +16,7 @@ namespace BF
 			{
 			private:
 				BF::Graphics::Renderers::RenderPipeline& renderPipeline;
-				BF::Graphics::GUI::StyleSheet styleSheet;
+				//BF::Graphics::GUI::StyleSheet styleSheet;
 				std::vector<BF::Graphics::GUI::IWidget*> widgets;
 
 			public:

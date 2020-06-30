@@ -85,9 +85,9 @@ namespace BF
 					Type type;
 
 				public:
-					BF::System::RenderableTransform* transfrom;
+					//BF::System::RenderableTransform* transfrom;
 					int zSortingOrder;
-					BF::Graphics::Renderers::RenderLayer* renderLayer;
+					//BF::Graphics::Renderers::RenderLayer* renderLayer;
 					int xySortingOrder;
 					Color color;
 

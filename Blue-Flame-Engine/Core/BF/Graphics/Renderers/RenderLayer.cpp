@@ -21,10 +21,10 @@ namespace BF
 
 			void RenderLayer::Sort()
 			{
-				if (sortingOrder == SortingOrder::BackToFront)
+				/*if (sortingOrder == SortingOrder::BackToFront)
 					sort(renderables.begin(), renderables.end(), IRenderable::BackToFront());
 				else if (sortingOrder == SortingOrder::BackToFrontRightToLeft)
-					sort(renderables.begin(), renderables.end(), IRenderable::BackToFrontRightToLeft());
+					sort(renderables.begin(), renderables.end(), IRenderable::BackToFrontRightToLeft());*/
 			}
 		}
 	}

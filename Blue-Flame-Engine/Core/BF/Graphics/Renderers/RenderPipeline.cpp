@@ -72,14 +72,19 @@ namespace BF
 				cameraManager.GetMainCamera().SwapBuffers();
 			}
 
+			void RenderPipeline::AddRectangle(BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape& rectangleShape)
+			{
+				spriteRenderer->renderLayerManager.GetDefaultRenderLayer().rectangleShapes.emplace_back(rectangleShape);
+			}
+
 			void RenderPipeline::AddRenderable(IComponent* component)
 			{
 				if (component->type == IComponent::Type::Renderable)
 				{
 					if (spriteRenderer != nullptr)
 					{
-						IRenderable* iRenderable = (IRenderable*)component;
-						iRenderable->renderLayer->renderables.emplace_back(iRenderable);
+						//IRenderable* iRenderable = (IRenderable*)component;
+						//iRenderable->renderLayer->renderables.emplace_back(iRenderable);
 
 						//spriteRenderer->renderLayerManager.GetRenderLayer(iRenderable->renderLayer.(renderables.emplace_back((IRenderable*)component);
 					}

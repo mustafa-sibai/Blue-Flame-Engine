@@ -31,12 +31,15 @@ namespace BF
 				~VertexBuffer();
 
 				void Create();
-				void SetBuffer(unsigned int size, const void* data, BF::Graphics::API::BufferMode mode);
+				void Allocate(unsigned int size, const void* data, BF::Graphics::API::BufferMode mode);
 
 				void SetLayout(const Shader& shader, const VertexBufferLayout* vertexBufferLayout);
 
 				void* Map() const;
 				void Unmap() const;
+
+				void* MapPersistentStream() const;
+				void UnmapPersistentStream() const;
 
 				void Bind() const;
 				void Unbind() const;

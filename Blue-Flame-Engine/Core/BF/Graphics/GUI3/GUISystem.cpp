@@ -16,7 +16,7 @@ namespace BF
 			using namespace BF::Input;
 
 			GUISystem::GUISystem(BF::Graphics::Renderers::RenderPipeline& renderPipeline) :
-				renderPipeline(renderPipeline), styleSheet(*renderPipeline.spriteRenderer->renderLayerManager.GetGUIRenderLayer())
+				renderPipeline(renderPipeline)//, styleSheet(*renderPipeline.spriteRenderer->renderLayerManager.GetGUIRenderLayer())
 			{
 			}
 
@@ -30,7 +30,7 @@ namespace BF
 
 			void GUISystem::Load()
 			{
-				styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
+				//styleSheet.Load("../Sandbox/Assets/GUI/StyleSheet.xml");
 			}
 
 			void GUISystem::PostLoad()
@@ -140,7 +140,7 @@ namespace BF
 
 			void GUISystem::AddWidget(IWidget* iWidget)
 			{
-				if (iWidget->type == IWidget::Type::Button)
+				/*if (iWidget->type == IWidget::Type::Button)
 				{
 					*iWidget = styleSheet.GetWidget("Button");
 				}
@@ -150,7 +150,7 @@ namespace BF
 				}
 
 				renderPipeline.AddRenderable((IComponent*)iWidget->currentSprite);
-				widgets.emplace_back(iWidget);
+				widgets.emplace_back(iWidget);*/
 			}
 
 			void GUISystem::RemoveWidget(IWidget* iWidget)

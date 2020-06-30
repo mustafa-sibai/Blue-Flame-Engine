@@ -7,6 +7,7 @@
 #include "BF/AI/Astar/AstarNode.h"
 #include "BF/System/Debug.h"
 #include "BF/Graphics/Renderers/SpriteRendererComponents/IRenderable.h"
+#include "BF/Graphics/Renderers/SpriteRendererComponents/RectangleShape.h"
 
 namespace BF
 {
@@ -34,15 +35,33 @@ namespace BF
 			GameObject::globalID++;
 			id = globalID;
 
-			components.emplace_back(new Transform());
-			components[0]->gameObject = this;
+			//components.emplace_back(new Transform());
+			//components[0]->gameObject = this;
 		}
 
 		GameObject::~GameObject()
 		{
 		}
 
-		IRenderable* GameObject::AddComponent(Vector2i& size, Vector2f& pivot, IRenderable* iRenderable)
+		RectangleShape& GameObject::AddComponent(Vector2i& size, Vector2f& pivot, Vector2f& position, RectangleShape& rectangleShape)
+		{
+			rectangleShape.gameObject = this;
+
+			//Transform* transform = (Transform*)components[0];
+
+			//transform->transformables.emplace_back(new RenderableTransform(size, pivot));
+			//rectangleShape.transfrom = (RenderableTransform*)(transform)->transformables[transform->transformables.size() - 1];
+
+			//components.emplace_back(rectangleShape);
+			rectangleShape.SetPosition(size, pivot, position);
+			scene->app.renderPipeline.AddRectangle(rectangleShape);
+
+			rectangleShape.added = true;
+
+			return rectangleShape;
+		}
+
+		/*IRenderable* GameObject::AddComponent(Vector2i& size, Vector2f& pivot, IRenderable* iRenderable)
 		{
 			iRenderable->gameObject = this;
 
@@ -57,7 +76,24 @@ namespace BF
 			iRenderable->added = true;
 
 			return iRenderable;
-		}
+		}*/
+
+		/*IRenderable* GameObject::AddComponent(Vector2i& size, Vector2f& pivot, IRenderable* iRenderable)
+		{
+			iRenderable->gameObject = this;
+
+			Transform* transform = (Transform*)components[0];
+
+			transform->transformables.emplace_back(new RenderableTransform(size, pivot));
+			iRenderable->transfrom = (RenderableTransform*)(transform)->transformables[transform->transformables.size() - 1];
+
+			components.emplace_back(iRenderable);
+			scene->app.renderPipeline.AddRenderable(iRenderable);
+
+			iRenderable->added = true;
+
+			return iRenderable;
+		}*/
 
 		IComponent* GameObject::AddComponent(IComponent* component)
 		{

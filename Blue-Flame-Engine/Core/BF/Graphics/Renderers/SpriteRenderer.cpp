@@ -4,7 +4,7 @@
 #include "BF/System/Debug.h"
 #include "BF/ECS/GameObject.h"
 
-#define BFE_MAX_SPRITES     300000
+#define BFE_MAX_SPRITES     1001000
 #define BFE_SPRITE_VERTICES 4
 #define	BFE_SPRITE_INDICES  6
 #define BFE_VERTICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
@@ -80,7 +80,10 @@ namespace BF
 				}
 
 				vertexBuffer.Create();
-				vertexBuffer.SetBuffer(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr, BufferMode::DynamicDraw);
+				//vertexBuffer.Allocate(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr, BufferMode::DynamicDraw);
+				vertexBuffer.Allocate(BFE_VERTICES_SIZE * sizeof(SpriteBuffer), nullptr, BufferMode::PersistentMapping);
+				ogSpriteBuffer = (SpriteBuffer*)vertexBuffer.MapPersistentStream();
+				spriteBuffer = ogSpriteBuffer;
 
 				indexBuffer.Create();
 				indexBuffer.SetBuffer(indices, BFE_INDICES_SIZE, BufferMode::StaticDraw);
@@ -110,7 +113,7 @@ namespace BF
 			{
 				totalDrawCalls = 0;
 				shader.Bind();
-				spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
+				//spriteBuffer = (SpriteBuffer*)vertexBuffer.Map();
 
 				if (submitSprite)
 				{
@@ -121,7 +124,7 @@ namespace BF
 					}*/
 
 					MapBuffer();
-					vertexBuffer.Unmap();
+					//vertexBuffer.Unmap();
 				}
 
 				vertexBuffer.Bind();
@@ -133,7 +136,7 @@ namespace BF
 
 				indexCount = 0;
 				currentBoundTexture = nullptr;
-
+				spriteBuffer = ogSpriteBuffer;
 				//BFE_LOG_INFO("Draw calls " + std::to_string(totalDrawCalls), "");
 			}
 
@@ -172,7 +175,7 @@ namespace BF
 				indexCount += BFE_SPRITE_INDICES;
 			}
 
-			void SpriteRenderer::MapRectangleShapeBuffer(RectangleShape* rectangleShape)
+			void SpriteRenderer::MapRectangleShapeBuffer(RectangleShape& rectangleShape)
 			{
 				/*
 				x = left position
@@ -205,31 +208,31 @@ namespace BF
 				*/
 
 				//Top Left
-				spriteBuffer->position = rectangleShape->transfrom->corners[0];
-				spriteBuffer->color = rectangleShape->color;
-				spriteBuffer->UV = Vector2f(0.0f);
-				spriteBuffer->renderingType = 0;
+				spriteBuffer->position = rectangleShape.position;
+				spriteBuffer->color = rectangleShape.color;
+				//spriteBuffer->UV = Vector2f(0.0f);
+				//spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Top Right
-				spriteBuffer->position = rectangleShape->transfrom->corners[1];
-				spriteBuffer->color = rectangleShape->color;
-				spriteBuffer->UV = Vector2f(0.0f);
-				spriteBuffer->renderingType = 0;
+				spriteBuffer->position = Vector2f(rectangleShape.position.x + rectangleShape.size.x, rectangleShape.position.y);
+				spriteBuffer->color = rectangleShape.color;
+				//spriteBuffer->UV = Vector2f(0.0f);
+				//spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Right
-				spriteBuffer->position = rectangleShape->transfrom->corners[2];
-				spriteBuffer->color = rectangleShape->color;
-				spriteBuffer->UV = Vector2f(0.0f);
-				spriteBuffer->renderingType = 0;
+				spriteBuffer->position = Vector2f(rectangleShape.position.x + rectangleShape.size.x, rectangleShape.position.y - rectangleShape.size.y);
+				spriteBuffer->color = rectangleShape.color;
+				//spriteBuffer->UV = Vector2f(0.0f);
+				//spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				//Bottom Left
-				spriteBuffer->position = rectangleShape->transfrom->corners[3];
-				spriteBuffer->color = rectangleShape->color;
-				spriteBuffer->UV = Vector2f(0.0f);
-				spriteBuffer->renderingType = 0;
+				spriteBuffer->position = Vector2f(rectangleShape.position.x, rectangleShape.position.y - rectangleShape.size.y);
+				spriteBuffer->color = rectangleShape.color;
+				//spriteBuffer->UV = Vector2f(0.0f);
+				//spriteBuffer->renderingType = 0;
 				spriteBuffer++;
 
 				indexCount += BFE_SPRITE_INDICES;
@@ -554,11 +557,14 @@ namespace BF
 				{
 					for (size_t i = 0; i < renderLayerManager.renderLayers.size(); i++)
 					{
-						renderLayerManager.renderLayers[i]->Sort();
+						//renderLayerManager.renderLayers[i].Sort();
 
-						for (size_t j = 0; j < renderLayerManager.renderLayers[i]->renderables.size(); j++)
+						for (size_t j = 0; j < renderLayerManager.renderLayers[i].rectangleShapes.size(); j++)
 						{
-							IRenderable* iRenderable = renderLayerManager.renderLayers[i]->renderables[j];
+							//MapRectangleShapeBuffer((RectangleShape*)renderLayerManager.renderLayers[i]->renderables[j]);
+							MapRectangleShapeBuffer(renderLayerManager.renderLayers[i].rectangleShapes[j]);
+
+							/*IRenderable* iRenderable = renderLayerManager.renderLayers[i]->renderables[j];
 
 							if (iRenderable->type == IRenderable::Type::Sprite)
 								MapSpriteBuffer((Sprite*)iRenderable);
@@ -569,7 +575,7 @@ namespace BF
 							else if (iRenderable->type == IRenderable::Type::LineShape)
 								MapLineBuffer((LineShape*)iRenderable);
 							else if (iRenderable->type == IRenderable::Type::Text)
-								MapTextBuffer((Text*)iRenderable);
+								MapTextBuffer((Text*)iRenderable);*/
 						}
 					}
 				}

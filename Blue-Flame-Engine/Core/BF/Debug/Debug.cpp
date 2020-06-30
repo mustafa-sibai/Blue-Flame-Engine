@@ -1,7 +1,7 @@
 #include "Debug.h"
 #include "BF/Engine.h"
 
-#define BFE_MAX_SPRITES     300000
+#define BFE_MAX_SPRITES     1001000
 #define BFE_SPRITE_VERTICES 4
 #define	BFE_SPRITE_INDICES  6
 #define BFE_VERTICES_SIZE	BFE_MAX_SPRITES * BFE_SPRITE_VERTICES
@@ -29,7 +29,7 @@ namespace BF
 
 		vector<Debug::Renderable*> Debug::renderable;
 
-		vector<Vector2i> Debug::corners;
+		//vector<Vector2i> Debug::corners;
 
 		void Debug::Initialize()
 		{
@@ -43,7 +43,7 @@ namespace BF
 			vertexBuffer.Create();
 			indexBuffer.Create();
 
-			vertexBuffer.SetBuffer(BFE_VERTICES_SIZE * sizeof(Vertex), nullptr, BufferMode::DynamicDraw);
+			vertexBuffer.Allocate(BFE_VERTICES_SIZE * sizeof(Vertex), nullptr, BufferMode::DynamicDraw);
 			indexBuffer.SetBuffer(nullptr, BFE_INDICES_SIZE, BufferMode::DynamicDraw);
 
 			vertexBuffer.SetLayout(shader, &vertexBufferLayout);
@@ -149,7 +149,7 @@ namespace BF
 				|_____\|
 				3      2
 			*/
-			/*int startingIndex = 0;
+			int startingIndex = 0;
 
 			startingIndex = currentIndex;
 
@@ -204,27 +204,27 @@ namespace BF
 
 			  as you can see, the image is close to the bottom right of the screen.
 			*/
-			/*corners = BF::Math::Rectangle(rectangle.position.x, rectangle.position.y, rectangle.size.x, rectangle.size.y, rectangle.pivot).GetCorners();
+			//corners = BF::Math::Rectangle(rectangle.position.x, rectangle.position.y, rectangle.size.x, rectangle.size.y, rectangle.pivot).GetEdgeOffsetByPivot();
 
 			//Top Left
-			vertexData->position = Vector2f(corners[0].x, corners[0].y);
+			vertexData->position = Vector2f(rectangle.position.x, rectangle.position.y);
 			vertexData->color = rectangle.color;
 			vertexData++;
 
 			//Top Right
-			vertexData->position = Vector2f(corners[1].x, corners[1].y);
+			vertexData->position = Vector2f(rectangle.position.x + rectangle.size.x, rectangle.position.y);
 			vertexData->color = rectangle.color;
 			vertexData++;
 
 			//Bottom Right
-			vertexData->position = Vector2f(corners[2].x, corners[2].y);
+			vertexData->position = Vector2f(rectangle.position.x + rectangle.size.x, rectangle.position.y - rectangle.size.y);
 			vertexData->color = rectangle.color;
 			vertexData++;
 
 			//Bottom Left
-			vertexData->position = Vector2f(corners[3].x, corners[3].y);
+			vertexData->position = Vector2f(rectangle.position.x, rectangle.position.y - rectangle.size.y);
 			vertexData->color = rectangle.color;
-			vertexData++;*/
+			vertexData++;
 		}
 
 		void Debug::MapRegularPolygon(RegularPolygon& regularPolygon)

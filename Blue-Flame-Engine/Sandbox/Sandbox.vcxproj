@@ -411,6 +411,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>BlueFlame.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -495,6 +496,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>BlueFlame.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -563,21 +565,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Sandbox\AABBTest.cpp" />
     <ClCompile Include="Sandbox\DebugTest.cpp" />
-    <ClCompile Include="Sandbox\FontTest.cpp" />
-    <ClCompile Include="Sandbox\AstarTest.cpp" />
-    <ClCompile Include="Sandbox\CameraViewCullingTest.cpp" />
-    <ClCompile Include="Sandbox\GUITest.cpp" />
-    <ClCompile Include="Sandbox\ECS_Script_Test.cpp" />
-    <ClCompile Include="Sandbox\Forward_Renderer_Test.cpp" />
-    <ClCompile Include="Sandbox\FPSCamera.cpp" />
-    <ClCompile Include="Sandbox\Hello_Triangle.cpp" />
-    <ClCompile Include="Sandbox\IsoMapTest.cpp" />
     <ClCompile Include="Sandbox\Main.cpp" />
-    <ClCompile Include="Sandbox\ScriptTest.cpp" />
-    <ClCompile Include="Sandbox\SpriteAnimationTest.cpp" />
-    <ClCompile Include="Sandbox\SpriteRendererTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\GLSL\3DMipAF\PixelShader.glsl" />
@@ -700,20 +689,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sandbox\AABBTest.h" />
     <ClInclude Include="Sandbox\DebugTest.h" />
-    <ClInclude Include="Sandbox\FontTest.h" />
-    <ClInclude Include="Sandbox\AstarTest.h" />
-    <ClInclude Include="Sandbox\CameraViewCullingTest.h" />
-    <ClInclude Include="Sandbox\GUITest.h" />
-    <ClInclude Include="Sandbox\ECS_Script_Test.h" />
-    <ClInclude Include="Sandbox\Forward_Renderer_Test.h" />
-    <ClInclude Include="Sandbox\FPSCamera.h" />
-    <ClInclude Include="Sandbox\Hello_Triangle.h" />
-    <ClInclude Include="Sandbox\IsoMapTest.h" />
-    <ClInclude Include="Sandbox\ScriptTest.h" />
-    <ClInclude Include="Sandbox\SpriteAnimationTest.h" />
-    <ClInclude Include="Sandbox\SpriteRendererTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

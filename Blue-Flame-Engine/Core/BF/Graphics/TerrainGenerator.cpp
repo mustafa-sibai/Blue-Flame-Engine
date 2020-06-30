@@ -102,7 +102,7 @@ namespace BF
 			}
 
 			vertexBuffer.Create();
-			vertexBuffer.SetBuffer((unsigned int)VERTICES_SIZE * sizeof(MeshData::PUVNVertexData), vertices, BufferMode::StaticDraw);
+			vertexBuffer.Allocate((unsigned int)VERTICES_SIZE * sizeof(MeshData::PUVNVertexData), vertices, BufferMode::StaticDraw);
 
 			indexBuffer.Create();
 			indexBuffer.SetBuffer(indecies, INDICES_SIZE, BufferMode::StaticDraw);

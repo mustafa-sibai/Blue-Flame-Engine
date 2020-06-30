@@ -50,7 +50,7 @@ namespace BF
 				vertexStructSize = sizeof(MeshData::PVertexData);
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 
-				vertexBuffer->SetBuffer((unsigned int)((vector<MeshData::PVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
+				vertexBuffer->Allocate((unsigned int)((vector<MeshData::PVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
 				break;
 			}
 			case MeshData::VertexStructVersion::PUV:
@@ -59,7 +59,7 @@ namespace BF
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 				vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 
-				vertexBuffer->SetBuffer((unsigned int)((vector<MeshData::PUVVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
+				vertexBuffer->Allocate((unsigned int)((vector<MeshData::PUVVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
 				break;
 			}
 			case MeshData::VertexStructVersion::PN:
@@ -68,7 +68,7 @@ namespace BF
 				vertexBufferLayout.Push(0, "POSITION", VertexBufferLayout::DataType::Float3, vertexStructSize, 0);
 				vertexBufferLayout.Push(1, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f));
 
-				vertexBuffer->SetBuffer((unsigned int)((vector<MeshData::PNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PNVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
+				vertexBuffer->Allocate((unsigned int)((vector<MeshData::PNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PNVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
 				break;
 			}
 			case MeshData::VertexStructVersion::PUVN:
@@ -78,7 +78,7 @@ namespace BF
 				vertexBufferLayout.Push(1, "TEXCOORD", VertexBufferLayout::DataType::Float2, vertexStructSize, sizeof(Vector3f));
 				vertexBufferLayout.Push(2, "NORMAL", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f));
 
-				vertexBuffer->SetBuffer((unsigned int)((vector<MeshData::PUVNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
+				vertexBuffer->Allocate((unsigned int)((vector<MeshData::PUVNVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
 				break;
 			}
 			case MeshData::VertexStructVersion::PUVNTB:
@@ -90,7 +90,7 @@ namespace BF
 				vertexBufferLayout.Push(3, "TANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f));
 				vertexBufferLayout.Push(4, "BITANGENT", VertexBufferLayout::DataType::Float3, vertexStructSize, sizeof(Vector3f) + sizeof(Vector2f) + sizeof(Vector3f) + sizeof(Vector3f));
 
-				vertexBuffer->SetBuffer((unsigned int)((vector<MeshData::PUVNTBVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNTBVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
+				vertexBuffer->Allocate((unsigned int)((vector<MeshData::PUVNTBVertexData>*)meshData->vertices)->size() * vertexStructSize, &(*(vector<MeshData::PUVNTBVertexData>*)meshData->vertices)[0], BufferMode::StaticDraw);
 				break;
 			}
 			default:

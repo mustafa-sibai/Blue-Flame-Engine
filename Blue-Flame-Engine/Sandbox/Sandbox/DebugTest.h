@@ -9,9 +9,9 @@ namespace DebugTest
 	private:
 		BF::Application::Scene* scene;
 		BF::Graphics::Camera* camera;
-		BF::Graphics::Renderers::RenderLayer* defaultRenderLayer;
-		BF::Graphics::Renderers::RenderLayer* spriteRenderLayer;
-		BF::Graphics::Renderers::RenderLayer* guiRenderLayer;
+		BF::Graphics::Renderers::RenderLayer defaultRenderLayer;
+		BF::Graphics::Renderers::RenderLayer spriteRenderLayer;
+		BF::Graphics::Renderers::RenderLayer guiRenderLayer;
 		BF::Math::Rectangle orthographicRectangle;
 
 		std::vector<BF::System::Transform*> transforms;

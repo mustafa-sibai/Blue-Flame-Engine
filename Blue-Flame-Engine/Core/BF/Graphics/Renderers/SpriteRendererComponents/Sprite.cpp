@@ -23,7 +23,7 @@ namespace BF
 				}
 
 				Sprite::Sprite(const Sprite& sprite) :
-					Renderable(Type::Sprite, sprite.zSortingOrder, sprite.renderLayer, sprite.color),
+					Renderable(Type::Sprite, sprite.zSortingOrder, nullptr/*sprite.renderLayer*/, sprite.color),
 					texture2D(sprite.texture2D), scissorRectangle(sprite.scissorRectangle)
 				{
 					gameObject = sprite.gameObject;
@@ -76,9 +76,9 @@ namespace BF
 
 				void Sprite::Swap(Sprite& rhs)
 				{
-					renderLayer = rhs.renderLayer;
-					texture2D = rhs.texture2D;
-					gameObject = rhs.gameObject;
+					//renderLayer = rhs.renderLayer;
+					//texture2D = rhs.texture2D;
+					//gameObject = rhs.gameObject;
 
 					/*std::swap(type, rhs.type);
 					std::swap(size, rhs.size);

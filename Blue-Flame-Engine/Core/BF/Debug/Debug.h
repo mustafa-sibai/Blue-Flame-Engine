@@ -88,7 +88,8 @@ namespace BF
 
 			static std::vector<Renderable*> renderable;
 
-			static std::vector<BF::Math::Vector2i> corners;
+			//static std::vector<BF::Math::Vector2i> corners;
+			//static BF::Math::Rectangle corners;
 
 		public:
 			static void Initialize();

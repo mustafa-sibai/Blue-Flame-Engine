@@ -16,7 +16,7 @@ namespace BF
 
 				IRenderable::IRenderable(Type type, int zSortingOrder, RenderLayer* renderLayer, const Color& color) :
 					Component(IComponent::Type::Renderable),
-					type(type), zSortingOrder(zSortingOrder), renderLayer(renderLayer), color(color), xySortingOrder(0), transfrom(nullptr)
+					type(type), zSortingOrder(zSortingOrder), /*renderLayer(renderLayer),*/ color(color), xySortingOrder(0)//, transfrom(nullptr)
 				{
 				}
 
@@ -26,14 +26,14 @@ namespace BF
 
 				void IRenderable::SetSize(const Vector2i& size)
 				{
-					transfrom->size = size;
-					transfrom->updatePivotAndSize = true;
+					/*transfrom->size = size;
+					transfrom->updatePivotAndSize = true;*/
 				}
 
 				void IRenderable::SetPivot(const Vector2f& pivot)
 				{
-					transfrom->pivot = pivot;
-					transfrom->updatePivotAndSize = true;
+					/*transfrom->pivot = pivot;
+					transfrom->updatePivotAndSize = true;*/
 				}
 			}
 		}

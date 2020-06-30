@@ -27,15 +27,15 @@ namespace BF
 #endif
 			}
 
-			void VertexBuffer::SetBuffer(unsigned int size, const void* data, BufferMode mode)
+			void VertexBuffer::Allocate(unsigned int size, const void* data, BufferMode mode)
 			{
 #ifdef BFE_PLATFORM_WINDOWS
 				//if (Context::GetRenderAPI() == RenderAPI::DirectX)
-					//dxVertexBuffer.SetBuffer(data, size);
+					//dxVertexBuffer.Allocate(data, size);
 #endif
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
-					glVertexBuffer.SetBuffer(size, data, mode);
+					glVertexBuffer.Allocate(size, data, mode);
 #endif
 			}
 
@@ -75,6 +75,31 @@ namespace BF
 #if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
 				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
 					glVertexBuffer.Unmap();
+#endif
+			}
+
+			void* VertexBuffer::MapPersistentStream() const
+			{
+#ifdef BFE_PLATFORM_WINDOWS
+				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					return dxVertexBuffer.Map();*/
+#endif
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					return glVertexBuffer.MapPersistentStream();
+#endif
+				return nullptr;
+			}
+
+			void VertexBuffer::UnmapPersistentStream() const
+			{
+#ifdef BFE_PLATFORM_WINDOWS
+				/*if (Context::GetRenderAPI() == RenderAPI::DirectX)
+					dxVertexBuffer.Unmap();*/
+#endif
+#if defined (BFE_PLATFORM_WINDOWS) || defined (BFE_PLATFORM_LINUX) || defined (BFE_PLATFORM_WEB) || defined (BFE_PLATFORM_ANDROID)
+				if (Context::GetRenderAPI() == RenderAPI::OpenGL)
+					glVertexBuffer.UnmapPersistentStream();
 #endif
 			}
 

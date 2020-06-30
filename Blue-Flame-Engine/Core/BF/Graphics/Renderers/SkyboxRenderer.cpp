@@ -40,7 +40,7 @@ namespace BF
 			void SkyboxRenderer::Load(const vector<string>& filenames)
 			{
 				vertexBuffer.Create();
-				vertexBuffer.SetBuffer((unsigned int)vertcies.size() * sizeof(float), &vertcies[0], BufferMode::StaticDraw);
+				vertexBuffer.Allocate((unsigned int)vertcies.size() * sizeof(float), &vertcies[0], BufferMode::StaticDraw);
 
 				indexBuffer.Create();
 				indexBuffer.SetBuffer(&indices[0], (unsigned int)indices.size() * sizeof(unsigned int), BufferMode::StaticDraw);

@@ -19,7 +19,7 @@ namespace BF
 		{
 			namespace SpriteRendererComponents
 			{
-				class IRenderable;
+				class RectangleShape;
 			}
 		}
 	}
@@ -47,7 +47,8 @@ namespace BF
 			GameObject(const std::string& name);
 			virtual ~GameObject();
 
-			BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* AddComponent(BF::Math::Vector2i& size, BF::Math::Vector2f& pivot, BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* iRenderable);
+			BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape& AddComponent(BF::Math::Vector2i& size, BF::Math::Vector2f& pivot, BF::Math::Vector2f& position, BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape& rectangleShape);
+			//BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* AddComponent(BF::Math::Vector2i& size, BF::Math::Vector2f& pivot, BF::Graphics::Renderers::SpriteRendererComponents::IRenderable* iRenderable);
 			IComponent* AddComponent(IComponent* component);
 
 			void RemoveComponent(IComponent* component);

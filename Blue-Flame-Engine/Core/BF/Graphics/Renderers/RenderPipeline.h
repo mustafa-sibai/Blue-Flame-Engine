@@ -56,6 +56,7 @@ namespace BF
 				void Update(double deltaTime) override;
 				void Render()				  override;
 
+				void AddRectangle(BF::Graphics::Renderers::SpriteRendererComponents::RectangleShape& rectangleShape);
 				void AddRenderable(BF::ECS::IComponent* component);
 				void RemoveRenderable(BF::ECS::IComponent* component);
 			};

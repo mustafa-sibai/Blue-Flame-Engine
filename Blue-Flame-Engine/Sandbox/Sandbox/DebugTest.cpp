@@ -1,4 +1,4 @@
-#include "DebugTest.h"
+﻿#include "DebugTest.h"
 
 namespace DebugTest
 {
@@ -18,7 +18,10 @@ namespace DebugTest
 	using namespace BF::Physics;
 	//using namespace BF::Debugging;
 
-	DebugTest::DebugTest()
+	DebugTest::DebugTest() :
+		defaultRenderLayer("r", BF::Graphics::Renderers::RenderLayer::SortingOrder::BackToFront),
+		spriteRenderLayer("r", BF::Graphics::Renderers::RenderLayer::SortingOrder::BackToFront),
+		guiRenderLayer("r", BF::Graphics::Renderers::RenderLayer::SortingOrder::BackToFront)
 	{
 	}
 
@@ -37,9 +40,9 @@ namespace DebugTest
 		BF::Engine::GetContext().CullFace(CullingType::Back);
 		//BF::Engine::LimitFrameRate(60.0f);
 
-		defaultRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer();
-		spriteRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(new RenderLayer("Sprites", RenderLayer::SortingOrder::BackToFrontRightToLeft));
-		guiRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(new RenderLayer("GUI", RenderLayer::SortingOrder::BackToFrontRightToLeft));
+		//defaultRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.GetDefaultRenderLayer();
+		//spriteRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(RenderLayer("Sprites", RenderLayer::SortingOrder::BackToFrontRightToLeft));
+		//guiRenderLayer = renderPipeline.spriteRenderer->renderLayerManager.AddRenderLayer(RenderLayer("GUI", RenderLayer::SortingOrder::BackToFrontRightToLeft));
 
 		GameObject* CameraGameObject = scene->AddGameObject(new GameObject("Camera"));
 
@@ -73,24 +76,25 @@ namespace DebugTest
 
 	void DebugTest::PostLoad()
 	{
-		//240,000 sprites = 62 FPS
-		/*for (size_t y = 0; y < 400; y++)
+		//791 * 1265 = 1,000,615‬ sprite = 28 FPS
+		/*for (size_t y = 0; y < 791; y++)
 		{
-			for (size_t x = 0; x < 600; x++)
+			for (size_t x = 0; x < 1265; x++)
 			{
 				BF::Debugging::Debug::DrawRectangle(Vector2f(-950.0f + (float)x * 3.0f, 520.0f - (float)y * 3.0f), Vector2f(2.0f, 2.0f), Vector2f(0.5f, 0.5f), Color(0.2f, 0.3f, 0.5f, 1));
 			}
 		}*/
 
-		//240,000 sprite = 62 FPS
-		for (size_t y = 0; y < 400; y++)
+		//791 * 1265 = 1,000,615‬ sprite = 47 FPS
+		for (size_t y = 0; y < 791; y++)
 		{
-			for (size_t x = 0; x < 600; x++)
+			for (size_t x = 0; x < 1265; x++)
 			{
 				GameObject* sprite = scene->AddGameObject(new GameObject("sprite"));
-				sprite->AddComponent(Vector2i(2, 2), Vector2f(0.5f, 0.5f), new RectangleShape(0, defaultRenderLayer, Color(0.5f, 0.3f, 0.3f, 1)));
-				transforms.emplace_back(sprite->GetComponent<Transform>());
-				sprite->GetComponent<Transform>()->SetPosition(Vector3f(-950.0f + (float)x * 3.0f, 520.0f - (float)y * 3.0f, 0));
+				RectangleShape& r = sprite->AddComponent(Vector2i(2, 2), Vector2f(0.5f, 0.5f), Vector2f(-1900.0f + (float)x * 3.0f, 1040.0f - (float)y * 3.0f), RectangleShape(0, &defaultRenderLayer, Color(0.5f, 0.3f, 0.3f, 1)));
+				//r.SetPosition(Vector2i(2, 2), Vector2f(0.5f, 0.5f), Vector3f(-1900.0f + (float)x * 3.0f, 1040.0f - (float)y * 3.0f, 0));
+				//transforms.emplace_back(sprite->GetComponent<Transform>());
+				//sprite->GetComponent<Transform>()->SetPosition(Vector3f(-1900.0f + (float)x * 3.0f, 1040.0f - (float)y * 3.0f, 0));
 			}
 		}
 

@@ -5,7 +5,7 @@ namespace BF
 	{
 		namespace API
 		{
-			enum class BufferMode { StaticDraw, DynamicDraw };
+			enum class BufferMode { StaticDraw, DynamicDraw, StreamDraw, PersistentMapping };
 		}
 	}
 }

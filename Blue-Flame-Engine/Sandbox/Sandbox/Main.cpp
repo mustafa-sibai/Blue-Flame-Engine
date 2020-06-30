@@ -26,7 +26,7 @@
 int main()
 {
 #ifdef BFE_NO_NET
-	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(1920, 1200), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
+	BF::Engine engine(BF::Application::Window("Blue Flame Engine", BF::Math::Vector2i(150, 150), BF::Math::Vector2i(3820, 2100), BF::Application::WindowStyle::ResizableWindow), BF::Graphics::API::RenderAPI::OpenGL);
 
 	//BF::Application::SceneManager::AddNewScene(new AndroidTestScene());
 	//BF::Application::SceneManager::AddNewScene(new test());

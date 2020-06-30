@@ -25,7 +25,7 @@ namespace BF
 			if (!gameObject->added)
 			{
 				gameObjects.emplace_back(gameObject);
-				app.transformSystem.AddTransform((BF::System::Transform*)gameObject->components[0]);
+//				app.transformSystem.AddTransform((BF::System::Transform*)gameObject->components[0]);
 				gameObject->added = true;
 				gameObject->scene = this;
 			}

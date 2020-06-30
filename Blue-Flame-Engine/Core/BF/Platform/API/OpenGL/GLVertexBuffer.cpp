@@ -28,12 +28,16 @@ namespace BF
 					GLCall(glGenBuffers(1, &vbo));
 				}
 
-				void GLVertexBuffer::SetBuffer(unsigned int size, const void* data, BufferMode mode)
+				void GLVertexBuffer::Allocate(unsigned int size, const void* data, BufferMode mode)
 				{
 					this->size = size;
 
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, vbo));
-					GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GetGLBufferMode(mode)));
+
+					if(mode == BufferMode::PersistentMapping)
+						GLCall(glBufferStorage(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_STORAGE_BIT | GL_MAP_WRITE_BIT | GL_MAP_READ_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT));
+					else
+						GLCall(glBufferData(GL_ARRAY_BUFFER, size, data, GetGLBufferMode(mode)));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
 
@@ -67,6 +71,19 @@ namespace BF
 
 				void GLVertexBuffer::Unmap() const
 				{
+					GLCall(glUnmapBuffer(GL_ARRAY_BUFFER));
+					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+				}
+
+				void* GLVertexBuffer::MapPersistentStream() const
+				{
+					glBindBuffer(GL_ARRAY_BUFFER, vbo);
+					GLCall(return glMapBufferRange(GL_ARRAY_BUFFER, 0, size, GL_MAP_WRITE_BIT | GL_MAP_READ_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT));
+				}
+
+				void GLVertexBuffer::UnmapPersistentStream() const
+				{
+					glBindBuffer(GL_ARRAY_BUFFER, vbo);
 					GLCall(glUnmapBuffer(GL_ARRAY_BUFFER));
 					GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 				}
